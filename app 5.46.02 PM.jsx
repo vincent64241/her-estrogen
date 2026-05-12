@@ -252,7 +252,6 @@ function App() {
             </ul>
             <div className="hero-cta">
               <a href="quiz.html" className="btn btn-primary">Am I Qualified?</a>
-              <a href="#how" className="btn btn-ghost">How it works</a>
             </div>
           </div>
         </div>

@@ -856,6 +856,44 @@
     .hero-tag { display: none; }
   }
 
+  /* ---- TIGHTER SECTION SPACING (-25%) ---- */
+  .quiz { padding: 72px 0; }
+  .science { padding: 90px 0; }
+  .how { padding: 90px 0 105px; }
+  .treatments { padding: 90px 0; }
+  .compare { padding: 82px 0; }
+  .reviews { padding: 90px 0; }
+  .faq { padding: 90px 0; }
+  .cta-final { padding: 105px 0; }
+
+  /* ---- SHORTER, SMALLER HERO ---- */
+  .hero.hero-full { min-height: 66vh; }
+  .hero.hero-full .hero-content { padding: 72px 32px; }
+  .hero.hero-full h1 {
+    font-size: clamp(26px, 3.4vw, 46px);
+    margin: 0 0 14px;
+    line-height: 1.1;
+  }
+  .hero.hero-full .hero-sub { font-size: 16px; max-width: 560px; }
+  .hero.hero-full .hero-checks li { font-size: 13px; }
+  .hero.hero-full .hero-checks { margin: 6px 0 28px; }
+  @media (max-width: 760px) {
+    .hero.hero-full { min-height: 58vh; }
+    .hero.hero-full .hero-content { padding: 56px 24px; }
+  }
+
+  /* ---- SLIM FOOTER ---- */
+  footer { padding: 28px 0 22px; margin-top: 0; }
+  footer .foot-simple {
+    padding-bottom: 22px;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+  footer .foot-logo-large { margin-bottom: 0; }
+  footer .foot-simple .foot-tag { font-size: 18px; }
+  footer .foot-bottom { padding-top: 16px; font-size: 11px; }
+  footer .foot-disclaimer { padding-top: 12px; font-size: 10px; }
+
 </style>
 </head>
 <body>
