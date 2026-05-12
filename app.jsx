@@ -234,22 +234,25 @@ function App() {
         <div className="container hero-content">
           <div>
             <h1>
-              The years after 40<br />
-              shouldn't feel like<br />
-              a <em>quiet emergency.</em>
+              Hot flashes. Brain fog. Poor sleep.<br />
+              Low energy. Mood shifts.<br />
+              It's not in your head — <em>it's your hormones.</em>
             </h1>
             <p className="hero-sub">
-              Physician-prescribed estrogen, progesterone, and testosterone
-              for perimenopause and beyond — evaluated by a clinician,
-              shipped to your door, adjusted on your terms.
+              Real bioidentical HRT. Real relief. Prescribed online and
+              shipped directly to your door in days.
             </p>
+            <ul className="hero-checks">
+              <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
+              <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
+              <li><span className="check">✓</span> Start for just $149/month — no insurance needed</li>
+              <li><span className="check">✓</span> Unlimited provider messaging included</li>
+              <li><span className="check">✓</span> HSA/FSA approved</li>
+              <li><span className="check">✓</span> Free shipping on every order</li>
+            </ul>
             <div className="hero-cta">
-              <a href="quiz.html" className="btn btn-primary">Start free assessment →</a>
+              <a href="quiz.html" className="btn btn-primary">Am I Qualified?</a>
               <a href="#how" className="btn btn-ghost">How it works</a>
-            </div>
-            <div className="hero-meta">
-              <div><span className="check">✓</span> Board-certified clinicians</div>
-              <div><span className="check">✓</span> $49 first consult</div>
             </div>
           </div>
         </div>
@@ -352,7 +355,7 @@ function App() {
                 <div className="stat-label">Delivery routes (patch, oral, topical, local)</div>
               </div>
               <div className="stat">
-                <div className="stat-num">32</div>
+                <div className="stat-num">50</div>
                 <div className="stat-label">U.S. states currently licensed</div>
               </div>
             </div>
@@ -411,8 +414,7 @@ function App() {
                 <span className="price-unit">{tx.unit}</span>
               </div>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="quiz.html" className="btn btn-primary">Start with this protocol →</a>
-                <a href="#" className="btn btn-ghost">Clinical details</a>
+                <a href="quiz.html" className="btn btn-primary">Get Started</a>
               </div>
             </div>
           </div>
@@ -510,7 +512,7 @@ function App() {
             <h2>The questions <em>everyone</em> asks first.</h2>
             <p style={{ color: 'var(--ink-2)', fontSize: 15, marginTop: 12 }}>
               Can't find what you're looking for? Email{' '}
-              <a href="#" style={{ textDecoration: 'underline' }}>care@herestrogen.com</a>{' '}
+              <a href="mailto:support@herestrogen.com" style={{ textDecoration: 'underline' }}>support@herestrogen.com</a>{' '}
               — a clinician answers within one business day.
             </p>
           </div>
@@ -550,49 +552,16 @@ function App() {
 
       {/* FOOTER */}
       <footer data-screen-label="10 Footer">
-        <div className="container foot-grid">
-          <div className="foot foot-logo">
-            <img src="assets/logo.png" alt="Her Estrogen" />
-            <div className="foot-tag">
-              Modern hormone care, written for the women medicine forgot.
-            </div>
-            <div style={{ fontFamily: 'Geist Mono, monospace', fontSize: 11, color: 'rgba(245,239,230,.5)', letterSpacing: '0.1em' }}>
-              CARE@HERESTROGEN.COM
-            </div>
+        <div className="container foot-simple">
+          <img src="assets/logo.png" alt="Her Estrogen" className="foot-logo-large" />
+          <div className="foot-tag">
+            Modern hormone care, written for the women medicine forgot.
           </div>
-          <div className="foot">
-            <h4>Treatments</h4>
-            <ul>
-              <li><a href="#">Estradiol patch</a></li>
-              <li><a href="#">Progesterone</a></li>
-              <li><a href="#">Testosterone cream</a></li>
-              <li><a href="#">Vaginal estradiol</a></li>
-              <li><a href="#">Lab panels</a></li>
-            </ul>
-          </div>
-          <div className="foot">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="#">How it works</a></li>
-              <li><a href="#">Our clinicians</a></li>
-              <li><a href="#">Science library</a></li>
-              <li><a href="#">Press</a></li>
-              <li><a href="#">Careers</a></li>
-            </ul>
-          </div>
-          <div className="foot">
-            <h4>Support</h4>
-            <ul>
-              <li><a href="#">Help center</a></li>
-              <li><a href="#">Shipping & returns</a></li>
-              <li><a href="#">Privacy</a></li>
-              <li><a href="#">Terms</a></li>
-            </ul>
-          </div>
+          <a href="mailto:support@herestrogen.com" className="foot-email">support@herestrogen.com</a>
         </div>
         <div className="container foot-bottom">
           <div>© 2026 Her Estrogen, PBC.</div>
-          <div>Licensed in 32 U.S. states · LegitScript certified</div>
+          <div>Licensed in all 50 U.S. states · LegitScript certified</div>
         </div>
         <div className="container foot-disclaimer">
           Her Estrogen provides telehealth services through independently
