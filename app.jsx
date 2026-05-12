@@ -23,25 +23,7 @@ const TREATMENTS = [
   ['Cadence', 'Apply 2x per week'],
   ['Form', 'Adhesive matrix patch'],
   ['Ships', 'Every 90 days']],
-  svg: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="patchG" cx="50%" cy="42%" r="60%">
-        <stop offset="0%" stop-color="#fbeae0"/>
-        <stop offset="100%" stop-color="#e6c3b0"/>
-      </radialGradient>
-    </defs>
-    <g transform="translate(60 60) rotate(-6 100 100)">
-      <rect x="0" y="0" width="200" height="200" rx="22" fill="url(#patchG)" stroke="#c89a85" stroke-width="1.2" opacity="0.96"/>
-      <circle cx="100" cy="100" r="56" fill="none" stroke="#b8235c" stroke-width="1.4" opacity="0.55"/>
-      <circle cx="100" cy="100" r="34" fill="#b8235c" opacity="0.18"/>
-      <text x="100" y="108" text-anchor="middle" font-family="Lora, Georgia, serif" font-style="italic" font-size="22" fill="#8a1745" font-weight="500">her</text>
-      <g stroke="#c89a85" stroke-width="0.8" opacity="0.45" fill="none">
-        <path d="M22 22 L40 40"/><path d="M178 22 L160 40"/>
-        <path d="M22 178 L40 160"/><path d="M178 178 L160 160"/>
-      </g>
-    </g>
-  </svg>`
-
+  image: 'assets/transdermal-patch.png'
 },
 {
   id: 'progesterone',
@@ -54,25 +36,7 @@ const TREATMENTS = [
   ['Cadence', 'Daily, before sleep'],
   ['Form', 'Soft-gel capsule'],
   ['Ships', 'Every 90 days']],
-  svg: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="capL" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#fbe6d9"/><stop offset="100%" stop-color="#e9b787"/>
-      </linearGradient>
-      <linearGradient id="capR" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#c97a3e"/><stop offset="100%" stop-color="#a85a26"/>
-      </linearGradient>
-    </defs>
-    <g transform="translate(160 160) rotate(-22)">
-      <g transform="translate(-110 -38)">
-        <path d="M38 0 H110 V76 H38 a38 38 0 0 1 0 -76 z" fill="url(#capL)" stroke="#c79676" stroke-width="0.8"/>
-        <path d="M110 0 H182 a38 38 0 0 1 0 76 H110 z" fill="url(#capR)" stroke="#7e3f15" stroke-width="0.8"/>
-        <ellipse cx="66" cy="22" rx="22" ry="6" fill="#fff" opacity="0.55"/>
-        <ellipse cx="140" cy="22" rx="22" ry="5" fill="#fff" opacity="0.22"/>
-      </g>
-    </g>
-  </svg>`
-
+  image: 'assets/oral-pills.png'
 },
 {
   id: 'testosterone',
@@ -85,26 +49,7 @@ const TREATMENTS = [
   ['Cadence', 'Once daily, topical'],
   ['Form', 'Compounded cream'],
   ['Ships', 'Every 60 days']],
-  svg: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="tubeG" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#fff"/>
-        <stop offset="45%" stop-color="#fdf6f2"/>
-        <stop offset="100%" stop-color="#e9d3cc"/>
-      </linearGradient>
-    </defs>
-    <g transform="translate(115 40)">
-      <rect x="0" y="30" width="90" height="34" rx="4" fill="#b8235c"/>
-      <rect x="0" y="30" width="90" height="6" fill="#8a1745" opacity="0.35"/>
-      <rect x="4" y="60" width="82" height="8" rx="2" fill="#fdf6f2" stroke="#d9c0b5" stroke-width="0.8"/>
-      <path d="M0 68 L90 68 L80 240 a4 4 0 0 1 -4 4 H14 a4 4 0 0 1 -4 -4 z" fill="url(#tubeG)" stroke="#c9aea4" stroke-width="0.9"/>
-      <text x="45" y="150" text-anchor="middle" font-family="Lora, Georgia, serif" font-style="italic" font-size="20" fill="#b8235c" font-weight="500">her</text>
-      <text x="45" y="175" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#7a6770" letter-spacing="1">TESTOSTERONE</text>
-      <text x="45" y="187" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#7a6770" letter-spacing="1">CREAM 2%</text>
-      <path d="M16 80 Q12 100 14 130" stroke="#fff" stroke-width="4" fill="none" opacity="0.7" stroke-linecap="round"/>
-    </g>
-  </svg>`
-
+  image: 'assets/cream.png'
 },
 {
   id: 'vaginal',
@@ -117,31 +62,7 @@ const TREATMENTS = [
   ['Cadence', '2x per week'],
   ['Form', 'Vaginal insert'],
   ['Ships', 'Every 90 days']],
-  svg: `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="appG" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#fff"/>
-        <stop offset="50%" stop-color="#fdf6f2"/>
-        <stop offset="100%" stop-color="#e9d3cc"/>
-      </linearGradient>
-      <radialGradient id="insG" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#fff"/>
-        <stop offset="100%" stop-color="#e9d3cc"/>
-      </radialGradient>
-    </defs>
-    <g transform="translate(40 120) rotate(-8)">
-      <rect x="0" y="0" width="170" height="36" rx="18" fill="url(#appG)" stroke="#c9aea4" stroke-width="0.9"/>
-      <rect x="170" y="6" width="50" height="24" rx="3" fill="#b8235c"/>
-      <rect x="170" y="6" width="50" height="6" fill="#8a1745" opacity="0.4"/>
-      <ellipse cx="22" cy="18" rx="10" ry="2" fill="#fff" opacity="0.6"/>
-    </g>
-    <g transform="translate(200 180)">
-      <ellipse cx="0" cy="0" rx="30" ry="18" fill="url(#insG)" stroke="#c9aea4" stroke-width="0.9"/>
-      <ellipse cx="-10" cy="-6" rx="10" ry="3" fill="#fff" opacity="0.6"/>
-      <text x="0" y="3" text-anchor="middle" font-family="DM Mono, monospace" font-size="6" fill="#b8235c" letter-spacing="1">10mcg</text>
-    </g>
-  </svg>`
-
+  image: 'assets/vaginal.png'
 }];
 
 
@@ -165,24 +86,24 @@ const TIMELINE_STEPS = [
   eyebrow: 'Step 01',
   title: 'Get approved',
   body: "Complete a 10-minute medical and symptom intake — written by women's-health clinicians, not a generic chatbot. Our team reviews your information and gets back to you within 48 hours.",
-  image: 'lifestyle — woman, soft window light, phone in hand',
-  src: 'https://images.unsplash.com/photo-1771340589665-cf724a153b46?auto=format&fit=crop&w=1200&q=80',
+  image: 'woman smiling at her phone, completing the intake',
+  src: 'assets/step-1-get-approved.jpg',
   meta: '~ 10 min to complete'
 },
 {
   eyebrow: 'Step 02',
   title: 'Get prescribed',
   body: "If hormone therapy is appropriate, your clinician builds a protocol around your symptoms, history, and goals — bioidentical estrogen, progesterone, or testosterone, dosed conservatively.",
-  image: 'macro — clinician writing Rx pad, warm desktop',
-  src: 'https://images.unsplash.com/photo-1629540266304-fff9c67b7660?auto=format&fit=crop&w=1200&q=80',
+  image: 'clinician on a video call, writing your prescription',
+  src: 'assets/step-2-get-prescribed.jpg',
   meta: 'Reviewed within 48 hrs'
 },
 {
   eyebrow: 'Step 03',
   title: 'Receive your medication',
   body: "Your prescriptions ship in discreet packaging straight to your door, every 90 days. Message your clinician anytime; we adjust dose based on how you feel.",
-  image: 'still life — package at doorstep, soft morning light',
-  src: 'https://images.unsplash.com/photo-1758686253896-e6c76b6f7aa1?auto=format&fit=crop&w=1200&q=80',
+  image: 'patient receiving her package at the door',
+  src: 'assets/step-3-receive-medication.jpg',
   meta: 'Free shipping · 3–5 days'
 }];
 
@@ -307,10 +228,11 @@ function App() {
   return (
     <>
       {/* HERO */}
-      <section className="hero" data-screen-label="01 Hero">
-        <div className="container hero-grid">
+      <section className="hero hero-full" data-screen-label="01 Hero">
+        <img src="assets/hero-women.jpg" alt="A wall of women" className="hero-bg" />
+        <div className="hero-scrim"></div>
+        <div className="container hero-content">
           <div>
-            <div className="eyebrow"></div>
             <h1>
               The years after 40<br />
               shouldn't feel like<br />
@@ -330,15 +252,12 @@ function App() {
               <div><span className="check">✓</span> $49 first consult</div>
             </div>
           </div>
-          <div className="hero-art">
-            <img src="https://images.unsplash.com/photo-1764173039248-78beb636931a?auto=format&fit=crop&w=1400&q=80" alt="Woman in her 50s, joyful portrait" className="photo" />
-            <div className="tag">
-              <div className="tag-num">93%</div>
-              <div className="tag-text">
-                of patients report symptom relief within<br />
-                <strong>90 days of starting therapy.</strong>
-              </div>
-            </div>
+        </div>
+        <div className="hero-tag">
+          <div className="tag-num">93%</div>
+          <div className="tag-text">
+            of patients report symptom relief within<br />
+            <strong>90 days of starting therapy.</strong>
           </div>
         </div>
       </section>
@@ -439,7 +358,7 @@ function App() {
             </div>
           </div>
           <div className="science-art">
-            <img src="https://images.unsplash.com/photo-1772723246504-3c56817b437f?auto=format&fit=crop&w=1200&q=80" alt="Women, mid-life, together" className="photo" />
+            <img src="assets/science-women.jpg" alt="Women, mid-life, together" className="photo" />
           </div>
         </div>
       </section>
@@ -472,7 +391,7 @@ function App() {
           </div>
           <div className="product">
             <div className="product-img">
-              <div className="product-svg" dangerouslySetInnerHTML={{__html: tx.svg}} />
+              <div className="product-svg"><img src={tx.image} alt={tx.name} style={{width: '88%', height: '88%', objectFit: 'contain'}} /></div>
             </div>
             <div>
               <div className="eyebrow">{tx.eyebrow}</div>
