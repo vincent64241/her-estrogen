@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Get approved — Her Estrogen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #b8235c; --pink-2: #d04a7e; --pink-3: #ec84a8;
+    --pink-soft: #fde8ef; --pink-softer: #fef5f8; --pink-deep: #8a1745;
+    --ink: #1a1216; --ink-2: #3d2b33; --muted: #7a6770;
+    --line: #f0d9e2; --line-2: #e8c5d2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(900px 600px at 90% 0%, var(--pink-soft) 0%, transparent 55%),
+      radial-gradient(700px 500px at 0% 100%, var(--pink-softer) 0%, transparent 55%),
+      #fff;
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; color: inherit; }
+
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(10px);
+  }
+  .top img { height: 80px; width: auto; display: block; }
+  .top-back {
+    font-size: 14px; color: var(--ink-2); font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .top-back:hover { color: var(--pink); }
+
+  .shell {
+    max-width: 640px; margin: 0 auto;
+    padding: 48px 32px 96px;
+  }
+  .progress-shell {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 40px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .progress-bar {
+    flex: 1; height: 6px; background: var(--pink-soft);
+    border-radius: 999px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--pink-deep) 100%);
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .step h1 {
+    font-family: 'Lora', serif; font-weight: 500;
+    font-size: clamp(32px, 4.4vw, 48px); line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 14px;
+  }
+  .step h1 em { font-style: italic; color: var(--pink); }
+  .step-intro {
+    font-size: 17px; color: var(--ink-2); line-height: 1.55;
+    margin: 0 0 32px;
+  }
+
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice {
+    width: 100%; text-align: left;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 16px; font-weight: 500; color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    transition: all .15s ease;
+  }
+  .choice:hover { border-color: var(--pink-3); box-shadow: 0 4px 14px rgba(184,35,92,.07); }
+  .choice.selected {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    color: #fff; border-color: var(--pink);
+    box-shadow: 0 8px 22px rgba(184,35,92,.22);
+  }
+  .choice .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1.5px solid var(--line-2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: transparent; font-size: 13px;
+  }
+  .choice.selected .check {
+    background: #fff; border-color: #fff; color: var(--pink);
+  }
+  .choice-note {
+    font-size: 12px; color: var(--muted); font-weight: 400;
+    margin-top: 4px;
+  }
+  .choice.selected .choice-note { color: rgba(255,255,255,.8); }
+
+  .field {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .field label {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink);
+  }
+  .field input {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px 18px;
+    font-family: inherit; font-size: 16px; color: var(--ink);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .field input:focus {
+    outline: none; border-color: var(--pink);
+    box-shadow: 0 0 0 4px rgba(184,35,92,.12);
+  }
+
+  .actions {
+    margin-top: 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 999px;
+    font-size: 15px; font-weight: 600;
+    transition: all .2s ease; white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--pink); color: #fff;
+    box-shadow: 0 4px 18px rgba(184,35,92,.22);
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--pink-deep); }
+  .btn-primary:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
+  .btn-back {
+    background: transparent; color: var(--muted); font-weight: 500;
+  }
+  .btn-back:hover { color: var(--ink); }
+
+  .symptom-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .symptom-grid .choice { padding: 14px 16px; font-size: 14px; }
+
+  .footnote {
+    margin-top: 28px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footnote::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink);
+  }
+
+  /* finish */
+  .finish { text-align: center; padding: 32px 0; }
+  .finish-badge {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--pink-soft);
+    color: var(--pink); font-size: 32px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .finish h1 { font-family: 'Lora', serif; font-weight: 500;
+    font-size: 44px; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .finish h1 em { font-style: italic; color: var(--pink); }
+  .finish p { font-size: 17px; color: var(--ink-2); max-width: 440px; margin: 0 auto 28px; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="Her Estrogen.html" aria-label="Her Estrogen home"><img src="assets/logo.png" alt="Her Estrogen" /></a>
+  <a class="top-back" href="Her Estrogen.html">← Back to home</a>
+</div>
+
+<div id="root"></div>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+        <stop offset="0%" stop-color="#fde8ef"/>
+        <stop offset="100%" stop-color="#ec84a8"/>
+      </radialGradient>
+    </defs>
+    <rect width="200" height="200" fill="url(#bg)"/>
+    <text x="100" y="118" text-anchor="middle" font-family="Lora, Georgia, serif" font-style="italic" font-size="64" font-weight="500" fill="#b8235c">Her</text>
+  </svg>
+</template>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const STEPS = [
+  {
+    kind: 'single', key: 'stage',
+    title: 'Where are you in the menopause journey?',
+    intro: "We use this to match you with a clinician who treats women in your stage every day.",
+    options: [
+      { v: 'peri',  label: 'Perimenopause',   note: 'Cycles still present but shifting' },
+      { v: 'meno',  label: 'Menopause',       note: '12+ months without a period' },
+      { v: 'post',  label: 'Postmenopause',   note: 'A few years past my last period' },
+      { v: 'unsure', label: "I'm not sure",   note: "That's okay — we'll help figure it out" },
+    ],
+  },
+  {
+    kind: 'multi', key: 'symptoms',
+    title: 'Which symptoms have you noticed?',
+    intro: 'Tap anything you have experienced in the last six months. There are no wrong answers.',
+    options: [
+      { v: 'hot',   label: 'Hot flashes' },
+      { v: 'sleep', label: 'Sleep disruption' },
+      { v: 'mood',  label: 'Mood shifts' },
+      { v: 'brain', label: 'Brain fog' },
+      { v: 'sex',   label: 'Low libido' },
+      { v: 'skin',  label: 'Dry skin & hair' },
+      { v: 'weight',label: 'Weight & energy' },
+      { v: 'cycle', label: 'Irregular cycles' },
+    ],
+    grid: true,
+  },
+  {
+    kind: 'single', key: 'age',
+    title: 'What is your age range?',
+    intro: 'Hormone therapy is most studied in women within 10 years of menopause — we will be honest about candidacy outside that window.',
+    options: [
+      { v: '<40',   label: 'Under 40' },
+      { v: '40-49', label: '40 – 49' },
+      { v: '50-59', label: '50 – 59' },
+      { v: '60+',   label: '60 or older' },
+    ],
+  },
+  {
+    kind: 'single', key: 'tried',
+    title: 'Have you tried hormone therapy before?',
+    intro: 'Whatever your history, your clinician will start from where you are.',
+    options: [
+      { v: 'never',   label: 'Never' },
+      { v: 'past',    label: 'Yes, in the past' },
+      { v: 'current', label: 'Currently on it' },
+      { v: 'unsure',  label: 'Not sure' },
+    ],
+  },
+  {
+    kind: 'text', key: 'email',
+    title: 'Where should we send your results?',
+    intro: 'We will email your candidacy summary and the link to finish your medical intake. No spam, ever.',
+    placeholder: 'you@email.com',
+    label: 'Email',
+  },
+];
+
+function Quiz() {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [done, setDone] = useState(false);
+
+  const step = STEPS[idx];
+  const total = STEPS.length;
+  const progress = done ? 100 : ((idx) / total) * 100;
+
+  const value = answers[step?.key];
+  const canContinue = (() => {
+    if (!step) return false;
+    if (step.kind === 'single') return !!value;
+    if (step.kind === 'multi') return Array.isArray(value) && value.length > 0;
+    if (step.kind === 'text') return typeof value === 'string' && /\S+@\S+\.\S+/.test(value);
+    return false;
+  })();
+
+  const setSingle = (v) => setAnswers({ ...answers, [step.key]: v });
+  const toggleMulti = (v) => {
+    const cur = Array.isArray(value) ? value.slice() : [];
+    const i = cur.indexOf(v);
+    if (i >= 0) cur.splice(i, 1); else cur.push(v);
+    setAnswers({ ...answers, [step.key]: cur });
+  };
+  const setText = (e) => setAnswers({ ...answers, [step.key]: e.target.value });
+
+  const next = () => {
+    if (idx < total - 1) setIdx(idx + 1);
+    else setDone(true);
+  };
+  const back = () => idx > 0 && setIdx(idx - 1);
+
+  if (done) {
+    return (
+      <div className="shell">
+        <div className="progress-shell">
+          <span>Step {total} of {total}</span>
+          <div className="progress-bar"><div className="progress-fill" style={{ width: '100%' }}></div></div>
+          <span>100%</span>
+        </div>
+        <div className="finish">
+          <div className="finish-badge">✓</div>
+          <h1>You are <em>likely a candidate.</em></h1>
+          <p>
+            A board-certified clinician will review your responses and reach
+            out within 48 hours with a personalized protocol — or honest
+            reasons why hormone therapy may not be right for you.
+          </p>
+          <a href="Her Estrogen.html" className="btn btn-primary">Back to home →</a>
+          <div className="footnote">A clinician will reach out within 48 hours</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="shell">
+      <div className="progress-shell">
+        <span>Step {idx + 1} of {total}</span>
+        <div className="progress-bar"><div className="progress-fill" style={{ width: progress + '%' }}></div></div>
+        <span>{Math.round(progress)}%</span>
+      </div>
+
+      <div className="step">
+        <h1>{step.title}</h1>
+        <p className="step-intro">{step.intro}</p>
+
+        {step.kind === 'single' && (
+          <div className="choices">
+            {step.options.map(o => (
+              <button
+                key={o.v}
+                className={'choice' + (value === o.v ? ' selected' : '')}
+                onClick={() => setSingle(o.v)}
+              >
+                <span>
+                  <div>{o.label}</div>
+                  {o.note && <div className="choice-note">{o.note}</div>}
+                </span>
+                <span className="check">✓</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {step.kind === 'multi' && (
+          <div className={step.grid ? 'symptom-grid' : 'choices'}>
+            {step.options.map(o => {
+              const sel = Array.isArray(value) && value.indexOf(o.v) >= 0;
+              return (
+                <button
+                  key={o.v}
+                  className={'choice' + (sel ? ' selected' : '')}
+                  onClick={() => toggleMulti(o.v)}
+                >
+                  <span>{o.label}</span>
+                  <span className="check">✓</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {step.kind === 'text' && (
+          <div className="field">
+            <label>{step.label}</label>
+            <input
+              type="email"
+              placeholder={step.placeholder}
+              value={value || ''}
+              onChange={setText}
+              autoFocus
+            />
+          </div>
+        )}
+
+        <div className="actions">
+          <button className="btn btn-back" onClick={back} disabled={idx === 0} style={{ visibility: idx === 0 ? 'hidden' : 'visible' }}>
+            ← Back
+          </button>
+          <button className="btn btn-primary" onClick={next} disabled={!canContinue}>
+            {idx === total - 1 ? 'See if I qualify →' : 'Continue →'}
+          </button>
+        </div>
+
+        <div className="footnote">Your answers are private and HIPAA-protected</div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Quiz />);
+</script>
+
+</body>
+</html>
