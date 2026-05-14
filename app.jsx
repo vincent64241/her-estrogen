@@ -560,6 +560,11 @@ function App() {
         </div>
         <div className="container foot-bottom">
           <div>© 2026 Her Estrogen, PBC.</div>
+          <div className="foot-legal-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <span className="sep">·</span>
+            <a href="terms.html">Terms of Service</a>
+          </div>
           <div>Licensed in all 50 U.S. states · LegitScript certified</div>
         </div>
         <div className="container foot-disclaimer">
