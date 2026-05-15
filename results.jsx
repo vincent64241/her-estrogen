@@ -3,8 +3,10 @@ const { useState, useEffect, useRef, useMemo } = React;
 // ============ DATA ============
 
 const PRICING = {
-  patch: { 1: 169, 3: 154, 6: 139, 12: 124 },
-  oral:  { 1: 149, 3: 134, 6: 119, 12: 104 }
+  bundle: { 1: 219, 3: 199, 6: 189, 12: 179 },
+  gel:    { 1: 149, 3: 134, 6: 124, 12: 114 },
+  patch:  { 1: 139, 3: 124, 6: 114, 12: 104 },
+  dhea:   { 1: 149, 3: 134, 6: 124, 12: 114 }
 };
 
 const SYMPTOMS_LIST = [
@@ -23,38 +25,82 @@ const DURATIONS = [
 ];
 
 const MEDS = {
-  patch: {
-    name: 'Transdermal Patch',
-    badge: 'Most Popular',
+  bundle: {
+    name: 'The Complete Protocol',
+    label: 'Most Effective — Save $228/year',
+    badge: 'Recommended',
+    badgeKind: 'pink',
+    rating: '4.9',
+    reviewCount: '3,210',
+    product: 'Estradiol Gel + Micronized Progesterone',
+    description: 'The clinical gold standard — prescribed together for complete hormonal restoration',
+    image: 'assets/cream.png',
+    secondImage: 'assets/oral-pills.png',
+    imageLabels: ['Estradiol Gel', 'Micronized Progesterone'],
+    features: [
+      'Both FDA-approved medications included',
+      'Estrogen + Progesterone — the complete protocol',
+      'Provider consultation, messaging, check-ins all included',
+      'Price NEVER increases — locked in at today\'s rate',
+      'Free shipping every month',
+      'HSA/FSA approved'
+    ]
+  },
+  gel: {
+    name: 'Estradiol Gel',
+    label: 'Estrogen Only',
+    badge: 'FDA-Approved',
     badgeKind: 'pink',
     rating: '4.8',
     reviewCount: '2,847',
-    product: 'Bioidentical Estradiol Patch — Twice-Weekly Application',
-    image: 'assets/transdermal-patch.png',
-    priceFrom: 149,
-    priceStrike: 199,
+    product: 'FDA-Approved Estradiol Gel — Daily Transdermal',
+    description: "Start here if your provider hasn't yet prescribed progesterone, or if you've had a hysterectomy",
+    image: 'assets/cream.png',
     features: [
-      'Twice-weekly patch — steady hormone levels',
-      'Bypasses the liver — lower clot risk than oral',
-      'Available to ship within 3–5 days of approval',
-      'INCLUDES: provider consultation, unlimited messaging, written prescription, free shipping'
+      'FDA-approved estradiol gel — prescribed to your dose',
+      'Daily transdermal application — liver-safe delivery',
+      'Provider consultation, messaging, check-ins included',
+      'Price never increases',
+      'Free shipping',
+      'HSA/FSA approved'
     ]
   },
-  oral: {
-    name: 'Oral Capsules',
-    badge: 'Also Recommended',
+  patch: {
+    name: 'Estradiol Patch',
+    label: 'Estrogen Only — Twice Weekly',
+    badge: 'FDA-Approved',
+    badgeKind: 'pink',
+    rating: '4.8',
+    reviewCount: '1,964',
+    product: 'FDA-Approved Estradiol Patch — Twice-Weekly Application',
+    description: 'Same FDA-approved estrogen as the gel — changed just twice a week for women who prefer minimal routine',
+    image: 'assets/transdermal-patch.png',
+    features: [
+      'FDA-approved estradiol patch — prescribed to your dose',
+      'Twice-weekly application — consistent levels, no daily step',
+      'Provider consultation, messaging, check-ins included',
+      'Price never increases',
+      'Free shipping',
+      'HSA/FSA approved'
+    ]
+  },
+  dhea: {
+    name: 'Vaginal DHEA (Prasterone)',
+    label: 'Vaginal Health Only',
+    badge: 'FDA-Approved',
     badgeKind: 'pink',
     rating: '4.7',
-    reviewCount: '1,204',
-    product: 'Bioidentical Oral Estradiol + Progesterone Capsules',
-    image: 'assets/oral-pills.png',
-    priceFrom: 129,
-    priceStrike: 179,
+    reviewCount: '892',
+    product: 'FDA-Approved Prasterone (Intrarosa) — Daily Intravaginal',
+    description: 'The only FDA-approved non-estrogen treatment for vaginal dryness and painful sex due to menopause',
+    image: 'assets/vaginal.png',
     features: [
-      'Once-daily oral capsule — simple routine',
-      'Plant-derived bioidentical formulation',
-      'Available to ship within 3–5 days of approval',
-      'INCLUDES: provider consultation, unlimited messaging, written prescription, free shipping'
+      'FDA-approved Prasterone (Intrarosa) — delivered monthly',
+      'Local vaginal treatment — minimal systemic absorption',
+      'Provider consultation, messaging, check-ins included',
+      'Price never increases',
+      'Free shipping',
+      'HSA/FSA approved'
     ]
   }
 };
@@ -66,20 +112,20 @@ const GOALS = [
 ];
 
 const INCLUDED = [
-  { icon: '💊', text: 'Personalized compounded bioidentical HRT — cost of medication included' },
+  { icon: '💊', text: 'FDA-approved hormone therapy — cost of medication included' },
   { icon: '👩‍⚕️', text: 'Licensed provider review within 24 hours' },
-  { icon: '💬', text: 'Unlimited provider messaging — ask questions anytime' },
+  { icon: '💬', text: 'Unlimited provider messaging — 4-hour response guarantee' },
   { icon: '🚚', text: 'Free shipping on every monthly refill' },
-  { icon: '📋', text: 'Monthly check-ins and dose adjustments included' },
-  { icon: '🧴', text: 'Optional supplement add-ons available' }
+  { icon: '📋', text: 'Monthly 30-day provider check-in included' },
+  { icon: '📦', text: 'Premium Her Estrogen packaging — every shipment' }
 ];
 
 const STEPS = [
-  { n: 1, title: 'Provider Review', body: "You're already pre-screened. After checkout, a board-certified licensed provider will review your complete intake within 24 hours." },
-  { n: 2, title: 'Prescription Approval', body: 'Most prescriptions are approved in less than 24 hours. Your provider may message you through your secure portal with any questions.' },
-  { n: 3, title: 'Medication Prepared & Shipped', body: 'Once approved, your custom-compounded HRT is prepared by our licensed pharmacy partner and shipped directly to your door. Tracking info sent by text and email.' },
-  { n: 4, title: 'Monthly Refills', body: 'At the start of each cycle, your medication is automatically refilled and shipped. No action needed — we handle everything.' },
-  { n: 5, title: 'Unlimited Support', body: "Questions about your protocol, dosage, or how you're feeling? Message your licensed Her Estrogen provider 24/7 through your secure patient portal." }
+  { n: 1, title: 'Provider Review', body: "You're pre-screened. After checkout, a board-certified licensed Her Estrogen provider reviews your complete intake within 24 hours." },
+  { n: 2, title: 'Prescription Approval', body: 'Most prescriptions are approved in under 24 hours. Your provider may send you a message through your secure Her Estrogen portal with any questions or adjustments.' },
+  { n: 3, title: 'Medication Prepared and Shipped', body: 'Once approved, your FDA-approved prescription is processed and shipped directly to your door in premium Her Estrogen packaging. Tracking sent by text and email.' },
+  { n: 4, title: 'Monthly Refills', body: 'Your medication refills automatically every month. We handle everything — you just open your door.' },
+  { n: 5, title: 'Unlimited Support', body: "Questions about how you're feeling, your dosage, or your protocol? Message your licensed Her Estrogen provider anytime — guaranteed 4-hour response during business hours." }
 ];
 
 const STATS = [
@@ -92,17 +138,17 @@ const STATS = [
 const TESTIMONIALS = [
   {
     title: 'I finally feel like myself again',
-    body: "I suffered for 3 years thinking brain fog and no sleep was just 'getting older.' Two months into Her Estrogen and I sleep through the night for the first time since 2021. My husband says I'm a different person. He's right.",
+    body: "I suffered through 3 years of hot flashes, brain fog, and waking up at 3am convinced something was wrong with me. Six weeks into Her Estrogen and I sleep through the night. My husband says I'm a different person. He's right.",
     name: 'Sarah M.'
   },
   {
-    title: 'My doctor never mentioned this was an option',
-    body: "I spent a year on antidepressants that didn't work. Her Estrogen connected me with a provider who actually listened. Turns out it was perimenopause the whole time. I wish I'd found this sooner.",
+    title: 'My doctor never told me FDA-approved HRT existed like this',
+    body: 'I thought HRT meant scary synthetic hormones or shady compounded creams. Her Estrogen uses FDA-approved medications — that was the deciding factor for me. Three months in and the hot flashes are gone. The sleep alone was worth every penny.',
     name: 'Jennifer K.'
   },
   {
-    title: 'Worth every penny',
-    body: 'At 44 I thought feeling exhausted and irritable was just my personality now. Three months of bioidentical HRT through Her Estrogen and I have my energy back, my libido back, and my life back.',
+    title: 'Worth every single dollar',
+    body: "At 44 I thought exhaustion and irritability was just my personality now. Two months on the Complete Protocol and I have my energy back, I'm sleeping, and I actually want to be around people again. This is what healthcare should feel like.",
     name: 'Michelle R.'
   }
 ];
@@ -110,7 +156,7 @@ const TESTIMONIALS = [
 const FAQ_ITEMS = [
   {
     q: 'What is the Her Estrogen prescription plan?',
-    a: 'Her Estrogen coordinates access to personalized bioidentical hormone replacement therapy (HRT) through a network of licensed providers. After your checkout, a board-certified provider reviews your intake and writes a custom prescription for compounded bioidentical hormones including estradiol, progesterone, and if indicated, low-dose testosterone. The medication is compounded and shipped directly to your door by our licensed pharmacy partner.'
+    a: 'Her Estrogen coordinates access to FDA-approved hormone replacement therapy (HRT) through a network of licensed providers. After your checkout, a board-certified provider reviews your intake and writes a custom prescription — choosing from FDA-approved estradiol gel, estradiol patch, micronized progesterone, or vaginal DHEA (Prasterone) based on your symptoms and clinical needs. The medication is shipped directly to your door by our licensed pharmacy partner in premium Her Estrogen packaging.'
   },
   {
     q: 'What does the price include?',
@@ -131,6 +177,106 @@ const FAQ_ITEMS = [
 ];
 
 const US_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+// 20 case studies — PLACEHOLDER content. Replace each entry with real verified patient
+// stories before launch. Photos go in /assets/ as case-1.jpg through case-20.jpg.
+const CASE_STUDIES = Array.from({ length: 20 }, (_, i) => ({
+  name: `Patient ${i + 1}`,
+  meta: 'Age — · State',
+  quote: 'Replace this card with a real verified patient story before launch.',
+  photo: `assets/case-${i + 1}.jpg`
+}));
+
+// ============ RECOMMENDATION ENGINE ============
+// Reads quiz answers from localStorage (saved by quiz.html) and picks the best protocol.
+
+function readQuizAnswers() {
+  try {
+    const raw = localStorage.getItem('herestrogen_quiz');
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+
+function recommendProduct(quiz) {
+  if (!quiz) {
+    return {
+      primary: 'gel',
+      offerBundle: true,
+      reason: 'Most prescribed FDA-approved hormone therapy — a strong default for women in perimenopause and menopause.'
+    };
+  }
+  const { stage, symptoms = [], age, preference } = quiz;
+  const sys = ['hot', 'sleep', 'mood', 'brain', 'weight'];
+  const systemicCount = symptoms.filter((s) => sys.includes(s)).length;
+  const onlyVaginal = symptoms.length > 0 && symptoms.every((s) => s === 'skin');
+
+  // Honor explicit delivery-form preference (unless user picked "most effective" or left blank)
+  if (preference === 'gel') {
+    return {
+      primary: 'gel',
+      offerBundle: true,
+      reason: 'You preferred a daily cream — FDA-approved estradiol gel, the most prescribed first-line therapy.'
+    };
+  }
+  if (preference === 'patch') {
+    return {
+      primary: 'patch',
+      offerBundle: true,
+      reason: 'You preferred a twice-weekly patch — FDA-approved estradiol patch, with the same liver-bypass benefits as the gel and the lowest daily routine.'
+    };
+  }
+  if (preference === 'vaginal') {
+    return {
+      primary: 'dhea',
+      offerBundle: false,
+      reason: 'You preferred a local treatment — FDA-approved vaginal DHEA (Prasterone), the only non-estrogen option for vaginal symptoms.'
+    };
+  }
+  // preference === 'effective' or undefined → run the algorithm
+
+  // Vaginal/atrophy symptoms only → DHEA first-line
+  if (onlyVaginal) {
+    return {
+      primary: 'dhea',
+      offerBundle: false,
+      reason: 'For local symptoms, FDA-approved vaginal DHEA (Prasterone) is the first-line non-estrogen option.'
+    };
+  }
+
+  // 60+ or postmenopause → start conservative with gel alone, offer bundle as upgrade
+  if (age === '60+' || stage === 'post') {
+    return {
+      primary: 'gel',
+      offerBundle: true,
+      reason: 'Lowest effective dose of FDA-approved estradiol gel — your provider can add progesterone if indicated.'
+    };
+  }
+
+  // 2+ systemic symptoms → Complete Protocol (bundle) is the evidence-based choice
+  if (systemicCount >= 2) {
+    return {
+      primary: 'bundle',
+      offerBundle: false,
+      reason: "Multiple symptoms respond best to the Complete Protocol — FDA-approved estradiol gel + micronized progesterone. Backed by NAMS, IMS, and the FDA as the standard of care."
+    };
+  }
+
+  // Single systemic symptom → start with gel, suggest bundle upgrade
+  if (systemicCount === 1) {
+    return {
+      primary: 'gel',
+      offerBundle: true,
+      reason: 'FDA-approved estradiol gel — the most prescribed first-line therapy for your primary symptom.'
+    };
+  }
+
+  // Default fallback
+  return {
+    primary: 'bundle',
+    offerBundle: false,
+    reason: 'The Complete Protocol — FDA-approved estradiol gel + micronized progesterone — the most evidence-based first protocol.'
+  };
+}
 
 // ============ UTILITIES ============
 
@@ -270,10 +416,10 @@ function TimelineChart() {
   // Points (x from 60..560, y from 50 (high severity) to 200 (low))
   const pts = [
     { x: 60, y: 60, label: 'Today', tag: '' },
-    { x: 175, y: 110, label: 'Week 2', tag: 'Sleep begins improving' },
-    { x: 290, y: 145, label: 'Month 1', tag: 'Hot flashes reduce 60%' },
-    { x: 420, y: 178, label: 'Month 3', tag: 'Energy and mood restored' },
-    { x: 540, y: 200, label: 'Month 6', tag: 'Full hormonal balance achieved' }
+    { x: 175, y: 120, label: 'Week 2', tag: 'Sleep begins improving' },
+    { x: 290, y: 175, label: 'Month 1', tag: 'Hot flashes reduce 60%' },
+    { x: 420, y: 205, label: 'Month 2', tag: 'Full hormonal balance achieved' },
+    { x: 540, y: 205, label: 'Month 6', tag: 'Sustained relief' }
   ];
   const pathD = pts.reduce((acc, p, i) => {
     if (i === 0) return `M ${p.x} ${p.y}`;
@@ -331,34 +477,23 @@ function TimelineChart() {
   );
 }
 
-// ============ STRIPE CARD ELEMENT (mounted via JS API) ============
-
-function CardElementMount({ onReady }) {
-  useEffect(() => {
-    if (!window.Stripe) return;
-    const stripe = window.Stripe('pk_test_placeholder_key_here');
-    const elements = stripe.elements({
-      fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap' }]
-    });
-    const card = elements.create('card', {
-      style: {
-        base: {
-          color: '#1a1216',
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontSize: '16px',
-          fontSmoothing: 'antialiased',
-          '::placeholder': { color: '#a89aa1' }
-        },
-        invalid: { color: '#c33', iconColor: '#c33' }
-      }
-    });
-    card.mount('#card-element');
-    onReady && onReady({ stripe, card });
-    return () => card.destroy();
-  }, []);
-
-  return <div id="card-element"></div>;
-}
+// ============ PRODUCT/PERIOD KEY MAP ============
+// Maps our internal selectedMed + selectedDuration to the keys the
+// /api/checkout endpoint expects (which then resolve to Stripe Price IDs
+// from server-side env vars).
+const PRODUCT_KEY_MAP = {
+  bundle:       'completeProtocol',
+  gel:          'estradiolGel',
+  patch:        'estradiolPatch',
+  progesterone: 'progesterone',
+  dhea:         'vaginalDHEA'
+};
+const PERIOD_KEY_MAP = {
+  1:  'monthly',
+  3:  'threeMonth',
+  6:  'sixMonth',
+  12: 'annual'
+};
 
 // ============ MAIN APP ============
 
@@ -367,20 +502,41 @@ function App() {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedMed, setSelectedMed] = useState('patch');
+  const [quizAnswers, setQuizAnswers] = useState(null);
+  const [selectedMed, setSelectedMed] = useState('gel');
   const [selectedDuration, setSelectedDuration] = useState(3);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState('card');
   const [openFaq, setOpenFaq] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
   const checkoutRef = useRef(null);
   const pricingRef = useRef(null);
-  const stripeApiRef = useRef(null);
 
   const timeLeft = useCountdown(10 * 60, phase === 'results');
   const expired = timeLeft <= 0 && phase === 'results';
 
+  // Read quiz answers + auto-skip Phase 1 if contact info already present, set recommendation
+  useEffect(() => {
+    const quiz = readQuizAnswers();
+    setQuizAnswers(quiz);
+    const rec = recommendProduct(quiz);
+    setSelectedMed(rec.primary);
+
+    // If the quiz collected firstName + valid email + 10-digit phone, jump straight to Phase 2
+    if (quiz && quiz.firstName && quiz.firstName.trim() && quiz.email && /\S+@\S+\.\S+/.test(quiz.email)) {
+      const phoneDigits = (quiz.phone || '').replace(/\D/g, '');
+      if (phoneDigits.length === 10) {
+        const cleanName = quiz.firstName.trim().charAt(0).toUpperCase() + quiz.firstName.trim().slice(1).toLowerCase();
+        setFirstName(cleanName);
+        setEmail(quiz.email);
+        setPhone(quiz.phone);
+        setPhase('results');
+      }
+    }
+  }, []);
+
+  const recommendation = useMemo(() => recommendProduct(quizAnswers), [quizAnswers]);
   const monthly = PRICING[selectedMed][selectedDuration];
   const total = monthly * selectedDuration;
   const med = MEDS[selectedMed];
@@ -411,15 +567,80 @@ function App() {
     pricingRef.current && pricingRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // Submit → server creates a Stripe Checkout Session → redirect to hosted page.
+  // Stripe collects card details + handles 3DS / Apple Pay / Google Pay / Klarna
+  // on their secure hosted checkout page, then redirects back to /success.html.
   const handleCheckoutSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
+    setPaymentError('');
+
+    // Map internal product key + duration to API contract
+    const productKey = PRODUCT_KEY_MAP[selectedMed];
+    const periodKey = PERIOD_KEY_MAP[selectedDuration];
+    if (!productKey || !periodKey) {
+      setPaymentError('Could not resolve your selected protocol. Please refresh and try again.');
+      return;
+    }
+
+    // Basic shipping form validation (shipping captured here; billing on Stripe page)
+    if (!form.fullName.trim() || !form.address1.trim() || !form.city.trim() || !form.state || !form.zip) {
+      setPaymentError('Please complete your shipping information before continuing.');
+      return;
+    }
+    if (!email) {
+      setPaymentError('Email is required.');
+      return;
+    }
+
     setSubmitting(true);
-    // Demo: simulate Stripe call
-    setTimeout(() => {
+
+    try {
+      const resp = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product: productKey,
+          period: periodKey,
+          customerEmail: email,
+          customerName: form.fullName || firstName,
+          productName: med.name,
+          billingPeriod: selectedDuration === 1
+            ? 'Month to Month'
+            : `${selectedDuration} Month Plan`,
+          metadata: {
+            firstName,
+            phone,
+            shipping_line1: form.address1,
+            shipping_line2: form.address2 || '',
+            shipping_city: form.city,
+            shipping_state: form.state,
+            shipping_zip: form.zip
+          }
+        })
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok || data.error) {
+        setPaymentError(data.error || 'Could not start your checkout. Please try again.');
+        setSubmitting(false);
+        return;
+      }
+
+      // Redirect to Stripe-hosted Checkout page
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+
+      setPaymentError('Checkout did not return a URL. Please try again or contact support.');
       setSubmitting(false);
-      setSuccess(true);
-    }, 1500);
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setPaymentError(err.message || 'Something went wrong. Please try again.');
+      setSubmitting(false);
+    }
   };
 
   if (phase === 'capture') {
@@ -492,14 +713,14 @@ function App() {
         <div className="container">
           <div className="recommend">
             <div>
-              <span className="recommend-badge">Our Recommendation</span>
-              <h3>Personalized compounded bioidentical HRT</h3>
-              <p>Based on your intake, we recommend a personalized compounded bioidentical HRT protocol including estradiol and micronized progesterone — customized to your exact hormone levels and symptom profile.</p>
+              <span className="recommend-badge">Our Recommendation for {firstName}</span>
+              <h3>{med.product}</h3>
+              <p>{recommendation.reason}</p>
               <p style={{ fontSize: 13, color: 'var(--muted)', fontStyle: 'italic' }}>You can discuss your specific formulation with your licensed Her Estrogen provider after checkout — your protocol is always adjustable.</p>
               <span className="small-badge">Prescription Required — Included in your plan</span>
             </div>
             <div className="vial-wrap">
-              <img src="assets/transdermal-patch.png" alt="Her Estrogen transdermal patch" className="rec-product-img" />
+              <img src={med.image} alt={med.name} className="rec-product-img" />
             </div>
           </div>
         </div>
@@ -563,37 +784,71 @@ function App() {
             <div className="green-line">24/7 provider access + unlimited messaging + medication — all included.</div>
           </div>
 
-          <h3 className="meds-head">Choose your HRT protocol:</h3>
-          <div className="meds-grid">
-            {['patch', 'oral'].map((key) => {
-              const m = MEDS[key];
-              return (
-                <div
-                  key={key}
-                  className={`med-card ${selectedMed === key ? 'selected' : ''}`}
-                  onClick={() => setSelectedMed(key)}
-                  role="button"
-                >
-                  <span className="badge">{m.badge}</span>
-                  <div className="med-img-wrap">
-                    <img src={m.image} alt={m.name} className="med-img" />
+          <h3 className="meds-head">Your recommended FDA-approved protocol:</h3>
+
+          {/* Single recommended product card */}
+          <div className={`med-card recommended ${selectedMed === 'bundle' ? 'bundle' : ''}`}>
+            <span className="badge">{selectedMed === 'bundle' ? 'Recommended Bundle' : 'Your Recommendation'}</span>
+            <div className={'med-img-wrap' + (selectedMed === 'bundle' && med.secondImage ? ' bundle-images' : '')}>
+              {selectedMed === 'bundle' && med.secondImage ? (
+                <>
+                  <div className="bundle-img-pair">
+                    <img src={med.image} alt={med.imageLabels?.[0] || 'Product 1'} className="med-img" />
+                    <span className="bundle-img-label">{med.imageLabels?.[0]}</span>
                   </div>
-                  <div className="med-rating">
-                    <span className="stars">{'★★★★★'}</span>
-                    <span className="review-count">{m.rating} — {m.reviewCount} Reviews</span>
+                  <div className="bundle-img-plus" aria-hidden="true">+</div>
+                  <div className="bundle-img-pair">
+                    <img src={med.secondImage} alt={med.imageLabels?.[1] || 'Product 2'} className="med-img" />
+                    <span className="bundle-img-label">{med.imageLabels?.[1]}</span>
                   </div>
-                  <h3>{m.product}</h3>
-                  <div className="price">
-                    <span className="price-num">Starting at ${m.priceFrom}/mo</span>
-                    <span className="price-strike">${m.priceStrike}</span>
-                  </div>
-                  <ul>
-                    {m.features.map((f, i) => <li key={i}>{f}</li>)}
-                  </ul>
-                </div>
-              );
-            })}
+                </>
+              ) : (
+                <img src={med.image} alt={med.name} className="med-img" />
+              )}
+            </div>
+            <div className="med-rating">
+              <span className="stars">{'★★★★★'}</span>
+              <span className="review-count">{med.rating} — {med.reviewCount}</span>
+            </div>
+            <h3>{med.product}</h3>
+            {med.label && <div className="med-label">{med.label}</div>}
+            <p className="med-description">{recommendation.reason}</p>
+            <div className="price">
+              <span className="price-num">Starting at ${PRICING[selectedMed][12]}/mo</span>
+            </div>
+            <ul>
+              {med.features.map((f, i) => <li key={i}>{f}</li>)}
+            </ul>
           </div>
+
+          {/* Bundle upgrade offer — always shown when user isn't already on the bundle */}
+          {selectedMed !== 'bundle' && (
+            <div className="bundle-upgrade" onClick={() => setSelectedMed('bundle')} role="button">
+              <div className="bundle-upgrade-left">
+                <div className="bundle-upgrade-badge">Save ~10% · More Effective</div>
+                <h4>Upgrade to The Complete Protocol</h4>
+                <p>
+                  Add FDA-approved <strong>Micronized Progesterone</strong> to your {med.name}. The combination is the clinical gold standard — backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and ~10% off both medications.</strong>
+                </p>
+                <div className="bundle-upgrade-price">
+                  <span className="up-from">Your plan today:</span> <strong>${monthly}/mo</strong>
+                  <span className="up-arrow">→</span>
+                  <span className="up-to">With bundle:</span> <strong className="up-bundle-price">${PRICING.bundle[selectedDuration]}/mo</strong>
+                </div>
+              </div>
+              <div className="bundle-upgrade-cta">Add Progesterone →</div>
+            </div>
+          )}
+
+          {/* If already on bundle, offer to switch to single product */}
+          {selectedMed === 'bundle' && (
+            <div className="bundle-downgrade">
+              <span>Prefer to start with just one medication?</span>
+              <button className="downgrade-link" onClick={() => setSelectedMed(recommendation.primary === 'bundle' ? 'gel' : recommendation.primary)}>
+                Switch to {MEDS[recommendation.primary === 'bundle' ? 'gel' : recommendation.primary].name} only
+              </button>
+            </div>
+          )}
 
           <div className="trust-row">
             <span>🔒 HIPAA Secure</span>
@@ -626,7 +881,7 @@ function App() {
             </div>
 
             <div className="summary-box">
-              Currently selected: <strong>{med.name}</strong> — <strong>{selectedDuration === 1 ? 'Month-to-Month' : `${selectedDuration} Month Plan`}</strong> — <strong>${monthly}/month</strong> — Billed as <strong>${total.toLocaleString()} every {selectedDuration === 1 ? 'month' : `${selectedDuration} months`}</strong>
+              Currently selected: <strong>{med.name}</strong>{selectedMed === 'bundle' && <> — {med.product}</>} — <strong>{selectedDuration === 1 ? 'Month-to-Month' : `${selectedDuration} Month Plan`}</strong> — <strong>${monthly}/month</strong> — Billed as <strong>${total.toLocaleString()} every {selectedDuration === 1 ? 'month' : `${selectedDuration} months`}</strong>
             </div>
 
             <button className="cta-large" onClick={scrollToCheckout}>Continue to Checkout →</button>
@@ -690,27 +945,14 @@ function App() {
                   </label>
                 </div>
 
-                <h3 className="checkout-h">Payment method</h3>
-                <div className="pay-tabs">
-                  {[
-                    { id: 'card', label: 'Card' },
-                    { id: 'klarna', label: 'Klarna' },
-                    { id: 'amazon', label: 'Amazon Pay' }
-                  ].map((t) => (
-                    <button
-                      type="button"
-                      key={t.id}
-                      className={`pay-tab ${paymentMethod === t.id ? 'active' : ''}`}
-                      onClick={() => setPaymentMethod(t.id)}
-                    >{t.label}</button>
-                  ))}
+                <div className="checkout-secure">
+                  <span aria-hidden="true">🔒</span>
+                  <span>Card details collected on Stripe's secure hosted page after you click below. Supports card, Apple Pay, Google Pay, and Klarna.</span>
                 </div>
 
-                {paymentMethod === 'card' ? (
-                  <CardElementMount onReady={(api) => { stripeApiRef.current = api; }} />
-                ) : (
-                  <div className="alt-pay-info">
-                    You'll be redirected to {paymentMethod === 'klarna' ? 'Klarna' : 'Amazon Pay'} to complete payment after clicking submit.
+                {paymentError && (
+                  <div className="payment-error" role="alert">
+                    <strong>Payment couldn't complete.</strong> {paymentError}
                   </div>
                 )}
 
@@ -719,11 +961,11 @@ function App() {
                 </p>
 
                 <button type="submit" className="submit-btn" disabled={submitting}>
-                  {submitting ? 'Processing…' : 'Start My HRT Journey →'}
+                  {submitting ? 'Redirecting to secure checkout…' : 'Continue to Secure Checkout →'}
                 </button>
 
                 <div className="guarantee">
-                  🔒 <strong>Provider Guarantee</strong> — If our licensed provider determines HRT is not right for you, you receive a full refund. No questions asked.
+                  🔒 <strong>The Her Estrogen Provider Guarantee</strong> — If our licensed provider determines that HRT is not medically appropriate for you after reviewing your intake, you receive a complete refund within 3 business days. No questions asked. No forms. No friction. If you're not approved — you don't pay.
                 </div>
               </form>
             </div>
@@ -754,47 +996,28 @@ function App() {
         </div>
       </section>
 
-      {/* SECTION 13 — Testimonials */}
-      <section className="testimonials-section">
+      {/* SECTION 13 — Case Studies (20 patient stories with photos) */}
+      <section className="case-studies-section">
         <div className="container">
-          <h2 className="section-title">The results <em>speak for themselves</em></h2>
-          <p className="section-sub">Her Estrogen success stories are coming in, and we can't get enough.</p>
-          <div className="reviews-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div className="review" key={i}>
-                <div className="stars">★★★★★</div>
-                <h4>{t.title}</h4>
-                <div className="review-body">"{t.body}"</div>
-                <div className="review-author">
-                  <span className="name">{t.name}</span>
-                  <span className="verified">✅ Verified patient</span>
+          <h2 className="section-title center">Real women, <em>real results</em></h2>
+          <p className="section-sub center">Twenty case studies — verified patients on FDA-approved Her Estrogen protocols.</p>
+          <div className="case-grid">
+            {CASE_STUDIES.map((c, i) => (
+              <div className="case-card" key={i}>
+                <div className="case-photo-wrap">
+                  <img src={c.photo} alt={c.name} className="case-photo" loading="lazy" />
+                </div>
+                <div className="case-body">
+                  <div className="case-stars">★★★★★</div>
+                  <p className="case-quote">"{c.quote}"</p>
+                  <div className="case-meta">
+                    <div className="case-name">{c.name}</div>
+                    <div className="case-loc">{c.meta}</div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 14 — Final CTA */}
-      <section className="final-cta">
-        <div className="narrow">
-          <span className="pill">Are You Ready?</span>
-          <h2>Start Your Hormone Restoration Today</h2>
-          <p className="timer-text">Your pre-approval expires in {expired ? '0:00' : formatTime(timeLeft)}</p>
-          <div className="green-bar">HRT protocols start at just $149 — no insurance required</div>
-          <p className="subhead">The most effective women's hormone program is right here.</p>
-          <div className="incl">
-            <ul>
-              <li>Access to Bioidentical HRT — medication cost included</li>
-              <li>No insurance required</li>
-              <li>Board-certified licensed provider review</li>
-              <li>1:1 Provider guidance and messaging</li>
-              <li>Hormone health report — personalized to your profile</li>
-              <li>Free shipping, always</li>
-            </ul>
-          </div>
-          <p className="fineprint">Pay one month at a time. No contracts. Cancel anytime.</p>
-          <button onClick={scrollToPricing} className="cta-cream">Choose My Plan →</button>
         </div>
       </section>
 

@@ -256,13 +256,30 @@ const STEPS = [
     ],
   },
   {
-    kind: 'text', key: 'email',
+    kind: 'single', key: 'preference',
+    title: 'Which form of treatment do you prefer?',
+    intro: 'Hormone therapy can be delivered in different ways. Pick what fits your lifestyle — your provider can always adjust.',
+    options: [
+      { v: 'gel',       label: 'Cream or gel',           note: 'Daily — applied to skin' },
+      { v: 'patch',     label: 'Patch',                  note: 'Twice weekly — set and forget' },
+      { v: 'vaginal',   label: 'Vaginal insert',         note: 'For local symptoms only' },
+      { v: 'effective', label: "I'm not picky — give me the most effective option", note: 'Let our clinician choose the best protocol for you' },
+    ],
+  },
+  {
+    kind: 'contact',
     title: 'Where should we send your results?',
-    intro: 'We will email your candidacy summary and the link to finish your medical intake. No spam, ever.',
-    placeholder: 'you@email.com',
-    label: 'Email',
+    intro: 'We will text and email your candidacy summary and the link to finish your medical intake. No spam, ever.',
   },
 ];
+
+function formatPhone(value) {
+  const digits = (value || '').replace(/\D/g, '').slice(0, 10);
+  if (digits.length === 0) return '';
+  if (digits.length < 4) return `(${digits}`;
+  if (digits.length < 7) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+}
 
 function Quiz() {
   const [idx, setIdx] = useState(0);
@@ -279,6 +296,12 @@ function Quiz() {
     if (step.kind === 'single') return !!value;
     if (step.kind === 'multi') return Array.isArray(value) && value.length > 0;
     if (step.kind === 'text') return typeof value === 'string' && /\S+@\S+\.\S+/.test(value);
+    if (step.kind === 'contact') {
+      const fn = (answers.firstName || '').trim();
+      const em = answers.email || '';
+      const ph = (answers.phone || '').replace(/\D/g, '');
+      return fn.length > 0 && /\S+@\S+\.\S+/.test(em) && ph.length === 10;
+    }
     return false;
   })();
 
@@ -296,6 +319,15 @@ function Quiz() {
     else setDone(true);
   };
   const back = () => idx > 0 && setIdx(idx - 1);
+
+  // Persist answers to localStorage when quiz completes — results.html reads this
+  React.useEffect(() => {
+    if (done) {
+      try {
+        localStorage.setItem('herestrogen_quiz', JSON.stringify(answers));
+      } catch (e) { /* storage disabled — fall back to defaults */ }
+    }
+  }, [done, answers]);
 
   if (done) {
     return (
@@ -378,6 +410,45 @@ function Quiz() {
               onChange={setText}
               autoFocus
             />
+          </div>
+        )}
+
+        {step.kind === 'contact' && (
+          <div>
+            <div className="field">
+              <label>First name</label>
+              <input
+                type="text"
+                placeholder="Jane"
+                value={answers.firstName || ''}
+                onChange={(e) => setAnswers({ ...answers, firstName: e.target.value })}
+                autoComplete="given-name"
+                autoCapitalize="words"
+                autoFocus
+              />
+            </div>
+            <div className="field">
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="you@email.com"
+                value={answers.email || ''}
+                onChange={(e) => setAnswers({ ...answers, email: e.target.value })}
+                autoComplete="email"
+                inputMode="email"
+              />
+            </div>
+            <div className="field">
+              <label>Phone</label>
+              <input
+                type="tel"
+                placeholder="(555) 123-4567"
+                value={answers.phone || ''}
+                onChange={(e) => setAnswers({ ...answers, phone: formatPhone(e.target.value) })}
+                autoComplete="tel"
+                inputMode="tel"
+              />
+            </div>
           </div>
         )}
 

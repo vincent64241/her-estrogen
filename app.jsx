@@ -13,55 +13,51 @@ const SYMPTOMS = [
 
 const TREATMENTS = [
 {
-  id: 'estradiol',
-  eyebrow: 'Bioidentical estradiol',
-  name: 'Transdermal patch',
-  desc: 'Twice-weekly patch delivering bioidentical 17β-estradiol through the skin — bypassing the liver for a steadier hormonal floor.',
-  price: 89, strike: 145, unit: '/ month',
+  id: 'gel',
+  eyebrow: 'FDA-Approved · Most Prescribed',
+  name: 'Estradiol Gel',
+  desc: 'The gold standard for hormonal restoration — FDA-approved, liver-safe, and precisely dosed.',
   features: [
-  ['Dose', '0.025 – 0.1 mg / day'],
-  ['Cadence', 'Apply 2x per week'],
-  ['Form', 'Adhesive matrix patch'],
-  ['Ships', 'Every 90 days']],
+  ['Application', 'Once daily — inner arm or thigh'],
+  ['Delivery', 'Transdermal (bypasses the liver)'],
+  ['Treats', 'Hot flashes, sleep, mood, bone density'],
+  ['Status', 'FDA-Approved']],
+  image: 'assets/cream.png'
+},
+{
+  id: 'patch',
+  eyebrow: 'FDA-Approved · No Daily Routine',
+  name: 'Estradiol Patch',
+  desc: 'Consistent hormone delivery, zero daily effort — changed just twice a week.',
+  features: [
+  ['Application', 'Twice weekly — adhesive patch'],
+  ['Delivery', 'Transdermal — steady levels'],
+  ['Treats', 'Hot flashes, sleep, mood, bone density'],
+  ['Status', 'FDA-Approved']],
   image: 'assets/transdermal-patch.png'
 },
 {
   id: 'progesterone',
-  eyebrow: 'Micronized progesterone',
-  name: 'Nightly oral capsule',
-  desc: 'Plant-derived, bioidentical progesterone taken before bed — pairs with estradiol if you have an intact uterus, and supports sleep.',
-  price: 49, strike: 95, unit: '/ month',
+  eyebrow: 'FDA-Approved · Sleep + Protection',
+  name: 'Micronized Progesterone',
+  desc: 'The gold standard progestogen — protects your uterus and gives you the best sleep of your life.',
   features: [
-  ['Dose', '100 – 200 mg / night'],
-  ['Cadence', 'Daily, before sleep'],
-  ['Form', 'Soft-gel capsule'],
-  ['Ships', 'Every 90 days']],
+  ['Application', 'Nightly oral capsule'],
+  ['Dose', '100 mg or 200 mg as prescribed'],
+  ['Treats', 'Sleep, anxiety, uterine protection'],
+  ['Status', 'FDA-Approved']],
   image: 'assets/oral-pills.png'
 },
 {
-  id: 'testosterone',
-  eyebrow: 'Compounded testosterone',
-  name: 'Low-dose cream',
-  desc: 'Physician-compounded topical testosterone for libido, energy, and lean mass — dosed at a fraction of male protocols.',
-  price: 119, strike: 199, unit: '/ month',
+  id: 'dhea',
+  eyebrow: 'FDA-Approved · Vaginal Health',
+  name: 'Vaginal DHEA (Prasterone)',
+  desc: 'The only FDA-approved non-estrogen treatment for painful sex and vaginal dryness due to menopause.',
   features: [
-  ['Dose', '0.5 – 5 mg / day'],
-  ['Cadence', 'Once daily, topical'],
-  ['Form', 'Compounded cream'],
-  ['Ships', 'Every 60 days']],
-  image: 'assets/cream.png'
-},
-{
-  id: 'vaginal',
-  eyebrow: 'Local estradiol',
-  name: 'Vaginal estradiol',
-  desc: 'Low-dose local estrogen for dryness, discomfort, and urinary symptoms — minimal systemic absorption, used independently or alongside.',
-  price: 69, strike: 110, unit: '/ month',
-  features: [
-  ['Dose', '10 mcg insert'],
-  ['Cadence', '2x per week'],
-  ['Form', 'Vaginal insert'],
-  ['Ships', 'Every 90 days']],
+  ['Application', 'Once daily — intravaginal insert'],
+  ['Form', 'Prasterone (Intrarosa)'],
+  ['Treats', 'Dryness, pain, atrophy, recurrent UTIs'],
+  ['Status', 'FDA-Approved']],
   image: 'assets/vaginal.png'
 }];
 
@@ -70,6 +66,27 @@ const REVIEWS = [
 { stars: 5, body: 'I spent two years asking my OB about night sweats and was told to "ride it out." Three weeks on the patch and I am sleeping through the night for the first time since I was 44.', name: 'Marisol R.', age: 'Age 51 · Texas' },
 { stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
 { stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
+
+const PATIENT_STORIES = [
+  {
+    name: 'Jessica L.',
+    location: 'Age 48 · Florida',
+    body: "I haven't had a hot flash in 6 weeks. My husband keeps telling me I look 10 years younger — and I finally feel like the woman he married.",
+    photo: 'assets/testimonial-1.jpg'
+  },
+  {
+    name: 'Amanda K.',
+    location: 'Age 52 · Colorado',
+    body: 'My sleep is finally restored. I wake up rested, energetic, and ready to take on the day. I wish I had started this years ago.',
+    photo: 'assets/testimonial-2.jpg'
+  },
+  {
+    name: 'Diana W.',
+    location: 'Age 46 · Washington',
+    body: 'After two ineffective specialists, Her Estrogen got my hormones right in 30 days. Best money I have ever spent on my health.',
+    photo: 'assets/testimonial-3.jpg'
+  }
+];
 
 
 const FAQ = [
@@ -117,7 +134,11 @@ function Timeline() {
   const cardRefs = React.useRef([]);
 
   React.useEffect(() => {
-    const onScroll = () => {
+    let rafId = null;
+    let pending = false;
+
+    const compute = () => {
+      pending = false;
       const rail = railRef.current;
       if (!rail) return;
       const r = rail.getBoundingClientRect();
@@ -137,20 +158,39 @@ function Timeline() {
       });
       setActiveIdx(lastActive);
 
-      // fade-in cards near viewport
+      // fade-in cards near viewport (staggered for smoother flow)
       const nextVis = visible.slice();
       let changed = false;
       cardRefs.current.forEach((c, i) => {
         if (!c || nextVis[i]) return;
         const cr = c.getBoundingClientRect();
-        if (cr.top < vh * 0.88) {nextVis[i] = true;changed = true;}
+        if (cr.top < vh * 0.88) {
+          // stagger reveal by 120ms per card index for a smoother cascade
+          setTimeout(() => {
+            setVisible((prev) => {
+              if (prev[i]) return prev;
+              const out = prev.slice();
+              out[i] = true;
+              return out;
+            });
+          }, i * 120);
+          nextVis[i] = true;
+          changed = true;
+        }
       });
-      if (changed) setVisible(nextVis);
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (pending) return;
+      pending = true;
+      rafId = window.requestAnimationFrame(compute);
+    };
+
+    compute();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
@@ -213,7 +253,7 @@ function Timeline() {
 
 function App() {
   const [selected, setSelected] = useState(new Set(['hot', 'sleep', 'mood']));
-  const [activeTreatment, setActiveTreatment] = useState('estradiol');
+  const [activeTreatment, setActiveTreatment] = useState('gel');
   const [openFaq, setOpenFaq] = useState(0);
 
   const toggle = (id) => {
@@ -227,45 +267,41 @@ function App() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="hero hero-full" data-screen-label="01 Hero">
-        <img src="assets/hero-women.jpg" alt="A wall of women" className="hero-bg" />
-        <div className="hero-scrim"></div>
-        <div className="container hero-content">
-          <div>
-            <h1>
-              Hot flashes. Brain fog. Poor sleep.<br />
-              Low energy. Mood shifts.<br />
-              It's not in your head — <em>it's your hormones.</em>
-            </h1>
-            <p className="hero-sub">
-              Real bioidentical HRT. Real relief. Prescribed online and
-              shipped directly to your door in days.
-            </p>
-            <ul className="hero-checks">
-              <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
-              <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
-              <li><span className="check">✓</span> Start for just $149/month — no insurance needed</li>
-              <li><span className="check">✓</span> Unlimited provider messaging included</li>
-              <li><span className="check">✓</span> HSA/FSA approved</li>
-              <li><span className="check">✓</span> Free shipping on every order</li>
-            </ul>
-            <div className="hero-cta">
-              <a href="quiz.html" className="btn btn-primary">Am I Qualified?</a>
-            </div>
+      {/* HERO — editorial layout */}
+      <section className="hero hero-editorial" data-screen-label="01 Hero">
+        <img src="assets/hero-bg.jpg" alt="Three women smiling together against blue sky" className="hero-bg-img" />
+        <div className="hero-gradient"></div>
+
+        <div className="hero-editorial-content">
+          <div className="hero-stars">
+            <span className="stars">★★★★★</span>
+            <span>4.9 from 12,000+ patients</span>
+          </div>
+          <h1>
+            Poor Sleep. Low Energy. Brain Fog.<br />
+            It's not in your head — <em>it's your hormones.</em>
+          </h1>
+          <p className="hero-sub">
+            Real bioidentical HRT. Real relief. Prescribed online and
+            shipped directly to your door in days.
+          </p>
+          <ul className="hero-checks">
+            <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
+            <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
+            <li><span className="check">✓</span> Start for just $149/month — no insurance needed</li>
+            <li><span className="check">✓</span> Unlimited provider messaging included</li>
+            <li><span className="check">✓</span> HSA/FSA approved</li>
+            <li><span className="check">✓</span> Free shipping on every order</li>
+          </ul>
+          <div className="hero-cta">
+            <a href="quiz.html" className="btn btn-primary">Am I Qualified?</a>
           </div>
         </div>
-        <div className="hero-tag">
-          <div className="tag-num">93%</div>
-          <div className="tag-text">
-            of patients report symptom relief within<br />
-            <strong>90 days of starting therapy.</strong>
-          </div>
-        </div>
+
       </section>
 
-      {/* PRESS */}
-      <section className="press">
+      {/* PRESS — hidden (moved inside hero) */}
+      <section className="press" style={{ display: 'none' }}>
         <div className="container press-inner">
           <div className="press-label">As featured in</div>
           <div className="press-logos">
@@ -279,12 +315,85 @@ function App() {
         </div>
       </section>
 
-      {/* SYMPTOMS / QUIZ */}
-      <section className="quiz" id="symptoms" data-screen-label="02 Symptom checker">
+      {/* TREATMENTS (no animation) */}
+      <section className="treatments" id="treatments" data-screen-label="02 Treatments">
+        <div className="container">
+          <div className="treatments-head">
+            <div className="eyebrow">Treatments</div>
+            <h2>Four protocols. <em>Mixed and matched</em> for your body.</h2>
+            <p className="treatments-sub">
+              Most patients start with one or two of the following. Your
+              clinician decides what's appropriate based on your symptoms,
+              history, and goals.
+            </p>
+          </div>
+          <div className="product-tabs">
+            {TREATMENTS.map((t) =>
+              <button
+                key={t.id}
+                className={'tab' + (activeTreatment === t.id ? ' active' : '')}
+                onClick={() => setActiveTreatment(t.id)}>
+                {t.name}
+              </button>
+            )}
+          </div>
+          <div className="product">
+            <div className="product-img">
+              <div className="product-svg"><img src={tx.image} alt={tx.name} style={{width: '88%', height: '88%', objectFit: 'contain'}} /></div>
+            </div>
+            <div>
+              <div className="eyebrow">{tx.eyebrow}</div>
+              <h3>{tx.name}</h3>
+              <p className="product-desc">{tx.desc}</p>
+              <ul className="product-features">
+                {tx.features.map(([k, v]) =>
+                  <li key={k}>
+                    <span className="feat-key">{k}</span>
+                    <span className="feat-val">{v}</span>
+                  </li>
+                )}
+              </ul>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 8 }}>
+                <a href="quiz.html" className="btn btn-primary">Get Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PATIENT STORIES — with photos */}
+      <section className="patient-stories" data-screen-label="02b Patient stories">
+        <div className="container">
+          <div className="patient-stories-head">
+            <div className="eyebrow">Real patient stories</div>
+            <h2>Women just like you — <em>thriving again.</em></h2>
+          </div>
+          <div className="patient-stories-grid">
+            {PATIENT_STORIES.map((p, i) => (
+              <div className="patient-card" key={i}>
+                <div className="patient-photo-wrap">
+                  <img src={p.photo} alt={p.name} className="patient-photo" />
+                </div>
+                <div className="patient-card-body">
+                  <div className="patient-stars">★★★★★</div>
+                  <p className="patient-quote">"{p.body}"</p>
+                  <div className="patient-meta">
+                    <div className="patient-name">{p.name}</div>
+                    <div className="patient-loc">{p.location}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SYMPTOMS / QUIZ — moved below treatments */}
+      <section className="quiz" id="symptoms" data-screen-label="03 Symptom checker">
         <div className="container">
           <div className="quiz-head">
             <div>
-              <div className="eyebrow">Symptom inventory · 30 seconds</div>
+              <div className="eyebrow">Symptom quiz · 30 seconds</div>
               <h2>Which of these <em>actually</em> sound like you?</h2>
             </div>
             <p className="quiz-intro">
@@ -301,7 +410,7 @@ function App() {
                   key={s.id}
                   className={'symptom' + (active ? ' active' : '')}
                   onClick={() => toggle(s.id)}>
-                  
+
                   <span className="symptom-glyph">{s.glyph}</span>
                   <span className="symptom-name">{s.name}</span>
                   <span className="symptom-note">{s.note}</span>
@@ -321,104 +430,8 @@ function App() {
         </div>
       </section>
 
-      {/* SCIENCE */}
-      <section className="science" data-screen-label="03 What is HRT">
-        <div className="container science-grid">
-          <div>
-            <div className="eyebrow">What we prescribe</div>
-            <h2>Bioidentical hormones, <em>conservative dosing,</em> careful follow-up.</h2>
-            <div className="science-body">
-              <p>
-                Estradiol, progesterone, and (in some cases) low-dose
-                testosterone — the same molecules your ovaries used to
-                produce, in delivery forms studied for safety and efficacy
-                in women.
-              </p>
-              <p>
-                Our default is the lowest dose that resolves your symptoms,
-                reviewed every 90 days. We adjust based on how you feel —
-                not on a one-size-fits-not protocol.
-              </p>
-            </div>
-            <div className="science-stats">
-              <div className="stat">
-                <div className="stat-num">17β</div>
-                <div className="stat-label">Bioidentical estradiol — identical to the body's own</div>
-              </div>
-              <div className="stat">
-                <div className="stat-num">90d</div>
-                <div className="stat-label">Re-evaluation cadence with your clinician</div>
-              </div>
-              <div className="stat">
-                <div className="stat-num">3+</div>
-                <div className="stat-label">Delivery routes (patch, oral, topical, local)</div>
-              </div>
-              <div className="stat">
-                <div className="stat-num">50</div>
-                <div className="stat-label">U.S. states currently licensed</div>
-              </div>
-            </div>
-          </div>
-          <div className="science-art">
-            <img src="assets/science-women.jpg" alt="Women, mid-life, together" className="photo" />
-          </div>
-        </div>
-      </section>
-
       {/* HOW IT WORKS */}
       <Timeline />
-
-      {/* TREATMENTS */}
-      <section className="treatments" id="treatments" data-screen-label="05 Treatments">
-        <div className="container">
-          <div className="treatments-head">
-            <div className="eyebrow">Treatments</div>
-            <h2>Four protocols. <em>Mixed and matched</em> for your body.</h2>
-            <p className="treatments-sub">
-              Most patients start with one or two of the following. Your
-              clinician decides what's appropriate based on your symptoms,
-              history, and goals.
-            </p>
-          </div>
-          <div className="product-tabs">
-            {TREATMENTS.map((t) =>
-            <button
-              key={t.id}
-              className={'tab' + (activeTreatment === t.id ? ' active' : '')}
-              onClick={() => setActiveTreatment(t.id)}>
-              
-                {t.name}
-              </button>
-            )}
-          </div>
-          <div className="product">
-            <div className="product-img">
-              <div className="product-svg"><img src={tx.image} alt={tx.name} style={{width: '88%', height: '88%', objectFit: 'contain'}} /></div>
-            </div>
-            <div>
-              <div className="eyebrow">{tx.eyebrow}</div>
-              <h3>{tx.name}</h3>
-              <p className="product-desc">{tx.desc}</p>
-              <ul className="product-features">
-                {tx.features.map(([k, v]) =>
-                <li key={k}>
-                    <span className="feat-key">{k}</span>
-                    <span className="feat-val">{v}</span>
-                  </li>
-                )}
-              </ul>
-              <div className="product-price">
-                <span className="price-num">${tx.price}</span>
-                <span className="price-strike">${tx.strike}</span>
-                <span className="price-unit">{tx.unit}</span>
-              </div>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="quiz.html" className="btn btn-primary">Get Started</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* COMPARE */}
       <section className="compare" data-screen-label="06 Compare">
