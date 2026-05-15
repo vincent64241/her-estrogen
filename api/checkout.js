@@ -130,7 +130,7 @@ module.exports = async (req, res) => {
 
     // Base URL for redirects
     const base = process.env.NEXT_PUBLIC_BASE_URL || `https://${req.headers.host}`;
-    const success = successUrl || `${base}/success.html?session_id={CHECKOUT_SESSION_ID}`;
+    const success = successUrl || `${base}/confirmation`;
     const cancel = cancelUrl   || `${base}/results.html`;
 
     // Pre-create the Customer so we attach friendly metadata for ops/reporting.

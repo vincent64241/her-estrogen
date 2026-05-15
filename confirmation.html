@@ -141,15 +141,6 @@
   }
   .step p { margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.55; }
 
-  .session {
-    margin-top: 26px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: .04em;
-    word-break: break-all;
-  }
-
   .home-link {
     display: inline-block;
     margin-top: 32px;
@@ -211,22 +202,8 @@
     </div>
   </div>
 
-  <div class="session" id="session-info"></div>
-
   <a class="home-link" href="index.html">← Back to home</a>
 </main>
-
-<script>
-  // Show a small session id reference (for your support team if customer needs help)
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var sid = params.get('session_id');
-    if (sid) {
-      var el = document.getElementById('session-info');
-      if (el) el.textContent = 'Reference: ' + sid;
-    }
-  })();
-</script>
 
 </body>
 </html>
