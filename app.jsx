@@ -402,7 +402,7 @@ function App() {
             {[...CASE_STUDIES_HOME.slice(0, 10), ...CASE_STUDIES_HOME.slice(0, 10)].map((c, i) => (
               <div className="marquee-card" key={`r1-${i}`} aria-hidden={i >= 10 ? 'true' : undefined}>
                 <div className="marquee-photo-wrap">
-                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="lazy" />
+                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
                 </div>
                 <div className="marquee-card-body">
                   <div className="marquee-stars">★★★★★</div>
@@ -423,7 +423,7 @@ function App() {
             {[...CASE_STUDIES_HOME.slice(10, 20), ...CASE_STUDIES_HOME.slice(10, 20)].map((c, i) => (
               <div className="marquee-card" key={`r2-${i}`} aria-hidden={i >= 10 ? 'true' : undefined}>
                 <div className="marquee-photo-wrap">
-                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="lazy" />
+                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
                 </div>
                 <div className="marquee-card-body">
                   <div className="marquee-stars">★★★★★</div>
