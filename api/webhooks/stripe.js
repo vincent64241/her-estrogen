@@ -1,24 +1,26 @@
 // Vercel Serverless Function — POST /api/webhooks/stripe
-// Receives Stripe webhook events, verifies signature, and handles:
-//   - checkout.session.completed
-//   - customer.subscription.created
-//   - customer.subscription.updated
-//   - customer.subscription.deleted
-//   - invoice.payment_succeeded
-//   - invoice.payment_failed
-//   (+ payment_intent.* kept for completeness)
+// Receives Stripe webhook events, verifies signature, and writes to Supabase.
 //
 // Required env vars:
-//   STRIPE_SECRET_KEY        sk_test_... or sk_live_...
-//   STRIPE_WEBHOOK_SECRET    whsec_... (Stripe Dashboard → Webhooks → Signing secret)
+//   STRIPE_SECRET_KEY
+//   STRIPE_WEBHOOK_SECRET
+//   NEXT_PUBLIC_SUPABASE_URL
+//   SUPABASE_SERVICE_ROLE_KEY
 
 const Stripe = require('stripe');
+const {
+  createPatient,
+  createPrescription,
+  getPatientByStripeCustomerId,
+  getPatientBySubscriptionId,
+  updatePatientStatus
+} = require('../../lib/database');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20'
 });
 
-// Read raw request body — required for Stripe signature verification.
+// Read raw body — required for Stripe signature verification.
 function readRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -51,109 +53,163 @@ module.exports = async (req, res) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // Each branch logs the key fields and leaves a TODO for downstream business
-  // logic (DB writes, transactional emails, provider task creation, etc.).
+  // Each branch tolerates DB errors and still returns 200 so Stripe doesn't
+  // retry the event forever. Errors are logged for investigation.
   try {
     switch (event.type) {
+
+      // ─── Patient pays → create patient + prescription rows ───
       case 'checkout.session.completed': {
         const session = event.data.object;
-        console.log('[stripe] checkout.session.completed', {
-          id: session.id,
-          customer: session.customer,
-          email: session.customer_details && session.customer_details.email,
-          amount_total: session.amount_total,
-          subscription: session.subscription,
-          product: session.metadata && session.metadata.product
+
+        // Pull customer details from Stripe (session itself has limited info)
+        let customer = null;
+        if (session.customer) {
+          try {
+            customer = await stripe.customers.retrieve(session.customer);
+          } catch (e) {
+            console.warn('[stripe] could not retrieve customer:', e.message);
+          }
+        }
+
+        const email = (customer && customer.email)
+          || (session.customer_details && session.customer_details.email);
+        const fullName = (customer && customer.name)
+          || (session.customer_details && session.customer_details.name)
+          || 'Her Estrogen Patient';
+        const phone = (customer && customer.phone)
+          || (session.customer_details && session.customer_details.phone)
+          || null;
+
+        if (!email) {
+          console.warn('[stripe] checkout.session.completed had no email; skipping DB write');
+          break;
+        }
+
+        // Pull metadata stamped by /api/checkout.js
+        const md = session.metadata || {};
+        const subMd = (session.subscription_data && session.subscription_data.metadata) || {};
+        const meta = { ...subMd, ...md };
+
+        const patient = await createPatient({
+          email,
+          full_name: fullName,
+          phone,
+          address_line1: meta.shipping_line1 || null,
+          address_line2: meta.shipping_line2 || null,
+          city: meta.shipping_city || null,
+          state: meta.shipping_state || null,
+          zip_code: meta.shipping_zip || null,
+          stripe_customer_id: session.customer || null,
+          stripe_subscription_id: session.subscription || null,
+          stripe_price_id: meta.priceId || null,
+          product_name: meta.productName || meta.product || null,
+          billing_period: meta.billingPeriod || meta.period || null,
+          monthly_amount: session.amount_total || 0
         });
-        // TODO: send intake to OpenLoop; trigger welcome email via Resend/Postmark
+
+        await createPrescription({
+          patient_id: patient.id,
+          medication_name: meta.productName || meta.product || 'HRT Protocol',
+          instructions: 'Apply as directed by your licensed Her Estrogen provider.'
+        });
+
+        console.log(`[stripe→supabase] patient + prescription created for ${email}`);
         break;
       }
 
+      // ─── Subscription created → mark patient active + set billing dates ───
       case 'customer.subscription.created': {
         const sub = event.data.object;
-        console.log('[stripe] customer.subscription.created', {
-          id: sub.id,
-          customer: sub.customer,
-          status: sub.status,
-          priceId: sub.items.data[0] && sub.items.data[0].price.id
-        });
-        // TODO: provision patient portal access; create provider review task;
-        //       schedule 30-day check-in
+        const patient = await getPatientByStripeCustomerId(sub.customer);
+        if (patient) {
+          await updatePatientStatus(patient.id, 'active', {
+            subscription_started_at: new Date().toISOString(),
+            next_billing_date: sub.current_period_end
+              ? new Date(sub.current_period_end * 1000).toISOString()
+              : null
+          });
+          console.log(`[stripe→supabase] patient activated: ${patient.email}`);
+        } else {
+          console.warn(`[stripe→supabase] no patient found for customer ${sub.customer}`);
+        }
         break;
       }
 
+      // ─── Subscription updated (pause / plan change / etc.) ───
       case 'customer.subscription.updated': {
         const sub = event.data.object;
-        const prev = event.data.previous_attributes || {};
-        console.log('[stripe] customer.subscription.updated', {
-          id: sub.id,
-          status: sub.status,
-          cancel_at_period_end: sub.cancel_at_period_end,
-          previous_status: prev.status
-        });
-        // TODO: handle past_due/cancellation/plan-change downstream
+        const patient = await getPatientBySubscriptionId(sub.id);
+        if (patient) {
+          const newStatus = sub.pause_collection
+            ? 'paused'
+            : (sub.status === 'active' ? 'active' : patient.status);
+          await updatePatientStatus(patient.id, newStatus, {
+            next_billing_date: sub.current_period_end
+              ? new Date(sub.current_period_end * 1000).toISOString()
+              : null
+          });
+          console.log(`[stripe→supabase] patient ${patient.email} → ${newStatus}`);
+        }
         break;
       }
 
+      // ─── Subscription cancelled ───
       case 'customer.subscription.deleted': {
         const sub = event.data.object;
-        console.log('[stripe] customer.subscription.deleted', {
-          id: sub.id,
-          customer: sub.customer
-        });
-        // TODO: revoke portal access; trigger win-back sequence
+        const patient = await getPatientBySubscriptionId(sub.id);
+        if (patient) {
+          await updatePatientStatus(patient.id, 'cancelled', {
+            subscription_cancelled_at: new Date().toISOString()
+          });
+          console.log(`[stripe→supabase] patient cancelled: ${patient.email}`);
+        }
         break;
       }
 
+      // ─── Refill paid → roll forward next billing date ───
       case 'invoice.payment_succeeded': {
-        const inv = event.data.object;
-        console.log('[stripe] invoice.payment_succeeded', {
-          id: inv.id,
-          customer: inv.customer,
-          subscription: inv.subscription,
-          amount_paid: inv.amount_paid
-        });
-        // TODO: trigger pharmacy refill order; send receipt
+        const invoice = event.data.object;
+        // Only act on recurring renewals, not the initial checkout invoice
+        if (invoice.billing_reason === 'subscription_cycle' && invoice.subscription) {
+          const patient = await getPatientByStripeCustomerId(invoice.customer);
+          if (patient) {
+            const sub = await stripe.subscriptions.retrieve(invoice.subscription);
+            await updatePatientStatus(patient.id, 'active', {
+              next_billing_date: sub.current_period_end
+                ? new Date(sub.current_period_end * 1000).toISOString()
+                : null
+            });
+            console.log(`[stripe→supabase] refill recorded: ${patient.email}`);
+          }
+        }
         break;
       }
 
+      // ─── Payment failed — log; downstream system handles dunning ───
       case 'invoice.payment_failed': {
-        const inv = event.data.object;
-        console.log('[stripe] invoice.payment_failed', {
-          id: inv.id,
-          customer: inv.customer,
-          attempt_count: inv.attempt_count,
-          next_payment_attempt: inv.next_payment_attempt
-        });
-        // TODO: send payment failure email with update-card link
+        const invoice = event.data.object;
+        const patient = await getPatientByStripeCustomerId(invoice.customer);
+        if (patient) {
+          console.warn(`[stripe→supabase] payment failed: ${patient.email}`);
+          // TODO: send "update your card" email via Postmark/Resend
+        }
         break;
       }
 
-      case 'payment_intent.succeeded': {
-        const pi = event.data.object;
-        console.log('[stripe] payment_intent.succeeded', {
-          id: pi.id,
-          amount: pi.amount,
-          customer: pi.customer
-        });
+      // payment_intent.* — kept for completeness; subscription flow already handles via invoice events
+      case 'payment_intent.succeeded':
+      case 'payment_intent.payment_failed':
+        // logged only
+        console.log(`[stripe] ${event.type}: ${event.data.object.id}`);
         break;
-      }
-
-      case 'payment_intent.payment_failed': {
-        const pi = event.data.object;
-        console.warn('[stripe] payment_intent.payment_failed', {
-          id: pi.id,
-          reason: pi.last_payment_error && pi.last_payment_error.message
-        });
-        break;
-      }
 
       default:
         console.log('[stripe] unhandled event type:', event.type);
     }
   } catch (handlerErr) {
-    // Don't 500 — Stripe will retry. Log and ack so we don't churn the queue.
-    console.error('[stripe] handler error (acking anyway):', handlerErr);
+    // Log + ack — don't 500, Stripe will retry forever otherwise
+    console.error('[stripe→supabase] handler error (acking anyway):', handlerErr);
   }
 
   return res.status(200).json({ received: true });

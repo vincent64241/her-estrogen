@@ -67,6 +67,15 @@ const REVIEWS = [
 { stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
 { stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
 
+// 20 case studies — same placeholder set as results.jsx. Replace with real verified
+// stories before launch. Photos: /assets/case-1.jpg … case-20.jpg.
+const CASE_STUDIES_HOME = Array.from({ length: 20 }, (_, i) => ({
+  name: `Patient ${i + 1}`,
+  meta: 'Age — · State',
+  quote: 'Replace this card with a real verified patient story before launch.',
+  photo: `assets/case-${i + 1}.jpg`
+}));
+
 const PATIENT_STORIES = [
   {
     name: 'Jessica L.',
@@ -361,25 +370,50 @@ function App() {
         </div>
       </section>
 
-      {/* PATIENT STORIES — with photos */}
-      <section className="patient-stories" data-screen-label="02b Patient stories">
+      {/* PATIENT STORIES — 20 case-studies in two scrolling rows; pause on hover */}
+      <section className="marquee-section" data-screen-label="02b Patient stories">
         <div className="container">
           <div className="patient-stories-head">
             <div className="eyebrow">Real patient stories</div>
             <h2>Women just like you — <em>thriving again.</em></h2>
           </div>
-          <div className="patient-stories-grid">
-            {PATIENT_STORIES.map((p, i) => (
-              <div className="patient-card" key={i}>
-                <div className="patient-photo-wrap">
-                  <img src={p.photo} alt={p.name} className="patient-photo" />
+        </div>
+
+        {/* Row 1 (cases 1–10) — scrolls left */}
+        <div className="marquee-row">
+          <div className="marquee-track marquee-left">
+            {[...CASE_STUDIES_HOME.slice(0, 10), ...CASE_STUDIES_HOME.slice(0, 10)].map((c, i) => (
+              <div className="marquee-card" key={`r1-${i}`} aria-hidden={i >= 10 ? 'true' : undefined}>
+                <div className="marquee-photo-wrap">
+                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="lazy" />
                 </div>
-                <div className="patient-card-body">
-                  <div className="patient-stars">★★★★★</div>
-                  <p className="patient-quote">"{p.body}"</p>
-                  <div className="patient-meta">
-                    <div className="patient-name">{p.name}</div>
-                    <div className="patient-loc">{p.location}</div>
+                <div className="marquee-card-body">
+                  <div className="marquee-stars">★★★★★</div>
+                  <p className="marquee-quote">"{c.quote}"</p>
+                  <div className="marquee-meta">
+                    <div className="marquee-name">{c.name}</div>
+                    <div className="marquee-loc">{c.meta}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 (cases 11–20) — scrolls right */}
+        <div className="marquee-row">
+          <div className="marquee-track marquee-right">
+            {[...CASE_STUDIES_HOME.slice(10, 20), ...CASE_STUDIES_HOME.slice(10, 20)].map((c, i) => (
+              <div className="marquee-card" key={`r2-${i}`} aria-hidden={i >= 10 ? 'true' : undefined}>
+                <div className="marquee-photo-wrap">
+                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="lazy" />
+                </div>
+                <div className="marquee-card-body">
+                  <div className="marquee-stars">★★★★★</div>
+                  <p className="marquee-quote">"{c.quote}"</p>
+                  <div className="marquee-meta">
+                    <div className="marquee-name">{c.name}</div>
+                    <div className="marquee-loc">{c.meta}</div>
                   </div>
                 </div>
               </div>

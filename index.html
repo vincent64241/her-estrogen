@@ -1493,6 +1493,151 @@
     .bundle-cta { padding: 14px 24px !important; font-size: 14px !important; }
   }
 
+  /* ---- PATIENT STORIES — marquee (2 scrolling rows, pause on hover) ---- */
+  .marquee-section {
+    padding: 72px 0 80px;
+    background: var(--pink-softer);
+    overflow: hidden;
+    position: relative;
+  }
+  .marquee-section .patient-stories-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+  .marquee-section .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .marquee-section h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 4px 0 0;
+    color: var(--ink);
+  }
+  .marquee-section h2 em { font-style: italic; color: var(--pink); }
+
+  .marquee-row {
+    overflow: hidden;
+    width: 100%;
+    margin: 14px 0;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    mask-image:         linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    will-change: transform;
+  }
+  .marquee-left  { animation: marqueeLeft 60s linear infinite; }
+  .marquee-right { animation: marqueeRight 60s linear infinite; }
+
+  /* Pause both rows whenever the user hovers anywhere over the section */
+  .marquee-section:hover .marquee-track,
+  .marquee-section:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marqueeLeft {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes marqueeRight {
+    from { transform: translate3d(-50%, 0, 0); }
+    to   { transform: translate3d(0, 0, 0); }
+  }
+
+  /* Card */
+  .marquee-card {
+    flex: 0 0 320px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 14px rgba(138, 23, 69, .06);
+  }
+  .marquee-photo-wrap {
+    aspect-ratio: 4 / 3;
+    background: var(--pink-soft);
+    overflow: hidden;
+  }
+  .marquee-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .marquee-card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .marquee-stars {
+    color: var(--pink);
+    letter-spacing: 0.12em;
+    font-size: 13px;
+  }
+  .marquee-quote {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    flex: 1;
+  }
+  .marquee-meta {
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .marquee-name { font-weight: 600; font-size: 13px; color: var(--ink); }
+  .marquee-loc { font-size: 12.5px; color: var(--muted); }
+
+  /* Smaller cards on tablet, even smaller on mobile (so more fit on screen) */
+  @media (max-width: 900px) {
+    .marquee-card { flex: 0 0 280px; }
+    .marquee-left  { animation-duration: 50s; }
+    .marquee-right { animation-duration: 50s; }
+  }
+  @media (max-width: 640px) {
+    .marquee-section { padding: 56px 0 60px; }
+    .marquee-section .patient-stories-head { margin-bottom: 28px; }
+    .marquee-card { flex: 0 0 240px; }
+    .marquee-track { gap: 14px; }
+    .marquee-quote { font-size: 14px; }
+    .marquee-left  { animation-duration: 40s; }
+    .marquee-right { animation-duration: 40s; }
+  }
+  @media (max-width: 380px) {
+    .marquee-card { flex: 0 0 220px; }
+  }
+
+  /* Accessibility — respect users who've turned animations off */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-left, .marquee-right { animation: none; }
+    .marquee-row {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+  }
+
   /* ---- PATIENT STORIES (testimonials with photos) ---- */
   .patient-stories {
     padding: 80px 0;
