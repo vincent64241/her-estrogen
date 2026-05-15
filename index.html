@@ -1540,8 +1540,8 @@
     width: max-content;
     will-change: transform;
   }
-  .marquee-left  { animation: marqueeLeft 22s linear infinite; }
-  .marquee-right { animation: marqueeRight 22s linear infinite; }
+  .marquee-left  { animation: marqueeLeft 60s linear infinite; }
+  .marquee-right { animation: marqueeRight 60s linear infinite; }
 
   /* Pause both rows whenever the user hovers anywhere over the section */
   .marquee-section:hover .marquee-track,
@@ -1613,8 +1613,8 @@
   /* Smaller cards on tablet, even smaller on mobile (so more fit on screen) */
   @media (max-width: 900px) {
     .marquee-card { flex: 0 0 280px; }
-    .marquee-left  { animation-duration: 18s; }
-    .marquee-right { animation-duration: 18s; }
+    .marquee-left  { animation-duration: 50s; }
+    .marquee-right { animation-duration: 50s; }
   }
   @media (max-width: 640px) {
     .marquee-section { padding: 56px 0 60px; }
@@ -1622,8 +1622,8 @@
     .marquee-card { flex: 0 0 240px; }
     .marquee-track { gap: 14px; }
     .marquee-quote { font-size: 14px; }
-    .marquee-left  { animation-duration: 14s; }
-    .marquee-right { animation-duration: 14s; }
+    .marquee-left  { animation-duration: 40s; }
+    .marquee-right { animation-duration: 40s; }
   }
   @media (max-width: 380px) {
     .marquee-card { flex: 0 0 220px; }

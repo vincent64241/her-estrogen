@@ -383,32 +383,11 @@ function App() {
           </div>
         </div>
 
-        {/* Row 1 (first 4 cases) — scrolls left */}
+        {/* Single row — all 8 cases, scrolls left, duplicated for seamless loop */}
         <div className="marquee-row">
           <div className="marquee-track marquee-left">
-            {[...CASE_STUDIES_HOME.slice(0, 4), ...CASE_STUDIES_HOME.slice(0, 4)].map((c, i) => (
-              <div className="marquee-card" key={`r1-${i}`} aria-hidden={i >= 4 ? 'true' : undefined}>
-                <div className="marquee-photo-wrap">
-                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
-                </div>
-                <div className="marquee-card-body">
-                  <div className="marquee-stars">★★★★★</div>
-                  <p className="marquee-quote">"{c.quote}"</p>
-                  <div className="marquee-meta">
-                    <div className="marquee-name">{c.name}</div>
-                    <div className="marquee-loc">{c.meta}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2 (last 4 cases) — scrolls right */}
-        <div className="marquee-row">
-          <div className="marquee-track marquee-right">
-            {[...CASE_STUDIES_HOME.slice(4, 8), ...CASE_STUDIES_HOME.slice(4, 8)].map((c, i) => (
-              <div className="marquee-card" key={`r2-${i}`} aria-hidden={i >= 4 ? 'true' : undefined}>
+            {[...CASE_STUDIES_HOME, ...CASE_STUDIES_HOME].map((c, i) => (
+              <div className="marquee-card" key={`r1-${i}`} aria-hidden={i >= 8 ? 'true' : undefined}>
                 <div className="marquee-photo-wrap">
                   <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
                 </div>
