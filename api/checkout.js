@@ -109,8 +109,22 @@ module.exports = async (req, res) => {
     // Resolve price ID: override wins, else look up via env
     const priceId = priceIdOverride || resolvePriceId(product, period);
     if (!priceId) {
+      // Build a clear diagnostic so the operator knows EXACTLY which env var to set
+      const expectedEnv = (PRICE_ENV[product] && PRICE_ENV[product][period]) || null;
+      let detail = '';
+      if (!product || !period) {
+        detail = `Request body is missing product or period. Received: { product: ${JSON.stringify(product)}, period: ${JSON.stringify(period)} }.`;
+      } else if (!PRICE_ENV[product]) {
+        detail = `Unknown product "${product}". Expected one of: ${Object.keys(PRICE_ENV).join(', ')}.`;
+      } else if (!PRICE_ENV[product][period]) {
+        detail = `Unknown period "${period}" for product "${product}". Expected one of: monthly, threeMonth, sixMonth, annual.`;
+      } else if (!process.env[expectedEnv]) {
+        detail = `Env var ${expectedEnv} is not set on this deployment. Add it in Vercel → Settings → Environment Variables, then redeploy.`;
+      } else if (!process.env[expectedEnv].startsWith('price_')) {
+        detail = `Env var ${expectedEnv} is set but its value does not start with "price_" (got: "${String(process.env[expectedEnv]).slice(0, 8)}…"). Fix the value in Vercel.`;
+      }
       return res.status(400).json({
-        error: 'Could not resolve Stripe Price. Provide either { priceId } directly, or { product, period } where product is one of: completeProtocol, estradiolGel, estradiolPatch, progesterone, vaginalDHEA and period is one of: monthly, threeMonth, sixMonth, annual.'
+        error: `Could not resolve Stripe Price. ${detail}`.trim()
       });
     }
 
