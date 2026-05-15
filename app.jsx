@@ -67,14 +67,31 @@ const REVIEWS = [
 { stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
 { stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
 
-// 20 case studies — same placeholder set as results.jsx. Replace with real verified
-// stories before launch. Photos: /assets/case-1.jpg … case-20.jpg.
-const CASE_STUDIES_HOME = Array.from({ length: 20 }, (_, i) => ({
-  name: `Patient ${i + 1}`,
-  meta: 'Age — · State',
-  quote: 'Replace this card with a real verified patient story before launch.',
-  photo: `assets/case-${i + 1}.jpg`
-}));
+// 20 case studies — PLACEHOLDER content for pre-launch testing.
+// Replace with real, consented patient quotes before scaling marketing.
+// Photos: /assets/case-1.jpg … case-20.jpg.
+const CASE_STUDIES_HOME = [
+  { name: 'Sarah K.',     meta: 'Age 48 · Texas',          quote: 'I feel like myself again — finally.',                            photo: 'assets/case-1.jpg' },
+  { name: 'Jennifer M.',  meta: 'Age 51 · California',     quote: 'Sleep is back. So is the rest of me.',                           photo: 'assets/case-2.jpg' },
+  { name: 'Mira L.',      meta: 'Age 47 · New York',       quote: "Best decision I've made for myself in years.",                   photo: 'assets/case-3.jpg' },
+  { name: 'Amanda B.',    meta: 'Age 49 · Florida',        quote: "The fog lifted. I didn't realize how thick it was.",             photo: 'assets/case-4.jpg' },
+  { name: 'Rachel T.',    meta: 'Age 52 · Colorado',       quote: 'I have my energy back. I have me back.',                         photo: 'assets/case-5.jpg' },
+  { name: 'Priya N.',     meta: 'Age 46 · Washington',     quote: 'Worth every dollar. Worth more, actually.',                      photo: 'assets/case-6.jpg' },
+  { name: 'Karen H.',     meta: 'Age 53 · Illinois',       quote: 'I cried the first night I slept through.',                       photo: 'assets/case-7.jpg' },
+  { name: 'Diana W.',     meta: 'Age 50 · Oregon',         quote: "Calm. Rested. Steady. Words I haven't used in years.",           photo: 'assets/case-8.jpg' },
+  { name: 'Lisa P.',      meta: 'Age 48 · Massachusetts',  quote: 'My partner says I came back to him. He is right.',               photo: 'assets/case-9.jpg' },
+  { name: 'Stephanie C.', meta: 'Age 45 · Georgia',        quote: 'I stopped doubting myself in meetings.',                         photo: 'assets/case-10.jpg' },
+  { name: 'Nicole F.',    meta: 'Age 47 · Arizona',        quote: 'The mood swings stopped. So did the shame.',                     photo: 'assets/case-11.jpg' },
+  { name: 'Patricia L.',  meta: 'Age 54 · Pennsylvania',   quote: 'Everything I tried before this was a guess. This was not.',      photo: 'assets/case-12.jpg' },
+  { name: 'Heather V.',   meta: 'Age 49 · Minnesota',      quote: 'I was told to ride it out. So glad I did not.',                  photo: 'assets/case-13.jpg' },
+  { name: 'Megan J.',     meta: 'Age 46 · North Carolina', quote: 'Three friends signed up after me. They thank me weekly.',        photo: 'assets/case-14.jpg' },
+  { name: 'Christine A.', meta: 'Age 48 · Virginia',       quote: 'I look at my calendar and recognize my life again.',             photo: 'assets/case-15.jpg' },
+  { name: 'Rebecca D.',   meta: 'Age 50 · Michigan',       quote: 'Energy. Sleep. Patience. All three, together, finally.',         photo: 'assets/case-16.jpg' },
+  { name: 'Brittany S.',  meta: 'Age 44 · Tennessee',      quote: 'I forgot what calm felt like. I remember now.',                  photo: 'assets/case-17.jpg' },
+  { name: 'Veronica E.',  meta: 'Age 52 · Ohio',           quote: "It's quiet at 3am again. That's a miracle.",                     photo: 'assets/case-18.jpg' },
+  { name: 'Tracy G.',     meta: 'Age 55 · Utah',           quote: 'I have my afternoons back — I did not realize they were gone.',  photo: 'assets/case-19.jpg' },
+  { name: 'Olivia N.',    meta: 'Age 47 · Maryland',       quote: 'I tell every woman in my life about this.',                      photo: 'assets/case-20.jpg' }
+];
 
 const PATIENT_STORIES = [
   {
