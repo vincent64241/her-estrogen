@@ -340,16 +340,9 @@ async function subscribeToKlaviyo(answers) {
   const profileAttrs = { email: answers.email, properties };
   const phoneE164 = toE164(answers.phone);
   if (phoneE164) profileAttrs.phone_number = phoneE164;
-
-  // Marketing consent — required for the list subscription to actually opt-in.
-  // The user has filled their email in a contact form on our site = implicit single opt-in.
-  // (If you want double opt-in, configure that on the Klaviyo list itself.)
-  profileAttrs.subscriptions = {
-    email: { marketing: { consent: 'SUBSCRIBED' } }
-  };
-  if (phoneE164) {
-    profileAttrs.subscriptions.sms = { marketing: { consent: 'SUBSCRIBED' } };
-  }
+  // Note: opt-in consent is IMPLICIT in the /client/subscriptions/ endpoint —
+  // calling this endpoint with a list relationship is itself the subscription event.
+  // Do NOT add a `subscriptions` block on profile attributes; the API rejects it.
 
   try {
     const resp = await fetch(
