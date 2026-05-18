@@ -6,6 +6,7 @@ const PRICING = {
   bundle: { 1: 219, 3: 199, 6: 189, 12: 179 },
   gel:    { 1: 149, 3: 134, 6: 124, 12: 114 },
   patch:  { 1: 139, 3: 124, 6: 114, 12: 104 },
+  pill:   { 1: 129, 3: 114, 6: 104, 12: 94  },
   dhea:   { 1: 149, 3: 134, 6: 124, 12: 114 }
 };
 
@@ -32,11 +33,11 @@ const MEDS = {
     badgeKind: 'pink',
     rating: '4.9',
     reviewCount: '3,210',
-    product: 'Estradiol Gel + Micronized Progesterone',
+    product: 'Estradiol Gel + Progesterone Pill',
     description: 'The clinical gold standard — prescribed together for complete hormonal restoration',
     image: 'assets/cream.png',
     secondImage: 'assets/oral-pills.png',
-    imageLabels: ['Estradiol Gel', 'Micronized Progesterone'],
+    imageLabels: ['Estradiol Gel', 'Progesterone Pill'],
     features: [
       'Both FDA-approved medications included',
       'Estrogen + Progesterone — the complete protocol',
@@ -84,18 +85,37 @@ const MEDS = {
       'HSA/FSA approved'
     ]
   },
+  pill: {
+    name: 'Estradiol Pill',
+    label: 'Oral Estrogen Option',
+    badge: 'FDA-Approved',
+    badgeKind: 'pink',
+    rating: '4.7',
+    reviewCount: '1,412',
+    product: 'FDA-Approved Estradiol Pill — Once-Daily Oral Tablet',
+    description: 'A convenient once-daily tablet — one of the most studied forms of HRT with decades of clinical evidence',
+    image: 'assets/oral-pills.png',
+    features: [
+      'FDA-approved estradiol tablet — prescribed to your dose',
+      'Once-daily oral — simple and convenient',
+      'Provider consultation, messaging, check-ins included',
+      'Price never increases',
+      'Free shipping',
+      'HSA/FSA approved'
+    ]
+  },
   dhea: {
-    name: 'Vaginal DHEA (Prasterone)',
-    label: 'Vaginal Health Only',
+    name: 'Estradiol Vaginal Cream',
+    label: 'Vaginal Health',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
     rating: '4.7',
     reviewCount: '892',
-    product: 'FDA-Approved Prasterone (Intrarosa) — Daily Intravaginal',
-    description: 'The only FDA-approved non-estrogen treatment for vaginal dryness and painful sex due to menopause',
+    product: 'FDA-Approved Estradiol Vaginal Cream — Applied As Directed',
+    description: 'Restores vaginal tissue health and relieves intimate menopause symptoms — minimal systemic absorption',
     image: 'assets/vaginal.png',
     features: [
-      'FDA-approved Prasterone (Intrarosa) — delivered monthly',
+      'FDA-approved Estradiol Vaginal Cream — prescribed and delivered monthly',
       'Local vaginal treatment — minimal systemic absorption',
       'Provider consultation, messaging, check-ins included',
       'Price never increases',
@@ -156,7 +176,7 @@ const TESTIMONIALS = [
 const FAQ_ITEMS = [
   {
     q: 'What is the Her Estrogen prescription plan?',
-    a: 'Her Estrogen coordinates access to FDA-approved hormone replacement therapy (HRT) through a network of licensed providers. After your checkout, a board-certified provider reviews your intake and writes a custom prescription — choosing from FDA-approved estradiol gel, estradiol patch, micronized progesterone, or vaginal DHEA (Prasterone) based on your symptoms and clinical needs. The medication is shipped directly to your door by our licensed pharmacy partner in premium Her Estrogen packaging.'
+    a: 'Her Estrogen coordinates access to FDA-approved hormone replacement therapy (HRT) through a network of licensed providers. After your checkout, a board-certified provider reviews your intake and writes a custom prescription — choosing from FDA-approved estradiol gel, estradiol patch, estradiol pill, estradiol vaginal cream, or progesterone pill based on your symptoms and clinical needs. The medication is shipped directly to your door by our licensed pharmacy partner in premium Her Estrogen packaging.'
   },
   {
     q: 'What does the price include?',
@@ -233,17 +253,17 @@ function recommendProduct(quiz) {
     return {
       primary: 'dhea',
       offerBundle: false,
-      reason: 'You preferred a local treatment — FDA-approved vaginal DHEA (Prasterone), the only non-estrogen option for vaginal symptoms.'
+      reason: 'You preferred a local treatment — FDA-approved Estradiol Vaginal Cream, applied directly to vaginal tissue with minimal systemic absorption.'
     };
   }
   // preference === 'effective' or undefined → run the algorithm
 
-  // Vaginal/atrophy symptoms only → DHEA first-line
+  // Vaginal/atrophy symptoms only → Estradiol Vaginal Cream first-line
   if (onlyVaginal) {
     return {
       primary: 'dhea',
       offerBundle: false,
-      reason: 'For local symptoms, FDA-approved vaginal DHEA (Prasterone) is the first-line non-estrogen option.'
+      reason: 'For local symptoms, FDA-approved Estradiol Vaginal Cream is the first-line option — minimal systemic absorption, applied directly to vaginal tissue.'
     };
   }
 
@@ -489,6 +509,7 @@ const PRODUCT_KEY_MAP = {
   bundle:       'completeProtocol',
   gel:          'estradiolGel',
   patch:        'estradiolPatch',
+  pill:         'estradiolPill',
   progesterone: 'progesterone',
   dhea:         'vaginalDHEA'
 };
@@ -832,7 +853,7 @@ function App() {
                 <div className="bundle-upgrade-badge">Save ~10% · More Effective</div>
                 <h4>Upgrade to The Complete Protocol</h4>
                 <p>
-                  Add FDA-approved <strong>Micronized Progesterone</strong> to your {med.name}. The combination is the clinical gold standard — backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and ~10% off both medications.</strong>
+                  Add FDA-approved <strong>Progesterone Pill</strong> to your {med.name}. The combination is the clinical gold standard — backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and ~10% off both medications.</strong>
                 </p>
                 <div className="bundle-upgrade-price">
                   <span className="up-from">Your plan today:</span> <strong>${monthly}/mo</strong>

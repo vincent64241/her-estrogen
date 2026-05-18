@@ -11,7 +11,7 @@
 // Request body:
 //   {
 //     product: 'completeProtocol' | 'estradiolGel' | 'estradiolPatch'
-//            | 'progesterone' | 'vaginalDHEA',
+//            | 'estradiolPill' | 'progesterone' | 'vaginalDHEA',
 //     period: 'monthly' | 'threeMonth' | 'sixMonth' | 'annual',
 //     customerEmail: string,
 //     customerName?: string,
@@ -48,6 +48,12 @@ const PRICE_ENV = {
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_PATCH_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_PATCH_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_PATCH_12MONTH'
+  },
+  estradiolPill: {
+    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_PILL_MONTHLY',
+    threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_PILL_3MONTH',
+    sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_PILL_6MONTH',
+    annual:     'NEXT_PUBLIC_STRIPE_PRICE_PILL_12MONTH'
   },
   progesterone: {
     monthly:    'NEXT_PUBLIC_STRIPE_PRICE_PROG_MONTHLY',

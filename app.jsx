@@ -37,28 +37,40 @@ const TREATMENTS = [
   image: 'assets/transdermal-patch.png'
 },
 {
-  id: 'progesterone',
-  eyebrow: 'FDA-Approved · Sleep + Protection',
-  name: 'Micronized Progesterone',
-  desc: 'The gold standard progestogen — protects your uterus and gives you the best sleep of your life.',
+  id: 'pill',
+  eyebrow: 'FDA-Approved · Oral Option',
+  name: 'Estradiol Pill',
+  desc: 'A convenient once-daily oral tablet — one of the most studied forms of HRT with decades of clinical evidence.',
   features: [
-  ['Application', 'Nightly oral capsule'],
-  ['Dose', '100 mg or 200 mg as prescribed'],
-  ['Treats', 'Sleep, anxiety, uterine protection'],
+  ['Application', 'Once daily — oral tablet'],
+  ['Delivery', 'Oral (passes through the liver)'],
+  ['Treats', 'Hot flashes, sleep, mood, bone density'],
   ['Status', 'FDA-Approved']],
   image: 'assets/oral-pills.png'
 },
 {
   id: 'dhea',
   eyebrow: 'FDA-Approved · Vaginal Health',
-  name: 'Vaginal DHEA (Prasterone)',
-  desc: 'The only FDA-approved non-estrogen treatment for painful sex and vaginal dryness due to menopause.',
+  name: 'Estradiol Vaginal Cream',
+  desc: 'FDA-approved estradiol vaginal cream — restores vaginal tissue health and relieves intimate menopause symptoms.',
   features: [
-  ['Application', 'Once daily — intravaginal insert'],
-  ['Form', 'Prasterone (Intrarosa)'],
-  ['Treats', 'Dryness, pain, atrophy, recurrent UTIs'],
+  ['Application', 'Vaginal cream — as directed'],
+  ['Form', 'Estrace Vaginal Cream'],
+  ['Treats', 'Dryness, painful sex, GSM, recurrent UTIs'],
   ['Status', 'FDA-Approved']],
   image: 'assets/vaginal.png'
+},
+{
+  id: 'progesterone',
+  eyebrow: 'FDA-Approved · Sleep + Protection',
+  name: 'Progesterone Pill',
+  desc: 'Bioidentical oral progesterone taken nightly — protects your uterine lining and unlocks deep, restorative sleep.',
+  features: [
+  ['Application', 'Nightly oral pill — at bedtime'],
+  ['Dose', '100 mg or 200 mg as prescribed'],
+  ['Treats', 'Sleep, anxiety, uterine protection'],
+  ['Status', 'FDA-Approved']],
+  image: 'assets/oral-pills.png'
 }];
 
 
