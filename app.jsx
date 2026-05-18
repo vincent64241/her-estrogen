@@ -395,11 +395,11 @@ function App() {
           </div>
         </div>
 
-        {/* Single row — all 8 cases, scrolls left, duplicated for seamless loop */}
+        {/* Static grid — all 8 cases, no animation */}
         <div className="marquee-row">
-          <div className="marquee-track marquee-left">
-            {[...CASE_STUDIES_HOME, ...CASE_STUDIES_HOME].map((c, i) => (
-              <div className="marquee-card" key={`r1-${i}`} aria-hidden={i >= 8 ? 'true' : undefined}>
+          <div className="marquee-track marquee-static">
+            {CASE_STUDIES_HOME.map((c, i) => (
+              <div className="marquee-card" key={`r1-${i}`}>
                 <div className="marquee-photo-wrap">
                   <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
                 </div>

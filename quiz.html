@@ -284,6 +284,110 @@ function formatPhone(value) {
   return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
 }
 
+// =====================================================================
+// Klaviyo integration — public client-side subscription
+// =====================================================================
+// company_id and list_id are PUBLIC (used in browser). Safe to commit.
+// Replace these placeholder strings with values from Klaviyo Dashboard:
+//   - company_id: Account → Settings → API Keys → "Public API Key (Company ID)"
+//   - list_id:    Lists & Segments → click your list → "List ID" in URL or settings
+const KLAVIYO_COMPANY_ID = 'RUvm7K';
+const KLAVIYO_LIST_ID    = 'Rsp58u';
+
+// ⚠ HIPAA: only flip this to true after Klaviyo signs you a BAA in writing.
+//   When false, we send ONLY email + first name + quiz_completed flag
+//   (no symptoms, stage, age — those stay in Supabase only).
+const KLAVIYO_SEND_HEALTH_DATA = false;
+
+// Convert a US phone like "(555) 123-4567" to Klaviyo's required E.164 format "+15551234567"
+function toE164(phone) {
+  const digits = (phone || '').replace(/\D/g, '');
+  if (digits.length === 10) return '+1' + digits;
+  if (digits.length === 11 && digits.startsWith('1')) return '+' + digits;
+  return null;
+}
+
+async function subscribeToKlaviyo(answers) {
+  if (!answers || !answers.email) return;
+  if (KLAVIYO_COMPANY_ID.startsWith('REPLACE_') || KLAVIYO_LIST_ID.startsWith('REPLACE_')) {
+    console.warn('[klaviyo] not configured — set KLAVIYO_COMPANY_ID + KLAVIYO_LIST_ID in quiz.html');
+    return;
+  }
+
+  // Avoid double-subscribing if user re-completes the quiz in the same session
+  const dedupeKey = `klaviyo_subscribed_${answers.email}`;
+  if (localStorage.getItem(dedupeKey)) return;
+
+  // Base properties — always safe to send
+  const properties = {
+    quiz_completed: true,
+    quiz_completed_at: new Date().toISOString()
+  };
+  if (answers.firstName) properties.$first_name = answers.firstName.trim();
+
+  // ⚠ HIPAA-gated: only attach health data if BAA confirmed
+  if (KLAVIYO_SEND_HEALTH_DATA) {
+    if (answers.stage)             properties.hormone_stage = answers.stage;
+    if (Array.isArray(answers.symptoms)) {
+      properties.symptom_score  = answers.symptoms.length;
+      properties.primary_symptom = answers.symptoms[0] || null;
+      properties.symptoms_list  = answers.symptoms.join(', ');
+    }
+    if (answers.age)               properties.age_range = answers.age;
+    if (answers.tried)             properties.prior_hrt = answers.tried;
+  }
+
+  const profileAttrs = { email: answers.email, properties };
+  const phoneE164 = toE164(answers.phone);
+  if (phoneE164) profileAttrs.phone_number = phoneE164;
+
+  // Marketing consent — required for the list subscription to actually opt-in.
+  // The user has filled their email in a contact form on our site = implicit single opt-in.
+  // (If you want double opt-in, configure that on the Klaviyo list itself.)
+  profileAttrs.subscriptions = {
+    email: { marketing: { consent: 'SUBSCRIBED' } }
+  };
+  if (phoneE164) {
+    profileAttrs.subscriptions.sms = { marketing: { consent: 'SUBSCRIBED' } };
+  }
+
+  try {
+    const resp = await fetch(
+      `https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(KLAVIYO_COMPANY_ID)}`,
+      {
+        method: 'POST',
+        headers: {
+          'revision': '2024-02-15',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              custom_source: 'Her Estrogen quiz',
+              profile: { data: { type: 'profile', attributes: profileAttrs } }
+            },
+            relationships: {
+              list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
+            }
+          }
+        })
+      }
+    );
+
+    if (resp.ok || resp.status === 202) {
+      localStorage.setItem(dedupeKey, '1');
+      console.log('[klaviyo] subscribed:', answers.email);
+    } else {
+      const txt = await resp.text().catch(() => '');
+      console.warn('[klaviyo] non-OK response:', resp.status, txt.slice(0, 200));
+    }
+  } catch (err) {
+    // Never break the quiz flow on a Klaviyo failure
+    console.warn('[klaviyo] subscribe failed:', err && err.message);
+  }
+}
+
 function Quiz() {
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -323,12 +427,14 @@ function Quiz() {
   };
   const back = () => idx > 0 && setIdx(idx - 1);
 
-  // Persist answers to localStorage when quiz completes — results.html reads this
+  // On completion: persist to localStorage (results.html reads this) + subscribe to Klaviyo
   React.useEffect(() => {
     if (done) {
       try {
         localStorage.setItem('herestrogen_quiz', JSON.stringify(answers));
       } catch (e) { /* storage disabled — fall back to defaults */ }
+      // Fire-and-forget — quiz UX is independent of Klaviyo response
+      subscribeToKlaviyo(answers);
     }
   }, [done, answers]);
 
