@@ -430,7 +430,6 @@ function App() {
               <p><strong>Hot flashes?</strong> Estrogen sets your hypothalamus — your body's thermostat. When estrogen drops, the thermostat misfires. Restore estrogen, the flashes stop.</p>
               <p><strong>Can't sleep?</strong> Progesterone converts to allopregnanolone — the neurosteroid that activates GABA, the brain chemical that keeps you in deep sleep. Take it at bedtime, sleep returns.</p>
               <p><strong>Mood, memory, bones, joints.</strong> Estrogen runs them too — it regulates serotonin, feeds the hippocampus, protects bone density, and reduces inflammation. HRT replaces the exact molecules your body is missing.</p>
-              <p>Not magic. Biology.</p>
             </div>
             <div className="edu-stats">
               <div className="edu-stat">

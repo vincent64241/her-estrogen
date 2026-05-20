@@ -878,10 +878,10 @@
   .how { padding: 72px 0 96px; }
   .how-head { margin: 0 auto 56px; }
   .how h2 { margin: 18px 0 20px; }
-  .compare { padding: 82px 0; }
+  .compare { padding: 48px 0; }
   .reviews { padding: 90px 0; }
   .faq { padding: 48px 0; }
-  .cta-final { padding: 105px 0; }
+  .cta-final { padding: 56px 0 80px; }
   /* Final CTA: more breathing room between eyebrow and headline */
   .cta-final .eyebrow { margin-bottom: 32px; }
   /* Tighter timeline steps — less scrolling */
@@ -1605,17 +1605,17 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 64px;
-    margin-bottom: 96px;
-    padding: 56px 0;
+    margin-bottom: 56px;
+    padding: 32px 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
   @media (max-width: 880px) {
     .edu-education {
       grid-template-columns: 1fr;
-      gap: 36px;
-      margin-bottom: 64px;
-      padding: 40px 0;
+      gap: 32px;
+      margin-bottom: 40px;
+      padding: 24px 0;
     }
   }
   .edu-text h3 {
@@ -1924,37 +1924,18 @@
     margin-right: auto;
     padding: 0 32px;
   }
-  /* Static single-row layout — always one row; scrolls horizontally on narrow screens */
+  /* Static responsive grid — all 5 cards always visible, wraps cleanly on smaller screens */
   .marquee-track.marquee-static {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: flex-start;
+    gap: 16px;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px; /* room for the scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: var(--pink-3) transparent;
   }
-  .marquee-track.marquee-static::-webkit-scrollbar { height: 6px; }
-  .marquee-track.marquee-static::-webkit-scrollbar-thumb {
-    background: var(--pink-3);
-    border-radius: 999px;
-  }
-  .marquee-track.marquee-static .marquee-card {
-    flex: 0 0 calc((100% - 72px) / 5); /* 5 cards fit exactly at viewport ≥ ~1200px */
-    min-width: 240px;
-    scroll-snap-align: start;
-  }
-  @media (max-width: 1100px) {
-    .marquee-row { padding: 0 20px; }
-    .marquee-track.marquee-static .marquee-card { flex: 0 0 260px; }
-  }
-  @media (max-width: 480px) {
-    .marquee-track.marquee-static .marquee-card { flex: 0 0 78%; }
-    .marquee-track.marquee-static { gap: 14px; }
-  }
+  @media (max-width: 1200px) { .marquee-track.marquee-static { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .marquee-track.marquee-static { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+  @media (max-width: 480px)  { .marquee-track.marquee-static { grid-template-columns: 1fr; } }
+  .marquee-track.marquee-static .marquee-card { flex: none; width: 100%; }
 
   /* Card */
   .marquee-card {
