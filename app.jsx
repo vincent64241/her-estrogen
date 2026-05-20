@@ -395,15 +395,10 @@ function App() {
           <div className="edu-education">
             <div className="edu-text">
               <h3>Why do women in perimenopause and menopause need HRT?</h3>
-              <p>Estrogen production declines starting in your mid-30s and drops sharply at menopause. The deficiency affects sleep, mood, cognition, bone density, cardiovascular health, and metabolism.</p>
-              <p>HRT replaces the hormones your ovaries no longer produce. Started within 10 years of menopause, it relieves symptoms and provides long-term protection for bones, heart, and brain.</p>
-              <p>Modern bioidentical HRT is FDA-approved and safe for most healthy women. The 2002 WHI study findings were specific to older synthetic formulations — today's protocols are different.</p>
+              <p>Over a million American women are on HRT today — your sister, your coworker, the friend you grab coffee with. They're sleeping through the night, present with their families, and finally feeling like themselves again.</p>
+              <p>This isn't a last resort. It's how women in their 40s and 50s come back to their energy, their patience with their kids, their connection with their partner — and to the woman they used to recognize in the mirror.</p>
             </div>
             <div className="edu-stats">
-              <div className="edu-stat">
-                <div className="edu-stat-num">75%</div>
-                <div className="edu-stat-label">of women with symptoms receive no treatment</div>
-              </div>
               <div className="edu-stat">
                 <div className="edu-stat-num">6,000</div>
                 <div className="edu-stat-label">women enter menopause every day in the US</div>
@@ -457,22 +452,6 @@ function App() {
                   ? 'Show less ↑'
                   : `See ${HRT_COMPARISON.length - 7} more symptoms ↓`}
               </button>
-            </div>
-          </div>
-
-          {/* 6 — Closing CTA */}
-          <div className="edu-closing">
-            <h2>You don't have to keep <em>pushing through it.</em></h2>
-            <p>A licensed Her Estrogen provider will review your intake within 24 hours. No insurance required. No waiting room. Just answers — and relief.</p>
-            <div className="edu-cta-row">
-              <a href="quiz.html" className="btn btn-primary">Take the Free Hormone Quiz →</a>
-              <a href="#treatments" className="btn btn-ghost">View Our Products</a>
-            </div>
-            <div className="edu-trust-row">
-              <span>✓ FDA-Approved Only</span><span className="sep">·</span>
-              <span>✓ HSA/FSA Accepted</span><span className="sep">·</span>
-              <span>✓ Cancel Anytime</span><span className="sep">·</span>
-              <span>✓ Free Shipping</span>
             </div>
           </div>
 
