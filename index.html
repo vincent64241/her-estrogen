@@ -968,9 +968,13 @@
     overflow: hidden;
   }
   .nav.nav-editorial .nav-cta {
-    flex-shrink: 0;
-    position: relative;
-    z-index: 2;
+    position: fixed;
+    top: 24px;
+    right: 48px;
+    z-index: 60;
+    display: flex;
+    gap: 12px;
+    align-items: center;
   }
   .nav.nav-editorial .nav-btn {
     padding: 11px 22px;
@@ -978,15 +982,13 @@
     white-space: nowrap;
   }
   .nav.nav-editorial .nav-logo {
-    height: 88px;
+    height: 190px;
     width: auto;
-    max-width: 220px;
-    object-fit: contain;
     display: block;
     transition: height .25s ease;
   }
   .nav.nav-editorial.scrolled .nav-logo {
-    height: 64px;
+    height: 120px;
   }
 
   /* Hero section (20% shorter than viewport) */
@@ -1179,9 +1181,10 @@
     .hero.hero-editorial .hero-bg-img { right: 100px; width: 60%; }
     .hero-editorial-content { max-width: 480px; padding-left: 96px; top: 200px; }
     .hero-press-strip { padding: 0 48px 28px; }
-    .nav.nav-editorial .nav-inner { padding: 16px 36px; }
-    .nav.nav-editorial .nav-logo { height: 80px; max-width: 200px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 60px; max-width: 180px; }
+    .nav.nav-editorial .nav-inner { padding: 18px 36px; }
+    .nav.nav-editorial .nav-logo { height: 150px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 96px; }
+    .nav.nav-editorial .nav-cta { right: 36px; top: 22px; }
   }
 
   /* Mid-tablet — further scale down, intermediate between 767 and 1279 */
@@ -1197,10 +1200,11 @@
       );
     }
     .hero-editorial-content { max-width: 420px; padding-left: 60px; top: 156px; }
-    .nav.nav-editorial .nav-inner { padding: 14px 24px; }
-    .nav.nav-editorial .nav-logo { height: 72px; max-width: 180px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 56px; max-width: 160px; }
+    .nav.nav-editorial .nav-inner { padding: 16px 28px; }
+    .nav.nav-editorial .nav-logo { height: 110px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 76px; }
     .nav.nav-editorial .nav-btn { padding: 10px 18px; font-size: 13px; }
+    .nav.nav-editorial .nav-cta { right: 28px; top: 20px; }
   }
 
   /* Mobile */
@@ -1231,10 +1235,11 @@
       top: 170px;
       max-width: 100%;
     }
-    .nav.nav-editorial .nav-inner { padding: 12px 18px; }
-    .nav.nav-editorial .nav-logo { height: 60px; max-width: 150px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 48px; max-width: 140px; }
-    .nav.nav-editorial .nav-btn { padding: 9px 14px; font-size: 12px; }
+    .nav.nav-editorial .nav-inner { padding: 14px 24px; }
+    .nav.nav-editorial .nav-logo { height: 130px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 84px; }
+    .nav.nav-editorial .nav-btn { padding: 9px 16px; font-size: 12px; }
+    .nav.nav-editorial .nav-cta { right: 18px; top: 18px; }
     .hero-press-strip {
       padding: 0 24px 18px;
       gap: 12px;
@@ -1251,17 +1256,19 @@
     .hero.hero-editorial .hero-sub { font-size: 13.5px; }
     .hero.hero-editorial .hero-checks { font-size: 11.5px; }
     .hero-editorial-content { top: 124px; }
-    .nav.nav-editorial .nav-logo { height: 52px; max-width: 130px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 44px; max-width: 120px; }
-    .nav.nav-editorial .nav-inner { padding: 10px 14px; }
-    .nav.nav-editorial .nav-btn { padding: 8px 12px; font-size: 11px; }
+    .nav.nav-editorial .nav-logo { height: 88px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 60px; }
+    .nav.nav-editorial .nav-inner { padding: 12px 18px; }
+    .nav.nav-editorial .nav-btn { padding: 8px 14px; font-size: 11px; }
+    .nav.nav-editorial .nav-cta { right: 14px; top: 14px; }
   }
 
   /* Tiny screens — keep logo + button from crashing into each other */
   @media (max-width: 380px) {
-    .nav.nav-editorial .nav-logo { height: 44px; max-width: 110px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 40px; max-width: 100px; }
-    .nav.nav-editorial .nav-btn { padding: 7px 10px; font-size: 10.5px; }
+    .nav.nav-editorial .nav-logo { height: 72px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 52px; }
+    .nav.nav-editorial .nav-btn { padding: 7px 12px; font-size: 10.5px; }
+    .nav.nav-editorial .nav-cta { right: 10px; top: 12px; }
   }
 
   /* ---- BUNDLE SECTION (The Complete Protocol) ---- */
@@ -2173,7 +2180,7 @@
   <div class="nav-inner">
     <a class="logo" href="#"><img src="assets/logo.png" alt="Her Estrogen" class="nav-logo" /></a>
     <div class="nav-cta">
-      <a href="quiz.html" class="btn btn-primary nav-btn">Get approved →</a>
+      <a href="quiz.html" class="btn btn-primary nav-btn">Am I qualified? →</a>
     </div>
   </div>
 </nav>
