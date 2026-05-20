@@ -1,0 +1,19 @@
+# Her Estrogen — robots.txt
+# Allow public marketing pages; block server endpoints + post-funnel pages.
+
+User-agent: *
+Allow: /
+
+# Block API endpoints (these are server functions, not for crawling)
+Disallow: /api/
+
+# Block the post-quiz funnel — should only be reached via the quiz flow
+Disallow: /results.html
+Disallow: /results
+
+# Block the post-checkout confirmation page
+Disallow: /confirmation
+Disallow: /confirmation.html
+
+# Sitemap location
+Sitemap: https://her-estrogen.vercel.app/sitemap.xml
