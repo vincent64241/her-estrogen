@@ -1494,6 +1494,364 @@
     .bundle-cta { padding: 14px 24px !important; font-size: 14px !important; }
   }
 
+  /* ===========================================================
+     EDUCATIONAL CONVERSION SECTION — "Why HRT"
+     Sits between Hero and Treatments. Reuses existing tokens.
+     =========================================================== */
+  .edu-section {
+    padding: clamp(56px, 9vw, 96px) 0;
+    background: #fff;
+  }
+  .edu-section .container { max-width: 1240px; padding: 0 32px; }
+
+  /* 1 · Hook pill */
+  .edu-hook { text-align: center; margin-bottom: 22px; }
+  .edu-hook-pill {
+    display: inline-block;
+    background: var(--pink-softer);
+    color: var(--pink-deep);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  /* 2 · Headline block */
+  .edu-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px;
+  }
+  .edu-head .eyebrow {
+    color: var(--pink);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .edu-head h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 18px;
+    color: var(--ink);
+  }
+  .edu-head h2 em { font-style: italic; color: var(--pink); }
+  .edu-head .edu-sub {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* 3 · Three-column WHY block */
+  .edu-why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 96px;
+  }
+  @media (max-width: 880px) { .edu-why-grid { grid-template-columns: 1fr; gap: 18px; margin-bottom: 64px; } }
+  .edu-why-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--pink);
+    border-radius: 12px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1);
+  }
+  .edu-why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(138,23,69,.08);
+  }
+  .edu-why-icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: var(--pink-soft);
+    color: var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .edu-why-card h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--ink);
+  }
+  .edu-why-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* 4 · Education block (2-col text + stats) */
+  .edu-education {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 64px;
+    margin-bottom: 96px;
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 880px) {
+    .edu-education {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-bottom: 64px;
+      padding: 40px 0;
+    }
+  }
+  .edu-text h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    margin: 0 0 22px;
+    color: var(--ink);
+  }
+  .edu-text p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  .edu-text p:last-child { margin-bottom: 0; }
+
+  .edu-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: start;
+  }
+  @media (max-width: 880px) { .edu-stats { order: 3; } }
+  .edu-stat {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu-stat:last-child { border-bottom: 0; }
+  .edu-stat:first-child { padding-top: 0; }
+  .edu-stat-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(48px, 6vw, 64px);
+    line-height: 1;
+    color: var(--pink);
+    letter-spacing: -0.02em;
+  }
+  .edu-stat-label {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* 5 · Problem vs Solution table */
+  .edu-table-wrap { margin-bottom: 96px; }
+  @media (max-width: 880px) { .edu-table-wrap { margin-bottom: 64px; } }
+  .edu-table-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 40px;
+  }
+  .edu-table-head h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .edu-table-head h2 em { font-style: italic; color: var(--pink); }
+  .edu-table-sub {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .edu-table {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(138,23,69,.04);
+  }
+  .edu-table thead { background: var(--pink-softer); }
+  .edu-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-align: left;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu-table th:first-child { border-right: 1px solid var(--line); }
+  .edu-table td {
+    padding: 18px 24px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .edu-table td:first-child {
+    border-right: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .edu-table td:last-child { background: rgba(45,122,95,.04); }
+  .edu-table tr:last-child td { border-bottom: 0; }
+  .edu-table tbody tr:nth-child(even) td:first-child { background: rgba(184,35,92,.03); }
+
+  /* Featured last row — emotional closer */
+  .edu-row-feature td {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .edu-row-feature td:first-child { color: var(--ink); }
+  .edu-row-feature td:last-child {
+    color: var(--pink-deep);
+    background: rgba(184,35,92,.08) !important;
+  }
+
+  /* Dots */
+  .edu-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: -1px;
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .edu-dot-problem { background: #e9a896; }
+  .edu-dot-fix { background: #2d7a5f; color: #fff; }
+  .edu-table th .edu-dot { width: 10px; height: 10px; }
+
+  /* Mobile — collapse table to stacked cards */
+  @media (max-width: 760px) {
+    .edu-table { border: 0; box-shadow: none; background: transparent; }
+    .edu-table thead { display: none; }
+    .edu-table tbody, .edu-table tr, .edu-table td { display: block; width: 100%; }
+    .edu-table tr {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(138,23,69,.05);
+    }
+    .edu-table td {
+      padding: 0;
+      border: 0 !important;
+      background: transparent !important;
+    }
+    .edu-table td:first-child {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 15px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px dashed var(--line) !important;
+      position: relative;
+    }
+    .edu-table td:first-child::after {
+      content: '↓';
+      display: block;
+      text-align: center;
+      color: var(--pink);
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .edu-table td:last-child {
+      color: var(--ink-2);
+      font-size: 14.5px;
+    }
+    .edu-row-feature {
+      background: var(--pink-softer) !important;
+      border-color: var(--pink-3) !important;
+    }
+  }
+
+  /* 6 · Closing CTA */
+  .edu-closing {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .edu-closing h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4.4vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .edu-closing h2 em { font-style: italic; color: var(--pink); }
+  .edu-closing > p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 28px;
+  }
+  .edu-cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 540px) {
+    .edu-cta-row { flex-direction: column; gap: 10px; }
+    .edu-cta-row .btn { width: 100%; justify-content: center; }
+  }
+  .edu-trust-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .edu-trust-row .sep { opacity: .4; }
+  @media (max-width: 540px) {
+    .edu-trust-row { font-size: 11.5px; gap: 6px; }
+    .edu-trust-row .sep { display: none; }
+  }
+
   /* ---- PATIENT STORIES — marquee (2 scrolling rows, pause on hover) ---- */
   .marquee-section {
     padding: 72px 0 80px;

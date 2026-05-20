@@ -79,17 +79,30 @@ const REVIEWS = [
 { stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
 { stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
 
-// 8 case studies — only the working photos. Bump back to 20 once the rest push.
-// PLACEHOLDER content; replace with real, consented patient quotes before scale.
+// 5 case studies — placeholder content. Replace with real, consented patient quotes
+// before scale. Photos: /assets/case-N.jpg.
 const CASE_STUDIES_HOME = [
-  { name: 'Mira L.',     meta: 'Age 47 · New York',       quote: "Best decision I've made for myself in years.",                   photo: 'assets/case-3.jpg'  },
-  { name: 'Karen H.',    meta: 'Age 53 · Illinois',       quote: 'I cried the first night I slept through.',                       photo: 'assets/case-7.jpg'  },
-  { name: 'Diana W.',    meta: 'Age 50 · Oregon',         quote: "Calm. Rested. Steady. Words I haven't used in years.",           photo: 'assets/case-8.jpg'  },
-  { name: 'Lisa P.',     meta: 'Age 48 · Massachusetts',  quote: 'My partner says I came back to him. He is right.',               photo: 'assets/case-9.jpg'  },
-  { name: 'Patricia L.', meta: 'Age 54 · Pennsylvania',   quote: 'Everything I tried before this was a guess. This was not.',      photo: 'assets/case-12.jpg' },
-  { name: 'Veronica E.', meta: 'Age 52 · Ohio',           quote: "It's quiet at 3am again. That's a miracle.",                     photo: 'assets/case-18.jpg' },
-  { name: 'Tracy G.',    meta: 'Age 55 · Utah',           quote: 'I have my afternoons back — I did not realize they were gone.',  photo: 'assets/case-19.jpg' },
-  { name: 'Olivia N.',   meta: 'Age 47 · Maryland',       quote: 'I tell every woman in my life about this.',                      photo: 'assets/case-20.jpg' }
+  { name: 'Mira L.',     meta: 'Age 47 · New York',       quote: "Best decision I've made for myself in years.",            photo: 'assets/case-3.jpg'  },
+  { name: 'Karen H.',    meta: 'Age 53 · Illinois',       quote: 'I cried the first night I slept through.',                photo: 'assets/case-7.jpg'  },
+  { name: 'Diana W.',    meta: 'Age 50 · Oregon',         quote: "Calm. Rested. Steady. Words I haven't used in years.",    photo: 'assets/case-8.jpg'  },
+  { name: 'Lisa P.',     meta: 'Age 48 · Massachusetts',  quote: 'My partner says I came back to him. He is right.',        photo: 'assets/case-9.jpg'  },
+  { name: 'Patricia L.', meta: 'Age 54 · Pennsylvania',   quote: 'Everything I tried before this was a guess. This was not.', photo: 'assets/case-12.jpg' }
+];
+
+// Educational section data — "Why HRT" comparison rows
+const HRT_COMPARISON = [
+  ['Hot flashes waking you up at 3am',              'Estrogen regulates your body temperature — most women see relief within 7 days'],
+  ["Can't sleep through the night",                 'Progesterone promotes deep, natural sleep — taken nightly at bedtime'],
+  ['Brain fog and memory lapses',                   'Estrogen fuels cognitive function — clarity returns as levels stabilize'],
+  ['Mood swings, anxiety, irritability',            'Estrogen regulates serotonin and dopamine — mood stabilizes within weeks'],
+  ["Weight gain that won't move",                   'Hormonal balance restores healthy metabolism and muscle composition'],
+  ['Joint pain and stiffness',                      'Estrogen has anti-inflammatory properties — joint comfort improves over months'],
+  ['Hair thinning and skin aging',                  'Estrogen maintains collagen — skin and hair improve with consistent HRT'],
+  ['Low libido and loss of intimacy',               'Restored hormones revive desire, sensitivity, and connection'],
+  ['Vaginal dryness and painful sex',               'Estradiol vaginal cream restores tissue health and moisture locally'],
+  ['Heart palpitations and anxiety spikes',         'Estrogen protects cardiovascular function — palpitations resolve'],
+  ['Bone loss and fracture risk',                   'Estrogen is your primary bone protector — HRT stops bone density decline'],
+  ['Feeling like a stranger in your own body',      'Balanced hormones restore your sense of self — women describe it as "coming home"']
 ];
 
 const PATIENT_STORIES = [
@@ -323,6 +336,131 @@ function App() {
           </div>
         </div>
 
+      </section>
+
+      {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}
+      <section className="edu-section" id="why" data-screen-label="01b Why HRT">
+        <div className="container">
+
+          {/* 1 — Hook banner pill */}
+          <div className="edu-hook">
+            <span className="edu-hook-pill">Backed by 30+ years of clinical research</span>
+          </div>
+
+          {/* 2 — Main headline block */}
+          <div className="edu-head">
+            <div className="eyebrow">Why Her Estrogen</div>
+            <h2>Every woman deserves to feel like <em>herself</em> again.</h2>
+            <p className="edu-sub">
+              Perimenopause and menopause affect every woman — yet 75% receive no treatment.
+              Her Estrogen exists to change that. FDA-approved hormone replacement therapy,
+              prescribed online, delivered to your door.
+            </p>
+          </div>
+
+          {/* 3 — Three-column WHY block */}
+          <div className="edu-why-grid">
+            <div className="edu-why-card">
+              <div className="edu-why-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <h3>FDA-Approved. Always.</h3>
+              <p>Every prescription we write uses only FDA-approved bioidentical hormones — estradiol, progesterone, and more. No compounded formulations. No gray-area medications. Just the four most clinically proven, safest hormone therapies available.</p>
+            </div>
+            <div className="edu-why-card">
+              <div className="edu-why-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <h3>Approved in 24 Hours.</h3>
+              <p>No waiting rooms. No 6-week appointment waits. Complete your intake online, a licensed provider reviews your case within 24 hours, and your medication ships directly to your door within days.</p>
+            </div>
+            <div className="edu-why-card">
+              <div className="edu-why-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <h3>Finally, Someone Who Listens.</h3>
+              <p>Her Estrogen providers specialize exclusively in women's hormonal health. Unlimited messaging. Monthly check-ins. A care team that actually understands what you're going through — because this is all we do.</p>
+            </div>
+          </div>
+
+          {/* 4 — Education block (2 columns: text + stats) */}
+          <div className="edu-education">
+            <div className="edu-text">
+              <h3>Why do women in perimenopause and menopause need HRT?</h3>
+              <p>Starting in your mid-to-late 30s, your ovaries begin producing less estrogen, progesterone, and testosterone. This decline — which can span 10–15 years — triggers a cascade of symptoms that affect every system in your body. Most women are told to "push through it." They shouldn't have to.</p>
+              <p>Hormone Replacement Therapy restores the hormones your body is losing. When started at the right time, HRT doesn't just relieve symptoms — it actively protects your bones, your heart, and your cognitive function for decades to come. The 2002 study that scared an entire generation of women away from HRT has been thoroughly debunked. The science today is clear: for most healthy women, HRT is safe, effective, and life-changing.</p>
+              <p>Her Estrogen makes the safest, most evidence-based HRT protocols accessible to every woman — without insurance, without waiting rooms, and without being dismissed by a doctor who has five minutes for your appointment.</p>
+            </div>
+            <div className="edu-stats">
+              <div className="edu-stat">
+                <div className="edu-stat-num">75%</div>
+                <div className="edu-stat-label">of women with symptoms receive no treatment</div>
+              </div>
+              <div className="edu-stat">
+                <div className="edu-stat-num">6,000</div>
+                <div className="edu-stat-label">women enter menopause every day in the US</div>
+              </div>
+              <div className="edu-stat">
+                <div className="edu-stat-num">10+</div>
+                <div className="edu-stat-label">body systems affected by estrogen decline</div>
+              </div>
+            </div>
+          </div>
+
+          {/* 5 — Problem vs Solution table */}
+          <div className="edu-table-wrap">
+            <div className="edu-table-head">
+              <h2>What HRT <em>Actually Fixes</em></h2>
+              <p className="edu-table-sub">These are not "just part of aging." They are hormone deficiency symptoms — and they are treatable.</p>
+            </div>
+            <table className="edu-table" aria-label="HRT benefits comparison">
+              <thead>
+                <tr>
+                  <th><span className="edu-dot edu-dot-problem" aria-hidden="true"></span>What You're Feeling</th>
+                  <th><span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>What HRT Does</th>
+                </tr>
+              </thead>
+              <tbody>
+                {HRT_COMPARISON.map(([problem, fix], i) => (
+                  <tr key={i} className={i === HRT_COMPARISON.length - 1 ? 'edu-row-feature' : ''}>
+                    <td data-label="What You're Feeling">
+                      <span className="edu-dot edu-dot-problem" aria-hidden="true"></span>
+                      {problem}
+                    </td>
+                    <td data-label="What HRT Does">
+                      <span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>
+                      {fix}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 6 — Closing CTA */}
+          <div className="edu-closing">
+            <h2>You don't have to keep <em>pushing through it.</em></h2>
+            <p>A licensed Her Estrogen provider will review your intake within 24 hours. No insurance required. No waiting room. Just answers — and relief.</p>
+            <div className="edu-cta-row">
+              <a href="quiz.html" className="btn btn-primary">Take the Free Hormone Quiz →</a>
+              <a href="#treatments" className="btn btn-ghost">View Our Products</a>
+            </div>
+            <div className="edu-trust-row">
+              <span>✓ FDA-Approved Only</span><span className="sep">·</span>
+              <span>✓ HSA/FSA Accepted</span><span className="sep">·</span>
+              <span>✓ Cancel Anytime</span><span className="sep">·</span>
+              <span>✓ Free Shipping</span>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* PRESS — hidden (moved inside hero) */}
