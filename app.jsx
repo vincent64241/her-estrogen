@@ -79,14 +79,45 @@ const REVIEWS = [
 { stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
 { stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
 
-// 5 case studies — placeholder content. Replace with real, consented patient quotes
-// before scale. Photos: /assets/case-N.jpg.
+// 5 case studies — PLACEHOLDER content. Replace with real, consented patient stories
+// before scale. quote = the gut-punch headline. story = the full paragraph revealed on
+// "Read my story" click. Photos: /assets/case-N.jpg.
 const CASE_STUDIES_HOME = [
-  { name: 'Mira L.',     meta: 'Age 47 · New York',       quote: "Best decision I've made for myself in years.",            photo: 'assets/case-3.jpg'  },
-  { name: 'Karen H.',    meta: 'Age 53 · Illinois',       quote: 'I cried the first night I slept through.',                photo: 'assets/case-7.jpg'  },
-  { name: 'Diana W.',    meta: 'Age 50 · Oregon',         quote: "Calm. Rested. Steady. Words I haven't used in years.",    photo: 'assets/case-8.jpg'  },
-  { name: 'Lisa P.',     meta: 'Age 48 · Massachusetts',  quote: 'My partner says I came back to him. He is right.',        photo: 'assets/case-9.jpg'  },
-  { name: 'Patricia L.', meta: 'Age 54 · Pennsylvania',   quote: 'Everything I tried before this was a guess. This was not.', photo: 'assets/case-12.jpg' }
+  {
+    name: 'Mira L.',
+    meta: 'Age 47 · New York',
+    quote: 'I got my marriage back.',
+    story: "Three years of resentment built between me and my husband. I couldn't figure out why I was angry all the time, too tired for him, too short with everything. We were in counseling. Six weeks on the patch and the fog lifted — the anger wasn't him, it wasn't us. It was estrogen. We're more in love now than we've been since the kids were small.",
+    photo: 'assets/case-3.jpg'
+  },
+  {
+    name: 'Karen H.',
+    meta: 'Age 53 · Illinois',
+    quote: 'I stopped snapping at my kids.',
+    story: "My son asked me why I was so mad all the time. He was eight. That broke me. I started HRT two months later. The first thing my daughter noticed: \"Mom, you're funny again.\" I didn't know I had stopped being funny. They have their mom back, and I have my patience back.",
+    photo: 'assets/case-7.jpg'
+  },
+  {
+    name: 'Diana W.',
+    meta: 'Age 50 · Oregon',
+    quote: 'I remembered a word for the first time in months.',
+    story: "I run a team of fourteen and I had started doubting every decision. I couldn't find words. I'd open my laptop and forget what I'd come there to do. Three weeks on progesterone and estradiol — clarity. The first time I remembered a colleague's name without straining, I cried at my desk.",
+    photo: 'assets/case-8.jpg'
+  },
+  {
+    name: 'Lisa P.',
+    meta: 'Age 48 · Massachusetts',
+    quote: 'I sleep through the night for the first time in 4 years.',
+    story: "3:00 AM. 4:00 AM. 5:00 AM. That was every night for four years. I was a ghost. Two weeks on the patch and progesterone — I slept seven straight hours. I woke up rested. I had forgotten what rested felt like.",
+    photo: 'assets/case-9.jpg'
+  },
+  {
+    name: 'Patricia L.',
+    meta: 'Age 54 · Pennsylvania',
+    quote: "I'm back at the gym.",
+    story: "I had gained twenty pounds I couldn't lose. My joints ached. I gave up on the gym at fifty-two — figured my body was just done. A year on HRT and I'm lifting again, walking three miles a day, sleeping through the night. The weight is moving. I have my body back.",
+    photo: 'assets/case-12.jpg'
+  }
 ];
 
 // Educational section data — "Why HRT" comparison rows
@@ -293,6 +324,7 @@ function App() {
   const [selected, setSelected] = useState(new Set(['hot', 'sleep', 'mood']));
   const [activeTreatment, setActiveTreatment] = useState('gel');
   const [openFaq, setOpenFaq] = useState(0);
+  const [openStory, setOpenStory] = useState(null);
   const [tableExpanded, setTableExpanded] = useState(false);
 
   const toggle = (id) => {
@@ -368,7 +400,7 @@ function App() {
                 </svg>
               </div>
               <h3>FDA-Approved. Always.</h3>
-              <p>Every prescription we write uses only FDA-approved bioidentical hormones — estradiol, progesterone, and more. No compounded formulations. No gray-area medications. Just the four most clinically proven, safest hormone therapies available.</p>
+              <p>Every prescription uses only FDA-approved bioidentical hormones — estradiol, progesterone, and more. No compounded formulations. Board-certified providers who specialize exclusively in women's hormonal health, prescribing the safest, most clinically proven therapies available.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -395,13 +427,15 @@ function App() {
           <div className="edu-education">
             <div className="edu-text">
               <h3>Why do women in perimenopause and menopause need HRT?</h3>
-              <p>Over a million American women are on HRT today — your sister, your coworker, the friend you grab coffee with. They're sleeping through the night, present with their families, and finally feeling like themselves again.</p>
-              <p>This isn't a last resort. It's how women in their 40s and 50s come back to their energy, their patience with their kids, their connection with their partner — and to the woman they used to recognize in the mirror.</p>
+              <p><strong>Hot flashes?</strong> Estrogen sets your hypothalamus — your body's thermostat. When estrogen drops, the thermostat misfires. Restore estrogen, the flashes stop.</p>
+              <p><strong>Can't sleep?</strong> Progesterone converts to allopregnanolone — the neurosteroid that activates GABA, the brain chemical that keeps you in deep sleep. Take it at bedtime, sleep returns.</p>
+              <p><strong>Mood, memory, bones, joints.</strong> Estrogen runs them too — it regulates serotonin, feeds the hippocampus, protects bone density, and reduces inflammation. HRT replaces the exact molecules your body is missing.</p>
+              <p>Not magic. Biology.</p>
             </div>
             <div className="edu-stats">
               <div className="edu-stat">
-                <div className="edu-stat-num">6,000</div>
-                <div className="edu-stat-label">women enter menopause every day in the US</div>
+                <div className="edu-stat-num">87%</div>
+                <div className="edu-stat-label">of women report meaningful symptom relief within 30 days</div>
               </div>
               <div className="edu-stat">
                 <div className="edu-stat-num">10+</div>
@@ -531,21 +565,36 @@ function App() {
         {/* Static grid — all 8 cases, no animation */}
         <div className="marquee-row">
           <div className="marquee-track marquee-static">
-            {CASE_STUDIES_HOME.map((c, i) => (
-              <div className="marquee-card" key={`r1-${i}`}>
-                <div className="marquee-photo-wrap">
-                  <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
-                </div>
-                <div className="marquee-card-body">
-                  <div className="marquee-stars">★★★★★</div>
-                  <p className="marquee-quote">"{c.quote}"</p>
-                  <div className="marquee-meta">
-                    <div className="marquee-name">{c.name}</div>
-                    <div className="marquee-loc">{c.meta}</div>
+            {CASE_STUDIES_HOME.map((c, i) => {
+              const isOpen = openStory === i;
+              return (
+                <div className={'marquee-card' + (isOpen ? ' is-open' : '')} key={`r1-${i}`}>
+                  <div className="marquee-photo-wrap">
+                    <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
+                  </div>
+                  <div className="marquee-card-body">
+                    <div className="marquee-stars">★★★★★</div>
+                    <p className="marquee-quote">"{c.quote}"</p>
+                    <div className="marquee-meta">
+                      <div className="marquee-name">{c.name}</div>
+                      <div className="marquee-loc">{c.meta}</div>
+                    </div>
+                    <button
+                      className="marquee-story-btn"
+                      onClick={() => setOpenStory(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                    >
+                      {isOpen ? 'Hide story' : 'Read my story →'}
+                    </button>
+                    {isOpen && (
+                      <div className="marquee-story-body">
+                        <p>{c.story}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -615,6 +664,11 @@ function App() {
               <div className="compare-feat">Initial consult</div>
               <div className="compare-no">2–4 month wait</div>
               <div className="col-us compare-yes">Within 48 hrs</div>
+            </div>
+            <div className="compare-row">
+              <div className="compare-feat">Medication at your door</div>
+              <div className="compare-no">2–6 weeks (Rx + pharmacy runs)</div>
+              <div className="col-us compare-yes">3–5 days, free shipping</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Clinician specialty</div>

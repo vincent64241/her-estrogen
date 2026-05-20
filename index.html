@@ -2008,11 +2008,66 @@
   .marquee-name { font-weight: 600; font-size: 13px; color: var(--ink); }
   .marquee-loc { font-size: 12.5px; color: var(--muted); }
 
+  /* Static row: each card sizes to its own content height so expanding one
+     card doesn't stretch the others in the same row. */
+  .marquee-track.marquee-static { align-items: flex-start; }
+
+  /* Quality-of-life headline — bigger emotional punch than the original 15px */
+  .marquee-track.marquee-static .marquee-quote {
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 500;
+    flex: none;
+  }
+
+  /* "Read my story" button + expandable body */
+  .marquee-story-btn {
+    margin-top: 12px;
+    padding: 9px 16px;
+    background: transparent;
+    color: var(--pink-deep);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+    align-self: flex-start;
+  }
+  .marquee-story-btn:hover {
+    background: var(--pink);
+    color: #fff;
+    border-color: var(--pink);
+  }
+  .marquee-card.is-open .marquee-story-btn {
+    background: var(--pink-soft);
+    border-color: var(--pink-soft);
+    color: var(--pink-deep);
+  }
+  .marquee-story-body {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line-2);
+    animation: storyFadeIn .35s cubic-bezier(.22,1,.36,1);
+  }
+  .marquee-story-body p {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  @keyframes storyFadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* Smaller cards on tablet, even smaller on mobile (so more fit on screen) */
   @media (max-width: 640px) {
     .marquee-section { padding: 56px 0 60px; }
     .marquee-section .patient-stories-head { margin-bottom: 28px; }
-    .marquee-quote { font-size: 14px; }
+    .marquee-track.marquee-static .marquee-quote { font-size: 15px; }
   }
 
   /* ---- PATIENT STORIES (testimonials with photos) ---- */

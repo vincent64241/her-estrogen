@@ -132,13 +132,53 @@ const GOALS = [
 ];
 
 const INCLUDED = [
-  { icon: '💊', text: 'FDA-approved hormone therapy — cost of medication included' },
-  { icon: '👩‍⚕️', text: 'Licensed provider review within 24 hours' },
-  { icon: '💬', text: 'Unlimited provider messaging — 4-hour response guarantee' },
-  { icon: '🚚', text: 'Free shipping on every monthly refill' },
-  { icon: '📋', text: 'Monthly 30-day provider check-in included' },
-  { icon: '📦', text: 'Premium Her Estrogen packaging — every shipment' }
+  {
+    icon: '💊',
+    title: 'Your FDA-Approved HRT Protocol',
+    body: "Estradiol, progesterone, or both — prescribed for your symptoms. Shipped in premium packaging within days of approval.",
+    value: null
+  },
+  {
+    icon: '👩‍⚕️',
+    title: 'BONUS 1 · Your Personal Provider',
+    body: "Board-certified, specializes only in women's hormonal health. Reviews your intake within 24 hours.",
+    value: '$297 value'
+  },
+  {
+    icon: '💬',
+    title: 'BONUS 2 · Unlimited Provider Messaging',
+    body: 'Message about anything, anytime. Guaranteed 4-hour response during business hours.',
+    value: '$197/mo value'
+  },
+  {
+    icon: '📋',
+    title: 'BONUS 3 · Monthly Provider Check-In',
+    body: 'Your provider reaches out at day 30 to review and adjust your dose. You never have to ask.',
+    value: '$99/mo value'
+  },
+  {
+    icon: '📖',
+    title: 'BONUS 4 · The Her Estrogen Hormone Guide',
+    body: 'Personalized education — what your body is doing and what to expect, week by week.',
+    value: '$49 value'
+  },
+  {
+    icon: '✨',
+    title: 'BONUS 5 · The Her Estrogen Community',
+    body: 'Private community of women at every stage. Provider Q&As twice monthly.',
+    value: '$29/mo value'
+  },
+  {
+    icon: '🚚',
+    title: 'BONUS 6 · Free Shipping. Forever.',
+    body: 'Every refill, every month. No minimums, no thresholds.',
+    value: '$120/yr value'
+  }
 ];
+
+// Roll-up shown at the bottom of the Included block
+const INCLUDED_TOTAL_VALUE = '$540+/month value';
+const INCLUDED_YOU_PAY = 'from $149/month';
 
 const STEPS = [
   { n: 1, title: 'Provider Review', body: "You're pre-screened. After checkout, a board-certified licensed Her Estrogen provider reviews your complete intake within 24 hours." },
@@ -438,12 +478,13 @@ function useCountdown(initialSeconds, running) {
 function TimelineChart() {
   // viewBox: 600 wide, 240 tall
   // Points (x from 60..560, y from 50 (high severity) to 200 (low))
+  // Evenly spaced milestones, steady descent (60 → 200 over 5 points)
   const pts = [
-    { x: 60, y: 60, label: 'Today', tag: '' },
-    { x: 175, y: 120, label: 'Week 2', tag: 'Sleep begins improving' },
-    { x: 290, y: 175, label: 'Month 1', tag: 'Hot flashes reduce 60%' },
-    { x: 420, y: 205, label: 'Month 2', tag: 'Full hormonal balance achieved' },
-    { x: 540, y: 205, label: 'Month 6', tag: 'Sustained relief' }
+    { x: 60,  y: 60,  label: 'Today',   tag: '' },
+    { x: 180, y: 95,  label: 'Week 2',  tag: 'Sleep begins improving' },
+    { x: 300, y: 130, label: 'Month 1', tag: 'Hot flashes reduce 60%' },
+    { x: 420, y: 165, label: 'Month 2', tag: 'Energy and mood restored' },
+    { x: 540, y: 200, label: 'Month 3', tag: 'Full hormonal balance' }
   ];
   const pathD = pts.reduce((acc, p, i) => {
     if (i === 0) return `M ${p.x} ${p.y}`;
@@ -728,7 +769,7 @@ function App() {
       <section className="timeline-section">
         <div className="container">
           <h2 className="section-title">Your <em>symptom relief</em> timeline</h2>
-          <p className="section-sub">Most women feel a meaningful difference within the first 30 days.</p>
+          <p className="section-sub">Most women feel a meaningful difference within 30 days — but symptoms come back if you stop. Bone, brain, and cardiovascular protection build month after month with consistent use. The protocol works because you stay on it.</p>
           <TimelineChart />
         </div>
       </section>
@@ -775,11 +816,35 @@ function App() {
               {INCLUDED.map((item, i) => (
                 <div className="included-row" key={i}>
                   <div className="icon">{item.icon}</div>
-                  <div>{item.text}</div>
+                  <div className="included-text">
+                    <div className="included-title">{item.title}</div>
+                    <div className="included-body">{item.body}</div>
+                  </div>
+                  {item.value && <div className="included-value">{item.value}</div>}
                 </div>
               ))}
             </div>
+
+            <div className="included-total">
+              <div className="included-total-left">
+                <div className="included-total-label">Total bonus value</div>
+                <div className="included-total-value">{INCLUDED_TOTAL_VALUE}</div>
+              </div>
+              <div className="included-total-right">
+                <div className="included-total-label">You pay</div>
+                <div className="included-total-pay">{INCLUDED_YOU_PAY}</div>
+              </div>
+            </div>
+
             <div className="included-note">+ No insurance required. HSA/FSA accepted.</div>
+          </div>
+
+          <div className="approval-guarantee">
+            <div className="approval-guarantee-head">
+              <span className="approval-guarantee-icon" aria-hidden="true">🔒</span>
+              <strong>Our Provider Approval Guarantee</strong>
+            </div>
+            <p>"If our licensed provider reviews your intake and determines HRT is not right for you — you receive a complete refund within 3 business days. It's that easy."</p>
           </div>
         </div>
       </section>
