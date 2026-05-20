@@ -293,6 +293,7 @@ function App() {
   const [selected, setSelected] = useState(new Set(['hot', 'sleep', 'mood']));
   const [activeTreatment, setActiveTreatment] = useState('gel');
   const [openFaq, setOpenFaq] = useState(0);
+  const [tableExpanded, setTableExpanded] = useState(false);
 
   const toggle = (id) => {
     const next = new Set(selected);
@@ -394,9 +395,9 @@ function App() {
           <div className="edu-education">
             <div className="edu-text">
               <h3>Why do women in perimenopause and menopause need HRT?</h3>
-              <p>Starting in your mid-to-late 30s, your ovaries begin producing less estrogen, progesterone, and testosterone. This decline — which can span 10–15 years — triggers a cascade of symptoms that affect every system in your body. Most women are told to "push through it." They shouldn't have to.</p>
-              <p>Hormone Replacement Therapy restores the hormones your body is losing. When started at the right time, HRT doesn't just relieve symptoms — it actively protects your bones, your heart, and your cognitive function for decades to come. The 2002 study that scared an entire generation of women away from HRT has been thoroughly debunked. The science today is clear: for most healthy women, HRT is safe, effective, and life-changing.</p>
-              <p>Her Estrogen makes the safest, most evidence-based HRT protocols accessible to every woman — without insurance, without waiting rooms, and without being dismissed by a doctor who has five minutes for your appointment.</p>
+              <p>Estrogen production declines starting in your mid-30s and drops sharply at menopause. The deficiency affects sleep, mood, cognition, bone density, cardiovascular health, and metabolism.</p>
+              <p>HRT replaces the hormones your ovaries no longer produce. Started within 10 years of menopause, it relieves symptoms and provides long-term protection for bones, heart, and brain.</p>
+              <p>Modern bioidentical HRT is FDA-approved and safe for most healthy women. The 2002 WHI study findings were specific to older synthetic formulations — today's protocols are different.</p>
             </div>
             <div className="edu-stats">
               <div className="edu-stat">
@@ -420,28 +421,43 @@ function App() {
               <h2>What HRT <em>Actually Fixes</em></h2>
               <p className="edu-table-sub">These are not "just part of aging." They are hormone deficiency symptoms — and they are treatable.</p>
             </div>
-            <table className="edu-table" aria-label="HRT benefits comparison">
-              <thead>
-                <tr>
-                  <th><span className="edu-dot edu-dot-problem" aria-hidden="true"></span>What You're Feeling</th>
-                  <th><span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>What HRT Does</th>
-                </tr>
-              </thead>
-              <tbody>
-                {HRT_COMPARISON.map(([problem, fix], i) => (
-                  <tr key={i} className={i === HRT_COMPARISON.length - 1 ? 'edu-row-feature' : ''}>
-                    <td data-label="What You're Feeling">
-                      <span className="edu-dot edu-dot-problem" aria-hidden="true"></span>
-                      {problem}
-                    </td>
-                    <td data-label="What HRT Does">
-                      <span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>
-                      {fix}
-                    </td>
+            <div className={'edu-table-scroll' + (tableExpanded ? ' expanded' : '')}>
+              <table className="edu-table" aria-label="HRT benefits comparison">
+                <thead>
+                  <tr>
+                    <th><span className="edu-dot edu-dot-problem" aria-hidden="true"></span>What You're Feeling</th>
+                    <th><span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>What HRT Does</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {(tableExpanded ? HRT_COMPARISON : HRT_COMPARISON.slice(0, 7)).map(([problem, fix], i, arr) => (
+                    <tr key={i} className={i === arr.length - 1 && tableExpanded ? 'edu-row-feature' : ''}>
+                      <td data-label="What You're Feeling">
+                        <span className="edu-dot edu-dot-problem" aria-hidden="true"></span>
+                        {problem}
+                      </td>
+                      <td data-label="What HRT Does">
+                        <span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>
+                        {fix}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {!tableExpanded && <div className="edu-table-fade" aria-hidden="true"></div>}
+            </div>
+            <div className="edu-table-toggle-wrap">
+              <button
+                type="button"
+                className="edu-table-toggle"
+                onClick={() => setTableExpanded((v) => !v)}
+                aria-expanded={tableExpanded}
+              >
+                {tableExpanded
+                  ? 'Show less ↑'
+                  : `See ${HRT_COMPARISON.length - 7} more symptoms ↓`}
+              </button>
+            </div>
           </div>
 
           {/* 6 — Closing CTA */}

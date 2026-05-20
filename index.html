@@ -1036,10 +1036,11 @@
     padding: 0 20px;
   }
 
-  /* Bottom-left content stack */
+  /* Top-anchored content stack — sits below the nav so the logo can never overlap */
   .hero-editorial-content {
     position: absolute;
-    bottom: 56px;
+    top: 240px;
+    bottom: auto;
     left: 0;
     padding-left: 200px;
     padding-right: 24px;
@@ -1161,7 +1162,7 @@
       );
     }
     .hero.hero-editorial .hero-bg-img { right: 100px; width: 60%; }
-    .hero-editorial-content { max-width: 480px; padding-left: 96px; }
+    .hero-editorial-content { max-width: 480px; padding-left: 96px; top: 200px; }
     .hero-press-strip { padding: 0 48px 28px; }
     .nav.nav-editorial .nav-inner { padding: 18px 48px 18px 96px; }
     .nav.nav-editorial .nav-logo { height: 150px; }
@@ -1180,7 +1181,7 @@
         transparent 90%
       );
     }
-    .hero-editorial-content { max-width: 420px; padding-left: 60px; bottom: 48px; }
+    .hero-editorial-content { max-width: 420px; padding-left: 60px; top: 156px; }
     .nav.nav-editorial .nav-inner { padding: 16px 32px 16px 60px; }
     .nav.nav-editorial .nav-logo { height: 110px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 76px; }
@@ -1212,7 +1213,7 @@
     .hero-editorial-content {
       padding-left: 24px;
       padding-right: 24px;
-      bottom: 40px;
+      top: 170px;
       max-width: 100%;
     }
     .nav.nav-editorial .nav-inner { padding: 14px 24px; }
@@ -1234,7 +1235,7 @@
     .hero.hero-editorial h1 { font-size: 20px; }
     .hero.hero-editorial .hero-sub { font-size: 13.5px; }
     .hero.hero-editorial .hero-checks { font-size: 11.5px; }
-    .hero-editorial-content { bottom: 32px; }
+    .hero-editorial-content { top: 124px; }
     .nav.nav-editorial .nav-logo { height: 88px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 60px; }
     .nav.nav-editorial .nav-inner { padding: 12px 18px; }
@@ -1663,8 +1664,8 @@
   }
 
   /* 5 · Problem vs Solution table */
-  .edu-table-wrap { margin-bottom: 96px; }
-  @media (max-width: 880px) { .edu-table-wrap { margin-bottom: 64px; } }
+  .edu-table-wrap { margin-bottom: 48px; }
+  @media (max-width: 880px) { .edu-table-wrap { margin-bottom: 36px; } }
   .edu-table-head {
     text-align: center;
     max-width: 720px;
@@ -1756,6 +1757,38 @@
   .edu-dot-fix { background: #2d7a5f; color: #fff; }
   .edu-table th .edu-dot { width: 10px; height: 10px; }
 
+  /* See-more toggle for the table */
+  .edu-table-scroll { position: relative; }
+  .edu-table-fade {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 70%);
+    pointer-events: none;
+    border-radius: 0 0 14px 14px;
+  }
+  .edu-table-toggle-wrap {
+    text-align: center;
+    margin-top: 18px;
+  }
+  .edu-table-toggle {
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--pink-deep);
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .edu-table-toggle:hover {
+    background: var(--pink-softer);
+    border-color: var(--pink-3);
+    color: var(--pink);
+  }
+
   /* Mobile — collapse table to stacked cards */
   @media (max-width: 760px) {
     .edu-table { border: 0; box-shadow: none; background: transparent; }
@@ -1802,13 +1835,12 @@
     }
   }
 
-  /* 6 · Closing CTA */
+  /* 6 · Closing CTA — tight, no divider, matches sibling-section gaps */
   .edu-closing {
     text-align: center;
     max-width: 720px;
     margin: 0 auto;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
+    padding-top: 0;
   }
   .edu-closing h2 {
     font-family: 'Newsreader', Georgia, serif;
@@ -1892,22 +1924,36 @@
     margin-right: auto;
     padding: 0 32px;
   }
-  /* Static responsive grid — replaces the marquee animation */
+  /* Static single-row layout — always one row; scrolls horizontally on narrow screens */
   .marquee-track.marquee-static {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
     gap: 18px;
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px; /* room for the scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--pink-3) transparent;
+  }
+  .marquee-track.marquee-static::-webkit-scrollbar { height: 6px; }
+  .marquee-track.marquee-static::-webkit-scrollbar-thumb {
+    background: var(--pink-3);
+    border-radius: 999px;
+  }
+  .marquee-track.marquee-static .marquee-card {
+    flex: 0 0 calc((100% - 72px) / 5); /* 5 cards fit exactly at viewport ≥ ~1200px */
+    min-width: 240px;
+    scroll-snap-align: start;
   }
   @media (max-width: 1100px) {
-    .marquee-track.marquee-static { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 760px) {
-    .marquee-track.marquee-static { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .marquee-row { padding: 0 20px; }
+    .marquee-track.marquee-static .marquee-card { flex: 0 0 260px; }
   }
   @media (max-width: 480px) {
-    .marquee-track.marquee-static { grid-template-columns: 1fr; }
+    .marquee-track.marquee-static .marquee-card { flex: 0 0 78%; }
+    .marquee-track.marquee-static { gap: 14px; }
   }
 
   /* Card */
