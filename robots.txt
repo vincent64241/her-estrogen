@@ -16,4 +16,4 @@ Disallow: /confirmation
 Disallow: /confirmation.html
 
 # Sitemap location
-Sitemap: https://her-estrogen.vercel.app/sitemap.xml
+Sitemap: https://herestrogen.com/sitemap.xml
