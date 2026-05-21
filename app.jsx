@@ -353,7 +353,7 @@ function App() {
     <>
       {/* HERO — editorial layout */}
       <section className="hero hero-editorial" data-screen-label="01 Hero">
-        <img src="assets/hero-bg.jpg" alt="Three women smiling together against blue sky" className="hero-bg-img" />
+        <img src="assets/hero-bg.jpg?v=2" alt="Hero" className="hero-bg-img" />
         <div className="hero-gradient"></div>
 
         <div className="hero-editorial-content">
