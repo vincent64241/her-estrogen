@@ -75,9 +75,9 @@ const TREATMENTS = [
 
 
 const REVIEWS = [
-{ stars: 5, body: 'I spent two years asking my OB about night sweats and was told to "ride it out." Three weeks on the patch and I am sleeping through the night for the first time since I was 44.', name: 'Marisol R.', age: 'Age 51 · Texas' },
-{ stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California' },
-{ stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York' }];
+{ stars: 5, body: 'I spent two years asking my OB about night sweats and was told to "ride it out." Three weeks on the patch and I am sleeping through the night for the first time since I was 44.', name: 'Marisol R.', age: 'Age 51 · Texas', photo: 'assets/case-1.jpg' },
+{ stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California', photo: 'assets/case-5.jpg' },
+{ stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York', photo: 'assets/case-14.jpg' }];
 
 // 5 case studies — PLACEHOLDER content. Replace with real, consented patient stories
 // before scale. quote = the gut-punch headline. story = the full paragraph revealed on
@@ -719,7 +719,11 @@ function App() {
                 <div className="review-stars">{'★'.repeat(r.stars)}</div>
                 <div className="review-body">"{r.body}"</div>
                 <div className="review-author">
-                  <div className="avatar">{r.name.charAt(0)}</div>
+                  {r.photo ? (
+                    <img className="review-photo" src={r.photo} alt={r.name} loading="lazy" />
+                  ) : (
+                    <div className="avatar">{r.name.charAt(0)}</div>
+                  )}
                   <div>
                     <div className="review-name">{r.name}</div>
                     <div className="review-age">{r.age}</div>
