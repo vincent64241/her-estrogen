@@ -1028,17 +1028,17 @@
   .hero.hero-editorial .hero-bg-img {
     position: absolute;
     top: 0;
-    right: 180px;
+    right: -60px;
     bottom: 0;
     left: auto;
-    width: 56%;
+    width: 72%;
     height: 100%;
     object-fit: cover;
-    object-position: right top;
+    object-position: right center;
     z-index: 0;
-    /* Soft fade on both edges — image blends seamlessly into white bg */
-    mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    /* Soft fade on left edge — image blends into white bg behind text */
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
   }
   .hero.hero-editorial .hero-gradient {
     position: absolute;
@@ -1199,7 +1199,7 @@
         transparent 82%
       );
     }
-    .hero.hero-editorial .hero-bg-img { right: 100px; width: 60%; }
+    .hero.hero-editorial .hero-bg-img { right: -40px; width: 70%; }
     .hero-editorial-content { max-width: 560px; padding: 180px 24px 0 96px; top: auto; }
     .hero-press-strip { padding: 0 48px 28px; }
     .nav.nav-editorial .nav-inner { padding: 18px 36px 18px 96px; }
@@ -1212,7 +1212,7 @@
   /* Mid-tablet — further scale down, intermediate between 767 and 1279 */
   @media (max-width: 1023px) {
     .hero.hero-editorial { min-height: 600px; max-height: 720px; }
-    .hero.hero-editorial .hero-bg-img { right: 40px; width: 55%; }
+    .hero.hero-editorial .hero-bg-img { right: -20px; width: 65%; }
     .hero.hero-editorial .hero-gradient {
       background: linear-gradient(to right,
         rgba(255,255,255,0.94) 0%,
