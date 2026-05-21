@@ -1800,6 +1800,30 @@
   .edu-dot-fix { background: #2d7a5f; color: #fff; }
   .edu-table th .edu-dot { width: 10px; height: 10px; }
 
+  /* Problem icons — emoji per row */
+  .edu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    margin-right: 12px;
+    vertical-align: -7px;
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    background: var(--pink-soft);
+    border-radius: 8px;
+  }
+  .edu-table th .edu-icon {
+    width: 18px; height: 18px;
+    font-size: 11px;
+    background: #e9a896;
+    color: #fff;
+    border-radius: 50%;
+    vertical-align: -2px;
+    margin-right: 10px;
+  }
+
   /* See-more toggle for the table */
   .edu-table-scroll { position: relative; }
   .edu-table-fade {
@@ -1854,19 +1878,12 @@
       color: var(--ink);
       font-weight: 600;
       font-size: 15px;
-      padding-bottom: 14px;
-      margin-bottom: 14px;
-      border-bottom: 1px dashed var(--line) !important;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
       position: relative;
     }
     .edu-table td:first-child::after {
-      content: '↓';
-      display: block;
-      text-align: center;
-      color: var(--pink);
-      font-size: 16px;
-      margin-top: 10px;
-      font-weight: 600;
+      content: none;
     }
     .edu-table td:last-child {
       color: var(--ink-2);
@@ -1876,6 +1893,26 @@
       background: var(--pink-softer) !important;
       border-color: var(--pink-3) !important;
     }
+    .edu-icon {
+      width: 24px; height: 24px;
+      font-size: 15px;
+      margin-right: 10px;
+      vertical-align: -6px;
+    }
+    /* Smaller "why" cards icons on mobile */
+    .edu-why-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+    }
+    .edu-why-icon svg {
+      width: 20px; height: 20px;
+    }
+    .edu-why-card {
+      padding: 24px 20px;
+      gap: 10px;
+    }
+    .edu-why-card h3 { font-size: 18px; }
+    .edu-why-card p { font-size: 14px; }
   }
 
   /* 6 · Closing CTA — tight, no divider, matches sibling-section gaps */
@@ -2091,7 +2128,11 @@
   @media (max-width: 640px) {
     .marquee-section { padding: 36px 0 32px; }
     .marquee-section .patient-stories-head { margin-bottom: 20px; }
-    .marquee-track.marquee-static .marquee-quote { font-size: 15px; }
+    .marquee-track.marquee-static .marquee-quote { font-size: 14px; }
+    .marquee-card { flex: 0 0 240px; }
+    .marquee-photo-wrap { aspect-ratio: 5 / 4; }
+    .marquee-card-body { padding: 14px 16px 16px; gap: 8px; }
+    .marquee-stars { font-size: 12px; }
   }
 
   /* ---- PATIENT STORIES (testimonials with photos) ---- */

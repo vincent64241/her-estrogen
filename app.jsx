@@ -122,18 +122,18 @@ const CASE_STUDIES_HOME = [
 
 // Educational section data — "Why HRT" comparison rows
 const HRT_COMPARISON = [
-  ['Hot flashes waking you up at 3am',              'Estrogen regulates your body temperature — most women see relief within 7 days'],
-  ["Can't sleep through the night",                 'Progesterone promotes deep, natural sleep — taken nightly at bedtime'],
-  ['Brain fog and memory lapses',                   'Estrogen fuels cognitive function — clarity returns as levels stabilize'],
-  ['Mood swings, anxiety, irritability',            'Estrogen regulates serotonin and dopamine — mood stabilizes within weeks'],
-  ["Weight gain that won't move",                   'Hormonal balance restores healthy metabolism and muscle composition'],
-  ['Joint pain and stiffness',                      'Estrogen has anti-inflammatory properties — joint comfort improves over months'],
-  ['Hair thinning and skin aging',                  'Estrogen maintains collagen — skin and hair improve with consistent HRT'],
-  ['Low libido and loss of intimacy',               'Restored hormones revive desire, sensitivity, and connection'],
-  ['Vaginal dryness and painful sex',               'Estradiol vaginal cream restores tissue health and moisture locally'],
-  ['Heart palpitations and anxiety spikes',         'Estrogen protects cardiovascular function — palpitations resolve'],
-  ['Bone loss and fracture risk',                   'Estrogen is your primary bone protector — HRT stops bone density decline'],
-  ['Feeling like a stranger in your own body',      'Balanced hormones restore your sense of self — women describe it as "coming home"']
+  { icon: '🌡️', problem: 'Hot flashes waking you up at 3am',              fix: 'Estrogen regulates your body temperature — most women see relief within 7 days' },
+  { icon: '🌙', problem: "Can't sleep through the night",                 fix: 'Progesterone promotes deep, natural sleep — taken nightly at bedtime' },
+  { icon: '🧠', problem: 'Brain fog and memory lapses',                   fix: 'Estrogen fuels cognitive function — clarity returns as levels stabilize' },
+  { icon: '💭', problem: 'Mood swings, anxiety, irritability',            fix: 'Estrogen regulates serotonin and dopamine — mood stabilizes within weeks' },
+  { icon: '⚖️', problem: "Weight gain that won't move",                   fix: 'Hormonal balance restores healthy metabolism and muscle composition' },
+  { icon: '🦴', problem: 'Joint pain and stiffness',                      fix: 'Estrogen has anti-inflammatory properties — joint comfort improves over months' },
+  { icon: '✨', problem: 'Hair thinning and skin aging',                  fix: 'Estrogen maintains collagen — skin and hair improve with consistent HRT' },
+  { icon: '❤️', problem: 'Low libido and loss of intimacy',               fix: 'Restored hormones revive desire, sensitivity, and connection' },
+  { icon: '💧', problem: 'Vaginal dryness and painful sex',               fix: 'Estradiol vaginal cream restores tissue health and moisture locally' },
+  { icon: '💗', problem: 'Heart palpitations and anxiety spikes',         fix: 'Estrogen protects cardiovascular function — palpitations resolve' },
+  { icon: '🩻', problem: 'Bone loss and fracture risk',                   fix: 'Estrogen is your primary bone protector — HRT stops bone density decline' },
+  { icon: '🪞', problem: 'Feeling like a stranger in your own body',      fix: 'Balanced hormones restore your sense of self — women describe it as "coming home"' }
 ];
 
 const PATIENT_STORIES = [
@@ -326,6 +326,19 @@ function App() {
   const [openFaq, setOpenFaq] = useState(0);
   const [openStory, setOpenStory] = useState(null);
   const [tableExpanded, setTableExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 760px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    if (mq.addEventListener) mq.addEventListener('change', update);
+    else mq.addListener(update);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', update);
+      else mq.removeListener(update);
+    };
+  }, []);
+  const collapsedCount = isMobile ? 3 : 7;
 
   const toggle = (id) => {
     const next = new Set(selected);
@@ -453,20 +466,20 @@ function App() {
               <table className="edu-table" aria-label="HRT benefits comparison">
                 <thead>
                   <tr>
-                    <th><span className="edu-dot edu-dot-problem" aria-hidden="true"></span>What You're Feeling</th>
+                    <th><span className="edu-icon edu-icon-problem" aria-hidden="true">●</span>What You're Feeling</th>
                     <th><span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>What HRT Does</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {(tableExpanded ? HRT_COMPARISON : HRT_COMPARISON.slice(0, 7)).map(([problem, fix], i, arr) => (
+                  {(tableExpanded ? HRT_COMPARISON : HRT_COMPARISON.slice(0, collapsedCount)).map((row, i, arr) => (
                     <tr key={i} className={i === arr.length - 1 && tableExpanded ? 'edu-row-feature' : ''}>
                       <td data-label="What You're Feeling">
-                        <span className="edu-dot edu-dot-problem" aria-hidden="true"></span>
-                        {problem}
+                        <span className="edu-icon edu-icon-problem" aria-hidden="true">{row.icon}</span>
+                        {row.problem}
                       </td>
                       <td data-label="What HRT Does">
                         <span className="edu-dot edu-dot-fix" aria-hidden="true">✓</span>
-                        {fix}
+                        {row.fix}
                       </td>
                     </tr>
                   ))}
@@ -483,7 +496,7 @@ function App() {
               >
                 {tableExpanded
                   ? 'Show less ↑'
-                  : `See ${HRT_COMPARISON.length - 7} more symptoms ↓`}
+                  : `See ${HRT_COMPARISON.length - collapsedCount} more symptoms ↓`}
               </button>
             </div>
           </div>
