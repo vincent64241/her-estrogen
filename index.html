@@ -1241,17 +1241,22 @@
       font-size: clamp(52px, 14vw, 80px);
       top: 72px;
     }
+    .hero.hero-editorial h1 { font-size: clamp(30px, 7.2vw, 40px); line-height: 1.1; }
+    .hero.hero-editorial .hero-sub { font-size: 16px; line-height: 1.55; }
+    .hero.hero-editorial .hero-checks { font-size: 14px; }
+    .hero.hero-editorial .hero-checks .check { font-size: 15px; }
     .hero-editorial-content {
-      padding: 150px 24px 0 24px;
+      padding: 200px 24px 0 24px;
       top: auto;
       max-width: 100%;
     }
-    .nav.nav-editorial .nav-inner { padding: 14px 24px; }
-    .nav.nav-editorial .nav-logo { height: 130px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 84px; }
-    .nav.nav-editorial .nav-btn { padding: 9px 16px; font-size: 12px; }
-    .nav.nav-editorial .nav-cta { right: 18px; top: 62px; }
-    .nav.nav-editorial.scrolled .nav-cta { top: 40px; }
+    .nav.nav-editorial .nav-inner { padding: 18px 24px; }
+    .nav.nav-editorial.scrolled .nav-inner { padding: 14px 24px; }
+    .nav.nav-editorial .nav-logo { height: 160px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 108px; }
+    .nav.nav-editorial .nav-btn { padding: 13px 22px; font-size: 14.5px; font-weight: 600; }
+    .nav.nav-editorial .nav-cta { right: 18px; top: 78px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 52px; }
     .hero-press-strip {
       padding: 0 24px 18px;
       gap: 12px;
@@ -1264,25 +1269,26 @@
   }
 
   @media (max-width: 480px) {
-    .hero.hero-editorial h1 { font-size: 20px; }
-    .hero.hero-editorial .hero-sub { font-size: 13.5px; }
-    .hero.hero-editorial .hero-checks { font-size: 11.5px; }
-    .hero-editorial-content { padding-top: 110px; }
-    .nav.nav-editorial .nav-logo { height: 88px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 60px; }
-    .nav.nav-editorial .nav-inner { padding: 12px 18px; }
-    .nav.nav-editorial .nav-btn { padding: 8px 14px; font-size: 11px; }
-    .nav.nav-editorial .nav-cta { right: 14px; top: 40px; }
-    .nav.nav-editorial.scrolled .nav-cta { top: 28px; }
+    .hero.hero-editorial h1 { font-size: clamp(26px, 7.5vw, 34px); line-height: 1.1; }
+    .hero.hero-editorial .hero-sub { font-size: 15px; }
+    .hero.hero-editorial .hero-checks { font-size: 13.5px; }
+    .hero-editorial-content { padding-top: 170px; }
+    .nav.nav-editorial .nav-logo { height: 120px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 84px; }
+    .nav.nav-editorial .nav-inner { padding: 16px 18px; }
+    .nav.nav-editorial.scrolled .nav-inner { padding: 12px 18px; }
+    .nav.nav-editorial .nav-btn { padding: 11px 18px; font-size: 13.5px; font-weight: 600; }
+    .nav.nav-editorial .nav-cta { right: 14px; top: 60px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 42px; }
   }
 
   /* Tiny screens — keep logo + button from crashing into each other */
   @media (max-width: 380px) {
-    .nav.nav-editorial .nav-logo { height: 72px; }
-    .nav.nav-editorial.scrolled .nav-logo { height: 52px; }
-    .nav.nav-editorial .nav-btn { padding: 7px 12px; font-size: 10.5px; }
-    .nav.nav-editorial .nav-cta { right: 10px; top: 32px; }
-    .nav.nav-editorial.scrolled .nav-cta { top: 24px; }
+    .nav.nav-editorial .nav-logo { height: 96px; }
+    .nav.nav-editorial.scrolled .nav-logo { height: 68px; }
+    .nav.nav-editorial .nav-btn { padding: 10px 15px; font-size: 12.5px; font-weight: 600; }
+    .nav.nav-editorial .nav-cta { right: 10px; top: 50px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 34px; }
   }
 
   /* ---- BUNDLE SECTION (The Complete Protocol) ---- */
@@ -1923,7 +1929,7 @@
 
   /* ---- PATIENT STORIES — marquee (2 scrolling rows, pause on hover) ---- */
   .marquee-section {
-    padding: 72px 0 80px;
+    padding: 48px 0;
     background: var(--pink-softer);
     overflow: hidden;
     position: relative;
@@ -1931,7 +1937,7 @@
   .marquee-section .patient-stories-head {
     text-align: center;
     max-width: 720px;
-    margin: 0 auto 48px;
+    margin: 0 auto 28px;
   }
   .marquee-section .eyebrow {
     font-family: 'DM Mono', monospace;
@@ -2083,8 +2089,8 @@
 
   /* Smaller cards on tablet, even smaller on mobile (so more fit on screen) */
   @media (max-width: 640px) {
-    .marquee-section { padding: 56px 0 60px; }
-    .marquee-section .patient-stories-head { margin-bottom: 28px; }
+    .marquee-section { padding: 36px 0 32px; }
+    .marquee-section .patient-stories-head { margin-bottom: 20px; }
     .marquee-track.marquee-static .marquee-quote { font-size: 15px; }
   }
 
