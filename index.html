@@ -976,12 +976,16 @@
   }
   .nav.nav-editorial .nav-cta {
     position: fixed;
-    top: 24px;
+    top: 95px;
     right: 48px;
     z-index: 60;
     display: flex;
     gap: 12px;
     align-items: center;
+    transition: top .25s ease;
+  }
+  .nav.nav-editorial.scrolled .nav-cta {
+    top: 58px;
   }
   .nav.nav-editorial .nav-btn {
     padding: 11px 22px;
@@ -1002,13 +1006,13 @@
   .hero.hero-editorial {
     position: relative;
     width: 100%;
-    height: 80vh;
-    min-height: 560px;
-    max-height: 736px;
-    overflow: hidden;
-    padding: 0;
+    height: auto;
+    min-height: 80vh;
+    max-height: none;
+    padding: 0 0 56px;
     margin: 0;
     background: var(--paper);
+    overflow: hidden;
   }
   .hero.hero-editorial .hero-bg-img {
     position: absolute;
@@ -1062,13 +1066,12 @@
 
   /* Top-anchored content stack — sits below the nav so the logo can never overlap */
   .hero-editorial-content {
-    position: absolute;
-    top: 240px;
+    position: relative;
+    top: auto;
     bottom: auto;
     left: 0;
-    padding-left: 200px;
-    padding-right: 24px;
-    max-width: 680px;
+    padding: 220px 24px 0 200px;
+    max-width: 720px;
     z-index: 3;
   }
   .hero-editorial-content .hero-stars {
@@ -1186,12 +1189,13 @@
       );
     }
     .hero.hero-editorial .hero-bg-img { right: 100px; width: 60%; }
-    .hero-editorial-content { max-width: 480px; padding-left: 96px; top: 200px; }
+    .hero-editorial-content { max-width: 560px; padding: 180px 24px 0 96px; top: auto; }
     .hero-press-strip { padding: 0 48px 28px; }
     .nav.nav-editorial .nav-inner { padding: 18px 36px 18px 96px; }
     .nav.nav-editorial .nav-logo { height: 150px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 96px; }
-    .nav.nav-editorial .nav-cta { right: 36px; top: 22px; }
+    .nav.nav-editorial .nav-cta { right: 36px; top: 76px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 48px; }
   }
 
   /* Mid-tablet — further scale down, intermediate between 767 and 1279 */
@@ -1206,12 +1210,13 @@
         transparent 90%
       );
     }
-    .hero-editorial-content { max-width: 420px; padding-left: 60px; top: 156px; }
+    .hero-editorial-content { max-width: 500px; padding: 140px 24px 0 60px; top: auto; }
     .nav.nav-editorial .nav-inner { padding: 16px 28px 16px 60px; }
     .nav.nav-editorial .nav-logo { height: 110px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 76px; }
     .nav.nav-editorial .nav-btn { padding: 10px 18px; font-size: 13px; }
-    .nav.nav-editorial .nav-cta { right: 28px; top: 20px; }
+    .nav.nav-editorial .nav-cta { right: 28px; top: 54px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 38px; }
   }
 
   /* Mobile */
@@ -1237,16 +1242,16 @@
       top: 72px;
     }
     .hero-editorial-content {
-      padding-left: 24px;
-      padding-right: 24px;
-      top: 170px;
+      padding: 150px 24px 0 24px;
+      top: auto;
       max-width: 100%;
     }
     .nav.nav-editorial .nav-inner { padding: 14px 24px; }
     .nav.nav-editorial .nav-logo { height: 130px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 84px; }
     .nav.nav-editorial .nav-btn { padding: 9px 16px; font-size: 12px; }
-    .nav.nav-editorial .nav-cta { right: 18px; top: 18px; }
+    .nav.nav-editorial .nav-cta { right: 18px; top: 62px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 40px; }
     .hero-press-strip {
       padding: 0 24px 18px;
       gap: 12px;
@@ -1262,12 +1267,13 @@
     .hero.hero-editorial h1 { font-size: 20px; }
     .hero.hero-editorial .hero-sub { font-size: 13.5px; }
     .hero.hero-editorial .hero-checks { font-size: 11.5px; }
-    .hero-editorial-content { top: 124px; }
+    .hero-editorial-content { padding-top: 110px; }
     .nav.nav-editorial .nav-logo { height: 88px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 60px; }
     .nav.nav-editorial .nav-inner { padding: 12px 18px; }
     .nav.nav-editorial .nav-btn { padding: 8px 14px; font-size: 11px; }
-    .nav.nav-editorial .nav-cta { right: 14px; top: 14px; }
+    .nav.nav-editorial .nav-cta { right: 14px; top: 40px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 28px; }
   }
 
   /* Tiny screens — keep logo + button from crashing into each other */
@@ -1275,7 +1281,8 @@
     .nav.nav-editorial .nav-logo { height: 72px; }
     .nav.nav-editorial.scrolled .nav-logo { height: 52px; }
     .nav.nav-editorial .nav-btn { padding: 7px 12px; font-size: 10.5px; }
-    .nav.nav-editorial .nav-cta { right: 10px; top: 12px; }
+    .nav.nav-editorial .nav-cta { right: 10px; top: 32px; }
+    .nav.nav-editorial.scrolled .nav-cta { top: 24px; }
   }
 
   /* ---- BUNDLE SECTION (The Complete Protocol) ---- */
@@ -2083,13 +2090,13 @@
 
   /* ---- PATIENT STORIES (testimonials with photos) ---- */
   .patient-stories {
-    padding: 48px 0 44px;
+    padding: 28px 0 26px;
     background: var(--pink-softer);
   }
   .patient-stories-head {
     text-align: center;
     max-width: 720px;
-    margin: 0 auto 32px;
+    margin: 0 auto 20px;
   }
   .patient-stories .eyebrow {
     font-family: 'DM Mono', monospace;
@@ -2173,8 +2180,8 @@
   .patient-name { font-weight: 600; font-size: 14px; color: var(--ink); }
   .patient-loc { font-size: 13px; color: var(--muted); }
   @media (max-width: 640px) {
-    .patient-stories { padding: 36px 0 32px; }
-    .patient-stories-head { margin-bottom: 24px; }
+    .patient-stories { padding: 22px 0 20px; }
+    .patient-stories-head { margin-bottom: 16px; }
     .patient-card-body { padding: 18px 20px 22px; }
     .patient-quote { font-size: 15px; }
   }
