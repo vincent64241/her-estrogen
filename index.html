@@ -1236,17 +1236,29 @@
     .hero.hero-editorial .hero-bg-img {
       right: 0;
       width: 100%;
-      object-position: 50% bottom;
-      mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+      object-position: 50% 40%;
+      filter: brightness(0.92);
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 100%);
     }
     .hero.hero-editorial .hero-gradient {
       background: linear-gradient(to bottom,
-        rgba(255,255,255,0.94) 0%,
-        rgba(255,255,255,0.88) 30%,
-        rgba(255,255,255,0.45) 60%,
-        transparent 90%
+        rgba(255,255,255,0.96) 0%,
+        rgba(255,255,255,0.92) 22%,
+        rgba(255,255,255,0.78) 42%,
+        rgba(255,255,255,0.55) 62%,
+        rgba(255,255,255,0.35) 82%,
+        rgba(255,255,255,0.20) 100%
       );
+    }
+    .hero.hero-editorial .hero-sub {
+      color: var(--ink);
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+    }
+    .hero.hero-editorial .hero-checks {
+      color: var(--ink);
+      font-weight: 500;
     }
     .hero-display {
       font-size: clamp(52px, 14vw, 80px);
