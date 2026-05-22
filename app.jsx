@@ -522,20 +522,44 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="products-scroll-container">
-          {TREATMENTS.map((t) => (
-            <div className="product-card-new" key={t.id}>
-              <div className="product-card-image-wrapper">
-                <img src={t.image} alt={t.name} />
+        <div className="products-scroll-wrapper">
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-left"
+            aria-label="Scroll products left"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: -380, behavior: 'smooth' });
+            }}
+          >
+            ‹
+          </button>
+          <div className="products-scroll-container">
+            {TREATMENTS.map((t) => (
+              <div className="product-card-new" key={t.id}>
+                <div className="product-card-image-wrapper">
+                  <img src={t.image} alt={t.name} />
+                </div>
+                <div className="product-card-body">
+                  <div className="product-card-price">Starting at $507 · 3 months</div>
+                  <h3 className="product-card-name">{t.name}</h3>
+                  <p className="product-card-subtitle">{t.subtitle}</p>
+                  <a href="quiz.html" className="product-card-btn">GET STARTED</a>
+                </div>
               </div>
-              <div className="product-card-body">
-                <div className="product-card-price">Starting at $507 · 3 months</div>
-                <h3 className="product-card-name">{t.name}</h3>
-                <p className="product-card-subtitle">{t.subtitle}</p>
-                <a href="quiz.html" className="product-card-btn">GET STARTED</a>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-right"
+            aria-label="Scroll products right"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: 380, behavior: 'smooth' });
+            }}
+          >
+            ›
+          </button>
         </div>
       </section>
 
