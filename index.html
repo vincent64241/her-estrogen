@@ -1475,7 +1475,7 @@
     .hero.hero-editorial .hero-cta {
       width: 100%;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .hero.hero-editorial .hero-cta .btn {
       max-width: 100%;
@@ -1491,20 +1491,18 @@
     .hero.hero-editorial .hero-checks { font-size: 14px; display: inline-block; text-align: left; }
     .hero.hero-editorial .hero-checks .check { font-size: 15px; }
     .hero-editorial-content {
-      padding: 200px 24px 96px 24px;
+      padding: 200px 24px 288px 24px;
       top: auto;
       max-width: 100%;
       text-align: center;
     }
-    /* Extra breathing room below the hero CTA on mobile so the next section
-       (Why Her Estrogen) doesn't crowd / cover the button. */
+    /* 3x the breathing room below the hero CTA on mobile — fully clears the
+       next section (Why Her Estrogen) so the button is never crowded. */
     .hero.hero-editorial .hero-cta {
-      margin-bottom: 48px;
+      margin-bottom: 144px;
     }
-    /* Bump the hero section's own bottom padding too — the hero is currently
-       padded `0 0 56px` on the section, which on tight viewports lets the
-       next section's top edge ride up on the CTA. */
-    .hero.hero-editorial { padding-bottom: 96px; }
+    /* And triple the section's own bottom padding too. */
+    .hero.hero-editorial { padding-bottom: 288px; }
     .hero-editorial-content .hero-stars { justify-content: center; }
     .hero-editorial-content .hero-cta { justify-content: center; flex-wrap: wrap; }
     .nav.nav-editorial .nav-inner { padding: 18px 24px; }
