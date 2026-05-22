@@ -12,7 +12,7 @@
 //   {
 //     product: 'completeProtocol' | 'estradiolGel' | 'estradiolPatch'
 //            | 'estradiolPill' | 'progesterone' | 'vaginalDHEA',
-//     period: 'monthly' | 'threeMonth' | 'sixMonth' | 'annual',
+//     period: 'threeMonth' | 'sixMonth' | 'annual',
 //     customerEmail: string,
 //     customerName?: string,
 //     productName?: string,         // human-readable label for metadata
@@ -29,43 +29,39 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20'
 });
 
-// Map (product, period) → name of the env var that holds the Stripe Price ID
+// Map (product, period) → name of the env var that holds the Stripe Price ID.
+// Monthly options have been REMOVED — minimum plan is now 3 months.
+// All products share identical pricing: $507 / $912 / $1,716.
 const PRICE_ENV = {
   completeProtocol: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_COMPLETE_MONTHLY',
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_COMPLETE_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_COMPLETE_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_COMPLETE_12MONTH'
   },
   estradiolGel: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_GEL_MONTHLY',
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_GEL_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_GEL_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_GEL_12MONTH'
   },
   estradiolPatch: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_PATCH_MONTHLY',
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_PATCH_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_PATCH_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_PATCH_12MONTH'
   },
   estradiolPill: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_PILL_MONTHLY',
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_PILL_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_PILL_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_PILL_12MONTH'
   },
   progesterone: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_PROG_MONTHLY',
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_PROG_3MONTH',
     sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_PROG_6MONTH',
     annual:     'NEXT_PUBLIC_STRIPE_PRICE_PROG_12MONTH'
   },
   vaginalDHEA: {
-    monthly:    'NEXT_PUBLIC_STRIPE_PRICE_DHEA_MONTHLY',
-    threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_DHEA_3MONTH',
-    sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_DHEA_6MONTH',
-    annual:     'NEXT_PUBLIC_STRIPE_PRICE_DHEA_12MONTH'
+    threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_VAGINAL_3MONTH',
+    sixMonth:   'NEXT_PUBLIC_STRIPE_PRICE_VAGINAL_6MONTH',
+    annual:     'NEXT_PUBLIC_STRIPE_PRICE_VAGINAL_12MONTH'
   }
 };
 
@@ -123,7 +119,7 @@ module.exports = async (req, res) => {
       } else if (!PRICE_ENV[product]) {
         detail = `Unknown product "${product}". Expected one of: ${Object.keys(PRICE_ENV).join(', ')}.`;
       } else if (!PRICE_ENV[product][period]) {
-        detail = `Unknown period "${period}" for product "${product}". Expected one of: monthly, threeMonth, sixMonth, annual.`;
+        detail = `Unknown period "${period}" for product "${product}". Expected one of: threeMonth, sixMonth, annual.`;
       } else if (!process.env[expectedEnv]) {
         detail = `Env var ${expectedEnv} is not set on this deployment. Add it in Vercel → Settings → Environment Variables, then redeploy.`;
       } else if (!process.env[expectedEnv].startsWith('price_')) {

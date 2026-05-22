@@ -2,13 +2,46 @@ const { useState, useEffect, useRef, useMemo } = React;
 
 // ============ DATA ============
 
-const PRICING = {
-  bundle: { 1: 219, 3: 199, 6: 189, 12: 179 },
-  gel:    { 1: 149, 3: 134, 6: 124, 12: 114 },
-  patch:  { 1: 139, 3: 124, 6: 114, 12: 104 },
-  pill:   { 1: 129, 3: 114, 6: 104, 12: 94  },
-  dhea:   { 1: 149, 3: 134, 6: 124, 12: 114 }
+// ============ PRICING ============
+// All products share the same plan pricing. Three plans only — no monthly.
+// 3 Month: $507 total ($169/mo)  ·  6 Month: $912 total ($152/mo, save $102)
+// 12 Month: $1,716 total ($143/mo, save $312/yr)
+const PLAN_DETAILS = {
+  threeMonth: {
+    months: 3,
+    total: 507,
+    monthly: 169,
+    label: '3 Month Plan',
+    badge: 'Most Popular',
+    savingsText: '',
+    savingsAmount: 0,
+    billedAs: '$507 every 3 months',
+    discountPercent: 0
+  },
+  sixMonth: {
+    months: 6,
+    total: 912,
+    monthly: 152,
+    label: '6 Month Plan',
+    badge: 'Save 10%',
+    savingsText: 'Save $102 vs 3-month plan',
+    savingsAmount: 102,
+    billedAs: '$912 every 6 months',
+    discountPercent: 10
+  },
+  annual: {
+    months: 12,
+    total: 1716,
+    monthly: 143,
+    label: '12 Month Plan',
+    badge: 'Best Value — Save 15%',
+    savingsText: 'Save $312/year vs 3-month plan',
+    savingsAmount: 312,
+    billedAs: '$1,716 every 12 months',
+    discountPercent: 15
+  }
 };
+const PLAN_ORDER = ['threeMonth', 'sixMonth', 'annual'];
 
 const SYMPTOMS_LIST = [
   'Hot Flashes',
@@ -18,17 +51,12 @@ const SYMPTOMS_LIST = [
   'Low Energy'
 ];
 
-const DURATIONS = [
-  { months: 1, label: 'Month-to-Month', note: 'Try it first, no commitment' },
-  { months: 3, label: '3 Months', note: 'Most popular', badge: 'Most Popular' },
-  { months: 6, label: '6 Months', note: 'Save more' },
-  { months: 12, label: '12 Months', note: 'Best deal', badge: 'Best Deal', isBest: true }
-];
+// (Plan options now derived from PLAN_DETAILS / PLAN_ORDER above)
 
 const MEDS = {
   bundle: {
     name: 'The Complete Protocol',
-    label: 'Most Effective — Save $228/year',
+    label: 'Most Effective — The Clinical Gold Standard',
     badge: 'Recommended',
     badgeKind: 'pink',
     rating: '4.9',
@@ -115,7 +143,7 @@ const MEDS = {
     description: 'Restores vaginal tissue health and relieves intimate menopause symptoms — minimal systemic absorption',
     image: 'assets/vaginal.png',
     features: [
-      'FDA-approved Estradiol Vaginal Cream — prescribed and delivered monthly',
+      'FDA-approved Estradiol Vaginal Cream — prescribed and shipped to your door',
       'Local vaginal treatment — minimal systemic absorption',
       'Provider consultation, messaging, check-ins included',
       'Price never increases',
@@ -178,13 +206,13 @@ const INCLUDED = [
 
 // Roll-up shown at the bottom of the Included block
 const INCLUDED_TOTAL_VALUE = '$540+/month value';
-const INCLUDED_YOU_PAY = 'from $149/month';
+const INCLUDED_YOU_PAY = 'from $143/month (on the 12-month plan)';
 
 const STEPS = [
   { n: 1, title: 'Provider Review', body: "You're pre-screened. After checkout, a board-certified licensed Her Estrogen provider reviews your complete intake within 24 hours." },
   { n: 2, title: 'Prescription Approval', body: 'Most prescriptions are approved in under 24 hours. Your provider may send you a message through your secure Her Estrogen portal with any questions or adjustments.' },
   { n: 3, title: 'Medication Prepared and Shipped', body: 'Once approved, your FDA-approved prescription is processed and shipped directly to your door in premium Her Estrogen packaging. Tracking sent by text and email.' },
-  { n: 4, title: 'Monthly Refills', body: 'Your medication refills automatically every month. We handle everything — you just open your door.' },
+  { n: 4, title: 'Automatic Refills', body: 'Your medication automatically refills every 12 weeks throughout your plan. We handle everything — you just open your door.' },
   { n: 5, title: 'Unlimited Support', body: "Questions about how you're feeling, your dosage, or your protocol? Message your licensed Her Estrogen provider anytime — guaranteed 4-hour response during business hours." }
 ];
 
@@ -554,12 +582,8 @@ const PRODUCT_KEY_MAP = {
   progesterone: 'progesterone',
   dhea:         'vaginalDHEA'
 };
-const PERIOD_KEY_MAP = {
-  1:  'monthly',
-  3:  'threeMonth',
-  6:  'sixMonth',
-  12: 'annual'
-};
+// selectedDuration is now already a period key ('threeMonth' | 'sixMonth' | 'annual'),
+// so no mapping is required — the API contract uses these same keys.
 
 // ============ MAIN APP ============
 
@@ -570,7 +594,7 @@ function App() {
   const [phone, setPhone] = useState('');
   const [quizAnswers, setQuizAnswers] = useState(null);
   const [selectedMed, setSelectedMed] = useState('gel');
-  const [selectedDuration, setSelectedDuration] = useState(3);
+  const [selectedDuration, setSelectedDuration] = useState('threeMonth');
   const [checkoutVisible, setCheckoutVisible] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -603,8 +627,9 @@ function App() {
   }, []);
 
   const recommendation = useMemo(() => recommendProduct(quizAnswers), [quizAnswers]);
-  const monthly = PRICING[selectedMed][selectedDuration];
-  const total = monthly * selectedDuration;
+  const plan = PLAN_DETAILS[selectedDuration];
+  const monthly = plan.monthly;          // monthly equivalent for display
+  const total = plan.total;              // charged amount per billing cycle
   const med = MEDS[selectedMed];
 
   // shipping form
@@ -641,9 +666,10 @@ function App() {
     if (submitting) return;
     setPaymentError('');
 
-    // Map internal product key + duration to API contract
+    // Map internal product key to API contract. selectedDuration is already
+    // the period key the API expects ('threeMonth' | 'sixMonth' | 'annual').
     const productKey = PRODUCT_KEY_MAP[selectedMed];
-    const periodKey = PERIOD_KEY_MAP[selectedDuration];
+    const periodKey = selectedDuration;
     if (!productKey || !periodKey) {
       setPaymentError('Could not resolve your selected protocol. Please refresh and try again.');
       return;
@@ -671,9 +697,7 @@ function App() {
           customerEmail: email,
           customerName: form.fullName || firstName,
           productName: med.name,
-          billingPeriod: selectedDuration === 1
-            ? 'Month to Month'
-            : `${selectedDuration} Month Plan`,
+          billingPeriod: plan.label,
           metadata: {
             firstName,
             phone,
@@ -869,8 +893,8 @@ function App() {
         <div className="container">
           <div className="urgency-callout">
             <span className="reserved-pill">Your approval is reserved for {expired ? '0:00' : formatTime(timeLeft)}</span>
-            <h2>Save Up to $840 Instantly</h2>
-            <p style={{ color: 'rgba(255,255,255,.92)', margin: '8px 0' }}>Pay month-to-month or bundle for major savings. No contracts. Cancel anytime.</p>
+            <h2>Save Up to $312/year</h2>
+            <p style={{ color: 'rgba(255,255,255,.92)', margin: '8px 0' }}>Choose 3, 6, or 12 months. Locked-in pricing. Cancel or pause after your plan period.</p>
             <div className="green-line">24/7 provider access + unlimited messaging + medication — all included.</div>
           </div>
 
@@ -904,7 +928,10 @@ function App() {
             {med.label && <div className="med-label">{med.label}</div>}
             <p className="med-description">{recommendation.reason}</p>
             <div className="price">
-              <span className="price-num">Starting at ${PRICING[selectedMed][12]}/mo</span>
+              <span className="price-num">Starting at ${PLAN_DETAILS.annual.monthly}/mo</span>
+              <span className="price-sub" style={{ display: 'block', fontSize: 13, color: 'var(--ink-2)', marginTop: 4 }}>
+                on the 12-month plan · $169/mo on 3-month
+              </span>
             </div>
             <ul>
               {med.features.map((f, i) => <li key={i}>{f}</li>)}
@@ -915,16 +942,11 @@ function App() {
           {selectedMed !== 'bundle' && (
             <div className="bundle-upgrade" onClick={() => setSelectedMed('bundle')} role="button">
               <div className="bundle-upgrade-left">
-                <div className="bundle-upgrade-badge">Save ~10% · More Effective</div>
+                <div className="bundle-upgrade-badge">Clinical Gold Standard · Same Price</div>
                 <h4>Upgrade to The Complete Protocol</h4>
                 <p>
-                  Add FDA-approved <strong>Progesterone Pill</strong> to your {med.name}. The combination is the clinical gold standard — backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and ~10% off both medications.</strong>
+                  Add FDA-approved <strong>Progesterone Pill</strong> to your {med.name} — at no extra cost. The combination is the clinical gold standard backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and the full restoration protocol — all included.</strong>
                 </p>
-                <div className="bundle-upgrade-price">
-                  <span className="up-from">Your plan today:</span> <strong>${monthly}/mo</strong>
-                  <span className="up-arrow">→</span>
-                  <span className="up-to">With bundle:</span> <strong className="up-bundle-price">${PRICING.bundle[selectedDuration]}/mo</strong>
-                </div>
               </div>
               <div className="bundle-upgrade-cta">Add Progesterone →</div>
             </div>
@@ -944,34 +966,51 @@ function App() {
             <span>🔒 HIPAA Secure</span>
             <span>💳 HSA/FSA Approved</span>
             <span>🚚 Free Shipping</span>
-            <span>✅ Cancel Anytime</span>
+            <span>✅ Cancel or pause after your plan period</span>
           </div>
 
           {/* Duration */}
           <div className="duration-section">
             <h3 className="meds-head">Choose your plan length:</h3>
             <div className="duration-grid">
-              {DURATIONS.map((d) => {
-                const price = PRICING[selectedMed][d.months];
-                const isSelected = selectedDuration === d.months;
+              {PLAN_ORDER.map((key) => {
+                const d = PLAN_DETAILS[key];
+                const isSelected = selectedDuration === key;
+                const isBest = key === 'annual';
                 return (
                   <div
-                    key={d.months}
-                    className={`dur-card ${isSelected ? 'selected' : ''} ${d.isBest ? 'best' : ''}`}
-                    onClick={() => setSelectedDuration(d.months)}
+                    key={key}
+                    className={`dur-card ${isSelected ? 'selected' : ''} ${isBest ? 'best' : ''}`}
+                    onClick={() => setSelectedDuration(key)}
                     role="button"
                   >
                     {d.badge && <span className="badge">{d.badge}</span>}
                     <div className="dur-name">{d.label}</div>
-                    <div className="dur-price">${price}<span className="dur-unit">/mo</span></div>
-                    <div className="dur-note">{d.note}</div>
+                    <div className="dur-price">${d.monthly}<span className="dur-unit">/mo</span></div>
+                    <div className="dur-note">{d.billedAs}</div>
+                    {d.savingsText && (
+                      <div className="dur-savings" style={{ fontSize: 12, color: 'var(--pink)', marginTop: 6, fontWeight: 600 }}>
+                        {d.savingsText}
+                      </div>
+                    )}
                   </div>
                 );
               })}
             </div>
 
             <div className="summary-box">
-              Currently selected: <strong>{med.name}</strong>{selectedMed === 'bundle' && <> — {med.product}</>} — <strong>{selectedDuration === 1 ? 'Month-to-Month' : `${selectedDuration} Month Plan`}</strong> — <strong>${monthly}/month</strong> — Billed as <strong>${total.toLocaleString()} every {selectedDuration === 1 ? 'month' : `${selectedDuration} months`}</strong>
+              Currently Selected: <strong>{med.name}</strong>{selectedMed === 'bundle' && <> — {med.product}</>} — <strong>{plan.label}</strong>
+              <br />
+              <strong>${total.toLocaleString()}</strong> billed every {plan.months} months · <strong>${monthly}/month</strong>
+              {plan.savingsAmount > 0 && (
+                <> · <strong>You save ${plan.savingsAmount}{plan.months === 12 ? '/year' : ''}</strong></>
+              )}
+            </div>
+
+            <div className="savings-urgency" style={{ marginTop: 14, padding: '14px 18px', background: 'var(--pink-softer, #fef5f8)', border: '1px solid var(--pink-3, #ec84a8)', borderRadius: 10, fontSize: 14, color: 'var(--ink-2)', lineHeight: 1.5 }}>
+              <strong>Your price is locked at today's rate for the life of your subscription.</strong>
+              <br />
+              Annual members save up to $312/year.
             </div>
 
             <button className="cta-large" onClick={scrollToCheckout}>Continue to Checkout →</button>
@@ -1047,7 +1086,7 @@ function App() {
                 )}
 
                 <p className="agree">
-                  By subscribing, you authorize Her Estrogen to charge you <strong>${total.toLocaleString()}.00 today</strong> and <strong>${total.toLocaleString()}.00 every {selectedDuration === 1 ? 'month' : `${selectedDuration} months`}</strong> until you cancel. Cancel anytime with 72 hours notice before renewal.
+                  By subscribing, you authorize Her Estrogen to charge you <strong>${total.toLocaleString()}.00 today</strong> and <strong>${total.toLocaleString()}.00 every {plan.months} months</strong> until you cancel. You can cancel or pause after your plan period with 72 hours notice before renewal.
                 </p>
 
                 <button type="submit" className="submit-btn" disabled={submitting}>
@@ -1055,7 +1094,7 @@ function App() {
                 </button>
 
                 <div className="guarantee">
-                  🔒 <strong>The Her Estrogen Provider Guarantee</strong> — If our licensed provider determines that HRT is not medically appropriate for you after reviewing your intake, you receive a complete refund within 3 business days. No questions asked. No forms. No friction. If you're not approved — you don't pay.
+                  🔒 <strong>The Her Estrogen Provider Guarantee</strong> — If our licensed provider determines HRT is not right for you after reviewing your intake — you receive a complete refund within 3 business days. No questions asked. Once your plan period begins and medication has shipped, our standard plan terms apply.
                 </div>
               </form>
             </div>

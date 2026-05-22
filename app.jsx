@@ -16,6 +16,7 @@ const TREATMENTS = [
   id: 'gel',
   eyebrow: 'FDA-Approved · Most Prescribed',
   name: 'Estradiol Gel',
+  subtitle: 'Applied once daily to skin',
   features: [
   ['Application', 'Once daily — inner arm or thigh']],
   image: 'assets/cream.png'
@@ -24,6 +25,7 @@ const TREATMENTS = [
   id: 'patch',
   eyebrow: 'FDA-Approved · No Daily Routine',
   name: 'Estradiol Patch',
+  subtitle: 'Applied twice weekly',
   features: [
   ['Application', 'Twice weekly — adhesive patch']],
   image: 'assets/transdermal-patch.png'
@@ -32,6 +34,7 @@ const TREATMENTS = [
   id: 'pill',
   eyebrow: 'FDA-Approved · Oral Option',
   name: 'Estradiol Pill',
+  subtitle: 'One tablet taken daily',
   features: [
   ['Application', 'Once daily — oral tablet']],
   image: 'assets/oral-pills.png'
@@ -40,6 +43,7 @@ const TREATMENTS = [
   id: 'dhea',
   eyebrow: 'FDA-Approved · Vaginal Health',
   name: 'Estradiol Vaginal Cream',
+  subtitle: 'Applied locally as directed',
   features: [
   ['Application', 'Vaginal cream — as directed'],
   ['Form', 'Estrace Vaginal Cream']],
@@ -49,6 +53,7 @@ const TREATMENTS = [
   id: 'progesterone',
   eyebrow: 'FDA-Approved · Sleep + Protection',
   name: 'Progesterone Pill',
+  subtitle: 'One capsule taken nightly',
   features: [
   ['Application', 'Nightly oral pill — at bedtime'],
   ['Dose', '100 mg or 200 mg as prescribed']],
@@ -144,7 +149,7 @@ const FAQ = [
 { q: 'Is hormone therapy safe?', a: 'For most healthy women under 60 (or within 10 years of menopause), modern bioidentical HRT has a favorable risk-benefit profile. Your clinician reviews personal and family history, current meds, and labs before prescribing, and reassesses every 90 days.' },
 { q: 'Do I need bloodwork to start?', a: 'Not always. Symptom-based prescribing is supported by current guidelines for many patients, but our clinicians may order labs (FSH, estradiol, thyroid, lipids) when it changes the plan. Labs are available at-home or at any Quest location.' },
 { q: 'What if I have a history of breast cancer or clots?', a: 'These histories require a careful, individualized conversation. Some patients are still candidates for local-only therapy; others are not. Our clinicians will be direct about what we can and cannot prescribe.' },
-{ q: 'How much does it cost?', a: 'Consults are $49. Medications start at $49/month and most patients spend $90–180/month depending on protocol. We do not bill insurance, but most prescriptions can be filled at your local pharmacy with coverage as an alternative.' },
+{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes your FDA-approved prescription, unlimited provider messaging, monthly check-ins, and free shipping. We do not bill insurance, but plans can be paid with HSA/FSA.' },
 { q: 'Can I use my own pharmacy?', a: 'Yes. We can ship from our partner pharmacy or send the prescription to any local pharmacy you prefer. Compounded formulations only ship from our partner.' },
 { q: 'How quickly will I feel different?', a: 'Sleep and night sweats often improve within 2–3 weeks. Mood, libido, and body composition shifts typically take 8–12 weeks. We adjust dose based on how you feel, not just labs.' }];
 
@@ -354,7 +359,7 @@ function App() {
           <ul className="hero-checks">
             <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
             <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
-            <li><span className="check">✓</span> Start for just $149/month — no insurance needed</li>
+            <li><span className="check">✓</span> Starting at $507 for 3 months ($169/mo) — no insurance needed</li>
             <li><span className="check">✓</span> Unlimited provider messaging included</li>
             <li><span className="check">✓</span> HSA/FSA approved</li>
             <li><span className="check">✓</span> Free shipping on every order</li>
@@ -502,45 +507,35 @@ function App() {
       {/* TREATMENTS (no animation) */}
       <section className="treatments" id="treatments" data-screen-label="02 Treatments">
         <div className="container">
-          <div className="treatments-head">
-            <div className="eyebrow">Treatments</div>
-            <h2>Your solutions, <em>trusted by experts.</em></h2>
-            <p className="treatments-sub">
-              Most patients start with one or two of the following. Your
-              clinician decides what's appropriate based on your symptoms,
-              history, and goals.
-            </p>
-          </div>
-          <div className="product-tabs">
-            {TREATMENTS.map((t) =>
-              <button
-                key={t.id}
-                className={'tab' + (activeTreatment === t.id ? ' active' : '')}
-                onClick={() => setActiveTreatment(t.id)}>
-                {t.name}
-              </button>
-            )}
-          </div>
-          <div className="product">
-            <div className="product-img">
-              <div className="product-svg"><img src={tx.image} alt={tx.name} style={{width: '88%', height: '88%', objectFit: 'contain'}} /></div>
+          <div className="treatments-two-col">
+            <div className="treatments-col-left">
+              <div className="eyebrow">Treatments</div>
+              <h2>Your solutions, <em>trusted by experts.</em></h2>
             </div>
-            <div>
-              <div className="eyebrow">{tx.eyebrow}</div>
-              <h3>{tx.name}</h3>
-              <ul className="product-features">
-                {tx.features.map(([k, v]) =>
-                  <li key={k}>
-                    <span className="feat-key">{k}</span>
-                    <span className="feat-val">{v}</span>
-                  </li>
-                )}
-              </ul>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 8 }}>
-                <a href="quiz.html" className="btn btn-primary">Get Started</a>
+            <div className="treatments-col-right">
+              <p className="treatments-sub">
+                Most patients start with one or two of the following{' '}
+                <span className="treatments-highlight">FDA-approved</span>{' '}
+                protocols. Your clinician decides what's appropriate based on
+                your symptoms, history, and goals.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="products-scroll-container">
+          {TREATMENTS.map((t) => (
+            <div className="product-card-new" key={t.id}>
+              <div className="product-card-image-wrapper">
+                <img src={t.image} alt={t.name} />
+              </div>
+              <div className="product-card-body">
+                <div className="product-card-price">Starting at $507 · 3 months</div>
+                <h3 className="product-card-name">{t.name}</h3>
+                <p className="product-card-subtitle">{t.subtitle}</p>
+                <a href="quiz.html" className="product-card-btn">GET STARTED</a>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 

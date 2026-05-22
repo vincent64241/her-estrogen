@@ -451,15 +451,170 @@
   }
 
   /* ---- TREATMENTS / PRODUCT ---- */
-  .treatments { padding: 120px 0; background: #fff; }
-  .treatments-head { text-align: center; margin-bottom: 56px; }
-  .treatments h2 {
-    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
-    font-size: clamp(36px, 4.6vw, 60px); line-height: 1.05;
-    letter-spacing: -0.022em; margin: 12px 0 16px;
+  .treatments { padding: 96px 0 80px; background: #fff; }
+
+  /* Two-column header (40 / 60 split) */
+  .treatments-two-col {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 48px;
   }
-  .treatments h2 em { font-style: italic; color: var(--pink); }
-  .treatments-sub { color: var(--muted); max-width: 540px; margin: 0 auto; font-size: 16px; }
+  .treatments-col-left h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(36px, 4.6vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    margin: 12px 0 0;
+    text-align: left;
+  }
+  .treatments-col-left h2 em { font-style: italic; color: var(--pink); }
+  .treatments-col-right {
+    padding-bottom: 8px;
+  }
+  .treatments-sub {
+    color: var(--ink-2);
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0;
+    text-align: left;
+    max-width: 560px;
+  }
+  .treatments-highlight {
+    color: var(--pink);
+    font-weight: 600;
+  }
+  @media (max-width: 880px) {
+    .treatments { padding: 56px 0 48px; }
+    .treatments-two-col {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .treatments-col-right { padding-bottom: 0; }
+    .treatments-sub { font-size: 15.5px; max-width: 100%; }
+  }
+
+  /* Horizontal scroll container */
+  .products-scroll-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 50px 60px 50px 60px;
+    cursor: grab;
+  }
+  .products-scroll-container::-webkit-scrollbar { display: none; }
+  .products-scroll-container:active { cursor: grabbing; }
+
+  /* Individual card */
+  .product-card-new {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 360px;
+    position: relative;
+    overflow: visible;
+    background: var(--pink-softer);
+    border: 1px solid rgba(184, 35, 92, 0.10);
+    border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(20, 18, 22, 0.06);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .product-card-new:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(184, 35, 92, 0.12);
+  }
+
+  /* Image area — overflows above card top */
+  .product-card-image-wrapper {
+    position: relative;
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: -40px;
+    padding: 0 24px;
+  }
+  .product-card-image-wrapper img {
+    height: 240px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 22px rgba(138, 23, 69, 0.18));
+  }
+
+  /* Content area */
+  .product-card-body {
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+    padding: 24px;
+    text-align: left;
+    border-top: 1px solid rgba(184, 35, 92, 0.08);
+  }
+  .product-card-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--pink);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .product-card-name {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .product-card-subtitle {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.45;
+    margin: 0 0 20px;
+  }
+  .product-card-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .product-card-btn:hover {
+    background: var(--pink);
+    transform: translateY(-1px);
+  }
+
+  /* Mobile */
+  @media (max-width: 880px) {
+    .products-scroll-container {
+      padding: 30px 24px 32px 24px;
+      gap: 16px;
+    }
+    .product-card-new { width: 300px; }
+    .product-card-image-wrapper {
+      height: 180px;
+      margin-top: -20px;
+    }
+    .product-card-image-wrapper img { height: 200px; }
+    .product-card-body { padding: 20px; }
+    .product-card-name { font-size: 22px; }
+  }
   .product-tabs {
     display: flex; gap: 4px; justify-content: center;
     margin-bottom: 40px; flex-wrap: wrap;
@@ -2300,7 +2455,7 @@
 </head>
 <body>
 
-<div class="banner" style='font-family: "DM Sans"; font-weight: 800'>Telehealth in all 50 states <span class="dot">•</span> Free shipping <span class="dot">•</span> Pause or cancel anytime</div>
+<div class="banner" style='font-family: "DM Sans"; font-weight: 800'>Telehealth in all 50 states <span class="dot">•</span> Free shipping <span class="dot">•</span> Cancel or pause after your plan period</div>
 
 <nav class="nav nav-editorial">
   <div class="nav-inner">
@@ -2330,6 +2485,44 @@
     };
     window.addEventListener('scroll', update, { passive: true });
     update();
+  })();
+
+  // Products scroll container: click-and-drag to scroll on desktop.
+  // Mobile uses native touch scroll. Wait briefly so React mounts the cards first.
+  (function() {
+    function init() {
+      var el = document.querySelector('.products-scroll-container');
+      if (!el) { return setTimeout(init, 200); }
+      var isDown = false, startX = 0, scrollLeft = 0;
+      el.addEventListener('mousedown', function(e) {
+        isDown = true;
+        el.classList.add('dragging');
+        startX = e.pageX - el.offsetLeft;
+        scrollLeft = el.scrollLeft;
+        e.preventDefault();
+      });
+      ['mouseleave', 'mouseup'].forEach(function(evt) {
+        el.addEventListener(evt, function() {
+          isDown = false;
+          el.classList.remove('dragging');
+        });
+      });
+      el.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        var x = e.pageX - el.offsetLeft;
+        el.scrollLeft = scrollLeft - (x - startX) * 1.4;
+      });
+      // Block click on cards while dragging to avoid accidental navigation
+      el.addEventListener('click', function(e) {
+        if (el.classList.contains('just-dragged')) {
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.remove('just-dragged');
+        }
+      }, true);
+    }
+    init();
   })();
 </script>
 
