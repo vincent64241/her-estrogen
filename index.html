@@ -1435,12 +1435,9 @@
 
   /* Mobile */
   @media (max-width: 767px) {
-    /* Hero must GROW to fit content on mobile — no fixed height, no max-height.
-       Was: { min-height: 512px; height: 74vh; max-height: 680px; } which clipped
-       the "Am I Qualified?" CTA below 680px regardless of padding. */
+    /* Hero sizes to its content on mobile — no forced viewport height. */
     .hero.hero-editorial {
-      min-height: 100vh;       /* fallback for older mobile browsers */
-      min-height: 100svh;      /* small-viewport-height: accounts for browser chrome */
+      min-height: 0;
       height: auto;
       max-height: none;
       overflow: visible;
@@ -1500,18 +1497,16 @@
     .hero.hero-editorial .hero-checks { font-size: 14px; display: inline-block; text-align: left; }
     .hero.hero-editorial .hero-checks .check { font-size: 15px; }
     .hero-editorial-content {
-      padding: 200px 24px 60px 24px;
+      padding: 200px 24px 0 24px;
       top: auto;
       max-width: 100%;
       text-align: center;
     }
-    /* CTA gets a clear 48px breathing room below it before the next section. */
+    /* Just a small breathing room under the CTA — section ends right after. */
     .hero.hero-editorial .hero-cta {
-      margin-bottom: 48px;
+      margin-bottom: 0;
     }
-    /* Hero section bottom padding — section grows with content now, this is the
-       gap between the last content element and the next page section. */
-    .hero.hero-editorial { padding-bottom: 80px; }
+    .hero.hero-editorial { padding-bottom: 24px; }
     .hero-editorial-content .hero-stars { justify-content: center; }
     .hero-editorial-content .hero-cta { justify-content: center; flex-wrap: wrap; }
     .nav.nav-editorial .nav-inner { padding: 18px 24px; }
