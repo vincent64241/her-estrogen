@@ -354,12 +354,11 @@ function App() {
           </h1>
           <p className="hero-sub">
             Real bioidentical HRT. Real relief. Prescribed online and
-            shipped directly to your door in days.
+            shipped directly to your door in <span className="hero-sub-underline">days.</span>
           </p>
           <ul className="hero-checks">
             <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
             <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
-            <li><span className="check">✓</span> Starting at $507 for 3 months ($169/mo) — no insurance needed</li>
             <li><span className="check">✓</span> Unlimited provider messaging included</li>
             <li><span className="check">✓</span> HSA/FSA approved</li>
             <li><span className="check">✓</span> Free shipping on every order</li>
@@ -541,7 +540,6 @@ function App() {
                   <img src={t.image} alt={t.name} />
                 </div>
                 <div className="product-card-body">
-                  <div className="product-card-price">Starting at $507 · 3 months</div>
                   <h3 className="product-card-name">{t.name}</h3>
                   <p className="product-card-subtitle">{t.subtitle}</p>
                   <a href="quiz.html" className="product-card-btn">GET STARTED</a>
