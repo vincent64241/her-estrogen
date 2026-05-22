@@ -442,10 +442,8 @@ function App() {
           {/* 4 — Education block (2 columns: text + stats) */}
           <div className="edu-education">
             <div className="edu-text">
-              <h3>Why do women in perimenopause and menopause need HRT?</h3>
-              <p><strong>Hot flashes?</strong> Estrogen sets your hypothalamus — your body's thermostat. When estrogen drops, the thermostat misfires. Restore estrogen, the flashes stop.</p>
-              <p><strong>Can't sleep?</strong> Progesterone converts to allopregnanolone — the neurosteroid that activates GABA, the brain chemical that keeps you in deep sleep. Take it at bedtime, sleep returns.</p>
-              <p><strong>Mood, memory, bones, joints.</strong> Estrogen runs them too — it regulates serotonin, feeds the hippocampus, protects bone density, and reduces inflammation. HRT replaces the exact molecules your body is missing.</p>
+              <h3>Why women in perimenopause and menopause need HRT.</h3>
+              <p>Estrogen and progesterone run your sleep, mood, brain, bones, and metabolism — when they decline, every system that depends on them starts failing. HRT replaces the exact molecules your body is missing, so symptoms stop and function returns.</p>
             </div>
             <div className="edu-stats">
               <div className="edu-stat">
