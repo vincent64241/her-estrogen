@@ -1440,7 +1440,7 @@
       right: 0;
       left: 0;
       width: 100%;
-      object-position: 25% 40%;
+      object-position: 70% 40%;
       filter: brightness(0.92);
       mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 100%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 100%);
@@ -1491,11 +1491,20 @@
     .hero.hero-editorial .hero-checks { font-size: 14px; display: inline-block; text-align: left; }
     .hero.hero-editorial .hero-checks .check { font-size: 15px; }
     .hero-editorial-content {
-      padding: 200px 24px 0 24px;
+      padding: 200px 24px 96px 24px;
       top: auto;
       max-width: 100%;
       text-align: center;
     }
+    /* Extra breathing room below the hero CTA on mobile so the next section
+       (Why Her Estrogen) doesn't crowd / cover the button. */
+    .hero.hero-editorial .hero-cta {
+      margin-bottom: 48px;
+    }
+    /* Bump the hero section's own bottom padding too — the hero is currently
+       padded `0 0 56px` on the section, which on tight viewports lets the
+       next section's top edge ride up on the CTA. */
+    .hero.hero-editorial { padding-bottom: 96px; }
     .hero-editorial-content .hero-stars { justify-content: center; }
     .hero-editorial-content .hero-cta { justify-content: center; flex-wrap: wrap; }
     .nav.nav-editorial .nav-inner { padding: 18px 24px; }
