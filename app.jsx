@@ -16,60 +16,42 @@ const TREATMENTS = [
   id: 'gel',
   eyebrow: 'FDA-Approved · Most Prescribed',
   name: 'Estradiol Gel',
-  desc: 'The gold standard for hormonal restoration — FDA-approved, liver-safe, and precisely dosed.',
   features: [
-  ['Application', 'Once daily — inner arm or thigh'],
-  ['Delivery', 'Transdermal (bypasses the liver)'],
-  ['Treats', 'Hot flashes, sleep, mood, bone density'],
-  ['Status', 'FDA-Approved']],
+  ['Application', 'Once daily — inner arm or thigh']],
   image: 'assets/cream.png'
 },
 {
   id: 'patch',
   eyebrow: 'FDA-Approved · No Daily Routine',
   name: 'Estradiol Patch',
-  desc: 'Consistent hormone delivery, zero daily effort — changed just twice a week.',
   features: [
-  ['Application', 'Twice weekly — adhesive patch'],
-  ['Delivery', 'Transdermal — steady levels'],
-  ['Treats', 'Hot flashes, sleep, mood, bone density'],
-  ['Status', 'FDA-Approved']],
+  ['Application', 'Twice weekly — adhesive patch']],
   image: 'assets/transdermal-patch.png'
 },
 {
   id: 'pill',
   eyebrow: 'FDA-Approved · Oral Option',
   name: 'Estradiol Pill',
-  desc: 'A convenient once-daily oral tablet — one of the most studied forms of HRT with decades of clinical evidence.',
   features: [
-  ['Application', 'Once daily — oral tablet'],
-  ['Delivery', 'Oral (passes through the liver)'],
-  ['Treats', 'Hot flashes, sleep, mood, bone density'],
-  ['Status', 'FDA-Approved']],
+  ['Application', 'Once daily — oral tablet']],
   image: 'assets/oral-pills.png'
 },
 {
   id: 'dhea',
   eyebrow: 'FDA-Approved · Vaginal Health',
   name: 'Estradiol Vaginal Cream',
-  desc: 'FDA-approved estradiol vaginal cream — restores vaginal tissue health and relieves intimate menopause symptoms.',
   features: [
   ['Application', 'Vaginal cream — as directed'],
-  ['Form', 'Estrace Vaginal Cream'],
-  ['Treats', 'Dryness, painful sex, GSM, recurrent UTIs'],
-  ['Status', 'FDA-Approved']],
+  ['Form', 'Estrace Vaginal Cream']],
   image: 'assets/vaginal.png'
 },
 {
   id: 'progesterone',
   eyebrow: 'FDA-Approved · Sleep + Protection',
   name: 'Progesterone Pill',
-  desc: 'Bioidentical oral progesterone taken nightly — protects your uterine lining and unlocks deep, restorative sleep.',
   features: [
   ['Application', 'Nightly oral pill — at bedtime'],
-  ['Dose', '100 mg or 200 mg as prescribed'],
-  ['Treats', 'Sleep, anxiety, uterine protection'],
-  ['Status', 'FDA-Approved']],
+  ['Dose', '100 mg or 200 mg as prescribed']],
   image: 'assets/oral-pills.png'
 }];
 
@@ -522,7 +504,7 @@ function App() {
         <div className="container">
           <div className="treatments-head">
             <div className="eyebrow">Treatments</div>
-            <h2>Four protocols. <em>Mixed and matched</em> for your body.</h2>
+            <h2>Your solutions, <em>trusted by experts.</em></h2>
             <p className="treatments-sub">
               Most patients start with one or two of the following. Your
               clinician decides what's appropriate based on your symptoms,
@@ -546,7 +528,6 @@ function App() {
             <div>
               <div className="eyebrow">{tx.eyebrow}</div>
               <h3>{tx.name}</h3>
-              <p className="product-desc">{tx.desc}</p>
               <ul className="product-features">
                 {tx.features.map(([k, v]) =>
                   <li key={k}>
