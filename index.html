@@ -1435,7 +1435,16 @@
 
   /* Mobile */
   @media (max-width: 767px) {
-    .hero.hero-editorial { min-height: 512px; height: 74vh; max-height: 680px; }
+    /* Hero must GROW to fit content on mobile — no fixed height, no max-height.
+       Was: { min-height: 512px; height: 74vh; max-height: 680px; } which clipped
+       the "Am I Qualified?" CTA below 680px regardless of padding. */
+    .hero.hero-editorial {
+      min-height: 100vh;       /* fallback for older mobile browsers */
+      min-height: 100svh;      /* small-viewport-height: accounts for browser chrome */
+      height: auto;
+      max-height: none;
+      overflow: visible;
+    }
     .hero.hero-editorial .hero-bg-img {
       right: 0;
       left: 0;
@@ -1491,18 +1500,18 @@
     .hero.hero-editorial .hero-checks { font-size: 14px; display: inline-block; text-align: left; }
     .hero.hero-editorial .hero-checks .check { font-size: 15px; }
     .hero-editorial-content {
-      padding: 200px 24px 288px 24px;
+      padding: 200px 24px 60px 24px;
       top: auto;
       max-width: 100%;
       text-align: center;
     }
-    /* 3x the breathing room below the hero CTA on mobile — fully clears the
-       next section (Why Her Estrogen) so the button is never crowded. */
+    /* CTA gets a clear 48px breathing room below it before the next section. */
     .hero.hero-editorial .hero-cta {
-      margin-bottom: 144px;
+      margin-bottom: 48px;
     }
-    /* And triple the section's own bottom padding too. */
-    .hero.hero-editorial { padding-bottom: 288px; }
+    /* Hero section bottom padding — section grows with content now, this is the
+       gap between the last content element and the next page section. */
+    .hero.hero-editorial { padding-bottom: 80px; }
     .hero-editorial-content .hero-stars { justify-content: center; }
     .hero-editorial-content .hero-cta { justify-content: center; flex-wrap: wrap; }
     .nav.nav-editorial .nav-inner { padding: 18px 24px; }
