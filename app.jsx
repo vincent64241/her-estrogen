@@ -528,7 +528,7 @@ function App() {
             aria-label="Scroll products left"
             onClick={() => {
               const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: -500, behavior: 'smooth' });
+              if (el) el.scrollBy({ left: -452, behavior: 'smooth' });
             }}
           >
             ‹
@@ -553,7 +553,7 @@ function App() {
             aria-label="Scroll products right"
             onClick={() => {
               const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: 500, behavior: 'smooth' });
+              if (el) el.scrollBy({ left: 452, behavior: 'smooth' });
             }}
           >
             ›
