@@ -507,19 +507,20 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: #fff;
-    border: 1px solid rgba(184, 35, 92, 0.18);
+    border: 2px solid var(--pink);
     color: var(--pink);
     font-family: 'Newsreader', Georgia, serif;
-    font-size: 32px;
+    font-size: 34px;
+    font-weight: 600;
     line-height: 0;
     padding-bottom: 4px;
     cursor: pointer;
     z-index: 10;
-    box-shadow: 0 8px 24px rgba(20, 18, 22, 0.10);
+    box-shadow: 0 8px 20px rgba(184, 35, 92, 0.22), 0 0 0 4px rgba(184, 35, 92, 0.08);
     transition: background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
     display: flex;
     align-items: center;
@@ -528,8 +529,8 @@
   .products-scroll-arrow:hover {
     background: var(--pink);
     color: #fff;
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 12px 28px rgba(184, 35, 92, 0.28);
+    transform: translateY(-50%) scale(1.06);
+    box-shadow: 0 14px 32px rgba(184, 35, 92, 0.40), 0 0 0 6px rgba(184, 35, 92, 0.14);
   }
   .products-scroll-arrow-left  { left: 16px; }
   .products-scroll-arrow-right { right: 16px; }
