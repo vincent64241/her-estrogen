@@ -75,35 +75,35 @@ const CASE_STUDIES_HOME = [
     meta: 'Age 47 · New York',
     quote: 'I got my marriage back.',
     story: "Three years of resentment built between me and my husband. I couldn't figure out why I was angry all the time, too tired for him, too short with everything. We were in counseling. Six weeks on the patch and the fog lifted — the anger wasn't him, it wasn't us. It was estrogen. We're more in love now than we've been since the kids were small.",
-    photo: 'assets/case-3.jpg'
+    photo: 'assets/case-couple.jpg'
   },
   {
     name: 'Karen H.',
     meta: 'Age 53 · Illinois',
-    quote: 'I stopped snapping at my kids.',
-    story: "My son asked me why I was so mad all the time. He was eight. That broke me. I started HRT two months later. The first thing my daughter noticed: \"Mom, you're funny again.\" I didn't know I had stopped being funny. They have their mom back, and I have my patience back.",
-    photo: 'assets/case-7.jpg'
+    quote: "My kids told me I'm laughing again.",
+    story: "My son asked me why I was so mad all the time. He was eight. That broke me. I started HRT two months later. The first thing my daughter noticed: \"Mom, you're laughing again.\" I didn't know I had stopped laughing. They have their mom back, and I have my joy back.",
+    photo: 'assets/case-joy.jpg'
   },
   {
     name: 'Diana W.',
     meta: 'Age 50 · Oregon',
     quote: 'I remembered a word for the first time in months.',
     story: "I run a team of fourteen and I had started doubting every decision. I couldn't find words. I'd open my laptop and forget what I'd come there to do. Three weeks on progesterone and estradiol — clarity. The first time I remembered a colleague's name without straining, I cried at my desk.",
-    photo: 'assets/case-8.jpg'
+    photo: 'assets/case-reading.jpg'
   },
   {
     name: 'Lisa P.',
     meta: 'Age 48 · Massachusetts',
-    quote: 'I sleep through the night for the first time in 4 years.',
-    story: "3:00 AM. 4:00 AM. 5:00 AM. That was every night for four years. I was a ghost. Two weeks on the patch and progesterone — I slept seven straight hours. I woke up rested. I had forgotten what rested felt like.",
-    photo: 'assets/case-9.jpg'
+    quote: "I'm meeting my best friend for coffee again.",
+    story: "For two years I canceled every coffee, every dinner, every group plan. I told myself I was 'just too tired.' The truth was — I felt like a ghost. Six weeks on HRT and the fog lifted. Last Saturday I drove forty minutes to see my oldest friend and we sat at that café for three hours like we used to. I cried in the car after. I had my person back.",
+    photo: 'assets/case-friends.jpg'
   },
   {
     name: 'Patricia L.',
     meta: 'Age 54 · Pennsylvania',
     quote: "I'm back at the gym.",
     story: "I had gained twenty pounds I couldn't lose. My joints ached. I gave up on the gym at fifty-two — figured my body was just done. A year on HRT and I'm lifting again, walking three miles a day, sleeping through the night. The weight is moving. I have my body back.",
-    photo: 'assets/case-12.jpg'
+    photo: 'assets/case-gym.jpg'
   }
 ];
 
@@ -528,7 +528,7 @@ function App() {
             aria-label="Scroll products left"
             onClick={() => {
               const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: -380, behavior: 'smooth' });
+              if (el) el.scrollBy({ left: -500, behavior: 'smooth' });
             }}
           >
             ‹
@@ -553,7 +553,7 @@ function App() {
             aria-label="Scroll products right"
             onClick={() => {
               const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: 380, behavior: 'smooth' });
+              if (el) el.scrollBy({ left: 500, behavior: 'smooth' });
             }}
           >
             ›
