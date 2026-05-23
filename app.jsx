@@ -19,7 +19,7 @@ const TREATMENTS = [
   subtitle: 'Applied once daily to skin',
   features: [
   ['Application', 'Once daily — inner arm or thigh']],
-  image: 'assets/cream.png'
+  image: 'assets/estradiol-gel.png'
 },
 {
   id: 'patch',
@@ -28,7 +28,7 @@ const TREATMENTS = [
   subtitle: 'Applied twice weekly',
   features: [
   ['Application', 'Twice weekly — adhesive patch']],
-  image: 'assets/transdermal-patch.png'
+  image: 'assets/estradiol-patch.png'
 },
 {
   id: 'pill',
@@ -37,7 +37,7 @@ const TREATMENTS = [
   subtitle: 'One tablet taken daily',
   features: [
   ['Application', 'Once daily — oral tablet']],
-  image: 'assets/oral-pills.png'
+  image: 'assets/estradiol-pill.png'
 },
 {
   id: 'dhea',
@@ -47,7 +47,7 @@ const TREATMENTS = [
   features: [
   ['Application', 'Vaginal cream — as directed'],
   ['Form', 'Estrace Vaginal Cream']],
-  image: 'assets/vaginal.png'
+  image: 'assets/estradiol-vaginal-cream.png'
 },
 {
   id: 'progesterone',
@@ -57,7 +57,7 @@ const TREATMENTS = [
   features: [
   ['Application', 'Nightly oral pill — at bedtime'],
   ['Dose', '100 mg or 200 mg as prescribed']],
-  image: 'assets/oral-pills.png'
+  image: 'assets/progesterone-pill.png'
 }];
 
 
