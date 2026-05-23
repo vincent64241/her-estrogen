@@ -535,16 +535,16 @@ function App() {
           </button>
           <div className="products-scroll-container">
             {TREATMENTS.map((t) => (
-              <div className="product-card-new" key={t.id}>
+              <a href="quiz.html" className="product-card-new" key={t.id}>
                 <div className="product-card-image-wrapper">
                   <img src={t.image} alt={t.name} />
                 </div>
                 <div className="product-card-body">
                   <h3 className="product-card-name">{t.name}</h3>
                   <p className="product-card-subtitle">{t.subtitle}</p>
-                  <a href="quiz.html" className="product-card-btn">GET STARTED</a>
+                  <span className="product-card-btn">GET STARTED</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           <button

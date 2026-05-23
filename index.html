@@ -569,9 +569,21 @@
     border-radius: 20px;
     box-shadow: none;
     transition: transform .25s ease;
+    /* Whole card is a clickable link */
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
   .product-card-new:hover {
     transform: translateY(-4px);
+  }
+  /* When ANY part of the card is hovered (including the image),
+     light up the Get Started button. */
+  .product-card-new:hover .product-card-btn {
+    background: var(--pink);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(184, 35, 92, 0.28);
   }
 
   /* Image area — fixed-size square render box so every product (tube,
