@@ -537,13 +537,11 @@ function App() {
             {TREATMENTS.map((t) => (
               <a href="quiz.html" className="product-card-new" key={t.id}>
                 <div className="product-card-image-wrapper">
-                  {t.id === 'patch' ? (
-                    <div className="product-card-wordmark" aria-label={t.name}>
-                      <span className="wm-her">her</span><span className="wm-estrogen">estrogen</span>
-                    </div>
-                  ) : (
-                    <img src={t.image} alt={t.name} />
-                  )}
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className={t.id === 'patch' ? 'no-shadow' : ''}
+                  />
                 </div>
                 <div className="product-card-body">
                   <h3 className="product-card-name">{t.name}</h3>
