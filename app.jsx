@@ -399,7 +399,7 @@ function App() {
                 </svg>
               </div>
               <h3>FDA-Approved. Always.</h3>
-              <p>Every prescription uses only FDA-approved bioidentical hormones — estradiol, progesterone, and more. No compounded formulations. Board-certified providers who specialize exclusively in women's hormonal health, prescribing the safest, most clinically proven therapies available.</p>
+              <p>Only FDA-approved bioidentical hormones. No compounded formulations, ever.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -409,7 +409,7 @@ function App() {
                 </svg>
               </div>
               <h3>Approved in 24 Hours.</h3>
-              <p>No waiting rooms. No 6-week appointment waits. Complete your intake online, a licensed provider reviews your case within 24 hours, and your medication ships directly to your door within days.</p>
+              <p>Complete your intake online. A licensed provider reviews and ships in days.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -418,7 +418,7 @@ function App() {
                 </svg>
               </div>
               <h3>Finally, Someone Who Listens.</h3>
-              <p>Her Estrogen providers specialize exclusively in women's hormonal health. Unlimited messaging. Monthly check-ins. A care team that actually understands what you're going through — because this is all we do.</p>
+              <p>Providers who specialize only in women's hormones. Unlimited messaging, monthly check-ins.</p>
             </div>
           </div>
 
@@ -430,12 +430,8 @@ function App() {
             </div>
             <div className="edu-stats">
               <div className="edu-stat">
-                <div className="edu-stat-num">87%</div>
-                <div className="edu-stat-label">of women report meaningful symptom relief within 30 days</div>
-              </div>
-              <div className="edu-stat">
-                <div className="edu-stat-num">10+</div>
-                <div className="edu-stat-label">body systems affected by estrogen decline</div>
+                <div className="edu-stat-num">92%</div>
+                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
               </div>
             </div>
           </div>
