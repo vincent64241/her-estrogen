@@ -685,6 +685,14 @@ function App() {
       return;
     }
 
+    // Meta Pixel — sanitized InitiateCheckout signal (no medical metadata).
+    // Value passed is the 3-month plan price ($507) per the tracking spec.
+    // The helper is defined inline in results.html; it's a no-op if fbq is
+    // unavailable (ad-blocker, network failure).
+    if (typeof window.trackInitiateCheckout === 'function') {
+      window.trackInitiateCheckout(507);
+    }
+
     setSubmitting(true);
 
     try {

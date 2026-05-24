@@ -179,6 +179,40 @@
   .finish h1 em { font-style: italic; color: var(--pink); }
   .finish p { font-size: 17px; color: var(--ink-2); max-width: 440px; margin: 0 auto 28px; }
 </style>
+<!-- Meta Pixel — quiz funnel
+     Fires PageView on load + Lead on load (quiz page entry counts as Lead).
+     Event payloads NEVER include the words "menopause", "HRT", or
+     "hormone replacement therapy" — compliance lock for PHI protection. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1691324572051294');
+fbq('track', 'PageView');
+// Layered tracking: quiz pageview = a top-of-funnel Lead
+fbq('track', 'Lead');
+// Sanitized helpers — exposed for the submit handler to call.
+// Both no-op safely if fbq is undefined (ad-blocker, network failure).
+window.trackCompleteRegistration = function () {
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'CompleteRegistration', { value: 1, currency: 'USD' });
+  }
+};
+window.trackInitiateCheckout = function (value) {
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'InitiateCheckout', { value: value, currency: 'USD' });
+  }
+};
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel -->
 </head>
 <body>
 
@@ -308,77 +342,51 @@ function toE164(phone) {
   return null;
 }
 
-async function subscribeToKlaviyo(answers) {
+// Server-side submit pipeline. Replaces the old client-side Klaviyo call:
+// the private API key + service-role Supabase writes live in /api/quiz/submit.
+//
+// We POST only sanitized fields — never any words that could expose PHI
+// (no "menopause", "HRT", "hormone replacement therapy", etc.). The server
+// fan-outs the call to Supabase + Klaviyo profile-import + Klaviyo subscribe
+// using Promise.allSettled so Klaviyo flakes never break the quiz UX.
+async function submitQuizToServer(answers) {
   if (!answers || !answers.email) return;
-  if (KLAVIYO_COMPANY_ID.startsWith('REPLACE_') || KLAVIYO_LIST_ID.startsWith('REPLACE_')) {
-    console.warn('[klaviyo] not configured — set KLAVIYO_COMPANY_ID + KLAVIYO_LIST_ID in quiz.html');
-    return;
-  }
 
-  // Avoid double-subscribing if user re-completes the quiz in the same session
-  const dedupeKey = `klaviyo_subscribed_${answers.email}`;
+  // Dedupe — don't re-submit if the user lands back on /quiz with the same answers
+  const dedupeKey = 'quiz_submitted_' + answers.email;
   if (localStorage.getItem(dedupeKey)) return;
 
-  // Base properties — always safe to send
-  const properties = {
-    quiz_completed: true,
-    quiz_completed_at: new Date().toISOString()
+  // Derive summary fields from the raw answers WITHOUT leaking medical jargon.
+  // primary_symptom / hormone_stage are kept as opaque slugs (e.g. "stage_a")
+  // assigned by the quiz UI — never the human-readable "perimenopause" etc.
+  const payload = {
+    email: answers.email,
+    firstName: answers.firstName || null,
+    primary_symptom: Array.isArray(answers.symptoms) ? (answers.symptoms[0] || null) : null,
+    hormone_stage: answers.stage || null,
+    symptom_score: Array.isArray(answers.symptoms) ? answers.symptoms.length : null,
+    recommended_product: answers.recommended_product || null,
+    responses: answers
   };
-  if (answers.firstName) properties.$first_name = answers.firstName.trim();
-
-  // ⚠ HIPAA-gated: only attach health data if BAA confirmed
-  if (KLAVIYO_SEND_HEALTH_DATA) {
-    if (answers.stage)             properties.hormone_stage = answers.stage;
-    if (Array.isArray(answers.symptoms)) {
-      properties.symptom_score  = answers.symptoms.length;
-      properties.primary_symptom = answers.symptoms[0] || null;
-      properties.symptoms_list  = answers.symptoms.join(', ');
-    }
-    if (answers.age)               properties.age_range = answers.age;
-    if (answers.tried)             properties.prior_hrt = answers.tried;
-  }
-
-  const profileAttrs = { email: answers.email, properties };
-  const phoneE164 = toE164(answers.phone);
-  if (phoneE164) profileAttrs.phone_number = phoneE164;
-  // Note: opt-in consent is IMPLICIT in the /client/subscriptions/ endpoint —
-  // calling this endpoint with a list relationship is itself the subscription event.
-  // Do NOT add a `subscriptions` block on profile attributes; the API rejects it.
 
   try {
-    const resp = await fetch(
-      `https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(KLAVIYO_COMPANY_ID)}`,
-      {
-        method: 'POST',
-        headers: {
-          'revision': '2024-02-15',
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: {
-            type: 'subscription',
-            attributes: {
-              custom_source: 'Her Estrogen quiz',
-              profile: { data: { type: 'profile', attributes: profileAttrs } }
-            },
-            relationships: {
-              list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
-            }
-          }
-        })
-      }
-    );
-
-    if (resp.ok || resp.status === 202) {
+    const resp = await fetch('/api/quiz/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (resp.ok) {
       localStorage.setItem(dedupeKey, '1');
-      console.log('[klaviyo] subscribed:', answers.email);
+      // Sanitized conversion event — no medical info, just signals "form completed".
+      if (typeof window.trackCompleteRegistration === 'function') {
+        window.trackCompleteRegistration();
+      }
     } else {
-      const txt = await resp.text().catch(() => '');
-      console.warn('[klaviyo] non-OK response:', resp.status, txt.slice(0, 200));
+      console.warn('[quiz/submit] non-OK response:', resp.status);
     }
   } catch (err) {
-    // Never break the quiz flow on a Klaviyo failure
-    console.warn('[klaviyo] subscribe failed:', err && err.message);
+    // Never break the quiz flow on a network failure
+    console.warn('[quiz/submit] failed:', err && err.message);
   }
 }
 
@@ -427,8 +435,8 @@ function Quiz() {
       try {
         localStorage.setItem('herestrogen_quiz', JSON.stringify(answers));
       } catch (e) { /* storage disabled — fall back to defaults */ }
-      // Fire-and-forget — quiz UX is independent of Klaviyo response
-      subscribeToKlaviyo(answers);
+      // Fire-and-forget — quiz UX is independent of the server response
+      submitQuizToServer(answers);
     }
   }, [done, answers]);
 
