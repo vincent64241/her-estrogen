@@ -149,7 +149,7 @@ const FAQ = [
 { q: 'Is hormone therapy safe?', a: 'For most healthy women under 60 (or within 10 years of menopause), modern bioidentical HRT has a favorable risk-benefit profile. Your clinician reviews personal and family history, current meds, and labs before prescribing, and reassesses every 90 days.' },
 { q: 'Do I need bloodwork to start?', a: 'Not always. Symptom-based prescribing is supported by current guidelines for many patients, but our clinicians may order labs (FSH, estradiol, thyroid, lipids) when it changes the plan. Labs are available at-home or at any Quest location.' },
 { q: 'What if I have a history of breast cancer or clots?', a: 'These histories require a careful, individualized conversation. Some patients are still candidates for local-only therapy; others are not. Our clinicians will be direct about what we can and cannot prescribe.' },
-{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes your FDA-approved prescription, unlimited provider messaging, monthly check-ins, and free shipping. We do not bill insurance, but plans can be paid with HSA/FSA.' },
+{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes your FDA-approved prescription, unlimited provider messaging, quarterly check-ins every 3 months, and free shipping. We do not bill insurance, but plans can be paid with HSA/FSA.' },
 { q: 'Can I use my own pharmacy?', a: 'Yes. We can ship from our partner pharmacy or send the prescription to any local pharmacy you prefer. Compounded formulations only ship from our partner.' },
 { q: 'How quickly will I feel different?', a: 'Sleep and night sweats often improve within 2–3 weeks. Mood, libido, and body composition shifts typically take 8–12 weeks. We adjust dose based on how you feel, not just labs.' }];
 
@@ -370,6 +370,45 @@ function App() {
 
       </section>
 
+      {/* PRESS MARQUEE — auto-scrolling "Featured In" strip just below the hero */}
+      <section className="press-marquee" data-screen-label="01a Press">
+        <div className="press-marquee-label">
+          <span className="press-marquee-line"></span>
+          <span className="press-marquee-title">Proud To Be Featured And Advertised In</span>
+          <span className="press-marquee-line"></span>
+        </div>
+        <div className="press-marquee-viewport" aria-hidden="true">
+          <div className="press-marquee-track-anim">
+            {/* Row content is duplicated twice so the keyframe can translate -50%
+                without visible seams — produces a seamless infinite loop. */}
+            <div className="press-marquee-row">
+              <span className="press-logo-name serif">The Atlantic</span>
+              <span className="press-logo-name bold">FORBES</span>
+              <span className="press-logo-name serif-tracked">VOGUE</span>
+              <span className="press-logo-name bold">Bloomberg</span>
+              <span className="press-logo-name serif italic">Goop</span>
+              <span className="press-logo-name bold">WELL + GOOD</span>
+              <span className="press-logo-name bold">WebMD</span>
+              <span className="press-logo-name serif">Harper's Bazaar</span>
+              <span className="press-logo-name bold">FORTUNE</span>
+              <span className="press-logo-name serif">The New York Times</span>
+            </div>
+            <div className="press-marquee-row" aria-hidden="true">
+              <span className="press-logo-name serif">The Atlantic</span>
+              <span className="press-logo-name bold">FORBES</span>
+              <span className="press-logo-name serif-tracked">VOGUE</span>
+              <span className="press-logo-name bold">Bloomberg</span>
+              <span className="press-logo-name serif italic">Goop</span>
+              <span className="press-logo-name bold">WELL + GOOD</span>
+              <span className="press-logo-name bold">WebMD</span>
+              <span className="press-logo-name serif">Harper's Bazaar</span>
+              <span className="press-logo-name bold">FORTUNE</span>
+              <span className="press-logo-name serif">The New York Times</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
         <div className="container">
@@ -418,7 +457,7 @@ function App() {
                 </svg>
               </div>
               <h3>Finally, Someone Who Listens.</h3>
-              <p>Providers who specialize only in women's hormones. Unlimited messaging, monthly check-ins.</p>
+              <p>Providers who specialize only in women's hormones. Unlimited messaging, quarterly check-ins every 3 months.</p>
             </div>
           </div>
 

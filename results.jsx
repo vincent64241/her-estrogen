@@ -248,7 +248,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'What does the price include?',
-    a: 'Your subscription includes your licensed provider consultation, written prescription, custom-compounded medication, unlimited provider messaging, free shipping on every refill, and monthly check-ins. There are no hidden fees and your price does not change as your dose adjusts.'
+    a: 'Your subscription includes your licensed provider consultation, written prescription, custom-compounded medication, unlimited provider messaging, free shipping on every refill, and quarterly check-ins every 3 months. There are no hidden fees and your price does not change as your dose adjusts.'
   },
   {
     q: 'Is a prescription required?',
