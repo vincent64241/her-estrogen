@@ -128,6 +128,34 @@
     outline: none; border-color: var(--pink);
     box-shadow: 0 0 0 4px rgba(184,35,92,.12);
   }
+  /* Birthday — three Month/Day/Year dropdowns sharing the .field styling */
+  .field .helper {
+    font-family: inherit; font-size: 13px; color: var(--ink-2);
+    margin-top: -4px; line-height: 1.4;
+  }
+  .field-row3 {
+    display: grid; grid-template-columns: 1.4fr 1fr 1.1fr; gap: 10px;
+  }
+  .field-row3 select {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px 14px;
+    font-family: inherit; font-size: 16px; color: var(--ink);
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23b8235c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .field-row3 select:focus {
+    outline: none; border-color: var(--pink);
+    box-shadow: 0 0 0 4px rgba(184,35,92,.12);
+  }
+  .field-error {
+    font-size: 13px; color: var(--pink-deep);
+    margin-top: 2px;
+  }
 
   .actions {
     margin-top: 40px;
@@ -272,17 +300,6 @@ const STEPS = [
     grid: true,
   },
   {
-    kind: 'single', key: 'age',
-    title: 'What is your age range?',
-    intro: 'Hormone therapy is most studied in women within 10 years of menopause — we will be honest about candidacy outside that window.',
-    options: [
-      { v: '<40',   label: 'Under 40' },
-      { v: '40-49', label: '40 – 49' },
-      { v: '50-59', label: '50 – 59' },
-      { v: '60+',   label: '60 or older' },
-    ],
-  },
-  {
     kind: 'single', key: 'tried',
     title: 'Have you tried hormone therapy before?',
     intro: 'Whatever your history, your clinician will start from where you are.',
@@ -319,6 +336,47 @@ function formatPhone(value) {
   return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
 }
 
+// ===== Birthday helpers (optional field; partial fills are rejected) =====
+const MONTHS = [
+  '', 'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+const BIRTH_YEAR_MAX = new Date().getFullYear() - 21;  // gate minors / impossibly young
+const BIRTH_YEAR_MIN = 1940;
+const BIRTH_YEARS = (() => {
+  const arr = [];
+  for (let y = BIRTH_YEAR_MAX; y >= BIRTH_YEAR_MIN; y--) arr.push(y);
+  return arr;
+})();
+// Days vary by (month, year). Returns 0 if month not set yet.
+function daysInMonth(month, year) {
+  if (!month) return 0;
+  const m = parseInt(month, 10);
+  const y = year ? parseInt(year, 10) : 2000; // leap-safe default for picker before year chosen
+  return new Date(y, m, 0).getDate();
+}
+// Validate the three-piece birthday. Returns one of:
+//   { state: 'empty' }         — all three blank, valid (field is optional)
+//   { state: 'partial' }       — some but not all filled, invalid
+//   { state: 'ok', iso }       — fully filled + a real calendar date in range
+//   { state: 'invalid' }       — fully filled but not a real date
+function validateBirthday(b) {
+  const m = (b && b.month) || '';
+  const d = (b && b.day) || '';
+  const y = (b && b.year) || '';
+  const filledCount = [m, d, y].filter(Boolean).length;
+  if (filledCount === 0) return { state: 'empty' };
+  if (filledCount < 3) return { state: 'partial' };
+  const mi = parseInt(m, 10), di = parseInt(d, 10), yi = parseInt(y, 10);
+  if (yi < BIRTH_YEAR_MIN || yi > BIRTH_YEAR_MAX) return { state: 'invalid' };
+  const dt = new Date(yi, mi - 1, di);
+  if (dt.getFullYear() !== yi || dt.getMonth() !== mi - 1 || dt.getDate() !== di) {
+    return { state: 'invalid' };
+  }
+  const iso = `${yi}-${String(mi).padStart(2, '0')}-${String(di).padStart(2, '0')}`;
+  return { state: 'ok', iso };
+}
+
 // =====================================================================
 // Klaviyo integration — public client-side subscription
 // =====================================================================
@@ -331,7 +389,7 @@ const KLAVIYO_LIST_ID    = 'Rsp58u';
 
 // ⚠ HIPAA: only flip this to true after Klaviyo signs you a BAA in writing.
 //   When false, we send ONLY email + first name + quiz_completed flag
-//   (no symptoms, stage, age — those stay in Supabase only).
+//   (no symptoms, stage — those stay in Supabase only).
 const KLAVIYO_SEND_HEALTH_DATA = false;
 
 // Convert a US phone like "(555) 123-4567" to Klaviyo's required E.164 format "+15551234567"
@@ -359,6 +417,9 @@ async function submitQuizToServer(answers) {
   // Derive summary fields from the raw answers WITHOUT leaking medical jargon.
   // primary_symptom / hormone_stage are kept as opaque slugs (e.g. "stage_a")
   // assigned by the quiz UI — never the human-readable "perimenopause" etc.
+  // Birthday is OPTIONAL — if the user left it blank or partially filled, omit it.
+  const birthdayCheck = validateBirthday(answers.birthday);
+  const birthdayISO = birthdayCheck.state === 'ok' ? birthdayCheck.iso : null;
   const payload = {
     email: answers.email,
     firstName: answers.firstName || null,
@@ -366,6 +427,7 @@ async function submitQuizToServer(answers) {
     hormone_stage: answers.stage || null,
     symptom_score: Array.isArray(answers.symptoms) ? answers.symptoms.length : null,
     recommended_product: answers.recommended_product || null,
+    birthday: birthdayISO,
     responses: answers
   };
 
@@ -400,6 +462,9 @@ function Quiz() {
   const progress = done ? 100 : ((idx) / total) * 100;
 
   const value = answers[step?.key];
+  // Birthday lives outside the STEPS array — it's an optional sub-field of the
+  // contact step. Validate it alongside the required name/email/phone fields.
+  const birthdayResult = validateBirthday(answers.birthday);
   const canContinue = (() => {
     if (!step) return false;
     if (step.kind === 'single') return !!value;
@@ -409,7 +474,11 @@ function Quiz() {
       const fn = (answers.firstName || '').trim();
       const em = answers.email || '';
       const ph = (answers.phone || '').replace(/\D/g, '');
-      return fn.length > 0 && /\S+@\S+\.\S+/.test(em) && ph.length === 10;
+      const requiredOk = fn.length > 0 && /\S+@\S+\.\S+/.test(em) && ph.length === 10;
+      // Birthday is OPTIONAL. Allowed states for submission: empty OR fully-valid.
+      // Partial fills or invalid dates block submission.
+      const birthdayOk = birthdayResult.state === 'empty' || birthdayResult.state === 'ok';
+      return requiredOk && birthdayOk;
     }
     return false;
   })();
@@ -559,6 +628,64 @@ function Quiz() {
                 autoComplete="tel"
                 inputMode="tel"
               />
+            </div>
+            {/* OPTIONAL — single point of capture. Skipping it is a happy path. */}
+            <div className="field">
+              <label>Birthday</label>
+              <div className="helper">So we can celebrate with you (optional)</div>
+              <div className="field-row3">
+                <select
+                  aria-label="Birth month"
+                  value={(answers.birthday && answers.birthday.month) || ''}
+                  onChange={(e) => setAnswers({
+                    ...answers,
+                    birthday: { ...(answers.birthday || {}), month: e.target.value }
+                  })}
+                >
+                  <option value="">Month</option>
+                  {MONTHS.slice(1).map((m, i) => (
+                    <option key={i + 1} value={String(i + 1)}>{m}</option>
+                  ))}
+                </select>
+                <select
+                  aria-label="Birth day"
+                  value={(answers.birthday && answers.birthday.day) || ''}
+                  onChange={(e) => setAnswers({
+                    ...answers,
+                    birthday: { ...(answers.birthday || {}), day: e.target.value }
+                  })}
+                >
+                  <option value="">Day</option>
+                  {(() => {
+                    const max = daysInMonth(
+                      (answers.birthday && answers.birthday.month) || '',
+                      (answers.birthday && answers.birthday.year) || ''
+                    ) || 31;
+                    const opts = [];
+                    for (let d = 1; d <= max; d++) opts.push(<option key={d} value={String(d)}>{d}</option>);
+                    return opts;
+                  })()}
+                </select>
+                <select
+                  aria-label="Birth year"
+                  value={(answers.birthday && answers.birthday.year) || ''}
+                  onChange={(e) => setAnswers({
+                    ...answers,
+                    birthday: { ...(answers.birthday || {}), year: e.target.value }
+                  })}
+                >
+                  <option value="">Year</option>
+                  {BIRTH_YEARS.map((y) => (
+                    <option key={y} value={String(y)}>{y}</option>
+                  ))}
+                </select>
+              </div>
+              {birthdayResult.state === 'partial' && (
+                <div className="field-error">Please complete all three fields or leave blank.</div>
+              )}
+              {birthdayResult.state === 'invalid' && (
+                <div className="field-error">Please enter a valid birthday.</div>
+              )}
             </div>
           </div>
         )}

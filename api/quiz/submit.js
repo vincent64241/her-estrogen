@@ -34,6 +34,7 @@
 //     hormone_stage?:      string,
 //     symptom_score?:      number,
 //     recommended_product?: string,
+//     birthday?:           string,    // OPTIONAL — ISO YYYY-MM-DD, or null/omit
 //     responses?:          object     // free-form full quiz answers
 //   }
 
@@ -42,6 +43,27 @@ const { supabaseAdmin } = require('../../lib/supabase');
 const KLAVIYO_BASE = 'https://a.klaviyo.com/api';
 const KLAVIYO_REVISION = '2024-10-15';
 const KLAVIYO_LIST_ID = process.env.KLAVIYO_QUIZ_LIST_ID || 'Rsp58u';
+
+// Validate the optional birthday field on the API contract.
+// Accepts: null/undefined/'' → valid (returns null)
+// Accepts: 'YYYY-MM-DD' that is a real calendar date AND year between
+//          1940-01-01 and (today - 21 years) → valid (returns ISO string)
+// Anything else throws (caller turns into 400).
+function parseBirthday(raw) {
+  if (raw == null || raw === '') return null;
+  if (typeof raw !== 'string') throw new Error('birthday must be a string YYYY-MM-DD');
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(raw);
+  if (!m) throw new Error('birthday must be in YYYY-MM-DD format');
+  const yi = parseInt(m[1], 10), mi = parseInt(m[2], 10), di = parseInt(m[3], 10);
+  const minYear = 1940;
+  const maxYear = new Date().getFullYear() - 21;
+  if (yi < minYear || yi > maxYear) throw new Error('birthday year out of range');
+  const dt = new Date(yi, mi - 1, di);
+  if (dt.getFullYear() !== yi || dt.getMonth() !== mi - 1 || dt.getDate() !== di) {
+    throw new Error('birthday is not a real date');
+  }
+  return raw;
+}
 
 // Build the headers Klaviyo expects on every request.
 function klaviyoHeaders() {
@@ -54,6 +76,8 @@ function klaviyoHeaders() {
 }
 
 // (a) Insert the quiz response into Supabase. Returns the inserted row or throws.
+//     NOTE: requires the `birthday DATE` column on quiz_responses — apply migration
+//     `ALTER TABLE quiz_responses ADD COLUMN birthday DATE;` before using.
 async function writeToSupabase(payload) {
   if (!supabaseAdmin) {
     throw new Error('Supabase admin client is not configured (missing URL or SERVICE_ROLE_KEY)');
@@ -65,7 +89,8 @@ async function writeToSupabase(payload) {
       primary_symptom: payload.primary_symptom || null,
       hormone_stage: payload.hormone_stage || null,
       symptom_score: typeof payload.symptom_score === 'number' ? payload.symptom_score : null,
-      recommended_product: payload.recommended_product || null
+      recommended_product: payload.recommended_product || null,
+      birthday: payload.birthday || null
       // submitted_at defaults to NOW() in the table schema
     })
     .select()
@@ -79,20 +104,27 @@ async function klaviyoProfileImport(payload) {
   if (!process.env.KLAVIYO_PRIVATE_KEY) {
     throw new Error('KLAVIYO_PRIVATE_KEY is not set');
   }
+  // Build properties dynamically so birthday is omitted when null.
+  // Spec: store birthday as a custom property (NOT Klaviyo's reserved root
+  // attribute) to avoid timezone shifts. The birthday flow segment reads
+  // from $properties.birthday.
+  const properties = {
+    primary_symptom: payload.primary_symptom || null,
+    hormone_stage: payload.hormone_stage || null,
+    symptom_score: typeof payload.symptom_score === 'number' ? payload.symptom_score : null,
+    recommended_product: payload.recommended_product || null,
+    quiz_completed_at: new Date().toISOString(),
+    source: 'quiz'
+  };
+  if (payload.birthday) properties.birthday = payload.birthday;
+
   const body = {
     data: {
       type: 'profile',
       attributes: {
         email: payload.email,
         first_name: payload.firstName || null,
-        properties: {
-          primary_symptom: payload.primary_symptom || null,
-          hormone_stage: payload.hormone_stage || null,
-          symptom_score: typeof payload.symptom_score === 'number' ? payload.symptom_score : null,
-          recommended_product: payload.recommended_product || null,
-          quiz_completed_at: new Date().toISOString(),
-          source: 'quiz'
-        }
+        properties
       }
     }
   };
@@ -162,6 +194,15 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'A valid email is required.' });
   }
 
+  // Validate optional birthday before kicking off any writes. A bad birthday
+  // returns 400 — but null/missing is fully allowed.
+  let birthday;
+  try {
+    birthday = parseBirthday(body.birthday);
+  } catch (err) {
+    return res.status(400).json({ error: 'Invalid birthday: ' + err.message });
+  }
+
   const payload = {
     email,
     firstName: (body.firstName || '').toString().trim() || null,
@@ -169,6 +210,7 @@ module.exports = async (req, res) => {
     hormone_stage: body.hormone_stage || null,
     symptom_score: typeof body.symptom_score === 'number' ? body.symptom_score : null,
     recommended_product: body.recommended_product || null,
+    birthday,
     responses: body.responses && typeof body.responses === 'object' ? body.responses : {}
   };
 

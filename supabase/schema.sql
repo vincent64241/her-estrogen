@@ -130,9 +130,19 @@ CREATE TABLE quiz_responses (
   symptom_score INTEGER,
   recommended_product TEXT,
 
+  -- Optional birthday — celebrated by marketing automation only.
+  -- HIPAA note: NOT a clinical DOB; that's collected separately by OpenLoop
+  -- during medical intake. This field is for friendly comms (e.g. birthday
+  -- email flow keyed on $properties.birthday in Klaviyo).
+  birthday DATE,
+
   -- Timestamp
   submitted_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- ---- MIGRATION (run once against existing prod) ----
+-- If you applied schema.sql before the birthday column existed, run:
+--   ALTER TABLE quiz_responses ADD COLUMN IF NOT EXISTS birthday DATE;
 
 -- ------------------------------------------------
 -- TABLE 4: COMMUNICATIONS LOG
