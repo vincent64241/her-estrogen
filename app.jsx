@@ -374,27 +374,12 @@ function App() {
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
         <div className="container">
 
-          {/* 1 — "Why women in perimenopause and menopause need HRT" — sits right
-              under the hero so the value prop hits before anything else. */}
-          <div className="edu-education edu-education-top">
-            <div className="edu-text">
-              <h3>Why women in perimenopause and menopause need HRT.</h3>
-              <p>Estrogen and progesterone run your sleep, mood, brain, bones, and metabolism — when they decline, every system that depends on them starts failing. HRT replaces the exact molecules your body is missing, so symptoms stop and function returns.</p>
-            </div>
-            <div className="edu-stats">
-              <div className="edu-stat">
-                <div className="edu-stat-num">92%</div>
-                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
-              </div>
-            </div>
-          </div>
-
-          {/* 2 — Hook banner pill */}
+          {/* 1 — Hook banner pill */}
           <div className="edu-hook">
             <span className="edu-hook-pill">Backed by 30+ years of clinical research</span>
           </div>
 
-          {/* 3 — Main headline block */}
+          {/* 2 — Main headline block */}
           <div className="edu-head">
             <div className="eyebrow">Why Her Estrogen</div>
             <h2>Every woman deserves to feel like <em>herself</em> again.</h2>
@@ -405,7 +390,7 @@ function App() {
             </p>
           </div>
 
-          {/* 4 — Three-column WHY block */}
+          {/* 3 — Three-column WHY block */}
           <div className="edu-why-grid">
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -434,6 +419,20 @@ function App() {
               </div>
               <h3>Finally, Someone Who Listens.</h3>
               <p>Providers who specialize only in women's hormones. Unlimited messaging, quarterly check-ins every 3 months.</p>
+            </div>
+          </div>
+
+          {/* 4 — Education block (2 columns: text + stat) */}
+          <div className="edu-education">
+            <div className="edu-text">
+              <h3>Why women in perimenopause and menopause need HRT.</h3>
+              <p>Estrogen runs your sleep, mood, brain, bones, and metabolism. When it drops, they fail. HRT replaces what's missing — symptoms stop.</p>
+            </div>
+            <div className="edu-stats">
+              <div className="edu-stat">
+                <div className="edu-stat-num">92%</div>
+                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
+              </div>
             </div>
           </div>
 
