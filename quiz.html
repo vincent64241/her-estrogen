@@ -475,9 +475,9 @@ function Quiz() {
       const em = answers.email || '';
       const ph = (answers.phone || '').replace(/\D/g, '');
       const requiredOk = fn.length > 0 && /\S+@\S+\.\S+/.test(em) && ph.length === 10;
-      // Birthday is OPTIONAL. Allowed states for submission: empty OR fully-valid.
-      // Partial fills or invalid dates block submission.
-      const birthdayOk = birthdayResult.state === 'empty' || birthdayResult.state === 'ok';
+      // Birthday is REQUIRED (needed by OpenLoop for clinical intake).
+      // Only fully-valid birthdays unlock the submit button.
+      const birthdayOk = birthdayResult.state === 'ok';
       return requiredOk && birthdayOk;
     }
     return false;
@@ -629,10 +629,12 @@ function Quiz() {
                 inputMode="tel"
               />
             </div>
-            {/* OPTIONAL — single point of capture. Skipping it is a happy path. */}
+            {/* REQUIRED — single point of capture. Used by OpenLoop for clinical
+                intake (provider must verify candidacy by age) and by Klaviyo
+                for birthday flows. */}
             <div className="field">
               <label>Birthday</label>
-              <div className="helper">So we can celebrate with you (optional)</div>
+              <div className="helper">Required to verify your candidacy with a licensed provider</div>
               <div className="field-row3">
                 <select
                   aria-label="Birth month"
@@ -681,7 +683,7 @@ function Quiz() {
                 </select>
               </div>
               {birthdayResult.state === 'partial' && (
-                <div className="field-error">Please complete all three fields or leave blank.</div>
+                <div className="field-error">Please complete all three fields.</div>
               )}
               {birthdayResult.state === 'invalid' && (
                 <div className="field-error">Please enter a valid birthday.</div>

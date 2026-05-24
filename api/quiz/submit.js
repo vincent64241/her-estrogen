@@ -34,7 +34,7 @@
 //     hormone_stage?:      string,
 //     symptom_score?:      number,
 //     recommended_product?: string,
-//     birthday?:           string,    // OPTIONAL — ISO YYYY-MM-DD, or null/omit
+//     birthday:            string,    // REQUIRED — ISO YYYY-MM-DD (clinical intake)
 //     responses?:          object     // free-form full quiz answers
 //   }
 
@@ -44,13 +44,13 @@ const KLAVIYO_BASE = 'https://a.klaviyo.com/api';
 const KLAVIYO_REVISION = '2024-10-15';
 const KLAVIYO_LIST_ID = process.env.KLAVIYO_QUIZ_LIST_ID || 'Rsp58u';
 
-// Validate the optional birthday field on the API contract.
-// Accepts: null/undefined/'' → valid (returns null)
+// Validate the REQUIRED birthday field on the API contract.
+// Birthday is required because OpenLoop's clinical intake needs DOB to
+// verify candidacy. Missing or empty values throw → caller returns 400.
 // Accepts: 'YYYY-MM-DD' that is a real calendar date AND year between
 //          1940-01-01 and (today - 21 years) → valid (returns ISO string)
-// Anything else throws (caller turns into 400).
 function parseBirthday(raw) {
-  if (raw == null || raw === '') return null;
+  if (raw == null || raw === '') throw new Error('birthday is required');
   if (typeof raw !== 'string') throw new Error('birthday must be a string YYYY-MM-DD');
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(raw);
   if (!m) throw new Error('birthday must be in YYYY-MM-DD format');
@@ -104,19 +104,19 @@ async function klaviyoProfileImport(payload) {
   if (!process.env.KLAVIYO_PRIVATE_KEY) {
     throw new Error('KLAVIYO_PRIVATE_KEY is not set');
   }
-  // Build properties dynamically so birthday is omitted when null.
   // Spec: store birthday as a custom property (NOT Klaviyo's reserved root
   // attribute) to avoid timezone shifts. The birthday flow segment reads
-  // from $properties.birthday.
+  // from $properties.birthday. Birthday is now required upstream so we can
+  // safely include it directly.
   const properties = {
     primary_symptom: payload.primary_symptom || null,
     hormone_stage: payload.hormone_stage || null,
     symptom_score: typeof payload.symptom_score === 'number' ? payload.symptom_score : null,
     recommended_product: payload.recommended_product || null,
+    birthday: payload.birthday,
     quiz_completed_at: new Date().toISOString(),
     source: 'quiz'
   };
-  if (payload.birthday) properties.birthday = payload.birthday;
 
   const body = {
     data: {
