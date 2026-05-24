@@ -370,55 +370,31 @@ function App() {
 
       </section>
 
-      {/* PRESS MARQUEE — auto-scrolling "Featured In" strip just below the hero */}
-      <section className="press-marquee" data-screen-label="01a Press">
-        <div className="press-marquee-label">
-          <span className="press-marquee-line"></span>
-          <span className="press-marquee-title">Proud To Be Featured And Advertised In</span>
-          <span className="press-marquee-line"></span>
-        </div>
-        <div className="press-marquee-viewport" aria-hidden="true">
-          <div className="press-marquee-track-anim">
-            {/* Row content is duplicated twice so the keyframe can translate -50%
-                without visible seams — produces a seamless infinite loop. */}
-            <div className="press-marquee-row">
-              <span className="press-logo-name serif">The Atlantic</span>
-              <span className="press-logo-name bold">FORBES</span>
-              <span className="press-logo-name serif-tracked">VOGUE</span>
-              <span className="press-logo-name bold">Bloomberg</span>
-              <span className="press-logo-name serif italic">Goop</span>
-              <span className="press-logo-name bold">WELL + GOOD</span>
-              <span className="press-logo-name bold">WebMD</span>
-              <span className="press-logo-name serif">Harper's Bazaar</span>
-              <span className="press-logo-name bold">FORTUNE</span>
-              <span className="press-logo-name serif">The New York Times</span>
-            </div>
-            <div className="press-marquee-row" aria-hidden="true">
-              <span className="press-logo-name serif">The Atlantic</span>
-              <span className="press-logo-name bold">FORBES</span>
-              <span className="press-logo-name serif-tracked">VOGUE</span>
-              <span className="press-logo-name bold">Bloomberg</span>
-              <span className="press-logo-name serif italic">Goop</span>
-              <span className="press-logo-name bold">WELL + GOOD</span>
-              <span className="press-logo-name bold">WebMD</span>
-              <span className="press-logo-name serif">Harper's Bazaar</span>
-              <span className="press-logo-name bold">FORTUNE</span>
-              <span className="press-logo-name serif">The New York Times</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
         <div className="container">
 
-          {/* 1 — Hook banner pill */}
+          {/* 1 — "Why women in perimenopause and menopause need HRT" — sits right
+              under the hero so the value prop hits before anything else. */}
+          <div className="edu-education edu-education-top">
+            <div className="edu-text">
+              <h3>Why women in perimenopause and menopause need HRT.</h3>
+              <p>Estrogen and progesterone run your sleep, mood, brain, bones, and metabolism — when they decline, every system that depends on them starts failing. HRT replaces the exact molecules your body is missing, so symptoms stop and function returns.</p>
+            </div>
+            <div className="edu-stats">
+              <div className="edu-stat">
+                <div className="edu-stat-num">92%</div>
+                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 — Hook banner pill */}
           <div className="edu-hook">
             <span className="edu-hook-pill">Backed by 30+ years of clinical research</span>
           </div>
 
-          {/* 2 — Main headline block */}
+          {/* 3 — Main headline block */}
           <div className="edu-head">
             <div className="eyebrow">Why Her Estrogen</div>
             <h2>Every woman deserves to feel like <em>herself</em> again.</h2>
@@ -429,7 +405,7 @@ function App() {
             </p>
           </div>
 
-          {/* 3 — Three-column WHY block */}
+          {/* 4 — Three-column WHY block */}
           <div className="edu-why-grid">
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -458,20 +434,6 @@ function App() {
               </div>
               <h3>Finally, Someone Who Listens.</h3>
               <p>Providers who specialize only in women's hormones. Unlimited messaging, quarterly check-ins every 3 months.</p>
-            </div>
-          </div>
-
-          {/* 4 — Education block (2 columns: text + stats) */}
-          <div className="edu-education">
-            <div className="edu-text">
-              <h3>Why women in perimenopause and menopause need HRT.</h3>
-              <p>Estrogen and progesterone run your sleep, mood, brain, bones, and metabolism — when they decline, every system that depends on them starts failing. HRT replaces the exact molecules your body is missing, so symptoms stop and function returns.</p>
-            </div>
-            <div className="edu-stats">
-              <div className="edu-stat">
-                <div className="edu-stat-num">92%</div>
-                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
-              </div>
             </div>
           </div>
 
