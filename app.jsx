@@ -96,14 +96,14 @@ const CASE_STUDIES_HOME = [
     meta: 'Age 48 · Massachusetts',
     quote: "I'm meeting my best friend for coffee again.",
     story: "For two years I canceled every coffee, every dinner, every group plan. I told myself I was 'just too tired.' The truth was — I felt like a ghost. Six weeks on HRT and the fog lifted. Last Saturday I drove forty minutes to see my oldest friend and we sat at that café for three hours like we used to. I cried in the car after. I had my person back.",
-    photo: 'assets/case-friends.jpg'
+    photo: 'assets/case-friends.jpg?v=2'
   },
   {
     name: 'Patricia L.',
     meta: 'Age 54 · Pennsylvania',
     quote: "I'm back at the gym.",
     story: "I had gained twenty pounds I couldn't lose. My joints ached. I gave up on the gym at fifty-two — figured my body was just done. A year on HRT and I'm lifting again, walking three miles a day, sleeping through the night. The weight is moving. I have my body back.",
-    photo: 'assets/case-gym.jpg'
+    photo: 'assets/case-gym.jpg?v=2'
   }
 ];
 
@@ -121,27 +121,6 @@ const HRT_COMPARISON = [
   { icon: '💗', problem: 'Heart palpitations and anxiety spikes',         fix: 'Estrogen protects cardiovascular function — palpitations resolve' },
   { icon: '🩻', problem: 'Bone loss and fracture risk',                   fix: 'Estrogen is your primary bone protector — HRT stops bone density decline' },
   { icon: '🪞', problem: 'Feeling like a stranger in your own body',      fix: 'Balanced hormones restore your sense of self — women describe it as "coming home"' }
-];
-
-const PATIENT_STORIES = [
-  {
-    name: 'Jessica L.',
-    location: 'Age 48 · Florida',
-    body: "I haven't had a hot flash in 6 weeks. My husband keeps telling me I look 10 years younger — and I finally feel like the woman he married.",
-    photo: 'assets/testimonial-1.jpg'
-  },
-  {
-    name: 'Amanda K.',
-    location: 'Age 52 · Colorado',
-    body: 'My sleep is finally restored. I wake up rested, energetic, and ready to take on the day. I wish I had started this years ago.',
-    photo: 'assets/testimonial-2.jpg'
-  },
-  {
-    name: 'Diana W.',
-    location: 'Age 46 · Washington',
-    body: 'After two ineffective specialists, Her Estrogen got my hormones right in 30 days. Best money I have ever spent on my health.',
-    photo: 'assets/testimonial-3.jpg'
-  }
 ];
 
 
@@ -176,7 +155,7 @@ const TIMELINE_STEPS = [
   title: 'Receive your medication',
   body: "Your prescriptions ship in discreet packaging straight to your door, every 90 days. Message your clinician anytime; we adjust dose based on how you feel.",
   image: 'patient receiving her package at the door',
-  src: 'assets/step-3-receive-medication.jpg',
+  src: 'assets/step-3-receive-medication.jpg?v=2',
   meta: 'Free shipping · 3–5 days'
 }];
 
