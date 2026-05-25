@@ -378,6 +378,61 @@ function validateBirthday(b) {
 }
 
 // =====================================================================
+// Sticky draft — persist partial quiz answers to localStorage so the
+// user re-hydrates on reload AND we can replay them as Klaviyo profile
+// properties the instant we capture an email.
+//
+// Key: `herestrogen_quiz_draft`. Cleared on successful submit. Expires
+// after 7 days so stale drafts don't haunt return visits months later.
+// =====================================================================
+const DRAFT_KEY = 'herestrogen_quiz_draft';
+const DRAFT_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return null;
+    if (!parsed.savedAt || (Date.now() - parsed.savedAt) > DRAFT_TTL_MS) {
+      localStorage.removeItem(DRAFT_KEY);
+      return null;
+    }
+    return parsed;
+  } catch (e) {
+    return null;
+  }
+}
+function saveDraft(answers, idx) {
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({
+      answers: answers || {},
+      idx: typeof idx === 'number' ? idx : 0,
+      savedAt: Date.now()
+    }));
+  } catch (e) { /* storage disabled — silently no-op */ }
+}
+function clearDraft() {
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+}
+
+// Build a sanitized set of Klaviyo profile properties from in-progress
+// quiz answers. Same compliance locks as /api/quiz/submit — opaque slugs
+// only (e.g. "peri", "hot"), never the human-readable medical strings.
+function buildDraftProfileProps(answers) {
+  const props = { source: 'quiz', quiz_in_progress: true };
+  if (!answers) return props;
+  if (answers.stage) props.hormone_stage = answers.stage;
+  if (Array.isArray(answers.symptoms) && answers.symptoms.length > 0) {
+    props.primary_symptom = answers.symptoms[0];
+    props.symptom_score = answers.symptoms.length;
+  }
+  if (answers.tried) props.tried_hrt = answers.tried;
+  if (answers.preference) props.preference = answers.preference;
+  return props;
+}
+
+// =====================================================================
 // Klaviyo integration — public client-side subscription
 // =====================================================================
 // company_id and list_id are PUBLIC (used in browser). Safe to commit.
@@ -403,10 +458,23 @@ const KLAVIYO_SEND_HEALTH_DATA = false;
 //
 // We dedupe via localStorage so re-entering the page doesn't re-fire.
 // =====================================================================
-async function fireStartedQuiz(email) {
+// We attach the in-progress draft answers as profile properties on the
+// same call — this is the "sticky" payload that lets F1 Quiz Abandonment
+// personalize emails ("Hi {{ first_name|default:'there' }}…") and that
+// gives nurture flows context even when the user never finishes.
+async function fireStartedQuiz(email, answers) {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
   const dedupeKey = 'klaviyo_started_quiz_' + email;
   if (localStorage.getItem(dedupeKey)) return;
+
+  const profileAttrs = { email };
+  if (answers && answers.firstName) {
+    profileAttrs.first_name = String(answers.firstName).slice(0, 80);
+  }
+  const draftProps = buildDraftProfileProps(answers);
+  if (Object.keys(draftProps).length > 0) {
+    profileAttrs.properties = draftProps;
+  }
 
   try {
     const resp = await fetch(
@@ -423,7 +491,7 @@ async function fireStartedQuiz(email) {
             attributes: {
               properties: { step: 'contact' },
               metric: { data: { type: 'metric', attributes: { name: 'Started Quiz' } } },
-              profile: { data: { type: 'profile', attributes: { email: email } } }
+              profile: { data: { type: 'profile', attributes: profileAttrs } }
             }
           }
         })
@@ -437,6 +505,41 @@ async function fireStartedQuiz(email) {
   } catch (err) {
     // Never break the quiz flow on a Klaviyo failure
     console.warn('[klaviyo] Started Quiz failed:', err && err.message);
+  }
+}
+
+// Profile-only patch — used when the user changes answers AFTER we've
+// already captured their email (e.g. clicks Back to change a symptom).
+// The Started Quiz event is deduped per-email, so subsequent edits would
+// be invisible to Klaviyo without this. No event fires, just a profile
+// upsert via the public client API. Throttled by a 2s debounce in the
+// caller so we don't hammer Klaviyo on every keystroke.
+async function patchKlaviyoProfile(email, answers) {
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+  const profileAttrs = { email };
+  if (answers && answers.firstName) {
+    profileAttrs.first_name = String(answers.firstName).slice(0, 80);
+  }
+  const draftProps = buildDraftProfileProps(answers);
+  if (Object.keys(draftProps).length > 0) {
+    profileAttrs.properties = draftProps;
+  }
+  try {
+    await fetch(
+      'https://a.klaviyo.com/client/profiles/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID),
+      {
+        method: 'POST',
+        headers: {
+          'revision': '2024-10-15',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: { type: 'profile', attributes: profileAttrs }
+        })
+      }
+    );
+  } catch (err) {
+    console.warn('[klaviyo] profile patch failed:', err && err.message);
   }
 }
 
@@ -487,6 +590,9 @@ async function submitQuizToServer(answers) {
     });
     if (resp.ok) {
       localStorage.setItem(dedupeKey, '1');
+      // Quiz is in the books — sticky draft is no longer useful, wipe it
+      // so a return visit starts fresh.
+      clearDraft();
       // Sanitized conversion event — no medical info, just signals "form completed".
       if (typeof window.trackCompleteRegistration === 'function') {
         window.trackCompleteRegistration();
@@ -501,9 +607,32 @@ async function submitQuizToServer(answers) {
 }
 
 function Quiz() {
-  const [idx, setIdx] = useState(0);
-  const [answers, setAnswers] = useState({});
+  // Hydrate from a saved draft so partial sessions survive reload + return
+  // visits. loadDraft() handles its own TTL + corruption checks.
+  const draft = React.useMemo(() => loadDraft(), []);
+  const [idx, setIdx] = useState(() => {
+    if (!draft) return 0;
+    const want = typeof draft.idx === 'number' ? draft.idx : 0;
+    return Math.min(Math.max(want, 0), STEPS.length - 1);
+  });
+  const [answers, setAnswers] = useState(() => (draft && draft.answers) || {});
   const [done, setDone] = useState(false);
+
+  // Persist the draft on every state change while the quiz is in progress.
+  React.useEffect(() => {
+    if (!done) saveDraft(answers, idx);
+  }, [answers, idx, done]);
+
+  // Re-sync the Klaviyo profile when the user edits answers AFTER we've
+  // already captured their email. Debounced 2s so we don't hammer Klaviyo
+  // on every click. No-op until email validates.
+  React.useEffect(() => {
+    const email = answers.email || '';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    if (!localStorage.getItem('klaviyo_started_quiz_' + email)) return; // initial event hasn't fired yet
+    const t = setTimeout(() => { patchKlaviyoProfile(email, answers); }, 2000);
+    return () => clearTimeout(t);
+  }, [answers]);
 
   const step = STEPS[idx];
   const total = STEPS.length;
@@ -663,11 +792,14 @@ function Quiz() {
                 value={answers.email || ''}
                 onChange={(e) => {
                   const v = e.target.value;
-                  setAnswers({ ...answers, email: v });
+                  const nextAnswers = { ...answers, email: v };
+                  setAnswers(nextAnswers);
                   // Fire Started Quiz once the email validates — this is the
                   // signal F1 Quiz Abandonment listens for. The helper is
                   // idempotent (localStorage dedupe) so re-typing won't re-fire.
-                  fireStartedQuiz(v);
+                  // We pass the in-progress answers so the profile carries the
+                  // sticky context (symptoms, stage, etc.) on first capture.
+                  fireStartedQuiz(v, nextAnswers);
                 }}
                 autoComplete="email"
                 inputMode="email"
