@@ -5,8 +5,9 @@
 // for the win-back flows (F8A/B/C/D) at 30/90/180/360 days.
 //
 // We deliberately do NOT clear the profile's `current_plan_length` or
-// `product` properties on cancel — keeping them lets win-back emails reference
-// the customer's last plan, and historical segments still resolve correctly.
+// `product_count` properties on cancel — keeping them lets win-back emails
+// reference the customer's last plan, and historical segments still resolve
+// correctly.
 //
 // Required env vars (set in Vercel + .env.local):
 //   KLAVIYO_PRIVATE_KEY        — pk_* private API key
@@ -24,7 +25,7 @@
 //     {
 //       "email": "customer@example.com",
 //       "plan_length": 3 | 6 | 12,        // optional but recommended
-//       "product": "Estradiol Gel",       // optional but recommended
+//       "product_count": 1 | 2,           // optional but recommended
 //       "reason": "too_expensive"         // optional; free-form cancel reason
 //     }
 //
@@ -59,7 +60,7 @@ module.exports = async (req, res) => {
   const body = req.body || {};
   const email = (body.email || '').trim().toLowerCase();
   const plan_length = body.plan_length;
-  const product = body.product ? body.product.toString().trim() : null;
+  const product_count = body.product_count;
   const reason = body.reason ? body.reason.toString().trim() : null;
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -68,9 +69,12 @@ module.exports = async (req, res) => {
   if (plan_length !== undefined && plan_length !== null && ![3, 6, 12].includes(plan_length)) {
     return res.status(400).json({ error: 'plan_length, if provided, must be 3, 6, or 12.' });
   }
+  if (product_count !== undefined && product_count !== null && ![1, 2].includes(product_count)) {
+    return res.status(400).json({ error: 'product_count, if provided, must be 1 or 2.' });
+  }
 
   try {
-    const result = await fireCancelledSubscription({ email, plan_length, product, reason });
+    const result = await fireCancelledSubscription({ email, plan_length, product_count, reason });
     console.log(`[orders/cancelled] Klaviyo Cancelled Subscription fired for ${email} (status ${result.status})`);
     return res.status(200).json({ ok: true });
   } catch (err) {

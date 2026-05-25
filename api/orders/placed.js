@@ -3,9 +3,9 @@
 // Source-of-truth endpoint for "a customer has paid." Called by OpenLoop's
 // webhook (or any future payment processor) when a payment is successfully
 // captured. Fires the Klaviyo "Placed Order" event AND updates the profile's
-// `current_plan_length` and `product` custom properties so Klaviyo segments
-// (Active 3/6/12-Month Plan, Single Product Customer, Complete Protocol
-// Customer, etc.) can filter on them.
+// `current_plan_length` and `product_count` custom properties so Klaviyo
+// segments (Active 3/6/12-Month Plan, Single Product Customer, etc.) can
+// filter on them.
 //
 // NOTE: As of this build, Stripe is NO LONGER the payment processor for live
 // transactions. The /checkout flow on the site exists only as a whitelabeled
@@ -27,10 +27,9 @@
 //     {
 //       "email": "customer@example.com",
 //       "plan_length": 3 | 6 | 12,
-//       "product": "Estradiol Gel"        // single string, NOT an array
-//                                          // use "Complete Protocol" for the bundle
+//       "product_count": 1 | 2,            // 1 = single product, 2 = bundle
 //       "value": 116,
-//       "currency": "USD"                  // optional, defaults to "USD"
+//       "currency": "USD"                   // optional, defaults to "USD"
 //     }
 //
 // Response:
@@ -68,7 +67,7 @@ module.exports = async (req, res) => {
   const body = req.body || {};
   const email = (body.email || '').trim().toLowerCase();
   const plan_length = body.plan_length;
-  const product = (body.product || '').toString().trim();
+  const product_count = body.product_count;
   const value = body.value;
   const currency = body.currency || 'USD';
 
@@ -78,8 +77,8 @@ module.exports = async (req, res) => {
   if (![3, 6, 12].includes(plan_length)) {
     return res.status(400).json({ error: 'plan_length must be 3, 6, or 12.' });
   }
-  if (!product) {
-    return res.status(400).json({ error: 'product must be a non-empty string (e.g. "Estradiol Gel" or "Complete Protocol").' });
+  if (![1, 2].includes(product_count)) {
+    return res.status(400).json({ error: 'product_count must be 1 (single product) or 2 (bundle).' });
   }
   if (typeof value !== 'number' || value <= 0) {
     return res.status(400).json({ error: 'value must be a positive number (dollars).' });
@@ -89,7 +88,7 @@ module.exports = async (req, res) => {
   // force OpenLoop to retry forever — log loudly on failure but return 502 so
   // OpenLoop knows to retry once if their retry policy supports it.
   try {
-    const result = await firePlacedOrder({ email, plan_length, product, value, currency });
+    const result = await firePlacedOrder({ email, plan_length, product_count, value, currency });
     console.log(`[orders/placed] Klaviyo Placed Order fired for ${email} (status ${result.status})`);
     return res.status(200).json({ ok: true });
   } catch (err) {
