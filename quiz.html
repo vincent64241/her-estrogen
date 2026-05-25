@@ -392,6 +392,54 @@ const KLAVIYO_LIST_ID    = 'Rsp58u';
 //   (no symptoms, stage — those stay in Supabase only).
 const KLAVIYO_SEND_HEALTH_DATA = false;
 
+// =====================================================================
+// Started Quiz event — fires client-side via Klaviyo's /client/events/
+// endpoint (public, uses company_id; no private key needed).
+//
+// Fires the first time a user types a VALID email in the contact step.
+// Triggers F1 Quiz Abandonment in Klaviyo. If the user goes on to submit
+// the quiz within 1 hour, /api/quiz/submit fires a "Completed Quiz" event
+// which is F1's exit signal — so the abandonment emails never go out.
+//
+// We dedupe via localStorage so re-entering the page doesn't re-fire.
+// =====================================================================
+async function fireStartedQuiz(email) {
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+  const dedupeKey = 'klaviyo_started_quiz_' + email;
+  if (localStorage.getItem(dedupeKey)) return;
+
+  try {
+    const resp = await fetch(
+      'https://a.klaviyo.com/client/events/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID),
+      {
+        method: 'POST',
+        headers: {
+          'revision': '2024-10-15',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'event',
+            attributes: {
+              properties: { step: 'contact' },
+              metric: { data: { type: 'metric', attributes: { name: 'Started Quiz' } } },
+              profile: { data: { type: 'profile', attributes: { email: email } } }
+            }
+          }
+        })
+      }
+    );
+    if (resp.ok || resp.status === 202) {
+      localStorage.setItem(dedupeKey, '1');
+    } else {
+      console.warn('[klaviyo] Started Quiz non-OK:', resp.status);
+    }
+  } catch (err) {
+    // Never break the quiz flow on a Klaviyo failure
+    console.warn('[klaviyo] Started Quiz failed:', err && err.message);
+  }
+}
+
 // Convert a US phone like "(555) 123-4567" to Klaviyo's required E.164 format "+15551234567"
 function toE164(phone) {
   const digits = (phone || '').replace(/\D/g, '');
@@ -613,7 +661,14 @@ function Quiz() {
                 type="email"
                 placeholder="you@email.com"
                 value={answers.email || ''}
-                onChange={(e) => setAnswers({ ...answers, email: e.target.value })}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setAnswers({ ...answers, email: v });
+                  // Fire Started Quiz once the email validates — this is the
+                  // signal F1 Quiz Abandonment listens for. The helper is
+                  // idempotent (localStorage dedupe) so re-typing won't re-fire.
+                  fireStartedQuiz(v);
+                }}
                 autoComplete="email"
                 inputMode="email"
               />

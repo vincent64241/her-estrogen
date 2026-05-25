@@ -39,6 +39,7 @@
 //   }
 
 const { supabaseAdmin } = require('../../lib/supabase');
+const { fireCompletedQuiz } = require('../../lib/klaviyo');
 
 const KLAVIYO_BASE = 'https://a.klaviyo.com/api';
 const KLAVIYO_REVISION = '2024-10-15';
@@ -214,11 +215,18 @@ module.exports = async (req, res) => {
     responses: body.responses && typeof body.responses === 'object' ? body.responses : {}
   };
 
-  // Run all three writes in parallel. Klaviyo failures must NOT fail the request.
-  const [supaResult, importResult, subscribeResult] = await Promise.allSettled([
+  // Run all four writes in parallel. Klaviyo failures must NOT fail the request.
+  //   - writeToSupabase: canonical record
+  //   - klaviyoProfileImport: create/update profile with quiz properties
+  //   - klaviyoSubscribe: add to list Rsp58u (triggers F2 Pre-Rx Nurture)
+  //   - fireCompletedQuiz: fires "Completed Quiz" metric event (EXIT signal
+  //     for F1 Quiz Abandonment — stops the F1 flow from sending abandonment
+  //     emails when the user actually completes within the 1hr window)
+  const [supaResult, importResult, subscribeResult, completedResult] = await Promise.allSettled([
     writeToSupabase(payload),
     klaviyoProfileImport(payload),
-    klaviyoSubscribe(payload)
+    klaviyoSubscribe(payload),
+    fireCompletedQuiz({ email })
   ]);
 
   if (supaResult.status === 'rejected') {
@@ -230,6 +238,9 @@ module.exports = async (req, res) => {
   }
   if (subscribeResult.status === 'rejected') {
     console.warn('[quiz/submit] klaviyo subscribe failed:', subscribeResult.reason && subscribeResult.reason.message);
+  }
+  if (completedResult.status === 'rejected') {
+    console.warn('[quiz/submit] klaviyo Completed Quiz event failed:', completedResult.reason && completedResult.reason.message);
   }
 
   // UX is fire-and-forget — always return 200 so the client can advance.
