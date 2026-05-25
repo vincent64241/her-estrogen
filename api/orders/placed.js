@@ -2,11 +2,10 @@
 //
 // Source-of-truth endpoint for "a customer has paid." Called by OpenLoop's
 // webhook (or any future payment processor) when a payment is successfully
-// captured. Fires the Klaviyo "Placed Order" event which drives:
-//   - New customer welcome flow (F3)
-//   - Active customer care flow (F4)
-//   - Plan upgrade flow eligibility (F5A/B — once subscription_start_date is set)
-//   - Revenue dashboards
+// captured. Fires the Klaviyo "Placed Order" event AND updates the profile's
+// `current_plan_length` and `product` custom properties so Klaviyo segments
+// (Active 3/6/12-Month Plan, Single Product Customer, Complete Protocol
+// Customer, etc.) can filter on them.
 //
 // NOTE: As of this build, Stripe is NO LONGER the payment processor for live
 // transactions. The /checkout flow on the site exists only as a whitelabeled
@@ -28,13 +27,14 @@
 //     {
 //       "email": "customer@example.com",
 //       "plan_length": 3 | 6 | 12,
-//       "products": ["Estradiol Gel", "Progesterone Pill"],
+//       "product": "Estradiol Gel"        // single string, NOT an array
+//                                          // use "Complete Protocol" for the bundle
 //       "value": 116,
-//       "currency": "USD"        // optional, defaults to "USD"
+//       "currency": "USD"                  // optional, defaults to "USD"
 //     }
 //
 // Response:
-//   200 { ok: true }                       — event fired
+//   200 { ok: true }                       — event fired + profile updated
 //   400 { error: <validation message> }    — bad payload
 //   401 { error: 'Unauthorized' }          — missing or wrong webhook secret
 //   502 { error: 'Klaviyo event firing failed', detail: ... }
@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
   const body = req.body || {};
   const email = (body.email || '').trim().toLowerCase();
   const plan_length = body.plan_length;
-  const products = body.products;
+  const product = (body.product || '').toString().trim();
   const value = body.value;
   const currency = body.currency || 'USD';
 
@@ -78,18 +78,18 @@ module.exports = async (req, res) => {
   if (![3, 6, 12].includes(plan_length)) {
     return res.status(400).json({ error: 'plan_length must be 3, 6, or 12.' });
   }
-  if (!Array.isArray(products) || products.length === 0) {
-    return res.status(400).json({ error: 'products must be a non-empty array of strings.' });
+  if (!product) {
+    return res.status(400).json({ error: 'product must be a non-empty string (e.g. "Estradiol Gel" or "Complete Protocol").' });
   }
   if (typeof value !== 'number' || value <= 0) {
     return res.status(400).json({ error: 'value must be a positive number (dollars).' });
   }
 
-  // Fire the event. Never let a Klaviyo flake force OpenLoop to retry forever —
-  // log loudly on failure but return a 502 so OpenLoop knows to retry once if
-  // their retry policy supports it.
+  // Fire the event + update profile properties. Never let a Klaviyo flake
+  // force OpenLoop to retry forever — log loudly on failure but return 502 so
+  // OpenLoop knows to retry once if their retry policy supports it.
   try {
-    const result = await firePlacedOrder({ email, plan_length, products, value, currency });
+    const result = await firePlacedOrder({ email, plan_length, product, value, currency });
     console.log(`[orders/placed] Klaviyo Placed Order fired for ${email} (status ${result.status})`);
     return res.status(200).json({ ok: true });
   } catch (err) {
