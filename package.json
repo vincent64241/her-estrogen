@@ -2,7 +2,7 @@
   "name": "her-estrogen",
   "version": "1.0.0",
   "private": true,
-  "description": "Her Estrogen marketing site + post-quiz checkout. Static front-end with Vercel Serverless Functions for Stripe + Supabase.",
+  "description": "Her Estrogen marketing site + post-quiz checkout. Static front-end (HTML + CDN React + Babel-standalone) with Vercel Serverless Functions. Production payments processed by OpenLoop via webhooks (api/orders/*); Stripe scaffold (api/checkout, api/webhooks/stripe) is dormant and gated behind STRIPE_ENABLED.",
   "dependencies": {
     "stripe": "^17.5.0",
     "@supabase/supabase-js": "^2.45.0"

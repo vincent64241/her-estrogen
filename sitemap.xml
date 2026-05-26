@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Compliance note: only public, non-health-context pages belong here.
+       quiz.html, results.html, and confirmation.html are intentionally
+       omitted so health-condition copy does not appear in search snippets
+       (audit findings M-07, M-13). -->
+
   <url>
     <loc>https://herestrogen.com/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://herestrogen.com/quiz.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
     <loc>https://herestrogen.com/privacy.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://herestrogen.com/terms.html</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

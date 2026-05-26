@@ -8,6 +8,7 @@
 //   SUPABASE_SERVICE_ROLE_KEY
 
 const Stripe = require('stripe');
+const crypto = require('crypto');
 const {
   createPatient,
   createPrescription,
@@ -19,6 +20,18 @@ const {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20'
 });
+
+// DORMANT BY DEFAULT (audit finding M-02). OpenLoop is the production
+// payment processor — this Stripe webhook is kept for reference only.
+// Set STRIPE_ENABLED=true ONLY if you have intentionally reactivated the
+// Stripe payment path (and updated terms.html + privacy.html to match).
+const STRIPE_ENABLED = process.env.STRIPE_ENABLED === 'true';
+
+// Hash an email to a non-PHI log token (audit finding H-03).
+function logToken(email) {
+  if (!email) return 'sha-unknown';
+  return 'sha-' + crypto.createHash('sha256').update(String(email).toLowerCase()).digest('hex').slice(0, 8);
+}
 
 // Read raw body — required for Stripe signature verification.
 function readRawBody(req) {
@@ -34,6 +47,15 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end();
+  }
+
+  // Hard-stop until STRIPE_ENABLED is explicitly set (audit finding M-02).
+  // OpenLoop is the production processor; any Stripe events that hit this
+  // URL while disabled are most likely test-mode or from a stale webhook
+  // configuration and must NOT be allowed to write rows to Supabase.
+  if (!STRIPE_ENABLED) {
+    console.warn('[stripe] webhook hit while disabled (STRIPE_ENABLED != true); returning 410');
+    return res.status(410).json({ error: 'Stripe webhook is disabled. OpenLoop is the active processor.' });
   }
 
   const sig = req.headers['stripe-signature'];
@@ -114,7 +136,7 @@ module.exports = async (req, res) => {
           instructions: 'Apply as directed by your licensed Her Estrogen provider.'
         });
 
-        console.log(`[stripe→supabase] patient + prescription created for ${email}`);
+        console.log(`[stripe→supabase] patient + prescription created for ${logToken(email)}`);
         break;
       }
 
@@ -129,7 +151,7 @@ module.exports = async (req, res) => {
               ? new Date(sub.current_period_end * 1000).toISOString()
               : null
           });
-          console.log(`[stripe→supabase] patient activated: ${patient.email}`);
+          console.log(`[stripe→supabase] patient activated: ${logToken(patient.email)}`);
         } else {
           console.warn(`[stripe→supabase] no patient found for customer ${sub.customer}`);
         }
@@ -149,7 +171,7 @@ module.exports = async (req, res) => {
               ? new Date(sub.current_period_end * 1000).toISOString()
               : null
           });
-          console.log(`[stripe→supabase] patient ${patient.email} → ${newStatus}`);
+          console.log(`[stripe→supabase] patient ${logToken(patient.email)} → ${newStatus}`);
         }
         break;
       }
@@ -162,7 +184,7 @@ module.exports = async (req, res) => {
           await updatePatientStatus(patient.id, 'cancelled', {
             subscription_cancelled_at: new Date().toISOString()
           });
-          console.log(`[stripe→supabase] patient cancelled: ${patient.email}`);
+          console.log(`[stripe→supabase] patient cancelled: ${logToken(patient.email)}`);
         }
         break;
       }
@@ -180,7 +202,7 @@ module.exports = async (req, res) => {
                 ? new Date(sub.current_period_end * 1000).toISOString()
                 : null
             });
-            console.log(`[stripe→supabase] refill recorded: ${patient.email}`);
+            console.log(`[stripe→supabase] refill recorded: ${logToken(patient.email)}`);
           }
         }
         break;
@@ -191,7 +213,7 @@ module.exports = async (req, res) => {
         const invoice = event.data.object;
         const patient = await getPatientByStripeCustomerId(invoice.customer);
         if (patient) {
-          console.warn(`[stripe→supabase] payment failed: ${patient.email}`);
+          console.warn(`[stripe→supabase] payment failed: ${logToken(patient.email)}`);
           // TODO: send "update your card" email via Postmark/Resend
         }
         break;

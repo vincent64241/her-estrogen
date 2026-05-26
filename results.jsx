@@ -53,214 +53,198 @@ const SYMPTOMS_LIST = [
 
 // (Plan options now derived from PLAN_DETAILS / PLAN_ORDER above)
 
+// Audit findings C-06, H-13, C-11: removed rating/reviewCount fields. Site
+// is pre-launch — no real reviews exist. Restore only with verified data.
+// Audit finding H-19: removed "custom-compounded" / "bioidentical" framing
+// where it conflicts with the FDA-approved product line.
 const MEDS = {
   bundle: {
     name: 'The Complete Protocol',
-    label: 'Most Effective — The Clinical Gold Standard',
-    badge: 'Recommended',
+    label: 'Estradiol + Progesterone',
+    badge: 'Often Prescribed',
     badgeKind: 'pink',
-    rating: '4.9',
-    reviewCount: '3,210',
     product: 'Estradiol Gel + Progesterone Pill',
-    description: 'The clinical gold standard — prescribed together for complete hormonal restoration',
+    description: 'When clinically appropriate, FDA-approved estradiol and oral progesterone are commonly prescribed together for hormone therapy.',
     image: 'assets/cream.png',
     secondImage: 'assets/oral-pills.png',
     imageLabels: ['Estradiol Gel', 'Progesterone Pill'],
     features: [
-      'Both FDA-approved medications included',
-      'Estrogen + Progesterone — the complete protocol',
-      'Provider consultation, messaging, check-ins all included',
-      'Price NEVER increases — locked in at today\'s rate',
-      'Free shipping every month',
-      'HSA/FSA approved'
+      'FDA-approved estradiol + FDA-approved oral progesterone',
+      'Clinician consultation, messaging, and check-ins during your plan',
+      'Price locked in at today\'s rate for your plan term',
+      'Free shipping',
+      'HSA/FSA accepted'
     ]
   },
   gel: {
     name: 'Estradiol Gel',
-    label: 'Estrogen Only',
+    label: 'Estradiol — Topical Gel',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
-    rating: '4.8',
-    reviewCount: '2,847',
-    product: 'FDA-Approved Estradiol Gel — Daily Transdermal',
-    description: "Start here if your provider hasn't yet prescribed progesterone, or if you've had a hysterectomy",
+    product: 'FDA-approved estradiol gel',
+    description: 'A topical estradiol gel — one of several FDA-approved forms of estrogen therapy your clinician may consider.',
     image: 'assets/cream.png',
     features: [
-      'FDA-approved estradiol gel — prescribed to your dose',
-      'Daily transdermal application — liver-safe delivery',
-      'Provider consultation, messaging, check-ins included',
-      'Price never increases',
+      'FDA-approved estradiol gel — dose set by the clinician',
+      'Daily topical application',
+      'Clinician consultation, messaging, and check-ins during your plan',
+      'Price locked in at today\'s rate for your plan term',
       'Free shipping',
-      'HSA/FSA approved'
+      'HSA/FSA accepted'
     ]
   },
   patch: {
     name: 'Estradiol Patch',
-    label: 'Estrogen Only — Twice Weekly',
+    label: 'Estradiol — Transdermal Patch',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
-    rating: '4.8',
-    reviewCount: '1,964',
-    product: 'FDA-Approved Estradiol Patch — Twice-Weekly Application',
-    description: 'Same FDA-approved estrogen as the gel — changed just twice a week for women who prefer minimal routine',
+    product: 'FDA-approved estradiol patch',
+    description: 'A twice-weekly transdermal estradiol patch — one of several FDA-approved forms of estrogen therapy your clinician may consider.',
     image: 'assets/transdermal-patch.png',
     features: [
-      'FDA-approved estradiol patch — prescribed to your dose',
-      'Twice-weekly application — consistent levels, no daily step',
-      'Provider consultation, messaging, check-ins included',
-      'Price never increases',
+      'FDA-approved estradiol patch — dose set by the clinician',
+      'Twice-weekly application',
+      'Clinician consultation, messaging, and check-ins during your plan',
+      'Price locked in at today\'s rate for your plan term',
       'Free shipping',
-      'HSA/FSA approved'
+      'HSA/FSA accepted'
     ]
   },
   pill: {
     name: 'Estradiol Pill',
-    label: 'Oral Estrogen Option',
+    label: 'Estradiol — Oral Tablet',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
-    rating: '4.7',
-    reviewCount: '1,412',
-    product: 'FDA-Approved Estradiol Pill — Once-Daily Oral Tablet',
-    description: 'A convenient once-daily tablet — one of the most studied forms of HRT with decades of clinical evidence',
+    product: 'FDA-approved oral estradiol tablet',
+    description: 'A once-daily oral estradiol tablet — one of several FDA-approved forms of estrogen therapy your clinician may consider.',
     image: 'assets/oral-pills.png',
     features: [
-      'FDA-approved estradiol tablet — prescribed to your dose',
-      'Once-daily oral — simple and convenient',
-      'Provider consultation, messaging, check-ins included',
-      'Price never increases',
+      'FDA-approved estradiol tablet — dose set by the clinician',
+      'Once-daily oral',
+      'Clinician consultation, messaging, and check-ins during your plan',
+      'Price locked in at today\'s rate for your plan term',
       'Free shipping',
-      'HSA/FSA approved'
+      'HSA/FSA accepted'
     ]
   },
   dhea: {
     name: 'Estradiol Vaginal Cream',
-    label: 'Vaginal Health',
+    label: 'Estradiol — Vaginal Cream',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
-    rating: '4.7',
-    reviewCount: '892',
-    product: 'FDA-Approved Estradiol Vaginal Cream — Applied As Directed',
-    description: 'Restores vaginal tissue health and relieves intimate menopause symptoms — minimal systemic absorption',
+    product: 'FDA-approved estradiol vaginal cream',
+    description: 'A vaginal estradiol cream — used for local treatment when clinically appropriate.',
     image: 'assets/vaginal.png',
     features: [
-      'FDA-approved Estradiol Vaginal Cream — prescribed and shipped to your door',
-      'Local vaginal treatment — minimal systemic absorption',
-      'Provider consultation, messaging, check-ins included',
-      'Price never increases',
+      'FDA-approved estradiol vaginal cream',
+      'Local application; minimal systemic absorption',
+      'Clinician consultation, messaging, and check-ins during your plan',
+      'Price locked in at today\'s rate for your plan term',
       'Free shipping',
-      'HSA/FSA approved'
+      'HSA/FSA accepted'
     ]
   }
 };
 
+// Goals reframed as conversation topics, not guaranteed outcomes (audit
+// findings C-11, FTC §5). Specific time-to-relief claims removed.
 const GOALS = [
-  { text: 'Eliminate hot flashes and night sweats — most women see results within 7 days' },
-  { text: 'Restore deep sleep and mental clarity — brain fog lifts as hormones stabilize' },
-  { text: 'Reclaim your energy, mood, and sense of self — feel like YOU again' }
+  { text: 'Discuss vasomotor symptoms (hot flashes, night sweats) with your clinician' },
+  { text: 'Discuss sleep, mood, and cognitive symptoms in the context of hormone changes' },
+  { text: 'Build a personalized plan with a licensed clinician — adjusted over time based on how you feel' }
 ];
 
+// "What's included" rewritten to drop unsubstantiated dollar "values" and
+// "guaranteed" SLAs (audit findings H-14, C-11, H-05).
 const INCLUDED = [
   {
     icon: '💊',
-    title: 'Your FDA-Approved HRT Protocol',
-    body: "Estradiol, progesterone, or both — prescribed for your symptoms. Shipped in premium packaging within days of approval.",
+    title: 'FDA-approved medication (if prescribed)',
+    body: "If a clinician approves treatment, your medication ships from a licensed pharmacy partner. Specific protocol is determined by the clinician.",
     value: null
   },
   {
     icon: '👩‍⚕️',
-    title: 'BONUS 1 · Your Personal Provider',
-    body: "Board-certified, specializes only in women's hormonal health. Reviews your intake within 24 hours.",
-    value: '$297 value'
+    title: 'Licensed clinician via OpenLoop Health',
+    body: "A clinician licensed in your state reviews your intake — typically within 1–2 business days. Treatment is subject to clinician determination and is not guaranteed.",
+    value: null
   },
   {
     icon: '💬',
-    title: 'BONUS 2 · Unlimited Provider Messaging',
-    body: 'Message about anything, anytime. Guaranteed 4-hour response during business hours.',
-    value: '$197/mo value'
+    title: 'Messaging during your plan',
+    body: 'Message the clinical team during your plan about dosing or how you are feeling. Response times vary by clinician availability.',
+    value: null
   },
   {
     icon: '📋',
-    title: 'BONUS 3 · Monthly Provider Check-In',
-    body: 'Your provider reaches out at day 30 to review and adjust your dose. You never have to ask.',
-    value: '$99/mo value'
+    title: 'Periodic clinician check-ins',
+    body: 'Periodic check-ins to review progress and discuss any dose changes the clinician recommends.',
+    value: null
   },
   {
     icon: '📖',
-    title: 'BONUS 4 · The Her Estrogen Hormone Guide',
-    body: 'Personalized education — what your body is doing and what to expect, week by week.',
-    value: '$49 value'
-  },
-  {
-    icon: '✨',
-    title: 'BONUS 5 · The Her Estrogen Community',
-    body: 'Private community of women at every stage. Provider Q&As twice monthly.',
-    value: '$29/mo value'
+    title: 'Educational resources',
+    body: 'Plain-language information about hormone changes, treatment options, and what to discuss with your clinician.',
+    value: null
   },
   {
     icon: '🚚',
-    title: 'BONUS 6 · Free Shipping. Forever.',
-    body: 'Every refill, every month. No minimums, no thresholds.',
-    value: '$120/yr value'
+    title: 'Free shipping',
+    body: 'No shipping charges on plan medications.',
+    value: null
   }
 ];
 
-// Roll-up shown at the bottom of the Included block
-const INCLUDED_TOTAL_VALUE = '$540+/month value';
-const INCLUDED_YOU_PAY = 'from $143/month (on the 12-month plan)';
+// Roll-up — removed unsubstantiated "$540+/month value" claim.
+const INCLUDED_TOTAL_VALUE = '';
+const INCLUDED_YOU_PAY = 'from $143/month on the 12-month plan';
 
+// Audit findings H-07, H-14: removed hard SLA promises ("24 hours",
+// "guaranteed 4-hour response"). Reconciled with Terms §6: treatment is
+// subject to clinician determination and not guaranteed.
 const STEPS = [
-  { n: 1, title: 'Provider Review', body: "You're pre-screened. After checkout, a board-certified licensed Her Estrogen provider reviews your complete intake within 24 hours." },
-  { n: 2, title: 'Prescription Approval', body: 'Most prescriptions are approved in under 24 hours. Your provider may send you a message through your secure Her Estrogen portal with any questions or adjustments.' },
-  { n: 3, title: 'Medication Prepared and Shipped', body: 'Once approved, your FDA-approved prescription is processed and shipped directly to your door in premium Her Estrogen packaging. Tracking sent by text and email.' },
-  { n: 4, title: 'Automatic Refills', body: 'Your medication automatically refills every 12 weeks throughout your plan. We handle everything — you just open your door.' },
-  { n: 5, title: 'Unlimited Support', body: "Questions about how you're feeling, your dosage, or your protocol? Message your licensed Her Estrogen provider anytime — guaranteed 4-hour response during business hours." }
+  { n: 1, title: 'Clinician review', body: "After checkout, a licensed clinician via our medical partner, OpenLoop Health, reviews your intake — typically within 1–2 business days. Treatment is subject to clinician determination and is not guaranteed." },
+  { n: 2, title: 'Treatment decision', body: 'The clinician decides whether hormone therapy is clinically appropriate for you. If approved, they may message you with dose questions through your secure portal. If not approved, your subscription payment is refunded per the refund policy below.' },
+  { n: 3, title: 'Medication shipped (if prescribed)', body: 'If prescribed, your medication is shipped from a licensed pharmacy partner. Shipping windows vary by state. Tracking sent by email.' },
+  { n: 4, title: 'Refills', body: 'During your plan, refills are sent on a regular schedule. You can cancel before any renewal — see Terms §7 for renewal and cancellation details.' },
+  { n: 5, title: 'Ongoing support', body: "Message the clinical team during your plan about dosing or how you're feeling. Response times vary by clinician availability." }
 ];
 
-const STATS = [
-  { num: '87%', label: 'Women report significant symptom relief within 30 days' },
-  { num: '9/10', label: 'Patients say HRT is the most effective treatment they’ve tried' },
-  { num: '94%', label: 'Continuation rate after 6 months of treatment' },
-  { num: '5+ yrs', label: 'Average length of time patients stay on HRT' }
-];
+// Audit finding C-11: efficacy stats removed pending sourced citations.
+// "87% relief in 30 days", "94% continuation", "5+ years average" cannot be
+// from a pre-launch site. Restore only with peer-reviewed citations visible
+// at the point of claim (WHI, KEEPS, ELITE, etc.), reviewed by counsel.
+const STATS = [];
 
-const TESTIMONIALS = [
-  {
-    title: 'I finally feel like myself again',
-    body: "I suffered through 3 years of hot flashes, brain fog, and waking up at 3am convinced something was wrong with me. Six weeks into Her Estrogen and I sleep through the night. My husband says I'm a different person. He's right.",
-    name: 'Sarah M.'
-  },
-  {
-    title: 'My doctor never told me FDA-approved HRT existed like this',
-    body: 'I thought HRT meant scary synthetic hormones or shady compounded creams. Her Estrogen uses FDA-approved medications — that was the deciding factor for me. Three months in and the hot flashes are gone. The sleep alone was worth every penny.',
-    name: 'Jennifer K.'
-  },
-  {
-    title: 'Worth every single dollar',
-    body: "At 44 I thought exhaustion and irritability was just my personality now. Two months on the Complete Protocol and I have my energy back, I'm sleeping, and I actually want to be around people again. This is what healthcare should feel like.",
-    name: 'Michelle R.'
-  }
-];
+// Audit findings C-06, H-13: fabricated testimonials removed. Restore only
+// with named, consenting customers + typicality disclosure per 16 CFR Part 465.
+const TESTIMONIALS = [];
 
+// FAQ rewritten per audit findings H-15, H-19, M-17: refund language
+// aligned with Terms §8 (refund window closes when first medication ships);
+// removed "custom-compounded" / "bioidentical" framing where it conflicts
+// with the FDA-approved branded/generic product line; replaced "Her
+// Estrogen provider" with OpenLoop attribution.
 const FAQ_ITEMS = [
   {
-    q: 'What is the Her Estrogen prescription plan?',
-    a: 'Her Estrogen coordinates access to FDA-approved hormone replacement therapy (HRT) through a network of licensed providers. After your checkout, a board-certified provider reviews your intake and writes a custom prescription — choosing from FDA-approved estradiol gel, estradiol patch, estradiol pill, estradiol vaginal cream, or progesterone pill based on your symptoms and clinical needs. The medication is shipped directly to your door by our licensed pharmacy partner in premium Her Estrogen packaging.'
+    q: 'How does Her Estrogen work?',
+    a: 'Her Estrogen coordinates access to hormone therapy through a network of independent licensed clinicians at our medical partner, OpenLoop Health. After your subscription is initiated, a licensed clinician reviews your intake. If hormone therapy is clinically appropriate, the clinician may prescribe an FDA-approved product — estradiol gel, estradiol patch, oral estradiol, oral micronized progesterone, or vaginal estradiol cream — selected based on your clinical picture. Medication is shipped from a licensed pharmacy partner.'
   },
   {
     q: 'What does the price include?',
-    a: 'Your subscription includes your licensed provider consultation, written prescription, custom-compounded medication, unlimited provider messaging, free shipping on every refill, and quarterly check-ins every 3 months. There are no hidden fees and your price does not change as your dose adjusts.'
+    a: 'Your plan includes the clinician intake review, the prescription (if a clinician approves treatment), messaging access during your plan, periodic check-ins, and free shipping. There are no separate consultation fees. Plans automatically renew at the same price unless cancelled before the renewal date — see Terms §7 and §8 for renewal and cancellation details.'
   },
   {
     q: 'Is a prescription required?',
-    a: 'Yes. Bioidentical HRT requires a prescription from a licensed medical provider. Her Estrogen connects you with licensed physicians and nurse practitioners who review your health intake and, when appropriate, prescribe your custom hormone protocol. This is what separates Her Estrogen from OTC supplements — you get real, clinically effective hormone therapy.'
+    a: 'Yes. Estradiol and oral progesterone are prescription medications. A licensed clinician via OpenLoop Health reviews your intake and decides whether to prescribe. Her Estrogen is not itself a medical provider; we coordinate access to independent licensed clinicians.'
   },
   {
-    q: 'How long until I feel results?',
-    a: 'Most women notice improvements in sleep quality within the first 1–2 weeks. Hot flash frequency typically reduces by 50–70% within the first month. Full hormonal balance and complete symptom resolution generally occurs within 3 months. Individual results vary based on starting hormone levels and symptom severity.'
+    q: 'How quickly will I feel different?',
+    a: "Individual results vary. Hormone therapy is not appropriate for everyone, and outcomes depend on the individual's clinical picture, dosing, and other factors. Your clinician may adjust dosing during the plan based on how you are feeling."
   },
   {
-    q: "What if the provider determines HRT isn't right for me?",
-    a: 'If our licensed provider reviews your intake and determines that HRT is not medically appropriate for you, you will receive a full refund of your subscription payment. No questions asked. This is our complete guarantee.'
+    q: "What if the clinician determines hormone therapy isn't right for me?",
+    a: 'If a licensed clinician via OpenLoop Health reviews your intake and determines that hormone therapy is not medically appropriate, you will receive a full refund of your subscription payment per Terms §8. The refund window closes once medication has shipped — once your plan period begins and medication has shipped, standard plan terms apply.'
   }
 ];
 
@@ -289,85 +273,78 @@ function readQuizAnswers() {
   } catch (e) { return null; }
 }
 
+// Audit finding C-10: algorithm output reframed as "topics your clinician may
+// discuss with you" rather than "your prescription is X." The clinician —
+// not the page — decides what (if anything) to prescribe. Specific dose,
+// formulation, and even whether to prescribe at all are determined by the
+// independent licensed clinician at OpenLoop Health after intake review.
 function recommendProduct(quiz) {
-  if (!quiz) {
-    return {
-      primary: 'gel',
-      offerBundle: true,
-      reason: 'Most prescribed FDA-approved hormone therapy — a strong default for women in perimenopause and menopause.'
-    };
-  }
+  const generic = {
+    primary: 'gel',
+    offerBundle: true,
+    reason: 'Estradiol therapy is one of the FDA-approved options a clinician may consider for hormone therapy. The clinician will choose the form and dose (or recommend an alternative) based on your individual clinical picture.'
+  };
+  if (!quiz) return generic;
   const { stage, symptoms = [], age, preference } = quiz;
   const sys = ['hot', 'sleep', 'mood', 'brain', 'weight'];
   const systemicCount = symptoms.filter((s) => sys.includes(s)).length;
   const onlyVaginal = symptoms.length > 0 && symptoms.every((s) => s === 'skin');
 
-  // Honor explicit delivery-form preference (unless user picked "most effective" or left blank)
   if (preference === 'gel') {
     return {
       primary: 'gel',
       offerBundle: true,
-      reason: 'You preferred a daily cream — FDA-approved estradiol gel, the most prescribed first-line therapy.'
+      reason: 'You said you would prefer a topical gel. A topical estradiol gel is one of the FDA-approved forms of estrogen therapy a clinician may consider for you.'
     };
   }
   if (preference === 'patch') {
     return {
       primary: 'patch',
       offerBundle: true,
-      reason: 'You preferred a twice-weekly patch — FDA-approved estradiol patch, with the same liver-bypass benefits as the gel and the lowest daily routine.'
+      reason: 'You said you would prefer a transdermal patch. A twice-weekly estradiol patch is one of the FDA-approved forms of estrogen therapy a clinician may consider for you.'
     };
   }
   if (preference === 'vaginal') {
     return {
       primary: 'dhea',
       offerBundle: false,
-      reason: 'You preferred a local treatment — FDA-approved Estradiol Vaginal Cream, applied directly to vaginal tissue with minimal systemic absorption.'
+      reason: 'You said you would prefer a local treatment. A vaginal estradiol cream is one of the FDA-approved local treatments a clinician may consider for you.'
     };
   }
-  // preference === 'effective' or undefined → run the algorithm
 
-  // Vaginal/atrophy symptoms only → Estradiol Vaginal Cream first-line
   if (onlyVaginal) {
     return {
       primary: 'dhea',
       offerBundle: false,
-      reason: 'For local symptoms, FDA-approved Estradiol Vaginal Cream is the first-line option — minimal systemic absorption, applied directly to vaginal tissue.'
+      reason: 'For local symptoms, a vaginal estradiol cream is one of the FDA-approved local treatments a clinician may consider for you.'
     };
   }
 
-  // 60+ or postmenopause → start conservative with gel alone, offer bundle as upgrade
   if (age === '60+' || stage === 'post') {
     return {
       primary: 'gel',
       offerBundle: true,
-      reason: 'Lowest effective dose of FDA-approved estradiol gel — your provider can add progesterone if indicated.'
+      reason: 'A topical estradiol gel is one of several FDA-approved forms of estrogen therapy a clinician may consider, often at a low effective dose. The clinician decides on the actual protocol.'
     };
   }
 
-  // 2+ systemic symptoms → Complete Protocol (bundle) is the evidence-based choice
   if (systemicCount >= 2) {
     return {
       primary: 'bundle',
       offerBundle: false,
-      reason: "Multiple symptoms respond best to the Complete Protocol — FDA-approved estradiol gel + micronized progesterone. Backed by NAMS, IMS, and the FDA as the standard of care."
+      reason: 'When systemic symptoms are present, clinicians often consider estrogen with oral micronized progesterone (for patients with a uterus). The actual treatment plan is decided by the clinician after reviewing your intake.'
     };
   }
 
-  // Single systemic symptom → start with gel, suggest bundle upgrade
   if (systemicCount === 1) {
     return {
       primary: 'gel',
       offerBundle: true,
-      reason: 'FDA-approved estradiol gel — the most prescribed first-line therapy for your primary symptom.'
+      reason: 'A topical estradiol gel is one of several FDA-approved forms of estrogen therapy a clinician may consider for the symptom you reported.'
     };
   }
 
-  // Default fallback
-  return {
-    primary: 'bundle',
-    offerBundle: false,
-    reason: 'The Complete Protocol — FDA-approved estradiol gel + micronized progesterone — the most evidence-based first protocol.'
-  };
+  return generic;
 }
 
 // ============ UTILITIES ============
@@ -428,8 +405,8 @@ function Capture({ onContinue }) {
     <div className="capture">
       <div className="capture-card">
         <img src="assets/logo.png" alt="Her Estrogen" className="capture-logo" />
-        <h1>Almost there — where should we send your <em>hormone report?</em></h1>
-        <p className="capture-sub">Your personalized HRT protocol is ready. Enter your details to view your results.</p>
+        <h1>Almost there — where should we send your <em>next steps?</em></h1>
+        <p className="capture-sub">Enter your details to view your next steps. Submitting this form does not create a doctor-patient relationship or guarantee a prescription.</p>
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-row">
             <label className="field-label">First name</label>
@@ -479,7 +456,10 @@ function Capture({ onContinue }) {
             </div>
             {errors.phone && <div className="field-error">{errors.phone}</div>}
           </div>
-          <p className="privacy-note">🔒 Your information is protected by HIPAA. We never sell your data.</p>
+          {/* Updated to be accurate to the actual data flow — Klaviyo
+              receives email + first_name and does not currently have a BAA,
+              so "HIPAA-protected" was misleading (audit findings C-04, M-04). */}
+          <p className="privacy-note">🔒 We do not sell your data. See our <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> for how your information is used.</p>
           <button type="submit" className="btn-primary-full" disabled={submitting}>
             {submitting ? 'Loading…' : 'View My Results →'}
           </button>
@@ -750,19 +730,21 @@ function App() {
 
       {/* SECTION 1 — Urgency bar */}
       <div className={'urgency-bar' + (expired ? ' expired' : '')}>
-        <span className="label"><strong>{firstName}</strong> · Pre-Approved · Offer expires in</span>
+        {/* Audit finding C-10 / FTC §5: "Pre-Approved" framing softened so
+            visitors don't conflate intake submission with treatment approval. */}
+        <span className="label"><strong>{firstName}</strong> · Intake spot held for</span>
         <span className="timer">{expired ? '0:00 — Refresh to continue' : formatTime(timeLeft)}</span>
       </div>
 
       {/* SECTION 2 — Approval headline */}
       <section className="approval">
         <div className="container">
-          <span className="eyebrow">Pre-screened ✓</span>
-          <h1>{firstName} — <em>Pre-Approved</em> for Hormone Restoration</h1>
-          <p className="approval-sub">Based on your intake assessment, a licensed Her Estrogen provider has pre-screened your profile. You are a strong candidate for bioidentical HRT.</p>
+          <span className="eyebrow">Intake received</span>
+          <h1>{firstName} — your intake is <em>ready for clinician review</em></h1>
+          <p className="approval-sub">Thanks for your intake. A licensed clinician via our medical partner, OpenLoop Health, will review your responses to decide whether hormone therapy is clinically appropriate for you. Treatment is subject to clinician determination and is not guaranteed.</p>
 
           <div className="symptoms-block">
-            <div className="symptoms-label">Your reported symptoms</div>
+            <div className="symptoms-label">Topics you flagged</div>
             <div className="symptoms-tags">
               {SYMPTOMS_LIST.map((s, i) => (
                 <span key={i} className="symptom-tag">{s}</span>
@@ -772,50 +754,37 @@ function App() {
 
           <div className="data-cards two">
             <div className="data-card">
-              <div className="label">Hormone type</div>
-              <div className="value">Bioidentical HRT</div>
+              <div className="label">Possible category</div>
+              <div className="value">FDA-approved estradiol &amp; progesterone</div>
             </div>
             <div className="data-card">
-              <div className="label">Life stage</div>
-              <div className="value">Perimenopause</div>
+              <div className="label">Decision-maker</div>
+              <div className="value">Licensed clinician (OpenLoop Health)</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3 — Success probability */}
-      <section style={{ background: '#fff', paddingTop: 0 }}>
-        <div className="container">
-          <div className="probability">
-            <div className="probability-text">Based on your symptom profile, you have a very high likelihood of responding well to bioidentical HRT</div>
-            <div>
-              <div className="probability-stat">94.3%</div>
-              <div className="probability-label">Likelihood of improvement</div>
-            </div>
-          </div>
-          <div className="progress"><div className="progress-fill" style={{ width: '94.3%' }}></div></div>
-        </div>
-      </section>
+      {/* Audit finding C-11: unsourced 94.3% "likelihood of improvement"
+          claim removed. Restore only with sourced citation. */}
 
-      {/* SECTION 4 — Timeline chart */}
-      <section className="timeline-section">
-        <div className="container">
-          <h2 className="section-title">Your <em>symptom relief</em> timeline</h2>
-          <p className="section-sub">Most women feel a meaningful difference within 30 days — but symptoms come back if you stop. Bone, brain, and cardiovascular protection build month after month with consistent use. The protocol works because you stay on it.</p>
-          <TimelineChart />
-        </div>
-      </section>
+      {/* Audit findings C-11, FTC §5: unsourced "Most women feel a meaningful
+          difference within 30 days" timeline copy removed. The visual chart
+          shown earlier in the file was also reframing efficacy claims as
+          guaranteed timelines — the section is hidden site-wide pending
+          counsel-blessed copy with peer-reviewed citations. */}
+      {/* (Timeline chart section removed pending sourced copy) */}
 
       {/* SECTION 5 — Recommendation */}
       <section style={{ background: '#fff' }}>
         <div className="container">
           <div className="recommend">
             <div>
-              <span className="recommend-badge">Our Recommendation for {firstName}</span>
+              <span className="recommend-badge">Topic for clinician review · {firstName}</span>
               <h3>{med.product}</h3>
               <p>{recommendation.reason}</p>
-              <p style={{ fontSize: 13, color: 'var(--muted)', fontStyle: 'italic' }}>You can discuss your specific formulation with your licensed Her Estrogen provider after checkout — your protocol is always adjustable.</p>
-              <span className="small-badge">Prescription Required — Included in your plan</span>
+              <p style={{ fontSize: 13, color: 'var(--muted)', fontStyle: 'italic' }}>This is a category for discussion only — not a prescription. A licensed clinician via OpenLoop Health decides the actual treatment (including whether hormone therapy is appropriate at all) after reviewing your intake.</p>
+              <span className="small-badge">Prescription required — clinician approval is not guaranteed</span>
             </div>
             <div className="vial-wrap">
               <img src={med.image} alt={med.name} className="rec-product-img" />
@@ -871,12 +840,16 @@ function App() {
             <div className="included-note">+ No insurance required. HSA/FSA accepted.</div>
           </div>
 
+          {/* Refund block aligned with Terms §8 — refund applies only if a
+              clinician declines treatment or you cancel before shipment.
+              Once medication ships, standard plan terms apply (audit
+              finding H-15). */}
           <div className="approval-guarantee">
             <div className="approval-guarantee-head">
               <span className="approval-guarantee-icon" aria-hidden="true">🔒</span>
-              <strong>Our Provider Approval Guarantee</strong>
+              <strong>Refund policy</strong>
             </div>
-            <p>"If our licensed provider reviews your intake and determines HRT is not right for you — you receive a complete refund within 3 business days. It's that easy."</p>
+            <p>If a licensed clinician via OpenLoop Health determines hormone therapy is not clinically appropriate for you after reviewing your intake, you will receive a full refund of your subscription payment within three business days. You may also cancel and receive a refund before your first medication ships. Once medication has shipped, standard plan terms apply — see Terms §8 for the full refund policy.</p>
           </div>
         </div>
       </section>
@@ -900,17 +873,19 @@ function App() {
       <section className="pricing-section" ref={pricingRef}>
         <div className="container">
           <div className="urgency-callout">
-            <span className="reserved-pill">Your approval is reserved for {expired ? '0:00' : formatTime(timeLeft)}</span>
-            <h2>Save Up to $312/year</h2>
-            <p style={{ color: 'rgba(255,255,255,.92)', margin: '8px 0' }}>Choose 3, 6, or 12 months. Locked-in pricing. Cancel or pause after your plan period.</p>
-            <div className="green-line">24/7 provider access + unlimited messaging + medication — all included.</div>
+            {/* Audit finding H-14: "approval is reserved for X" countdown
+                framing softened — no health/treatment urgency framing. */}
+            <span className="reserved-pill">Your intake spot is held for {expired ? '0:00' : formatTime(timeLeft)}</span>
+            <h2>Save up to $312/year on the 12-month plan</h2>
+            <p style={{ color: 'rgba(255,255,255,.92)', margin: '8px 0' }}>Choose 3, 6, or 12 months. Plans automatically renew at the same price unless cancelled before the renewal date — see Terms §7. Cancel anytime before any renewal.</p>
+            <div className="green-line">Clinician intake review + messaging during your plan + medication (if prescribed) — all included.</div>
           </div>
 
-          <h3 className="meds-head">Your recommended FDA-approved protocol:</h3>
+          <h3 className="meds-head">FDA-approved category your clinician may consider:</h3>
 
           {/* Single recommended product card */}
           <div className={`med-card recommended ${selectedMed === 'bundle' ? 'bundle' : ''}`}>
-            <span className="badge">{selectedMed === 'bundle' ? 'Recommended Bundle' : 'Your Recommendation'}</span>
+            <span className="badge">{selectedMed === 'bundle' ? 'Often prescribed together' : 'Category for clinician review'}</span>
             <div className={'med-img-wrap' + (selectedMed === 'bundle' && med.secondImage ? ' bundle-images' : '')}>
               {selectedMed === 'bundle' && med.secondImage ? (
                 <>
@@ -928,10 +903,8 @@ function App() {
                 <img src={med.image} alt={med.name} className="med-img" />
               )}
             </div>
-            <div className="med-rating">
-              <span className="stars">{'★★★★★'}</span>
-              <span className="review-count">{med.rating} — {med.reviewCount}</span>
-            </div>
+            {/* Audit findings C-06, H-13: per-product star rating + review
+                count removed. Restore only with real review data. */}
             <h3>{med.product}</h3>
             {med.label && <div className="med-label">{med.label}</div>}
             <p className="med-description">{recommendation.reason}</p>
@@ -946,17 +919,20 @@ function App() {
             </ul>
           </div>
 
-          {/* Bundle upgrade offer — always shown when user isn't already on the bundle */}
+          {/* Audit findings C-10, C-11, M-18: bundle "upsell" reframed.
+              Removed unsourced "clinical gold standard" and unsupported
+              endorsement claims (NAMS/IMS/FDA). The decision to add
+              progesterone is the clinician's. */}
           {selectedMed !== 'bundle' && (
             <div className="bundle-upgrade" onClick={() => setSelectedMed('bundle')} role="button">
               <div className="bundle-upgrade-left">
-                <div className="bundle-upgrade-badge">Clinical Gold Standard · Same Price</div>
-                <h4>Upgrade to The Complete Protocol</h4>
+                <div className="bundle-upgrade-badge">Topic for discussion · Same plan price</div>
+                <h4>Discuss FDA-approved oral progesterone</h4>
                 <p>
-                  Add FDA-approved <strong>Progesterone Pill</strong> to your {med.name} — at no extra cost. The combination is the clinical gold standard backed by NAMS, the International Menopause Society, and the FDA. <strong>Deeper sleep, uterine protection, and the full restoration protocol — all included.</strong>
+                  Clinicians sometimes consider oral micronized progesterone alongside estrogen for patients with a uterus. Whether to prescribe — and at what dose — is the clinician's decision after reviewing your intake. Adding this topic to your plan does not change your plan price.
                 </p>
               </div>
-              <div className="bundle-upgrade-cta">Add Progesterone →</div>
+              <div className="bundle-upgrade-cta">Add to discussion →</div>
             </div>
           )}
 
@@ -971,10 +947,10 @@ function App() {
           )}
 
           <div className="trust-row">
-            <span>🔒 HIPAA Secure</span>
-            <span>💳 HSA/FSA Approved</span>
-            <span>🚚 Free Shipping</span>
-            <span>✅ Cancel or pause after your plan period</span>
+            <span>🔒 Privacy-protected per our Privacy Policy</span>
+            <span>💳 HSA/FSA accepted</span>
+            <span>🚚 Free shipping</span>
+            <span>✅ Cancel before any renewal — see Terms §7</span>
           </div>
 
           {/* Duration */}
@@ -1033,7 +1009,7 @@ function App() {
             <div className="checkout-card">
               <div className="secure-banner">
                 <span>🛡</span>
-                <span>Your data is protected by HIPAA. All transactions secured and encrypted by Stripe.</span>
+                <span>Card details are collected on the payment processor's secure hosted page after you continue. We do not store your card number.</span>
               </div>
 
               <form onSubmit={handleCheckoutSubmit}>
@@ -1084,7 +1060,7 @@ function App() {
 
                 <div className="checkout-secure">
                   <span aria-hidden="true">🔒</span>
-                  <span>Card details collected on Stripe's secure hosted page after you click below. Supports card, Apple Pay, Google Pay, and Klarna.</span>
+                  <span>Card details collected on the payment processor's secure hosted page after you click below.</span>
                 </div>
 
                 {paymentError && (
@@ -1093,16 +1069,36 @@ function App() {
                   </div>
                 )}
 
-                <p className="agree">
-                  By subscribing, you authorize Her Estrogen to charge you <strong>${total.toLocaleString()}.00 today</strong> and <strong>${total.toLocaleString()}.00 every {plan.months} months</strong> until you cancel. You can cancel or pause after your plan period with 72 hours notice before renewal.
-                </p>
+                {/* California ARL + FTC ROSCA + FTC Click-to-Cancel disclosure
+                    (audit findings H-09, H-15). Clear-and-conspicuous, in a
+                    bordered box immediately above the Pay button. Counsel
+                    should sign off on the exact wording before launch. */}
+                <div className="agree" style={{ border: '2px solid var(--pink, #b8235c)', borderRadius: 10, padding: '14px 16px', background: '#fef5f8', fontSize: 14, lineHeight: 1.55, color: '#1a1216', margin: '20px 0' }}>
+                  <strong>Subscription &amp; renewal terms.</strong>{' '}
+                  By subscribing, you authorize Her Estrogen to charge you
+                  <strong> ${total.toLocaleString()}.00 today</strong> and the same amount
+                  <strong> every {plan.months} months</strong> until you cancel. Your
+                  subscription automatically renews at the same price for
+                  successive {plan.months}-month terms unless you cancel before
+                  the renewal date. You may cancel anytime by emailing{' '}
+                  <a href="mailto:support@herestrogen.com">support@herestrogen.com</a> or via your account page.
+                  <br /><br />
+                  <strong>Refund policy.</strong> If a licensed clinician determines
+                  hormone therapy is not clinically appropriate for you after reviewing
+                  your intake, your subscription payment is refunded in full within 3
+                  business days. You may also cancel before your first medication
+                  shipment for a full refund. <strong>Once medication has shipped,
+                  refunds are not available</strong> per applicable pharmacy regulations
+                  (Terms §8). Treatment is subject to clinician determination and is not
+                  guaranteed.
+                </div>
 
                 <button type="submit" className="submit-btn" disabled={submitting}>
                   {submitting ? 'Redirecting to secure checkout…' : 'Continue to Secure Checkout →'}
                 </button>
 
-                <div className="guarantee">
-                  🔒 <strong>The Her Estrogen Provider Guarantee</strong> — If our licensed provider determines HRT is not right for you after reviewing your intake — you receive a complete refund within 3 business days. No questions asked. Once your plan period begins and medication has shipped, our standard plan terms apply.
+                <div className="guarantee" style={{ marginTop: 14, fontSize: 13, color: '#3d2b33' }}>
+                  🔒 Card details collected on Stripe's secure hosted page after you click above.
                 </div>
               </form>
             </div>
@@ -1110,53 +1106,16 @@ function App() {
         </section>
       )}
 
-      {/* SECTION 12 — Research + Stats */}
-      <section className="research-section">
-        <div className="container">
-          <div className="research-label">Backed by clinical research from</div>
-          <div className="research-logos">
-            <div className="research-logo">Mayo Clinic</div>
-            <div className="research-logo">Harvard Medical School</div>
-            <div className="research-logo">NIH</div>
-            <div className="research-logo">The Menopause Society</div>
-            <div className="research-logo">NAMS</div>
-          </div>
-          <h2 className="stats-title">What makes Her Estrogen so much <em>better</em> than anything else?</h2>
-          <div className="stats-grid">
-            {STATS.map((s, i) => (
-              <div className="stat" key={i}>
-                <div className="stat-num">{s.num}</div>
-                <div className="stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Audit findings M-16, C-11: "Backed by clinical research from
+          [Mayo / Harvard / NIH / NAMS]" logo block removed pending
+          documented relationships or explicit citation. Also removed
+          "What makes Her Estrogen so much better than anything else?"
+          comparative claim. */}
 
-      {/* SECTION 13 — Case Studies (20 patient stories with photos) */}
-      <section className="case-studies-section">
-        <div className="container">
-          <h2 className="section-title center">Real women, <em>real results</em></h2>
-          <p className="section-sub center">Twenty case studies — verified patients on FDA-approved Her Estrogen protocols.</p>
-          <div className="case-grid">
-            {CASE_STUDIES.map((c, i) => (
-              <div className="case-card" key={i}>
-                <div className="case-photo-wrap">
-                  <img src={c.photo} alt={c.name} className="case-photo" loading="lazy" />
-                </div>
-                <div className="case-body">
-                  <div className="case-stars">★★★★★</div>
-                  <p className="case-quote">"{c.quote}"</p>
-                  <div className="case-meta">
-                    <div className="case-name">{c.name}</div>
-                    <div className="case-loc">{c.meta}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Audit findings C-06, H-13: 20-case-study section removed. Pre-launch
+          site has no real patients; "verified patients on FDA-approved Her
+          Estrogen protocols" claim was demonstrably false. Restore only
+          with documented, consenting customers. */}
 
       {/* SECTION 15 — FAQ */}
       <section className="faq-section">
@@ -1176,16 +1135,34 @@ function App() {
         </div>
       </section>
 
-      {/* SECTION 16 — Disclaimer */}
+      {/* SECTION 16 — Important Safety Information + Disclaimer */}
       <section className="disclaimer-section">
-        <div className="disclaimer">
-          *The assessment completed on the Her Estrogen website does not create a doctor-patient relationship. A licensed provider from our clinical partner network will review your intake after checkout to determine if HRT is appropriate. Licensed providers retain the decision to prescribe. Results from bioidentical HRT may vary. Her Estrogen is not a healthcare provider — we coordinate access to licensed clinical services. HSA/FSA eligibility is determined by your plan administrator. Compounded medications are not FDA-evaluated for safety or efficacy as finished products. All data is protected under HIPAA.
+        <div className="disclaimer" style={{ fontSize: 13, lineHeight: 1.55 }}>
+          <strong>Important Safety Information (FDA boxed warning).</strong> Estrogen-containing
+          products carry boxed warnings for endometrial cancer; cardiovascular disorders
+          including stroke, heart attack, and venous thromboembolism (deep-vein
+          thrombosis and pulmonary embolism); probable dementia; and (in combination with
+          progestins) breast cancer. Use the lowest effective dose for the shortest
+          duration consistent with treatment goals and individual risk. These are
+          prescription medications and may not be appropriate for everyone. Discuss
+          risks and benefits with your clinician. Report side effects to FDA MedWatch
+          at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
+          <br /><br />
+          The intake completed on this site does not create a doctor-patient
+          relationship. A licensed clinician via our medical partner, OpenLoop
+          Health, reviews your intake to determine clinical appropriateness;
+          the clinician retains discretion to decline. Her Estrogen is not a
+          healthcare provider — we coordinate access to independent licensed
+          clinical services. HSA/FSA eligibility is determined by your plan
+          administrator. The medications discussed on this page are FDA-approved
+          branded or generic products; we do not market mass-compounded BHRT.
         </div>
         <div className="footer-links">
           <a href="privacy.html">Privacy Policy</a>·
           <a href="terms.html">Terms of Service</a>·
           <a href="privacy.html">HIPAA Notice</a>·
           <a href="terms.html#refunds">Refund Policy</a>·
+          <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">Report a side effect (FDA MedWatch)</a>·
           <a href="mailto:support@herestrogen.com">Contact Us</a>
         </div>
       </section>
@@ -1195,16 +1172,12 @@ function App() {
         <div className="success-overlay">
           <div className="success-card">
             <div className="success-check">✓</div>
-            <h2>You're officially a Her Estrogen member, {firstName}!</h2>
-            <p className="sub">Your intake has been sent to a licensed provider. You will receive a review within 24 hours. Check your email at <strong>{email}</strong> for next steps.</p>
+            <h2>Thanks, {firstName}. Your intake has been submitted.</h2>
+            <p className="sub">A licensed clinician via our medical partner, OpenLoop Health, will review your intake — typically within 1&ndash;2 business days. Treatment is subject to clinician approval and is not guaranteed. Check your email at <strong>{email}</strong> for next steps.</p>
             <div className="steps-row">
-              <div className="success-step"><div className="n">01</div><div className="t">Provider review</div><div>Within 24 hours</div></div>
-              <div className="success-step"><div className="n">02</div><div className="t">Custom prescription</div><div>Compounded for you</div></div>
-              <div className="success-step"><div className="n">03</div><div className="t">Shipped to your door</div><div>Free, discreet, fast</div></div>
-            </div>
-            <div className="success-actions">
-              <button className="success-btn primary">Add to Calendar</button>
-              <button className="success-btn">Download App</button>
+              <div className="success-step"><div className="n">01</div><div className="t">Clinician review</div><div>Typically 1–2 business days</div></div>
+              <div className="success-step"><div className="n">02</div><div className="t">Treatment decision</div><div>If clinically appropriate</div></div>
+              <div className="success-step"><div className="n">03</div><div className="t">Medication ships (if prescribed)</div><div>From a licensed pharmacy</div></div>
             </div>
           </div>
         </div>

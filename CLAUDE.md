@@ -14,9 +14,15 @@ rsync -av --delete \
   --exclude='.git/' \
   --exclude='.DS_Store' \
   --exclude='node_modules/' \
+  --exclude='.env' \
+  --exclude='.env.local' \
+  --exclude='.env.*' \
   /Users/isanguyen/her-estrogen/ \
   /Users/isanguyen/Documents/GitHub/her-estrogen/
 ```
+
+The `.env*` excludes are CRITICAL — never sync any environment file into the
+GitHub Desktop mirror (compliance audit finding H-20).
 
 The user then commits + pushes via the GitHub Desktop app. Do not attempt
 `git push` from the CLI in either folder — terminal git is not authenticated

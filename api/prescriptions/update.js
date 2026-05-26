@@ -43,14 +43,18 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Optional bearer-token auth — strongly recommended in production
+  // Mandatory bearer-token auth (audit finding M-01). If the env var is not
+  // set on the deployment we fail closed — better a 500 than an unauthenticated
+  // endpoint that any internet user can use to mark prescriptions delivered.
   const expectedToken = process.env.PRESCRIPTION_UPDATE_TOKEN;
-  if (expectedToken) {
-    const auth = req.headers['authorization'] || '';
-    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-    if (token !== expectedToken) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
+  if (!expectedToken) {
+    console.error('[prescriptions/update] PRESCRIPTION_UPDATE_TOKEN is not set; refusing all requests');
+    return res.status(500).json({ error: 'Server misconfigured' });
+  }
+  const auth = req.headers['authorization'] || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+  if (token !== expectedToken) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {

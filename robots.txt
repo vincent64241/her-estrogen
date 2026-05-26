@@ -1,5 +1,5 @@
 # Her Estrogen — robots.txt
-# Allow public marketing pages; block server endpoints + post-funnel pages.
+# Allow public marketing pages; block all health-context URLs from indexing.
 
 User-agent: *
 Allow: /
@@ -7,11 +7,13 @@ Allow: /
 # Block API endpoints (these are server functions, not for crawling)
 Disallow: /api/
 
-# Block the post-quiz funnel — should only be reached via the quiz flow
-Disallow: /results.html
+# Block every health-context URL from search indexing. These URLs reveal the
+# user's health-condition context and must not appear in search snippets or
+# be linked from sitemaps (compliance audit findings M-07, M-13).
+Disallow: /quiz
+Disallow: /quiz.html
 Disallow: /results
-
-# Block the post-checkout confirmation page
+Disallow: /results.html
 Disallow: /confirmation
 Disallow: /confirmation.html
 

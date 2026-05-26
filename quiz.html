@@ -207,40 +207,20 @@
   .finish h1 em { font-style: italic; color: var(--pink); }
   .finish p { font-size: 17px; color: var(--ink-2); max-width: 440px; margin: 0 auto 28px; }
 </style>
-<!-- Meta Pixel — quiz funnel
-     Fires PageView on load + Lead on load (quiz page entry counts as Lead).
-     Event payloads NEVER include the words "menopause", "HRT", or
-     "hormone replacement therapy" — compliance lock for PHI protection. -->
+<!-- Compliance audit C-08 / HHS OCR tracking-tech guidance (Dec 2022; rev
+     Mar 2024): NO Meta Pixel, NO Google Analytics, NO Vercel Web Analytics
+     on this page or any other health-context URL (quiz, results,
+     confirmation, privacy, terms). Re-enabling on this page requires
+     counsel review + a written Klaviyo / Meta healthcare-policy
+     determination. Marketing attribution may be added later via the
+     server-side Meta Conversions API keyed off de-identified pseudonyms
+     created AFTER an explicit consent gate.
+     Stub helpers below are no-ops so callers in the React tree don't crash. -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1691324572051294');
-fbq('track', 'PageView');
-// Layered tracking: quiz pageview = a top-of-funnel Lead
-fbq('track', 'Lead');
-// Sanitized helpers — exposed for the submit handler to call.
-// Both no-op safely if fbq is undefined (ad-blocker, network failure).
-window.trackCompleteRegistration = function () {
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', 'CompleteRegistration', { value: 1, currency: 'USD' });
-  }
-};
-window.trackInitiateCheckout = function (value) {
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', 'InitiateCheckout', { value: value, currency: 'USD' });
-  }
-};
+window.trackCompleteRegistration = function () { /* tracker disabled per compliance audit */ };
+window.trackInitiateCheckout = function () { /* tracker disabled per compliance audit */ };
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel -->
+<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
 
@@ -324,7 +304,7 @@ const STEPS = [
   {
     kind: 'contact',
     title: 'Where should we send your results?',
-    intro: 'We will text and email your candidacy summary and the link to finish your medical intake. No spam, ever.',
+    intro: 'We use your email to send your candidacy summary and the link to finish your medical intake. SMS opt-in is shown below — it is optional and never a condition of purchase.',
   },
 ];
 
@@ -655,7 +635,11 @@ function Quiz() {
       // Birthday is REQUIRED (needed by OpenLoop for clinical intake).
       // Only fully-valid birthdays unlock the submit button.
       const birthdayOk = birthdayResult.state === 'ok';
-      return requiredOk && birthdayOk;
+      // Notice-at-Collection + 18+ affirmation are REQUIRED for CCPA/CPRA
+      // and the Terms eligibility statement. Both must be explicitly ticked
+      // (audit findings H-17, M-22).
+      const consentOk = answers.consentNoticeAck === true && answers.adultAck === true;
+      return requiredOk && birthdayOk && consentOk;
     }
     return false;
   })();
@@ -696,14 +680,16 @@ function Quiz() {
         </div>
         <div className="finish">
           <div className="finish-badge">✓</div>
-          <h1>You are <em>likely a candidate.</em></h1>
+          <h1>Thanks — your intake has been <em>submitted</em>.</h1>
           <p>
-            A board-certified clinician will review your responses and reach
-            out within 48 hours with a personalized protocol — or honest
-            reasons why hormone therapy may not be right for you.
+            A licensed clinician via our medical partner, OpenLoop Health,
+            will review your responses — typically within 1&ndash;2 business days.
+            Treatment is subject to clinical appropriateness and is not
+            guaranteed; your clinician may decline if hormone therapy is not
+            suitable for you.
           </p>
-          <a href="results.html" className="btn btn-primary">View my results →</a>
-          <div className="footnote">A clinician will reach out within 48 hours</div>
+          <a href="results.html" className="btn btn-primary">View my next steps →</a>
+          <div className="footnote">A clinician will respond by email</div>
         </div>
       </div>
     );
@@ -815,12 +801,33 @@ function Quiz() {
                 autoComplete="tel"
                 inputMode="tel"
               />
+              {/* TCPA-compliant SMS disclosure (audit finding H-16).
+                  Tied to the SMS opt-in checkbox below so consent is opt-in
+                  rather than implied. */}
+              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 10, cursor: 'pointer', lineHeight: 1.5 }}>
+                <input
+                  type="checkbox"
+                  checked={!!answers.smsOptIn}
+                  onChange={(e) => setAnswers({ ...answers, smsOptIn: e.target.checked })}
+                  style={{ marginTop: 3 }}
+                />
+                <span>
+                  <strong>SMS opt-in (optional).</strong> By checking this box,
+                  I agree to receive recurring marketing and care-related text
+                  messages from Her Estrogen at the number above (sent via an
+                  automated dialing system). Message frequency varies. Message
+                  &amp; data rates may apply. Reply STOP to opt out, HELP for
+                  help. Consent is <strong>not</strong> a condition of any
+                  purchase. See our <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                </span>
+              </label>
             </div>
             {/* REQUIRED — single point of capture. Used by OpenLoop for clinical
                 intake (provider must verify candidacy by age) and by Klaviyo
-                for birthday flows. */}
-            <div className="field">
-              <label>Birthday</label>
+                for birthday flows. Wrapped in fieldset/legend for screen-reader
+                grouping (audit finding L-09). */}
+            <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+              <legend style={{ fontFamily: 'DM Mono, monospace', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--pink)', padding: 0 }}>Birthday</legend>
               <div className="helper">Required to verify your candidacy with a licensed provider</div>
               <div className="field-row3">
                 <select
@@ -875,6 +882,33 @@ function Quiz() {
               {birthdayResult.state === 'invalid' && (
                 <div className="field-error">Please enter a valid birthday.</div>
               )}
+            </fieldset>
+
+            {/* Notice at Collection + 18+ affirmation (audit findings H-17, M-22).
+                Required to advance — see canContinue() above. */}
+            <div className="field" style={{ marginTop: 24, paddingTop: 18, borderTop: '1px solid var(--line)' }}>
+              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer', lineHeight: 1.5 }}>
+                <input
+                  type="checkbox"
+                  checked={!!answers.consentNoticeAck}
+                  onChange={(e) => setAnswers({ ...answers, consentNoticeAck: e.target.checked })}
+                  style={{ marginTop: 3 }}
+                  required
+                />
+                <span>
+                  I have read the <a href="privacy.html" target="_blank" rel="noopener">Notice at Collection &amp; Privacy Policy</a> and the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>, including how my information is used and shared. I am providing consumer health information voluntarily (per Washington MHMDA and similar state laws where applicable).
+                </span>
+              </label>
+              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, cursor: 'pointer', lineHeight: 1.5 }}>
+                <input
+                  type="checkbox"
+                  checked={!!answers.adultAck}
+                  onChange={(e) => setAnswers({ ...answers, adultAck: e.target.checked })}
+                  style={{ marginTop: 3 }}
+                  required
+                />
+                <span>I confirm that I am at least 18 years old.</span>
+              </label>
             </div>
           </div>
         )}
@@ -888,7 +922,7 @@ function Quiz() {
           </button>
         </div>
 
-        <div className="footnote">Your answers are private and HIPAA-protected</div>
+        <div className="footnote">Your answers are protected per our Privacy Policy</div>
       </div>
     </div>
   );

@@ -39,13 +39,21 @@
 //   502 { error: 'Klaviyo event firing failed', detail: ... }
 
 const { firePlacedOrder } = require('../../lib/klaviyo');
+const crypto = require('crypto');
+
+// Server-to-server webhook — there is no browser-callable case, so we do
+// NOT emit wildcard CORS (audit finding H-01). OpenLoop posts directly
+// from its backend with the shared secret in X-Webhook-Secret.
+function logToken(email) {
+  if (!email) return 'sha-unknown';
+  return 'sha-' + crypto.createHash('sha256').update(String(email).toLowerCase()).digest('hex').slice(0, 8);
+}
+
+// Sanity cap so absurd `value` payloads can't poison Klaviyo segment math
+// (audit finding M-12). $50k is well above the highest 12-month plan price.
+const MAX_ORDER_VALUE_USD = 50000;
 
 module.exports = async (req, res) => {
-  // CORS / preflight
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Webhook-Secret');
-  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
@@ -83,16 +91,23 @@ module.exports = async (req, res) => {
   if (typeof value !== 'number' || value <= 0) {
     return res.status(400).json({ error: 'value must be a positive number (dollars).' });
   }
+  if (value > MAX_ORDER_VALUE_USD) {
+    return res.status(400).json({ error: 'value exceeds sanity cap.' });
+  }
+
+  // Round to cents to defend against floating-point junk from the caller.
+  const safeValue = Math.round(value * 100) / 100;
+  const tok = logToken(email);
 
   // Fire the event + update profile properties. Never let a Klaviyo flake
   // force OpenLoop to retry forever — log loudly on failure but return 502 so
   // OpenLoop knows to retry once if their retry policy supports it.
   try {
-    const result = await firePlacedOrder({ email, plan_length, product_count, value, currency });
-    console.log(`[orders/placed] Klaviyo Placed Order fired for ${email} (status ${result.status})`);
+    const result = await firePlacedOrder({ email, plan_length, product_count, value: safeValue, currency });
+    console.log(`[orders/placed] Klaviyo Placed Order fired for ${tok} (status ${result.status})`);
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[orders/placed] Klaviyo fire failed:', err && err.message);
+    console.error('[orders/placed] Klaviyo fire failed for', tok, ':', err && err.message);
     return res.status(502).json({
       error: 'Klaviyo event firing failed',
       detail: err && err.message

@@ -14,23 +14,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --pink: #b8235c;
-    --pink-deep: #8a1745;
-    --pink-soft: #fde8ef;
-    --pink-softer: #fef5f8;
-    --ink: #1a1216;
-    --ink-2: #3d2b33;
-    --muted: #7a6770;
+    --pink: #b8235c; --pink-deep: #8a1745;
+    --pink-soft: #fde8ef; --pink-softer: #fef5f8;
+    --ink: #1a1216; --ink-2: #3d2b33; --muted: #7a6770;
     --line: #f0d9e2;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: #fff;
-    color: var(--ink);
+    background: #fff; color: var(--ink);
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.65;
+    font-size: 16px; line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--pink); text-decoration: none; }
@@ -38,12 +32,10 @@
 
   .top {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,.94);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,.94); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 32px;
-    max-width: 1240px; margin: 0 auto;
+    padding: 14px 32px; max-width: 1240px; margin: 0 auto;
   }
   .top img { height: 36px; width: auto; display: block; }
   .top a.home {
@@ -52,48 +44,35 @@
   }
   .top a.home:hover { color: var(--pink); text-decoration: none; }
 
-  .doc {
-    max-width: 760px; margin: 0 auto;
-    padding: 64px 32px 96px;
-  }
+  .doc { max-width: 760px; margin: 0 auto; padding: 64px 32px 96px; }
   .eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 12px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 12px;
   }
   h1 {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 500;
-    font-size: clamp(36px, 4.4vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
+    font-size: clamp(36px, 4.4vw, 56px); line-height: 1.05;
+    letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink);
   }
   .effective {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px; color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 48px;
-    padding-bottom: 24px;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--muted); letter-spacing: 0.05em;
+    margin-bottom: 36px; padding-bottom: 18px;
     border-bottom: 1px solid var(--line);
   }
+  .counsel-banner {
+    background: #fff4d6; border: 1px solid #e0b800; color: #5a4500;
+    padding: 14px 18px; border-radius: 8px; font-size: 13px;
+    margin-bottom: 36px; line-height: 1.55;
+  }
   h2 {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 500;
-    font-size: clamp(22px, 2.4vw, 28px);
-    line-height: 1.15;
-    letter-spacing: -0.012em;
-    color: var(--ink);
-    margin: 48px 0 14px;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15;
+    letter-spacing: -0.012em; color: var(--ink); margin: 48px 0 14px;
   }
   h3 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    color: var(--ink);
-    margin: 28px 0 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.01em; color: var(--ink); margin: 28px 0 8px;
   }
   p { margin: 0 0 14px; color: var(--ink-2); }
   ul { margin: 0 0 16px; padding-left: 22px; color: var(--ink-2); }
@@ -101,59 +80,24 @@
   strong { color: var(--ink); font-weight: 600; }
 
   .callout {
-    background: var(--pink-softer);
-    border-left: 3px solid var(--pink);
-    padding: 18px 22px;
-    border-radius: 4px;
-    margin: 18px 0 24px;
-    font-size: 15px;
+    background: var(--pink-softer); border-left: 3px solid var(--pink);
+    padding: 18px 22px; border-radius: 4px;
+    margin: 18px 0 24px; font-size: 15px;
   }
   .callout strong { color: var(--pink-deep); }
 
   footer.legal-foot {
     background: linear-gradient(180deg, var(--pink-deep) 0%, #5a0e2b 100%);
-    color: rgba(255,255,255,.78);
-    padding: 32px 0;
-    text-align: center;
-    font-size: 13px;
+    color: rgba(255,255,255,.78); padding: 32px 0;
+    text-align: center; font-size: 13px;
   }
   footer.legal-foot a { color: rgba(255,255,255,.92); text-decoration: underline; }
   footer.legal-foot a:hover { color: #fff; }
   footer.legal-foot .legal-links { margin-top: 8px; }
   footer.legal-foot .legal-links a { margin: 0 10px; }
 </style>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1691324572051294');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CTPN8D3JZN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CTPN8D3JZN');
-</script>
-<!-- End Google tag -->
-
-<!-- Vercel Web Analytics -->
-<script defer src="/_vercel/insights/script.js"></script>
-<!-- End Vercel Web Analytics -->
+<!-- Compliance audit C-03 / HHS OCR tracking-tech guidance: NO trackers
+     of any kind on the Terms of Service page. -->
 </head>
 <body>
 
@@ -165,115 +109,212 @@ src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
 <main class="doc">
   <div class="eyebrow">Legal</div>
   <h1>Terms of Service</h1>
-  <div class="effective">Effective Date: May 13, 2026</div>
+  <div class="effective">Effective Date: May 25, 2026 · Last Updated: May 25, 2026</div>
+
+  <div class="counsel-banner">
+    <strong>Notice:</strong> These Terms have been structurally updated to
+    add subscription auto-renewal disclosures (CA ARL + FTC Negative Option /
+    "Click-to-Cancel" Rule), aligned refund language, arbitration framing,
+    FDA Important Safety Information, and corrected processor identification.
+    <strong>Final language, governing-law selection, arbitration carve-outs,
+    and state-specific consumer notices must be reviewed and approved by
+    qualified healthcare-marketing counsel before launch.</strong>
+  </div>
 
   <h2>1. Acceptance of Terms</h2>
-  <p>Welcome to HerEstrogen ("HerEstrogen," "we," "our," or "us"). By accessing or using <a href="https://www.herestrogen.com">www.herestrogen.com</a>, creating an account, completing an intake questionnaire, communicating with our care team, or purchasing services, you agree to these Terms of Service.</p>
-  <p>If you do not agree, do not use this website or services.</p>
+  <p>Welcome to Her Estrogen ("Her Estrogen," "we," "our," or "us"). By
+  accessing or using <a href="https://www.herestrogen.com">www.herestrogen.com</a>,
+  creating an account, completing an intake, communicating with the clinical
+  team, or purchasing services, you agree to these Terms of Service. If you
+  do not agree, do not use this website or services.</p>
 
   <h2>2. Eligibility</h2>
   <p>You must:</p>
   <ul>
-    <li>Be at least 18 years old</li>
-    <li>Reside within the United States</li>
-    <li>Provide truthful, accurate, and complete information — including a valid date of birth, which our medical partner OpenLoop Health uses to verify your candidacy for treatment</li>
-    <li>Be legally capable of entering binding agreements</li>
+    <li>Be at least <strong>18 years old</strong>;</li>
+    <li>Reside within the United States, in a state where independent licensed clinicians at our medical partner (OpenLoop Health) are authorized to provide telehealth services;</li>
+    <li>Provide truthful, accurate, and complete information — including a valid date of birth, which our medical partner uses to verify your candidacy for treatment; and</li>
+    <li>Be legally capable of entering binding agreements.</li>
   </ul>
-  <p>Our services are available only within the United States.</p>
 
-  <h2>3. Medical Services</h2>
-  <p>HerEstrogen facilitates access to licensed healthcare professionals through OpenLoop Health.</p>
-  <p>HerEstrogen does not directly practice medicine.</p>
-  <p>All medical decisions, including diagnosis, treatment, prescriptions, lab recommendations, dosage adjustments, and eligibility determinations, are made solely by licensed healthcare providers.</p>
-  <p>Use of HerEstrogen does not guarantee:</p>
+  <h2>3. Medical Services Are Provided by Independent Clinicians</h2>
+  <p>Her Estrogen <strong>does not practice medicine</strong>. Her Estrogen
+  facilitates access to independent licensed healthcare professionals through
+  our medical partner, <strong>OpenLoop Health</strong>. All medical
+  decisions — including diagnosis, treatment, prescriptions, lab orders,
+  dosage adjustments, and eligibility determinations — are made solely by
+  licensed clinicians in their independent clinical judgment.</p>
+  <p>Use of Her Estrogen does <strong>not</strong> guarantee:</p>
   <ul>
-    <li>A diagnosis</li>
-    <li>Prescription approval</li>
-    <li>Medication eligibility</li>
-    <li>Specific treatment outcomes</li>
+    <li>A diagnosis;</li>
+    <li>Prescription approval;</li>
+    <li>Medication eligibility; or</li>
+    <li>Any specific treatment outcome.</li>
   </ul>
+  <p>Hormone therapy is not appropriate for everyone. Clinicians may decline
+  to prescribe at their sole medical discretion based on your clinical
+  picture, contraindications, or state-specific prescribing laws.</p>
 
-  <h2>4. No Emergency Services</h2>
+  <h2>4. Telehealth Consent</h2>
+  <p>You consent to receive medical services via telehealth as permitted in
+  your state. You understand that telehealth has limitations and that an
+  in-person visit may be more appropriate in some circumstances. You may
+  withdraw your consent to telehealth at any time without affecting future
+  care; withdrawal does not retroactively affect care already provided.</p>
+
+  <h2>5. No Emergency Services</h2>
   <div class="callout">
-    HerEstrogen is <strong>not intended for medical emergencies</strong>. If you believe you are experiencing a medical emergency, call 911 immediately or seek care at the nearest emergency facility.
+    Her Estrogen is <strong>not intended for medical emergencies</strong>.
+    If you believe you are experiencing a medical emergency, call 911
+    immediately or go to the nearest emergency facility.
   </div>
 
-  <h2>5. Account Responsibilities</h2>
+  <h2>6. Account Responsibilities</h2>
   <p>You are responsible for:</p>
   <ul>
-    <li>Maintaining confidentiality of your account credentials</li>
-    <li>Providing accurate intake information</li>
-    <li>Updating medical information when changes occur</li>
+    <li>Maintaining the confidentiality of your account credentials;</li>
+    <li>Providing accurate intake information; and</li>
+    <li>Updating medical information when changes occur.</li>
   </ul>
   <p>You may not share your account with another individual.</p>
 
-  <h2>6. Prescription Eligibility</h2>
-  <p>Submission of an intake form does not guarantee prescription approval.</p>
-  <p>Treatment eligibility is determined exclusively by the licensed provider based on:</p>
+  <h2>7. Subscriptions, Auto-Renewal &amp; How to Cancel</h2>
+  <p>Her Estrogen offers prepaid plans of 3, 6, or 12 months. The plan price
+  is charged in full at the start of each plan period.</p>
+  <h3>Renewal terms (clear and conspicuous)</h3>
+  <p><strong>Your subscription automatically renews at the same price for
+  successive plan periods until you cancel.</strong> Specifically:</p>
   <ul>
-    <li>Medical history</li>
-    <li>Contraindications</li>
-    <li>Clinical appropriateness</li>
-    <li>State specific prescribing laws</li>
+    <li><strong>3-month plan:</strong> $507.00 charged today and every 3 months thereafter.</li>
+    <li><strong>6-month plan:</strong> $912.00 charged today and every 6 months thereafter.</li>
+    <li><strong>12-month plan:</strong> $1,716.00 charged today and every 12 months thereafter.</li>
   </ul>
-  <p>Providers may deny treatment at their sole medical discretion.</p>
-
-  <h2>7. Payments</h2>
-  <p>Payments are securely processed through Stripe.</p>
-  <p>By submitting payment information, you authorize HerEstrogen to charge applicable fees for services rendered.</p>
-  <p>You agree that billing information provided is accurate and authorized.</p>
+  <h3>How to cancel</h3>
+  <p>You may cancel <strong>at any time before the next renewal</strong> by:</p>
+  <ul>
+    <li>Emailing <a href="mailto:support@herestrogen.com">support@herestrogen.com</a> with the subject line "Cancel"; or</li>
+    <li>Using the cancellation link in your account page or any subscription email.</li>
+  </ul>
+  <p>Cancellation is processed within one business day. If you cancel before
+  the next renewal date, you will not be charged for the next renewal. The
+  cancellation process is designed to be at least as straightforward as the
+  signup process, consistent with the FTC Negative Option Rule and applicable
+  state automatic-renewal laws.</p>
+  <h3>Renewal reminder</h3>
+  <p>For plans of 6 months or longer, we will send a renewal reminder email
+  before the renewal date, consistent with applicable state automatic-renewal
+  laws.</p>
+  <h3>State-specific notices</h3>
+  <p>If you are a <strong>California resident</strong>, you may report
+  complaints to the California Department of Consumer Affairs, Consumer
+  Information Division (<a href="https://www.dca.ca.gov" target="_blank" rel="noopener">dca.ca.gov</a>),
+  1625 North Market Blvd., Suite N-112, Sacramento, CA 95834, or by phone at
+  1-800-952-5210.</p>
+  <p>REQUIRES COUNSEL REVIEW: state-specific renewal-reminder timing,
+  applicable mini-FTC rules, and any opt-in-vs-opt-out consent collection at
+  the point of subscription.</p>
 
   <h2>8. Refund Policy</h2>
-
-  <h3>Not Approved</h3>
-  <p>If a licensed provider determines hormone replacement therapy is not medically appropriate after review of your intake, you will receive a full refund within three business days.</p>
-
-  <h3>Cancellation Before Shipment</h3>
-  <p>If you cancel before your prescription is submitted for fulfillment, you may be eligible for a full refund.</p>
-
-  <h3>After Shipment</h3>
-  <p>Due to federal and pharmacy regulations, prescription medications cannot be returned, resold, or refunded after shipment preparation.</p>
-  <p>No refunds will be issued after medication fulfillment has begun.</p>
-
-  <h3>90 Day Commitment</h3>
-  <p>If you complete 90 consecutive days of treatment as directed and do not experience meaningful improvement in your primary symptoms, HerEstrogen may offer:</p>
-  <ul>
-    <li>Protocol adjustment</li>
-    <li>Alternative formulation review</li>
-    <li>Credit toward eligible HerEstrogen products or services</li>
-  </ul>
-  <p>Eligibility is determined at our discretion.</p>
+  <p id="refunds">Refunds are available in two situations:</p>
+  <h3>(a) Clinician declines treatment</h3>
+  <p>If a licensed clinician via OpenLoop Health reviews your intake and
+  determines that hormone therapy is not medically appropriate for you, you
+  will receive a <strong>full refund</strong> of your subscription payment
+  within three business days.</p>
+  <h3>(b) Cancellation before first shipment</h3>
+  <p>If you cancel before your first medication has shipped, you are
+  eligible for a full refund of your subscription payment.</p>
+  <h3>After first shipment</h3>
+  <p>Due to federal and state pharmacy regulations, prescription medications
+  cannot be returned, resold, or refunded after shipment has begun. <strong>No
+  refunds are issued after medication fulfillment has started.</strong> If
+  you cancel mid-plan, you will not be billed for the next renewal but the
+  amount paid for the current plan period is non-refundable.</p>
 
   <h2>9. Communications Consent</h2>
   <p>By providing your contact information, you consent to receive:</p>
   <ul>
-    <li>Appointment reminders</li>
-    <li>Care updates</li>
-    <li>Account notifications</li>
-    <li>Educational content</li>
-    <li>Marketing emails and SMS messages, where separately consented</li>
+    <li>Appointment and refill reminders;</li>
+    <li>Care updates from the clinical team;</li>
+    <li>Account notifications; and</li>
+    <li>Educational content related to your plan.</li>
   </ul>
-  <p>You may opt out of marketing communications at any time.</p>
-  <p>Message and data rates may apply.</p>
-  <p>Consent to marketing is not a condition of purchase.</p>
+  <p>Marketing emails and SMS messages are sent only with your separate
+  opt-in (which you provide on the intake by checking the SMS consent box).
+  You may opt out of marketing communications at any time by replying
+  <strong>STOP</strong> to any SMS or clicking the unsubscribe link in any
+  email. Reply <strong>HELP</strong> for help. Message frequency varies;
+  message and data rates may apply. Consent to marketing is <strong>not</strong>
+  a condition of any purchase.</p>
 
-  <h2>10. Intellectual Property</h2>
-  <p>All content on HerEstrogen, including branding, text, graphics, workflows, logos, educational materials, and software, is owned by HerEstrogen and protected by intellectual property laws.</p>
-  <p>You may not copy, reproduce, or distribute materials without written permission.</p>
+  <h2>10. Important Safety Information (Prescription Products)</h2>
+  <p>Estrogen-containing products carry FDA <strong>boxed warnings</strong>
+  for endometrial cancer; cardiovascular disorders including stroke, heart
+  attack, and venous thromboembolism (deep-vein thrombosis and pulmonary
+  embolism); probable dementia; and, in combination with progestins, breast
+  cancer. Use the lowest effective dose for the shortest duration consistent
+  with treatment goals and your individual risk profile.</p>
+  <p>The medications we coordinate access to are FDA-approved branded or
+  generic estradiol and oral progesterone products. We do not market
+  mass-compounded BHRT. Discuss risks, benefits, contraindications, and
+  alternatives with your clinician before starting treatment.</p>
+  <p><strong>Report adverse events</strong> to the FDA MedWatch program at
+  <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>
+  or 1-800-FDA-1088.</p>
 
-  <h2>11. Limitation of Liability</h2>
-  <p>To the fullest extent permitted by law, HerEstrogen shall not be liable for indirect, incidental, consequential, special, or punitive damages arising from use of the services.</p>
-  <p>Medical outcomes cannot be guaranteed.</p>
+  <h2>11. Intellectual Property</h2>
+  <p>All content on Her Estrogen — including branding, text, graphics,
+  workflows, logos, educational materials, and software — is owned by Her
+  Estrogen, PBC and protected by intellectual-property laws. You may not
+  copy, reproduce, or distribute materials without written permission.</p>
 
-  <h2>12. Arbitration</h2>
-  <p>Any disputes arising under these Terms shall be resolved through binding arbitration under the laws of the United States and the state of Virginia, except where prohibited by law.</p>
+  <h2>12. Disclaimers</h2>
+  <p>Information on this site is for general educational purposes and is
+  <strong>not medical advice</strong>. Individual results vary. The
+  intake completed on this site does not, by itself, create a doctor-patient
+  relationship. A clinician-patient relationship arises only when an
+  independent licensed clinician at OpenLoop Health accepts you as a
+  patient. Her Estrogen is not a healthcare provider — we coordinate access
+  to independent licensed clinical services.</p>
 
-  <h2>13. Governing Law</h2>
-  <p>These Terms shall be governed by the laws of Virginia.</p>
+  <h2>13. Limitation of Liability</h2>
+  <p>To the fullest extent permitted by applicable law, Her Estrogen and
+  its affiliates, officers, employees, agents, and licensors shall not be
+  liable for any indirect, incidental, consequential, special, exemplary,
+  or punitive damages arising from or related to your use of the services,
+  even if we have been advised of the possibility of such damages.
+  Medical outcomes cannot be guaranteed.</p>
+
+  <h2>14. Dispute Resolution &amp; Arbitration</h2>
+  <p>REQUIRES COUNSEL REVIEW. Subject to counsel approval of the specific
+  language below, the parties agree as follows:</p>
+  <ul>
+    <li><strong>Pre-arbitration notice.</strong> Before filing a claim, you and Her Estrogen agree to first attempt to resolve any dispute informally by sending a written notice describing the claim to <a href="mailto:legal@herestrogen.com">legal@herestrogen.com</a>. We will attempt to resolve within 30 days of receipt.</li>
+    <li><strong>Binding arbitration.</strong> Any unresolved disputes will be resolved by individual binding arbitration administered by [arbitration body — to be set with counsel] in accordance with its then-current consumer rules. Class actions and class-wide arbitration are not permitted.</li>
+    <li><strong>30-day opt-out.</strong> You may opt out of this arbitration agreement by emailing <a href="mailto:legal@herestrogen.com">legal@herestrogen.com</a> with the subject "Arbitration Opt-Out" within <strong>30 days</strong> of first agreeing to these Terms. Opting out does not affect any other provision of these Terms.</li>
+    <li><strong>Carve-outs.</strong> Nothing in this Section limits your right to: file a complaint with a state medical board or pharmacy board; file a HIPAA complaint with HHS OCR; pursue claims in small-claims court for individual disputes within the court's jurisdictional limit; or exercise any non-waivable right under applicable consumer-protection or telehealth law.</li>
+  </ul>
+
+  <h2>15. Governing Law</h2>
+  <p>REQUIRES COUNSEL REVIEW. These Terms will be governed by the laws of
+  the state of [to be set with counsel], without regard to its conflict-of-laws
+  rules, except that the Federal Arbitration Act governs the arbitration
+  provision and any state-specific consumer-protection rights that cannot be
+  waived by contract continue to apply.</p>
+
+  <h2>16. Changes</h2>
+  <p>We may update these Terms from time to time. Material changes will be
+  posted on this page with an updated "Last Updated" date. Continued use of
+  the site after a change indicates acceptance of the updated Terms.</p>
+
+  <h2>17. Contact</h2>
+  <p>General questions: <a href="mailto:support@herestrogen.com">support@herestrogen.com</a>.<br>
+  Legal notices: <a href="mailto:legal@herestrogen.com">legal@herestrogen.com</a>.<br>
+  Privacy: <a href="mailto:privacy@herestrogen.com">privacy@herestrogen.com</a>.</p>
 </main>
 
 <footer class="legal-foot">
-  © 2026 Her Estrogen. All rights reserved.
+  © 2026 Her Estrogen, PBC. All rights reserved.
   <div class="legal-links">
     <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a> · <a href="mailto:support@herestrogen.com">support@herestrogen.com</a>
   </div>

@@ -29,6 +29,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20'
 });
 
+// CORS allow-list — pin to the production origin(s) (audit finding H-01).
+// Set ALLOWED_ORIGIN as a comma-separated list in Vercel; defaults to
+// herestrogen.com. Wildcards are not permitted.
+const ALLOWED_ORIGINS = new Set(
+  (process.env.ALLOWED_ORIGIN || 'https://herestrogen.com,https://www.herestrogen.com')
+    .split(',').map(s => s.trim()).filter(Boolean)
+);
+
 // Map (product, period) → name of the env var that holds the Stripe Price ID.
 // Monthly options have been REMOVED — minimum plan is now 3 months.
 // All products share identical pricing: $507 / $912 / $1,716.
@@ -74,7 +82,11 @@ function resolvePriceId(product, period) {
 }
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers['origin'] || '';
+  if (ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -174,7 +186,9 @@ module.exports = async (req, res) => {
       url: session.url
     });
   } catch (err) {
-    console.error('checkout error:', err);
+    // Log the type/code only — never the full error object, which can echo
+    // request bodies that include customer email + shipping fields (H-03).
+    console.error('checkout error:', err && err.type, err && err.code, err && err.message);
     const isStripeErr = err && err.type && String(err.type).startsWith('Stripe');
     return res.status(isStripeErr ? 400 : 500).json({
       error: err.message || 'Failed to create checkout session',

@@ -61,51 +61,14 @@ const TREATMENTS = [
 }];
 
 
-const REVIEWS = [
-{ stars: 5, body: 'I spent two years asking my OB about night sweats and was told to "ride it out." Three weeks on the patch and I am sleeping through the night for the first time since I was 44.', name: 'Marisol R.', age: 'Age 51 · Texas', photo: 'assets/case-1.jpg' },
-{ stars: 5, body: 'The intake form was the first time a doctor actually asked about my mood, my cycle, my libido, and my sleep in the same conversation. Felt seen.', name: 'Priya N.', age: 'Age 47 · California', photo: 'assets/case-5.jpg' },
-{ stars: 5, body: 'My brain fog is gone. I run a team of 14 and I had started doubting myself in meetings. The clinician walked me through every dose change.', name: 'Kelly D.', age: 'Age 49 · New York', photo: 'assets/case-14.jpg' }];
-
-// 5 case studies — PLACEHOLDER content. Replace with real, consented patient stories
-// before scale. quote = the gut-punch headline. story = the full paragraph revealed on
-// "Read my story" click. Photos: /assets/case-N.jpg.
-const CASE_STUDIES_HOME = [
-  {
-    name: 'Mira L.',
-    meta: 'Age 47 · New York',
-    quote: 'I got my marriage back.',
-    story: "Three years of resentment built between me and my husband. I couldn't figure out why I was angry all the time, too tired for him, too short with everything. We were in counseling. Six weeks on the patch and the fog lifted — the anger wasn't him, it wasn't us. It was estrogen. We're more in love now than we've been since the kids were small.",
-    photo: 'assets/case-couple.jpg'
-  },
-  {
-    name: 'Karen H.',
-    meta: 'Age 53 · Illinois',
-    quote: "My kids told me I'm laughing again.",
-    story: "My son asked me why I was so mad all the time. He was eight. That broke me. I started HRT two months later. The first thing my daughter noticed: \"Mom, you're laughing again.\" I didn't know I had stopped laughing. They have their mom back, and I have my joy back.",
-    photo: 'assets/case-joy.jpg'
-  },
-  {
-    name: 'Diana W.',
-    meta: 'Age 50 · Oregon',
-    quote: 'I remembered a word for the first time in months.',
-    story: "I run a team of fourteen and I had started doubting every decision. I couldn't find words. I'd open my laptop and forget what I'd come there to do. Three weeks on progesterone and estradiol — clarity. The first time I remembered a colleague's name without straining, I cried at my desk.",
-    photo: 'assets/case-reading.jpg'
-  },
-  {
-    name: 'Lisa P.',
-    meta: 'Age 48 · Massachusetts',
-    quote: "I'm meeting my best friend for coffee again.",
-    story: "For two years I canceled every coffee, every dinner, every group plan. I told myself I was 'just too tired.' The truth was — I felt like a ghost. Six weeks on HRT and the fog lifted. Last Saturday I drove forty minutes to see my oldest friend and we sat at that café for three hours like we used to. I cried in the car after. I had my person back.",
-    photo: 'assets/case-friends.jpg?v=2'
-  },
-  {
-    name: 'Patricia L.',
-    meta: 'Age 54 · Pennsylvania',
-    quote: "I'm back at the gym.",
-    story: "I had gained twenty pounds I couldn't lose. My joints ached. I gave up on the gym at fifty-two — figured my body was just done. A year on HRT and I'm lifting again, walking three miles a day, sleeping through the night. The weight is moving. I have my body back.",
-    photo: 'assets/case-gym.jpg?v=2'
-  }
-];
+// REVIEWS / CASE STUDIES — REMOVED (audit findings C-06, H-13).
+// Pre-launch site has no real patients; fabricated reviews + per-product
+// review counts + "X verified patients" claims trigger the FTC 2024 Reviews
+// Rule (16 CFR Part 465) and FTC Endorsement Guides (16 CFR Part 255).
+// Do NOT reintroduce until each entry is from a named, consenting customer
+// with documented permission and typicality disclosure.
+const REVIEWS = [];
+const CASE_STUDIES_HOME = [];
 
 // Educational section data — "Why HRT" comparison rows
 const HRT_COMPARISON = [
@@ -125,38 +88,38 @@ const HRT_COMPARISON = [
 
 
 const FAQ = [
-{ q: 'Is hormone therapy safe?', a: 'For most healthy women under 60 (or within 10 years of menopause), modern bioidentical HRT has a favorable risk-benefit profile. Your clinician reviews personal and family history, current meds, and labs before prescribing, and reassesses every 90 days.' },
-{ q: 'Do I need bloodwork to start?', a: 'Not always. Symptom-based prescribing is supported by current guidelines for many patients, but our clinicians may order labs (FSH, estradiol, thyroid, lipids) when it changes the plan. Labs are available at-home or at any Quest location.' },
-{ q: 'What if I have a history of breast cancer or clots?', a: 'These histories require a careful, individualized conversation. Some patients are still candidates for local-only therapy; others are not. Our clinicians will be direct about what we can and cannot prescribe.' },
-{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes your FDA-approved prescription, unlimited provider messaging, quarterly check-ins every 3 months, and free shipping. We do not bill insurance, but plans can be paid with HSA/FSA.' },
-{ q: 'Can I use my own pharmacy?', a: 'Yes. We can ship from our partner pharmacy or send the prescription to any local pharmacy you prefer. Compounded formulations only ship from our partner.' },
-{ q: 'How quickly will I feel different?', a: 'Sleep and night sweats often improve within 2–3 weeks. Mood, libido, and body composition shifts typically take 8–12 weeks. We adjust dose based on how you feel, not just labs.' }];
+{ q: 'Is hormone therapy right for me?', a: 'Hormone therapy is not appropriate for everyone. A licensed clinician via our medical partner, OpenLoop Health, reviews your personal and family history, current medications, and clinical history before deciding whether to prescribe. Estrogen-containing products carry FDA boxed warnings, including for endometrial cancer, cardiovascular events (stroke, heart attack, blood clots), probable dementia, and (in combination with progestins) breast cancer — discuss the risks and benefits with your clinician. See the Important Safety Information at the bottom of this page.' },
+{ q: 'Do I need bloodwork to start?', a: 'Not always. Symptom-based prescribing is supported by current guidelines for many patients, and your clinician may order labs (such as FSH, estradiol, thyroid, lipids) when it changes the plan. Labs are available at-home or at any Quest location.' },
+{ q: 'What if I have a history of breast cancer or clots?', a: 'These histories require a careful, individualized conversation. Some patients are still candidates for local-only therapy; others are not. The clinician will be direct about what can and cannot be prescribed.' },
+{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes the clinician consultation, unlimited messaging during your plan, check-ins, and free shipping. Treatment is subject to clinician approval and is not guaranteed. We do not bill insurance, but plans can be paid with HSA/FSA. Subscriptions automatically renew at the same price unless cancelled before the renewal date; see Terms §7 for renewal and cancellation details.' },
+{ q: 'Can I use my own pharmacy?', a: 'Yes. We can route your prescription to the partner pharmacy or to any local pharmacy you prefer.' },
+{ q: 'How quickly will I feel different?', a: 'Individual results vary. Some patients report changes in sleep and vasomotor symptoms within several weeks; others take longer or do not respond. Dose adjustments are decided by the clinician based on how you are feeling.' }];
 
 
 const TIMELINE_STEPS = [
 {
   eyebrow: 'Step 01',
-  title: 'Get approved',
-  body: "Complete a 10-minute medical and symptom intake — written by women's-health clinicians, not a generic chatbot. Our team reviews your information and gets back to you within 48 hours.",
+  title: 'Submit your intake',
+  body: "Complete a brief medical and symptom intake written by women's-health clinicians. A licensed clinician via our medical partner, OpenLoop Health, reviews your information — typically within 1–2 business days.",
   image: 'woman smiling at her phone, completing the intake',
   src: 'assets/step-1-get-approved.jpg',
   meta: '~ 10 min to complete'
 },
 {
   eyebrow: 'Step 02',
-  title: 'Get prescribed',
-  body: "If hormone therapy is appropriate, your clinician builds a protocol around your symptoms, history, and goals — bioidentical estrogen, progesterone, or testosterone, dosed conservatively.",
+  title: 'Clinician review',
+  body: "If hormone therapy is clinically appropriate, your clinician designs a protocol based on your symptoms, history, and goals. Hormone therapy is not appropriate for everyone; the clinician retains discretion to decline.",
   image: 'clinician on a video call, writing your prescription',
   src: 'assets/step-2-get-prescribed.jpg',
-  meta: 'Reviewed within 48 hrs'
+  meta: 'Typically reviewed within 1–2 business days'
 },
 {
   eyebrow: 'Step 03',
   title: 'Receive your medication',
-  body: "Your prescriptions ship in discreet packaging straight to your door, every 90 days. Message your clinician anytime; we adjust dose based on how you feel.",
+  body: "If a clinician prescribes, your medication is shipped from a licensed pharmacy partner in discreet packaging. Shipping windows vary by state.",
   image: 'patient receiving her package at the door',
   src: 'assets/step-3-receive-medication.jpg?v=2',
-  meta: 'Free shipping · 3–5 days'
+  meta: 'Free shipping'
 }];
 
 
@@ -323,23 +286,23 @@ function App() {
         <div className="hero-gradient"></div>
 
         <div className="hero-editorial-content">
-          <div className="hero-stars">
-            <span className="stars">★★★★★</span>
-            <span>4.9 from 12,000+ patients</span>
-          </div>
+          {/* Star rating + "X+ patients" removed per audit findings C-06 / H-13.
+              Site is pre-launch; reintroduce only after counsel review with
+              real, named, consenting reviews. */}
           <h1>
             Poor Sleep. Low Energy. Brain Fog.<br />
             It's not in your head — <em>it's your hormones.</em>
           </h1>
           <p className="hero-sub">
-            Real bioidentical HRT. Real relief. Prescribed online and
-            shipped directly to your door in <span className="hero-sub-underline">days.</span>
+            FDA-approved hormone therapy, prescribed by a licensed clinician
+            via OpenLoop Health when clinically appropriate. Treatment is
+            subject to clinician approval; outcomes vary by individual.
           </p>
           <ul className="hero-checks">
-            <li><span className="check">✓</span> Licensed providers review your intake within 24 hours</li>
-            <li><span className="check">✓</span> Custom hormone protocol built for your symptoms</li>
-            <li><span className="check">✓</span> Unlimited provider messaging included</li>
-            <li><span className="check">✓</span> HSA/FSA approved</li>
+            <li><span className="check">✓</span> Licensed clinicians via OpenLoop Health typically review intakes within 1–2 business days</li>
+            <li><span className="check">✓</span> Treatment plan built around your clinical picture (when prescribed)</li>
+            <li><span className="check">✓</span> Messaging with the clinical team during your plan</li>
+            <li><span className="check">✓</span> HSA/FSA accepted</li>
             <li><span className="check">✓</span> Free shipping on every order</li>
           </ul>
           <div className="hero-cta">
@@ -353,19 +316,18 @@ function App() {
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
         <div className="container">
 
-          {/* 1 — Hook banner pill */}
-          <div className="edu-hook">
-            <span className="edu-hook-pill">Backed by 30+ years of clinical research</span>
-          </div>
+          {/* Audit findings M-16: "30+ years of clinical research" claim
+              removed pending sourced citations. */}
 
           {/* 2 — Main headline block */}
           <div className="edu-head">
             <div className="eyebrow">Why Her Estrogen</div>
             <h2>Every woman deserves to feel like <em>herself</em> again.</h2>
             <p className="edu-sub">
-              Perimenopause and menopause affect every woman — yet 75% receive no treatment.
-              Her Estrogen exists to change that. FDA-approved hormone replacement therapy,
-              prescribed online, delivered to your door.
+              Perimenopause and menopause are common life stages with a wide
+              range of symptoms. Her Estrogen provides access — through
+              independent licensed clinicians at OpenLoop Health — to
+              FDA-approved hormone therapy when clinically appropriate.
             </p>
           </div>
 
@@ -377,8 +339,8 @@ function App() {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
               </div>
-              <h3>FDA-Approved. Always.</h3>
-              <p>Only FDA-approved bioidentical hormones. No compounded formulations, ever.</p>
+              <h3>FDA-Approved Medications.</h3>
+              <p>The products we route are FDA-approved branded or generic estradiol and progesterone. No mass-marketed compounded BHRT.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -387,8 +349,8 @@ function App() {
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
               </div>
-              <h3>Approved in 24 Hours.</h3>
-              <p>Complete your intake online. A licensed provider reviews and ships in days.</p>
+              <h3>Clinician-led intake review.</h3>
+              <p>Submit your intake online. A licensed clinician via OpenLoop Health reviews it — typically within 1&ndash;2 business days. Approval is not guaranteed.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -396,22 +358,19 @@ function App() {
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
               </div>
-              <h3>Finally, Someone Who Listens.</h3>
-              <p>Providers who specialize only in women's hormones. Unlimited messaging, quarterly check-ins every 3 months.</p>
+              <h3>Care focused on women's hormone health.</h3>
+              <p>Clinicians experienced in women's hormone care. Messaging access during your plan; periodic check-ins.</p>
             </div>
           </div>
 
-          {/* 4 — Education block (2 columns: text + stat) */}
+          {/* Education block — sourced stats only.
+              The unsourced "92% relief in 90 days" claim was removed per
+              audit finding C-11. Restore only with peer-reviewed citation
+              visible at the point of claim. */}
           <div className="edu-education">
             <div className="edu-text">
-              <h3>Why women in perimenopause and menopause need HRT.</h3>
-              <p>Estrogen runs your sleep, mood, brain, bones, and metabolism. When it drops, they fail. HRT replaces what's missing — symptoms stop.</p>
-            </div>
-            <div className="edu-stats">
-              <div className="edu-stat">
-                <div className="edu-stat-num">92%</div>
-                <div className="edu-stat-label">of women report meaningful symptom relief within 90 days</div>
-              </div>
+              <h3>Why hormone therapy is worth a conversation.</h3>
+              <p>Estrogen plays a role in sleep, mood, cognition, bone, and metabolic health. When levels change in perimenopause and menopause, symptoms can follow. Hormone therapy is one option among several — a clinician can help you decide whether it is right for you.</p>
             </div>
           </div>
 
@@ -540,51 +499,9 @@ function App() {
         </div>
       </section>
 
-      {/* PATIENT STORIES — 20 case-studies in two scrolling rows; pause on hover */}
-      <section className="marquee-section" data-screen-label="02b Patient stories">
-        <div className="container">
-          <div className="patient-stories-head">
-            <div className="eyebrow">Real patient stories</div>
-            <h2>Women just like you — <em>thriving again.</em></h2>
-          </div>
-        </div>
-
-        {/* Static grid — all 8 cases, no animation */}
-        <div className="marquee-row">
-          <div className="marquee-track marquee-static">
-            {CASE_STUDIES_HOME.map((c, i) => {
-              const isOpen = openStory === i;
-              return (
-                <div className={'marquee-card' + (isOpen ? ' is-open' : '')} key={`r1-${i}`}>
-                  <div className="marquee-photo-wrap">
-                    <img src={c.photo} alt={c.name} className="marquee-photo" loading="eager" decoding="async" />
-                  </div>
-                  <div className="marquee-card-body">
-                    <div className="marquee-stars">★★★★★</div>
-                    <p className="marquee-quote">"{c.quote}"</p>
-                    <div className="marquee-meta">
-                      <div className="marquee-name">{c.name}</div>
-                      <div className="marquee-loc">{c.meta}</div>
-                    </div>
-                    <button
-                      className="marquee-story-btn"
-                      onClick={() => setOpenStory(isOpen ? null : i)}
-                      aria-expanded={isOpen}
-                    >
-                      {isOpen ? 'Hide story' : 'Read my story →'}
-                    </button>
-                    {isOpen && (
-                      <div className="marquee-story-body">
-                        <p>{c.story}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* PATIENT STORIES section REMOVED pending real, consented patient
+          testimonials (audit findings C-06, H-13). Do not reintroduce with
+          fabricated content. */}
 
       {/* SYMPTOMS / QUIZ — moved below treatments */}
       <section className="quiz" id="symptoms" data-screen-label="03 Symptom checker">
@@ -648,29 +565,29 @@ function App() {
               <div className="col-us">Her Estrogen</div>
             </div>
             <div className="compare-row">
-              <div className="compare-feat">Initial consult</div>
-              <div className="compare-no">2–4 month wait</div>
-              <div className="col-us compare-yes">Within 48 hrs</div>
+              <div className="compare-feat">Initial intake review</div>
+              <div className="compare-no">Often 2–4 month wait</div>
+              <div className="col-us compare-yes">Typically 1–2 business days</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Medication at your door</div>
               <div className="compare-no">2–6 weeks (Rx + pharmacy runs)</div>
-              <div className="col-us compare-yes">3–5 days, free shipping</div>
+              <div className="col-us compare-yes">Shipped free; shipping time varies by state</div>
             </div>
             <div className="compare-row">
-              <div className="compare-feat">Clinician specialty</div>
+              <div className="compare-feat">Clinician focus</div>
               <div className="compare-no">General practice</div>
-              <div className="col-us compare-yes">Menopause-trained</div>
+              <div className="col-us compare-yes">Women's hormone care</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Async messaging</div>
-              <div className="compare-no">Phone tag only</div>
-              <div className="col-us compare-yes">Same-day reply</div>
+              <div className="compare-no">Phone tag</div>
+              <div className="col-us compare-yes">Messaging during your plan</div>
             </div>
             <div className="compare-row">
-              <div className="compare-feat">Bioidentical options</div>
+              <div className="compare-feat">FDA-approved estradiol &amp; progesterone</div>
               <div className="compare-no">Sometimes</div>
-              <div className="col-us compare-yes">Default standard</div>
+              <div className="col-us compare-yes">Default offering</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Dose adjustments</div>
@@ -686,42 +603,11 @@ function App() {
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section className="reviews" id="reviews" data-screen-label="07 Reviews">
-        <div className="container">
-          <div className="reviews-head">
-            <div>
-              <div className="eyebrow">From our patients</div>
-              <h2>What women say after <em>ninety days.</em></h2>
-            </div>
-            <div className="reviews-meta">
-              <div className="reviews-rating">4.9<span className="stars">★★★★★</span></div>
-              <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 6 }}>
-                Across 2,840 verified patients
-              </div>
-            </div>
-          </div>
-          <div className="review-grid">
-            {REVIEWS.map((r, i) =>
-            <div className="review" key={i}>
-                <div className="review-stars">{'★'.repeat(r.stars)}</div>
-                <div className="review-body">"{r.body}"</div>
-                <div className="review-author">
-                  {r.photo ? (
-                    <img className="review-photo" src={r.photo} alt={r.name} loading="lazy" />
-                  ) : (
-                    <div className="avatar">{r.name.charAt(0)}</div>
-                  )}
-                  <div>
-                    <div className="review-name">{r.name}</div>
-                    <div className="review-age">{r.age}</div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      {/* REVIEWS section REMOVED — site is pre-launch; 4.9 star rating,
+          "2,840 verified patients", and 3 fabricated reviews violate FTC
+          16 CFR Part 465 (eff. Oct 2024) and 16 CFR Part 255. Restore only
+          with real, named, consenting customers and typicality disclosure
+          (audit findings C-06, H-13). */}
 
       {/* FAQ */}
       <section className="faq" id="faq" data-screen-label="08 FAQ">
@@ -752,18 +638,16 @@ function App() {
       {/* CTA */}
       <section className="cta-final" id="cta" data-screen-label="09 CTA">
         <div className="narrow">
-          <div className="eyebrow">$49 to start · refundable if you're not a candidate</div>
+          <div className="eyebrow">Refund available if a clinician determines HRT is not right for you (before shipment)</div>
           <h2>You don't have to <em>ride it out.</em></h2>
           <p>
-            Ten minutes today, a clinician within forty-eight hours,
-            and a real plan in your hands by the end of the week.
+            Submit your intake today. A licensed clinician via OpenLoop Health
+            will review it — typically within 1&ndash;2 business days.
+            Treatment is subject to clinician approval and is not guaranteed.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="quiz.html" className="btn btn-rose" style={{ padding: '16px 28px', fontSize: 16 }}>
               Start free assessment →
-            </a>
-            <a href="quiz.html" className="btn btn-ghost" style={{ padding: '16px 28px', fontSize: 16 }}>
-              Talk to a clinician first
             </a>
           </div>
         </div>
@@ -784,15 +668,23 @@ function App() {
             <a href="privacy.html">Privacy Policy</a>
             <span className="sep">·</span>
             <a href="terms.html">Terms of Service</a>
+            <span className="sep">·</span>
+            <a href="terms.html#refunds">Refund Policy</a>
           </div>
-          <div>Licensed in all 50 U.S. states · LegitScript certified</div>
+          <div>Telehealth available where independently licensed clinicians are authorized to practice.</div>
         </div>
         <div className="container foot-disclaimer">
-          Her Estrogen provides telehealth services through independently
-          licensed clinicians. Hormone therapy is not appropriate for
-          everyone; risks and benefits will be reviewed with your prescriber
-          before treatment. This site is for informational purposes and is
-          not medical advice. Individual results vary.
+          <strong>Important Safety Information.</strong> Estrogen-containing
+          products carry boxed warnings for endometrial cancer; cardiovascular
+          disorders including stroke, heart attack, and venous thromboembolism;
+          probable dementia; and (in combination with progestins) breast
+          cancer. Use the lowest effective dose for the shortest duration
+          consistent with treatment goals and patient risk. Treatment is
+          subject to clinician determination and may not be appropriate for
+          everyone. This page is for informational purposes only and does
+          not constitute medical advice. Individual results vary. Report side
+          effects to FDA MedWatch at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
+          See full Privacy Policy and HIPAA Notice for how we handle your information.
         </div>
       </footer>
     </>);

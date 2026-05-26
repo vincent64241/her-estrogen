@@ -36,12 +36,16 @@
 //   502 { error: 'Klaviyo event firing failed', detail: ... }
 
 const { fireCancelledSubscription } = require('../../lib/klaviyo');
+const crypto = require('crypto');
+
+// Server-to-server webhook — no browser-callable case, no wildcard CORS
+// (audit finding H-01).
+function logToken(email) {
+  if (!email) return 'sha-unknown';
+  return 'sha-' + crypto.createHash('sha256').update(String(email).toLowerCase()).digest('hex').slice(0, 8);
+}
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Webhook-Secret');
-  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
@@ -73,12 +77,14 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'product_count, if provided, must be 1 or 2.' });
   }
 
+  const tok = logToken(email);
+
   try {
     const result = await fireCancelledSubscription({ email, plan_length, product_count, reason });
-    console.log(`[orders/cancelled] Klaviyo Cancelled Subscription fired for ${email} (status ${result.status})`);
+    console.log(`[orders/cancelled] Klaviyo Cancelled Subscription fired for ${tok} (status ${result.status})`);
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[orders/cancelled] Klaviyo fire failed:', err && err.message);
+    console.error('[orders/cancelled] Klaviyo fire failed for', tok, ':', err && err.message);
     return res.status(502).json({
       error: 'Klaviyo event firing failed',
       detail: err && err.message
