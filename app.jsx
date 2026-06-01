@@ -28,7 +28,7 @@ const TREATMENTS = [
   subtitle: 'Applied twice weekly',
   features: [
   ['Application', 'Twice weekly — adhesive patch']],
-  image: 'assets/estradiol-patch.png'
+  image: 'assets/estradiol-patch.png?v=2'
 },
 {
   id: 'pill',
