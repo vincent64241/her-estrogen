@@ -100,7 +100,7 @@ const MEDS = {
     badgeKind: 'pink',
     product: 'FDA-approved estradiol patch',
     description: 'A twice-weekly transdermal estradiol patch — one of several FDA-approved forms of estrogen therapy your clinician may consider.',
-    image: 'assets/transdermal-patch.png',
+    image: 'assets/estradiol-patch.png',
     features: [
       'FDA-approved estradiol patch — dose set by the clinician',
       'Twice-weekly application',
