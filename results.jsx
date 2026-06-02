@@ -1085,12 +1085,14 @@ function App() {
                   <br /><br />
                   <strong>Refund policy.</strong> If a licensed clinician determines
                   hormone therapy is not clinically appropriate for you after reviewing
-                  your intake, your subscription payment is refunded in full within 3
-                  business days. You may also cancel before your first medication
-                  shipment for a full refund. <strong>Once medication has shipped,
-                  refunds are not available</strong> per applicable pharmacy regulations
-                  (Terms §8). Treatment is subject to clinician determination and is not
-                  guaranteed.
+                  your intake, your subscription payment is refunded in full. You may
+                  also cancel before your medication has been ordered for a full
+                  refund. <strong>Once your medication has been ordered, refunds are
+                  not available</strong> per applicable pharmacy regulations. Multi-month
+                  plans are eligible for prorated refunds calculated at the 3-month plan
+                  rate. See the full
+                  {' '}<a href="refunds.html" target="_blank" rel="noopener" style={{ textDecoration: 'underline' }}>Cancellation &amp; Refund Policy</a>.
+                  Treatment is subject to clinician determination and is not guaranteed.
                 </div>
 
                 <button type="submit" className="submit-btn" disabled={submitting}>
@@ -1161,7 +1163,8 @@ function App() {
           <a href="privacy.html">Privacy Policy</a>·
           <a href="terms.html">Terms of Service</a>·
           <a href="privacy.html">HIPAA Notice</a>·
-          <a href="terms.html#refunds">Refund Policy</a>·
+          <a href="refunds.html">Cancellation &amp; Refund Policy</a>·
+          <a href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener">OpenLoop Telehealth Consent</a>·
           <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">Report a side effect (FDA MedWatch)</a>·
           <a href="mailto:support@herestrogen.com">Contact Us</a>
         </div>

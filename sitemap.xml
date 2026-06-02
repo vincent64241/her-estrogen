@@ -22,7 +22,14 @@
 
   <url>
     <loc>https://herestrogen.com/terms.html</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://herestrogen.com/refunds.html</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

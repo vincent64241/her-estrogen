@@ -669,7 +669,9 @@ function App() {
             <span className="sep">·</span>
             <a href="terms.html">Terms of Service</a>
             <span className="sep">·</span>
-            <a href="terms.html#refunds">Refund Policy</a>
+            <a href="refunds.html">Cancellation &amp; Refunds</a>
+            <span className="sep">·</span>
+            <a href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener">Telehealth Consent</a>
           </div>
           <div>Telehealth available where independently licensed clinicians are authorized to practice.</div>
         </div>

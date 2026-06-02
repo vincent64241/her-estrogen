@@ -638,7 +638,7 @@ function Quiz() {
       // Notice-at-Collection + 18+ affirmation are REQUIRED for CCPA/CPRA
       // and the Terms eligibility statement. Both must be explicitly ticked
       // (audit findings H-17, M-22).
-      const consentOk = answers.consentNoticeAck === true && answers.adultAck === true;
+      const consentOk = answers.consentNoticeAck === true && answers.adultAck === true && answers.telehealthConsent === true;
       return requiredOk && birthdayOk && consentOk;
     }
     return false;
@@ -908,6 +908,18 @@ function Quiz() {
                   required
                 />
                 <span>I confirm that I am at least 18 years old.</span>
+              </label>
+              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, cursor: 'pointer', lineHeight: 1.5 }}>
+                <input
+                  type="checkbox"
+                  checked={!!answers.telehealthConsent}
+                  onChange={(e) => setAnswers({ ...answers, telehealthConsent: e.target.checked })}
+                  style={{ marginTop: 3 }}
+                  required
+                />
+                <span>
+                  I consent to receive telehealth services from our medical partner, OpenLoop Health. I have reviewed the <a href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener">OpenLoop Telehealth Informed Consent</a> and Her Estrogen's <a href="refunds.html" target="_blank" rel="noopener">Cancellation &amp; Refund Policy</a>.
+                </span>
               </label>
             </div>
           </div>
