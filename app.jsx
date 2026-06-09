@@ -286,21 +286,9 @@ function App() {
         <div className="hero-gradient"></div>
 
         <div className="hero-editorial-content">
-          {/* Hero social proof — aspirational AI imagery (NOT presented as
-              patients, no names, no quotes, no outcome claims). Compliance
-              audit C-06 / H-13 / C-11 safe: this is brand lifestyle imagery,
-              not testimonial. Do NOT pair these avatars with names or quotes
-              without real, consenting customers. */}
-          <div className="hero-social-proof">
-            <div className="hero-avatars">
-              <div className="hero-avatar"><img src="assets/hero-avatars/avatar-1.jpg" alt="" /></div>
-              <div className="hero-avatar"><img src="assets/hero-avatars/avatar-2.jpg" alt="" /></div>
-              <div className="hero-avatar"><img src="assets/hero-avatars/avatar-3.jpg" alt="" /></div>
-              <div className="hero-avatar"><img src="assets/hero-avatars/avatar-4.jpg" alt="" /></div>
-              <div className="hero-avatar"><img src="assets/hero-avatars/avatar-5.jpg" alt="" /></div>
-            </div>
-            <div className="hero-social-label">Modern hormone care, designed for women like you</div>
-          </div>
+          {/* Star rating + "X+ patients" removed per audit findings C-06 / H-13.
+              Site is pre-launch; reintroduce only after counsel review with
+              real, named, consenting reviews. */}
           <h1>
             Poor Sleep. Low Energy. Brain Fog.<br />
             It's not in your head — <em>it's your hormones.</em>
@@ -322,6 +310,34 @@ function App() {
           </div>
         </div>
 
+      </section>
+
+      {/* LIFESTYLE STRIP — horizontal scrolling marquee of aspirational
+          AI lifestyle imagery. NOT presented as patients (no names, no
+          quotes, no outcome claims). Compliance audit C-06 / H-13 / C-11
+          safe. Animation is CSS-only (no JS), continuous left scroll,
+          pauses on hover. Edges fade to white to avoid hard crop. */}
+      <section className="lifestyle-strip" aria-label="Lifestyle imagery" data-screen-label="01a Lifestyle">
+        <div className="lifestyle-strip-track">
+          {/* Set A — original */}
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-5.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-6.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-7.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-8.jpg" alt="" /></div>
+          {/* Set B — exact duplicate, makes the loop seamless */}
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-5.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-6.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-7.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-8.jpg" alt="" /></div>
+        </div>
       </section>
 
       {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}

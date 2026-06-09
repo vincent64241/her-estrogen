@@ -2546,50 +2546,62 @@
   }
 
   /* ─────────────────────────────────────────────
-     HERO SOCIAL PROOF (avatar strip)
-     Aspirational AI portraits — NOT presented as
-     patients. No names, no quotes, no outcome claims.
-     Lives inside the hero so it shows above the fold.
+     LIFESTYLE STRIP — animated horizontal marquee
+     Sits directly under the hero. Aspirational AI
+     lifestyle imagery; NOT presented as patients
+     (no names, no quotes, no outcome claims).
+     CSS-only continuous scroll; pauses on hover.
+     Edges fade to white via mask-image.
      Compliance audit C-06, H-13, C-11 safe.
      ───────────────────────────────────────────── */
-  .hero-social-proof {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-  .hero-avatars {
-    display: flex;
-    flex-shrink: 0;
-  }
-  .hero-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 2.5px solid #fff;
+  .lifestyle-strip {
+    background: #fff;
+    padding: 32px 0;
     overflow: hidden;
-    margin-left: -10px;
-    background: var(--pink-soft);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-    flex-shrink: 0;
+    position: relative;
+    /* Soft fade on left/right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
   }
-  .hero-avatar:first-child { margin-left: 0; }
-  .hero-avatar img {
+  .lifestyle-strip-track {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: lifestyleStripScroll 60s linear infinite;
+    will-change: transform;
+  }
+  .lifestyle-strip:hover .lifestyle-strip-track {
+    animation-play-state: paused;
+  }
+  .lifestyle-strip-item {
+    flex: 0 0 auto;
+    width: 280px;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--pink-soft);
+    box-shadow: 0 4px 14px rgba(184, 35, 92, 0.08);
+  }
+  .lifestyle-strip-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  .hero-social-label {
-    font-size: 14px;
-    color: var(--ink-2);
-    font-weight: 500;
-    line-height: 1.4;
+  /* The track holds 2 copies of the image set. Scroll by exactly half the
+     track width (i.e. one full set) for a seamless infinite loop. */
+  @keyframes lifestyleStripScroll {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
   }
-  @media (max-width: 640px) {
-    .hero-social-proof { gap: 10px; margin-bottom: 16px; }
-    .hero-avatar { width: 36px; height: 36px; border-width: 2px; margin-left: -8px; }
-    .hero-social-label { font-size: 12.5px; }
+  /* Respect users who don't want motion */
+  @media (prefers-reduced-motion: reduce) {
+    .lifestyle-strip-track { animation: none; }
+  }
+  @media (max-width: 760px) {
+    .lifestyle-strip { padding: 22px 0; }
+    .lifestyle-strip-track { gap: 12px; animation-duration: 45s; }
+    .lifestyle-strip-item { width: 200px; height: 160px; border-radius: 12px; }
   }
 
 </style>
