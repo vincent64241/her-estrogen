@@ -319,27 +319,26 @@ function App() {
           pauses on hover. Edges fade to white to avoid hard crop. */}
       <section className="lifestyle-strip" aria-label="Lifestyle imagery" data-screen-label="01a Lifestyle">
         <div className="lifestyle-strip-track">
-          {/* Set A — 4 new AI lifestyle + 4 existing case photos (decorative
-              reuse: no names, no quotes, no patient claims attached). Ordered
-              for visual rhythm: outdoor warm → intimate → indoor laugh →
-              active → outdoor active → social → indoor cozy → quiet. */}
+          {/* Set A — 4 new AI lifestyle + 3 vetted existing case photos
+              (decorative reuse: no names, no quotes, no patient claims).
+              Dropped case-couple (man on-brand mismatch) + case-gym
+              (gritty aesthetic). Ordered for visual rhythm: alternating
+              outdoor/indoor + active/calm + diverse ethnicities. */}
           <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-couple.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-gym.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-friends.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
           <div className="lifestyle-strip-item"><img src="assets/case-reading.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/case-joy.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item"><img src="assets/case-friends.jpg" alt="" /></div>
           {/* Set B — exact duplicate, makes the loop seamless */}
           <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-couple.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-gym.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-friends.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
           <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-reading.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-joy.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
+          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-friends.jpg" alt="" /></div>
         </div>
       </section>
 
