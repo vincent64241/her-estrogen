@@ -312,6 +312,48 @@ function App() {
 
       </section>
 
+      {/* LIFESTYLE GRID — aspirational AI imagery (NOT presented as patients).
+          No names, no quotes, no efficacy claims. Service-attribute stats only.
+          Compliance-safe per audit findings C-06, H-13, C-11 (lifestyle imagery
+          is fine; patient testimonials require real consenting customers). */}
+      <section className="lifestyle-section" data-screen-label="01a Lifestyle">
+        <div className="container">
+          <div className="lifestyle-head">
+            <h2>The hormone care women have been <em>waiting for</em>.</h2>
+            <p className="lifestyle-head-sub">
+              Modern, clinician-led hormone care designed for women navigating
+              perimenopause and menopause. FDA-approved options when prescribed
+              by a licensed clinician via OpenLoop Health.
+            </p>
+          </div>
+
+          <div className="lifestyle-grid">
+            <div className="lifestyle-card l1"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
+            <div className="lifestyle-card l2"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
+            <div className="lifestyle-card l3"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
+            <div className="lifestyle-card l4"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
+            <div className="lifestyle-card l5"><img src="assets/lifestyle/lifestyle-5.jpg" alt="" /></div>
+            <div className="lifestyle-card l6"><img src="assets/lifestyle/lifestyle-6.jpg" alt="" /></div>
+            <div className="lifestyle-card l7"><img src="assets/lifestyle/lifestyle-7.jpg" alt="" /></div>
+          </div>
+
+          <div className="lifestyle-stats">
+            <div className="lifestyle-stat">
+              <div className="lifestyle-stat-check" aria-hidden="true">✓</div>
+              <div className="lifestyle-stat-text">FDA-approved estradiol &amp; oral progesterone when prescribed</div>
+            </div>
+            <div className="lifestyle-stat">
+              <div className="lifestyle-stat-check" aria-hidden="true">✓</div>
+              <div className="lifestyle-stat-text">Clinician-led intake via our medical partner OpenLoop Health</div>
+            </div>
+            <div className="lifestyle-stat">
+              <div className="lifestyle-stat-check" aria-hidden="true">✓</div>
+              <div className="lifestyle-stat-text">Free shipping. Cancel before any renewal. HSA/FSA accepted.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
         <div className="container">

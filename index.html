@@ -2545,6 +2545,131 @@
     .patient-quote { font-size: 15px; }
   }
 
+  /* ─────────────────────────────────────────────
+     LIFESTYLE GRID SECTION
+     Aspirational lifestyle imagery. NOT presented
+     as patients (no names, quotes, outcome claims).
+     Service-attribute stats only — no efficacy claims.
+     Compliance audit C-06, H-13, C-11 safe.
+     ───────────────────────────────────────────── */
+  .lifestyle-section {
+    padding: 80px 0 100px;
+    background: #fff;
+  }
+  .lifestyle-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 32px;
+  }
+  .lifestyle-head h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4.6vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .lifestyle-head h2 em { font-style: italic; color: var(--pink); }
+  .lifestyle-head-sub {
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin: 0;
+    padding-bottom: 6px;
+  }
+  .lifestyle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.6fr 1fr;
+    grid-template-rows: 320px 240px;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .lifestyle-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--pink-soft);
+    position: relative;
+  }
+  .lifestyle-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Layout: 7 cards, varied sizes (Medvi-style) */
+  .lifestyle-card.l1 { grid-column: 1 / 2; grid-row: 1 / 2; }
+  .lifestyle-card.l2 { grid-column: 2 / 3; grid-row: 1 / 2; }
+  .lifestyle-card.l3 { grid-column: 3 / 4; grid-row: 1 / 3; }
+  .lifestyle-card.l4 { grid-column: 4 / 5; grid-row: 1 / 2; }
+  .lifestyle-card.l5 { grid-column: 1 / 2; grid-row: 2 / 3; }
+  .lifestyle-card.l6 { grid-column: 2 / 3; grid-row: 2 / 3; }
+  .lifestyle-card.l7 { grid-column: 4 / 5; grid-row: 2 / 3; }
+
+  .lifestyle-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 8px;
+  }
+  .lifestyle-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .lifestyle-stat-check {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .lifestyle-stat-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 760px) {
+    .lifestyle-section { padding: 48px 0 56px; }
+    .lifestyle-head {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .lifestyle-head h2 { font-size: clamp(26px, 7.5vw, 36px); }
+    .lifestyle-head-sub { font-size: 15px; padding-bottom: 0; }
+    .lifestyle-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 180px 180px 280px 180px;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .lifestyle-card.l1 { grid-column: 1 / 2; grid-row: 1 / 2; }
+    .lifestyle-card.l2 { grid-column: 2 / 3; grid-row: 1 / 2; }
+    .lifestyle-card.l3 { grid-column: 1 / 3; grid-row: 3 / 4; }
+    .lifestyle-card.l4 { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .lifestyle-card.l5 { grid-column: 2 / 3; grid-row: 2 / 3; }
+    .lifestyle-card.l6 { grid-column: 1 / 2; grid-row: 4 / 5; }
+    .lifestyle-card.l7 { grid-column: 2 / 3; grid-row: 4 / 5; }
+    .lifestyle-stats {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .lifestyle-stat-check { width: 24px; height: 24px; font-size: 13px; }
+    .lifestyle-stat-text { font-size: 14px; }
+  }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
