@@ -2611,7 +2611,7 @@
      Reference apricot/blush/butter/sage → our pink/moss/gold family.
      Honors prefers-reduced-motion.
      ═══════════════════════════════════════════════════════════════ */
-  .hero-bento { padding: 120px 0 64px; background: var(--paper); position: relative; }
+  .hero-bento { padding: 172px 0 88px; background: var(--paper); position: relative; }
   .hb-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   .hero-bento h1 {
     font-family: 'Newsreader', Georgia, serif;
@@ -2688,6 +2688,48 @@
   .hero-bento .tile.fog   { background: linear-gradient(150deg, #e9efe2, #d6e2cc); }
   .hero-bento .tile.mood  { background: linear-gradient(150deg, #f6ecd9, #efdcb6); }
 
+  /* ── Hero tiles as darkened lifestyle-photo cards (per request) ──
+     Each tile gets a lifestyle photo background + a dark scrim (brightness
+     lowered) so the text stays readable. Hover lightens the scrim + lifts. */
+  .hero-bento .tile.main,
+  .hero-bento .tile.sleep,
+  .hero-bento .tile.heat,
+  .hero-bento .tile.fog,
+  .hero-bento .tile.mood {
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    border: none;
+  }
+  .hero-bento .tile.main  { background-image: url('assets/lifestyle/lifestyle-1.jpg'); }
+  .hero-bento .tile.sleep { background-image: url('assets/case-reading.jpg'); }
+  .hero-bento .tile.heat  { background-image: url('assets/lifestyle/lifestyle-3.jpg'); }
+  .hero-bento .tile.fog   { background-image: url('assets/lifestyle/lifestyle-2.jpg'); }
+  .hero-bento .tile.mood  { background-image: url('assets/case-joy.jpg'); }
+  /* Dark scrim overlay (the "brightness lowered" layer) */
+  .hero-bento .tile.main::after,
+  .hero-bento .tile.sleep::after,
+  .hero-bento .tile.heat::after,
+  .hero-bento .tile.fog::after,
+  .hero-bento .tile.mood::after {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(26,18,22,.32) 0%, rgba(26,18,22,.68) 100%);
+    transition: background .35s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-bento .tile.main:hover::after,
+    .hero-bento .tile.sleep:hover::after,
+    .hero-bento .tile.heat:hover::after,
+    .hero-bento .tile.fog:hover::after,
+    .hero-bento .tile.mood:hover::after {
+      background: linear-gradient(180deg, rgba(26,18,22,.14) 0%, rgba(26,18,22,.52) 100%);
+    }
+  }
+  /* Lift content above the scrim + make text legible on photos */
+  .hero-bento .tile > * { position: relative; z-index: 1; }
+  .hero-bento .tile.main .blob { display: none; }
+  .hero-bento .tile h3, .hero-bento .tile p { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+  .hero-bento .tile .mini-art { stroke: #fff; opacity: .92; }
+  .hero-bento .tile .go { background: rgba(26,18,22,.7); }
+
   /* Trust marquee (text ticker) */
   .trust-marquee {
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
@@ -2723,7 +2765,7 @@
 
   /* Bento responsive */
   @media (max-width: 900px) {
-    .hero-bento { padding: 104px 0 48px; }
+    .hero-bento { padding: 128px 0 56px; }
     .hero-bento .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .hero-bento .tile.main { grid-row: auto; grid-column: 1 / -1; min-height: 280px; }
     .hero-bento .tile { min-height: 150px; }
@@ -2856,6 +2898,65 @@
     .science-v2 .stat-band { gap: 28px; }
   }
 
+  /* ═══ CLINICAL EXCELLENCE (ported from reference, brand-skinned) ═══ */
+  .clinical-v2 { background: var(--paper); }
+  .clinical-v2 .eyebrow-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', ui-monospace, monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--pink-deep); background: var(--pink-soft);
+    border-radius: 100px; padding: 8px 16px; margin-bottom: 20px;
+  }
+  .clinical-v2 .v2-title {
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
+    font-size: clamp(32px, 4.2vw, 54px); line-height: 1.06; letter-spacing: -0.02em;
+    color: var(--ink); margin: 0 0 40px;
+  }
+  .clinical-v2 .v2-title em { font-style: italic; color: var(--pink); }
+  .clinical-v2 .standards-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
+  .clinical-v2 .cred-list { display: flex; flex-direction: column; gap: 14px; }
+  .clinical-v2 .cred {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--pink-softer); border: 1px solid var(--line); border-radius: 18px; padding: 22px;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .clinical-v2 .cred:hover { transform: translateX(6px); box-shadow: 0 14px 36px rgba(26,18,22,.08); }
+  }
+  .clinical-v2 .cred .ic {
+    flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
+    background: var(--pink-soft); color: var(--pink-deep);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .clinical-v2 .cred h4 { font-family: 'DM Sans', system-ui, sans-serif; font-size: 17px; font-weight: 700; margin: 0 0 3px; color: var(--ink); }
+  .clinical-v2 .cred p { font-family: 'DM Sans', system-ui, sans-serif; font-size: 14px; color: var(--muted); margin: 0; line-height: 1.55; }
+  .clinical-v2 .clinical-panel {
+    background: var(--ink); color: #fff; border-radius: 24px; padding: 40px;
+    position: relative; overflow: hidden; align-self: stretch;
+  }
+  .clinical-v2 .clinical-panel::before {
+    content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,35,92,.40), transparent 70%);
+    right: -120px; bottom: -120px; animation: breathe 8s ease-in-out infinite; will-change: transform;
+  }
+  .clinical-v2 .clinical-panel .role {
+    font-family: 'DM Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--pink-3); margin-bottom: 14px; position: relative;
+  }
+  .clinical-v2 .clinical-panel h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.12; margin: 0 0 14px; position: relative; }
+  .clinical-v2 .clinical-panel p { font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.82); margin: 0 0 12px; position: relative; }
+  .clinical-v2 .clinical-panel .clinical-isi { font-size: 12.5px; color: rgba(255,255,255,.62); margin-bottom: 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .clinical-v2 .rv { animation: rvRise .7s cubic-bezier(.22,.7,.3,1) both; will-change: transform; }
+    .clinical-v2 .rv.d1 { animation-delay: .08s; }
+    .clinical-v2 .rv.d2 { animation-delay: .16s; }
+    .clinical-v2 .rv.d3 { animation-delay: .24s; }
+  }
+  @media (max-width: 900px) {
+    .clinical-v2 .standards-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
@@ -2887,7 +2988,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v2sections"></script>
+<script type="text/babel" src="app.jsx?v=v3"></script>
 
 <script>
   // Editorial nav: transparent at top, white-blur background once scrolled
@@ -2901,8 +3002,27 @@
     window.addEventListener('scroll', update, { passive: true });
     update();
   })();
-  // (Products drag-scroll script removed — the treatments scroll container was
-  //  replaced by the static meds grid in the v2 reskin.)
+
+  // Products scroll container: click-and-drag to scroll on desktop.
+  (function() {
+    function init() {
+      var el = document.querySelector('.products-scroll-container');
+      if (!el) { return setTimeout(init, 200); }
+      var isDown = false, startX = 0, scrollLeft = 0;
+      el.addEventListener('mousedown', function(e) {
+        isDown = true; el.classList.add('dragging');
+        startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; e.preventDefault();
+      });
+      ['mouseleave', 'mouseup'].forEach(function(evt) {
+        el.addEventListener(evt, function() { isDown = false; el.classList.remove('dragging'); });
+      });
+      el.addEventListener('mousemove', function(e) {
+        if (!isDown) return; e.preventDefault();
+        var x = e.pageX - el.offsetLeft; el.scrollLeft = scrollLeft - (x - startX) * 1.4;
+      });
+    }
+    init();
+  })();
 </script>
 
 <template id="__bundler_thumbnail">

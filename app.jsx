@@ -287,8 +287,7 @@ function App() {
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
           <h1 className="rv">
-            Poor Sleep. Low Energy. Brain Fog.<br />
-            It's not in your head — <em>it's your hormones.</em>
+            Feel like yourself, <em>again.</em>
           </h1>
           <p className="hb-sub rv d1">
             FDA-approved hormone therapy, prescribed by a licensed clinician
@@ -343,35 +342,8 @@ function App() {
         </div>
       </div>
 
-      {/* LIFESTYLE STRIP — horizontal scrolling marquee of aspirational
-          AI lifestyle imagery. NOT presented as patients (no names, no
-          quotes, no outcome claims). Compliance audit C-06 / H-13 / C-11
-          safe. Animation is CSS-only (no JS), continuous left scroll,
-          pauses on hover. Edges fade to white to avoid hard crop. */}
-      <section className="lifestyle-strip" aria-label="Lifestyle imagery" data-screen-label="01a Lifestyle">
-        <div className="lifestyle-strip-track">
-          {/* Set A — 4 new AI lifestyle + 3 vetted existing case photos
-              (decorative reuse: no names, no quotes, no patient claims).
-              Dropped case-couple (man on-brand mismatch) + case-gym
-              (gritty aesthetic). Ordered for visual rhythm: alternating
-              outdoor/indoor + active/calm + diverse ethnicities. */}
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-reading.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-joy.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item"><img src="assets/case-friends.jpg" alt="" /></div>
-          {/* Set B — exact duplicate, makes the loop seamless */}
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-1.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-reading.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-3.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-2.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-joy.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/lifestyle/lifestyle-4.jpg" alt="" /></div>
-          <div className="lifestyle-strip-item" aria-hidden="true"><img src="assets/case-friends.jpg" alt="" /></div>
-        </div>
-      </section>
+      {/* LIFESTYLE STRIP removed — its imagery now lives as the darkened
+          background photos inside the hero bento tiles. */}
 
       {/* EDUCATIONAL CONVERSION SECTION — Why HRT */}
       <section className="edu-section" id="why" data-screen-label="01b Why HRT">
@@ -498,60 +470,65 @@ function App() {
         </div>
       </section>
 
-      {/* SECTION 2 — MEDS GRID + MINI-QUIZ (ported from reference, brand-skinned) */}
-      <section className="meds-v2" id="treatments" data-screen-label="02 Treatments">
+      {/* TREATMENTS — restored original horizontal product scroll (per request) */}
+      <section className="treatments" id="treatments" data-screen-label="02 Treatments">
         <div className="container">
-          <span className="eyebrow-chip rv">FDA-approved lineup</span>
-          <h2 className="v2-title rv d1">Your hormone breakthrough <em>is here.</em></h2>
-          <p className="v2-sub rv d2">Five FDA-approved treatments. Your clinician matches the form and dose to your body, your symptoms, your life.</p>
-          <div className="med-row">
-            <div className="med rv">
-              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Daily gel</span></div>
-              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M8 2h8v6l3 11a2 2 0 01-2 3H7a2 2 0 01-2-3L8 8z" /></svg></div>
-              <h3>Estradiol Gel</h3><div className="form-name">Transdermal · once daily</div>
-              <div className="price">From <b>$143</b><small>/mo†</small></div>
+          <div className="treatments-two-col">
+            <div className="treatments-col-left">
+              <div className="eyebrow">Treatments</div>
+              <h2>Your solutions, <em>trusted by experts.</em></h2>
             </div>
-            <div className="med rv d1">
-              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">2x weekly</span></div>
-              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="4" y="6" width="16" height="12" rx="3" /></svg></div>
-              <h3>Estradiol Patch</h3><div className="form-name">Transdermal · twice weekly</div>
-              <div className="price">From <b>$143</b><small>/mo†</small></div>
-            </div>
-            <div className="med rv d2">
-              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Oral</span></div>
-              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><circle cx="12" cy="12" r="8" /><path d="M12 4v16" /></svg></div>
-              <h3>Estradiol Pill</h3><div className="form-name">Oral · once daily</div>
-              <div className="price">From <b>$143</b><small>/mo†</small></div>
-            </div>
-            <div className="med rv d3">
-              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Local</span></div>
-              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M12 3c4 4 6 7 6 10a6 6 0 11-12 0c0-3 2-6 6-10z" /></svg></div>
-              <h3>Vaginal Cream</h3><div className="form-name">Local estradiol therapy</div>
-              <div className="price">From <b>$143</b><small>/mo†</small></div>
-            </div>
-            <div className="med rv d4">
-              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Nightly</span></div>
-              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg></div>
-              <h3>Progesterone</h3><div className="form-name">Oral · nightly</div>
-              <div className="price">From <b>$143</b><small>/mo†</small></div>
+            <div className="treatments-col-right">
+              <p className="treatments-sub">
+                Most patients start with one or two of the following{' '}
+                <span className="treatments-highlight">FDA-approved</span>{' '}
+                protocols. Your clinician decides what's appropriate based on
+                your symptoms, history, and goals.
+              </p>
             </div>
           </div>
-          <p className="fineprint rv">†Price reflects the 12-month plan billed annually ($1,716/yr); 6-month and 3-month plans available at $152/mo and $169/mo respectively. Price includes medication if prescribed, clinician review, unlimited portal messaging, and shipping. Prescription issued only if determined appropriate by a licensed clinician. Cancel anytime before renewal.</p>
-
-          <div className="mini-quiz rv">
-            <div>
-              <h3>Unsure where to begin? <em>Start here.</em></h3>
-              <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician via OpenLoop Health reviews every answer.</p>
-            </div>
-            <div className="q-options">
-              <a className="q-opt" href="quiz.html"><span>I can't sleep</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Hot flashes</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Brain fog</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Mood swings</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Intimacy discomfort</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>All of the above</span><span>→</span></a>
-            </div>
+        </div>
+        <div className="products-scroll-wrapper">
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-left"
+            aria-label="Scroll products left"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: -452, behavior: 'smooth' });
+            }}
+          >
+            ‹
+          </button>
+          <div className="products-scroll-container">
+            {TREATMENTS.map((t) => (
+              <a href="quiz.html" className="product-card-new" key={t.id}>
+                <div className="product-card-image-wrapper">
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className={t.id === 'patch' ? 'no-shadow' : ''}
+                  />
+                </div>
+                <div className="product-card-body">
+                  <h3 className="product-card-name">{t.name}</h3>
+                  <p className="product-card-subtitle">{t.subtitle}</p>
+                  <span className="product-card-btn">GET STARTED</span>
+                </div>
+              </a>
+            ))}
           </div>
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-right"
+            aria-label="Scroll products right"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: 452, behavior: 'smooth' });
+            }}
+          >
+            ›
+          </button>
         </div>
       </section>
 
@@ -590,47 +567,7 @@ function App() {
           testimonials (audit findings C-06, H-13). Do not reintroduce with
           fabricated content. */}
 
-      {/* SYMPTOMS / QUIZ — moved below treatments */}
-      <section className="quiz" id="symptoms" data-screen-label="03 Symptom checker">
-        <div className="container">
-          <div className="quiz-head">
-            <div>
-              <div className="eyebrow">Symptom quiz · 30 seconds</div>
-              <h2>Which of these <em>actually</em> sound like you?</h2>
-            </div>
-            <p className="quiz-intro">
-              Tap anything you've noticed in the last six months. We'll match
-              you with a protocol — and a clinician who treats women in your
-              stage of life every day.
-            </p>
-          </div>
-          <div className="symptom-grid">
-            {SYMPTOMS.map((s) => {
-              const active = selected.has(s.id);
-              return (
-                <button
-                  key={s.id}
-                  className={'symptom' + (active ? ' active' : '')}
-                  onClick={() => toggle(s.id)}>
-
-                  <span className="symptom-glyph">{s.glyph}</span>
-                  <span className="symptom-name">{s.name}</span>
-                  <span className="symptom-note">{s.note}</span>
-                </button>);
-
-            })}
-          </div>
-          <div className="quiz-action">
-            <a href="quiz.html" className="btn btn-primary">
-              Continue with {selected.size || 0} {selected.size === 1 ? 'symptom' : 'symptoms'} →
-            </a>
-            <div>
-              <div className="quiz-count"><strong>{selected.size}</strong> / {SYMPTOMS.length} selected</div>
-              <div className="progress"><div className="progress-fill" style={{ width: progress + '%' }}></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* SYMPTOM QUIZ section removed (per request). */}
 
       {/* HOW IT WORKS */}
       <Timeline />
@@ -696,6 +633,43 @@ function App() {
           with real, named, consenting customers and typicality disclosure
           (audit findings C-06, H-13). */}
 
+      {/* CLINICAL EXCELLENCE — ported from reference, brand-skinned.
+          Doctor-card dropped (placeholder/fabrication risk); replaced with a
+          factual partner + safety panel. "Board-certified" softened to
+          "licensed clinicians via OpenLoop Health" (audit H-05). */}
+      <section className="clinical-v2" id="clinical" data-screen-label="07b Clinical excellence">
+        <div className="container">
+          <span className="eyebrow-chip rv">Clinical excellence</span>
+          <h2 className="v2-title rv d1">The best care, <em>by the book.</em></h2>
+          <div className="standards-grid">
+            <div className="cred-list">
+              <div className="cred rv">
+                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg></div>
+                <div><h4>FDA-approved medications only</h4><p>Never compounded. Every dose manufactured and tested under federal standards.</p></div>
+              </div>
+              <div className="cred rv d1">
+                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg></div>
+                <div><h4>Licensed clinicians via OpenLoop Health</h4><p>Licensed in your state, experienced in modern hormonal medicine, reachable through your portal.</p></div>
+              </div>
+              <div className="cred rv d2">
+                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18" /></svg></div>
+                <div><h4>Licensed U.S. pharmacies</h4><p>State-regulated dispensing and discreet packaging, with tracking on every shipment.</p></div>
+              </div>
+              <div className="cred rv d3">
+                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 018 0v3" /></svg></div>
+                <div><h4>Private by design</h4><p>Your health information is protected and never sold. Care happens in a secure portal.</p></div>
+              </div>
+            </div>
+            <div className="clinical-panel rv d2">
+              <div className="role">Our medical partner</div>
+              <h3>Care from independent, licensed clinicians</h3>
+              <p>Her Estrogen is a technology and brand platform; medical care is provided by independent licensed clinicians via OpenLoop Health. Treatment is prescribed only when a clinician determines it's appropriate after reviewing your history.</p>
+              <p className="clinical-isi">Estrogen-containing products carry FDA boxed warnings. See the Important Safety Information at the bottom of this page.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="faq" id="faq" data-screen-label="08 FAQ">
         <div className="container faq-grid">
@@ -726,7 +700,7 @@ function App() {
       <section className="final-v2" id="cta" data-screen-label="09 CTA">
         <div className="final-inner">
           <div className="eyebrow rv">Refund available if a clinician determines HRT is not right for you (before shipment)</div>
-          <h2 className="rv d1">You don't have to <em>ride it out.</em></h2>
+          <h2 className="rv d1">You've waited <em>long enough.</em></h2>
           <p className="rv d2">
             Submit your intake today. A licensed clinician via OpenLoop Health
             will review it — typically within 1&ndash;2 business days.
