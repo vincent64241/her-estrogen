@@ -280,37 +280,68 @@ function App() {
 
   return (
     <>
-      {/* HERO — editorial layout */}
-      <section className="hero hero-editorial" data-screen-label="01 Hero">
-        <img src="assets/hero-bg-desktop.jpg?v=2" alt="Hero" className="hero-bg-img" />
-        <div className="hero-gradient"></div>
-
-        <div className="hero-editorial-content">
-          {/* Star rating + "X+ patients" removed per audit findings C-06 / H-13.
-              Site is pre-launch; reintroduce only after counsel review with
-              real, named, consenting reviews. */}
-          <h1>
+      {/* HERO — bento layout (ported from design-reference v2, reskinned to brand).
+          Layout/motion from reference; palette + fonts are 100% ours.
+          Headline + sub kept from existing site per spec STEP-1 reuse rule;
+          bento tile copy ported verbatim per Vincent's "B" choice. */}
+      <section className="hero-bento" data-screen-label="01 Hero">
+        <div className="hb-wrap">
+          <h1 className="rv">
             Poor Sleep. Low Energy. Brain Fog.<br />
             It's not in your head — <em>it's your hormones.</em>
           </h1>
-          <p className="hero-sub">
+          <p className="hb-sub rv d1">
             FDA-approved hormone therapy, prescribed by a licensed clinician
             via OpenLoop Health when clinically appropriate. Treatment is
             subject to clinician approval; outcomes vary by individual.
           </p>
-          <ul className="hero-checks">
-            <li><span className="check">✓</span> Licensed clinicians via OpenLoop Health typically review intakes within 1–2 business days</li>
-            <li><span className="check">✓</span> Treatment plan built around your clinical picture (when prescribed)</li>
-            <li><span className="check">✓</span> Messaging with the clinical team during your plan</li>
-            <li><span className="check">✓</span> HSA/FSA accepted</li>
-            <li><span className="check">✓</span> Free shipping on every order</li>
-          </ul>
-          <div className="hero-cta">
-            <a href="quiz.html" className="btn btn-primary">Am I Qualified?</a>
+          <div className="bento">
+            <a className="tile main rv d1" href="quiz.html">
+              <div className="blob" aria-hidden="true"></div>
+              <div>
+                <h3>Start with the 2-minute assessment</h3>
+                <div className="pillrow">
+                  <span className="pill-chip">No insurance needed</span>
+                  <span className="pill-chip">Reviewed in 24–48h</span>
+                  <span className="pill-chip">All 50 states</span>
+                </div>
+              </div>
+              <span className="btn btn-primary hb-cta">
+                Find my treatment
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
+            </a>
+            <a className="tile sleep rv d2" href="quiz.html">
+              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8a1745" strokeWidth="1.8"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
+              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              <h3>Sleep through the night</h3><p>Night sweats &amp; 3am wakeups</p>
+            </a>
+            <a className="tile heat rv d3" href="quiz.html">
+              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b8235c" strokeWidth="1.8"><path d="M12 3c3 4 5 6.5 5 9.5a5 5 0 11-10 0C7 9.5 9 7 12 3z" /></svg>
+              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              <h3>Cool the hot flashes</h3><p>Daytime heat, on your terms</p>
+            </a>
+            <a className="tile fog rv d3" href="quiz.html">
+              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5a6b4a" strokeWidth="1.8"><path d="M4 15h12M6 19h14M3 11h18" /></svg>
+              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              <h3>Clear the fog</h3><p>Focus, memory, sharpness</p>
+            </a>
+            <a className="tile mood rv d4" href="quiz.html">
+              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b89455" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
+              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              <h3>Steady the moods</h3><p>Feel like you, more often</p>
+            </a>
           </div>
         </div>
-
       </section>
+
+      {/* TRUST MARQUEE — ported from reference (text ticker), brand-skinned */}
+      <div className="trust-marquee" aria-hidden="true">
+        <div className="tm-track">
+          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians via OpenLoop Health</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
+          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians via OpenLoop Health</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
+        </div>
+      </div>
 
       {/* LIFESTYLE STRIP — horizontal scrolling marquee of aspirational
           AI lifestyle imagery. NOT presented as patients (no names, no
@@ -467,65 +498,91 @@ function App() {
         </div>
       </section>
 
-      {/* TREATMENTS (no animation) */}
-      <section className="treatments" id="treatments" data-screen-label="02 Treatments">
+      {/* SECTION 2 — MEDS GRID + MINI-QUIZ (ported from reference, brand-skinned) */}
+      <section className="meds-v2" id="treatments" data-screen-label="02 Treatments">
         <div className="container">
-          <div className="treatments-two-col">
-            <div className="treatments-col-left">
-              <div className="eyebrow">Treatments</div>
-              <h2>Your solutions, <em>trusted by experts.</em></h2>
+          <span className="eyebrow-chip rv">FDA-approved lineup</span>
+          <h2 className="v2-title rv d1">Your hormone breakthrough <em>is here.</em></h2>
+          <p className="v2-sub rv d2">Five FDA-approved treatments. Your clinician matches the form and dose to your body, your symptoms, your life.</p>
+          <div className="med-row">
+            <div className="med rv">
+              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Daily gel</span></div>
+              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M8 2h8v6l3 11a2 2 0 01-2 3H7a2 2 0 01-2-3L8 8z" /></svg></div>
+              <h3>Estradiol Gel</h3><div className="form-name">Transdermal · once daily</div>
+              <div className="price">From <b>$143</b><small>/mo†</small></div>
             </div>
-            <div className="treatments-col-right">
-              <p className="treatments-sub">
-                Most patients start with one or two of the following{' '}
-                <span className="treatments-highlight">FDA-approved</span>{' '}
-                protocols. Your clinician decides what's appropriate based on
-                your symptoms, history, and goals.
-              </p>
+            <div className="med rv d1">
+              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">2x weekly</span></div>
+              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="4" y="6" width="16" height="12" rx="3" /></svg></div>
+              <h3>Estradiol Patch</h3><div className="form-name">Transdermal · twice weekly</div>
+              <div className="price">From <b>$143</b><small>/mo†</small></div>
+            </div>
+            <div className="med rv d2">
+              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Oral</span></div>
+              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><circle cx="12" cy="12" r="8" /><path d="M12 4v16" /></svg></div>
+              <h3>Estradiol Pill</h3><div className="form-name">Oral · once daily</div>
+              <div className="price">From <b>$143</b><small>/mo†</small></div>
+            </div>
+            <div className="med rv d3">
+              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Local</span></div>
+              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M12 3c4 4 6 7 6 10a6 6 0 11-12 0c0-3 2-6 6-10z" /></svg></div>
+              <h3>Vaginal Cream</h3><div className="form-name">Local estradiol therapy</div>
+              <div className="price">From <b>$143</b><small>/mo†</small></div>
+            </div>
+            <div className="med rv d4">
+              <div className="badges"><span className="badge fda">FDA Approved</span><span className="badge form">Nightly</span></div>
+              <div className="med-visual"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg></div>
+              <h3>Progesterone</h3><div className="form-name">Oral · nightly</div>
+              <div className="price">From <b>$143</b><small>/mo†</small></div>
+            </div>
+          </div>
+          <p className="fineprint rv">†Price reflects the 12-month plan billed annually ($1,716/yr); 6-month and 3-month plans available at $152/mo and $169/mo respectively. Price includes medication if prescribed, clinician review, unlimited portal messaging, and shipping. Prescription issued only if determined appropriate by a licensed clinician. Cancel anytime before renewal.</p>
+
+          <div className="mini-quiz rv">
+            <div>
+              <h3>Unsure where to begin? <em>Start here.</em></h3>
+              <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician via OpenLoop Health reviews every answer.</p>
+            </div>
+            <div className="q-options">
+              <a className="q-opt" href="quiz.html"><span>I can't sleep</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Hot flashes</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Brain fog</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Mood swings</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Intimacy discomfort</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>All of the above</span><span>→</span></a>
             </div>
           </div>
         </div>
-        <div className="products-scroll-wrapper">
-          <button
-            type="button"
-            className="products-scroll-arrow products-scroll-arrow-left"
-            aria-label="Scroll products left"
-            onClick={() => {
-              const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: -452, behavior: 'smooth' });
-            }}
-          >
-            ‹
-          </button>
-          <div className="products-scroll-container">
-            {TREATMENTS.map((t) => (
-              <a href="quiz.html" className="product-card-new" key={t.id}>
-                <div className="product-card-image-wrapper">
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className={t.id === 'patch' ? 'no-shadow' : ''}
-                  />
-                </div>
-                <div className="product-card-body">
-                  <h3 className="product-card-name">{t.name}</h3>
-                  <p className="product-card-subtitle">{t.subtitle}</p>
-                  <span className="product-card-btn">GET STARTED</span>
-                </div>
-              </a>
-            ))}
+      </section>
+
+      {/* SECTION 3 — SCIENCE / ESTRADIOL CURVE (ported from reference, brand-skinned) */}
+      <section className="science-v2" id="science" data-screen-label="02b Science">
+        <div className="container">
+          <div className="curve-grid">
+            <div>
+              <span className="eyebrow-chip rv">The science, plainly</span>
+              <h2 className="v2-title rv d1" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>This is the curve <em>nobody showed you.</em></h2>
+              <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
+              <div className="stat-band">
+                <div className="stat rv"><b>5</b><small>FDA-approved treatment options</small></div>
+                <div className="stat rv d1"><b>50</b><small>U.S. states served</small></div>
+                <div className="stat rv d2"><b>1–2</b><small>business-day typical review</small></div>
+              </div>
+            </div>
+            <div className="curve-card rv d2">
+              <svg viewBox="0 0 560 330" fill="none">
+                <line x1="42" y1="284" x2="540" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
+                <line x1="42" y1="44" x2="42" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
+                <text x="48" y="62" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Estradiol level</text>
+                <text x="402" y="308" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Age 35 → 60</text>
+                <path id="declineLine" d="M42 92 C 142 88, 204 98, 264 132 C 324 166, 364 232, 540 254" stroke="#1a1216" strokeWidth="3" strokeLinecap="round" />
+                <path id="liftLine" d="M302 152 C 382 130, 462 122, 540 118" stroke="#b8235c" strokeWidth="3.4" strokeLinecap="round" />
+                <circle cx="302" cy="152" r="6.5" fill="#b8235c" />
+                <text x="314" y="142" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="700" fill="#8a1745">Treatment begins</text>
+              </svg>
+              <div className="curve-note">Illustrative only — individual results and treatment plans vary, and are determined by your clinician.</div>
+            </div>
           </div>
-          <button
-            type="button"
-            className="products-scroll-arrow products-scroll-arrow-right"
-            aria-label="Scroll products right"
-            onClick={() => {
-              const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: 452, behavior: 'smooth' });
-            }}
-          >
-            ›
-          </button>
         </div>
       </section>
 
@@ -665,17 +722,17 @@ function App() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-final" id="cta" data-screen-label="09 CTA">
-        <div className="narrow">
-          <div className="eyebrow">Refund available if a clinician determines HRT is not right for you (before shipment)</div>
-          <h2>You don't have to <em>ride it out.</em></h2>
-          <p>
+      {/* SECTION 4 — FINAL CTA (ported from reference layout, our approved copy) */}
+      <section className="final-v2" id="cta" data-screen-label="09 CTA">
+        <div className="final-inner">
+          <div className="eyebrow rv">Refund available if a clinician determines HRT is not right for you (before shipment)</div>
+          <h2 className="rv d1">You don't have to <em>ride it out.</em></h2>
+          <p className="rv d2">
             Submit your intake today. A licensed clinician via OpenLoop Health
             will review it — typically within 1&ndash;2 business days.
             Treatment is subject to clinician approval and is not guaranteed.
           </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="rv d3" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="quiz.html" className="btn btn-rose" style={{ padding: '16px 28px', fontSize: 16 }}>
               Start free assessment →
             </a>

@@ -2604,6 +2604,258 @@
     .lifestyle-strip-item { width: 200px; height: 160px; border-radius: 12px; }
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     SECTION 1 — BENTO HERO + TRUST MARQUEE
+     Ported from design-reference v2 (layout + motion only).
+     Palette + fonts are 100% Her Estrogen brand tokens.
+     Reference apricot/blush/butter/sage → our pink/moss/gold family.
+     Honors prefers-reduced-motion.
+     ═══════════════════════════════════════════════════════════════ */
+  .hero-bento { padding: 120px 0 64px; background: var(--paper); position: relative; }
+  .hb-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .hero-bento h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(40px, 6.4vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .hero-bento h1 em { font-style: italic; color: var(--pink); font-weight: 500; }
+  .hero-bento .hb-sub {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 18px; line-height: 1.55; color: var(--ink-2);
+    max-width: 620px; margin: 0 0 40px;
+  }
+
+  /* Bento grid: 1 tall primary + 4 symptom tiles */
+  .hero-bento .bento {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    grid-template-rows: 230px 230px;
+    gap: 16px;
+  }
+  .hero-bento .tile {
+    border-radius: 26px; position: relative; overflow: hidden;
+    text-decoration: none; color: var(--ink);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+    background: var(--paper); border: 1px solid var(--line);
+    transition: transform .35s cubic-bezier(.22,.7,.3,1), box-shadow .35s ease;
+  }
+  .hero-bento .tile h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.1; margin: 0 0 4px; color: var(--ink); }
+  .hero-bento .tile p  { font-family: 'DM Sans', system-ui, sans-serif; font-size: 14px; color: var(--muted); margin: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-bento .tile:hover { transform: translateY(-6px) scale(1.012); box-shadow: 0 24px 56px rgba(26,18,22,0.13); }
+  }
+  .hero-bento .tile .go {
+    position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center;
+    transition: transform .3s ease, background .3s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-bento .tile:hover .go { transform: rotate(-45deg); background: var(--pink-deep); }
+  }
+  .hero-bento .tile .mini-art { position: absolute; top: 18px; left: 24px; opacity: .6; }
+
+  /* Primary tile — brand pink radial + breathing blob */
+  .hero-bento .tile.main {
+    grid-row: 1 / 3; justify-content: space-between; padding: 34px; border: none;
+    background: radial-gradient(120% 90% at 15% 10%, var(--pink-softer) 0%, var(--pink-soft) 42%, var(--pink) 135%);
+  }
+  .hero-bento .tile.main .blob {
+    position: absolute; width: 340px; height: 340px; border-radius: 50%;
+    background: radial-gradient(circle at 32% 32%, rgba(255,255,255,.85), rgba(184,35,92,.32) 70%);
+    right: -90px; bottom: -110px; filter: blur(2px);
+    animation: breathe 7s ease-in-out infinite; will-change: transform;
+  }
+  @keyframes breathe { 0%,100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.08) translateY(-14px); } }
+  .hero-bento .tile.main h3 { font-size: clamp(28px, 3vw, 40px); max-width: 330px; position: relative; }
+  .hero-bento .tile.main .pillrow { display: flex; gap: 8px; flex-wrap: wrap; position: relative; margin-top: 14px; }
+  .hero-bento .pill-chip {
+    font-family: 'DM Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; color: var(--ink);
+    background: rgba(255,255,255,.78); border-radius: 100px; padding: 7px 14px; backdrop-filter: blur(4px);
+  }
+  .hero-bento .tile.main .hb-cta { align-self: flex-start; position: relative; margin-top: 24px; }
+  .hero-bento .tile.main .hb-cta svg { transition: transform .25s ease; }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-bento .tile.main:hover .hb-cta svg { transform: translateX(4px); }
+  }
+
+  /* Symptom tile tints — mapped to our pink / moss / gold family (no reference colors) */
+  .hero-bento .tile.sleep { background: linear-gradient(150deg, var(--pink-softer), var(--pink-soft)); }
+  .hero-bento .tile.heat  { background: linear-gradient(150deg, var(--pink-soft), #f6c9d8); }
+  .hero-bento .tile.fog   { background: linear-gradient(150deg, #e9efe2, #d6e2cc); }
+  .hero-bento .tile.mood  { background: linear-gradient(150deg, #f6ecd9, #efdcb6); }
+
+  /* Trust marquee (text ticker) */
+  .trust-marquee {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 18px 0; overflow: hidden; white-space: nowrap; background: var(--paper);
+  }
+  .trust-marquee .tm-track { display: inline-flex; gap: 58px; align-items: center; animation: tmScroll 32s linear infinite; }
+  .trust-marquee:hover .tm-track { animation-play-state: paused; }
+  @keyframes tmScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .trust-marquee .tm-track span {
+    font-family: 'DM Mono', ui-monospace, monospace;
+    font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); display: inline-flex; align-items: center; gap: 12px;
+  }
+  .trust-marquee .tm-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+
+  /* Reveal motion — hero is above the fold, so it animates on LOAD via pure
+     CSS. Deliberately animates TRANSFORM ONLY (never opacity): content is
+     always visible even if the animation engine doesn't run (e.g. a
+     background/hidden tab pauses animations), so the hero can never be stuck
+     invisible. Damped stagger via d1–d4. Reduced-motion: no animation. */
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes rvRise { from { transform: translateY(26px); } to { transform: none; } }
+    .hero-bento .rv { animation: rvRise .7s cubic-bezier(.22,.7,.3,1) both; will-change: transform; }
+    .hero-bento .rv.d1 { animation-delay: .08s; }
+    .hero-bento .rv.d2 { animation-delay: .16s; }
+    .hero-bento .rv.d3 { animation-delay: .24s; }
+    .hero-bento .rv.d4 { animation-delay: .32s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bento .tile.main .blob { animation: none; }
+    .trust-marquee .tm-track { animation: none; }
+  }
+
+  /* Bento responsive */
+  @media (max-width: 900px) {
+    .hero-bento { padding: 104px 0 48px; }
+    .hero-bento .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .hero-bento .tile.main { grid-row: auto; grid-column: 1 / -1; min-height: 280px; }
+    .hero-bento .tile { min-height: 150px; }
+  }
+  @media (max-width: 560px) {
+    .hero-bento .bento { grid-template-columns: 1fr; }
+    .hero-bento .tile.main { grid-column: auto; }
+    .trust-marquee .tm-track { gap: 38px; animation-duration: 24s; }
+  }
+
+  /* Shared reveal for ported sections (transform-only, bulletproof) */
+  @media (prefers-reduced-motion: no-preference) {
+    .meds-v2 .rv, .science-v2 .rv, .final-v2 .rv { animation: rvRise .7s cubic-bezier(.22,.7,.3,1) both; will-change: transform; }
+    .meds-v2 .rv.d1, .science-v2 .rv.d1, .final-v2 .rv.d1 { animation-delay: .08s; }
+    .meds-v2 .rv.d2, .science-v2 .rv.d2, .final-v2 .rv.d2 { animation-delay: .16s; }
+    .meds-v2 .rv.d3, .science-v2 .rv.d3, .final-v2 .rv.d3 { animation-delay: .24s; }
+    .meds-v2 .rv.d4, .science-v2 .rv.d4, .final-v2 .rv.d4 { animation-delay: .32s; }
+  }
+
+  /* Shared eyebrow chip for ported sections (brand pink, not reference apricot) */
+  .meds-v2 .eyebrow-chip, .science-v2 .eyebrow-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', ui-monospace, monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--pink-deep); background: var(--pink-soft);
+    border-radius: 100px; padding: 8px 16px; margin-bottom: 20px;
+  }
+  .meds-v2 .v2-title, .science-v2 .v2-title {
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
+    font-size: clamp(34px, 4.4vw, 58px); line-height: 1.06; letter-spacing: -0.02em;
+    color: var(--ink); max-width: 760px; margin: 0;
+  }
+  .meds-v2 .v2-title em, .science-v2 .v2-title em { font-style: italic; color: var(--pink); }
+  .meds-v2 .v2-sub, .science-v2 .v2-sub {
+    font-family: 'DM Sans', system-ui, sans-serif; color: var(--ink-2);
+    max-width: 560px; margin-top: 16px; font-size: 17px; line-height: 1.55;
+  }
+
+  /* ═══ SECTION 2 — MEDS GRID + MINI-QUIZ (ported, brand-skinned) ═══ */
+  .meds-v2 { background: var(--paper); }
+  .meds-v2 .med-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 48px; }
+  .meds-v2 .med {
+    background: var(--pink-softer); border: 1px solid var(--line); border-radius: 22px;
+    padding: 24px 18px 22px; text-align: left;
+    transition: transform .32s ease, box-shadow .32s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .meds-v2 .med:hover { transform: translateY(-7px); box-shadow: 0 22px 48px rgba(26,18,22,0.11); }
+  }
+  .meds-v2 .badges { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .meds-v2 .badge { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border-radius: 100px; padding: 4px 10px; }
+  .meds-v2 .badge.fda { background: var(--ink); color: #fff; }
+  .meds-v2 .badge.form { background: var(--pink-soft); color: var(--pink-deep); }
+  .meds-v2 .med-visual { height: 96px; border-radius: 14px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; background: linear-gradient(140deg, var(--pink-soft), var(--pink-softer)); }
+  .meds-v2 .med:nth-child(2) .med-visual { background: linear-gradient(140deg, #f3e3ea, var(--pink-soft)); }
+  .meds-v2 .med:nth-child(3) .med-visual { background: linear-gradient(140deg, #f6ecd9, #f0dcb6); }
+  .meds-v2 .med:nth-child(4) .med-visual { background: linear-gradient(140deg, #e9efe2, #d6e2cc); }
+  .meds-v2 .med:nth-child(5) .med-visual { background: linear-gradient(140deg, #fad7e1, var(--pink-soft)); }
+  .meds-v2 .med-visual svg { color: var(--pink-deep); opacity: .85; }
+  .meds-v2 .med h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 2px; color: var(--ink); }
+  .meds-v2 .med .form-name { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .meds-v2 .med .price { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink); }
+  .meds-v2 .med .price b { font-family: 'Newsreader', Georgia, serif; font-size: 20px; color: var(--pink-deep); }
+  .meds-v2 .med .price small { color: var(--muted); font-weight: 500; }
+  .meds-v2 .fineprint { font-family: 'DM Sans', sans-serif; font-size: 11.5px; color: var(--muted); margin-top: 26px; max-width: 820px; line-height: 1.7; }
+
+  .meds-v2 .mini-quiz {
+    margin-top: 60px; background: var(--ink); border-radius: 30px; padding: 54px; color: #fff;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; overflow: hidden; position: relative;
+  }
+  .meds-v2 .mini-quiz::before {
+    content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,35,92,.40), transparent 70%);
+    right: -130px; top: -130px; animation: breathe 8s ease-in-out infinite; will-change: transform;
+  }
+  .meds-v2 .mini-quiz h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(28px, 3.2vw, 42px); position: relative; margin: 0; }
+  .meds-v2 .mini-quiz h3 em { font-style: italic; color: var(--pink-3); }
+  .meds-v2 .mini-quiz p { font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,.75); margin-top: 12px; font-size: 15.5px; position: relative; }
+  .meds-v2 .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; }
+  .meds-v2 .q-opt {
+    font-family: 'DM Sans', sans-serif; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16);
+    border-radius: 16px; padding: 18px 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 15px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    transition: background .25s ease, transform .25s ease, border-color .25s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .meds-v2 .q-opt:hover { background: var(--pink); border-color: var(--pink); transform: translateY(-3px); }
+  }
+
+  /* ═══ SECTION 3 — SCIENCE / ESTRADIOL CURVE (ported, brand-skinned) ═══ */
+  .science-v2 { background: var(--pink-softer); }
+  .science-v2 .curve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .science-v2 .curve-card { background: var(--paper); border: 1px solid var(--line); border-radius: 28px; padding: 38px; box-shadow: 0 26px 64px rgba(26,18,22,0.07); }
+  .science-v2 .curve-card svg { width: 100%; height: auto; }
+  /* Line-draw on load — base = fully drawn (offset 0), so it's never stuck hidden;
+     animation draws it in for motion-OK users. forwards only (no backwards hold). */
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes drawLine { from { stroke-dashoffset: var(--dash, 1200); } to { stroke-dashoffset: 0; } }
+    .science-v2 #declineLine { stroke-dasharray: 1200; animation: drawLine 2.2s cubic-bezier(.4,0,.2,1) forwards; }
+    .science-v2 #liftLine { stroke-dasharray: 620; --dash: 620; animation: drawLine 1.6s cubic-bezier(.4,0,.2,1) 1.1s forwards; }
+  }
+  .science-v2 .curve-note { font-family: 'DM Sans', sans-serif; font-size: 11.5px; color: var(--muted); margin-top: 14px; }
+  .science-v2 .stat-band { display: flex; gap: 48px; margin-top: 40px; flex-wrap: wrap; }
+  .science-v2 .stat b { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 50px; color: var(--pink-deep); display: block; line-height: 1; }
+  .science-v2 .stat small { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink-2); }
+
+  /* ═══ SECTION 4 — FINAL CTA (ported, brand-skinned, our approved copy) ═══ */
+  .final-v2 { padding: 110px 0; text-align: center; position: relative; overflow: hidden; background: var(--paper); }
+  .final-v2::before {
+    content: ""; position: absolute; left: 50%; top: -120px; transform: translateX(-50%);
+    width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, var(--pink-soft), transparent 68%);
+    z-index: 0; pointer-events: none;
+  }
+  .final-v2 .final-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .final-v2 .eyebrow { display: inline-block; margin-bottom: 18px; }
+  .final-v2 h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5.6vw, 76px); line-height: 1.04; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  .final-v2 h2 em { font-style: italic; color: var(--pink); }
+  .final-v2 p { font-family: 'DM Sans', sans-serif; color: var(--ink-2); margin: 20px auto 34px; max-width: 500px; font-size: 17px; line-height: 1.55; }
+
+  /* Responsive for ported sections */
+  @media (max-width: 900px) {
+    .meds-v2 .med-row { grid-template-columns: repeat(2, 1fr); }
+    .meds-v2 .mini-quiz { grid-template-columns: 1fr; padding: 38px; gap: 28px; }
+    .science-v2 .curve-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  @media (max-width: 560px) {
+    .meds-v2 .med-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .meds-v2 .q-options { grid-template-columns: 1fr; }
+    .science-v2 .stat-band { gap: 28px; }
+  }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
@@ -2635,7 +2887,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel" src="app.jsx?v=v2sections"></script>
 
 <script>
   // Editorial nav: transparent at top, white-blur background once scrolled
@@ -2649,44 +2901,8 @@
     window.addEventListener('scroll', update, { passive: true });
     update();
   })();
-
-  // Products scroll container: click-and-drag to scroll on desktop.
-  // Mobile uses native touch scroll. Wait briefly so React mounts the cards first.
-  (function() {
-    function init() {
-      var el = document.querySelector('.products-scroll-container');
-      if (!el) { return setTimeout(init, 200); }
-      var isDown = false, startX = 0, scrollLeft = 0;
-      el.addEventListener('mousedown', function(e) {
-        isDown = true;
-        el.classList.add('dragging');
-        startX = e.pageX - el.offsetLeft;
-        scrollLeft = el.scrollLeft;
-        e.preventDefault();
-      });
-      ['mouseleave', 'mouseup'].forEach(function(evt) {
-        el.addEventListener(evt, function() {
-          isDown = false;
-          el.classList.remove('dragging');
-        });
-      });
-      el.addEventListener('mousemove', function(e) {
-        if (!isDown) return;
-        e.preventDefault();
-        var x = e.pageX - el.offsetLeft;
-        el.scrollLeft = scrollLeft - (x - startX) * 1.4;
-      });
-      // Block click on cards while dragging to avoid accidental navigation
-      el.addEventListener('click', function(e) {
-        if (el.classList.contains('just-dragged')) {
-          e.preventDefault();
-          e.stopPropagation();
-          el.classList.remove('just-dragged');
-        }
-      }, true);
-    }
-    init();
-  })();
+  // (Products drag-scroll script removed — the treatments scroll container was
+  //  replaced by the static meds grid in the v2 reskin.)
 </script>
 
 <template id="__bundler_thumbnail">
