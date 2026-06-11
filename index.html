@@ -10,10 +10,7 @@
 <link rel="shortcut icon" href="assets/favicon-32.png?v=3" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Progressive-enhancement flag: scroll-reveal hidden states only apply when JS is on.
-     No-JS users (and the failsafe path) always see fully-visible content. -->
-<script>document.documentElement.classList.add('js-motion');</script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --pink: #b8235c;
@@ -38,12 +35,12 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .serif { font-family: 'Newsreader', Georgia, serif; }
   .mono { font-family: 'DM Mono', ui-monospace, monospace; }
   .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
   .narrow { max-width: 980px; margin: 0 auto; padding: 0 32px; }
@@ -127,7 +124,7 @@
   }
   @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
   .hero h1 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(44px, 6.2vw, 84px);
     line-height: 1.02;
@@ -172,7 +169,7 @@
     box-shadow: 0 12px 40px rgba(138,23,69,.14);
   }
   .tag-num {
-    font-family: 'Fraunces', Georgia, serif; font-size: 38px;
+    font-family: 'Newsreader', Georgia, serif; font-size: 38px;
     color: var(--pink); line-height: 1; font-weight: 500;
     font-style: italic;
   }
@@ -196,11 +193,11 @@
   }
   .press-logos { display: flex; gap: 44px; flex-wrap: wrap; align-items: center; }
   .press-logo {
-    font-family: 'Fraunces', Georgia, serif; font-size: 18px;
+    font-family: 'Newsreader', Georgia, serif; font-size: 18px;
     color: var(--ink-2); opacity: .55; letter-spacing: -0.01em;
   }
-  .press-logo.bold { font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: -0.02em; font-size: 16px; }
-  .press-logo.upper { text-transform: uppercase; letter-spacing: 0.18em; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; }
+  .press-logo.bold { font-weight: 700; font-family: 'DM Sans', sans-serif; letter-spacing: -0.02em; font-size: 16px; }
+  .press-logo.upper { text-transform: uppercase; letter-spacing: 0.18em; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 600; }
 
   /* ---- SYMPTOMS QUIZ ---- */
   .quiz {
@@ -215,7 +212,7 @@
   }
   @media (max-width: 800px) { .quiz-head { grid-template-columns: 1fr; gap: 24px; } }
   .quiz h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(34px, 4.4vw, 56px);
     line-height: 1.05; letter-spacing: -0.02em; margin: 12px 0 0;
   }
@@ -249,7 +246,7 @@
     width: 22px; height: 22px; border-radius: 50%;
     background: var(--pink-soft);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', Georgia, serif; font-style: italic;
+    font-family: 'Newsreader', Georgia, serif; font-style: italic;
     font-size: 13px; color: var(--pink-deep);
   }
   .symptom.active .symptom-glyph { background: rgba(255,255,255,.22); color: #fff; }
@@ -278,7 +275,7 @@
   }
   @media (max-width: 880px) { .science-grid { grid-template-columns: 1fr; gap: 40px; } }
   .science h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(36px, 4.6vw, 60px); line-height: 1.05;
     letter-spacing: -0.022em; margin: 12px 0 24px;
   }
@@ -298,7 +295,7 @@
     background: var(--pink-softer);
   }
   .stat-num {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: 44px; line-height: 1; color: var(--pink);
     letter-spacing: -0.02em; font-style: italic;
   }
@@ -322,7 +319,7 @@
   }
   .how-head { max-width: 720px; margin: 0 auto 72px; }
   .how h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(36px, 4.8vw, 64px); line-height: 1.04;
     letter-spacing: -0.022em; margin: 12px 0 20px;
   }
@@ -410,7 +407,7 @@
     color: var(--pink); letter-spacing: 0.14em; text-transform: uppercase;
   }
   .step-card h3 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(28px, 3.2vw, 40px); line-height: 1.05;
     letter-spacing: -0.018em; margin: 14px 0 14px;
   }
@@ -465,7 +462,7 @@
     margin-bottom: 48px;
   }
   .treatments-col-left h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(36px, 4.6vw, 60px);
     line-height: 1.02;
@@ -516,7 +513,7 @@
     background: #fff;
     border: 2px solid var(--pink);
     color: var(--pink);
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 34px;
     font-weight: 600;
     line-height: 0;
@@ -627,7 +624,7 @@
     border-top: 0;
   }
   .product-card-name {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 700;
     font-size: 24px;
     line-height: 1.1;
@@ -649,7 +646,7 @@
     color: #fff;
     padding: 14px 20px;
     border-radius: 50px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -729,7 +726,7 @@
   }
   .product .eyebrow { color: var(--pink); }
   .product h3 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: 44px; line-height: 1.05; letter-spacing: -0.02em;
     margin: 12px 0 16px;
   }
@@ -747,7 +744,7 @@
     display: flex; align-items: baseline; gap: 12px;
     margin-bottom: 24px;
   }
-  .price-num { font-family: 'Fraunces', Georgia, serif; font-size: 44px; font-weight: 500; color: var(--pink-deep); font-style: italic; }
+  .price-num { font-family: 'Newsreader', Georgia, serif; font-size: 44px; font-weight: 500; color: var(--pink-deep); font-style: italic; }
   .price-unit { color: var(--muted); font-size: 14px; }
   .price-strike { color: var(--muted); text-decoration: line-through; font-size: 16px; }
 
@@ -760,7 +757,7 @@
   }
   .compare-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
   .compare h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(34px, 4.4vw, 54px); line-height: 1.05;
     letter-spacing: -0.022em; margin: 12px 0 16px;
   }
@@ -794,7 +791,7 @@
   .reviews-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px; align-items: end; }
   @media (max-width: 800px) { .reviews-head { grid-template-columns: 1fr; } }
   .reviews h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(36px, 4.6vw, 60px); line-height: 1.05;
     letter-spacing: -0.022em; margin: 12px 0 0;
   }
@@ -803,7 +800,7 @@
     text-align: right; font-size: 14px; color: var(--ink-2);
   }
   @media (max-width: 800px) { .reviews-meta { text-align: left; } }
-  .reviews-rating { font-family: 'Fraunces', Georgia, serif; font-size: 48px; font-weight: 500; color: var(--pink-deep); line-height: 1; font-style: italic; }
+  .reviews-rating { font-family: 'Newsreader', Georgia, serif; font-size: 48px; font-weight: 500; color: var(--pink-deep); line-height: 1; font-style: italic; }
   .reviews-rating .stars { color: var(--pink); font-size: 18px; margin-left: 6px; letter-spacing: 0.1em; font-style: normal; }
   .review-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
@@ -818,7 +815,7 @@
   }
   .review-stars { color: var(--pink); font-size: 14px; letter-spacing: 0.15em; }
   .review-body {
-    font-family: 'Fraunces', Georgia, serif; font-size: 19px;
+    font-family: 'Newsreader', Georgia, serif; font-size: 19px;
     line-height: 1.45; color: var(--ink); font-weight: 400;
     letter-spacing: -0.005em;
     flex: 1;
@@ -831,7 +828,7 @@
     width: 36px; height: 36px; border-radius: 50%;
     background: var(--pink-soft);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', Georgia, serif; font-style: italic;
+    font-family: 'Newsreader', Georgia, serif; font-style: italic;
     color: var(--pink); font-size: 16px; font-weight: 500;
   }
   .review-photo {
@@ -854,7 +851,7 @@
   .faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
   @media (max-width: 880px) { .faq-grid { grid-template-columns: 1fr; gap: 32px; } }
   .faq h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(34px, 4.4vw, 54px); line-height: 1.05;
     letter-spacing: -0.022em; margin: 12px 0 16px;
   }
@@ -893,7 +890,7 @@
       #fff;
   }
   .cta-final h2 {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-family: 'Newsreader', Georgia, serif; font-weight: 500;
     font-size: clamp(44px, 6vw, 84px); line-height: 1.04; letter-spacing: -0.025em;
     margin: 0 0 24px;
   }
@@ -924,7 +921,7 @@
   .foot ul li a:hover { color: var(--pink-3); }
   .foot-logo img { height: 36px; filter: brightness(0) invert(1); margin-bottom: 24px; display: block; }
   .foot-tag {
-    font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-style: italic;
+    font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-style: italic;
     line-height: 1.3; max-width: 280px; margin-bottom: 20px;
     color: #fff;
   }
@@ -978,7 +975,7 @@
     margin-bottom: 8px;
   }
   .foot-simple .foot-tag {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 22px;
     font-style: italic;
     line-height: 1.4;
@@ -1093,7 +1090,7 @@
     max-width: 340px;
   }
   .hero-tag .tag-num {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 38px; color: var(--pink);
     line-height: 1; font-weight: 500; font-style: italic;
   }
@@ -1261,9 +1258,9 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(to right,
-      rgba(250,246,240,0.96) 0%,
-      rgba(250,246,240,0.78) 30%,
-      rgba(250,246,240,0.26) 58%,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.75) 30%,
+      rgba(255,255,255,0.25) 58%,
       transparent 78%
     );
     z-index: 1;
@@ -1276,7 +1273,7 @@
     top: 95px;
     left: 0;
     right: 0;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: clamp(72px, 11vw, 155px);
     font-weight: 900;
     letter-spacing: -0.025em;
@@ -1316,7 +1313,7 @@
     font-size: 15px;
   }
   .hero.hero-editorial h1 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(30px, 3.8vw, 48px);
     line-height: 1.08;
@@ -1405,7 +1402,7 @@
     gap: 28px;
   }
   .hero-press-strip .logo {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 16px;
     color: var(--ink-2);
     opacity: .55;
@@ -1592,7 +1589,7 @@
     text-transform: uppercase;
   }
   .bundle-head h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 4vw, 44px);
     line-height: 1.1;
@@ -1628,7 +1625,7 @@
     font-weight: 600;
   }
   .bundle-name {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 3.4vw, 38px);
     line-height: 1.1;
@@ -1636,7 +1633,7 @@
     color: var(--ink);
   }
   .bundle-subtitle {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-style: italic;
     color: var(--pink-deep);
     font-size: 17px;
@@ -1672,7 +1669,7 @@
     text-align: center;
   }
   .bundle-final-price {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-style: italic;
     font-size: 44px;
     font-weight: 500;
@@ -1713,7 +1710,7 @@
   .bundle-option.best { border-color: var(--pink); background: var(--pink-softer); }
   .bundle-option .bo-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
   .bundle-option .bo-price {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: 22px;
     color: var(--pink-deep);
@@ -1747,7 +1744,7 @@
   }
   .bundle-point-icon { font-size: 22px; line-height: 1.2; }
   .bundle-point h4 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     font-weight: 700;
     color: var(--ink);
@@ -1855,7 +1852,7 @@
     margin-bottom: 14px;
   }
   .edu-head h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(32px, 5vw, 56px);
     line-height: 1.05;
@@ -1905,7 +1902,7 @@
     justify-content: center;
   }
   .edu-why-card h3 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: 22px;
     line-height: 1.15;
@@ -1967,7 +1964,7 @@
     .edu-stat-label { font-size: 12.5px; }
   }
   .edu-text h3 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(24px, 3.4vw, 34px);
     line-height: 1.1;
@@ -1997,7 +1994,7 @@
   .edu-stat:last-child { border-bottom: 0; }
   .edu-stat:first-child { padding-top: 0; }
   .edu-stat-num {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-style: italic;
     font-weight: 600;
     font-size: clamp(48px, 6vw, 64px);
@@ -2020,7 +2017,7 @@
     margin: 0 auto 40px;
   }
   .edu-table-head h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 4vw, 44px);
     line-height: 1.08;
@@ -2149,7 +2146,7 @@
     color: var(--pink-deep);
     padding: 12px 22px;
     border-radius: 999px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -2228,7 +2225,7 @@
     padding-top: 0;
   }
   .edu-closing h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 4.4vw, 44px);
     line-height: 1.08;
@@ -2291,7 +2288,7 @@
     display: inline-block;
   }
   .marquee-section h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 4vw, 44px);
     line-height: 1.08;
@@ -2358,7 +2355,7 @@
     font-size: 13px;
   }
   .marquee-quote {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 15px;
     line-height: 1.5;
     color: var(--ink);
@@ -2395,7 +2392,7 @@
     color: var(--pink-deep);
     border: 1px solid var(--line-2);
     border-radius: 999px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     cursor: pointer;
@@ -2419,7 +2416,7 @@
     animation: storyFadeIn .35s cubic-bezier(.22,1,.36,1);
   }
   .marquee-story-body p {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 14.5px;
     line-height: 1.6;
     color: var(--ink-2);
@@ -2470,7 +2467,7 @@
     display: inline-block;
   }
   .patient-stories h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-size: clamp(28px, 4vw, 44px);
     line-height: 1.08;
@@ -2525,7 +2522,7 @@
     letter-spacing: 0.15em;
   }
   .patient-quote {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 17px;
     line-height: 1.45;
     color: var(--ink);
@@ -2605,175 +2602,6 @@
     .lifestyle-strip { padding: 22px 0; }
     .lifestyle-strip-track { gap: 12px; animation-duration: 45s; }
     .lifestyle-strip-item { width: 200px; height: 160px; border-radius: 12px; }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     WARM EDITORIAL THEME + MOTION LAYER  (reskin pass — additive only)
-     Appended after the base stylesheet so it overrides cleanly.
-     Goal: forhers.com warmth — cream/sand palette, Fraunces serif,
-     calm damped scroll reveals, subtle 3D tilt + parallax.
-     Brand/CTA pink tokens are intentionally LEFT UNCHANGED.
-     Honors prefers-reduced-motion; tilt/parallax disabled on touch.
-     ═══════════════════════════════════════════════════════════════ */
-
-  :root {
-    /* Warm neutrals (remap) — pink/CTA tokens above are untouched */
-    --paper:  #FAF6F0;
-    --cream:  #FAF6F0;
-    --sand:   #F3ECE2;
-    --card:   #FFFDF9;
-    --ink:    #2B2825;
-    --ink-2:  #4A433D;
-    --muted:  #8A7F70;
-    --line:   #E7DDCF;
-    --line-2: #DED2C0;
-    --blob:   #EDE3D3;
-    --card-shadow: 0 8px 30px rgba(43,40,37,0.06);
-    --card-shadow-hover: 0 18px 48px rgba(43,40,37,0.12);
-    --ease-cinematic: cubic-bezier(0.25, 0.10, 0.25, 1);
-  }
-
-  html, body { background: var(--cream); }
-
-  /* ── Typography refinements ───────────────────────────────── */
-  h1, h2, h3, .serif { letter-spacing: -0.02em; }
-  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; line-height: 1.6; }
-  #root .eyebrow {
-    font-family: 'Inter', system-ui, sans-serif !important;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 600;
-    color: var(--muted);
-  }
-
-  /* ── Section background rhythm: cream → sand → cream ──────── */
-  #root .lifestyle-strip { background: var(--cream); }
-  #root .edu-section     { background: var(--sand);  position: relative; overflow: hidden; }
-  #root .treatments      { background: var(--cream); position: relative; overflow: hidden; }
-  #root .quiz            { background: var(--sand);  position: relative; overflow: hidden; }
-  #root .how             { background: var(--cream); position: relative; overflow: hidden; }
-  #root .compare         { background: var(--sand);  position: relative; overflow: hidden; }
-  #root .faq             { background: var(--cream); }
-  #root .cta-final       { background: var(--sand);  position: relative; overflow: hidden; }
-
-  /* ── Card surfaces → warm off-white + soft shadow ─────────── */
-  #root .product-card-new,
-  #root .edu-why-card,
-  #root .faq-item,
-  #root .step-card {
-    background: var(--card);
-    box-shadow: var(--card-shadow);
-    transition: box-shadow .3s var(--ease-cinematic), transform .3s var(--ease-cinematic);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    #root .edu-why-card:hover,
-    #root .faq-item:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
-  }
-
-  /* Rounded editorial imagery */
-  #root .product-card-image-wrapper,
-  #root .step-image,
-  #root .lifestyle-strip-item { border-radius: 24px; }
-
-  /* ── Decorative organic blobs (parallax behind content) ───── */
-  #root .edu-section::before,
-  #root .treatments::before,
-  #root .cta-final::before {
-    content: "";
-    position: absolute;
-    width: 520px; height: 520px;
-    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
-    background: var(--blob);
-    opacity: 0.5;
-    filter: blur(70px);
-    z-index: 0;
-    pointer-events: none;
-    will-change: transform;
-  }
-  #root .edu-section::before  { top: -160px; right: -120px; }
-  #root .treatments::before   { bottom: -180px; left: -140px; }
-  #root .cta-final::before    { top: -140px; left: 50%; transform: translateX(-50%); }
-  #root .edu-section .container,
-  #root .treatments .container,
-  #root .treatments .products-scroll-wrapper,
-  #root .cta-final .narrow { position: relative; z-index: 1; }
-
-  /* ── CTA micro-interactions (color UNCHANGED) ─────────────── */
-  @media (hover: hover) and (pointer: fine) {
-    #root .btn-primary, #root .btn-rose, #root .product-card-btn {
-      transition: transform .25s var(--ease-cinematic), box-shadow .25s var(--ease-cinematic), background-color .2s ease;
-    }
-    #root .btn-primary:hover, #root .btn-rose:hover {
-      transform: scale(1.03);
-      box-shadow: 0 14px 34px rgba(184,35,92,0.28);
-    }
-  }
-  #root .btn-primary:active, #root .btn-rose:active { transform: scale(0.98); }
-
-  /* Animated underline for inline text links (legal footer links untouched) */
-  #root .faq a:not(.btn), #root .edu-section a:not(.btn) {
-    background-image: linear-gradient(var(--pink), var(--pink));
-    background-size: 0% 1.5px; background-repeat: no-repeat; background-position: 0 100%;
-    transition: background-size .3s var(--ease-cinematic);
-    text-decoration: none;
-  }
-  #root .faq a:not(.btn):hover, #root .edu-section a:not(.btn):hover { background-size: 100% 1.5px; }
-
-  /* ── Sticky header → warm cream on scroll (existing inline script
-        toggles .scrolled; we only restyle colors here) ── */
-  .nav.nav-editorial.scrolled {
-    background: rgba(250,246,240,0.88) !important;
-    backdrop-filter: saturate(140%) blur(12px);
-    -webkit-backdrop-filter: saturate(140%) blur(12px);
-    box-shadow: 0 2px 24px rgba(43,40,37,0.07);
-    transition: background-color .3s var(--ease-cinematic), box-shadow .3s var(--ease-cinematic);
-  }
-
-  /* ═══ MOTION — GPU-composited (transform + opacity only) ═══ */
-  @media (prefers-reduced-motion: no-preference) {
-    html.js-motion #root .fx {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .7s var(--ease-cinematic), transform .7s var(--ease-cinematic);
-      will-change: opacity, transform;
-    }
-    html.js-motion #root .fx.fx-in { opacity: 1; transform: none; }
-
-    html.js-motion #root .fx-stagger > * {
-      opacity: 0; transform: translateY(18px);
-      transition: opacity .6s var(--ease-cinematic), transform .6s var(--ease-cinematic);
-    }
-    html.js-motion #root .fx-stagger.fx-in > * { opacity: 1; transform: none; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(1) { transition-delay: .00s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(2) { transition-delay: .08s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(3) { transition-delay: .16s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(4) { transition-delay: .24s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(5) { transition-delay: .32s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(6) { transition-delay: .40s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(7) { transition-delay: .48s; }
-    html.js-motion #root .fx-stagger.fx-in > *:nth-child(8) { transition-delay: .56s; }
-
-    @keyframes heroRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-    #root .hero-editorial-content > h1,
-    #root .hero-editorial-content > .hero-sub,
-    #root .hero-editorial-content > .hero-checks,
-    #root .hero-editorial-content > .hero-cta {
-      opacity: 0;
-      animation: heroRise .8s var(--ease-cinematic) forwards;
-    }
-    #root .hero-editorial-content > h1          { animation-delay: .10s; }
-    #root .hero-editorial-content > .hero-sub   { animation-delay: .25s; }
-    #root .hero-editorial-content > .hero-checks{ animation-delay: .40s; }
-    #root .hero-editorial-content > .hero-cta   { animation-delay: .55s; }
-
-    html.tilt-on #root .product-card-new { transform-style: preserve-3d; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html.js-motion #root .fx,
-    html.js-motion #root .fx-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
-    #root .hero-editorial-content > * { animation: none !important; opacity: 1 !important; }
-    #root .edu-section::before, #root .treatments::before, #root .cta-final::before { display: none; }
   }
 
 </style>
@@ -2860,10 +2688,6 @@
     init();
   })();
 </script>
-
-<!-- Warm-theme motion layer: scroll reveals + subtle tilt + hero parallax.
-     Self-hosted (CSP 'self'); waits for the React tree to mount. -->
-<script defer src="assets/motion.js"></script>
 
 <template id="__bundler_thumbnail">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
