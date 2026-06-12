@@ -3117,7 +3117,9 @@
        (2) .hrt-flow-band — How it works → bottom of Compare
      Each band stretches the gradient to its own full height, so the wash
      reaches "almost white" right where the next white section begins. */
-  .edu-section,
+  /* hrt-flow-band gradient: pink wash, saturated top → near-white bottom.
+     Now extended to wrap clinical-v2 too (per request: "for comparison"
+     gradient flows into clinical excellence). */
   .hrt-flow-band {
     position: relative;
     background:
@@ -3133,6 +3135,27 @@
         #fef5f8 100%);
   }
 
+  /* edu-section gradient: V-shape — saturated top (Why HerEstrogen header),
+     near-white middle (Why hormone therapy white card sits on lightest pink),
+     and RE-PINKS at the bottom so the gradient flows into the science
+     section below. The bottom stop matches science's top stop seamlessly. */
+  .edu-section {
+    position: relative;
+    background:
+      radial-gradient(ellipse 90% 30% at 18% 6%,  rgba(184,35,92,0.32), transparent 62%),
+      radial-gradient(ellipse 100% 32% at 78% 10%, rgba(184,35,92,0.48), transparent 60%),
+      radial-gradient(ellipse 110% 30% at 32% 26%, rgba(184,35,92,0.14), transparent 60%),
+      linear-gradient(180deg,
+        #e85f8b 0%,
+        #ec84a8 9%,
+        #f1a4be 18%,
+        #f6c9d8 30%,
+        #fde8ef 50%,
+        #fde8ef 68%,
+        #f6c9d8 84%,
+        #ec84a8 100%);
+  }
+
   /* edu-section: drop the prior white background; tighter top padding so
      the section lifts up against the trust marquee above it. */
   .edu-section { background-color: transparent; padding: clamp(36px, 4.5vw, 56px) 0 96px !important; }
@@ -3143,7 +3166,8 @@
 
   /* Sections inside hrt-flow-band let the band's gradient show through */
   .hrt-flow-band > .how,
-  .hrt-flow-band > .compare { background: transparent !important; }
+  .hrt-flow-band > .compare,
+  .hrt-flow-band > .clinical-v2 { background: transparent !important; }
 
   /* White-on-saturated text at the top of each band */
   .edu-section .edu-head .eyebrow,
@@ -3171,28 +3195,25 @@
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card h3,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card p,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card .step-meta {
-    color: #2b2228 !important;
+    color: #5a5a5a !important;
   }
 
-  /* ═══ "The science, plainly" — pink → near-black gradient. Picks up where
-     the edu-section gradient ended (near-white pink) and descends into deep
-     brand pink, then near-black at the bottom. Generous top padding gives
-     the gradient room to breathe so the light → dark transition isn't
-     cramped into the section. ═══ */
+  /* ═══ "The science, plainly" — mid-pink → near-black gradient. The TOP
+     stop (#ec84a8) matches the bottom of .edu-section, so the gradient
+     visually FLOWS UPWARD from science into the HRT-actually-fixes area.
+     Tightened padding both ends per request. ═══ */
   .science-v2 {
     background:
-      radial-gradient(ellipse 90% 45% at 50% 80%, rgba(184,35,92,0.42), transparent 70%),
+      radial-gradient(ellipse 90% 45% at 50% 78%, rgba(184,35,92,0.42), transparent 70%),
       linear-gradient(180deg,
-        #fef5f8  0%,
-        #fde8ef  8%,
-        #f6c9d8 18%,
-        #ec84a8 30%,
-        #b8235c 50%,
-        #8a1745 66%,
-        #4a0c25 80%,
-        #1a0610 92%,
+        #ec84a8  0%,
+        #d75a85 18%,
+        #b8235c 35%,
+        #8a1745 55%,
+        #4a0c25 75%,
+        #1a0610 90%,
         #0a0307 100%) !important;
-    padding: 160px 0 140px !important;
+    padding: 88px 0 88px !important;
   }
   /* Eyebrow: pink text in a light-pink bubble (restores the site's chip
      style, sitting on the light-pink top of the gradient). */
@@ -3262,7 +3283,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v7"></script>
+<script type="text/babel" src="app.jsx?v=v8"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav

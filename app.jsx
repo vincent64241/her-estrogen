@@ -637,8 +637,6 @@ function App() {
         </div>
       </section>
 
-      </div>{/* /hrt-flow-band */}
-
       {/* REVIEWS section REMOVED — site is pre-launch; 4.9 star rating,
           "2,840 verified patients", and 3 fabricated reviews violate FTC
           16 CFR Part 465 (eff. Oct 2024) and 16 CFR Part 255. Restore only
@@ -673,6 +671,8 @@ function App() {
           </div>
         </div>
       </section>
+
+      </div>{/* /hrt-flow-band */}
 
       {/* FAQ */}
       <section className="faq" id="faq" data-screen-label="08 FAQ">
