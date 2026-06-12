@@ -3257,34 +3257,10 @@
     color: var(--pink-deep) !important;
     backdrop-filter: none;
   }
-  /* Science H2: shiny metallic gold. Each word renders the same polished
-     gradient (dark gold → bright highlight → dark gold), so the title
-     reads as if it were stamped foil. Children share the gradient via
-     background-image: inherit so styling stays consistent across the
-     <em> and per-word spans used by the write-on animation. */
-  .science-v2 .v2-title {
-    background-image: linear-gradient(135deg,
-      #8a6818 0%,
-      #c79b2a 18%,
-      #f7e6a0 38%,
-      #fff7d4 50%,
-      #f0d97a 62%,
-      #c79b2a 82%,
-      #8a6818 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
-  }
-  .science-v2 .v2-title em,
-  .science-v2 .v2-title .word {
-    background-image: inherit;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  .science-v2 .v2-title em { font-style: italic; }
+  /* Science H2: solid yellow gold (per request — the foil gradient looked
+     shiny but read poorly on the light-pink top of the section). */
+  .science-v2 .v2-title { color: #d4a017 !important; }
+  .science-v2 .v2-title em { color: #d4a017 !important; font-style: italic; }
 
   /* ═══ Global "write-on" — type-out animation for headlines ═══
      Any element tagged with .write-on whose children are <span class="word">
