@@ -352,10 +352,6 @@ function App() {
           {/* Audit findings M-16: "30+ years of clinical research" claim
               removed pending sourced citations. */}
 
-          {/* "Why Her Estrogen" block — header + 3 icon cards sit on a
-              soft wavy pink wash (matching the reference, in brand pink). */}
-          <div className="edu-why-wrap">
-
           {/* 2 — Main headline block */}
           <div className="edu-head">
             <div className="eyebrow">Why Her Estrogen</div>
@@ -399,8 +395,6 @@ function App() {
               <p>Clinicians experienced in women's hormone care. Messaging access during your plan; periodic check-ins.</p>
             </div>
           </div>
-
-          </div>{/* /edu-why-wrap */}
 
           {/* Education block — sourced stats only.
               The unsourced "92% relief in 90 days" claim was removed per
@@ -581,6 +575,10 @@ function App() {
 
       {/* SYMPTOM QUIZ section removed (per request). */}
 
+      {/* HOW IT WORKS + COMPARE — share a single pink-wash gradient flowing
+          from the top of "How it works" through the bottom of "Compare". */}
+      <div className="hrt-flow-band">
+
       {/* HOW IT WORKS */}
       <Timeline />
 
@@ -638,6 +636,8 @@ function App() {
           </div>
         </div>
       </section>
+
+      </div>{/* /hrt-flow-band */}
 
       {/* REVIEWS section REMOVED — site is pre-launch; 4.9 star rating,
           "2,840 verified patients", and 3 fabricated reviews violate FTC
