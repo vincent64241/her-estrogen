@@ -3133,9 +3133,9 @@
         #fef5f8 100%);
   }
 
-  /* edu-section: drop the prior white background; widen padding a touch so
-     the saturated top has breathing room around the eyebrow + headline. */
-  .edu-section { background-color: transparent; padding: clamp(72px, 9vw, 112px) 0 96px !important; }
+  /* edu-section: drop the prior white background; tighter top padding so
+     the section lifts up against the trust marquee above it. */
+  .edu-section { background-color: transparent; padding: clamp(36px, 4.5vw, 56px) 0 96px !important; }
   /* The previously-boxed why-wrap div is now a pass-through (CSS already
      emptied above by removing the rule, but in case any stale markup is
      cached we neutralize it explicitly). */
@@ -3193,19 +3193,32 @@
         #0a0307 100%) !important;
     padding: 64px 0 140px !important;
   }
-  /* Light-on-dark text since most of this section now sits on saturated
-     pink → near-black. Curve card stays white for chart legibility. */
+  /* Eyebrow: pink text in a light-pink bubble (restores the site's chip
+     style, sitting on the light-pink top of the gradient). */
   .science-v2 .eyebrow-chip {
-    background: rgba(255,255,255,.16) !important;
-    color: #fff !important;
-    backdrop-filter: blur(4px);
+    background: var(--pink-soft) !important;
+    color: var(--pink-deep) !important;
+    backdrop-filter: none;
   }
-  .science-v2 .v2-title,
-  .science-v2 .v2-title em { color: #fff !important; }
-  .science-v2 .v2-sub { color: rgba(255,255,255,.88) !important; }
+  /* H2 title sits on the light-pink top → black text. Italic em stays brand
+     pink so the "nobody showed you" emphasis still pops. */
+  .science-v2 .v2-title { color: var(--ink) !important; }
+  .science-v2 .v2-title em { color: var(--pink) !important; }
+  /* Subhead is just below the h2 in the same light zone → dark grey */
+  .science-v2 .v2-sub { color: var(--ink-2) !important; }
+  /* Stats sit deep in the saturated/black bottom → white, no surrounding
+     box (the legacy .stat rule gave each stat a pink-softer card with
+     border/padding that made the white text invisible). */
+  .science-v2 .stat {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
   .science-v2 .stat b { color: #fff !important; }
   .science-v2 .stat small { color: rgba(255,255,255,.82) !important; }
-  .science-v2 .curve-note { color: rgba(255,255,255,.7) !important; }
+  /* Curve note sits inside the white curve card → restore muted dark */
+  .science-v2 .curve-note { color: var(--muted) !important; }
 
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
