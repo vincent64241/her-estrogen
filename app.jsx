@@ -202,7 +202,7 @@ function Timeline() {
           <h2 className="write-on">
             <span className="word" style={{ animationDelay: '0ms'   }}>From</span>{' '}
             <em>
-              <span className="word" style={{ animationDelay: '110ms' }}>get</span>{' '}
+              <span className="word" style={{ animationDelay: '110ms' }}>getting</span>{' '}
               <span className="word" style={{ animationDelay: '200ms' }}>approved</span>
             </em>{' '}
             <span className="word" style={{ animationDelay: '310ms' }}>to</span>{' '}
@@ -368,7 +368,7 @@ function App() {
 
           {/* 2 — Main headline block */}
           <div className="edu-head">
-            <div className="eyebrow">Why Her Estrogen</div>
+            <div className="eyebrow">What is HRT?</div>
             <h2 className="write-on">
               <span className="word" style={{ animationDelay: '0ms'   }}>Every</span>{' '}
               <span className="word" style={{ animationDelay: '90ms'  }}>woman</span>{' '}
@@ -380,10 +380,11 @@ function App() {
               <span className="word" style={{ animationDelay: '660ms' }}>again.</span>
             </h2>
             <p className="edu-sub">
-              Perimenopause and menopause are common life stages with a wide
-              range of symptoms. Her Estrogen provides access — through
-              independent licensed clinicians at OpenLoop Health — to
-              FDA-approved hormone therapy when clinically appropriate.
+              HRT — hormone replacement therapy — gently puts back the
+              estrogen and progesterone your body slowly stops making during
+              perimenopause and menopause. A licensed clinician via OpenLoop
+              Health decides whether it's the right fit, and we route an
+              FDA-approved option when it is.
             </p>
           </div>
 
@@ -441,7 +442,7 @@ function App() {
                   <span className="word" style={{ animationDelay: '290ms' }}>Fixes</span>
                 </em>
               </h2>
-              <p className="edu-table-sub">These are not "just part of aging." They are hormone deficiency symptoms — and they are treatable.</p>
+              <p className="edu-table-sub">Sound Familiar?</p>
             </div>
             <div className={'edu-table-scroll' + (tableExpanded ? ' expanded' : '')}>
               <table className="edu-table" aria-label="HRT benefits comparison">
@@ -643,42 +644,50 @@ function App() {
             <div className="compare-row header">
               <div></div>
               <div>Most clinics</div>
+              <div>Other telehealth brands</div>
               <div className="col-us">Her Estrogen</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Initial intake review</div>
               <div className="compare-no">Often 2–4 month wait</div>
-              <div className="col-us compare-yes">Typically 1–2 business days</div>
+              <div className="compare-no">Generic questionnaire</div>
+              <div className="col-us compare-yes">Hormone-specific intake, 1–2 business days</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Medication at your door</div>
               <div className="compare-no">2–6 weeks (Rx + pharmacy runs)</div>
-              <div className="col-us compare-yes">Shipped free; shipping time varies by state</div>
+              <div className="compare-no">Standard packaging</div>
+              <div className="col-us compare-yes">Free discreet shipping</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Clinician focus</div>
               <div className="compare-no">General practice</div>
+              <div className="compare-no">Multi-condition telehealth</div>
               <div className="col-us compare-yes">Women's hormone care</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Async messaging</div>
               <div className="compare-no">Phone tag</div>
-              <div className="col-us compare-yes">Messaging during your plan</div>
+              <div className="compare-no">Limited windows</div>
+              <div className="col-us compare-yes">Throughout your plan</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">FDA-approved estradiol &amp; progesterone</div>
               <div className="compare-no">Sometimes</div>
-              <div className="col-us compare-yes">Default offering</div>
+              <div className="compare-no">May include compounded BHRT</div>
+              <div className="col-us compare-yes">FDA-approved only</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Dose adjustments</div>
               <div className="compare-no">Annual visit</div>
+              <div className="compare-no">Periodic only</div>
               <div className="col-us compare-yes">Anytime, free</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Cancel or pause</div>
               <div className="compare-no">Call required</div>
-              <div className="col-us compare-yes">One tap</div>
+              <div className="compare-no">Online, with friction</div>
+              <div className="col-us compare-yes">Anytime, one tap</div>
             </div>
           </div>
         </div>

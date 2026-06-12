@@ -769,11 +769,27 @@
     box-shadow: 0 12px 36px rgba(138,23,69,.06);
   }
   .compare-row {
-    display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
     border-bottom: 1px solid var(--line);
   }
   .compare-row:last-child { border-bottom: none; }
-  .compare-row > div { padding: 20px 24px; font-size: 14px; }
+  .compare-row > div { padding: 20px 18px; font-size: 13.5px; }
+  @media (max-width: 760px) {
+    /* Stack into a 2-column micro-table on phones: feature label on the
+       left, the three states stacked on the right with mini-labels. */
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-row > div { padding: 14px 18px; }
+    .compare-row.header { display: none; }
+    .compare-row .compare-feat { background: var(--pink-softer); font-size: 14px; }
+    .compare-row .compare-no::before,
+    .compare-row .col-us.compare-yes::before {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px;
+    }
+    .compare-row .compare-no:nth-of-type(2)::before { content: 'Most clinics'; }
+    .compare-row .compare-no:nth-of-type(3)::before { content: 'Other telehealth brands'; }
+    .compare-row .col-us.compare-yes::before { content: 'Her Estrogen'; color: var(--pink-deep); }
+  }
   .compare-row.header > div { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding-top: 16px; padding-bottom: 16px; }
   .compare-row.header .col-us {
     background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
@@ -3241,10 +3257,9 @@
     color: var(--pink-deep) !important;
     backdrop-filter: none;
   }
-  /* Science H2 stays all-black (italic em included). The actual write-on
-     animation lives in the GLOBAL .write-on system below. */
-  .science-v2 .v2-title { color: var(--ink) !important; }
-  .science-v2 .v2-title em { color: var(--ink) !important; font-style: italic; }
+  /* Science H2: light gold (per request). Italic em matches. */
+  .science-v2 .v2-title { color: #d4b370 !important; }
+  .science-v2 .v2-title em { color: #d4b370 !important; font-style: italic; }
 
   /* ═══ Global "write-on" — type-out animation for headlines ═══
      Any element tagged with .write-on whose children are <span class="word">
@@ -3259,6 +3274,10 @@
       transform: translateY(0.45em);
       will-change: opacity, transform;
     }
+    /* Italic glyphs (e.g. the curl on a serif italic "f") overhang their
+       inline-block box. Give italic words a hair of trailing padding so the
+       overhang doesn't get clipped by the next inline element. */
+    .write-on em .word { padding-right: 0.08em; }
     .write-on.write-go .word {
       animation: wordWriteOn .6s cubic-bezier(.22,.8,.3,1) forwards;
     }
