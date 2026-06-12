@@ -470,6 +470,41 @@ function App() {
         </div>
       </section>
 
+      {/* SCIENCE / ESTRADIOL CURVE — moved ABOVE products (per request).
+          Chart line-draw + stat count-up animate when scrolled into view
+          (see the .science-v2 IntersectionObserver in the tail script).
+          Numbers default to their final value, so they're never stuck at 0
+          if the animation can't run. */}
+      <section className="science-v2" id="science" data-screen-label="02b Science">
+        <div className="container">
+          <div className="curve-grid">
+            <div>
+              <span className="eyebrow-chip rv">The science, plainly</span>
+              <h2 className="v2-title rv d1" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>This is the curve <em>nobody showed you.</em></h2>
+              <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
+              <div className="stat-band">
+                <div className="stat rv"><b><span className="num" data-count="75">75</span>M</b><small>U.S. women in hormonal transition</small></div>
+                <div className="stat rv d1"><b><span className="num" data-count="93">93</span>%</b><small>never receive treatment</small></div>
+                <div className="stat rv d2"><b><span className="num" data-count="7">7</span>+yrs</b><small>average wait before help</small></div>
+              </div>
+            </div>
+            <div className="curve-card rv d2">
+              <svg viewBox="0 0 560 330" fill="none">
+                <line x1="42" y1="284" x2="540" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
+                <line x1="42" y1="44" x2="42" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
+                <text x="48" y="62" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Estradiol level</text>
+                <text x="402" y="308" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Age 35 → 60</text>
+                <path id="declineLine" d="M42 92 C 142 88, 204 98, 264 132 C 324 166, 364 232, 540 254" stroke="#1a1216" strokeWidth="3" strokeLinecap="round" />
+                <path id="liftLine" d="M302 152 C 382 130, 462 122, 540 118" stroke="#b8235c" strokeWidth="3.4" strokeLinecap="round" />
+                <circle cx="302" cy="152" r="6.5" fill="#b8235c" />
+                <text x="314" y="142" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="700" fill="#8a1745">Treatment begins</text>
+              </svg>
+              <div className="curve-note">Illustrative only — individual results and treatment plans vary, and are determined by your clinician.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* TREATMENTS — restored original horizontal product scroll (per request) */}
       <section className="treatments" id="treatments" data-screen-label="02 Treatments">
         <div className="container">
@@ -532,36 +567,7 @@ function App() {
         </div>
       </section>
 
-      {/* SECTION 3 — SCIENCE / ESTRADIOL CURVE (ported from reference, brand-skinned) */}
-      <section className="science-v2" id="science" data-screen-label="02b Science">
-        <div className="container">
-          <div className="curve-grid">
-            <div>
-              <span className="eyebrow-chip rv">The science, plainly</span>
-              <h2 className="v2-title rv d1" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>This is the curve <em>nobody showed you.</em></h2>
-              <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
-              <div className="stat-band">
-                <div className="stat rv"><b>5</b><small>FDA-approved treatment options</small></div>
-                <div className="stat rv d1"><b>50</b><small>U.S. states served</small></div>
-                <div className="stat rv d2"><b>1–2</b><small>business-day typical review</small></div>
-              </div>
-            </div>
-            <div className="curve-card rv d2">
-              <svg viewBox="0 0 560 330" fill="none">
-                <line x1="42" y1="284" x2="540" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
-                <line x1="42" y1="44" x2="42" y2="284" stroke="#f0d9e2" strokeWidth="1.5" />
-                <text x="48" y="62" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Estradiol level</text>
-                <text x="402" y="308" fontFamily="DM Mono, monospace" fontSize="12" fill="#7a6770">Age 35 → 60</text>
-                <path id="declineLine" d="M42 92 C 142 88, 204 98, 264 132 C 324 166, 364 232, 540 254" stroke="#1a1216" strokeWidth="3" strokeLinecap="round" />
-                <path id="liftLine" d="M302 152 C 382 130, 462 122, 540 118" stroke="#b8235c" strokeWidth="3.4" strokeLinecap="round" />
-                <circle cx="302" cy="152" r="6.5" fill="#b8235c" />
-                <text x="314" y="142" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="700" fill="#8a1745">Treatment begins</text>
-              </svg>
-              <div className="curve-note">Illustrative only — individual results and treatment plans vary, and are determined by your clinician.</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* (Science section moved above the products section — see below.) */}
 
       {/* PATIENT STORIES section REMOVED pending real, consented patient
           testimonials (audit findings C-06, H-13). Do not reintroduce with
@@ -661,7 +667,6 @@ function App() {
               </div>
             </div>
             <div className="clinical-panel rv d2">
-              <div className="role">Our medical partner</div>
               <h3>Care from independent, licensed clinicians</h3>
               <p>Her Estrogen is a technology and brand platform; medical care is provided by independent licensed clinicians via OpenLoop Health. Treatment is prescribed only when a clinician determines it's appropriate after reviewing your history.</p>
               <p className="clinical-isi">Estrogen-containing products carry FDA boxed warnings. See the Important Safety Information at the bottom of this page.</p>
