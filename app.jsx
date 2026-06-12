@@ -199,7 +199,18 @@ function Timeline() {
       <div className="container">
         <div className="how-head">
           <div className="eyebrow">How it works</div>
-          <h2>From <em>get approved</em> to medication at your door.</h2>
+          <h2 className="write-on">
+            <span className="word" style={{ animationDelay: '0ms'   }}>From</span>{' '}
+            <em>
+              <span className="word" style={{ animationDelay: '110ms' }}>get</span>{' '}
+              <span className="word" style={{ animationDelay: '200ms' }}>approved</span>
+            </em>{' '}
+            <span className="word" style={{ animationDelay: '310ms' }}>to</span>{' '}
+            <span className="word" style={{ animationDelay: '400ms' }}>medication</span>{' '}
+            <span className="word" style={{ animationDelay: '490ms' }}>at</span>{' '}
+            <span className="word" style={{ animationDelay: '580ms' }}>your</span>{' '}
+            <span className="word" style={{ animationDelay: '670ms' }}>door.</span>
+          </h2>
           <p className="how-intro">
             A streamlined process built around your time. We've taken the
             three things that usually take six months — and made them take a
@@ -286,8 +297,11 @@ function App() {
           bento tile copy ported verbatim per Vincent's "B" choice. */}
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
-          <h1 className="rv">
-            Feel like yourself, <em>again.</em>
+          <h1 className="write-on">
+            <span className="word" style={{ animationDelay: '0ms'   }}>Feel</span>{' '}
+            <span className="word" style={{ animationDelay: '90ms'  }}>like</span>{' '}
+            <span className="word" style={{ animationDelay: '180ms' }}>yourself,</span>{' '}
+            <em><span className="word" style={{ animationDelay: '300ms' }}>again.</span></em>
           </h1>
           <p className="hb-sub rv d1">
             FDA-approved hormone therapy, prescribed by a licensed clinician
@@ -355,7 +369,16 @@ function App() {
           {/* 2 — Main headline block */}
           <div className="edu-head">
             <div className="eyebrow">Why Her Estrogen</div>
-            <h2>Every woman deserves to feel like <em>herself</em> again.</h2>
+            <h2 className="write-on">
+              <span className="word" style={{ animationDelay: '0ms'   }}>Every</span>{' '}
+              <span className="word" style={{ animationDelay: '90ms'  }}>woman</span>{' '}
+              <span className="word" style={{ animationDelay: '180ms' }}>deserves</span>{' '}
+              <span className="word" style={{ animationDelay: '270ms' }}>to</span>{' '}
+              <span className="word" style={{ animationDelay: '360ms' }}>feel</span>{' '}
+              <span className="word" style={{ animationDelay: '450ms' }}>like</span>{' '}
+              <em><span className="word" style={{ animationDelay: '560ms' }}>herself</span></em>{' '}
+              <span className="word" style={{ animationDelay: '660ms' }}>again.</span>
+            </h2>
             <p className="edu-sub">
               Perimenopause and menopause are common life stages with a wide
               range of symptoms. Her Estrogen provides access — through
@@ -410,7 +433,14 @@ function App() {
           {/* 5 — Problem vs Solution table */}
           <div className="edu-table-wrap">
             <div className="edu-table-head">
-              <h2>What HRT <em>Actually Fixes</em></h2>
+              <h2 className="write-on">
+                <span className="word" style={{ animationDelay: '0ms'   }}>What</span>{' '}
+                <span className="word" style={{ animationDelay: '90ms'  }}>HRT</span>{' '}
+                <em>
+                  <span className="word" style={{ animationDelay: '200ms' }}>Actually</span>{' '}
+                  <span className="word" style={{ animationDelay: '290ms' }}>Fixes</span>
+                </em>
+              </h2>
               <p className="edu-table-sub">These are not "just part of aging." They are hormone deficiency symptoms — and they are treatable.</p>
             </div>
             <div className={'edu-table-scroll' + (tableExpanded ? ' expanded' : '')}>
@@ -597,7 +627,14 @@ function App() {
         <div className="container">
           <div className="compare-head">
             <div className="eyebrow">For comparison</div>
-            <h2>Honest about <em>what's different.</em></h2>
+            <h2 className="write-on">
+              <span className="word" style={{ animationDelay: '0ms'   }}>Honest</span>{' '}
+              <span className="word" style={{ animationDelay: '90ms'  }}>about</span>{' '}
+              <em>
+                <span className="word" style={{ animationDelay: '200ms' }}>what's</span>{' '}
+                <span className="word" style={{ animationDelay: '290ms' }}>different.</span>
+              </em>
+            </h2>
             <p style={{ color: 'var(--muted)', fontSize: 16, margin: '0' }}>
               We aren't the cheapest, and we don't try to be everything to everyone.
             </p>
@@ -660,7 +697,16 @@ function App() {
       <section className="clinical-v2" id="clinical" data-screen-label="07b Clinical excellence">
         <div className="container">
           <span className="eyebrow-chip rv">Clinical excellence</span>
-          <h2 className="v2-title rv d1">The best care, <em>by the book.</em></h2>
+          <h2 className="v2-title write-on">
+            <span className="word" style={{ animationDelay: '0ms'   }}>The</span>{' '}
+            <span className="word" style={{ animationDelay: '90ms'  }}>best</span>{' '}
+            <span className="word" style={{ animationDelay: '180ms' }}>care,</span>{' '}
+            <em>
+              <span className="word" style={{ animationDelay: '290ms' }}>by</span>{' '}
+              <span className="word" style={{ animationDelay: '380ms' }}>the</span>{' '}
+              <span className="word" style={{ animationDelay: '470ms' }}>book.</span>
+            </em>
+          </h2>
           <div className="cred-list">
             <div className="cred rv">
               <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg></div>
@@ -716,7 +762,16 @@ function App() {
         <div className="container">
           <div className="mini-quiz rv">
             <div>
-              <h3>Unsure where to begin? <em>Start here.</em></h3>
+              <h3 className="write-on">
+                <span className="word" style={{ animationDelay: '0ms'   }}>Unsure</span>{' '}
+                <span className="word" style={{ animationDelay: '90ms'  }}>where</span>{' '}
+                <span className="word" style={{ animationDelay: '180ms' }}>to</span>{' '}
+                <span className="word" style={{ animationDelay: '270ms' }}>begin?</span>{' '}
+                <em>
+                  <span className="word" style={{ animationDelay: '380ms' }}>Start</span>{' '}
+                  <span className="word" style={{ animationDelay: '470ms' }}>here.</span>
+                </em>
+              </h3>
               <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician via OpenLoop Health reviews every answer.</p>
             </div>
             <div className="q-options">
