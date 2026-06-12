@@ -647,29 +647,22 @@ function App() {
         <div className="container">
           <span className="eyebrow-chip rv">Clinical excellence</span>
           <h2 className="v2-title rv d1">The best care, <em>by the book.</em></h2>
-          <div className="standards-grid">
-            <div className="cred-list">
-              <div className="cred rv">
-                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg></div>
-                <div><h4>FDA-approved medications only</h4><p>Never compounded. Every dose manufactured and tested under federal standards.</p></div>
-              </div>
-              <div className="cred rv d1">
-                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg></div>
-                <div><h4>Licensed clinicians via OpenLoop Health</h4><p>Licensed in your state, experienced in modern hormonal medicine, reachable through your portal.</p></div>
-              </div>
-              <div className="cred rv d2">
-                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18" /></svg></div>
-                <div><h4>Licensed U.S. pharmacies</h4><p>State-regulated dispensing and discreet packaging, with tracking on every shipment.</p></div>
-              </div>
-              <div className="cred rv d3">
-                <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 018 0v3" /></svg></div>
-                <div><h4>Private by design</h4><p>Your health information is protected and never sold. Care happens in a secure portal.</p></div>
-              </div>
+          <div className="cred-list">
+            <div className="cred rv">
+              <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg></div>
+              <div><h4>FDA-approved medications only</h4><p>Never compounded. Every dose manufactured and tested under federal standards.</p></div>
             </div>
-            <div className="clinical-panel rv d2">
-              <h3>Care from independent, licensed clinicians</h3>
-              <p>Her Estrogen is a technology and brand platform; medical care is provided by independent licensed clinicians via OpenLoop Health. Treatment is prescribed only when a clinician determines it's appropriate after reviewing your history.</p>
-              <p className="clinical-isi">Estrogen-containing products carry FDA boxed warnings. See the Important Safety Information at the bottom of this page.</p>
+            <div className="cred rv d1">
+              <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg></div>
+              <div><h4>Licensed clinicians via OpenLoop Health</h4><p>Licensed in your state, experienced in modern hormonal medicine, reachable through your portal.</p></div>
+            </div>
+            <div className="cred rv d2">
+              <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18" /></svg></div>
+              <div><h4>Licensed U.S. pharmacies</h4><p>State-regulated dispensing and discreet packaging, with tracking on every shipment.</p></div>
+            </div>
+            <div className="cred rv d3">
+              <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 018 0v3" /></svg></div>
+              <div><h4>Private by design</h4><p>Your health information is protected and never sold. Care happens in a secure portal.</p></div>
             </div>
           </div>
         </div>
