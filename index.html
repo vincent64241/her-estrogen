@@ -3156,6 +3156,57 @@
   .hrt-flow-band .how-head .how-intro { color: rgba(255,255,255,.92) !important; }
   .hrt-flow-band .how-head .how-intro strong { color: #fff !important; }
 
+  /* ═══ Timeline step colors — Step 1 white (sits on saturated top of the
+     flow band), Step 2 dark grey (sits on the lighter mid-band). Step 3
+     keeps defaults — it lands on the near-white bottom. ═══ */
+  .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card,
+  .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card .step-num,
+  .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card h3,
+  .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card p,
+  .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card .step-meta {
+    color: #fff !important;
+  }
+  .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card,
+  .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card .step-num,
+  .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card h3,
+  .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card p,
+  .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card .step-meta {
+    color: #2b2228 !important;
+  }
+
+  /* ═══ "The science, plainly" — pink → near-black gradient that picks up
+     where the edu-section gradient ended (near-white pink) and descends
+     into deep brand pink, then near-black at the bottom. Tightened top
+     padding so the section lifts toward the previous content. ═══ */
+  .science-v2 {
+    background:
+      radial-gradient(ellipse 90% 45% at 50% 78%, rgba(184,35,92,0.42), transparent 70%),
+      linear-gradient(180deg,
+        #fef5f8  0%,
+        #fde8ef  6%,
+        #f6c9d8 16%,
+        #ec84a8 28%,
+        #b8235c 48%,
+        #8a1745 64%,
+        #4a0c25 80%,
+        #1a0610 92%,
+        #0a0307 100%) !important;
+    padding: 64px 0 140px !important;
+  }
+  /* Light-on-dark text since most of this section now sits on saturated
+     pink → near-black. Curve card stays white for chart legibility. */
+  .science-v2 .eyebrow-chip {
+    background: rgba(255,255,255,.16) !important;
+    color: #fff !important;
+    backdrop-filter: blur(4px);
+  }
+  .science-v2 .v2-title,
+  .science-v2 .v2-title em { color: #fff !important; }
+  .science-v2 .v2-sub { color: rgba(255,255,255,.88) !important; }
+  .science-v2 .stat b { color: #fff !important; }
+  .science-v2 .stat small { color: rgba(255,255,255,.82) !important; }
+  .science-v2 .curve-note { color: rgba(255,255,255,.7) !important; }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
