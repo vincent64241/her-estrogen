@@ -2643,7 +2643,7 @@
   }
   .hero-bento .tile h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 27px; line-height: 1.1; margin: 0 0 4px; color: var(--ink); }
   .hero-bento .tile p  { font-family: 'DM Sans', system-ui, sans-serif; font-size: 14px; color: var(--muted); margin: 0; }
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) {
     .hero-bento .tile:hover { transform: translateY(-6px) scale(1.012); box-shadow: 0 24px 56px rgba(26,18,22,0.13); }
   }
   .hero-bento .tile .go {
@@ -2651,7 +2651,7 @@
     background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center;
     transition: transform .3s ease, background .3s ease;
   }
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) {
     .hero-bento .tile:hover .go { transform: rotate(-45deg); background: var(--pink-deep); }
   }
   .hero-bento .tile .mini-art { position: absolute; top: 18px; left: 24px; opacity: .6; }
@@ -2676,7 +2676,7 @@
   }
   .hero-bento .tile.main .hb-cta { align-self: flex-start; position: relative; margin-top: 24px; }
   .hero-bento .tile.main .hb-cta svg { transition: transform .25s ease; }
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) {
     .hero-bento .tile.main:hover .hb-cta svg { transform: translateX(4px); }
   }
 
@@ -2712,7 +2712,7 @@
     background: linear-gradient(180deg, rgba(26,18,22,.32) 0%, rgba(26,18,22,.68) 100%);
     transition: background .35s ease;
   }
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) {
     .hero-bento .tile.main:hover::after,
     .hero-bento .tile.sleep:hover::after,
     .hero-bento .tile.heat:hover::after,
@@ -2982,7 +2982,7 @@
   .faq-item.open .faq-a { max-height: 900px; padding-bottom: 24px; }
 
   /* ═══ Clinical Excellence — centered, extra top padding (per request) ═══ */
-  .clinical-v2 { padding: 144px 0 96px; }
+  .clinical-v2 { padding: 100px 0 68px; }
   .clinical-v2 .container { text-align: center; }
   .clinical-v2 .cred-list {
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
@@ -2997,13 +2997,13 @@
   @media (prefers-reduced-motion: no-preference) {
     @keyframes iconFlip { from { transform: rotateY(-180deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
     .edu-why-icon { backface-visibility: hidden; }
-    .edu-why-grid.flip-go .edu-why-card:nth-child(1) .edu-why-icon { animation: iconFlip .7s cubic-bezier(.22,.7,.3,1) both; }
-    .edu-why-grid.flip-go .edu-why-card:nth-child(2) .edu-why-icon { animation: iconFlip .7s cubic-bezier(.22,.7,.3,1) .14s both; }
-    .edu-why-grid.flip-go .edu-why-card:nth-child(3) .edu-why-icon { animation: iconFlip .7s cubic-bezier(.22,.7,.3,1) .28s both; }
+    .edu-why-grid.flip-go .edu-why-card:nth-child(1) .edu-why-icon { animation: iconFlip 1.4s cubic-bezier(.22,.7,.3,1) both; }
+    .edu-why-grid.flip-go .edu-why-card:nth-child(2) .edu-why-icon { animation: iconFlip 1.4s cubic-bezier(.22,.7,.3,1) .28s both; }
+    .edu-why-grid.flip-go .edu-why-card:nth-child(3) .edu-why-icon { animation: iconFlip 1.4s cubic-bezier(.22,.7,.3,1) .56s both; }
   }
 
   /* ═══ CLOSING "Start here" mini-quiz (replaces final CTA), our colors ═══ */
-  .start-quiz { padding: 110px 0; background: #fff; }
+  .start-quiz { padding: 72px 0 110px; background: #fff; }
   .start-quiz .mini-quiz {
     background: var(--ink); border-radius: 30px; padding: 54px; color: #fff;
     display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
@@ -3083,12 +3083,22 @@
   .trust-marquee .tm-track span { color: var(--pink) !important; }
   .trust-marquee .tm-dot { background: var(--pink) !important; }
 
-  /* "Why hormone therapy is worth a conversation." → white card,
-     pink subheading, black copy */
+  /* "Why hormone therapy is worth a conversation." → centered on the page.
+     Collapse the original 2-col grid (which left the card hugging the left)
+     so the white card sits dead-center beneath the icon row. */
+  .edu-education {
+    display: block !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    text-align: center;
+  }
   .edu-education .edu-text {
     background: #fff; border: 1px solid var(--line); border-radius: 20px;
     padding: 40px 44px; max-width: 760px; margin: 0 auto;
     box-shadow: 0 16px 44px rgba(26,18,22,.10);
+    text-align: center;
   }
   .edu-education .edu-text h3 { color: var(--pink) !important; }
   .edu-education .edu-text p  { color: #16110f !important; }
