@@ -2609,7 +2609,7 @@
      Reference apricot/blush/butter/sage → our pink/moss/gold family.
      Honors prefers-reduced-motion.
      ═══════════════════════════════════════════════════════════════ */
-  .hero-bento { padding: 172px 0 88px; background: var(--paper); position: relative; }
+  .hero-bento { padding: 248px 0 88px; background: var(--paper); position: relative; }
   .hb-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   .hero-bento h1 {
     font-family: 'Newsreader', Georgia, serif;
@@ -2763,7 +2763,7 @@
 
   /* Bento responsive */
   @media (max-width: 900px) {
-    .hero-bento { padding: 128px 0 56px; }
+    .hero-bento { padding: 196px 0 56px; }
     .hero-bento .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .hero-bento .tile.main { grid-row: auto; grid-column: 1 / -1; min-height: 280px; }
     .hero-bento .tile { min-height: 150px; }
@@ -3053,6 +3053,72 @@
   }
   .clinical-v2 { background: var(--pink-softer); }
   .clinical-v2 .cred { background: #fff; }
+
+  /* ════════════════════════════════════════════════════════════════
+     BOLD BRAND-PINK PAGE (per request) — whole page deep pink + light
+     text; the PRODUCTS section is the only light section. White cards
+     (edu cards, comparison + HRT tables, science chart, cred cards)
+     keep their dark text so they pop. Nav forced to a solid bar so the
+     pink logo + links stay legible.
+     ════════════════════════════════════════════════════════════════ */
+  html { background: #b8235c; }
+  body { background: linear-gradient(180deg, #bb265f 0%, #a31d50 100%) !important; }
+
+  /* All sections transparent so the deep-pink page shows through … */
+  .hero-bento, .trust-marquee, .edu-section, .science-v2, .how,
+  .compare, .clinical-v2, .faq, .start-quiz { background: transparent !important; }
+  /* … except the products section, which stays light. */
+  .treatments { background: #fff !important; }
+
+  /* Light text on the pink sections (scoped to non-card text) */
+  .hero-bento h1, .hero-bento .hb-sub,
+  .edu-head .eyebrow, .edu-head h2, .edu-sub,
+  .edu-education .edu-text h3, .edu-education .edu-text p,
+  .edu-table-head h2, .edu-table-sub,
+  .science-v2 .v2-title, .science-v2 .v2-sub, .science-v2 .stat b,
+  .how .eyebrow, .how h2, .how-intro,
+  .how .step-card h3, .how .step-card p, .how .step-num, .how .step-meta,
+  .compare .eyebrow, .compare-head h2, .compare-head p,
+  .clinical-v2 .v2-title,
+  .faq .eyebrow, .faq h2, .faq-q,
+  .trust-marquee .tm-track span { color: #fff !important; }
+
+  .science-v2 .stat small, .how-intro strong,
+  .faq-a, .faq .faq-grid > div:first-child p { color: rgba(255,255,255,.85) !important; }
+
+  /* em accents (were pink) → light pink so they read on deep pink */
+  .hero-bento h1 em, .edu-head h2 em, .edu-table-head h2 em,
+  .science-v2 .v2-title em, .clinical-v2 .v2-title em,
+  .compare-head h2 em, .faq h2 em, .how h2 em { color: var(--pink-soft) !important; }
+
+  /* Eyebrow chips → translucent white pill */
+  .eyebrow-chip { background: rgba(255,255,255,.16) !important; color: #fff !important; }
+
+  /* FAQ on pink: light dividers, white toggle */
+  .faq-list { border-top-color: rgba(255,255,255,.32) !important; }
+  .faq-item { border-bottom-color: rgba(255,255,255,.32) !important; }
+  .faq-q:hover { color: var(--pink-soft) !important; }
+  .faq-toggle { background: rgba(255,255,255,.16) !important; color: #fff !important; border-color: rgba(255,255,255,.4) !important; }
+  .faq-item.open .faq-toggle { background: #fff !important; color: var(--pink) !important; border-color: #fff !important; }
+
+  /* Trust marquee on pink */
+  .trust-marquee { border-top-color: rgba(255,255,255,.26) !important; border-bottom-color: rgba(255,255,255,.26) !important; }
+  .trust-marquee .tm-dot { background: #fff !important; }
+
+  /* CTAs → white pill with pink text (pop on pink) … */
+  .btn-primary { background: #fff !important; color: var(--pink-deep) !important; box-shadow: 0 8px 22px rgba(0,0,0,.18) !important; }
+  /* … but the nav button sits on the white nav bar, so keep it pink. */
+  .nav.nav-editorial .nav-btn, .nav.nav-editorial .btn-primary { background: var(--pink) !important; color: #fff !important; }
+
+  /* WHITE CARDS keep dark text (placed last → win over the white-text rules) */
+  .edu-why-card h3, .edu-why-card p,
+  .edu-table th, .edu-table td,
+  .compare-table, .compare-row > div,
+  .clinical-v2 .cred h4, .clinical-v2 .cred p,
+  .science-v2 .curve-card .curve-note { color: var(--ink) !important; }
+
+  /* Nav: solid bar always so the pink wordmark + links stay legible on pink */
+  .nav.nav-editorial { background: rgba(255,255,255,.96) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line) !important; box-shadow: 0 1px 0 rgba(184,35,92,.08); }
 
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
