@@ -88,10 +88,10 @@ const HRT_COMPARISON = [
 
 
 const FAQ = [
-{ q: 'Is hormone therapy right for me?', a: 'Hormone therapy is not appropriate for everyone. A licensed clinician via our medical partner, OpenLoop Health, reviews your personal and family history, current medications, and clinical history before deciding whether to prescribe. Estrogen-containing products carry FDA boxed warnings, including for endometrial cancer, cardiovascular events (stroke, heart attack, blood clots), probable dementia, and (in combination with progestins) breast cancer — discuss the risks and benefits with your clinician. See the Important Safety Information at the bottom of this page.' },
+{ q: 'Is hormone therapy right for me?', a: 'Hormone therapy is not appropriate for everyone. A licensed clinician reviews your personal and family history, current medications, and clinical history before deciding whether to prescribe. Hormone therapy carries real risks — including cardiovascular events, breast cancer (in combination with progestins), and others — that vary by individual, product, dose, and duration. Discuss the risks and benefits with your clinician. See the Important Safety Information at the bottom of this page.' },
 { q: 'Do I need bloodwork to start?', a: 'Not always. Symptom-based prescribing is supported by current guidelines for many patients, and your clinician may order labs (such as FSH, estradiol, thyroid, lipids) when it changes the plan. Labs are available at-home or at any Quest location.' },
 { q: 'What if I have a history of breast cancer or clots?', a: 'These histories require a careful, individualized conversation. Some patients are still candidates for local-only therapy; others are not. The clinician will be direct about what can and cannot be prescribed.' },
-{ q: 'How much does it cost?', a: 'All Her Estrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes the clinician consultation, unlimited messaging during your plan, check-ins, and free shipping. Treatment is subject to clinician approval and is not guaranteed. We do not bill insurance, but plans can be paid with HSA/FSA. Subscriptions automatically renew at the same price unless cancelled before the renewal date; see Terms §7 for renewal and cancellation details.' },
+{ q: 'How much does it cost?', a: 'All HerEstrogen plans share the same pricing: $507 for 3 months ($169/mo), $912 for 6 months ($152/mo, save $102), or $1,716 for 12 months ($143/mo, save $312/year). Every plan includes the clinician consultation, unlimited messaging during your plan, check-ins, and free shipping. Treatment is subject to clinician approval and is not guaranteed. We do not bill insurance, but plans can be paid with HSA/FSA. Subscriptions automatically renew at the same price unless cancelled before the renewal date; see Terms §7 for renewal and cancellation details.' },
 { q: 'Can I use my own pharmacy?', a: 'Yes. We can route your prescription to the partner pharmacy or to any local pharmacy you prefer.' },
 { q: 'How quickly will I feel different?', a: 'Individual results vary. Some patients report changes in sleep and vasomotor symptoms within several weeks; others take longer or do not respond. Dose adjustments are decided by the clinician based on how you are feeling.' }];
 
@@ -100,7 +100,7 @@ const TIMELINE_STEPS = [
 {
   eyebrow: 'Step 01',
   title: 'Submit your intake',
-  body: "Complete a brief medical and symptom intake written by women's-health clinicians. A licensed clinician via our medical partner, OpenLoop Health, reviews your information — typically within 1–2 business days.",
+  body: "Complete a brief medical and symptom intake written by women's-health clinicians. A licensed clinician reviews your information — typically within 1–2 business days.",
   image: 'woman smiling at her phone, completing the intake',
   src: 'assets/step-1-get-approved.jpg',
   meta: '~ 10 min to complete'
@@ -305,8 +305,8 @@ function App() {
           </h1>
           <p className="hb-sub rv d1">
             FDA-approved hormone therapy, prescribed by a licensed clinician
-            via OpenLoop Health when clinically appropriate. Treatment is
-            subject to clinician approval; outcomes vary by individual.
+            when clinically appropriate. Treatment is subject to clinician
+            approval; outcomes vary by individual.
           </p>
           <div className="bento">
             <a className="tile main rv d1" href="quiz.html">
@@ -351,8 +351,8 @@ function App() {
       {/* TRUST MARQUEE — ported from reference (text ticker), brand-skinned */}
       <div className="trust-marquee" aria-hidden="true">
         <div className="tm-track">
-          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians via OpenLoop Health</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
-          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians via OpenLoop Health</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
+          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians, all 50 states</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
+          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians, all 50 states</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
         </div>
       </div>
 
@@ -382,9 +382,9 @@ function App() {
             <p className="edu-sub">
               HRT — hormone replacement therapy — gently puts back the
               estrogen and progesterone your body slowly stops making during
-              perimenopause and menopause. A licensed clinician via OpenLoop
-              Health decides whether it's the right fit, and we route an
-              FDA-approved option when it is.
+              perimenopause and menopause. A licensed clinician decides
+              whether it's the right fit, and we route an FDA-approved
+              option when it is.
             </p>
           </div>
 
@@ -407,7 +407,7 @@ function App() {
                 </svg>
               </div>
               <h3>Clinician-led intake review.</h3>
-              <p>Submit your intake online. A licensed clinician via OpenLoop Health reviews it — typically within 1&ndash;2 business days. Approval is not guaranteed.</p>
+              <p>Submit your intake online. A licensed clinician reviews it — typically within 1&ndash;2 business days. Approval is not guaranteed.</p>
             </div>
             <div className="edu-why-card">
               <div className="edu-why-icon" aria-hidden="true">
@@ -636,16 +636,13 @@ function App() {
                 <span className="word" style={{ animationDelay: '290ms' }}>different.</span>
               </em>
             </h2>
-            <p style={{ color: 'var(--muted)', fontSize: 16, margin: '0' }}>
-              We aren't the cheapest, and we don't try to be everything to everyone.
-            </p>
           </div>
           <div className="compare-table">
             <div className="compare-row header">
               <div></div>
               <div>Most clinics</div>
               <div>Other telehealth brands</div>
-              <div className="col-us">Her Estrogen</div>
+              <div className="col-us">HerEstrogen</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Initial intake review</div>
@@ -689,6 +686,30 @@ function App() {
               <div className="compare-no">Online, with friction</div>
               <div className="col-us compare-yes">Anytime, one tap</div>
             </div>
+            <div className="compare-row">
+              <div className="compare-feat">Your own private licensed clinician</div>
+              <div className="compare-no">Random rotation</div>
+              <div className="compare-no">Rotating roster</div>
+              <div className="col-us compare-yes">Yes — included</div>
+            </div>
+            <div className="compare-row">
+              <div className="compare-feat">24/7 support</div>
+              <div className="compare-no">Office hours</div>
+              <div className="compare-no">Business hours</div>
+              <div className="col-us compare-yes">Anytime — included</div>
+            </div>
+            <div className="compare-row">
+              <div className="compare-feat">Educational resources &amp; guides</div>
+              <div className="compare-no">—</div>
+              <div className="compare-no">Limited</div>
+              <div className="col-us compare-yes">Full library — included</div>
+            </div>
+            <div className="compare-row">
+              <div className="compare-feat">Our guarantee</div>
+              <div className="compare-no">—</div>
+              <div className="compare-no">—</div>
+              <div className="col-us compare-yes">Included</div>
+            </div>
           </div>
         </div>
       </section>
@@ -723,7 +744,7 @@ function App() {
             </div>
             <div className="cred rv d1">
               <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg></div>
-              <div><h4>Licensed clinicians via OpenLoop Health</h4><p>Licensed in your state, experienced in modern hormonal medicine, reachable through your portal.</p></div>
+              <div><h4>Licensed clinicians, in your state</h4><p>Licensed in your state, experienced in modern hormonal medicine, reachable through your portal.</p></div>
             </div>
             <div className="cred rv d2">
               <div className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 10h18" /></svg></div>
@@ -781,7 +802,7 @@ function App() {
                   <span className="word" style={{ animationDelay: '470ms' }}>here.</span>
                 </em>
               </h3>
-              <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician via OpenLoop Health reviews every answer.</p>
+              <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician reviews every answer.</p>
             </div>
             <div className="q-options">
               <a className="q-opt" href="quiz.html"><span>I can't sleep</span><span>→</span></a>
@@ -798,14 +819,14 @@ function App() {
       {/* FOOTER */}
       <footer data-screen-label="10 Footer">
         <div className="container foot-simple">
-          <img src="assets/logo.png" alt="Her Estrogen" className="foot-logo-large" />
+          <img src="assets/logo.png" alt="HerEstrogen" className="foot-logo-large" />
           <div className="foot-tag">
             Modern hormone care, written for the women medicine forgot.
           </div>
           <a href="mailto:support@herestrogen.com" className="foot-email">support@herestrogen.com</a>
         </div>
         <div className="container foot-bottom">
-          <div>© 2026 Her Estrogen, PBC.</div>
+          <div>© 2026 HerEstrogen, PBC.</div>
           <div className="foot-legal-links">
             <a href="privacy.html">Privacy Policy</a>
             <span className="sep">·</span>
@@ -818,16 +839,16 @@ function App() {
           <div>Telehealth available where independently licensed clinicians are authorized to practice.</div>
         </div>
         <div className="container foot-disclaimer">
-          <strong>Important Safety Information.</strong> Estrogen-containing
-          products carry boxed warnings for endometrial cancer; cardiovascular
-          disorders including stroke, heart attack, and venous thromboembolism;
-          probable dementia; and (in combination with progestins) breast
-          cancer. Use the lowest effective dose for the shortest duration
-          consistent with treatment goals and patient risk. Treatment is
-          subject to clinician determination and may not be appropriate for
-          everyone. This page is for informational purposes only and does
-          not constitute medical advice. Individual results vary. Report side
-          effects to FDA MedWatch at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
+          <strong>Important Safety Information.</strong> Hormone therapy is a
+          prescription treatment with real risks — including cardiovascular
+          events, breast cancer (in combination with progestins), and others —
+          that vary by individual, product, dose, and duration. Use the lowest
+          effective dose for the shortest duration consistent with treatment
+          goals and patient risk. Treatment is subject to clinician
+          determination and may not be appropriate for everyone. This page is
+          for informational purposes only and does not constitute medical
+          advice. Individual results vary. Report side effects to FDA MedWatch
+          at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
           See full Privacy Policy and HIPAA Notice for how we handle your information.
         </div>
       </footer>

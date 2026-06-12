@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Her Estrogen — Women's Hormone Care</title>
+<title>HerEstrogen — Women's Hormone Care</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3" />
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=3" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=3" />
@@ -788,7 +788,7 @@
     }
     .compare-row .compare-no:nth-of-type(2)::before { content: 'Most clinics'; }
     .compare-row .compare-no:nth-of-type(3)::before { content: 'Other telehealth brands'; }
-    .compare-row .col-us.compare-yes::before { content: 'Her Estrogen'; color: var(--pink-deep); }
+    .compare-row .col-us.compare-yes::before { content: 'HerEstrogen'; color: var(--pink-deep); }
   }
   .compare-row.header > div { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding-top: 16px; padding-bottom: 16px; }
   .compare-row.header .col-us {
@@ -2621,7 +2621,7 @@
   /* ═══════════════════════════════════════════════════════════════
      SECTION 1 — BENTO HERO + TRUST MARQUEE
      Ported from design-reference v2 (layout + motion only).
-     Palette + fonts are 100% Her Estrogen brand tokens.
+     Palette + fonts are 100% HerEstrogen brand tokens.
      Reference apricot/blush/butter/sage → our pink/moss/gold family.
      Honors prefers-reduced-motion.
      ═══════════════════════════════════════════════════════════════ */
@@ -3009,7 +3009,7 @@
     .clinical-v2 .cred-list { grid-template-columns: 1fr; }
   }
 
-  /* ═══ "Why Her Estrogen" icons — flip in when scrolled into view ═══ */
+  /* ═══ "Why HerEstrogen" icons — flip in when scrolled into view ═══ */
   @media (prefers-reduced-motion: no-preference) {
     @keyframes iconFlip { from { transform: rotateY(-180deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
     .edu-why-icon { backface-visibility: hidden; }
@@ -3129,7 +3129,7 @@
      The brand pink (#b8235c) drives a vertical wash from a saturated top
      down to near-white at the bottom, with overlaid radial swells for the
      wavy/organic feel. Two bands share the same gradient:
-       (1) .edu-section — Why Her Estrogen → bottom of HRT comparison
+       (1) .edu-section — Why HerEstrogen → bottom of HRT comparison
        (2) .hrt-flow-band — How it works → bottom of Compare
      Each band stretches the gradient to its own full height, so the wash
      reaches "almost white" right where the next white section begins. */
@@ -3257,9 +3257,34 @@
     color: var(--pink-deep) !important;
     backdrop-filter: none;
   }
-  /* Science H2: light gold (per request). Italic em matches. */
-  .science-v2 .v2-title { color: #d4b370 !important; }
-  .science-v2 .v2-title em { color: #d4b370 !important; font-style: italic; }
+  /* Science H2: shiny metallic gold. Each word renders the same polished
+     gradient (dark gold → bright highlight → dark gold), so the title
+     reads as if it were stamped foil. Children share the gradient via
+     background-image: inherit so styling stays consistent across the
+     <em> and per-word spans used by the write-on animation. */
+  .science-v2 .v2-title {
+    background-image: linear-gradient(135deg,
+      #8a6818 0%,
+      #c79b2a 18%,
+      #f7e6a0 38%,
+      #fff7d4 50%,
+      #f0d97a 62%,
+      #c79b2a 82%,
+      #8a6818 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+  .science-v2 .v2-title em,
+  .science-v2 .v2-title .word {
+    background-image: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .science-v2 .v2-title em { font-style: italic; }
 
   /* ═══ Global "write-on" — type-out animation for headlines ═══
      Any element tagged with .write-on whose children are <span class="word">
@@ -3330,7 +3355,7 @@
 
 <nav class="nav nav-editorial">
   <div class="nav-inner">
-    <a class="logo" href="#"><img src="assets/logo.png" alt="Her Estrogen" class="nav-logo" /></a>
+    <a class="logo" href="#"><img src="assets/logo.png" alt="HerEstrogen" class="nav-logo" /></a>
     <div class="nav-cta">
       <a href="quiz.html" class="btn btn-primary nav-btn">Get Approved →</a>
     </div>
@@ -3343,7 +3368,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v10"></script>
+<script type="text/babel" src="app.jsx?v=v11"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
@@ -3414,7 +3439,7 @@
     else go();
   })();
 
-  // "Why Her Estrogen" icons: flip in when the grid scrolls into view.
+  // "Why HerEstrogen" icons: flip in when the grid scrolls into view.
   // Bulletproof — icons display normally if this never runs.
   (function () {
     var tries = 0;

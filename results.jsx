@@ -227,8 +227,8 @@ const TESTIMONIALS = [];
 // Estrogen provider" with OpenLoop attribution.
 const FAQ_ITEMS = [
   {
-    q: 'How does Her Estrogen work?',
-    a: 'Her Estrogen coordinates access to hormone therapy through a network of independent licensed clinicians at our medical partner, OpenLoop Health. After your subscription is initiated, a licensed clinician reviews your intake. If hormone therapy is clinically appropriate, the clinician may prescribe an FDA-approved product — estradiol gel, estradiol patch, oral estradiol, oral micronized progesterone, or vaginal estradiol cream — selected based on your clinical picture. Medication is shipped from a licensed pharmacy partner.'
+    q: 'How does HerEstrogen work?',
+    a: 'HerEstrogen coordinates access to hormone therapy through a network of independent licensed clinicians at our medical partner, OpenLoop Health. After your subscription is initiated, a licensed clinician reviews your intake. If hormone therapy is clinically appropriate, the clinician may prescribe an FDA-approved product — estradiol gel, estradiol patch, oral estradiol, oral micronized progesterone, or vaginal estradiol cream — selected based on your clinical picture. Medication is shipped from a licensed pharmacy partner.'
   },
   {
     q: 'What does the price include?',
@@ -236,7 +236,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Is a prescription required?',
-    a: 'Yes. Estradiol and oral progesterone are prescription medications. A licensed clinician via OpenLoop Health reviews your intake and decides whether to prescribe. Her Estrogen is not itself a medical provider; we coordinate access to independent licensed clinicians.'
+    a: 'Yes. Estradiol and oral progesterone are prescription medications. A licensed clinician via OpenLoop Health reviews your intake and decides whether to prescribe. HerEstrogen is not itself a medical provider; we coordinate access to independent licensed clinicians.'
   },
   {
     q: 'How quickly will I feel different?',
@@ -404,7 +404,7 @@ function Capture({ onContinue }) {
   return (
     <div className="capture">
       <div className="capture-card">
-        <img src="assets/logo.png" alt="Her Estrogen" className="capture-logo" />
+        <img src="assets/logo.png" alt="HerEstrogen" className="capture-logo" />
         <h1>Almost there — where should we send your <em>next steps?</em></h1>
         <p className="capture-sub">Enter your details to view your next steps. Submitting this form does not create a doctor-patient relationship or guarantee a prescription.</p>
         <form onSubmit={handleSubmit} noValidate>
@@ -811,7 +811,7 @@ function App() {
       {/* SECTION 7 — What's included */}
       <section style={{ background: '#fff' }}>
         <div className="container">
-          <h2 className="section-title">Everything <em>included</em> in your Her Estrogen plan:</h2>
+          <h2 className="section-title">Everything <em>included</em> in your HerEstrogen plan:</h2>
           <div className="included-card" style={{ marginTop: 24 }}>
             <div className="included-list">
               {INCLUDED.map((item, i) => (
@@ -1075,7 +1075,7 @@ function App() {
                     should sign off on the exact wording before launch. */}
                 <div className="agree" style={{ border: '2px solid var(--pink, #b8235c)', borderRadius: 10, padding: '14px 16px', background: '#fef5f8', fontSize: 14, lineHeight: 1.55, color: '#1a1216', margin: '20px 0' }}>
                   <strong>Subscription &amp; renewal terms.</strong>{' '}
-                  By subscribing, you authorize Her Estrogen to charge you
+                  By subscribing, you authorize HerEstrogen to charge you
                   <strong> ${total.toLocaleString()}.00 today</strong> and the same amount
                   <strong> every {plan.months} months</strong> until you cancel. Your
                   subscription automatically renews at the same price for
@@ -1111,7 +1111,7 @@ function App() {
       {/* Audit findings M-16, C-11: "Backed by clinical research from
           [Mayo / Harvard / NIH / NAMS]" logo block removed pending
           documented relationships or explicit citation. Also removed
-          "What makes Her Estrogen so much better than anything else?"
+          "What makes HerEstrogen so much better than anything else?"
           comparative claim. */}
 
       {/* Audit findings C-06, H-13: 20-case-study section removed. Pre-launch
@@ -1140,20 +1140,19 @@ function App() {
       {/* SECTION 16 — Important Safety Information + Disclaimer */}
       <section className="disclaimer-section">
         <div className="disclaimer" style={{ fontSize: 13, lineHeight: 1.55 }}>
-          <strong>Important Safety Information (FDA boxed warning).</strong> Estrogen-containing
-          products carry boxed warnings for endometrial cancer; cardiovascular disorders
-          including stroke, heart attack, and venous thromboembolism (deep-vein
-          thrombosis and pulmonary embolism); probable dementia; and (in combination with
-          progestins) breast cancer. Use the lowest effective dose for the shortest
-          duration consistent with treatment goals and individual risk. These are
-          prescription medications and may not be appropriate for everyone. Discuss
-          risks and benefits with your clinician. Report side effects to FDA MedWatch
-          at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
+          <strong>Important Safety Information.</strong> Hormone therapy is a
+          prescription treatment with real risks — including cardiovascular events,
+          breast cancer (in combination with progestins), and others — that vary by
+          individual, product, dose, and duration. Use the lowest effective dose for
+          the shortest duration consistent with treatment goals and individual risk.
+          These are prescription medications and may not be appropriate for everyone.
+          Discuss risks and benefits with your clinician. Report side effects to FDA
+          MedWatch at <a href="https://www.fda.gov/safety/medwatch" target="_blank" rel="noopener">fda.gov/safety/medwatch</a>.
           <br /><br />
           The intake completed on this site does not create a doctor-patient
           relationship. A licensed clinician via our medical partner, OpenLoop
           Health, reviews your intake to determine clinical appropriateness;
-          the clinician retains discretion to decline. Her Estrogen is not a
+          the clinician retains discretion to decline. HerEstrogen is not a
           healthcare provider — we coordinate access to independent licensed
           clinical services. HSA/FSA eligibility is determined by your plan
           administrator. The medications discussed on this page are FDA-approved
