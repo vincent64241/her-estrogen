@@ -694,20 +694,23 @@ function App() {
         </div>
       </section>
 
-      {/* SECTION 4 — FINAL CTA (ported from reference layout, our approved copy) */}
-      <section className="final-v2" id="cta" data-screen-label="09 CTA">
-        <div className="final-inner">
-          <div className="eyebrow rv">Refund available if a clinician determines HRT is not right for you (before shipment)</div>
-          <h2 className="rv d1">You've waited <em>long enough.</em></h2>
-          <p className="rv d2">
-            Submit your intake today. A licensed clinician via OpenLoop Health
-            will review it — typically within 1&ndash;2 business days.
-            Treatment is subject to clinician approval and is not guaranteed.
-          </p>
-          <div className="rv d3" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="quiz.html" className="btn btn-rose" style={{ padding: '16px 28px', fontSize: 16 }}>
-              Start free assessment →
-            </a>
+      {/* CLOSING — "Unsure where to begin? Start here." mini-quiz (ported from
+          v2 reskin, our color scheme). Replaces the prior final CTA. */}
+      <section className="start-quiz" id="cta" data-screen-label="09 Start here">
+        <div className="container">
+          <div className="mini-quiz rv">
+            <div>
+              <h3>Unsure where to begin? <em>Start here.</em></h3>
+              <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician via OpenLoop Health reviews every answer.</p>
+            </div>
+            <div className="q-options">
+              <a className="q-opt" href="quiz.html"><span>I can't sleep</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Hot flashes</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Brain fog</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Mood swings</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>Intimacy discomfort</span><span>→</span></a>
+              <a className="q-opt" href="quiz.html"><span>All of the above</span><span>→</span></a>
+            </div>
           </div>
         </div>
       </section>
