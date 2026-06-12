@@ -3425,9 +3425,12 @@
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var pendingIo = null;
     var setupDone = false;
+    // "In view" = element top has scrolled past ~60% of the viewport height
+    // (a touch below center) so the user is actually looking at it when the
+    // write-on plays, instead of triggering as soon as it barely peeks in.
     function inView(el) {
       var r = el.getBoundingClientRect();
-      return r.top < window.innerHeight && r.bottom > 0;
+      return r.top < window.innerHeight * 0.6 && r.bottom > 0;
     }
     function revealVisible() {
       document.querySelectorAll('#root .write-on:not(.write-go)').forEach(function (el) {
@@ -3456,7 +3459,13 @@
               pendingIo.unobserve(e.target);
             }
           });
-        }, { threshold: 0.15 });
+        }, {
+          // Shrink the "viewport" by 40% from the bottom — the observer
+          // only fires once the element's top crosses 60% of viewport
+          // height (a touch below center), matching the inView() math.
+          rootMargin: '0px 0px -40% 0px',
+          threshold: 0
+        });
         document.querySelectorAll('#root .write-on:not(.write-go)').forEach(function (el) {
           pendingIo.observe(el);
         });
