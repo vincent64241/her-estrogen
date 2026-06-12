@@ -260,6 +260,60 @@ function Timeline() {
 
 }
 
+// Closing "Unsure where to begin? Start here." mini-quiz — multi-select
+// symptom picker + pink Continue button. On submit, navigates to quiz.html
+// with the chosen symptom ids as a URL param so the full quiz can pre-fill.
+function MiniQuizClosing() {
+  const SYMPTOMS_MINI = [
+    { id: 'sleep', label: "I can't sleep" },
+    { id: 'heat',  label: 'Hot flashes' },
+    { id: 'fog',   label: 'Brain fog' },
+    { id: 'mood',  label: 'Mood swings' },
+    { id: 'sex',   label: 'Intimacy discomfort' }
+  ];
+  const [picked, setPicked] = useState({});
+  function toggle(id) {
+    setPicked(prev => {
+      const next = Object.assign({}, prev);
+      if (next[id]) delete next[id]; else next[id] = true;
+      return next;
+    });
+  }
+  const ids = Object.keys(picked);
+  const count = ids.length;
+  function go() {
+    const qs = count > 0 ? ('?symptoms=' + encodeURIComponent(ids.join(','))) : '';
+    window.location.href = 'quiz.html' + qs;
+  }
+  return (
+    <div className="q-options">
+      {SYMPTOMS_MINI.map(s => {
+        const on = !!picked[s.id];
+        return (
+          <button
+            key={s.id}
+            type="button"
+            className={'q-opt q-opt-toggle' + (on ? ' is-selected' : '')}
+            onClick={() => toggle(s.id)}
+            aria-pressed={on}
+          >
+            <span>{s.label}</span>
+            <span className="q-opt-mark" aria-hidden="true">{on ? '✓' : '+'}</span>
+          </button>
+        );
+      })}
+      <button
+        type="button"
+        className="q-continue"
+        onClick={go}
+        disabled={count === 0}
+      >
+        Continue{count > 0 ? <span className="q-continue-count"> ({count})</span> : null} →
+      </button>
+    </div>
+  );
+}
+
 function App() {
   const [selected, setSelected] = useState(new Set(['hot', 'sleep', 'mood']));
   const [activeTreatment, setActiveTreatment] = useState('gel');
@@ -804,14 +858,7 @@ function App() {
               </h3>
               <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician reviews every answer.</p>
             </div>
-            <div className="q-options">
-              <a className="q-opt" href="quiz.html"><span>I can't sleep</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Hot flashes</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Brain fog</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Mood swings</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>Intimacy discomfort</span><span>→</span></a>
-              <a className="q-opt" href="quiz.html"><span>All of the above</span><span>→</span></a>
-            </div>
+            <MiniQuizClosing />
           </div>
         </div>
       </section>

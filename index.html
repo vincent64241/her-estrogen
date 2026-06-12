@@ -775,19 +775,28 @@
   .compare-row:last-child { border-bottom: none; }
   .compare-row > div { padding: 20px 18px; font-size: 13.5px; }
   @media (max-width: 760px) {
-    /* Stack into a 2-column micro-table on phones: feature label on the
-       left, the three states stacked on the right with mini-labels. */
-    .compare-row { grid-template-columns: 1fr; }
-    .compare-row > div { padding: 14px 18px; }
+    /* Mobile: hide "Most clinics" entirely and show a clean side-by-side
+       of "Other brands" vs "HerEstrogen". Feature label spans the full
+       width as a row header above the two value cells. */
+    .compare-row { grid-template-columns: 1fr 1fr; }
+    .compare-row > div { padding: 14px 14px; font-size: 13px; }
     .compare-row.header { display: none; }
-    .compare-row .compare-feat { background: var(--pink-softer); font-size: 14px; }
+    .compare-row .compare-feat {
+      grid-column: 1 / -1;
+      background: var(--pink-softer);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    /* Hide the "Most clinics" cell (2nd div in source order) */
+    .compare-row > div:nth-of-type(2) { display: none; }
+    /* Mini-labels above the two remaining value cells so users can tell
+       which column is which without a header row. */
     .compare-row .compare-no::before,
     .compare-row .col-us.compare-yes::before {
       font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px;
+      text-transform: uppercase; display: block; margin-bottom: 4px;
     }
-    .compare-row .compare-no:nth-of-type(2)::before { content: 'Most clinics'; }
-    .compare-row .compare-no:nth-of-type(3)::before { content: 'Other telehealth brands'; }
+    .compare-row .compare-no:nth-of-type(3)::before { content: 'Other brands'; color: var(--muted); }
     .compare-row .col-us.compare-yes::before { content: 'HerEstrogen'; color: var(--pink-deep); }
   }
   .compare-row.header > div { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding-top: 16px; padding-bottom: 16px; }
@@ -1200,7 +1209,11 @@
     box-shadow: 0 2px 14px rgba(20, 18, 22, .04);
   }
   .nav.nav-editorial .nav-inner {
-    padding: 18px 48px 18px 96px;
+    /* Desktop: slightly tighter vertical padding so the nav bar is a touch
+       shorter even though the logo is visually scaled 1.5×. Tablet/mobile
+       padding is set inside the breakpoint blocks below — unchanged on
+       purpose so the mobile nav stays its current size. */
+    padding: 10px 48px 10px 96px;
     max-width: 100%;
     margin: 0;
     display: flex;
@@ -1211,7 +1224,14 @@
   .nav.nav-editorial .logo {
     flex-shrink: 1;
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
+  }
+  /* Visually scale the logo 1.5× WITHOUT growing the nav bar's layout box.
+     transform doesn't affect layout, so the bar height stays driven by the
+     img's natural rendered height while the bitmap is scaled in paint. */
+  .nav.nav-editorial .nav-logo {
+    transform: scale(1.5);
+    transform-origin: left center;
   }
   .nav.nav-editorial .nav-cta {
     position: fixed;
@@ -3036,15 +3056,81 @@
   .start-quiz .mini-quiz p { font-family: 'DM Sans', system-ui, sans-serif; color: rgba(255,255,255,.78); margin-top: 12px; font-size: 15.5px; line-height: 1.6; position: relative; }
   .start-quiz .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; }
   .start-quiz .q-opt {
-    font-family: 'DM Sans', system-ui, sans-serif; background: rgba(255,255,255,.07);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: rgba(255,255,255,.07);
     border: 1px solid rgba(255,255,255,.16); border-radius: 16px; padding: 18px 20px;
     color: #fff; text-decoration: none; font-weight: 600; font-size: 15px;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    transition: background .25s ease, transform .25s ease, border-color .25s ease;
+    transition: transform .25s ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .start-quiz .q-opt:hover { background: var(--pink); border-color: var(--pink); transform: translateY(-3px); }
+    .start-quiz .q-opt:hover { background-color: #b8235c; border-color: #b8235c; transform: translateY(-3px); }
   }
+  /* Multi-select toggle button styling (button element, not anchor).
+     Uses background-color/border-color explicitly so the selected state
+     paints reliably — the shorthand `background` was getting stuck mid
+     transition between disabled/enabled palettes. */
+  .start-quiz .q-opt-toggle {
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .start-quiz .q-opt-toggle.is-selected {
+    background-color: #b8235c !important;
+    border-color: #b8235c !important;
+  }
+  .start-quiz .q-opt-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,.18);
+    font-weight: 700; font-size: 13px;
+    line-height: 1;
+  }
+  .start-quiz .q-opt-toggle.is-selected .q-opt-mark {
+    background-color: #fff !important;
+    color: #8a1745 !important;
+  }
+  /* Pink "Continue" button — spans the full q-options grid below the picks.
+     Uses background-color (not the shorthand) so transitions and the
+     disabled state apply cleanly without the shorthand replay quirk. */
+  .start-quiz .q-continue {
+    grid-column: 1 / -1;
+    cursor: pointer;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 24px;
+    border-radius: 16px;
+    border: none;
+    background-color: #b8235c; /* brand pink — explicit hex avoids any
+                                  var resolution race with transitions */
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .start-quiz .q-continue:not(:disabled):hover {
+      background-color: #8a1745;
+      transform: translateY(-2px);
+    }
+  }
+  .start-quiz .q-continue:disabled {
+    background-color: rgba(255,255,255,.10);
+    color: rgba(255,255,255,.40);
+    cursor: not-allowed;
+  }
+  .start-quiz .q-continue-count { opacity: .85; font-weight: 600; }
   @media (max-width: 900px) {
     .start-quiz { padding: 72px 0; }
     .start-quiz .mini-quiz { grid-template-columns: 1fr; padding: 36px; gap: 26px; }
@@ -3057,7 +3143,9 @@
 
   /* ═══ ANNOUNCEMENT BAR (primary pink, centered clickable pill → quiz) ═══ */
   .annc-bar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    /* Sits at the very top of the document and scrolls away normally — the
+       nav slides up from beneath it via the tail-script handler. */
+    position: absolute; top: 0; left: 0; right: 0; z-index: 60;
     background: var(--pink);
     display: flex; align-items: center; justify-content: center;
     padding: 8px 16px; min-height: 46px; box-sizing: border-box;
@@ -3077,11 +3165,13 @@
   }
   @media (max-width: 560px) { .annc-pill { font-size: 12.5px; padding: 6px 14px; } .annc-bar { padding: 7px 12px; min-height: 42px; } }
 
-  /* Make room for the bar: push the fixed nav down + clear the hero headline */
-  .nav.nav-editorial { top: 46px !important; }
+  /* Nav starts beneath the announcement bar at scroll = 0, then slides up
+     to top: 0 as the user scrolls past the announcement bar (handled by
+     the tail-script). No !important so the inline style from JS wins. */
+  .nav.nav-editorial { top: 46px; }
   .hero-bento { padding-top: 244px; }
   @media (max-width: 900px) { .hero-bento { padding-top: 196px; } }
-  @media (max-width: 560px) { .nav.nav-editorial { top: 42px !important; } }
+  @media (max-width: 560px) { .nav.nav-editorial { top: 42px; } }
 
   /* ═══ FIX PASS (per request) ═══ */
 
@@ -3343,7 +3433,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v11"></script>
+<script type="text/babel" src="app.jsx?v=v12"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
@@ -3352,6 +3442,23 @@
     var nav = document.querySelector('.nav.nav-editorial');
     if (!nav) return;
     nav.classList.add('scrolled');
+  })();
+
+  // Announcement bar scrolls away normally (position: absolute). The nav
+  // is fixed but its top is computed each scroll: starts beneath the bar
+  // at scrollY=0, slides up to top:0 once the bar is past.
+  (function() {
+    var nav = document.querySelector('.nav.nav-editorial');
+    var ann = document.querySelector('.annc-bar');
+    if (!nav || !ann) return;
+    function update() {
+      var annH = ann.offsetHeight || 46;
+      var offset = Math.max(0, annH - window.scrollY);
+      nav.style.top = offset + 'px';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
   })();
 
   // Products scroll container: click-and-drag to scroll on desktop.
