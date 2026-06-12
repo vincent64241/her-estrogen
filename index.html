@@ -3174,24 +3174,25 @@
     color: #2b2228 !important;
   }
 
-  /* ═══ "The science, plainly" — pink → near-black gradient that picks up
-     where the edu-section gradient ended (near-white pink) and descends
-     into deep brand pink, then near-black at the bottom. Tightened top
-     padding so the section lifts toward the previous content. ═══ */
+  /* ═══ "The science, plainly" — pink → near-black gradient. Picks up where
+     the edu-section gradient ended (near-white pink) and descends into deep
+     brand pink, then near-black at the bottom. Generous top padding gives
+     the gradient room to breathe so the light → dark transition isn't
+     cramped into the section. ═══ */
   .science-v2 {
     background:
-      radial-gradient(ellipse 90% 45% at 50% 78%, rgba(184,35,92,0.42), transparent 70%),
+      radial-gradient(ellipse 90% 45% at 50% 80%, rgba(184,35,92,0.42), transparent 70%),
       linear-gradient(180deg,
         #fef5f8  0%,
-        #fde8ef  6%,
-        #f6c9d8 16%,
-        #ec84a8 28%,
-        #b8235c 48%,
-        #8a1745 64%,
+        #fde8ef  8%,
+        #f6c9d8 18%,
+        #ec84a8 30%,
+        #b8235c 50%,
+        #8a1745 66%,
         #4a0c25 80%,
         #1a0610 92%,
         #0a0307 100%) !important;
-    padding: 64px 0 140px !important;
+    padding: 160px 0 140px !important;
   }
   /* Eyebrow: pink text in a light-pink bubble (restores the site's chip
      style, sitting on the light-pink top of the gradient). */
@@ -3204,8 +3205,10 @@
      pink so the "nobody showed you" emphasis still pops. */
   .science-v2 .v2-title { color: var(--ink) !important; }
   .science-v2 .v2-title em { color: var(--pink) !important; }
-  /* Subhead is just below the h2 in the same light zone → dark grey */
-  .science-v2 .v2-sub { color: var(--ink-2) !important; }
+  /* Subhead sits in the transition / saturated zone of the gradient → white
+     (per request). Slight transparency keeps a hierarchy with the stat
+     numbers, which are pure white. */
+  .science-v2 .v2-sub { color: rgba(255,255,255,.94) !important; }
   /* Stats sit deep in the saturated/black bottom → white, no surrounding
      box (the legacy .stat rule gave each stat a pink-softer card with
      border/padding that made the white text invisible). */
