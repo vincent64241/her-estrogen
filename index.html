@@ -3109,6 +3109,43 @@
     stroke-dasharray: none !important; stroke-dashoffset: 0 !important; animation: none !important;
   }
 
+  /* ═══ "Why Her Estrogen" — soft wavy pink wash ═══
+     Matches the user's reference gradient: a saturated mid-pink at the top
+     that flows through softer pinks to almost-white at the bottom, with
+     overlaid radial swells creating the wavy/organic feel. All tones derive
+     from brand --pink (#b8235c). White cards inside stay legible. */
+  .edu-why-wrap {
+    position: relative;
+    border-radius: 36px;
+    padding: 88px 56px 72px;
+    margin: 0 auto 96px;
+    overflow: hidden;
+    background:
+      /* upper-left soft swell */
+      radial-gradient(ellipse 90% 55% at 18% 18%, rgba(184,35,92,0.32), transparent 62%),
+      /* upper-right deeper swell (the "wave" peak) */
+      radial-gradient(ellipse 100% 60% at 78% 26%, rgba(184,35,92,0.48), transparent 60%),
+      /* mid-band soft lift */
+      radial-gradient(ellipse 110% 55% at 32% 58%, rgba(184,35,92,0.14), transparent 60%),
+      /* base vertical wash: brand-pink-derived → almost-white */
+      linear-gradient(180deg,
+        #e85f8b 0%,
+        #ec84a8 18%,
+        #f1a4be 36%,
+        #f6c9d8 56%,
+        #fde8ef 78%,
+        #fef5f8 100%);
+  }
+  /* Eyebrow + headline sit on the saturated top — switch to white for contrast */
+  .edu-why-wrap .edu-head .eyebrow { color: #fff; opacity: .9; }
+  .edu-why-wrap .edu-head h2 { color: #fff; }
+  .edu-why-wrap .edu-head h2 em { color: #fff; }
+  .edu-why-wrap .edu-head .edu-sub { color: rgba(255,255,255,.92); }
+  /* Cards keep their white surfaces — they pop against the pink wash */
+  @media (max-width: 760px) {
+    .edu-why-wrap { padding: 56px 18px 48px; border-radius: 24px; margin-bottom: 64px; }
+  }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
@@ -3148,7 +3185,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v5"></script>
+<script type="text/babel" src="app.jsx?v=v6"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
