@@ -3062,7 +3062,16 @@
      pink logo + links stay legible.
      ════════════════════════════════════════════════════════════════ */
   html { background: #b8235c; }
-  body { background: linear-gradient(180deg, #bb265f 0%, #a31d50 100%) !important; }
+  /* Flowing multi-stop pink gradient spanning the whole page top→bottom,
+     so each section sits on a slightly different shade and they flow together
+     (not flat, not blocky). Default scroll attachment = progresses as you scroll. */
+  html { background: #8a1745; }
+  body {
+    background: linear-gradient(180deg,
+      #c62b68 0%, #ad2056 20%, #b8235c 40%, #8f1947 62%,
+      #b32257 82%, #8a1745 100%) no-repeat !important;
+    background-size: 100% 100% !important;
+  }
 
   /* All sections transparent so the deep-pink page shows through … */
   .hero-bento, .trust-marquee, .edu-section, .science-v2, .how,
@@ -3120,6 +3129,66 @@
   /* Nav: solid bar always so the pink wordmark + links stay legible on pink */
   .nav.nav-editorial { background: rgba(255,255,255,.96) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line) !important; box-shadow: 0 1px 0 rgba(184,35,92,.08); }
 
+  /* ═══ ANNOUNCEMENT BAR (primary pink, centered clickable pill → quiz) ═══ */
+  .annc-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    background: var(--pink);
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px 16px; min-height: 46px; box-sizing: border-box;
+  }
+  .annc-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.6);
+    color: #fff; text-decoration: none;
+    font-family: 'DM Sans', system-ui, sans-serif; font-size: 13.5px; font-weight: 600;
+    border-radius: 100px; padding: 6px 18px;
+    transition: background .25s ease, color .25s ease, transform .25s ease, border-color .25s ease;
+  }
+  .annc-pill svg { transition: transform .25s ease; flex-shrink: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .annc-pill:hover { background: #fff; color: var(--pink-deep); border-color: #fff; transform: translateY(-1px); }
+    .annc-pill:hover svg { transform: translateX(3px); }
+  }
+  @media (max-width: 560px) { .annc-pill { font-size: 12.5px; padding: 6px 14px; } .annc-bar { padding: 7px 12px; min-height: 42px; } }
+
+  /* Make room for the bar: push the fixed nav down + clear the hero headline */
+  .nav.nav-editorial { top: 46px !important; }
+  .hero-bento { padding-top: 296px; }
+  @media (max-width: 900px) { .hero-bento { padding-top: 240px; } }
+  @media (max-width: 560px) { .nav.nav-editorial { top: 42px !important; } }
+
+  /* ═══ FIX PASS (per request) ═══ */
+
+  /* No stray scrollbars: products scrolls horizontally only, bar hidden */
+  html, body { overflow-x: hidden; }
+  .products-scroll-container { overflow-x: auto !important; overflow-y: hidden !important; scrollbar-width: none; -ms-overflow-style: none; }
+  .products-scroll-container::-webkit-scrollbar { display: none; height: 0; }
+
+  /* "What HRT actually fixes" — the white fade strip above "See more" looked
+     wrong on the pink page; remove it for a clean edge. */
+  .edu-table-fade { display: none !important; }
+
+  /* Trust marquee → WHITE bar with PINK text + pink dots */
+  .trust-marquee { background: #fff !important; border-top-color: var(--line) !important; border-bottom-color: var(--line) !important; }
+  .trust-marquee .tm-track span { color: var(--pink) !important; }
+  .trust-marquee .tm-dot { background: var(--pink) !important; }
+
+  /* "Why hormone therapy is worth a conversation." → white card,
+     pink subheading, black copy */
+  .edu-education .edu-text {
+    background: #fff; border: 1px solid var(--line); border-radius: 20px;
+    padding: 40px 44px; max-width: 760px; margin: 0 auto;
+    box-shadow: 0 16px 44px rgba(26,18,22,.10);
+  }
+  .edu-education .edu-text h3 { color: var(--pink) !important; }
+  .edu-education .edu-text p  { color: #16110f !important; }
+
+  /* Science chart: force the curve fully visible (drop the fragile draw-in
+     that could leave it blank/white-box) */
+  .science-v2 #declineLine, .science-v2 #liftLine {
+    stroke-dasharray: none !important; stroke-dashoffset: 0 !important; animation: none !important;
+  }
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
@@ -3135,6 +3204,14 @@
      "Cancel or pause" softened to match Terms §7 (cancel before any
      renewal; no pause feature documented). -->
 <div class="banner" style='font-family: "DM Sans"; font-weight: 800'>Telehealth available where independently licensed clinicians are authorized <span class="dot">•</span> Free shipping <span class="dot">•</span> Cancel anytime before any renewal</div>
+
+<!-- Announcement bar (primary pink, centered clickable pill → quiz) -->
+<div class="annc-bar">
+  <a class="annc-pill" href="quiz.html">
+    The Estradiol patch is here.
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
 
 <nav class="nav nav-editorial">
   <div class="nav-inner">
