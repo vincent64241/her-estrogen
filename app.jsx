@@ -480,7 +480,17 @@ function App() {
           <div className="curve-grid">
             <div>
               <span className="eyebrow-chip rv">The science, plainly</span>
-              <h2 className="v2-title rv d1" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>This is the curve <em>nobody showed you.</em></h2>
+              <h2 className="v2-title write-on" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>
+                <span className="word" style={{ animationDelay: '0ms'   }}>This</span>{' '}
+                <span className="word" style={{ animationDelay: '90ms'  }}>is</span>{' '}
+                <span className="word" style={{ animationDelay: '180ms' }}>the</span>{' '}
+                <span className="word" style={{ animationDelay: '280ms' }}>curve</span>{' '}
+                <em>
+                  <span className="word" style={{ animationDelay: '400ms' }}>nobody</span>{' '}
+                  <span className="word" style={{ animationDelay: '510ms' }}>showed</span>{' '}
+                  <span className="word" style={{ animationDelay: '620ms' }}>you.</span>
+                </em>
+              </h2>
               <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
               <div className="stat-band">
                 <div className="stat rv"><b><span className="num" data-count="75">75</span>M</b><small>U.S. women in hormonal transition</small></div>

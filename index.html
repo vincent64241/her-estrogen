@@ -3166,8 +3166,27 @@
 
   /* Sections inside hrt-flow-band let the band's gradient show through */
   .hrt-flow-band > .how,
-  .hrt-flow-band > .compare,
   .hrt-flow-band > .clinical-v2 { background: transparent !important; }
+
+  /* "For comparison" — its own pink gradient WITH a diagonal white streak
+     cutting across (per request). The streak is a softly-feathered white
+     band layered on top of a vertical pink base; the bottom of the pink
+     base lands near-white, so the section still hands off cleanly to the
+     near-white band gradient that picks back up at .clinical-v2. */
+  .hrt-flow-band > .compare {
+    background:
+      linear-gradient(135deg,
+        transparent 28%,
+        rgba(255,255,255,0.55) 44%,
+        rgba(255,255,255,0.88) 50%,
+        rgba(255,255,255,0.55) 56%,
+        transparent 72%),
+      linear-gradient(180deg,
+        #ec84a8 0%,
+        #f1a4be 35%,
+        #f6c9d8 70%,
+        #fde8ef 100%) !important;
+  }
 
   /* White-on-saturated text at the top of each band */
   .edu-section .edu-head .eyebrow,
@@ -3213,7 +3232,7 @@
         #4a0c25 75%,
         #1a0610 90%,
         #0a0307 100%) !important;
-    padding: 88px 0 88px !important;
+    padding: 32px 0 88px !important;
   }
   /* Eyebrow: pink text in a light-pink bubble (restores the site's chip
      style, sitting on the light-pink top of the gradient). */
@@ -3222,10 +3241,26 @@
     color: var(--pink-deep) !important;
     backdrop-filter: none;
   }
-  /* H2 title sits on the light-pink top → black text. Italic em stays brand
-     pink so the "nobody showed you" emphasis still pops. */
+  /* H2 title is all-black (italic em included). The text writes itself out
+     word-by-word the first time the science section scrolls into view —
+     each .word is hidden by default and animates in on .sci-go. */
   .science-v2 .v2-title { color: var(--ink) !important; }
-  .science-v2 .v2-title em { color: var(--pink) !important; }
+  .science-v2 .v2-title em { color: var(--ink) !important; font-style: italic; }
+  @media (prefers-reduced-motion: no-preference) {
+    .science-v2 .v2-title.write-on .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.45em);
+      will-change: opacity, transform;
+    }
+    .science-v2.sci-go .v2-title.write-on .word {
+      animation: wordWriteOn .6s cubic-bezier(.22,.8,.3,1) forwards;
+    }
+    @keyframes wordWriteOn {
+      from { opacity: 0; transform: translateY(0.45em); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
   /* Subhead sits in the transition / saturated zone of the gradient → white
      (per request). Slight transparency keeps a hierarchy with the stat
      numbers, which are pure white. */
@@ -3283,7 +3318,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v8"></script>
+<script type="text/babel" src="app.jsx?v=v9"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
