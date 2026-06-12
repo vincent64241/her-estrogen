@@ -777,18 +777,27 @@
   @media (max-width: 760px) {
     /* Mobile: hide "Most clinics" entirely and show a clean side-by-side
        of "Other brands" vs "HerEstrogen". Feature label spans the full
-       width as a row header above the two value cells. */
+       width as a centered row header in mid-pink so it visually separates
+       the subject from the body copy. A vertical line down the middle
+       divides the two value columns. */
     .compare-row { grid-template-columns: 1fr 1fr; }
     .compare-row > div { padding: 14px 14px; font-size: 13px; }
     .compare-row.header { display: none; }
     .compare-row .compare-feat {
       grid-column: 1 / -1;
-      background: var(--pink-softer);
+      background-color: #ec84a8;            /* --pink-3, darker than the white card */
+      color: #fff;
+      text-align: center;
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: .01em;
     }
     /* Hide the "Most clinics" cell (2nd div in source order) */
     .compare-row > div:nth-of-type(2) { display: none; }
+    /* Vertical divider between "Other brands" and "HerEstrogen" */
+    .compare-row .compare-no:nth-of-type(3) {
+      border-right: 1px solid var(--line);
+    }
     /* Mini-labels above the two remaining value cells so users can tell
        which column is which without a header row. */
     .compare-row .compare-no::before,
@@ -2805,8 +2814,29 @@
     .hero-bento .tile { min-height: 150px; }
   }
   @media (max-width: 560px) {
-    .hero-bento .bento { grid-template-columns: 1fr; }
-    .hero-bento .tile.main { grid-column: auto; }
+    /* Mobile: keep a 2-column grid so the 4 symptom tiles sit 2-up + 2-up
+       below the full-width primary tile. The sub-paragraph on the small
+       tiles is hidden so only the heading shows. */
+    .hero-bento .bento { grid-template-columns: 1fr 1fr; }
+    .hero-bento .tile.main { grid-column: 1 / -1; min-height: 260px; }
+    .hero-bento .tile.sleep p,
+    .hero-bento .tile.heat p,
+    .hero-bento .tile.fog p,
+    .hero-bento .tile.mood p { display: none; }
+    .hero-bento .tile.sleep,
+    .hero-bento .tile.heat,
+    .hero-bento .tile.fog,
+    .hero-bento .tile.mood {
+      min-height: 130px;
+      padding: 20px;
+    }
+    .hero-bento .tile.sleep h3,
+    .hero-bento .tile.heat h3,
+    .hero-bento .tile.fog h3,
+    .hero-bento .tile.mood h3 {
+      font-size: 18px;
+      line-height: 1.15;
+    }
     .trust-marquee .tm-track { gap: 38px; animation-duration: 24s; }
   }
 
