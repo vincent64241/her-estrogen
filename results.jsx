@@ -4,41 +4,42 @@ const { useState, useEffect, useRef, useMemo } = React;
 
 // ============ PRICING ============
 // All products share the same plan pricing. Three plans only — no monthly.
-// 3 Month: $507 total ($169/mo)  ·  6 Month: $912 total ($152/mo, save $102)
-// 12 Month: $1,716 total ($143/mo, save $312/yr)
+// 3 Month:  $477 total ($159/mo) — baseline, most flexible, no discount
+// 6 Month:  $762 total ($127/mo) — 20% off, save $192 per 6mo ($384/yr annualized)
+// 12 Month: $1,140 total ($95/mo) — 40% off, save $768/yr vs 3-month baseline
 const PLAN_DETAILS = {
   threeMonth: {
     months: 3,
-    total: 507,
-    monthly: 169,
+    total: 477,
+    monthly: 159,
     label: '3 Month Plan',
-    badge: 'Most Popular',
+    badge: 'Most Flexible',
     savingsText: '',
     savingsAmount: 0,
-    billedAs: '$507 every 3 months',
+    billedAs: '$477 every 3 months',
     discountPercent: 0
   },
   sixMonth: {
     months: 6,
-    total: 912,
-    monthly: 152,
+    total: 762,
+    monthly: 127,
     label: '6 Month Plan',
-    badge: 'Save 10%',
-    savingsText: 'Save $102 vs 3-month plan',
-    savingsAmount: 102,
-    billedAs: '$912 every 6 months',
-    discountPercent: 10
+    badge: 'Save 20%',
+    savingsText: 'Save $192 vs 3-month plan',
+    savingsAmount: 192,
+    billedAs: '$762 every 6 months',
+    discountPercent: 20
   },
   annual: {
     months: 12,
-    total: 1716,
-    monthly: 143,
+    total: 1140,
+    monthly: 95,
     label: '12 Month Plan',
-    badge: 'Best Value — Save 15%',
-    savingsText: 'Save $312/year vs 3-month plan',
-    savingsAmount: 312,
-    billedAs: '$1,716 every 12 months',
-    discountPercent: 15
+    badge: 'Best Value — Save 40%',
+    savingsText: 'Save $768/year vs 3-month plan',
+    savingsAmount: 768,
+    billedAs: '$1,140 every 12 months',
+    discountPercent: 40
   }
 };
 const PLAN_ORDER = ['threeMonth', 'sixMonth', 'annual'];
@@ -197,7 +198,7 @@ const INCLUDED = [
 
 // Roll-up — removed unsubstantiated "$540+/month value" claim.
 const INCLUDED_TOTAL_VALUE = '';
-const INCLUDED_YOU_PAY = 'from $143/month on the 12-month plan';
+const INCLUDED_YOU_PAY = 'from $95/month on the 12-month plan';
 
 // Audit findings H-07, H-14: removed hard SLA promises ("24 hours",
 // "guaranteed 4-hour response"). Reconciled with Terms §6: treatment is
@@ -666,11 +667,11 @@ function App() {
     }
 
     // Meta Pixel — sanitized InitiateCheckout signal (no medical metadata).
-    // Value passed is the 3-month plan price ($507) per the tracking spec.
+    // Value passed is the 3-month plan price ($477) per the tracking spec.
     // The helper is defined inline in results.html; it's a no-op if fbq is
     // unavailable (ad-blocker, network failure).
     if (typeof window.trackInitiateCheckout === 'function') {
-      window.trackInitiateCheckout(507);
+      window.trackInitiateCheckout(477);
     }
 
     setSubmitting(true);
@@ -876,7 +877,7 @@ function App() {
             {/* Audit finding H-14: "approval is reserved for X" countdown
                 framing softened — no health/treatment urgency framing. */}
             <span className="reserved-pill">Your intake spot is held for {expired ? '0:00' : formatTime(timeLeft)}</span>
-            <h2>Save up to $312/year on the 12-month plan</h2>
+            <h2>Save up to $768/year on the 12-month plan</h2>
             <p style={{ color: 'rgba(255,255,255,.92)', margin: '8px 0' }}>Choose 3, 6, or 12 months. Plans automatically renew at the same price unless cancelled before the renewal date — see Terms §7. Cancel anytime before any renewal.</p>
             <div className="green-line">Clinician intake review + messaging during your plan + medication (if prescribed) — all included.</div>
           </div>
@@ -911,7 +912,7 @@ function App() {
             <div className="price">
               <span className="price-num">Starting at ${PLAN_DETAILS.annual.monthly}/mo</span>
               <span className="price-sub" style={{ display: 'block', fontSize: 13, color: 'var(--ink-2)', marginTop: 4 }}>
-                on the 12-month plan · $169/mo on 3-month
+                on the 12-month plan · $159/mo on 3-month
               </span>
             </div>
             <ul>
@@ -994,7 +995,7 @@ function App() {
             <div className="savings-urgency" style={{ marginTop: 14, padding: '14px 18px', background: 'var(--pink-softer, #fef5f8)', border: '1px solid var(--pink-3, #ec84a8)', borderRadius: 10, fontSize: 14, color: 'var(--ink-2)', lineHeight: 1.5 }}>
               <strong>Your price is locked at today's rate for the life of your subscription.</strong>
               <br />
-              Annual members save up to $312/year.
+              Annual members save up to $768/year.
             </div>
 
             <button className="cta-large" onClick={scrollToCheckout}>Continue to Checkout →</button>

@@ -39,7 +39,7 @@ const ALLOWED_ORIGINS = new Set(
 
 // Map (product, period) → name of the env var that holds the Stripe Price ID.
 // Monthly options have been REMOVED — minimum plan is now 3 months.
-// All products share identical pricing: $507 / $912 / $1,716.
+// All products share identical pricing: $477 / $762 / $1,140.
 const PRICE_ENV = {
   completeProtocol: {
     threeMonth: 'NEXT_PUBLIC_STRIPE_PRICE_COMPLETE_3MONTH',
