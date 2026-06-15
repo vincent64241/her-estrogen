@@ -60,15 +60,15 @@ const SYMPTOMS_LIST = [
 // where it conflicts with the FDA-approved product line.
 const MEDS = {
   bundle: {
-    name: 'The Complete Protocol',
-    label: 'Estradiol + Progesterone',
-    badge: 'Often Prescribed',
+    name: 'The Daily Gel + Nightly Pill',
+    label: 'Estradiol — transdermal, once daily · Progesterone — oral, nightly',
+    badge: 'FDA-Approved',
     badgeKind: 'pink',
-    product: 'Estradiol Gel + Progesterone Pill',
+    product: 'The Daily Hormone Gel + The Nightly Balance Pill',
     description: 'When clinically appropriate, FDA-approved estradiol and oral progesterone are commonly prescribed together for hormone therapy.',
     image: 'assets/cream.png',
     secondImage: 'assets/oral-pills.png',
-    imageLabels: ['Estradiol Gel', 'Progesterone Pill'],
+    imageLabels: ['The Daily Hormone Gel', 'The Nightly Balance Pill'],
     features: [
       'FDA-approved estradiol + FDA-approved oral progesterone',
       'Clinician consultation, messaging, and check-ins during your plan',
@@ -78,8 +78,8 @@ const MEDS = {
     ]
   },
   gel: {
-    name: 'Estradiol Gel',
-    label: 'Estradiol — Topical Gel',
+    name: 'The Daily Hormone Gel',
+    label: 'Estradiol — transdermal, once daily',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
     product: 'FDA-approved estradiol gel',
@@ -95,8 +95,8 @@ const MEDS = {
     ]
   },
   patch: {
-    name: 'Estradiol Patch',
-    label: 'Estradiol — Transdermal Patch',
+    name: 'The Twice-Weekly Patch',
+    label: 'Estradiol — transdermal, twice weekly',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
     product: 'FDA-approved estradiol patch',
@@ -112,8 +112,8 @@ const MEDS = {
     ]
   },
   pill: {
-    name: 'Estradiol Pill',
-    label: 'Estradiol — Oral Tablet',
+    name: 'The Daily Hormone Pill',
+    label: 'Estradiol — oral, once daily',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
     product: 'FDA-approved oral estradiol tablet',
@@ -129,8 +129,8 @@ const MEDS = {
     ]
   },
   dhea: {
-    name: 'Estradiol Vaginal Cream',
-    label: 'Estradiol — Vaginal Cream',
+    name: 'The Comfort Cream',
+    label: 'Estradiol — vaginal application',
     badge: 'FDA-Approved',
     badgeKind: 'pink',
     product: 'FDA-approved estradiol vaginal cream',
@@ -199,6 +199,57 @@ const INCLUDED = [
 // Roll-up — removed unsubstantiated "$540+/month value" claim.
 const INCLUDED_TOTAL_VALUE = '';
 const INCLUDED_YOU_PAY = 'from $95/month on the 12-month plan';
+
+// ──────────────────────────────────────────────────────────────────────────
+// "Everything included with your protocol" bonus stack.
+// Per compliance vote: dollar-value stacking is OFF — bonuses present as
+// "included free", no per-item dollar amounts, no "$1,250+" total stack.
+// (Audit finding H-14 explicitly disallowed unsubstantiated value claims.)
+// ──────────────────────────────────────────────────────────────────────────
+const BONUSES = [
+  {
+    icon: '📋',
+    name: 'Your Protocol Passport',
+    description: "A personalized clinical guide created for your specific protocol after clinician review. What you're taking, why, what to expect week by week, and how to reach your clinician — all in one place."
+  },
+  {
+    icon: '💬',
+    name: '30-Day Clinical Concierge',
+    description: 'Unlimited clinician messaging for your first 30 days. Questions, side-effect check-ins, reassurance — your clinician is there. Response times vary by clinician availability.'
+  },
+  {
+    icon: '🔄',
+    name: 'Quarterly Protocol Reviews',
+    description: 'Every 90 days, your board-certified clinician reviews your protocol, checks your progress, and adjusts your treatment if needed. Included in every plan.'
+  },
+  {
+    icon: '🔒',
+    name: 'Lifetime Price Lock',
+    description: 'Your rate today is your rate forever. As long as you remain an active subscriber, your price never changes — even if we raise prices for new customers.'
+  }
+];
+
+// "Our promises to you" — three process/experience guarantees only.
+// Per compliance vote: "next month on us" shipping remedy and hard 48hr SLA
+// were intentionally softened so we aren't on the hook for an operational
+// promise we can't reliably deliver. NO outcome-based guarantees.
+const GUARANTEES = [
+  {
+    icon: '✅',
+    headline: 'Clinical Match Guarantee',
+    body: "If our board-certified clinician reviews your intake and determines that FDA-approved hormone therapy is not the right fit for you, you pay absolutely nothing. No consultation fee. No processing fee. Nothing. You only pay if we can help you."
+  },
+  {
+    icon: '📦',
+    headline: 'Fast Shipping Commitment',
+    body: 'Once your clinician approves your protocol, your medication ships from a licensed U.S. pharmacy as quickly as state regulations allow. Shipping windows vary by state; we aim for the fastest available window for every order.'
+  },
+  {
+    icon: '🔒',
+    headline: 'Lifetime Price Lock Guarantee',
+    body: "The price you start at is the price you keep — forever. As long as you remain an active subscriber, your rate never increases regardless of what happens to our pricing. Lock in today and never pay more."
+  }
+];
 
 // Audit findings H-07, H-14: removed hard SLA promises ("24 hours",
 // "guaranteed 4-hour response"). Reconciled with Terms §6: treatment is
@@ -737,34 +788,10 @@ function App() {
         <span className="timer">{expired ? '0:00 — Refresh to continue' : formatTime(timeLeft)}</span>
       </div>
 
-      {/* SECTION 2 — Approval headline */}
-      <section className="approval">
-        <div className="container">
-          <span className="eyebrow">Intake received</span>
-          <h1>{firstName} — your intake is <em>ready for clinician review</em></h1>
-          <p className="approval-sub">Thanks for your intake. A licensed clinician via our medical partner, OpenLoop Health, will review your responses to decide whether hormone therapy is clinically appropriate for you. Treatment is subject to clinician determination and is not guaranteed.</p>
-
-          <div className="symptoms-block">
-            <div className="symptoms-label">Topics you flagged</div>
-            <div className="symptoms-tags">
-              {SYMPTOMS_LIST.map((s, i) => (
-                <span key={i} className="symptom-tag">{s}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="data-cards two">
-            <div className="data-card">
-              <div className="label">Possible category</div>
-              <div className="value">FDA-approved estradiol &amp; progesterone</div>
-            </div>
-            <div className="data-card">
-              <div className="label">Decision-maker</div>
-              <div className="value">Licensed clinician (OpenLoop Health)</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* SECTION 2 — REMOVED per spec: the "intake is ready for clinician
+          review / Thanks for your intake..." interstitial gated users from
+          seeing their actual protocol and pricing. The flow now lands the
+          user directly on the recommendation + plan view after capture. */}
 
       {/* Audit finding C-11: unsourced 94.3% "likelihood of improvement"
           claim removed. Restore only with sourced citation. */}
@@ -775,6 +802,17 @@ function App() {
           guaranteed timelines — the section is hidden site-wide pending
           counsel-blessed copy with peer-reviewed citations. */}
       {/* (Timeline chart section removed pending sourced copy) */}
+
+      {/* 48-hour clinician review callout — soft language per compliance
+          vote (no hard SLA promise). Sits as a slim trust strip directly
+          above the recommended-product card so it's the first thing users
+          see after the sticky pricing-urgency header. */}
+      <div className="trust-strip-48">
+        <div className="container">
+          <span className="trust-strip-48-icon" aria-hidden="true">⏱</span>
+          <span className="trust-strip-48-text">Board-certified clinician review — typically within <strong>48 hours</strong> of submission</span>
+        </div>
+      </div>
 
       {/* SECTION 5 — Recommendation */}
       <section style={{ background: '#fff' }}>
@@ -790,6 +828,26 @@ function App() {
             <div className="vial-wrap">
               <img src={med.image} alt={med.name} className="rec-product-img" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BONUSES — "Everything included with your protocol" */}
+      <section className="bonus-section">
+        <div className="container">
+          <h2 className="section-title">Everything <em>included</em> with your protocol</h2>
+          <p className="bonus-sub">Your investment: from $95/month on the 12-month plan</p>
+          <div className="bonus-grid">
+            {BONUSES.map(function (b, i) {
+              return (
+                <div className="bonus-card" key={i}>
+                  <div className="bonus-icon" aria-hidden="true">{b.icon}</div>
+                  <div className="bonus-name">{b.name}</div>
+                  <div className="bonus-included">Included</div>
+                  <div className="bonus-desc">{b.description}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -886,7 +944,7 @@ function App() {
 
           {/* Single recommended product card */}
           <div className={`med-card recommended ${selectedMed === 'bundle' ? 'bundle' : ''}`}>
-            <span className="badge">{selectedMed === 'bundle' ? 'Often prescribed together' : 'Category for clinician review'}</span>
+            <span className="badge">FDA-Approved</span>
             <div className={'med-img-wrap' + (selectedMed === 'bundle' && med.secondImage ? ' bundle-images' : '')}>
               {selectedMed === 'bundle' && med.secondImage ? (
                 <>
@@ -920,38 +978,24 @@ function App() {
             </ul>
           </div>
 
-          {/* Audit findings C-10, C-11, M-18: bundle "upsell" reframed.
-              Removed unsourced "clinical gold standard" and unsupported
-              endorsement claims (NAMS/IMS/FDA). The decision to add
-              progesterone is the clinician's. */}
-          {selectedMed !== 'bundle' && (
-            <div className="bundle-upgrade" onClick={() => setSelectedMed('bundle')} role="button">
-              <div className="bundle-upgrade-left">
-                <div className="bundle-upgrade-badge">Topic for discussion · Same plan price</div>
-                <h4>Discuss FDA-approved oral progesterone</h4>
-                <p>
-                  Clinicians sometimes consider oral micronized progesterone alongside estrogen for patients with a uterus. Whether to prescribe — and at what dose — is the clinician's decision after reviewing your intake. Adding this topic to your plan does not change your plan price.
-                </p>
-              </div>
-              <div className="bundle-upgrade-cta">Add to discussion →</div>
-            </div>
-          )}
-
-          {/* If already on bundle, offer to switch to single product */}
-          {selectedMed === 'bundle' && (
-            <div className="bundle-downgrade">
-              <span>Prefer to start with just one medication?</span>
-              <button className="downgrade-link" onClick={() => setSelectedMed(recommendation.primary === 'bundle' ? 'gel' : recommendation.primary)}>
-                Switch to {MEDS[recommendation.primary === 'bundle' ? 'gel' : recommendation.primary].name} only
-              </button>
-            </div>
-          )}
+          {/* Bundle upsell + bundle-downgrade switcher REMOVED per spec:
+              "Do NOT add the Complete Protocol Bundle." If the recommendation
+              engine routes a user to the bundle as their primary, the bundle
+              card still renders (with its new name), but we no longer cross-
+              sell between single-product and bundle on this page. */}
 
           <div className="trust-row">
             <span>🔒 Privacy-protected per our Privacy Policy</span>
             <span>💳 HSA/FSA accepted</span>
             <span>🚚 Free shipping</span>
             <span>✅ Cancel before any renewal — see Terms §7</span>
+          </div>
+
+          {/* Urgency block — editorial prose, NOT a card. Last thing the
+              user reads before the plan cards. EXACT copy locked per spec. */}
+          <div className="urgency-prose">
+            <p>You've already spent time waiting for things to get better on their own. Your clinician has reviewed your intake. Your protocol is ready.</p>
+            <p>The only question is how many more nights of broken sleep you're willing to accept before starting.</p>
           </div>
 
           {/* Duration */}
@@ -999,6 +1043,31 @@ function App() {
             </div>
 
             <button className="cta-large" onClick={scrollToCheckout}>Continue to Checkout →</button>
+
+            {/* Auto-renewal mini-disclosure — duplicated near plan cards
+                per spec. The full FTC ROSCA disclosure still lives inside
+                the checkout form (see ~line 1100). */}
+            <p className="renewal-mini">
+              Subscriptions renew automatically at the end of each plan period unless cancelled before the renewal date. You will receive a renewal reminder by email before any charge. Cancel anytime from your account.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* GUARANTEES — "Our promises to you" */}
+      <section className="guarantee-section">
+        <div className="container">
+          <h2 className="section-title">Our <em>promises</em> to you</h2>
+          <div className="guarantee-grid">
+            {GUARANTEES.map(function (g, i) {
+              return (
+                <div className="guarantee-card" key={i}>
+                  <div className="guarantee-icon" aria-hidden="true">{g.icon}</div>
+                  <h3 className="guarantee-headline">{g.headline}</h3>
+                  <p className="guarantee-body">{g.body}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

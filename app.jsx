@@ -15,8 +15,8 @@ const TREATMENTS = [
 {
   id: 'gel',
   eyebrow: 'FDA-Approved · Most Prescribed',
-  name: 'Estradiol Gel',
-  subtitle: 'Applied once daily to skin',
+  name: 'The Daily Hormone Gel',
+  subtitle: 'Estradiol — transdermal, once daily',
   features: [
   ['Application', 'Once daily — inner arm or thigh']],
   image: 'assets/estradiol-gel.png'
@@ -24,8 +24,8 @@ const TREATMENTS = [
 {
   id: 'patch',
   eyebrow: 'FDA-Approved · No Daily Routine',
-  name: 'Estradiol Patch',
-  subtitle: 'Applied twice weekly',
+  name: 'The Twice-Weekly Patch',
+  subtitle: 'Estradiol — transdermal, twice weekly',
   features: [
   ['Application', 'Twice weekly — adhesive patch']],
   image: 'assets/estradiol-patch.png?v=2'
@@ -33,8 +33,8 @@ const TREATMENTS = [
 {
   id: 'pill',
   eyebrow: 'FDA-Approved · Oral Option',
-  name: 'Estradiol Pill',
-  subtitle: 'One tablet taken daily',
+  name: 'The Daily Hormone Pill',
+  subtitle: 'Estradiol — oral, once daily',
   features: [
   ['Application', 'Once daily — oral tablet']],
   image: 'assets/estradiol-pill.png'
@@ -42,8 +42,8 @@ const TREATMENTS = [
 {
   id: 'dhea',
   eyebrow: 'FDA-Approved · Vaginal Health',
-  name: 'Estradiol Vaginal Cream',
-  subtitle: 'Applied locally as directed',
+  name: 'The Comfort Cream',
+  subtitle: 'Estradiol — vaginal application',
   features: [
   ['Application', 'Vaginal cream — as directed'],
   ['Form', 'Estrace Vaginal Cream']],
@@ -52,8 +52,8 @@ const TREATMENTS = [
 {
   id: 'progesterone',
   eyebrow: 'FDA-Approved · Sleep + Protection',
-  name: 'Progesterone Pill',
-  subtitle: 'One capsule taken nightly',
+  name: 'The Nightly Balance Pill',
+  subtitle: 'Progesterone — oral, nightly',
   features: [
   ['Application', 'Nightly oral pill — at bedtime'],
   ['Dose', '100 mg or 200 mg as prescribed']],

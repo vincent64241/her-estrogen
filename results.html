@@ -552,6 +552,193 @@
     .approval-guarantee p { font-size: 14px; }
   }
 
+  /* ---------- 48-hour clinician review trust strip ---------- */
+  .trust-strip-48 {
+    background: var(--cream, #fef5f8);
+    border-top: 1px solid var(--line, #f0d9e2);
+    border-bottom: 1px solid var(--line, #f0d9e2);
+    padding: 14px 0;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  .trust-strip-48 .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    color: var(--ink-2, #3d2b33);
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+  .trust-strip-48-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .trust-strip-48-text strong { color: var(--pink, #b8235c); font-weight: 700; }
+  @media (max-width: 520px) {
+    .trust-strip-48 .container { font-size: 13px; padding: 0 16px; }
+    .trust-strip-48-icon { font-size: 16px; }
+  }
+
+  /* ---------- BONUS STACK ("Everything included with your protocol") ---------- */
+  .bonus-section {
+    background: var(--paper, #fff);
+    padding: 64px 0 56px;
+  }
+  .bonus-section .section-title {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .bonus-sub {
+    text-align: center;
+    color: var(--muted, #7a6770);
+    font-size: 15px;
+    margin: 0 auto 36px;
+    max-width: 560px;
+  }
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .bonus-card {
+    background: var(--cream, #fef5f8);
+    border: 1px solid var(--line, #f0d9e2);
+    border-radius: 16px;
+    padding: 28px 26px;
+    transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, border-color .25s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .bonus-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(138,23,69,.08);
+      border-color: var(--pink-3, #ec84a8);
+    }
+  }
+  .bonus-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .bonus-name {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--ink, #1a1216);
+    margin-bottom: 4px;
+  }
+  .bonus-included {
+    font-family: 'DM Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--pink-deep, #8a1745);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .bonus-desc {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2, #3d2b33);
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .bonus-section { padding: 48px 0 40px; }
+    .bonus-grid { grid-template-columns: 1fr; gap: 14px; }
+    .bonus-card { padding: 22px 20px; }
+    .bonus-name { font-size: 18px; }
+  }
+
+  /* ---------- URGENCY PROSE (above plan cards, no card/box) ---------- */
+  .urgency-prose {
+    max-width: 640px;
+    margin: 28px auto 32px;
+    padding: 0 8px;
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(17px, 1.6vw, 19.5px);
+    line-height: 1.45;
+    color: var(--ink, #1a1216);
+    text-align: center;
+  }
+  .urgency-prose p {
+    margin: 0 0 12px;
+  }
+  .urgency-prose p:last-child {
+    margin-bottom: 0;
+    color: var(--pink-deep, #8a1745);
+    font-weight: 500;
+  }
+  @media (max-width: 560px) {
+    .urgency-prose { font-size: 16px; padding: 0 12px; margin: 24px auto 28px; }
+  }
+
+  /* ---------- Auto-renewal mini disclosure (below CTA) ---------- */
+  .renewal-mini {
+    margin: 18px auto 0;
+    max-width: 620px;
+    text-align: center;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--muted, #7a6770);
+  }
+
+  /* ---------- GUARANTEE STACK ("Our promises to you") ---------- */
+  .guarantee-section {
+    background: var(--paper, #fff);
+    padding: 72px 0 80px;
+    border-top: 1px solid var(--line, #f0d9e2);
+  }
+  .guarantee-section .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .guarantee-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .guarantee-card {
+    background: var(--cream, #fef5f8);
+    border: 1px solid var(--line, #f0d9e2);
+    border-radius: 16px;
+    padding: 32px 26px;
+    text-align: center;
+  }
+  .guarantee-icon {
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .guarantee-headline {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.18;
+    color: var(--ink, #1a1216);
+    margin: 0 0 12px;
+  }
+  .guarantee-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2, #3d2b33);
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .guarantee-grid { grid-template-columns: 1fr; gap: 14px; }
+    .guarantee-section { padding: 56px 0 64px; }
+    .guarantee-card { padding: 26px 22px; }
+  }
+
   /* ---------- WHAT HAPPENS NEXT (timeline) ---------- */
   .steps { position: relative; padding-left: 32px; }
   .steps::before {
