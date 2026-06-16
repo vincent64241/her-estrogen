@@ -154,6 +154,23 @@
     font-size: 13.5px; color: var(--ink-2); line-height: 1.6;
     white-space: pre-wrap;
   }
+  /* Inline safety block — surfaces in the question itself when a crisis-
+     level exclusion option (Q2 yes, Q5B yes, Q9 post-meno bleeding) is
+     chosen. Uses a higher-contrast pink border + "alert" head so it reads
+     as urgent vs. the softer pink-softer info blocks elsewhere. */
+  .inline-safety {
+    background: #fff5f8; border: 1px solid var(--pink-3);
+    border-left: 4px solid var(--pink-deep);
+    border-radius: 10px; padding: 18px 20px; margin: 20px 0 0;
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  .inline-safety-head {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--pink-deep); font-weight: 700;
+    margin-bottom: 10px; white-space: normal;
+  }
 </style>
 <!-- Compliance audit C-08: NO Meta Pixel / GA / Vercel Analytics on health-context URLs. -->
 <script>
@@ -912,12 +929,12 @@ function GeneralInfo(props) {
 
   return (
     <div className="step">
-      <h1>Let&rsquo;s start with the <em>basics.</em></h1>
+      <h1>Last step — your <em>contact &amp; basics.</em></h1>
       <p className="step-intro">OpenLoop&rsquo;s licensed clinicians need this information to review your intake. All fields are required unless noted.</p>
 
       <div className="field-grid">
         <div className="field">
-          <label>Legal first name</label>
+          <label>First name</label>
           <input type="text" autoComplete="given-name" value={g.legalFirstName || ''} onChange={set('legalFirstName')} />
         </div>
         <div className="field">
@@ -925,7 +942,7 @@ function GeneralInfo(props) {
           <input type="text" value={g.preferredName || ''} onChange={set('preferredName')} />
         </div>
         <div className="field">
-          <label>Legal last name</label>
+          <label>Last name</label>
           <input type="text" autoComplete="family-name" value={g.legalLastName || ''} onChange={set('legalLastName')} />
         </div>
         <div className="field">
@@ -974,10 +991,6 @@ function GeneralInfo(props) {
         <div className="field">
           <label>Weight (lbs)</label>
           <input type="number" inputMode="numeric" min="60" max="500" value={g.weight || ''} onChange={set('weight')} />
-        </div>
-        <div className="field">
-          <label>Waist circumference <span className="field-opt">(inches — optional)</span></label>
-          <input type="number" inputMode="numeric" min="20" max="80" value={g.waist || ''} onChange={set('waist')} />
         </div>
         <div className="field">
           <label>State</label>
@@ -1059,6 +1072,24 @@ function SingleQuestion(props) {
             onChange={function(e){ props.onChange({ value: val, freeText: e.target.value }); }} />
         </div>
       ) : null}
+      {opt && opt.safetyMsg ? renderSafetyBlock(opt.safetyMsg) : null}
+    </div>
+  );
+}
+
+// Inline safety block — surfaces the verbatim OpenLoop crisis / PCP-referral
+// copy directly below the choice when an exclusion-tagged option is selected.
+// Used by both SingleQuestion (Q2, Q5B) and MultiQuestion (Q9 a — post-meno
+// bleeding). The same copy also re-appears on the final excluded screen.
+function renderSafetyBlock(key) {
+  const text = key === 'SUICIDAL' ? SAFETY_MSG_SUICIDAL
+             : key === 'POSTMENO_BLEEDING' ? SAFETY_MSG_POSTMENO_BLEEDING
+             : '';
+  if (!text) return null;
+  return (
+    <div className="safety-msg inline-safety" role="alert" aria-live="polite">
+      <div className="inline-safety-head">Please read before continuing</div>
+      {text}
     </div>
   );
 }
@@ -1101,6 +1132,17 @@ function MultiQuestion(props) {
         })}
       </div>
       {showInfo ? <div className="step-info-block">{q.info.split('\n\n').map(function(p,i){ return <p key={i} style={{margin:i?'10px 0 0':0}}>{p}</p>; })}</div> : null}
+      {(function(){
+        // Aggregate safety messages from any selected option (e.g. Q9 'a' →
+        // post-menopausal bleeding referral). Dedupe so the same block doesn't
+        // appear twice if multiple safety-tagged options are checked.
+        const msgs = [];
+        sel.forEach(function(v){
+          const o = q.options.find(function(x){ return x.v === v; });
+          if (o && o.safetyMsg && msgs.indexOf(o.safetyMsg) < 0) msgs.push(o.safetyMsg);
+        });
+        return msgs.map(function(k){ return <div key={k}>{renderSafetyBlock(k)}</div>; });
+      })()}
     </div>
   );
 }
@@ -1178,7 +1220,11 @@ function getNextQuestionId(q, answer, allAnswers) {
 // ═══ MAIN APP ════════════════════════════════════════════════════════════
 function App() {
   const draft = useMemo(loadDraft, []);
-  const [phase, setPhase] = useState(function(){ return (draft && draft.phase) || 'general'; });
+  // Flow change: General Info is now the LAST step, not the first. Patients
+  // answer the 24 clinical questions BEFORE giving contact info — this
+  // removes the upfront-friction we were losing leads on. Phases:
+  //   'questions' (Q1 → Q24) → 'general' (contact) → 'done' or 'excluded'
+  const [phase, setPhase] = useState(function(){ return (draft && draft.phase) || 'questions'; });
   const [general, setGeneral] = useState(function(){ return (draft && draft.general) || {}; });
   const [answers, setAnswers] = useState(function(){ return (draft && draft.answers) || {}; });
   const [currentId, setCurrentId] = useState(function(){ return (draft && draft.currentId) || 'q1'; });
@@ -1205,15 +1251,16 @@ function App() {
 
   const flags = useMemo(function(){ return computeFlags(general, answers); }, [general, answers]);
 
+  // Progress: Q1 is step 1, …, Q24 is step at its index, General Info is the LAST step.
   const total = QUESTIONS.length + 1;
   let stepIdx = 0;
-  if (phase === 'general') stepIdx = 0;
-  else stepIdx = 1 + Math.max(0, QUESTIONS.findIndex(function(q){ return q.id === currentId; }));
-  const progressPct = done ? 100 : Math.round((stepIdx / total) * 100);
+  if (phase === 'general') stepIdx = QUESTIONS.length;
+  else stepIdx = Math.max(0, QUESTIONS.findIndex(function(q){ return q.id === currentId; }));
+  const progressPct = done ? 100 : Math.round(((stepIdx + 1) / total) * 100);
 
   function continueFromGeneral() {
-    setPhase('questions'); setCurrentId('q1'); setHistory([]);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // General Info is now the FINAL step → submit + resolve.
+    finishIntake();
   }
 
   function continueFromQuestion() {
@@ -1226,16 +1273,21 @@ function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    finishIntake();
+    // End of question chain → move to General Info (last step).
+    setHistory(history.concat([currentId]));
+    setPhase('general');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function back() {
-    if (phase === 'questions' && history.length > 0) {
+    if (phase === 'general') {
+      // From General Info, go back into the last question that was visited.
+      setPhase('questions');
+      // currentId is already set to the final question; don't pop history.
+    } else if (phase === 'questions' && history.length > 0) {
       const prev = history[history.length - 1];
       setHistory(history.slice(0, -1));
       setCurrentId(prev);
-    } else if (phase === 'questions' && history.length === 0) {
-      setPhase('general');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -1299,11 +1351,15 @@ function App() {
     return (
       <div className="shell wide">
         <div className="progress-shell">
-          <span>Step 1 of {total}</span>
+          <span>Step {total} of {total}</span>
           <div className="progress-bar"><div className="progress-fill" style={{ width: progressPct + '%' }} /></div>
           <span>{progressPct}%</span>
         </div>
         <GeneralInfo value={general} onChange={setGeneral} onContinue={continueFromGeneral} />
+        <div className="actions">
+          <button className="btn btn-back" onClick={back}>← Back</button>
+          <span />
+        </div>
       </div>
     );
   }
