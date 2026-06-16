@@ -580,6 +580,35 @@
     .trust-strip-48-icon { font-size: 16px; }
   }
 
+  /* ---------- Sync-divert banner (state + clinical sync triggers) ---------- */
+  .sync-banner {
+    background: linear-gradient(135deg, var(--pink, #b8235c) 0%, var(--pink-deep, #8a1745) 100%);
+    color: #fff; padding: 16px 0;
+  }
+  .sync-banner .container {
+    display: flex; align-items: flex-start; gap: 12px; max-width: 880px;
+    margin: 0 auto; padding: 0 24px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14.5px; line-height: 1.5;
+  }
+  .sync-banner-icon { font-size: 20px; line-height: 1.3; flex-shrink: 0; }
+  .sync-banner-text strong { font-weight: 700; }
+
+  /* ---------- Eligibility banner (vaginal-only path) ---------- */
+  .elig-banner {
+    background: var(--pink-softer, #fef5f8);
+    border-top: 1px solid var(--line, #f0d9e2);
+    border-bottom: 1px solid var(--line, #f0d9e2);
+    padding: 14px 0;
+  }
+  .elig-banner .container {
+    display: flex; align-items: flex-start; gap: 10px; max-width: 880px;
+    margin: 0 auto; padding: 0 24px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 13.5px; line-height: 1.5; color: var(--ink-2, #3d2b33);
+  }
+  .elig-banner-icon { font-size: 16px; line-height: 1.4; flex-shrink: 0; color: var(--pink-deep, #8a1745); }
+
   /* ---------- BONUS STACK ("Everything included with your protocol") ---------- */
   .bonus-section {
     background: var(--paper, #fff);

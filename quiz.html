@@ -32,63 +32,44 @@
   }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; color: inherit; }
-
   .top {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 32px;
-    border-bottom: 1px solid var(--line);
-    background: rgba(255,255,255,.85);
-    backdrop-filter: blur(10px);
+    padding: 18px 32px; border-bottom: 1px solid var(--line);
+    background: rgba(255,255,255,.85); backdrop-filter: blur(10px);
   }
   .top img { height: 80px; width: auto; display: block; }
-  .top-back {
-    font-size: 14px; color: var(--ink-2); font-weight: 500;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
+  .top-back { font-size: 14px; color: var(--ink-2); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
   .top-back:hover { color: var(--pink); }
-
-  .shell {
-    max-width: 640px; margin: 0 auto;
-    padding: 48px 32px 96px;
-  }
+  .shell { max-width: 640px; margin: 0 auto; padding: 48px 32px 96px; }
+  .shell.wide { max-width: 760px; }
   .progress-shell {
-    display: flex; align-items: center; gap: 16px;
-    margin-bottom: 40px;
+    display: flex; align-items: center; gap: 16px; margin-bottom: 40px;
     font-family: 'DM Mono', monospace; font-size: 11px;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
   }
-  .progress-bar {
-    flex: 1; height: 6px; background: var(--pink-soft);
-    border-radius: 999px; overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--pink) 0%, var(--pink-deep) 100%);
-    transition: width .4s cubic-bezier(.4,0,.2,1);
-  }
-
-  .step h1 {
+  .progress-bar { flex: 1; height: 6px; background: var(--pink-soft); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--pink) 0%, var(--pink-deep) 100%); transition: width .4s cubic-bezier(.4,0,.2,1); }
+  .step h1, .step h2 {
     font-family: 'Lora', serif; font-weight: 500;
-    font-size: clamp(32px, 4.4vw, 48px); line-height: 1.05;
-    letter-spacing: -0.022em;
-    margin: 0 0 14px;
+    font-size: clamp(26px, 3.6vw, 36px); line-height: 1.1;
+    letter-spacing: -0.018em; margin: 0 0 14px;
   }
-  .step h1 em { font-style: italic; color: var(--pink); }
-  .step-intro {
-    font-size: 17px; color: var(--ink-2); line-height: 1.55;
-    margin: 0 0 32px;
+  .step h1 em, .step h2 em { font-style: italic; color: var(--pink); }
+  .step-intro { font-size: 16px; color: var(--ink-2); line-height: 1.55; margin: 0 0 28px; }
+  .step-subtle { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: -16px 0 24px; font-style: italic; }
+  .step-info-block {
+    background: var(--pink-softer); border-left: 3px solid var(--pink-3);
+    border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    font-size: 14.5px; color: var(--ink-2); line-height: 1.6;
   }
-
+  .step-info-block strong { color: var(--pink-deep); }
   .choices { display: flex; flex-direction: column; gap: 10px; }
   .choice {
     width: 100%; text-align: left;
-    background: #fff; border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px 20px;
-    font-size: 16px; font-weight: 500; color: var(--ink);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 18px; font-size: 15px; font-weight: 500; color: var(--ink);
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    transition: all .15s ease;
+    transition: all .15s ease; line-height: 1.4;
   }
   .choice:hover { border-color: var(--pink-3); box-shadow: 0 4px 14px rgba(184,35,92,.07); }
   .choice.selected {
@@ -102,120 +83,79 @@
     display: flex; align-items: center; justify-content: center;
     color: transparent; font-size: 13px;
   }
-  .choice.selected .check {
-    background: #fff; border-color: #fff; color: var(--pink);
-  }
-  .choice-note {
-    font-size: 12px; color: var(--muted); font-weight: 400;
-    margin-top: 4px;
-  }
-  .choice.selected .choice-note { color: rgba(255,255,255,.8); }
-
-  .field {
-    display: flex; flex-direction: column; gap: 12px;
-  }
+  .choice.selected .check { background: #fff; border-color: #fff; color: var(--pink); }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
   .field label {
     font-family: 'DM Mono', monospace; font-size: 11px;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink);
   }
-  .field input {
-    background: #fff; border: 1px solid var(--line);
-    border-radius: 10px; padding: 16px 18px;
-    font-family: inherit; font-size: 16px; color: var(--ink);
-    transition: border-color .15s ease, box-shadow .15s ease;
+  .field-opt { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--muted); text-transform: none; letter-spacing: 0; margin-left: 6px; font-weight: 400; }
+  .field input, .field select, .field textarea {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; font-family: inherit; font-size: 15px; color: var(--ink);
+    transition: border-color .15s ease, box-shadow .15s ease; width: 100%;
   }
-  .field input:focus {
-    outline: none; border-color: var(--pink);
-    box-shadow: 0 0 0 4px rgba(184,35,92,.12);
-  }
-  /* Birthday — three Month/Day/Year dropdowns sharing the .field styling */
-  .field .helper {
-    font-family: inherit; font-size: 13px; color: var(--ink-2);
-    margin-top: -4px; line-height: 1.4;
-  }
-  .field-row3 {
-    display: grid; grid-template-columns: 1.4fr 1fr 1.1fr; gap: 10px;
-  }
-  .field-row3 select {
-    background: #fff; border: 1px solid var(--line);
-    border-radius: 10px; padding: 16px 14px;
-    font-family: inherit; font-size: 16px; color: var(--ink);
+  .field textarea { min-height: 90px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 4px rgba(184,35,92,.12); }
+  .field-row3 { display: grid; grid-template-columns: 1.4fr 1fr 1.1fr; gap: 10px; }
+  .field-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .field-grid { grid-template-columns: 1fr; } }
+  .field-row3 select, .field-row2 select {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 14px; font-family: inherit; font-size: 15px; color: var(--ink);
     appearance: none; -webkit-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23b8235c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
-    cursor: pointer;
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 36px; cursor: pointer;
     transition: border-color .15s ease, box-shadow .15s ease;
   }
-  .field-row3 select:focus {
-    outline: none; border-color: var(--pink);
-    box-shadow: 0 0 0 4px rgba(184,35,92,.12);
+  .field-error { font-size: 13px; color: var(--pink-deep); margin-top: 2px; }
+  .paired-block { margin-bottom: 22px; }
+  .paired-block-label { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 10px; line-height: 1.4; }
+  .freq-row { display: flex; flex-direction: column; gap: 8px; }
+  .freq-choice {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 16px; font-size: 14px; color: var(--ink); text-align: left;
+    transition: all .15s ease; width: 100%; cursor: pointer;
   }
-  .field-error {
-    font-size: 13px; color: var(--pink-deep);
-    margin-top: 2px;
-  }
-
-  .actions {
-    margin-top: 40px;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 24px; border-radius: 999px;
-    font-size: 15px; font-weight: 600;
-    transition: all .2s ease; white-space: nowrap;
-  }
-  .btn-primary {
-    background: var(--pink); color: #fff;
-    box-shadow: 0 4px 18px rgba(184,35,92,.22);
-  }
+  .freq-choice:hover { border-color: var(--pink-3); }
+  .freq-choice.selected { background: var(--pink); color: #fff; border-color: var(--pink); }
+  .actions { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; font-size: 15px; font-weight: 600; transition: all .2s ease; white-space: nowrap; }
+  .btn-primary { background: var(--pink); color: #fff; box-shadow: 0 4px 18px rgba(184,35,92,.22); }
   .btn-primary:hover:not(:disabled) { background: var(--pink-deep); }
   .btn-primary:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
-  .btn-back {
-    background: transparent; color: var(--muted); font-weight: 500;
-  }
+  .btn-back { background: transparent; color: var(--muted); font-weight: 500; }
   .btn-back:hover { color: var(--ink); }
-
-  .symptom-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-  }
-  .symptom-grid .choice { padding: 14px 16px; font-size: 14px; }
-
   .footnote {
-    margin-top: 28px;
-    font-family: 'DM Mono', monospace; font-size: 11px;
+    margin-top: 24px; font-family: 'DM Mono', monospace; font-size: 11px;
     color: var(--muted); letter-spacing: 0.06em;
     display: flex; align-items: center; gap: 8px;
   }
-  .footnote::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink);
-  }
-
-  /* finish */
+  .footnote::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); }
+  .agree-block { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 24px 0 12px; }
+  .agree-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .agree-row:last-child { margin-bottom: 0; }
+  .agree-row input[type=checkbox] { margin-top: 3px; flex-shrink: 0; cursor: pointer; }
+  .agree-row a { color: var(--pink); text-decoration: underline; }
   .finish { text-align: center; padding: 32px 0; }
-  .finish-badge {
-    width: 72px; height: 72px; border-radius: 50%;
-    background: var(--pink-soft);
-    color: var(--pink); font-size: 32px;
-    display: inline-flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
-  }
-  .finish h1 { font-family: 'Lora', serif; font-weight: 500;
-    font-size: 44px; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .finish-badge { width: 72px; height: 72px; border-radius: 50%; background: var(--pink-soft); color: var(--pink); font-size: 32px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .finish h1 { font-family: 'Lora', serif; font-weight: 500; font-size: 38px; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.1; }
   .finish h1 em { font-style: italic; color: var(--pink); }
-  .finish p { font-size: 17px; color: var(--ink-2); max-width: 440px; margin: 0 auto 28px; }
+  .finish p { font-size: 16px; color: var(--ink-2); max-width: 480px; margin: 0 auto 18px; line-height: 1.55; }
+  .excluded-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 36px 30px; margin: 24px auto; max-width: 600px; }
+  .excluded-card h2 { font-family: 'Lora', serif; font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -0.01em; color: var(--pink-deep); margin: 0 0 14px; }
+  .excluded-card .reason-list { margin: 14px 0; padding-left: 22px; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  .excluded-card .reason-list li { margin-bottom: 8px; }
+  .excluded-card .safety-msg {
+    background: var(--pink-softer); border-left: 3px solid var(--pink-3);
+    border-radius: 8px; padding: 16px 18px; margin: 18px 0;
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.6;
+    white-space: pre-wrap;
+  }
 </style>
-<!-- Compliance audit C-08 / HHS OCR tracking-tech guidance (Dec 2022; rev
-     Mar 2024): NO Meta Pixel, NO Google Analytics, NO Vercel Web Analytics
-     on this page or any other health-context URL (quiz, results,
-     confirmation, privacy, terms). Re-enabling on this page requires
-     counsel review + a written Klaviyo / Meta healthcare-policy
-     determination. Marketing attribution may be added later via the
-     server-side Meta Conversions API keyed off de-identified pseudonyms
-     created AFTER an explicit consent gate.
-     Stub helpers below are no-ops so callers in the React tree don't crash. -->
+<!-- Compliance audit C-08: NO Meta Pixel / GA / Vercel Analytics on health-context URLs. -->
 <script>
 window.trackCompleteRegistration = function () { /* tracker disabled per compliance audit */ };
 window.trackInitiateCheckout = function () { /* tracker disabled per compliance audit */ };
@@ -231,716 +171,1179 @@ window.trackInitiateCheckout = function () { /* tracker disabled per compliance 
 
 <div id="root"></div>
 
-<template id="__bundler_thumbnail">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <defs>
-      <radialGradient id="bg" cx="50%" cy="40%" r="70%">
-        <stop offset="0%" stop-color="#fde8ef"/>
-        <stop offset="100%" stop-color="#ec84a8"/>
-      </radialGradient>
-    </defs>
-    <rect width="200" height="200" fill="url(#bg)"/>
-    <text x="100" y="118" text-anchor="middle" font-family="Lora, Georgia, serif" font-style="italic" font-size="64" font-weight="500" fill="#b8235c">Her</text>
-  </svg>
-</template>
-
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <script type="text/babel">
-const { useState } = React;
+const { useState, useEffect, useMemo } = React;
 
-const STEPS = [
-  {
-    kind: 'single', key: 'stage',
-    title: 'Where are you in the menopause journey?',
-    intro: "We use this to match you with a clinician who treats women in your stage every day.",
-    options: [
-      { v: 'peri',  label: 'Perimenopause',   note: 'Cycles still present but shifting' },
-      { v: 'meno',  label: 'Menopause',       note: '12+ months without a period' },
-      { v: 'post',  label: 'Postmenopause',   note: 'A few years past my last period' },
-      { v: 'unsure', label: "I'm not sure",   note: "That's okay — we'll help figure it out" },
-    ],
-  },
-  {
-    kind: 'multi', key: 'symptoms',
-    title: 'Which symptoms have you noticed?',
-    intro: 'Tap anything you have experienced in the last six months. There are no wrong answers.',
-    options: [
-      { v: 'hot',   label: 'Hot flashes' },
-      { v: 'sleep', label: 'Sleep disruption' },
-      { v: 'mood',  label: 'Mood shifts' },
-      { v: 'brain', label: 'Brain fog' },
-      { v: 'sex',   label: 'Low libido' },
-      { v: 'skin',  label: 'Dry skin & hair' },
-      { v: 'weight',label: 'Weight & energy' },
-      { v: 'cycle', label: 'Irregular cycles' },
-    ],
-    grid: true,
-  },
-  {
-    kind: 'single', key: 'tried',
-    title: 'Have you tried hormone therapy before?',
-    intro: 'Whatever your history, your clinician will start from where you are.',
-    options: [
-      { v: 'never',   label: 'Never' },
-      { v: 'past',    label: 'Yes, in the past' },
-      { v: 'current', label: 'Currently on it' },
-      { v: 'unsure',  label: 'Not sure' },
-    ],
-  },
-  {
-    kind: 'single', key: 'preference',
-    title: 'Which form of treatment do you prefer?',
-    intro: 'Hormone therapy can be delivered in different ways. Pick what fits your lifestyle — your provider can always adjust.',
-    options: [
-      { v: 'gel',       label: 'Cream or gel',           note: 'Daily — applied to skin' },
-      { v: 'patch',     label: 'Patch',                  note: 'Twice weekly — set and forget' },
-      { v: 'vaginal',   label: 'Vaginal insert',         note: 'For local symptoms only' },
-      { v: 'effective', label: "I'm not picky — give me the most effective option", note: 'Let our clinician choose the best protocol for you' },
-    ],
-  },
-  {
-    kind: 'contact',
-    title: 'Where should we send your results?',
-    intro: 'We use your email to send your candidacy summary and the link to finish your medical intake. SMS opt-in is shown below — it is optional and never a condition of purchase.',
-  },
+// ═══════════════════════════════════════════════════════════════════════════
+// OpenLoop "HRT Initial" intake — clinical spec source:
+//   /Users/isanguyen/Downloads/Formatting for Female HRT Intake Logic .xlsx
+// Sheet: "HRT Initial" · Protocol Owner: Mohit Joshipura, MD
+// Backup of pre-rebuild quiz: quiz.OLD-pre-openloop.html.bak
+// ═══════════════════════════════════════════════════════════════════════════
+
+const SYNC_DIVERT_STATES = new Set(['AR','DC','DE','KS','MS','NM','RI','WV']);
+
+const US_STATES = [
+  ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],
+  ['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['DC','District of Columbia'],
+  ['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],
+  ['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],
+  ['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],
+  ['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],
+  ['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],
+  ['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],
+  ['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],
+  ['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],
+  ['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming']
 ];
 
-function formatPhone(value) {
-  const digits = (value || '').replace(/\D/g, '').slice(0, 10);
-  if (digits.length === 0) return '';
-  if (digits.length < 4) return `(${digits}`;
-  if (digits.length < 7) return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+// Verbatim safety/PCP-referral copy from OpenLoop spec — DO NOT EDIT.
+const SAFETY_MSG_SUICIDAL = `Thank you for choosing us to provide support with your health needs. We want to ensure our patients receive the safest and most appropriate care possible when working with our team of medical professionals. Unfortunately, the behavioral health history that you have identified requires care beyond what we can provide. Please refer to the resources below.
+
+If you are having suicidal thoughts or are in a mental health crisis, we recommend you seek in-person care immediately. Help is available. Call 911, 988 (988lifeline.org) or text CONNECT to 741741 (Crisis Text Line, crisistextline.org).
+
+If you do not already have a relationship with a Primary Care Provider, these links may help you find a healthcare provider:
+  • Find A Health Center (HRSA): findahealthcenter.hrsa.gov
+  • AMA Doctor Finder: find-doctor.ama-assn.org
+
+For help finding low-cost in-person therapy in your area: Reduced Cost Therapy (openpathcollective.org).`;
+
+const SAFETY_MSG_POSTMENO_BLEEDING = `We recommend that you discuss these symptoms with your Primary Care Provider who can help address and manage these symptoms.
+
+Bleeding after menopause is not normal. There are many harmless conditions that can cause post-menopausal bleeding, but the only way to rule out a serious cause is to be evaluated by your gynecologist.
+
+If you do not already have a relationship with a Primary Care Provider, these links may help you find a healthcare provider:
+  • Find A Health Center (HRSA): findahealthcenter.hrsa.gov
+  • AMA Doctor Finder: find-doctor.ama-assn.org`;
+
+const ONSET_OPTS = [
+  { v: '0-2', label: '0 to 2 years ago' },
+  { v: '2-5', label: 'More than 2 to less than 5 years ago' },
+  { v: '5-10', label: 'More than 5 to less than 10 years ago' },
+  { v: '10+', label: 'More than 10 years ago' }
+];
+
+const FREQ_OPTS = [
+  { v: 'not', label: 'Not at all' },
+  { v: 'several', label: 'Several days' },
+  { v: 'more', label: 'More than half the days' },
+  { v: 'nearly', label: 'Nearly every day' }
+];
+
+// ═══ 24 QUESTIONS ══════════════════════════════════════════════════════════
+// flags strings:
+//   exclude:<reason>   — exclude with reason
+//   systemicIneligible — not eligible for Systemic Estradiol
+//   oralIneligible     — not eligible for Oral Estradiol
+//   ssriIneligible     — not eligible for SSRIs/SNRIs
+//   desvenIneligible   — not eligible for desvenlafaxine
+//   syncDivert:<reason>— OpenLoop initiates a sync follow-up
+const QUESTIONS = [
+  {
+    id: 'q1', kind: 'multi-noneabove',
+    title: 'Do any of the following apply to you?',
+    note: 'Select all that apply.',
+    options: [
+      { v: 'pregnant', label: 'Pregnant or possibly pregnant', flags: ['exclude:Pregnancy or possible pregnancy'] },
+      { v: 'breastfeeding', label: 'Breastfeeding', flags: ['exclude:Currently breastfeeding'] },
+      { v: 'none', label: 'None of the above', noneAbove: true }
+    ],
+    next: 'q2'
+  },
+  {
+    id: 'q2', kind: 'single',
+    title: 'Do you have thoughts that you would be better off dead or of hurting yourself in some way?',
+    options: [
+      { v: 'yes', label: 'Yes', flags: ['exclude:Behavioral health concerns identified during intake'], safetyMsg: 'SUICIDAL' },
+      { v: 'no', label: 'No' }
+    ],
+    next: 'q3'
+  },
+  {
+    id: 'q3', kind: 'single',
+    title: 'How would you describe your menstrual cycle in the past year?',
+    options: [
+      { v: 'regular', label: 'Regular', next: 'q4' },
+      { v: 'irregular', label: 'Irregular or unpredictable (e.g. too close together, skipping periods, change in duration or flow)', next: 'q4' },
+      { v: 'none-over-year', label: 'No period in over a year', next: 'q5' },
+      { v: 'hysterectomy', label: 'Changes (no periods) due to hysterectomy (removal of the uterus)', next: 'q5' },
+      { v: 'discharge', label: 'Other vaginal discharge (with or without bleeding)', next: 'q4' },
+      { v: 'other', label: 'Other (please describe)', next: 'q4', freeText: true }
+    ]
+  },
+  {
+    id: 'q4', kind: 'single',
+    title: 'If you have had periods in the last year, how many would you approximate?',
+    options: [
+      { v: '1-2', label: '1–2 periods' },
+      { v: '3-5', label: '3–5 periods' },
+      { v: '6-12', label: '6–12 periods' },
+      { v: '12+', label: 'More than 12' }
+    ],
+    next: 'q6'
+  },
+  {
+    id: 'q5', kind: 'single',
+    title: 'If you are no longer having periods, how long has it been?',
+    options: [
+      { v: '<1', label: 'Less than 1 year', next: 'q5a' },
+      { v: '>1', label: 'Greater than 1 year', next: 'q5a' },
+      { v: '>5', label: 'Greater than 5 years', next: 'q5b' },
+      { v: '>10', label: 'Greater than 10 years', flags: ['systemicIneligible'], next: 'q5b' }
+    ]
+  },
+  {
+    id: 'q5a', kind: 'text-date',
+    title: 'What was the approximate date of your last menstrual period (LMP)?',
+    placeholder: 'mm/dd/yyyy',
+    next: 'q5b'
+  },
+  {
+    id: 'q5b', kind: 'single',
+    title: 'Have you experienced any vaginal bleeding since your periods stopped?',
+    options: [
+      { v: 'yes', label: 'Yes', flags: ['exclude:Vaginal bleeding after menopause requires in-person evaluation'], safetyMsg: 'POSTMENO_BLEEDING' },
+      { v: 'no', label: 'No' }
+    ],
+    next: 'q6'
+  },
+  {
+    id: 'q6', kind: 'multi-noneabove',
+    title: 'Which of the following menopausal symptoms are you experiencing?',
+    note: 'Select all that apply.',
+    options: [
+      { v: 'hot-flashes',     label: 'Hot flashes' },
+      { v: 'night-sweats',    label: 'Night sweats' },
+      { v: 'vaginal-issues',  label: 'Vaginal issues (e.g. dryness)' },
+      { v: 'weight-gain',     label: 'Weight gain' },
+      { v: 'joint-pain',      label: 'Joint pain' },
+      { v: 'fatigue',         label: 'Fatigue / tiredness' },
+      { v: 'insomnia',        label: 'Trouble sleeping (insomnia)' },
+      { v: 'headaches',       label: 'Headaches' },
+      { v: 'palpitations',    label: 'Rapid heartbeats (palpitations)' },
+      { v: 'bladder',         label: 'Bladder issues (reduced control or incontinence)' },
+      { v: 'painful-sex',     label: 'Painful sex' },
+      { v: 'low-libido',      label: 'Low sexual desire (low libido)' },
+      { v: 'brain-fog',       label: 'Brain fog (concentration or memory issues)' },
+      { v: 'irritability',    label: 'Irritability' },
+      { v: 'depression',      label: 'Depression' },
+      { v: 'anxiety',         label: 'Anxiety' },
+      { v: 'mood-swings',     label: 'Mood swings' },
+      { v: 'skin-issues',     label: 'Skin issues (e.g. dry or itchy skin)' },
+      { v: 'facial-acne',     label: 'Facial acne' },
+      { v: 'hair-loss',       label: 'Hair loss' },
+      { v: 'none', label: 'None of the above', noneAbove: true, flags: ['exclude:No menopausal symptoms reported'] }
+    ],
+    nextFn: function (sel) {
+      const s = Array.isArray(sel) ? sel : [];
+      if (s.indexOf('depression') >= 0 || s.indexOf('mood-swings') >= 0) return 'q6a';
+      if (s.indexOf('anxiety') >= 0) return 'q6b';
+      return 'q9';
+    }
+  },
+  {
+    id: 'q6a', kind: 'single',
+    title: 'When did your depression symptoms start?',
+    options: ONSET_OPTS,
+    nextFn: function (val, all) {
+      const q6 = Array.isArray(all.q6) ? all.q6 : [];
+      if (q6.indexOf('anxiety') >= 0 || q6.indexOf('mood-swings') >= 0) return 'q6b';
+      return 'q7';
+    }
+  },
+  {
+    id: 'q6b', kind: 'single',
+    title: 'When did your anxiety symptoms start?',
+    options: ONSET_OPTS,
+    nextFn: function (val, all) {
+      const q6 = Array.isArray(all.q6) ? all.q6 : [];
+      if (q6.indexOf('depression') >= 0 || q6.indexOf('mood-swings') >= 0) return 'q7';
+      return 'q8';
+    }
+  },
+  {
+    id: 'q7', kind: 'paired-frequency',
+    title: 'Over the last 2 weeks, how often have you been bothered by the following problems?',
+    note: 'PHQ-2 — please answer both.',
+    subA: 'Little interest or pleasure in doing things',
+    subB: 'Feeling down, depressed, or hopeless',
+    options: FREQ_OPTS,
+    nextFn: function (val, all) {
+      const q6 = Array.isArray(all.q6) ? all.q6 : [];
+      if (q6.indexOf('anxiety') >= 0 || q6.indexOf('mood-swings') >= 0) return 'q8';
+      return 'q9';
+    }
+  },
+  {
+    id: 'q8', kind: 'paired-frequency',
+    title: 'Over the last 2 weeks, how often have you been bothered by any of the following problems?',
+    note: 'GAD-2 — please answer both.',
+    subA: 'Feeling nervous, anxious, or on edge',
+    subB: 'Not being able to stop or control worrying',
+    options: FREQ_OPTS,
+    next: 'q9'
+  },
+  {
+    id: 'q9', kind: 'multi-noneabove',
+    title: 'Which of the following medical conditions have YOU been diagnosed with — currently or previously?',
+    note: 'This is about YOU, not family history. Select all that apply.',
+    options: [
+      { v: 'postmeno-bleeding', label: 'Unexplained post-menopausal bleeding (if no period in over a year)', flags: ['exclude:Unexplained post-menopausal bleeding requires in-person evaluation'], safetyMsg: 'POSTMENO_BLEEDING' },
+      { v: 'thyroid',           label: 'Thyroid issues', flags: ['oralIneligible'] },
+      { v: 'breast-cancer',     label: 'Breast cancer', flags: ['systemicIneligible'] },
+      { v: 'adh',               label: 'Atypical ductal hyperplasia (ADH) on breast biopsy', flags: ['systemicIneligible'] },
+      { v: 'cad',               label: 'Heart attack or coronary artery disease', flags: ['systemicIneligible'] },
+      { v: 'stroke',            label: 'Stroke or transient ischemic attack (TIA)', flags: ['systemicIneligible'] },
+      { v: 'clot',              label: 'Blood clot in legs or lungs', flags: ['systemicIneligible'] },
+      { v: 'brca',              label: 'Positive BRCA 1/2 test', flags: ['systemicIneligible'] },
+      { v: 'colon-cancer',      label: 'Blood in the stool or diagnosis of colon cancer', flags: ['systemicIneligible'] },
+      { v: 'cervical-cancer',   label: 'Abnormal Pap smear or diagnosis of cervical cancer', flags: ['systemicIneligible'] },
+      { v: 'migraine-aura',     label: 'Migraine headaches with aura (flashing lights or blind spots)', flags: ['systemicIneligible'] },
+      { v: 'lupus',             label: 'Lupus (autoimmune condition)', flags: ['systemicIneligible'] },
+      { v: 'endometrial-cancer',label: 'Endometrial cancer', flags: ['systemicIneligible'] },
+      { v: 'ovarian-cancer',    label: 'Ovarian cancer', flags: ['systemicIneligible'] },
+      { v: 'pelvic',            label: 'Pain or bulging/bloating in the pelvis', flags: ['systemicIneligible'] },
+      { v: 'weight-loss',       label: 'Unintentional weight loss of 5% or 10+ lbs in the last 6–12 months without trying', flags: ['systemicIneligible'] },
+      { v: 'liver',             label: 'Liver disease', flags: ['systemicIneligible'] },
+      { v: 'kidney',            label: 'Kidney disease' },
+      { v: 'diabetes-insulin',  label: 'Insulin-dependent diabetes', flags: ['systemicIneligible','syncDivert:Insulin-dependent diabetes'] },
+      { v: 'diabetes-other',    label: 'Non-insulin-dependent diabetes (diet or non-insulin medications)' },
+      { v: 'cholesterol',       label: 'Elevated cholesterol' },
+      { v: 'htn',               label: 'Elevated blood pressure (hypertension)' },
+      { v: 'osteoporosis',      label: 'Osteoporosis (low bone density)' },
+      { v: 'pcos',              label: 'Polycystic Ovarian Syndrome (PCOS)' },
+      { v: 'endometriosis',     label: 'Endometriosis' },
+      { v: 'hemoglobin',        label: 'Elevated hemoglobin / hematocrit' },
+      { v: 'sleep-apnea',       label: 'Untreated or severe sleep apnea' },
+      { v: 'thalassemia',       label: 'Thalassemia' },
+      { v: 'none', label: 'None of the above', noneAbove: true }
+    ],
+    nextFn: function (sel) {
+      const s = Array.isArray(sel) ? sel : [];
+      if (s.indexOf('htn') >= 0) return 'q9a';
+      return 'q10';
+    }
+  },
+  {
+    id: 'q9a', kind: 'single',
+    title: 'What has your approximate average blood pressure been over the past 3 months?',
+    note: 'With or without blood pressure medication.',
+    options: [
+      { v: 'normal',  label: 'Systolic ≤ 120–139 / diastolic ≤ 80–89' },
+      { v: 'mild',    label: 'Systolic 140–159 / diastolic 90–99', flags: ['systemicIneligible','desvenIneligible','syncDivert:Elevated blood pressure'] },
+      { v: 'severe',  label: 'Systolic ≥ 160 / diastolic ≥ 100', flags: ['systemicIneligible','desvenIneligible','syncDivert:Severely elevated blood pressure'] },
+      { v: 'unknown', label: "I don't know", flags: ['systemicIneligible','desvenIneligible'] }
+    ],
+    next: 'q10'
+  },
+  {
+    id: 'q10', kind: 'multi-noneabove',
+    title: 'Which medical conditions has any FIRST-DEGREE family member (biological parents or siblings) been diagnosed with?',
+    note: 'Currently or previously. Select all that apply.',
+    options: [
+      { v: 'breast-cancer',     label: 'Breast cancer' },
+      { v: 'adh',               label: 'Atypical ductal hyperplasia (ADH) on breast biopsy' },
+      { v: 'cad',               label: 'Heart attack or coronary artery disease' },
+      { v: 'stroke',            label: 'Stroke or TIA' },
+      { v: 'clot',              label: 'Blood clot in legs or lungs' },
+      { v: 'brca',              label: 'Positive BRCA 1/2 test' },
+      { v: 'postmeno-bleeding', label: 'Unexplained post-menopausal bleeding' },
+      { v: 'endometrial-cancer',label: 'Endometrial cancer' },
+      { v: 'ovarian-cancer',    label: 'Ovarian cancer' },
+      { v: 'sickle-cell',       label: 'Sickle cell disease or trait' },
+      { v: 'thalassemia',       label: 'Thalassemia' },
+      { v: 'none', label: 'None of the above', noneAbove: true }
+    ],
+    next: 'q11'
+  },
+  {
+    id: 'q11', kind: 'single',
+    title: 'When was your last mammogram?',
+    options: [
+      { v: '<2',     label: 'Within the last 2 years', next: 'q12' },
+      { v: '2+',     label: '2 or more years ago', flags: ['systemicIneligible'], next: 'q12' },
+      { v: 'never',  label: 'I have never had a mammogram', flags: ['systemicIneligible'], next: 'q14' }
+    ]
+  },
+  {
+    id: 'q12', kind: 'single',
+    title: 'What were the results of your last mammogram?',
+    options: [
+      { v: 'normal',          label: 'Normal', next: 'q14' },
+      { v: 'normal-followup', label: 'I had additional views or testing (e.g. ultrasound), but was told everything was normal', next: 'q14' },
+      { v: 'abnormal',        label: 'Abnormal', next: 'q13' }
+    ]
+  },
+  {
+    id: 'q13', kind: 'text-long',
+    title: 'Please provide any details on the abnormal mammogram.',
+    placeholder: 'Tell us what you were told.',
+    next: 'q14'
+  },
+  {
+    id: 'q14', kind: 'single',
+    title: 'Do you currently use nicotine products?',
+    options: [
+      { v: 'yes', label: 'Yes', flags: ['oralIneligible'] },
+      { v: 'no',  label: 'No' }
+    ],
+    next: 'q15'
+  },
+  {
+    id: 'q15', kind: 'single',
+    title: 'Are you currently taking — or have you stopped taking within the last 90 days — any hormonal birth control or menopausal hormone treatment?',
+    options: [
+      { v: 'yes', label: 'Yes', next: 'q16' },
+      { v: 'no',  label: 'No',  next: 'q17' }
+    ]
+  },
+  {
+    id: 'q16', kind: 'multi',
+    title: 'What type of hormone treatment are you currently taking, or have you recently stopped taking?',
+    note: 'Select all that apply.',
+    options: [
+      { v: 'ocp',          label: 'Oral contraceptive pills' },
+      { v: 'implant',      label: 'Implanted contraception (e.g. Nexplanon)' },
+      { v: 'injectable',   label: 'Injectable contraception (e.g. Depo-Provera)' },
+      { v: 'iud',          label: 'Intrauterine device / IUD (e.g. Mirena)' },
+      { v: 'patch-bc',     label: 'Transdermal (patch) contraception' },
+      { v: 'oral-ht',      label: 'Oral hormone therapy (pills, troches, RDT/ODTs)' },
+      { v: 'transdermal-ht', label: 'Transdermal hormone therapy (cream / gel / spray / patch)' },
+      { v: 'vaginal-ht',   label: 'Vaginal hormone therapy (ring / cream / tablet)' }
+    ],
+    nextFn: function (sel) {
+      const s = Array.isArray(sel) ? sel : [];
+      if (s.indexOf('implant') >= 0) return 'q16a';
+      if (s.indexOf('injectable') >= 0) return 'q16b';
+      if (s.indexOf('iud') >= 0) return 'q16c';
+      return 'q17';
+    }
+  },
+  {
+    id: 'q16a', kind: 'text-short',
+    title: 'Approximately when was the implantable contraception (e.g. Nexplanon) removed?',
+    placeholder: 'mm/dd/yyyy — or type "Not removed"',
+    nextFn: function (v, all) {
+      const q16 = Array.isArray(all.q16) ? all.q16 : [];
+      if (q16.indexOf('injectable') >= 0) return 'q16b';
+      if (q16.indexOf('iud') >= 0) return 'q16c';
+      return 'q17';
+    }
+  },
+  {
+    id: 'q16b', kind: 'text-short',
+    title: 'Approximately when was the injected contraception (e.g. Depo-Provera) last administered?',
+    placeholder: 'mm/dd/yyyy',
+    nextFn: function (v, all) {
+      const q16 = Array.isArray(all.q16) ? all.q16 : [];
+      if (q16.indexOf('iud') >= 0) return 'q16c';
+      return 'q17';
+    }
+  },
+  {
+    id: 'q16c', kind: 'text-short',
+    title: 'Approximately when was the IUD (e.g. Mirena) removed?',
+    placeholder: 'mm/dd/yyyy — or type "Not removed"',
+    next: 'q17'
+  },
+  {
+    id: 'q17', kind: 'multi-noneabove',
+    title: 'Do any of the following apply to you?',
+    note: 'Select all that apply.',
+    options: [
+      { v: 'hysterectomy', label: 'Had a hysterectomy (surgical removal of the uterus)' },
+      { v: 'single-ovary', label: 'Have a single ovary' },
+      { v: 'no-ovaries',   label: 'Do not have ovaries' },
+      { v: 'none', label: 'None of the above', noneAbove: true }
+    ],
+    nextFn: function (sel) {
+      const s = Array.isArray(sel) ? sel : [];
+      if (s.indexOf('none') >= 0 || s.length === 0) return 'q18';
+      return 'q17a';
+    }
+  },
+  {
+    id: 'q17a', kind: 'text-long',
+    title: 'Please provide details, including dates, for any of the above.',
+    placeholder: 'E.g. "Hysterectomy in 2018; both ovaries retained."',
+    next: 'q18'
+  },
+  {
+    id: 'q18', kind: 'text-long',
+    title: 'Please list any major surgeries you have had, including dates.',
+    placeholder: 'E.g. "Gallbladder removal — 2015; Knee replacement — 2021"',
+    optional: true,
+    next: 'q19'
+  },
+  {
+    id: 'q19', kind: 'single',
+    title: 'Are you currently taking any SSRIs or SNRIs?',
+    note: 'Examples: escitalopram (Lexapro), sertraline (Zoloft), paroxetine (Paxil), fluoxetine (Prozac), venlafaxine (Effexor).',
+    options: [
+      { v: 'yes', label: 'Yes', flags: ['ssriIneligible'], next: 'q20' },
+      { v: 'no',  label: 'No',  next: 'q21' }
+    ]
+  },
+  {
+    id: 'q20', kind: 'text-short',
+    title: 'Please list the name and dose of the SSRI / SNRI you are currently taking.',
+    placeholder: 'E.g. "Lexapro 10 mg daily"',
+    next: 'q21'
+  },
+  {
+    id: 'q21', kind: 'text-long',
+    title: 'Please list your current medications and supplements, including any taken for anxiety or depression.',
+    placeholder: 'List each on its own line if possible.',
+    optional: true,
+    next: 'q22'
+  },
+  {
+    id: 'q22', kind: 'text-long',
+    title: 'Please list your medication allergies.',
+    note: 'Also include any allergies to substances such as peanuts or adhesives.',
+    placeholder: 'E.g. "Penicillin — hives; latex"',
+    optional: true,
+    next: 'q23'
+  },
+  {
+    id: 'q23', kind: 'multi',
+    title: 'If eligible — and assuming no contraindications — which of the following treatments are you interested in?',
+    note: 'Select all that apply.',
+    info: 'Patients aged 35–39 and aged 66+ are only eligible for local/vaginal therapy because of clinical considerations. If you have systemic symptoms, please seek in-person evaluation as soon as possible.',
+    infoTriggers: ['oral-ht','transdermal-ht','oral-nonhormone'],
+    options: [
+      { v: 'oral-ht',         label: 'Oral hormone therapy' },
+      { v: 'transdermal-ht',  label: 'Transdermal hormone therapy (gel / patch)' },
+      { v: 'oral-nonhormone', label: 'Oral non-hormone therapy (e.g. Paxil / paroxetine)' },
+      { v: 'vaginal-ht',      label: 'Vaginal hormone therapy (cream / suppository)' },
+      { v: 'idk', label: "I don't know", noneAbove: true }
+    ],
+    next: 'q24'
+  },
+  {
+    id: 'q24', kind: 'single',
+    title: 'If eligible for both systemic and local treatment, are you interested in being prescribed both forms?',
+    info: 'Systemic treatments (oral pill, transdermal gel, or skin patch) primarily help with vasomotor symptoms — hot flashes, sleep/mood symptoms, bone health — and secondarily with genitourinary symptoms.\n\nLocal treatments (vaginal cream or suppository) exclusively help with genitourinary symptoms. If you are experiencing both, adding local treatment can add additional benefit over systemic alone.',
+    options: [
+      { v: 'yes', label: 'Yes — interested in both' },
+      { v: 'no',  label: 'No — one is enough for now' }
+    ],
+    next: null
+  }
+];
+
+const Q_BY_ID = {};
+QUESTIONS.forEach(function (q) { Q_BY_ID[q.id] = q; });
+
+// ═══ Flag accumulation ═══════════════════════════════════════════════════
+function newFlags() {
+  return {
+    systemicEligible: true, oralEligible: true, ssriEligible: true, desvenEligible: true,
+    syncDivert: false, syncDivertReasons: [],
+    excluded: false, excludeReasons: [],
+    safetyMsgs: []
+  };
 }
 
-// ===== Birthday helpers (optional field; partial fills are rejected) =====
-const MONTHS = [
-  '', 'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-const BIRTH_YEAR_MAX = new Date().getFullYear() - 21;  // gate minors / impossibly young
-const BIRTH_YEAR_MIN = 1940;
-const BIRTH_YEARS = (() => {
-  const arr = [];
-  for (let y = BIRTH_YEAR_MAX; y >= BIRTH_YEAR_MIN; y--) arr.push(y);
-  return arr;
-})();
-// Days vary by (month, year). Returns 0 if month not set yet.
+function applyFlagStrings(flags, arr) {
+  if (!Array.isArray(arr)) return;
+  arr.forEach(function (m) {
+    if (m === 'systemicIneligible') flags.systemicEligible = false;
+    else if (m === 'oralIneligible') flags.oralEligible = false;
+    else if (m === 'ssriIneligible') flags.ssriEligible = false;
+    else if (m === 'desvenIneligible') flags.desvenEligible = false;
+    else if (m.indexOf('syncDivert:') === 0) {
+      flags.syncDivert = true;
+      flags.syncDivertReasons.push(m.slice('syncDivert:'.length));
+    } else if (m.indexOf('exclude:') === 0) {
+      flags.excluded = true;
+      flags.excludeReasons.push(m.slice('exclude:'.length));
+    }
+  });
+}
+
+function applyAnswerFlags(flags, q, ans) {
+  if (!q || !q.options) return;
+  if (q.kind === 'single') {
+    const sel = ans && ans.value;
+    if (sel) {
+      const opt = q.options.find(function(o){ return o.v === sel; });
+      if (opt) {
+        if (opt.flags) applyFlagStrings(flags, opt.flags);
+        if (opt.safetyMsg && flags.safetyMsgs.indexOf(opt.safetyMsg) < 0) flags.safetyMsgs.push(opt.safetyMsg);
+      }
+    }
+    return;
+  }
+  if (q.kind === 'multi' || q.kind === 'multi-noneabove') {
+    const arr = Array.isArray(ans) ? ans : [];
+    arr.forEach(function(v){
+      const opt = q.options.find(function(o){ return o.v === v; });
+      if (opt) {
+        if (opt.flags) applyFlagStrings(flags, opt.flags);
+        if (opt.safetyMsg && flags.safetyMsgs.indexOf(opt.safetyMsg) < 0) flags.safetyMsgs.push(opt.safetyMsg);
+      }
+    });
+  }
+}
+
+function computeAge(dob) {
+  if (!dob || !dob.year || !dob.month || !dob.day) return null;
+  const y = parseInt(dob.year,10), m = parseInt(dob.month,10), d = parseInt(dob.day,10);
+  if (!y || !m || !d) return null;
+  const t = new Date();
+  let age = t.getFullYear() - y;
+  if ((t.getMonth()+1 < m) || (t.getMonth()+1 === m && t.getDate() < d)) age -= 1;
+  return age;
+}
+
+function computeFlags(general, answers) {
+  const flags = newFlags();
+  if (general) {
+    if (general.sexAtBirth && general.sexAtBirth !== 'female') {
+      flags.excluded = true;
+      flags.excludeReasons.push('Treatment is only available to patients whose sex assigned at birth is female');
+    }
+    const age = computeAge(general.dob);
+    if (age != null) {
+      if (age < 35) {
+        flags.excluded = true;
+        flags.excludeReasons.push('Treatment is only available to patients aged 35 and older');
+      } else if (age >= 35 && age <= 39) {
+        flags.systemicEligible = false;
+      } else if (age >= 66) {
+        flags.systemicEligible = false;
+      }
+    }
+    if (general.state && SYNC_DIVERT_STATES.has(general.state)) {
+      flags.syncDivert = true;
+      flags.syncDivertReasons.push('Licensed in ' + general.state + ' — a clinician will reach out to schedule a video visit');
+    }
+  }
+  QUESTIONS.forEach(function (q) {
+    if (answers && answers[q.id] !== undefined) {
+      applyAnswerFlags(flags, q, answers[q.id]);
+    }
+  });
+  return flags;
+}
+
+// ═══ helpers ═════════════════════════════════════════════════════════════
+function formatPhone(value) {
+  const digits = (value || '').replace(/\D/g,'').slice(0,10);
+  if (digits.length === 0) return '';
+  if (digits.length < 4) return '(' + digits;
+  if (digits.length < 7) return '(' + digits.slice(0,3) + ') ' + digits.slice(3);
+  return '(' + digits.slice(0,3) + ') ' + digits.slice(3,6) + '-' + digits.slice(6);
+}
+function isValidEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s || ''); }
+function isValidZip(s) { return /^\d{5}$/.test((s || '').trim()); }
+
+const MONTHS = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+const BIRTH_YEAR_MAX = new Date().getFullYear() - 21;
+const BIRTH_YEAR_MIN = 1925;
+const BIRTH_YEARS = (function(){ const a=[]; for (let y=BIRTH_YEAR_MAX; y>=BIRTH_YEAR_MIN; y--) a.push(y); return a; })();
 function daysInMonth(month, year) {
   if (!month) return 0;
-  const m = parseInt(month, 10);
-  const y = year ? parseInt(year, 10) : 2000; // leap-safe default for picker before year chosen
+  const m = parseInt(month,10), y = year ? parseInt(year,10) : 2000;
   return new Date(y, m, 0).getDate();
 }
-// Validate the three-piece birthday. Returns one of:
-//   { state: 'empty' }         — all three blank, valid (field is optional)
-//   { state: 'partial' }       — some but not all filled, invalid
-//   { state: 'ok', iso }       — fully filled + a real calendar date in range
-//   { state: 'invalid' }       — fully filled but not a real date
-function validateBirthday(b) {
-  const m = (b && b.month) || '';
-  const d = (b && b.day) || '';
-  const y = (b && b.year) || '';
-  const filledCount = [m, d, y].filter(Boolean).length;
-  if (filledCount === 0) return { state: 'empty' };
-  if (filledCount < 3) return { state: 'partial' };
-  const mi = parseInt(m, 10), di = parseInt(d, 10), yi = parseInt(y, 10);
-  if (yi < BIRTH_YEAR_MIN || yi > BIRTH_YEAR_MAX) return { state: 'invalid' };
-  const dt = new Date(yi, mi - 1, di);
-  if (dt.getFullYear() !== yi || dt.getMonth() !== mi - 1 || dt.getDate() !== di) {
-    return { state: 'invalid' };
-  }
-  const iso = `${yi}-${String(mi).padStart(2, '0')}-${String(di).padStart(2, '0')}`;
-  return { state: 'ok', iso };
-}
 
-// =====================================================================
-// Sticky draft — persist partial quiz answers to localStorage so the
-// user re-hydrates on reload AND we can replay them as Klaviyo profile
-// properties the instant we capture an email.
-//
-// Key: `herestrogen_quiz_draft`. Cleared on successful submit. Expires
-// after 7 days so stale drafts don't haunt return visits months later.
-// =====================================================================
-const DRAFT_KEY = 'herestrogen_quiz_draft';
+// ═══ draft localStorage ══════════════════════════════════════════════════
+const DRAFT_KEY = 'herestrogen_intake_draft';
 const DRAFT_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-
 function loadDraft() {
   try {
-    const raw = localStorage.getItem(DRAFT_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== 'object') return null;
-    if (!parsed.savedAt || (Date.now() - parsed.savedAt) > DRAFT_TTL_MS) {
-      localStorage.removeItem(DRAFT_KEY);
-      return null;
-    }
-    return parsed;
-  } catch (e) {
-    return null;
-  }
+    const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return null;
+    const p = JSON.parse(raw); if (!p || typeof p !== 'object') return null;
+    if (!p.savedAt || (Date.now() - p.savedAt) > DRAFT_TTL_MS) { localStorage.removeItem(DRAFT_KEY); return null; }
+    return p;
+  } catch (e) { return null; }
 }
-function saveDraft(answers, idx) {
-  try {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify({
-      answers: answers || {},
-      idx: typeof idx === 'number' ? idx : 0,
-      savedAt: Date.now()
-    }));
-  } catch (e) { /* storage disabled — silently no-op */ }
+function saveDraft(payload) {
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(Object.assign({ savedAt: Date.now() }, payload))); } catch(e){}
 }
-function clearDraft() {
-  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
-}
+function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch(e){} }
 
-// Build a sanitized set of Klaviyo profile properties from in-progress
-// quiz answers. Same compliance locks as /api/quiz/submit — opaque slugs
-// only (e.g. "peri", "hot"), never the human-readable medical strings.
+// ═══ Klaviyo (preserved verbatim — compliance audit C-09) ════════════════
+const KLAVIYO_COMPANY_ID = 'RUvm7K';
+const KLAVIYO_LIST_ID    = 'Rsp58u';
+const KLAVIYO_SEND_HEALTH_DATA = false; // requires signed BAA before flipping
+
 function buildDraftProfileProps(answers) {
   const props = { source: 'quiz', quiz_in_progress: true };
-  if (!answers) return props;
-  if (answers.stage) props.hormone_stage = answers.stage;
-  if (Array.isArray(answers.symptoms) && answers.symptoms.length > 0) {
-    props.primary_symptom = answers.symptoms[0];
-    props.symptom_score = answers.symptoms.length;
+  if (answers && Array.isArray(answers.q6) && answers.q6.length > 0) {
+    props.primary_symptom = answers.q6[0];
+    props.symptom_score = answers.q6.length;
   }
-  if (answers.tried) props.tried_hrt = answers.tried;
-  if (answers.preference) props.preference = answers.preference;
   return props;
 }
 
-// =====================================================================
-// Klaviyo integration — public client-side subscription
-// =====================================================================
-// company_id and list_id are PUBLIC (used in browser). Safe to commit.
-// Replace these placeholder strings with values from Klaviyo Dashboard:
-//   - company_id: Account → Settings → API Keys → "Public API Key (Company ID)"
-//   - list_id:    Lists & Segments → click your list → "List ID" in URL or settings
-const KLAVIYO_COMPANY_ID = 'RUvm7K';
-const KLAVIYO_LIST_ID    = 'Rsp58u';
-
-// ⚠ HIPAA: only flip this to true after Klaviyo signs you a BAA in writing.
-//   When false, we send ONLY email + first name + quiz_completed flag
-//   (no symptoms, stage — those stay in Supabase only).
-const KLAVIYO_SEND_HEALTH_DATA = false;
-
-// =====================================================================
-// Started Quiz event — fires client-side via Klaviyo's /client/events/
-// endpoint (public, uses company_id; no private key needed).
-//
-// Fires the first time a user types a VALID email in the contact step.
-// Triggers F1 Quiz Abandonment in Klaviyo. If the user goes on to submit
-// the quiz within 1 hour, /api/quiz/submit fires a "Completed Quiz" event
-// which is F1's exit signal — so the abandonment emails never go out.
-//
-// We dedupe via localStorage so re-entering the page doesn't re-fire.
-// =====================================================================
-// We attach the in-progress draft answers as profile properties on the
-// same call — this is the "sticky" payload that lets F1 Quiz Abandonment
-// personalize emails ("Hi {{ first_name|default:'there' }}…") and that
-// gives nurture flows context even when the user never finishes.
-async function fireStartedQuiz(email, answers) {
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+async function fireStartedQuiz(email, firstName, answers) {
+  if (!email || !isValidEmail(email)) return;
   const dedupeKey = 'klaviyo_started_quiz_' + email;
   if (localStorage.getItem(dedupeKey)) return;
-
   const profileAttrs = { email };
-  if (answers && answers.firstName) {
-    profileAttrs.first_name = String(answers.firstName).slice(0, 80);
-  }
-  const draftProps = buildDraftProfileProps(answers);
-  if (Object.keys(draftProps).length > 0) {
-    profileAttrs.properties = draftProps;
-  }
-
+  if (firstName) profileAttrs.first_name = String(firstName).slice(0, 80);
+  const props = buildDraftProfileProps(answers);
+  if (Object.keys(props).length > 0) profileAttrs.properties = props;
   try {
     const resp = await fetch(
       'https://a.klaviyo.com/client/events/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID),
-      {
-        method: 'POST',
-        headers: {
-          'revision': '2024-10-15',
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: {
-            type: 'event',
-            attributes: {
-              properties: { step: 'contact' },
-              metric: { data: { type: 'metric', attributes: { name: 'Started Quiz' } } },
-              profile: { data: { type: 'profile', attributes: profileAttrs } }
-            }
-          }
-        })
-      }
-    );
-    if (resp.ok || resp.status === 202) {
-      localStorage.setItem(dedupeKey, '1');
-    } else {
-      console.warn('[klaviyo] Started Quiz non-OK:', resp.status);
-    }
-  } catch (err) {
-    // Never break the quiz flow on a Klaviyo failure
-    console.warn('[klaviyo] Started Quiz failed:', err && err.message);
-  }
+      { method: 'POST', headers: { 'revision': '2024-10-15', 'content-type': 'application/json' },
+        body: JSON.stringify({ data: { type: 'event', attributes: {
+          properties: { step: 'general-info' },
+          metric: { data: { type: 'metric', attributes: { name: 'Started Quiz' } } },
+          profile: { data: { type: 'profile', attributes: profileAttrs } }
+        }}})});
+    if (resp.ok || resp.status === 202) localStorage.setItem(dedupeKey, '1');
+  } catch (err) { console.warn('[klaviyo] Started Quiz failed:', err && err.message); }
 }
 
-// Profile-only patch — used when the user changes answers AFTER we've
-// already captured their email (e.g. clicks Back to change a symptom).
-// The Started Quiz event is deduped per-email, so subsequent edits would
-// be invisible to Klaviyo without this. No event fires, just a profile
-// upsert via the public client API. Throttled by a 2s debounce in the
-// caller so we don't hammer Klaviyo on every keystroke.
-async function patchKlaviyoProfile(email, answers) {
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+async function patchKlaviyoProfile(email, firstName, answers) {
+  if (!email || !isValidEmail(email)) return;
   const profileAttrs = { email };
-  if (answers && answers.firstName) {
-    profileAttrs.first_name = String(answers.firstName).slice(0, 80);
-  }
-  const draftProps = buildDraftProfileProps(answers);
-  if (Object.keys(draftProps).length > 0) {
-    profileAttrs.properties = draftProps;
-  }
+  if (firstName) profileAttrs.first_name = String(firstName).slice(0, 80);
+  const props = buildDraftProfileProps(answers);
+  if (Object.keys(props).length > 0) profileAttrs.properties = props;
   try {
-    await fetch(
-      'https://a.klaviyo.com/client/profiles/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID),
-      {
-        method: 'POST',
-        headers: {
-          'revision': '2024-10-15',
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: { type: 'profile', attributes: profileAttrs }
-        })
-      }
-    );
-  } catch (err) {
-    console.warn('[klaviyo] profile patch failed:', err && err.message);
-  }
+    await fetch('https://a.klaviyo.com/client/profiles/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID),
+      { method: 'POST', headers: { 'revision': '2024-10-15', 'content-type': 'application/json' },
+        body: JSON.stringify({ data: { type: 'profile', attributes: profileAttrs } }) });
+  } catch (err) { /* no-op */ }
 }
 
-// Convert a US phone like "(555) 123-4567" to Klaviyo's required E.164 format "+15551234567"
-function toE164(phone) {
-  const digits = (phone || '').replace(/\D/g, '');
-  if (digits.length === 10) return '+1' + digits;
-  if (digits.length === 11 && digits.startsWith('1')) return '+' + digits;
-  return null;
-}
+// ═══ submit to backend ═══════════════════════════════════════════════════
+function deriveCompatShape(general, answers, flags) {
+  let stage = null;
+  if (answers.q3 && answers.q3.value === 'regular') stage = 'peri';
+  else if (answers.q3 && answers.q3.value === 'irregular') stage = 'peri';
+  else if (answers.q3 && (answers.q3.value === 'none-over-year' || answers.q3.value === 'hysterectomy')) stage = 'meno';
+  if (answers.q5 && answers.q5.value && (answers.q5.value === '>5' || answers.q5.value === '>10')) stage = 'post';
 
-// Server-side submit pipeline. Replaces the old client-side Klaviyo call:
-// the private API key + service-role Supabase writes live in /api/quiz/submit.
-//
-// We POST only sanitized fields — never any words that could expose PHI
-// (no "menopause", "HRT", "hormone replacement therapy", etc.). The server
-// fan-outs the call to Supabase + Klaviyo profile-import + Klaviyo subscribe
-// using Promise.allSettled so Klaviyo flakes never break the quiz UX.
-async function submitQuizToServer(answers) {
-  if (!answers || !answers.email) return;
-
-  // Dedupe — don't re-submit if the user lands back on /quiz with the same answers
-  const dedupeKey = 'quiz_submitted_' + answers.email;
-  if (localStorage.getItem(dedupeKey)) return;
-
-  // Derive summary fields from the raw answers WITHOUT leaking medical jargon.
-  // primary_symptom / hormone_stage are kept as opaque slugs (e.g. "stage_a")
-  // assigned by the quiz UI — never the human-readable "perimenopause" etc.
-  // Birthday is OPTIONAL — if the user left it blank or partially filled, omit it.
-  const birthdayCheck = validateBirthday(answers.birthday);
-  const birthdayISO = birthdayCheck.state === 'ok' ? birthdayCheck.iso : null;
-  const payload = {
-    email: answers.email,
-    firstName: answers.firstName || null,
-    primary_symptom: Array.isArray(answers.symptoms) ? (answers.symptoms[0] || null) : null,
-    hormone_stage: answers.stage || null,
-    symptom_score: Array.isArray(answers.symptoms) ? answers.symptoms.length : null,
-    recommended_product: answers.recommended_product || null,
-    birthday: birthdayISO,
-    responses: answers
+  const SYMPTOM_MAP = {
+    'hot-flashes':'hot','night-sweats':'sleep','insomnia':'sleep','brain-fog':'brain',
+    'mood-swings':'mood','low-libido':'sex','painful-sex':'sex','vaginal-issues':'sex',
+    'weight-gain':'weight','fatigue':'weight','skin-issues':'skin','hair-loss':'skin'
   };
+  const symptoms = [];
+  const q6 = Array.isArray(answers.q6) ? answers.q6 : [];
+  q6.forEach(function(s){
+    const m = SYMPTOM_MAP[s]; if (m && symptoms.indexOf(m) < 0) symptoms.push(m);
+  });
 
+  let preference = null;
+  const q23 = Array.isArray(answers.q23) ? answers.q23 : [];
+  if (q23.indexOf('vaginal-ht') >= 0) preference = 'vaginal';
+  else if (q23.indexOf('transdermal-ht') >= 0) preference = 'patch';
+  else if (q23.indexOf('oral-ht') >= 0) preference = 'gel';
+  else preference = 'effective';
+
+  let tried = 'never';
+  if (answers.q15 && answers.q15.value === 'yes') tried = 'past';
+
+  return {
+    firstName: general.legalFirstName || general.preferredName || null,
+    email: general.email || null,
+    phone: general.phone || null,
+    birthday: general.dob || null,
+    stage: stage, symptoms: symptoms, tried: tried, preference: preference,
+    eligibility: {
+      gel: flags.systemicEligible,
+      patch: flags.systemicEligible,
+      pill: flags.systemicEligible && flags.oralEligible,
+      cream: true,
+      progesterone: flags.systemicEligible
+    },
+    syncDivert: flags.syncDivert,
+    syncDivertReasons: flags.syncDivertReasons.slice()
+  };
+}
+
+async function submitIntake(general, answers, flags) {
+  const compat = deriveCompatShape(general, answers, flags);
+  const payload = Object.assign({}, compat, {
+    legal_name: { first: general.legalFirstName, preferred: general.preferredName, last: general.legalLastName },
+    sex_at_birth: general.sexAtBirth,
+    height_inches: (parseInt(general.heightFt||0,10) * 12) + parseInt(general.heightIn||0,10),
+    weight_lbs: parseInt(general.weight||0,10) || null,
+    waist_inches: general.waist ? parseInt(general.waist,10) : null,
+    zip: general.zip || null,
+    state: general.state || null,
+    responses: answers,
+    flags: {
+      systemicEligible: flags.systemicEligible, oralEligible: flags.oralEligible,
+      ssriEligible: flags.ssriEligible, desvenEligible: flags.desvenEligible,
+      syncDivert: flags.syncDivert, syncDivertReasons: flags.syncDivertReasons,
+      excluded: flags.excluded, excludeReasons: flags.excludeReasons
+    }
+  });
+  const dedupeKey = 'quiz_submitted_' + (general.email || '');
+  if (localStorage.getItem(dedupeKey)) return;
   try {
     const resp = await fetch('/api/quiz/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    if (resp.ok) {
-      localStorage.setItem(dedupeKey, '1');
-      // Quiz is in the books — sticky draft is no longer useful, wipe it
-      // so a return visit starts fresh.
-      clearDraft();
-      // Sanitized conversion event — no medical info, just signals "form completed".
-      if (typeof window.trackCompleteRegistration === 'function') {
-        window.trackCompleteRegistration();
-      }
-    } else {
-      console.warn('[quiz/submit] non-OK response:', resp.status);
-    }
-  } catch (err) {
-    // Never break the quiz flow on a network failure
-    console.warn('[quiz/submit] failed:', err && err.message);
-  }
+    if (resp.ok) { localStorage.setItem(dedupeKey, '1'); clearDraft(); }
+  } catch (err) { console.warn('[quiz/submit] failed:', err && err.message); }
 }
 
-function Quiz() {
-  // Hydrate from a saved draft so partial sessions survive reload + return
-  // visits. loadDraft() handles its own TTL + corruption checks.
-  const draft = React.useMemo(() => loadDraft(), []);
-  const [idx, setIdx] = useState(() => {
-    if (!draft) return 0;
-    const want = typeof draft.idx === 'number' ? draft.idx : 0;
-    return Math.min(Math.max(want, 0), STEPS.length - 1);
-  });
-  const [answers, setAnswers] = useState(() => (draft && draft.answers) || {});
-  const [done, setDone] = useState(false);
+// ═══ COMPONENTS ══════════════════════════════════════════════════════════
+function GeneralInfo(props) {
+  const g = props.value || {};
+  const dob = g.dob || {};
+  const days = daysInMonth(dob.month, dob.year);
+  const set = function(k){ return function(e){ props.onChange(Object.assign({}, g, { [k]: e.target ? e.target.value : e })); }; };
+  const setNested = function(k, sub){ return function(e){
+    const next = Object.assign({}, g[k] || {}, { [sub]: e.target ? e.target.value : e });
+    props.onChange(Object.assign({}, g, { [k]: next }));
+  }; };
 
-  // Persist the draft on every state change while the quiz is in progress.
-  React.useEffect(() => {
-    if (!done) saveDraft(answers, idx);
-  }, [answers, idx, done]);
-
-  // Re-sync the Klaviyo profile when the user edits answers AFTER we've
-  // already captured their email. Debounced 2s so we don't hammer Klaviyo
-  // on every click. No-op until email validates.
-  React.useEffect(() => {
-    const email = answers.email || '';
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-    if (!localStorage.getItem('klaviyo_started_quiz_' + email)) return; // initial event hasn't fired yet
-    const t = setTimeout(() => { patchKlaviyoProfile(email, answers); }, 2000);
-    return () => clearTimeout(t);
-  }, [answers]);
-
-  const step = STEPS[idx];
-  const total = STEPS.length;
-  const progress = done ? 100 : ((idx) / total) * 100;
-
-  const value = answers[step?.key];
-  // Birthday lives outside the STEPS array — it's an optional sub-field of the
-  // contact step. Validate it alongside the required name/email/phone fields.
-  const birthdayResult = validateBirthday(answers.birthday);
-  const canContinue = (() => {
-    if (!step) return false;
-    if (step.kind === 'single') return !!value;
-    if (step.kind === 'multi') return Array.isArray(value) && value.length > 0;
-    if (step.kind === 'text') return typeof value === 'string' && /\S+@\S+\.\S+/.test(value);
-    if (step.kind === 'contact') {
-      const fn = (answers.firstName || '').trim();
-      const em = answers.email || '';
-      const ph = (answers.phone || '').replace(/\D/g, '');
-      const requiredOk = fn.length > 0 && /\S+@\S+\.\S+/.test(em) && ph.length === 10;
-      // Birthday is REQUIRED (needed by OpenLoop for clinical intake).
-      // Only fully-valid birthdays unlock the submit button.
-      const birthdayOk = birthdayResult.state === 'ok';
-      // Notice-at-Collection + 18+ affirmation are REQUIRED for CCPA/CPRA
-      // and the Terms eligibility statement. Both must be explicitly ticked
-      // (audit findings H-17, M-22).
-      const consentOk = answers.consentNoticeAck === true && answers.adultAck === true && answers.telehealthConsent === true;
-      return requiredOk && birthdayOk && consentOk;
-    }
-    return false;
-  })();
-
-  const setSingle = (v) => setAnswers({ ...answers, [step.key]: v });
-  const toggleMulti = (v) => {
-    const cur = Array.isArray(value) ? value.slice() : [];
-    const i = cur.indexOf(v);
-    if (i >= 0) cur.splice(i, 1); else cur.push(v);
-    setAnswers({ ...answers, [step.key]: cur });
-  };
-  const setText = (e) => setAnswers({ ...answers, [step.key]: e.target.value });
-
-  const next = () => {
-    if (idx < total - 1) setIdx(idx + 1);
-    else setDone(true);
-  };
-  const back = () => idx > 0 && setIdx(idx - 1);
-
-  // On completion: persist to localStorage (results.html reads this) + subscribe to Klaviyo
-  React.useEffect(() => {
-    if (done) {
-      try {
-        localStorage.setItem('herestrogen_quiz', JSON.stringify(answers));
-      } catch (e) { /* storage disabled — fall back to defaults */ }
-      // Fire-and-forget — quiz UX is independent of the server response
-      submitQuizToServer(answers);
-    }
-  }, [done, answers]);
-
-  if (done) {
-    return (
-      <div className="shell">
-        <div className="progress-shell">
-          <span>Step {total} of {total}</span>
-          <div className="progress-bar"><div className="progress-fill" style={{ width: '100%' }}></div></div>
-          <span>100%</span>
-        </div>
-        <div className="finish">
-          <div className="finish-badge">✓</div>
-          <h1>Thanks — your intake has been <em>submitted</em>.</h1>
-          <p>
-            A licensed clinician via our medical partner, OpenLoop Health,
-            will review your responses — typically within 1&ndash;2 business days.
-            Treatment is subject to clinical appropriateness and is not
-            guaranteed; your clinician may decline if hormone therapy is not
-            suitable for you.
-          </p>
-          <a href="results.html" className="btn btn-primary">View my next steps →</a>
-          <div className="footnote">A clinician will respond by email</div>
-        </div>
-      </div>
-    );
-  }
+  const required = [g.legalFirstName, g.legalLastName, g.email, g.phone, g.zip, g.state, g.sexAtBirth, g.heightFt, g.heightIn, g.weight, dob.month, dob.day, dob.year];
+  const phoneDigits = (g.phone || '').replace(/\D/g,'');
+  const allFilled = required.every(function(v){ return v != null && String(v).trim() !== ''; });
+  const ok = allFilled && isValidEmail(g.email) && isValidZip(g.zip) && phoneDigits.length === 10
+    && g.consentNotice === true && g.adultAck === true && g.telehealthConsent === true;
 
   return (
-    <div className="shell">
-      <div className="progress-shell">
-        <span>Step {idx + 1} of {total}</span>
-        <div className="progress-bar"><div className="progress-fill" style={{ width: progress + '%' }}></div></div>
-        <span>{Math.round(progress)}%</span>
+    <div className="step">
+      <h1>Let&rsquo;s start with the <em>basics.</em></h1>
+      <p className="step-intro">OpenLoop&rsquo;s licensed clinicians need this information to review your intake. All fields are required unless noted.</p>
+
+      <div className="field-grid">
+        <div className="field">
+          <label>Legal first name</label>
+          <input type="text" autoComplete="given-name" value={g.legalFirstName || ''} onChange={set('legalFirstName')} />
+        </div>
+        <div className="field">
+          <label>Preferred name <span className="field-opt">(optional)</span></label>
+          <input type="text" value={g.preferredName || ''} onChange={set('preferredName')} />
+        </div>
+        <div className="field">
+          <label>Legal last name</label>
+          <input type="text" autoComplete="family-name" value={g.legalLastName || ''} onChange={set('legalLastName')} />
+        </div>
+        <div className="field">
+          <label>Sex assigned at birth</label>
+          <select value={g.sexAtBirth || ''} onChange={set('sexAtBirth')}>
+            <option value="">Select…</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="transgender">Transgender</option>
+          </select>
+        </div>
       </div>
 
-      <div className="step">
-        <h1>{step.title}</h1>
-        <p className="step-intro">{step.intro}</p>
-
-        {step.kind === 'single' && (
-          <div className="choices">
-            {step.options.map(o => (
-              <button
-                key={o.v}
-                className={'choice' + (value === o.v ? ' selected' : '')}
-                onClick={() => setSingle(o.v)}
-              >
-                <span>
-                  <div>{o.label}</div>
-                  {o.note && <div className="choice-note">{o.note}</div>}
-                </span>
-                <span className="check">✓</span>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {step.kind === 'multi' && (
-          <div className={step.grid ? 'symptom-grid' : 'choices'}>
-            {step.options.map(o => {
-              const sel = Array.isArray(value) && value.indexOf(o.v) >= 0;
-              return (
-                <button
-                  key={o.v}
-                  className={'choice' + (sel ? ' selected' : '')}
-                  onClick={() => toggleMulti(o.v)}
-                >
-                  <span>{o.label}</span>
-                  <span className="check">✓</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        {step.kind === 'text' && (
-          <div className="field">
-            <label>{step.label}</label>
-            <input
-              type="email"
-              placeholder={step.placeholder}
-              value={value || ''}
-              onChange={setText}
-              autoFocus
-            />
-          </div>
-        )}
-
-        {step.kind === 'contact' && (
-          <div>
-            <div className="field">
-              <label>First name</label>
-              <input
-                type="text"
-                placeholder="Jane"
-                value={answers.firstName || ''}
-                onChange={(e) => setAnswers({ ...answers, firstName: e.target.value })}
-                autoComplete="given-name"
-                autoCapitalize="words"
-                autoFocus
-              />
-            </div>
-            <div className="field">
-              <label>Email</label>
-              <input
-                type="email"
-                placeholder="you@email.com"
-                value={answers.email || ''}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  const nextAnswers = { ...answers, email: v };
-                  setAnswers(nextAnswers);
-                  // Fire Started Quiz once the email validates — this is the
-                  // signal F1 Quiz Abandonment listens for. The helper is
-                  // idempotent (localStorage dedupe) so re-typing won't re-fire.
-                  // We pass the in-progress answers so the profile carries the
-                  // sticky context (symptoms, stage, etc.) on first capture.
-                  fireStartedQuiz(v, nextAnswers);
-                }}
-                autoComplete="email"
-                inputMode="email"
-              />
-            </div>
-            <div className="field">
-              <label>Phone</label>
-              <input
-                type="tel"
-                placeholder="(555) 123-4567"
-                value={answers.phone || ''}
-                onChange={(e) => setAnswers({ ...answers, phone: formatPhone(e.target.value) })}
-                autoComplete="tel"
-                inputMode="tel"
-              />
-              {/* TCPA-compliant SMS disclosure (audit finding H-16).
-                  Tied to the SMS opt-in checkbox below so consent is opt-in
-                  rather than implied. */}
-              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 10, cursor: 'pointer', lineHeight: 1.5 }}>
-                <input
-                  type="checkbox"
-                  checked={!!answers.smsOptIn}
-                  onChange={(e) => setAnswers({ ...answers, smsOptIn: e.target.checked })}
-                  style={{ marginTop: 3 }}
-                />
-                <span>
-                  <strong>SMS opt-in (optional).</strong> By checking this box,
-                  I agree to receive recurring marketing and care-related text
-                  messages from HerEstrogen at the number above (sent via an
-                  automated dialing system). Message frequency varies. Message
-                  &amp; data rates may apply. Reply STOP to opt out, HELP for
-                  help. Consent is <strong>not</strong> a condition of any
-                  purchase. See our <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
-                </span>
-              </label>
-            </div>
-            {/* REQUIRED — single point of capture. Used by OpenLoop for clinical
-                intake (provider must verify candidacy by age) and by Klaviyo
-                for birthday flows. Wrapped in fieldset/legend for screen-reader
-                grouping (audit finding L-09). */}
-            <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
-              <legend style={{ fontFamily: 'DM Mono, monospace', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--pink)', padding: 0 }}>Birthday</legend>
-              <div className="helper">Required to verify your candidacy with a licensed provider</div>
-              <div className="field-row3">
-                <select
-                  aria-label="Birth month"
-                  value={(answers.birthday && answers.birthday.month) || ''}
-                  onChange={(e) => setAnswers({
-                    ...answers,
-                    birthday: { ...(answers.birthday || {}), month: e.target.value }
-                  })}
-                >
-                  <option value="">Month</option>
-                  {MONTHS.slice(1).map((m, i) => (
-                    <option key={i + 1} value={String(i + 1)}>{m}</option>
-                  ))}
-                </select>
-                <select
-                  aria-label="Birth day"
-                  value={(answers.birthday && answers.birthday.day) || ''}
-                  onChange={(e) => setAnswers({
-                    ...answers,
-                    birthday: { ...(answers.birthday || {}), day: e.target.value }
-                  })}
-                >
-                  <option value="">Day</option>
-                  {(() => {
-                    const max = daysInMonth(
-                      (answers.birthday && answers.birthday.month) || '',
-                      (answers.birthday && answers.birthday.year) || ''
-                    ) || 31;
-                    const opts = [];
-                    for (let d = 1; d <= max; d++) opts.push(<option key={d} value={String(d)}>{d}</option>);
-                    return opts;
-                  })()}
-                </select>
-                <select
-                  aria-label="Birth year"
-                  value={(answers.birthday && answers.birthday.year) || ''}
-                  onChange={(e) => setAnswers({
-                    ...answers,
-                    birthday: { ...(answers.birthday || {}), year: e.target.value }
-                  })}
-                >
-                  <option value="">Year</option>
-                  {BIRTH_YEARS.map((y) => (
-                    <option key={y} value={String(y)}>{y}</option>
-                  ))}
-                </select>
-              </div>
-              {birthdayResult.state === 'partial' && (
-                <div className="field-error">Please complete all three fields.</div>
-              )}
-              {birthdayResult.state === 'invalid' && (
-                <div className="field-error">Please enter a valid birthday.</div>
-              )}
-            </fieldset>
-
-            {/* Notice at Collection + 18+ affirmation (audit findings H-17, M-22).
-                Required to advance — see canContinue() above. */}
-            <div className="field" style={{ marginTop: 24, paddingTop: 18, borderTop: '1px solid var(--line)' }}>
-              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer', lineHeight: 1.5 }}>
-                <input
-                  type="checkbox"
-                  checked={!!answers.consentNoticeAck}
-                  onChange={(e) => setAnswers({ ...answers, consentNoticeAck: e.target.checked })}
-                  style={{ marginTop: 3 }}
-                  required
-                />
-                <span>
-                  I have read the <a href="privacy.html" target="_blank" rel="noopener">Notice at Collection &amp; Privacy Policy</a> and the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>, including how my information is used and shared. I am providing consumer health information voluntarily (per Washington MHMDA and similar state laws where applicable).
-                </span>
-              </label>
-              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, cursor: 'pointer', lineHeight: 1.5 }}>
-                <input
-                  type="checkbox"
-                  checked={!!answers.adultAck}
-                  onChange={(e) => setAnswers({ ...answers, adultAck: e.target.checked })}
-                  style={{ marginTop: 3 }}
-                  required
-                />
-                <span>I confirm that I am at least 18 years old.</span>
-              </label>
-              <label className="helper" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, cursor: 'pointer', lineHeight: 1.5 }}>
-                <input
-                  type="checkbox"
-                  checked={!!answers.telehealthConsent}
-                  onChange={(e) => setAnswers({ ...answers, telehealthConsent: e.target.checked })}
-                  style={{ marginTop: 3 }}
-                  required
-                />
-                <span>
-                  I consent to receive telehealth services from our medical partner, OpenLoop Health. I have reviewed the <a href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener">OpenLoop Telehealth Informed Consent</a> and HerEstrogen's <a href="refunds.html" target="_blank" rel="noopener">Cancellation &amp; Refund Policy</a>.
-                </span>
-              </label>
-            </div>
-          </div>
-        )}
-
-        <div className="actions">
-          <button className="btn btn-back" onClick={back} disabled={idx === 0} style={{ visibility: idx === 0 ? 'hidden' : 'visible' }}>
-            ← Back
-          </button>
-          <button className="btn btn-primary" onClick={next} disabled={!canContinue}>
-            {idx === total - 1 ? 'See if I qualify →' : 'Continue →'}
-          </button>
+      <div className="field">
+        <label>Date of birth</label>
+        <div className="field-row3">
+          <select value={dob.month || ''} onChange={setNested('dob','month')}>
+            <option value="">Month</option>
+            {MONTHS.slice(1).map(function(m,i){ return <option key={i+1} value={i+1}>{m}</option>; })}
+          </select>
+          <select value={dob.day || ''} onChange={setNested('dob','day')} disabled={!dob.month}>
+            <option value="">Day</option>
+            {Array.from({ length: days }, function(_, i){ return <option key={i+1} value={i+1}>{i+1}</option>; })}
+          </select>
+          <select value={dob.year || ''} onChange={setNested('dob','year')}>
+            <option value="">Year</option>
+            {BIRTH_YEARS.map(function(y){ return <option key={y} value={y}>{y}</option>; })}
+          </select>
         </div>
+      </div>
 
-        <div className="footnote">Your answers are protected per our Privacy Policy</div>
+      <div className="field-grid">
+        <div className="field">
+          <label>Height</label>
+          <div className="field-row2">
+            <select value={g.heightFt || ''} onChange={set('heightFt')}>
+              <option value="">Feet</option>
+              {[4,5,6,7].map(function(n){ return <option key={n} value={n}>{n} ft</option>; })}
+            </select>
+            <select value={g.heightIn || ''} onChange={set('heightIn')}>
+              <option value="">Inches</option>
+              {[0,1,2,3,4,5,6,7,8,9,10,11].map(function(n){ return <option key={n} value={n}>{n} in</option>; })}
+            </select>
+          </div>
+        </div>
+        <div className="field">
+          <label>Weight (lbs)</label>
+          <input type="number" inputMode="numeric" min="60" max="500" value={g.weight || ''} onChange={set('weight')} />
+        </div>
+        <div className="field">
+          <label>Waist circumference <span className="field-opt">(inches — optional)</span></label>
+          <input type="number" inputMode="numeric" min="20" max="80" value={g.waist || ''} onChange={set('waist')} />
+        </div>
+        <div className="field">
+          <label>State</label>
+          <select value={g.state || ''} onChange={set('state')}>
+            <option value="">Select…</option>
+            {US_STATES.map(function(s){ return <option key={s[0]} value={s[0]}>{s[1]}</option>; })}
+          </select>
+        </div>
+      </div>
+
+      <div className="field-grid">
+        <div className="field">
+          <label>Email</label>
+          <input type="email" autoComplete="email" placeholder="you@example.com" value={g.email || ''} onChange={set('email')} />
+        </div>
+        <div className="field">
+          <label>Mobile number</label>
+          <input type="tel" autoComplete="tel" placeholder="(555) 123-4567"
+            value={formatPhone(g.phone || '')}
+            onChange={function(e){ props.onChange(Object.assign({}, g, { phone: e.target.value })); }} />
+        </div>
+        <div className="field">
+          <label>ZIP code</label>
+          <input type="text" inputMode="numeric" maxLength="5" pattern="[0-9]{5}"
+            value={g.zip || ''}
+            onChange={function(e){ props.onChange(Object.assign({}, g, { zip: e.target.value.replace(/\D/g,'').slice(0,5) })); }} />
+        </div>
+      </div>
+
+      <div className="agree-block">
+        <div className="agree-row">
+          <input type="checkbox" id="ck-notice" checked={!!g.consentNotice} onChange={function(e){ props.onChange(Object.assign({}, g, { consentNotice: e.target.checked })); }} />
+          <label htmlFor="ck-notice">I&rsquo;ve read the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy + HIPAA Notice</a> describing how my intake is shared with OpenLoop Health for clinical review.</label>
+        </div>
+        <div className="agree-row">
+          <input type="checkbox" id="ck-adult" checked={!!g.adultAck} onChange={function(e){ props.onChange(Object.assign({}, g, { adultAck: e.target.checked })); }} />
+          <label htmlFor="ck-adult">I am 18 or older and the information I provide is true and accurate.</label>
+        </div>
+        <div className="agree-row">
+          <input type="checkbox" id="ck-telehealth" checked={!!g.telehealthConsent} onChange={function(e){ props.onChange(Object.assign({}, g, { telehealthConsent: e.target.checked })); }} />
+          <label htmlFor="ck-telehealth">I consent to telehealth services as described in the <a href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener">Telehealth Consent</a>.</label>
+        </div>
+      </div>
+
+      <div className="actions">
+        <span />
+        <button className="btn btn-primary" disabled={!ok} onClick={props.onContinue}>Continue →</button>
+      </div>
+      <div className="footnote">Your information is encrypted in transit + at rest</div>
+    </div>
+  );
+}
+
+function SingleQuestion(props) {
+  const q = props.q;
+  const val = props.value && props.value.value;
+  const opt = val ? q.options.find(function(o){ return o.v === val; }) : null;
+  const showFreeText = opt && opt.freeText;
+  return (
+    <div className="step">
+      <h1>{q.title}</h1>
+      {q.note ? <p className="step-subtle">{q.note}</p> : null}
+      {q.info ? <div className="step-info-block">{q.info.split('\n\n').map(function(p,i){ return <p key={i} style={{margin:i?'10px 0 0':0}}>{p}</p>; })}</div> : null}
+      <div className="choices">
+        {q.options.map(function(o){
+          return (
+            <button key={o.v} className={'choice' + (val === o.v ? ' selected' : '')}
+              onClick={function(){ props.onChange({ value: o.v, freeText: (props.value && props.value.freeText) || '' }); }}>
+              <span>{o.label}</span>
+              <span className="check">✓</span>
+            </button>
+          );
+        })}
+      </div>
+      {showFreeText ? (
+        <div className="field" style={{ marginTop: 16 }}>
+          <label>Please describe</label>
+          <textarea value={(props.value && props.value.freeText) || ''}
+            onChange={function(e){ props.onChange({ value: val, freeText: e.target.value }); }} />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function MultiQuestion(props) {
+  const q = props.q;
+  const sel = Array.isArray(props.value) ? props.value : [];
+  function toggle(v) {
+    const opt = q.options.find(function(o){ return o.v === v; });
+    let next;
+    if (opt && opt.noneAbove) {
+      next = sel.indexOf(v) >= 0 ? [] : [v];
+    } else {
+      const cur = sel.slice().filter(function(x){
+        const eo = q.options.find(function(o){ return o.v === x; });
+        return !(eo && eo.noneAbove);
+      });
+      const i = cur.indexOf(v);
+      if (i >= 0) cur.splice(i, 1); else cur.push(v);
+      next = cur;
+    }
+    props.onChange(next);
+  }
+  const showInfo = q.info && (
+    !q.infoTriggers || (Array.isArray(q.infoTriggers) && sel.some(function(s){ return q.infoTriggers.indexOf(s) >= 0; }))
+  );
+  return (
+    <div className="step">
+      <h1>{q.title}</h1>
+      {q.note ? <p className="step-subtle">{q.note}</p> : null}
+      <div className="choices">
+        {q.options.map(function(o){
+          const on = sel.indexOf(o.v) >= 0;
+          return (
+            <button key={o.v} className={'choice' + (on ? ' selected' : '')} onClick={function(){ toggle(o.v); }}>
+              <span>{o.label}</span>
+              <span className="check">✓</span>
+            </button>
+          );
+        })}
+      </div>
+      {showInfo ? <div className="step-info-block">{q.info.split('\n\n').map(function(p,i){ return <p key={i} style={{margin:i?'10px 0 0':0}}>{p}</p>; })}</div> : null}
+    </div>
+  );
+}
+
+function PairedFrequency(props) {
+  const q = props.q;
+  const v = props.value || {};
+  return (
+    <div className="step">
+      <h1>{q.title}</h1>
+      {q.note ? <p className="step-subtle">{q.note}</p> : null}
+      <div className="paired-block">
+        <div className="paired-block-label">{q.subA}</div>
+        <div className="freq-row">
+          {q.options.map(function(o){
+            return (<button key={o.v} className={'freq-choice' + (v.a === o.v ? ' selected' : '')}
+              onClick={function(){ props.onChange(Object.assign({}, v, { a: o.v })); }}>{o.label}</button>);
+          })}
+        </div>
+      </div>
+      <div className="paired-block">
+        <div className="paired-block-label">{q.subB}</div>
+        <div className="freq-row">
+          {q.options.map(function(o){
+            return (<button key={o.v} className={'freq-choice' + (v.b === o.v ? ' selected' : '')}
+              onClick={function(){ props.onChange(Object.assign({}, v, { b: o.v })); }}>{o.label}</button>);
+          })}
+        </div>
       </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Quiz />);
+function TextQuestion(props) {
+  const q = props.q;
+  const v = props.value || '';
+  const isLong = q.kind === 'text-long';
+  return (
+    <div className="step">
+      <h1>{q.title}</h1>
+      {q.note ? <p className="step-subtle">{q.note}</p> : null}
+      <div className="field">
+        <label>Your answer {q.optional ? <span className="field-opt">(optional)</span> : null}</label>
+        {isLong
+          ? <textarea placeholder={q.placeholder || ''} value={v} onChange={function(e){ props.onChange(e.target.value); }} />
+          : <input type="text" placeholder={q.placeholder || ''} value={v} onChange={function(e){ props.onChange(e.target.value); }} />}
+      </div>
+    </div>
+  );
+}
+
+function isAnswered(q, val) {
+  if (!q) return false;
+  if (q.optional) return true;
+  if (q.kind === 'single') return !!(val && val.value);
+  if (q.kind === 'multi' || q.kind === 'multi-noneabove') return Array.isArray(val) && val.length > 0;
+  if (q.kind === 'paired-frequency') return !!(val && val.a && val.b);
+  if (q.kind === 'text-long' || q.kind === 'text-short' || q.kind === 'text-date') return typeof val === 'string' && val.trim().length > 0;
+  return false;
+}
+
+function getNextQuestionId(q, answer, allAnswers) {
+  if (!q) return null;
+  if (typeof q.nextFn === 'function') return q.nextFn(
+    q.kind === 'single' ? (answer && answer.value) : answer,
+    allAnswers
+  );
+  if (q.kind === 'single' && answer && answer.value) {
+    const opt = q.options.find(function(o){ return o.v === answer.value; });
+    if (opt && opt.next) return opt.next;
+  }
+  return q.next || null;
+}
+
+// ═══ MAIN APP ════════════════════════════════════════════════════════════
+function App() {
+  const draft = useMemo(loadDraft, []);
+  const [phase, setPhase] = useState(function(){ return (draft && draft.phase) || 'general'; });
+  const [general, setGeneral] = useState(function(){ return (draft && draft.general) || {}; });
+  const [answers, setAnswers] = useState(function(){ return (draft && draft.answers) || {}; });
+  const [currentId, setCurrentId] = useState(function(){ return (draft && draft.currentId) || 'q1'; });
+  const [history, setHistory] = useState(function(){ return (draft && draft.history) || []; });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitErr, setSubmitErr] = useState(null);
+  const [done, setDone] = useState(false);
+
+  useEffect(function(){
+    if (done) return;
+    saveDraft({ phase: phase, general: general, answers: answers, currentId: currentId, history: history });
+  }, [phase, general, answers, currentId, history, done]);
+
+  useEffect(function(){
+    const email = general.email;
+    if (!email || !isValidEmail(email)) return;
+    if (!localStorage.getItem('klaviyo_started_quiz_' + email)) {
+      fireStartedQuiz(email, general.legalFirstName || general.preferredName, answers);
+      return;
+    }
+    const t = setTimeout(function(){ patchKlaviyoProfile(email, general.legalFirstName || general.preferredName, answers); }, 2000);
+    return function(){ clearTimeout(t); };
+  }, [general, answers]);
+
+  const flags = useMemo(function(){ return computeFlags(general, answers); }, [general, answers]);
+
+  const total = QUESTIONS.length + 1;
+  let stepIdx = 0;
+  if (phase === 'general') stepIdx = 0;
+  else stepIdx = 1 + Math.max(0, QUESTIONS.findIndex(function(q){ return q.id === currentId; }));
+  const progressPct = done ? 100 : Math.round((stepIdx / total) * 100);
+
+  function continueFromGeneral() {
+    setPhase('questions'); setCurrentId('q1'); setHistory([]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function continueFromQuestion() {
+    const q = Q_BY_ID[currentId];
+    if (!q) return;
+    const nextId = getNextQuestionId(q, answers[q.id], answers);
+    if (nextId && Q_BY_ID[nextId]) {
+      setHistory(history.concat([currentId]));
+      setCurrentId(nextId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    finishIntake();
+  }
+
+  function back() {
+    if (phase === 'questions' && history.length > 0) {
+      const prev = history[history.length - 1];
+      setHistory(history.slice(0, -1));
+      setCurrentId(prev);
+    } else if (phase === 'questions' && history.length === 0) {
+      setPhase('general');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async function finishIntake() {
+    setSubmitting(true); setSubmitErr(null);
+    try {
+      await submitIntake(general, answers, flags);
+      setDone(true);
+      setPhase(flags.excluded ? 'excluded' : 'done');
+    } catch (err) {
+      setSubmitErr((err && err.message) || 'Could not submit your intake. Please try again.');
+    } finally { setSubmitting(false); }
+  }
+
+  if (phase === 'excluded') {
+    return (
+      <div className="shell wide">
+        <div className="excluded-card">
+          <h2>Sorry — based on your intake, we&rsquo;re not able to prescribe women&rsquo;s hormone therapy through this service.</h2>
+          <p style={{ fontSize: 14.5, color: 'var(--ink-2)', lineHeight: 1.6, margin: '0 0 14px' }}>
+            HerEstrogen partners with licensed clinicians at OpenLoop Health, and certain situations require in-person care that we&rsquo;re not able to provide remotely. The reason(s) from your intake:
+          </p>
+          <ul className="reason-list">
+            {flags.excludeReasons.map(function(r, i){ return <li key={i}>{r}</li>; })}
+          </ul>
+          {flags.safetyMsgs.indexOf('SUICIDAL') >= 0 ? (<div className="safety-msg">{SAFETY_MSG_SUICIDAL}</div>) : null}
+          {flags.safetyMsgs.indexOf('POSTMENO_BLEEDING') >= 0 ? (<div className="safety-msg">{SAFETY_MSG_POSTMENO_BLEEDING}</div>) : null}
+          <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.55, marginTop: 18 }}>
+            Your intake has been securely saved. We are not charging your card and you will not be enrolled in a subscription.
+          </p>
+          <div className="actions">
+            <a className="btn btn-back" href="index.html">← Back to home</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === 'done') {
+    try { localStorage.setItem('herestrogen_quiz', JSON.stringify(deriveCompatShape(general, answers, flags))); } catch(e){}
+    const elig = flags.systemicEligible
+      ? (flags.oralEligible ? 'gel,patch,pill,cream,progesterone' : 'gel,patch,cream,progesterone')
+      : 'cream';
+    const search = '?eligible=' + encodeURIComponent(elig) + (flags.syncDivert ? '&sync=1' : '');
+    if (typeof window !== 'undefined') {
+      setTimeout(function(){ window.location.href = 'results.html' + search; }, 250);
+    }
+    return (
+      <div className="shell">
+        <div className="finish">
+          <div className="finish-badge">✓</div>
+          <h1>Submitting your intake&hellip;</h1>
+          <p>One moment — bringing up your next steps.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === 'general') {
+    return (
+      <div className="shell wide">
+        <div className="progress-shell">
+          <span>Step 1 of {total}</span>
+          <div className="progress-bar"><div className="progress-fill" style={{ width: progressPct + '%' }} /></div>
+          <span>{progressPct}%</span>
+        </div>
+        <GeneralInfo value={general} onChange={setGeneral} onContinue={continueFromGeneral} />
+      </div>
+    );
+  }
+
+  const q = Q_BY_ID[currentId];
+  if (!q) return null;
+  const aVal = answers[q.id];
+  const canContinue = isAnswered(q, aVal);
+
+  function setAnswer(val) { setAnswers(Object.assign({}, answers, { [q.id]: val })); }
+
+  const isLastQ = (currentId === 'q24') || getNextQuestionId(q, aVal, answers) == null;
+
+  return (
+    <div className="shell">
+      <div className="progress-shell">
+        <span>Step {stepIdx + 1} of {total}</span>
+        <div className="progress-bar"><div className="progress-fill" style={{ width: progressPct + '%' }} /></div>
+        <span>{progressPct}%</span>
+      </div>
+
+      {q.kind === 'single' ? <SingleQuestion q={q} value={aVal} onChange={setAnswer} /> : null}
+      {(q.kind === 'multi' || q.kind === 'multi-noneabove') ? <MultiQuestion q={q} value={aVal} onChange={setAnswer} /> : null}
+      {q.kind === 'paired-frequency' ? <PairedFrequency q={q} value={aVal} onChange={setAnswer} /> : null}
+      {(q.kind === 'text-short' || q.kind === 'text-long' || q.kind === 'text-date') ? <TextQuestion q={q} value={aVal} onChange={setAnswer} /> : null}
+
+      {submitErr ? <div className="field-error" style={{ marginTop: 12 }}>{submitErr}</div> : null}
+
+      <div className="actions">
+        <button className="btn btn-back" onClick={back}>← Back</button>
+        <button className="btn btn-primary" disabled={!canContinue || submitting} onClick={continueFromQuestion}>
+          {submitting ? 'Submitting…' : (isLastQ ? 'Submit intake →' : 'Continue →')}
+        </button>
+      </div>
+      <div className="footnote">Your answers are reviewed by an OpenLoop Health clinician</div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 
 </body>

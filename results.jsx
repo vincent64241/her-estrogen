@@ -325,6 +325,71 @@ function readQuizAnswers() {
   } catch (e) { return null; }
 }
 
+// Read eligibility flags from URL params (the new quiz redirects with
+// ?eligible=gel,patch,pill,cream,progesterone&sync=1) with a fallback to
+// the eligibility object embedded in the localStorage quiz compat-shape.
+// Returns null if the user never came through the new intake.
+function readEligibility(quiz) {
+  let urlElig = null;
+  let sync = false;
+  try {
+    if (typeof window !== 'undefined') {
+      const u = new URL(window.location.href);
+      const e = u.searchParams.get('eligible');
+      const s = u.searchParams.get('sync');
+      if (e) {
+        const list = e.split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+        urlElig = {
+          gel:          list.indexOf('gel') >= 0,
+          patch:        list.indexOf('patch') >= 0,
+          pill:         list.indexOf('pill') >= 0,
+          cream:        list.indexOf('cream') >= 0,
+          progesterone: list.indexOf('progesterone') >= 0
+        };
+      }
+      if (s === '1') sync = true;
+    }
+  } catch (e) { /* no-op */ }
+  // localStorage fallback
+  if (!urlElig && quiz && quiz.eligibility) {
+    urlElig = {
+      gel:          !!quiz.eligibility.gel,
+      patch:        !!quiz.eligibility.patch,
+      pill:         !!quiz.eligibility.pill,
+      cream:        !!quiz.eligibility.cream,
+      progesterone: !!quiz.eligibility.progesterone
+    };
+  }
+  if (!sync && quiz && quiz.syncDivert) sync = true;
+  if (!urlElig) return null;
+  return Object.assign({}, urlElig, { sync: sync });
+}
+
+// Downgrade the engine's recommendation to the best STILL-ELIGIBLE option.
+// If patient is systemic-ineligible (35-39, 66+, breast-cancer history, CV
+// or clot history, BRCA+, migraine-with-aura, BP ≥140/90, mammogram 2+ yrs
+// or never, post-meno periods >10 yrs, etc.) the only thing we should
+// surface is The Comfort Cream (vaginal estradiol, key='dhea'). If oral-
+// ineligible (thyroid issues, nicotine) we hide the pill.
+function applyEligibility(rec, elig) {
+  if (!rec || !elig) return rec;
+  const stillOk = function (k) {
+    if (k === 'gel')    return elig.gel;
+    if (k === 'patch')  return elig.patch;
+    if (k === 'pill')   return elig.pill;
+    if (k === 'dhea')   return elig.cream;
+    if (k === 'bundle') return elig.gel && elig.progesterone;
+    return false;
+  };
+  if (stillOk(rec.primary)) return rec;
+  const fallback = ['gel', 'patch', 'pill', 'dhea'].find(stillOk);
+  return Object.assign({}, rec, {
+    primary: fallback || 'dhea',
+    offerBundle: false,
+    reason: 'Based on your intake, a licensed clinician will most likely consider a local/vaginal option for you (other forms have clinical exclusions that apply). Final treatment is decided by the clinician.'
+  });
+}
+
 // Audit finding C-10: algorithm output reframed as "topics your clinician may
 // discuss with you" rather than "your prescription is X." The clinician —
 // not the page — decides what (if anything) to prescribe. Specific dose,
@@ -625,6 +690,9 @@ function App() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [quizAnswers, setQuizAnswers] = useState(null);
+  // Eligibility: { gel, patch, pill, cream, progesterone, sync }. null when
+  // the user didn't come through the new clinical intake (so no filtering).
+  const [eligibility, setEligibility] = useState(null);
   const [selectedMed, setSelectedMed] = useState('gel');
   const [selectedDuration, setSelectedDuration] = useState('threeMonth');
   const [checkoutVisible, setCheckoutVisible] = useState(false);
@@ -642,7 +710,9 @@ function App() {
   useEffect(() => {
     const quiz = readQuizAnswers();
     setQuizAnswers(quiz);
-    const rec = recommendProduct(quiz);
+    const elig = readEligibility(quiz);
+    setEligibility(elig);
+    const rec = applyEligibility(recommendProduct(quiz), elig);
     setSelectedMed(rec.primary);
 
     // If the quiz collected firstName + valid email + 10-digit phone, jump straight to Phase 2
@@ -658,7 +728,7 @@ function App() {
     }
   }, []);
 
-  const recommendation = useMemo(() => recommendProduct(quizAnswers), [quizAnswers]);
+  const recommendation = useMemo(function () { return applyEligibility(recommendProduct(quizAnswers), eligibility); }, [quizAnswers, eligibility]);
   const plan = PLAN_DETAILS[selectedDuration];
   const monthly = plan.monthly;          // monthly equivalent for display
   const total = plan.total;              // charged amount per billing cycle
@@ -813,6 +883,37 @@ function App() {
           <span className="trust-strip-48-text">Board-certified clinician review — typically within <strong>48 hours</strong> of submission</span>
         </div>
       </div>
+
+      {/* Sync-divert banner — surfaces when the intake flagged a state with
+          required video-visit before any prescription (AR, DC, DE, KS, MS,
+          NM, RI, WV) OR an insulin-diabetes / elevated-BP flag. The patient
+          can still continue to checkout; OpenLoop initiates the scheduling
+          call after intake review. */}
+      {eligibility && eligibility.sync ? (
+        <div className="sync-banner">
+          <div className="container">
+            <span className="sync-banner-icon" aria-hidden="true">📞</span>
+            <span className="sync-banner-text">
+              <strong>A short video visit is part of your plan.</strong> Based on your intake, a clinician at our medical partner OpenLoop Health will reach out to schedule a brief video visit before any prescription is finalized. You can still continue to checkout — no charge until your clinician reviews you.
+            </span>
+          </div>
+        </div>
+      ) : null}
+
+      {/* Eligibility-aware banner — when patient is systemic-ineligible
+          (35-39, 66+, or any of the clinical exclusions in Q9/Q11) we
+          surface a brief explainer above the recommendation card so the
+          single Comfort Cream product on the page doesn't feel limiting. */}
+      {eligibility && !eligibility.gel && !eligibility.patch && !eligibility.pill ? (
+        <div className="elig-banner">
+          <div className="container">
+            <span className="elig-banner-icon" aria-hidden="true">ℹ</span>
+            <span className="elig-banner-text">
+              Based on your intake, the FDA-approved option a clinician is most likely to consider for you is a local/vaginal estradiol cream. Other forms of estrogen therapy have clinical considerations that may not apply to you — your clinician decides after a full review.
+            </span>
+          </div>
+        </div>
+      ) : null}
 
       {/* SECTION 5 — Recommendation */}
       <section style={{ background: '#fff' }}>
