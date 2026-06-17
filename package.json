@@ -4,10 +4,17 @@
   "private": true,
   "description": "Her Estrogen marketing site + post-quiz checkout. Static front-end (HTML + CDN React + Babel-standalone) with Vercel Serverless Functions. Production payments processed by OpenLoop via webhooks (api/orders/*); Stripe scaffold (api/checkout, api/webhooks/stripe) is dormant and gated behind STRIPE_ENABLED.",
   "dependencies": {
-    "stripe": "^17.5.0",
-    "@supabase/supabase-js": "^2.45.0"
+    "@supabase/supabase-js": "^2.45.0",
+    "stripe": "^17.5.0"
   },
+  "scripts": {
+    "build": "esbuild app.jsx --minify --target=es2018 --outfile=app.bundle.js && esbuild quiz.src.jsx --minify --target=es2018 --outfile=quiz.bundle.js && esbuild results.jsx --minify --target=es2018 --outfile=results.bundle.js"
+  },
+  "comment_build": "Bundles are built LOCALLY and committed (Vercel serves them statically — no Vercel build step). After editing app.jsx, quiz.src.jsx, or results.jsx you MUST run `npm run build` and re-sync, or the live site will not reflect your changes.",
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
   }
 }

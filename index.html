@@ -1001,15 +1001,8 @@
     transition: width .3s ease;
   }
 
-  /* small banner */
-  .banner {
-    background: linear-gradient(90deg, var(--pink-deep) 0%, var(--pink) 100%);
-    color: #fff;
-    text-align: center; padding: 10px 24px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px; letter-spacing: 0.08em;
-  }
-  .banner .dot { color: var(--pink-soft); margin: 0 10px; }
+  /* (Old .banner styles removed — the top telehealth/shipping/cancel bar
+     was deleted; its compliance copy lives in the footer.) */
 
   /* ---- SIMPLIFIED FOOTER (overrides) ---- */
   .foot-simple {
@@ -1218,8 +1211,6 @@
      EDITORIAL HERO — full-bleed photo + giant display
      ==================================================== */
 
-  /* Hide announcement banner so editorial nav floats cleanly */
-  body > .banner { display: none; }
 
   /* Transparent fixed nav (logo left, button right) — turns white on scroll */
   .nav.nav-editorial {
@@ -1282,6 +1273,17 @@
     padding: 11px 22px;
     font-size: 14px;
     white-space: nowrap;
+  }
+  /* Mobile tap target — nav CTA was 39px tall; guarantee ≥44px without
+     changing desktop (P1-FIX3). inline-flex so min-height takes effect on
+     the anchor. */
+  @media (max-width: 560px) {
+    .nav.nav-editorial .nav-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .nav.nav-editorial .nav-logo {
     height: 190px;
@@ -2931,6 +2933,17 @@
       line-height: 1.15;
     }
     .trust-marquee .tm-track { gap: 38px; animation-duration: 24s; }
+
+    /* ── Mobile hero density (P1-FIX2) — pull the main tile + CTA up so it
+       reaches the fold faster. Mobile-only; desktop untouched. ── */
+    .hero-bento h1 { margin: 0 0 10px; }              /* a) tighter headline→subhead */
+    .hero-bento .hb-sub { margin: 0 0 10px; }
+    .hero-bento .hb-disclaimer {                       /* b) smaller, tighter fine print (still visible for compliance) */
+      font-size: 11px; line-height: 1.45; margin: 0 0 20px;
+    }
+    /* c) reduce main-tile internal padding so the CTA sits higher in the
+       tile (the tile uses justify-content: space-between). */
+    .hero-bento .tile.main { padding: 22px; min-height: 230px; }
   }
 
   /* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
@@ -3048,6 +3061,8 @@
     .home-promise-grid { grid-template-columns: 1fr; gap: 14px; }
     .home-bonus-card { padding: 22px 22px 20px; }
     .home-promise-card { padding: 26px 22px; }
+    /* Card body copy ≥15px on mobile for the 40-60yo demographic (P1-FIX3c). */
+    .home-bonus-desc, .home-promise-body { font-size: 15px; }
   }
 
   /* Shared reveal for ported sections (transform-only, bulletproof) */
@@ -3607,6 +3622,21 @@
   .science-v2 .v2-title { color: #ffffff !important; }
   .science-v2 .v2-title em { color: #ffffff !important; font-style: italic; }
 
+  /* Legibility (P1-FIX3d): the headline + subhead sit in the LIGHT-pink top
+     of the section gradient, where plain white text drops below WCAG AA
+     contrast. A dark plum text-shadow gives each glyph a readable edge
+     without changing the carefully-tuned gradient. Applies on all widths
+     since the contrast issue exists on desktop + mobile alike. */
+  .science-v2 .v2-title {
+    text-shadow: 0 1px 2px rgba(40,8,22,.55), 0 0 16px rgba(40,8,22,.45) !important;
+  }
+  .science-v2 .v2-sub {
+    text-shadow: 0 1px 2px rgba(40,8,22,.5), 0 0 12px rgba(40,8,22,.4) !important;
+  }
+  .science-v2 .stat b, .science-v2 .stat small {
+    text-shadow: 0 1px 6px rgba(40,8,22,.4) !important;
+  }
+
   /* ═══ Global "write-on" — type-out animation for headlines ═══
      Any element tagged with .write-on whose children are <span class="word">
      gets a staggered word reveal the first time it scrolls into view. A
@@ -3683,11 +3713,11 @@ fbq('track', 'PageView');
 </head>
 <body>
 
-<!-- Audit finding H-18: "Telehealth in all 50 states" softened pending
-     state-by-state OpenLoop licensure verification + LegitScript cert.
-     "Cancel or pause" softened to match Terms §7 (cancel before any
-     renewal; no pause feature documented). -->
-<div class="banner" style='font-family: "DM Sans"; font-weight: 800'>Telehealth available where independently licensed clinicians are authorized <span class="dot">•</span> Free shipping <span class="dot">•</span> Cancel anytime before any renewal</div>
+<!-- Old top "Telehealth / Free shipping / Cancel anytime" banner REMOVED
+     (duplicate top bar stacked above .annc-bar on mobile). Its compliance
+     content lives in the footer foot-bottom line: "Telehealth available
+     where independently licensed clinicians are authorized to practice."
+     (Audit H-18.) Only the .annc-bar 93% stat sits above the nav now. -->
 
 <!-- Announcement bar (primary pink, centered statement — non-clickable per
      spec; the nav already carries the CTA, so this line is a pure stat). -->
@@ -3708,11 +3738,13 @@ fbq('track', 'PageView');
 
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<!-- Production React (minified) — @babel/standalone removed. JSX is now
+     compiled ahead-of-time to app.bundle.js via esbuild (npm run build).
+     Source of truth stays app.jsx; re-run the build after editing it. -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v14"></script>
+<script src="app.bundle.js?v=v15" defer></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
