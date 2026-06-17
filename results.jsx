@@ -788,12 +788,37 @@ function App() {
     }
 
     // Meta Pixel — sanitized InitiateCheckout signal (no medical metadata).
-    // Value passed is the 3-month plan price ($477) per the tracking spec.
-    // The helper is defined inline in results.html; it's a no-op if fbq is
-    // unavailable (ad-blocker, network failure).
+    // The browser-side helper is a deliberate no-op per HHS OCR healthcare
+    // tracking guidance (audit C-08). Keep the call site so existing
+    // analytics scaffolding doesn't break if the stub is ever replaced.
     if (typeof window.trackInitiateCheckout === 'function') {
       window.trackInitiateCheckout(477);
     }
+
+    // Server-side Meta CAPI InitiateCheckout — fire-and-forget. Reads
+    // _fbc / _fbp cookies (set by the homepage PageView pixel on visitors
+    // from a Meta ad) and forwards to /api/capi/initiate-checkout which
+    // hashes email + posts to Meta's Graph API. NEVER awaited — checkout
+    // flow proceeds even if this request is slow / blocked / errors.
+    (function fireCAPIInitiateCheckout() {
+      function getCookie(name) {
+        var match = document.cookie.split('; ').find(function (row) { return row.indexOf(name + '=') === 0; });
+        return match ? match.split('=')[1] : undefined;
+      }
+      var planValue = (plan && typeof plan.total === 'number') ? plan.total : 477;
+      try {
+        fetch('/api/capi/initiate-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email || undefined,
+            fbc: getCookie('_fbc'),
+            fbp: getCookie('_fbp'),
+            planValue: planValue
+          })
+        }).catch(function () { /* silent failure — attribution only */ });
+      } catch (e) { /* never block checkout */ }
+    })();
 
     setSubmitting(true);
 

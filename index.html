@@ -636,13 +636,26 @@
     font-size: 14.5px;
     color: var(--muted);
     line-height: 1.45;
-    margin: 0 0 20px;
+    margin: 0 0 6px;
+  }
+  /* Use-case tag — surfaces below the clinical subtitle on selected
+     product cards (Comfort Cream + Nightly Balance Pill). Pink-deep, 12px,
+     600 weight so it reads as an emphasized supporting label without
+     competing with the product name. */
+  .product-use-case {
+    display: block;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--pink-deep);
+    letter-spacing: 0.01em;
+    margin: 0 0 16px;
   }
   .product-card-btn {
     display: block;
     width: 100%;
     text-align: center;
-    background: var(--ink);
+    background: var(--pink);
     color: #fff;
     padding: 14px 20px;
     border-radius: 50px;
@@ -652,10 +665,14 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: background .15s ease, transform .15s ease;
+    /* Box-shadow used for the hover outline so it doesn't shift layout. */
+    box-shadow: 0 0 0 0 var(--ink);
+    transition: box-shadow .15s ease, transform .15s ease;
   }
+  /* Hover: keep the pink fill, ring it in black, and lift. */
   .product-card-btn:hover {
     background: var(--pink);
+    box-shadow: 0 0 0 2px var(--ink);
     transform: translateY(-1px);
   }
 
@@ -819,6 +836,12 @@
   .compare-no { color: var(--muted); }
 
   /* ---- TESTIMONIALS ---- */
+  /* Hidden: no verified patient testimonials yet.
+     Only real, consented patient stories go here.
+     Remove display:none when consent + content ready.
+     Fake testimonials violate FTC rules (16 CFR Part 465 + Part 255) —
+     do not restore with unverified content. Audit findings C-06, H-13. */
+  .reviews, .reviews-rating, .review-grid, .review { display: none !important; }
   .reviews { padding: 120px 0; background: #fff; }
   .reviews-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px; align-items: end; }
   @media (max-width: 800px) { .reviews-head { grid-template-columns: 1fr; } }
@@ -2309,6 +2332,13 @@
     .edu-trust-row .sep { display: none; }
   }
 
+  /* Hidden: no verified patient testimonials yet.
+     Only real, consented patient stories go here.
+     Remove display:none when consent + content ready.
+     Fake testimonials violate FTC rules (16 CFR Part 465 + Part 255) —
+     do not restore with unverified content. Audit findings C-06, H-13. */
+  .marquee-section, .patient-stories, .marquee-card, .patient-card { display: none !important; }
+
   /* ---- PATIENT STORIES — marquee (2 scrolling rows, pause on hover) ---- */
   .marquee-section {
     padding: 28px 0 24px;
@@ -2678,6 +2708,59 @@
     font-size: 12.5px; line-height: 1.5; color: var(--muted);
     max-width: 620px; margin: 0 0 36px;
     font-style: italic;
+  }
+  /* Clinical-match guarantee line — sits IMMEDIATELY above the hero CTA
+     inside the bento main tile so the risk-reversal and the CTA read as
+     one visual unit. Pink ✓ pseudo-element used in lieu of an SVG. */
+  .hero-guarantee {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 420px;
+  }
+  .hero-guarantee::before {
+    content: '';
+    display: inline-flex;
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--pink);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+    flex-shrink: 0;
+  }
+  .hero-guarantee strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  @media (max-width: 560px) {
+    .hero-guarantee { font-size: 13px; max-width: 100%; }
+  }
+  /* The main bento tile sits over a darkened lifestyle photo where the
+     existing rule (.hero-bento .tile p { color: #fff }) forces white text.
+     Override the spec's ink color in that one context so the guarantee
+     stays readable against the photo backdrop; pink ✓ + white text retain
+     the same risk-reversal feel. */
+  .hero-bento .tile .hero-guarantee {
+    color: #fff;
+    text-shadow: 0 1px 14px rgba(0,0,0,.45);
+    position: relative; z-index: 1;
+    /* The main tile uses justify-content: space-between; auto-margin on
+       the guarantee absorbs the leftover slack so guarantee + CTA stay
+       visually grouped at the bottom of the tile (no large gap between). */
+    margin-top: auto; margin-bottom: 14px;
+  }
+  .hero-bento .tile .hero-guarantee strong {
+    color: #fff;
+    font-weight: 700;
   }
 
   /* Bento grid: 1 tall primary + 4 symptom tiles */
@@ -3105,7 +3188,18 @@
     color: var(--ink); margin: 0 0 40px;
   }
   .clinical-v2 .v2-title em { font-style: italic; color: var(--pink); }
-  .clinical-v2 .standards-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
+  /* Hidden: no medical director confirmed yet.
+     Remove display:none when real clinician is onboarded.
+     Do not show placeholder — compliance risk. */
+  .clinical-v2 .clinical-panel { display: none; }
+  /* Standards grid collapses to single column when the panel is hidden,
+     so credential cards (cred-list, below) become the only content. */
+  .clinical-v2 .standards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 880px;
+    margin: 0 auto;
+  }
   .clinical-v2 .cred-list { display: flex; flex-direction: column; gap: 14px; }
   .clinical-v2 .cred {
     display: flex; gap: 16px; align-items: flex-start;
@@ -3504,9 +3598,10 @@
     color: var(--pink-deep) !important;
     backdrop-filter: none;
   }
-  /* Science H2: solid yellow (per request). */
-  .science-v2 .v2-title { color: #facc15 !important; }
-  .science-v2 .v2-title em { color: #facc15 !important; font-style: italic; }
+  /* Science headline: white on dark gradient for clinical authority.
+     Yellow (#facc15) was flagged as undermining trust — use white only. */
+  .science-v2 .v2-title { color: #ffffff !important; }
+  .science-v2 .v2-title em { color: #ffffff !important; font-style: italic; }
 
   /* ═══ Global "write-on" — type-out animation for headlines ═══
      Any element tagged with .write-on whose children are <span class="word">
@@ -3558,6 +3653,29 @@
      server-side Conversions-API approach. Do NOT re-enable on any
      health-context URL (quiz, results, confirmation, privacy, terms).
      Re-enabling on the marketing home requires written counsel approval. -->
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     Meta Pixel — PageView ONLY on homepage (marketing page).
+     Health-context pages (quiz, results, confirmation) are pixel-free per
+     HHS OCR tracking-tech guidance (2022/2024). Lead /
+     CompleteRegistration / InitiateCheckout events must be implemented via
+     server-side Conversions API only. Re-enabling any client-side
+     health-context events requires written compliance review.
+     Pixel ID: 1691324572051294
+     ════════════════════════════════════════════════════════════════════════ -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1691324572051294');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
+  alt="" /></noscript>
+<!-- End Meta Pixel — PageView ONLY. Do NOT add Lead / Complete / Checkout. -->
 </head>
 <body>
 
@@ -3590,7 +3708,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="app.jsx?v=v13"></script>
+<script type="text/babel" src="app.jsx?v=v14"></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav

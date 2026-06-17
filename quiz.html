@@ -881,6 +881,16 @@ function deriveCompatShape(general, answers, flags) {
   };
 }
 
+// Meta CAPI attribution cookies — _fbc (click ID) and _fbp (browser ID)
+// are set by the homepage PageView pixel when a visitor lands from a
+// Meta ad. We pass them to /api/quiz/submit so the server-side Lead
+// CAPI event can match this conversion back to the originating ad.
+// Returns undefined when the cookie isn't present.
+function getCookieValue(name) {
+  const row = document.cookie.split('; ').find(function (r) { return r.indexOf(name + '=') === 0; });
+  return row ? row.split('=')[1] : undefined;
+}
+
 async function submitIntake(general, answers, flags) {
   const compat = deriveCompatShape(general, answers, flags);
   const payload = Object.assign({}, compat, {
@@ -897,7 +907,11 @@ async function submitIntake(general, answers, flags) {
       ssriEligible: flags.ssriEligible, desvenEligible: flags.desvenEligible,
       syncDivert: flags.syncDivert, syncDivertReasons: flags.syncDivertReasons,
       excluded: flags.excluded, excludeReasons: flags.excludeReasons
-    }
+    },
+    // Meta attribution cookies (set by homepage PageView pixel) — undefined
+    // for visitors who didn't arrive via a Meta ad.
+    fbc: getCookieValue('_fbc'),
+    fbp: getCookieValue('_fbp')
   });
   const dedupeKey = 'quiz_submitted_' + (general.email || '');
   if (localStorage.getItem(dedupeKey)) return;

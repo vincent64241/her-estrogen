@@ -44,6 +44,7 @@ const TREATMENTS = [
   eyebrow: 'FDA-Approved · Vaginal Health',
   name: 'The Comfort Cream',
   subtitle: 'Estradiol — vaginal application',
+  useCase: 'For local comfort & intimacy',
   features: [
   ['Application', 'Vaginal cream — as directed'],
   ['Form', 'Estrace Vaginal Cream']],
@@ -54,6 +55,7 @@ const TREATMENTS = [
   eyebrow: 'FDA-Approved · Sleep + Protection',
   name: 'The Nightly Balance Pill',
   subtitle: 'Progesterone — oral, nightly',
+  useCase: 'For sleep support & hormonal balance',
   features: [
   ['Application', 'Nightly oral pill — at bedtime'],
   ['Dose', '100 mg or 200 mg as prescribed']],
@@ -352,10 +354,17 @@ function App() {
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
           <h1 className="write-on">
-            <span className="word" style={{ animationDelay: '0ms'   }}>Feel</span>{' '}
-            <span className="word" style={{ animationDelay: '90ms'  }}>like</span>{' '}
-            <span className="word" style={{ animationDelay: '180ms' }}>yourself,</span>{' '}
-            <em><span className="word" style={{ animationDelay: '300ms' }}>again.</span></em>
+            <span className="word" style={{ animationDelay: '0ms'   }}>Your</span>{' '}
+            <span className="word" style={{ animationDelay: '80ms'  }}>doctor</span>{' '}
+            <span className="word" style={{ animationDelay: '160ms' }}>said</span>{' '}
+            <span className="word" style={{ animationDelay: '240ms' }}>it</span>{' '}
+            <span className="word" style={{ animationDelay: '320ms' }}>was</span>{' '}
+            <span className="word" style={{ animationDelay: '400ms' }}>stress.</span>
+            <br />
+            <em>
+              <span className="word" style={{ animationDelay: '560ms' }}>It</span>{' '}
+              <span className="word" style={{ animationDelay: '640ms' }}>wasn&rsquo;t.</span>
+            </em>
           </h1>
           <p className="hb-sub rv d1">
             For women experiencing hormonal changes. Get FDA-approved hormone
@@ -379,6 +388,9 @@ function App() {
                   <span className="pill-chip">All 50 states</span>
                 </div>
               </div>
+              <p className="hero-guarantee">
+                If your clinician determines hormone therapy isn&rsquo;t right for you — <strong>you pay nothing.</strong>
+              </p>
               <span className="btn btn-primary hb-cta">
                 Find my treatment
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -649,6 +661,7 @@ function App() {
                 <div className="product-card-body">
                   <h3 className="product-card-name">{t.name}</h3>
                   <p className="product-card-subtitle">{t.subtitle}</p>
+                  {t.useCase ? <span className="product-use-case">{t.useCase}</span> : null}
                   <span className="product-card-btn">GET STARTED</span>
                 </div>
               </a>

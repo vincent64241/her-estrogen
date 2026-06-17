@@ -49,6 +49,7 @@
 
 const { supabaseAdmin } = require('../../lib/supabase');
 const { fireCompletedQuiz } = require('../../lib/klaviyo');
+const { sendCAPIEvent, buildLeadEvent } = require('../../lib/meta-capi');
 const crypto = require('crypto');
 
 const KLAVIYO_BASE = 'https://a.klaviyo.com/api';
@@ -289,18 +290,51 @@ module.exports = async (req, res) => {
 
   const tok = logToken(email);
 
-  // Run all four writes in parallel. Klaviyo failures must NOT fail the request.
+  // ── Meta CAPI request context ──
+  // Extract IP + UA from the request for server-side Lead attribution.
+  // fbc / fbp come from the client (read from _fbc / _fbp cookies in
+  // quiz.html's submitIntake before POST). These let Meta match the
+  // server event to the original ad click chain.
+  const ipAddress =
+    (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+    req.headers['x-real-ip'] ||
+    undefined;
+  const userAgent = req.headers['user-agent'] || undefined;
+  const fbc = body.fbc || undefined;
+  const fbp = body.fbp || undefined;
+
+  // Event ID lets Meta deduplicate against any duplicate Lead that might
+  // arrive (e.g. if a future browser-side pixel is re-enabled and both
+  // fire). Unique per submission.
+  const leadEventId = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+
+  // Run all FIVE writes in parallel. Klaviyo + CAPI failures must NOT fail the request.
   //   - writeToSupabase: canonical record
   //   - klaviyoProfileImport: create/update profile (health data gated by KLAVIYO_SEND_HEALTH_DATA)
   //   - klaviyoSubscribe: add to list Rsp58u (triggers F2 Pre-Rx Nurture)
   //   - fireCompletedQuiz: fires "Completed Quiz" metric event (EXIT signal
   //     for F1 Quiz Abandonment — stops the F1 flow from sending abandonment
   //     emails when the user actually completes within the 1hr window)
-  const [supaResult, importResult, subscribeResult, completedResult] = await Promise.allSettled([
+  //   - sendCAPIEvent(buildLead..): server-side Meta Lead event (no PII
+  //     leaves this server unhashed; client-side pixel never fires Lead).
+  const [supaResult, importResult, subscribeResult, completedResult, capiResult] = await Promise.allSettled([
     writeToSupabase(payload),
     klaviyoProfileImport(payload),
     klaviyoSubscribe(payload),
-    fireCompletedQuiz({ email })
+    fireCompletedQuiz({ email }),
+    sendCAPIEvent(
+      buildLeadEvent({
+        email,
+        phone: body.phone || undefined,
+        ipAddress,
+        userAgent,
+        fbc,
+        fbp,
+        sourceUrl: 'https://www.herestrogen.com/quiz',
+        eventId: leadEventId
+      }),
+      process.env.META_CAPI_TEST_CODE
+    )
   ]);
 
   if (supaResult.status === 'rejected') {
@@ -314,6 +348,9 @@ module.exports = async (req, res) => {
   }
   if (completedResult.status === 'rejected') {
     console.warn('[quiz/submit] klaviyo Completed Quiz event failed for', tok, ':', completedResult.reason && completedResult.reason.message);
+  }
+  if (capiResult.status === 'rejected') {
+    console.warn('[quiz/submit] Meta CAPI Lead event failed for', tok, ':', capiResult.reason && capiResult.reason.message);
   }
 
   // UX is fire-and-forget — always return 200 so the client can advance.
