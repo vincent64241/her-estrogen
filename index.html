@@ -954,7 +954,7 @@
 
   /* ---- FOOTER ---- */
   footer {
-    background: linear-gradient(180deg, var(--pink-deep) 0%, #5a0e2b 100%);
+    background: var(--pink);
     color: #fde8ef;
     padding: 72px 0 32px;
   }
@@ -2936,7 +2936,9 @@
      soft cream/sand alternation against the white .treatments block above. */
   .home-bonus-section {
     background: var(--cream, var(--pink-softer));
-    padding: 88px 0;
+    /* Tighter top padding so this sits closer to the products carousel
+       above it; bottom padding unchanged. */
+    padding: 40px 0 88px;
   }
   .home-bonus-section .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
   .home-bonus-section .eyebrow {
@@ -3039,7 +3041,7 @@
     color: var(--muted); margin: 0;
   }
   @media (max-width: 900px) {
-    .home-bonus-section { padding: 64px 0; }
+    .home-bonus-section { padding: 28px 0 64px; }
     .home-bonus-grid { grid-template-columns: 1fr; gap: 14px; margin-bottom: 56px; }
     .home-promise-grid { grid-template-columns: 1fr; gap: 14px; }
     .home-bonus-card { padding: 22px 22px 20px; }
