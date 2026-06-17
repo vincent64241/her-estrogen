@@ -2742,7 +2742,9 @@
     font-weight: 700;
   }
   @media (max-width: 560px) {
-    .hero-guarantee { font-size: 13px; max-width: 100%; }
+    /* Hidden on mobile per request — the guarantee still appears in the
+       homepage promises section + on the results page. */
+    .hero-guarantee { display: none; }
   }
   /* The main bento tile sits over a darkened lifestyle photo where the
      existing rule (.hero-bento .tile p { color: #fff }) forces white text.
