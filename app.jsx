@@ -358,9 +358,15 @@ function App() {
             <em><span className="word" style={{ animationDelay: '300ms' }}>again.</span></em>
           </h1>
           <p className="hb-sub rv d1">
-            FDA-approved hormone therapy, prescribed by a licensed clinician
-            when clinically appropriate. Treatment is subject to clinician
-            approval; outcomes vary by individual.
+            For women experiencing hormonal changes. Get FDA-approved hormone
+            therapy prescribed in less than 48 hours and delivered straight to
+            your door in under 7 days after approval. You&rsquo;ve already
+            spent time waiting for things to get better on their own.
+          </p>
+          {/* Compliance disclaimer moved from inside the hero subhead — kept
+              on the page as fine-print directly below it (audit C-11). */}
+          <p className="hb-disclaimer rv d2">
+            Treatment is subject to clinician approval; outcomes vary by individual.
           </p>
           <div className="bento">
             <a className="tile main rv d1" href="quiz.html">
@@ -659,6 +665,116 @@ function App() {
           >
             ›
           </button>
+        </div>
+      </section>
+
+      {/* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
+          Sits directly below the treatments/products section per spec.
+          Bonus copy carries explicit dollar values per the spec — note this
+          differs from the results-page bonus stack (which has no $ values
+          per a prior compliance vote). The two pages render distinct UIs. */}
+      <section className="home-bonus-section" data-screen-label="02c Bonuses + Promises">
+        <div className="container">
+          <div className="eyebrow">Included with every plan</div>
+          <h2 className="home-bonus-h2">Everything <em>included</em> with your protocol</h2>
+          <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month</p>
+
+          <div className="home-bonus-grid">
+            {/* Card 1 — Protocol Passport */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="8" y1="13" x2="16" y2="13"/>
+                  <line x1="8" y1="17" x2="14" y2="17"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Your Protocol Passport</h3>
+              <span className="home-bonus-value">$150 value — included free</span>
+              <p className="home-bonus-desc">A personalized clinical guide created for your specific protocol after clinician review. What you&rsquo;re taking, why, what to expect week by week, and how to reach your clinician — all in one place.</p>
+            </div>
+
+            {/* Card 2 — 30-Day Clinical Concierge */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">30-Day Clinical Concierge</h3>
+              <span className="home-bonus-value">$300 value — included free</span>
+              <p className="home-bonus-desc">Unlimited clinician messaging for your first 30 days with responses within 2 hours during waking hours. Questions, side effects, reassurance — your clinician is there.</p>
+            </div>
+
+            {/* Card 3 — Quarterly Protocol Reviews */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <polyline points="9 16 11 18 15 14"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Quarterly Protocol Reviews</h3>
+              <span className="home-bonus-value">$800/year value — included</span>
+              <p className="home-bonus-desc">Every 90 days, your board-certified clinician reviews your protocol, checks your progress, and adjusts your treatment if needed. Included with every plan at no extra cost.</p>
+            </div>
+
+            {/* Card 4 — Lifetime Price Lock */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Lifetime Price Lock</h3>
+              <span className="home-bonus-value">Priceless — included</span>
+              <p className="home-bonus-desc">Your rate today is your rate forever. We raise prices as we grow. Your loyalty means your price never changes as long as you remain an active subscriber.</p>
+            </div>
+          </div>
+
+          {/* ── Promises (continues the same section) ──────────────────── */}
+          <h2 className="home-promise-h2">Our <em>promises</em> to you</h2>
+          <div className="home-promise-grid">
+            {/* Promise 1 — Clinical Match Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">Clinical Match Guarantee</h3>
+              <p className="home-promise-body">If our board-certified clinician reviews your intake and determines that FDA-approved hormone therapy is not the right fit for you, you pay absolutely nothing. No consultation fee. No processing fee. Nothing. You only pay if we can help you.</p>
+            </div>
+            {/* Promise 2 — 7-Day Shipping Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 3h5v5"/>
+                  <path d="M21 3l-7 7"/>
+                  <rect x="3" y="8" width="13" height="13" rx="2" ry="2"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">7-Day Shipping Guarantee</h3>
+              <p className="home-promise-body">Once your clinician approves your protocol, your medication ships from a licensed U.S. pharmacy and arrives at your door within 7 days — guaranteed. If it takes longer, your next month is on us.</p>
+            </div>
+            {/* Promise 3 — Lifetime Price Lock Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">Lifetime Price Lock Guarantee</h3>
+              <p className="home-promise-body">The price you start at is the price you keep — forever. As long as you remain an active subscriber, your rate never increases regardless of what happens to our pricing. Lock in today and never pay more.</p>
+            </div>
+          </div>
         </div>
       </section>
 
