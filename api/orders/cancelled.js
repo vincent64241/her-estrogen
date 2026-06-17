@@ -1,16 +1,13 @@
 // Vercel Serverless Function — POST /api/orders/cancelled
 //
 // Called by OpenLoop's webhook when a customer cancels their subscription.
-// Fires the Klaviyo "Cancelled Subscription" event, which is the trigger
-// for the win-back flows (F8A/B/C/D) at 30/90/180/360 days.
+// Currently a no-op acknowledger: validate the shared secret, log, return
+// 200. OpenLoop owns all customer email (win-back, retention, etc.) — the
+// prior Klaviyo "Cancelled Subscription" event has been removed.
 //
-// We deliberately do NOT clear the profile's `current_plan_length` or
-// `product_count` properties on cancel — keeping them lets win-back emails
-// reference the customer's last plan, and historical segments still resolve
-// correctly.
+// Kept live (rather than deleted) so OpenLoop has a stable webhook target.
 //
 // Required env vars (set in Vercel + .env.local):
-//   KLAVIYO_PRIVATE_KEY        — pk_* private API key
 //   OPENLOOP_WEBHOOK_SECRET    — shared secret OpenLoop sends in the
 //                                X-Webhook-Secret header (same secret as
 //                                /api/orders/placed)
@@ -33,9 +30,7 @@
 //   200 { ok: true }
 //   400 { error: <validation message> }
 //   401 { error: 'Unauthorized' }
-//   502 { error: 'Klaviyo event firing failed', detail: ... }
 
-const { fireCancelledSubscription } = require('../../lib/klaviyo');
 const crypto = require('crypto');
 
 // Server-to-server webhook — no browser-callable case, no wildcard CORS
@@ -79,15 +74,7 @@ module.exports = async (req, res) => {
 
   const tok = logToken(email);
 
-  try {
-    const result = await fireCancelledSubscription({ email, plan_length, product_count, reason });
-    console.log(`[orders/cancelled] Klaviyo Cancelled Subscription fired for ${tok} (status ${result.status})`);
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('[orders/cancelled] Klaviyo fire failed for', tok, ':', err && err.message);
-    return res.status(502).json({
-      error: 'Klaviyo event firing failed',
-      detail: err && err.message
-    });
-  }
+  // No-op acknowledge. OpenLoop owns all win-back / retention email.
+  console.log(`[orders/cancelled] accepted ${tok} plan=${plan_length} products=${product_count} reason=${reason || 'none'}`);
+  return res.status(200).json({ ok: true });
 };

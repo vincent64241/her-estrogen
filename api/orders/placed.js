@@ -1,19 +1,16 @@
 // Vercel Serverless Function — POST /api/orders/placed
 //
-// Source-of-truth endpoint for "a customer has paid." Called by OpenLoop's
-// webhook (or any future payment processor) when a payment is successfully
-// captured. Fires the Klaviyo "Placed Order" event AND updates the profile's
-// `current_plan_length` and `product_count` custom properties so Klaviyo
-// segments (Active 3/6/12-Month Plan, Single Product Customer, etc.) can
-// filter on them.
+// Order-placed webhook receiver. Called by OpenLoop when a payment is
+// successfully captured. Currently a no-op acknowledger: we receive,
+// validate the shared secret, log the event, and return 200. OpenLoop
+// handles all customer email (welcome, receipts, etc.) on their side —
+// the prior Klaviyo "Placed Order" event has been removed.
 //
-// NOTE: As of this build, Stripe is NO LONGER the payment processor for live
-// transactions. The /checkout flow on the site exists only as a whitelabeled
-// demo of OpenLoop's processor. The Stripe webhook (api/webhooks/stripe.js)
-// is dormant — kept for reference but not wired to real payments.
+// Keeping this endpoint live (rather than deleting it) gives OpenLoop a
+// stable webhook target and lets us re-attach analytics/CRM in the future
+// without renegotiating the webhook contract.
 //
 // Required env vars (set in Vercel + .env.local):
-//   KLAVIYO_PRIVATE_KEY        — pk_* private API key
 //   OPENLOOP_WEBHOOK_SECRET    — shared secret OpenLoop sends in the
 //                                X-Webhook-Secret header. Rotate periodically.
 //
@@ -27,18 +24,16 @@
 //     {
 //       "email": "customer@example.com",
 //       "plan_length": 3 | 6 | 12,
-//       "product_count": 1 | 2,            // 1 = single product, 2 = bundle
+//       "product_count": 1 | 2,
 //       "value": 116,
 //       "currency": "USD"                   // optional, defaults to "USD"
 //     }
 //
 // Response:
-//   200 { ok: true }                       — event fired + profile updated
+//   200 { ok: true }                       — event accepted
 //   400 { error: <validation message> }    — bad payload
 //   401 { error: 'Unauthorized' }          — missing or wrong webhook secret
-//   502 { error: 'Klaviyo event firing failed', detail: ... }
 
-const { firePlacedOrder } = require('../../lib/klaviyo');
 const crypto = require('crypto');
 
 // Server-to-server webhook — there is no browser-callable case, so we do
@@ -99,18 +94,8 @@ module.exports = async (req, res) => {
   const safeValue = Math.round(value * 100) / 100;
   const tok = logToken(email);
 
-  // Fire the event + update profile properties. Never let a Klaviyo flake
-  // force OpenLoop to retry forever — log loudly on failure but return 502 so
-  // OpenLoop knows to retry once if their retry policy supports it.
-  try {
-    const result = await firePlacedOrder({ email, plan_length, product_count, value: safeValue, currency });
-    console.log(`[orders/placed] Klaviyo Placed Order fired for ${tok} (status ${result.status})`);
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('[orders/placed] Klaviyo fire failed for', tok, ':', err && err.message);
-    return res.status(502).json({
-      error: 'Klaviyo event firing failed',
-      detail: err && err.message
-    });
-  }
+  // No-op acknowledge. OpenLoop owns all downstream customer email +
+  // CRM. Log enough to verify webhooks are landing if we need to audit.
+  console.log(`[orders/placed] accepted ${tok} plan=${plan_length} products=${product_count} value=$${safeValue} ${currency}`);
+  return res.status(200).json({ ok: true });
 };

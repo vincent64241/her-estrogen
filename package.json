@@ -2,15 +2,14 @@
   "name": "her-estrogen",
   "version": "1.0.0",
   "private": true,
-  "description": "Her Estrogen marketing site + post-quiz checkout. Static front-end (HTML + CDN React + Babel-standalone) with Vercel Serverless Functions. Production payments processed by OpenLoop via webhooks (api/orders/*); Stripe scaffold (api/checkout, api/webhooks/stripe) is dormant and gated behind STRIPE_ENABLED.",
+  "description": "HerEstrogen marketing site. Static front-end (HTML + pre-compiled React) with two Vercel Serverless Function endpoints for OpenLoop webhooks (api/orders/*) + provider/pharmacy hooks (api/prescriptions/*). Intake and checkout are hosted by OpenLoop — this site is marketing-only.",
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0",
-    "stripe": "^17.5.0"
+    "@supabase/supabase-js": "^2.45.0"
   },
   "scripts": {
-    "build": "esbuild app.jsx --minify --target=es2018 --outfile=app.bundle.js && esbuild quiz.src.jsx --minify --target=es2018 --outfile=quiz.bundle.js && esbuild results.jsx --minify --target=es2018 --outfile=results.bundle.js"
+    "build": "esbuild app.jsx --minify --target=es2018 --outfile=app.bundle.js"
   },
-  "comment_build": "Bundles are built LOCALLY and committed (Vercel serves them statically — no Vercel build step). After editing app.jsx, quiz.src.jsx, or results.jsx you MUST run `npm run build` and re-sync, or the live site will not reflect your changes.",
+  "comment_build": "app.bundle.js is built LOCALLY and committed (Vercel serves it statically — no Vercel build step). After editing app.jsx you MUST run `npm run build` and re-sync the GitHub Desktop mirror, or the live site will not reflect your changes.",
   "engines": {
     "node": ">=18"
   },

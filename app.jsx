@@ -1,5 +1,16 @@
 const { useState, useEffect } = React;
 
+// ─────────────────────────────────────────────────────────────────────────
+// INTAKE URL — OpenLoop is hosting the intake form. Every "Get Approved"
+// / "Find my treatment" CTA across the homepage routes here.
+//
+// TODO(vincent): replace '#' with the live OpenLoop intake URL once they
+//                provide it. Update the matching value in index.html's
+//                nav button (search for "INTAKE_URL_PLACEHOLDER") in lockstep.
+//                After editing, run `npm run build` and re-sync the mirror.
+// ─────────────────────────────────────────────────────────────────────────
+const INTAKE_URL = '#';  // INTAKE_URL_PLACEHOLDER — replace with OpenLoop URL
+
 const SYMPTOMS = [
 { id: 'hot', name: 'Hot flashes', note: 'Sudden warmth, flushing', glyph: 'H' },
 { id: 'sleep', name: 'Sleep disruption', note: 'Night waking, insomnia', glyph: 'S' },
@@ -263,8 +274,9 @@ function Timeline() {
 }
 
 // Closing "Unsure where to begin? Start here." mini-quiz — multi-select
-// symptom picker + pink Continue button. On submit, navigates to quiz.html
-// with the chosen symptom ids as a URL param so the full quiz can pre-fill.
+// symptom picker + pink Continue button. On submit, routes to INTAKE_URL
+// (OpenLoop-hosted intake). Symptom selections are sent as a `?symptoms=`
+// param so OpenLoop's intake can pre-fill if/when their form supports it.
 function MiniQuizClosing() {
   const SYMPTOMS_MINI = [
     { id: 'sleep', label: "I can't sleep" },
@@ -284,8 +296,12 @@ function MiniQuizClosing() {
   const ids = Object.keys(picked);
   const count = ids.length;
   function go() {
+    // INTAKE_URL is '#' until the OpenLoop URL is wired in. Don't append
+    // a query string to a bare '#' (it would just scroll the page).
+    if (INTAKE_URL === '#') { window.location.href = '#'; return; }
     const qs = count > 0 ? ('?symptoms=' + encodeURIComponent(ids.join(','))) : '';
-    window.location.href = 'quiz.html' + qs;
+    const sep = INTAKE_URL.indexOf('?') >= 0 ? '&' : '?';
+    window.location.href = count > 0 ? (INTAKE_URL + sep + 'symptoms=' + encodeURIComponent(ids.join(','))) : INTAKE_URL;
   }
   return (
     <div className="q-options">
@@ -378,7 +394,7 @@ function App() {
             Treatment is subject to clinician approval; outcomes vary by individual.
           </p>
           <div className="bento">
-            <a className="tile main rv d1" href="quiz.html">
+            <a className="tile main rv d1" href={INTAKE_URL}>
               <div className="blob" aria-hidden="true"></div>
               <div>
                 <h3>Start with the 2-minute assessment</h3>
@@ -396,22 +412,22 @@ function App() {
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               </span>
             </a>
-            <a className="tile sleep rv d2" href="quiz.html">
+            <a className="tile sleep rv d2" href={INTAKE_URL}>
               <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8a1745" strokeWidth="1.8"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
               <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
               <h3>Sleep through the night</h3><p>Night sweats &amp; 3am wakeups</p>
             </a>
-            <a className="tile heat rv d3" href="quiz.html">
+            <a className="tile heat rv d3" href={INTAKE_URL}>
               <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b8235c" strokeWidth="1.8"><path d="M12 3c3 4 5 6.5 5 9.5a5 5 0 11-10 0C7 9.5 9 7 12 3z" /></svg>
               <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
               <h3>Cool the hot flashes</h3><p>Daytime heat, on your terms</p>
             </a>
-            <a className="tile fog rv d3" href="quiz.html">
+            <a className="tile fog rv d3" href={INTAKE_URL}>
               <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5a6b4a" strokeWidth="1.8"><path d="M4 15h12M6 19h14M3 11h18" /></svg>
               <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
               <h3>Clear the fog</h3><p>Focus, memory, sharpness</p>
             </a>
-            <a className="tile mood rv d4" href="quiz.html">
+            <a className="tile mood rv d4" href={INTAKE_URL}>
               <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b89455" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
               <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
               <h3>Steady the moods</h3><p>Feel like you, more often</p>
@@ -650,7 +666,7 @@ function App() {
           </button>
           <div className="products-scroll-container">
             {TREATMENTS.map((t) => (
-              <a href="quiz.html" className="product-card-new" key={t.id}>
+              <a href={INTAKE_URL} className="product-card-new" key={t.id}>
                 <div className="product-card-image-wrapper">
                   <img
                     src={t.image}
