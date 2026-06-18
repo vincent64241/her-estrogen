@@ -39,7 +39,7 @@ const TREATMENTS = [
   subtitle: 'Estradiol — transdermal, twice weekly',
   features: [
   ['Application', 'Twice weekly — adhesive patch']],
-  image: 'assets/estradiol-patch.png?v=2'
+  image: 'assets/estradiol-patch.png?v=3'
 },
 {
   id: 'pill',
