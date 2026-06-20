@@ -29,7 +29,7 @@ In scope:
 Out of scope (please report directly to the vendor):
 
 - OpenLoop Health (clinical platform): security@openloop.com (or per their disclosure page)
-- Supabase, Klaviyo, Stripe, Vercel — report through their respective programs
+- Supabase, Vercel — report through their respective programs
 
 ## What to expect
 
