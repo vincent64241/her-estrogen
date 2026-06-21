@@ -610,9 +610,16 @@
   }
   /* Patch PNG has a solid white background (no real alpha channel), so the
      drop-shadow draws a rectangle around the full image bounding box —
-     creating a visible border artifact. Suppress the shadow for that image. */
+     creating a visible border artifact. Suppress the shadow for that image,
+     disable multiply blend (white-bg image becomes invisible under multiply),
+     and add a soft pink wash to the wrapper so the sticker reads as a card. */
   .product-card-image-wrapper img.no-shadow {
     filter: none;
+    mix-blend-mode: normal;
+  }
+  .product-card-image-wrapper:has(img.no-shadow) {
+    background: #fef5f8;
+    border-radius: 16px;
   }
 
   /* Content area — transparent (sits directly on white section bg). */
