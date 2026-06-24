@@ -395,21 +395,22 @@ function App() {
           bento tile copy ported verbatim per Vincent's "B" choice. */}
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
+          {/* Headline copy lives ABOVE the bento grid. */}
+          <h1 className="hb-headline write-on">
+            <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
+            <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
+            <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
+            <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>{' '}
+            <em>
+              <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
+              <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
+              <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
+            </em>
+          </h1>
           <div className="bento rv d1">
-            {/* MAIN tile — large lifestyle photo with the h1 + pill row + CTA */}
+            {/* MAIN tile — large lifestyle photo with pill row + CTA */}
             <a className="tile main" href={INTAKE_URL}>
               <div className="blob" aria-hidden="true"></div>
-              <h1 className="write-on">
-                <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
-                <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
-                <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
-                <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>{' '}
-                <em>
-                  <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
-                  <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
-                  <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
-                </em>
-              </h1>
               <div className="pillrow">
                 <span className="pill-chip">FDA-approved</span>
                 <span className="pill-chip">48-hour review</span>
