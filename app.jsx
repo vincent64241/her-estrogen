@@ -395,68 +395,68 @@ function App() {
           bento tile copy ported verbatim per Vincent's "B" choice. */}
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
-          {/* Headline split across left + right of the centered avatar.
-              `display: contents` on the <h1> lets its two halves participate
-              in the hb-wrap grid directly (semantic h1 preserved). */}
-          <h1 className="hero-h1 write-on">
-            <span className="h1-half h1-left">
+          {/* LEFT — headline, 3 green-check subheading items, CTA, fine-print */}
+          <div className="hero-left">
+            <h1 className="write-on">
               <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
               <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
               <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
               <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>
-            </span>
-            <span className="h1-half h1-right">
-              <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
-              <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
-              <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
-            </span>
-          </h1>
+              <br />
+              <em>
+                <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
+                <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
+                <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
+              </em>
+            </h1>
+            <ul className="hb-checks rv d2">
+              <li><span className="hb-check-icon" aria-hidden="true">✓</span>FDA-approved hormone therapy</li>
+              <li><span className="hb-check-icon" aria-hidden="true">✓</span>48-hour clinician review</li>
+              <li><span className="hb-check-icon" aria-hidden="true">✓</span>7-day delivery to your door</li>
+            </ul>
+            <a className="btn btn-primary hero-cta rv d3" href={INTAKE_URL}>
+              Find my treatment
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            {/* Compliance disclaimer — fine print directly below the CTA. */}
+            <p className="hb-disclaimer rv d4">
+              Treatment is subject to clinician approval; outcomes vary by individual.
+            </p>
+          </div>
 
-          {/* CENTER avatar — knocked-out image (no background); floats on
-              the white page so no card/border/shadow is applied. */}
+          {/* RIGHT — avatar image + 5 floating stat callouts wrapping the
+              picture. Percentages are sourced from peer-reviewed clinical
+              research on FDA-approved hormone therapy. SOURCES (not on
+              page, kept here for substantiation if challenged):
+                76% — MacLennan 2004 Cochrane review of vasomotor outcomes
+                70% — MsFLASH trial, JAMA Intern Med 2014 (sleep)
+                85% — ACOG Practice Bulletin 141 + NAMS 2020 GSM statement
+                68% — Schmidt 2015 JAMA Psychiatry + Soares 2001 (mood)
+                65% — NAMS 2022 HT Position Statement (energy / fatigue) */}
           <div className="hero-center rv d2">
-            <img src="assets/case-9.jpg" alt="" className="hero-avatar" />
+            <img src="assets/lifestyle/lifestyle-1.jpg" alt="" className="hero-avatar" />
+            <span className="hero-callout hero-callout-1" aria-hidden="true">
+              <span className="hero-callout-num">76%</span>
+              <span className="hero-callout-label">fewer hot flashes</span>
+            </span>
+            <span className="hero-callout hero-callout-2" aria-hidden="true">
+              <span className="hero-callout-num">70%</span>
+              <span className="hero-callout-label">better sleep quality</span>
+            </span>
+            <span className="hero-callout hero-callout-3" aria-hidden="true">
+              <span className="hero-callout-num">85%</span>
+              <span className="hero-callout-label">vaginal comfort restored</span>
+            </span>
+            <span className="hero-callout hero-callout-4" aria-hidden="true">
+              <span className="hero-callout-num">68%</span>
+              <span className="hero-callout-label">improved mood</span>
+            </span>
+            <span className="hero-callout hero-callout-5" aria-hidden="true">
+              <span className="hero-callout-num">65%</span>
+              <span className="hero-callout-label">energy &amp; focus return</span>
+            </span>
           </div>
         </div>
-
-        {/* 5 stat cards in a horizontal row across the bottom of the hero,
-            overlapping the bottom edge of the avatar. Percentages sourced
-            from peer-reviewed clinical research on FDA-approved hormone
-            therapy. SOURCES (not on page, kept here for substantiation):
-              76% — MacLennan 2004 Cochrane review of vasomotor outcomes
-              70% — MsFLASH trial, JAMA Intern Med 2014 (sleep)
-              85% — ACOG Practice Bulletin 141 + NAMS 2020 GSM statement
-              68% — Schmidt 2015 JAMA Psychiatry + Soares 2001 (mood)
-              65% — NAMS 2022 HT Position Statement (energy / fatigue) */}
-        <div className="hero-stats-row rv d3">
-          <div className="hero-stat-card">
-            <div className="hero-stat-num">76%</div>
-            <div className="hero-stat-label">fewer hot flashes</div>
-          </div>
-          <div className="hero-stat-card">
-            <div className="hero-stat-num">70%</div>
-            <div className="hero-stat-label">better sleep quality</div>
-          </div>
-          <div className="hero-stat-card">
-            <div className="hero-stat-num">85%</div>
-            <div className="hero-stat-label">vaginal comfort restored</div>
-          </div>
-          <div className="hero-stat-card">
-            <div className="hero-stat-num">68%</div>
-            <div className="hero-stat-label">improved mood</div>
-          </div>
-          <div className="hero-stat-card">
-            <div className="hero-stat-num">65%</div>
-            <div className="hero-stat-label">energy &amp; focus return</div>
-          </div>
-        </div>
-
-        {/* Compliance disclaimer — small centered line below the stats row.
-            Required by audit C-11; positioned subtly per the reference's
-            minimal aesthetic. */}
-        <p className="hb-disclaimer rv d4">
-          Treatment is subject to clinician approval; outcomes vary by individual.
-        </p>
       </section>
 
       {/* TRUST MARQUEE — ported from reference (text ticker), brand-skinned */}

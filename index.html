@@ -2694,37 +2694,32 @@
      stat-cards-right. Each column ~equal weight at desktop, stacks vertically
      on mobile. Mirrors a feature-discovery hero pattern (avatar with floating
      callouts highlighting our target symptoms). */
-  /* ═══ HERO — split headline (left + right) wrapping a centered, knocked-
-     out avatar, with a 5-card horizontal stats row across the bottom. ═══ */
   .hero-bento {
     position: relative;
-    padding: 220px 32px 0;
+    padding: 220px 32px 88px;
     background: #ffffff;
+    min-height: 720px;
+    display: flex;
+    align-items: center;
   }
   .hb-wrap {
     display: grid;
-    grid-template-columns: 1fr 1.05fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
     align-items: center;
-    max-width: 1320px;
+    max-width: 1180px;
     margin: 0 auto;
     width: 100%;
   }
-  /* <h1> uses display:contents so its two halves participate directly in
-     the hb-wrap grid (semantic h1 unity preserved). */
-  .hero-bento .hero-h1 { display: contents; }
-  .hero-bento .h1-half {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: clamp(42px, 6vw, 88px);
-    line-height: 0.96;
-    letter-spacing: -0.03em;
-    margin: 0;
-    display: block;
+  .hero-bento h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(38px, 4.8vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 24px;
   }
-  .hero-bento .h1-half.h1-left  { color: var(--ink);  grid-column: 1; }
-  .hero-bento .h1-half.h1-right { color: var(--pink); grid-column: 3; }
-  /* Italic em rule retained for backwards-compat — unused in current hero. */
   .hero-bento h1 em { font-style: italic; color: var(--pink); font-weight: 500; }
   .hero-bento .hb-sub {
     font-family: 'DM Sans', system-ui, sans-serif;
@@ -2758,14 +2753,13 @@
     .hero-bento .hb-checks li { font-size: 15px; }
     .hero-bento .hb-check-icon { width: 20px; height: 20px; font-size: 12px; }
   }
-  /* Fine-print disclaimer — small centered line below the stats row.
+  /* Fine-print disclaimer — sits below the CTA in the left column.
      Compliance-required text per audit C-11. */
   .hero-bento .hb-disclaimer {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11.5px; line-height: 1.5; color: var(--muted);
-    max-width: 560px; margin: 28px auto 0;
+    font-size: 12px; line-height: 1.5; color: var(--muted);
+    max-width: 420px; margin: 18px 0 0;
     font-style: italic;
-    text-align: center;
   }
   /* Clinical-match guarantee line — sits IMMEDIATELY above the hero CTA
      inside the bento main tile so the risk-reversal and the CTA read as
@@ -2821,64 +2815,24 @@
     box-shadow: 0 12px 30px rgba(184, 35, 92, 0.36);
   }
 
-  /* ═══ CENTER avatar — knocked-out JPG (case-9.jpg has no background);
-     no card / border-radius / shadow so it floats directly on the page. ═══ */
+  /* ═══ 3-column hero — left text · center avatar · right stat cards ═══ */
   .hero-bento .hero-left { min-width: 0; }
   .hero-bento .hero-center {
     position: relative;
-    max-width: 540px;
+    aspect-ratio: 1 / 1;
+    max-width: 480px;
     margin: 0 auto;
     width: 100%;
-    grid-column: 2;
   }
   .hero-bento .hero-avatar {
-    width: 100%;
-    height: auto;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    border-radius: 24px;
     display: block;
+    box-shadow: 0 24px 56px -16px rgba(26, 18, 22, 0.18);
   }
-
-  /* ═══ 5-card horizontal stats row — sits below the avatar, pulled up
-     with negative margin to overlap the avatar's bottom edge. ═══ */
-  .hero-bento .hero-stats-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
-    max-width: 980px;
-    margin: -56px auto 0;
-    padding: 0 24px;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-bento .hero-stat-card {
-    background: linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);
-    color: #ffffff;
-    border-radius: 6px;
-    padding: 20px 18px 16px;
-    text-align: left;
-    border: 1px solid rgba(255,255,255,0.16);
-    box-shadow: 0 12px 28px rgba(138, 23, 69, 0.22);
-  }
-  .hero-bento .hero-stat-num {
-    font-family: 'Newsreader', Georgia, serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1;
-    color: #ffffff;
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  .hero-bento .hero-stat-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.94);
-    line-height: 1.3;
-  }
-
-  /* ═══ Legacy hero-callout + right-column rules — unused, retained inert
-     so the previous floating-callout / 3-col layouts can be re-enabled
-     without re-deriving the values. ═══ */
+  /* 5 floating stat callouts wrap the avatar — each is a small card with
+     a large italic-serif percentage stacked over a DM-Sans caption. */
   .hero-bento .hero-callout {
     position: absolute;
     display: flex;
@@ -2886,52 +2840,105 @@
     gap: 2px;
     padding: 10px 14px;
     background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
     border: 1px solid rgba(184,35,92,0.18);
     border-radius: 6px;
+    box-shadow: 0 8px 22px rgba(26,18,22,0.12);
     min-width: 132px;
     z-index: 2;
   }
+  /* Bracketed-corner accent (top-left + bottom-right). */
+  .hero-bento .hero-callout::before,
+  .hero-bento .hero-callout::after {
+    content: ''; position: absolute;
+    width: 10px; height: 10px;
+    border: 1.5px solid var(--pink);
+  }
+  .hero-bento .hero-callout::before { top: -1.5px; left: -1.5px; border-right: 0; border-bottom: 0; }
+  .hero-bento .hero-callout::after  { bottom: -1.5px; right: -1.5px; border-left: 0; border-top: 0; }
   .hero-bento .hero-callout-num {
     font-family: 'Newsreader', Georgia, serif;
     font-style: italic; font-weight: 500;
-    font-size: 22px; color: var(--pink-deep);
+    font-size: 22px; line-height: 1;
+    color: var(--pink-deep);
+    letter-spacing: -0.01em;
   }
   .hero-bento .hero-callout-label {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11px; color: var(--ink-2);
+    font-size: 11px; font-weight: 500;
+    color: var(--ink-2); line-height: 1.25;
+    white-space: nowrap;
   }
-  .hero-bento .hero-right { display: flex; flex-direction: column; gap: 14px; }
-  .hero-bento .hero-stat  { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: var(--pink-softer); border: 1px solid var(--line); border-radius: 14px; }
-  .hero-bento .hero-stat-icon { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--pink-soft); color: var(--pink-deep); display: flex; align-items: center; justify-content: center; }
+  /* Positioning — 5 cards wrapping the square avatar, 3 right + 2 left for
+     visual balance. Slight overlap with the image edge for the "floating
+     overlay" effect from the reference. */
+  .hero-bento .hero-callout-1 { top: -2%;  right: -10%; }   /* 76% top-right */
+  .hero-bento .hero-callout-2 { top: 32%;  right: -16%; }   /* 70% mid-right */
+  .hero-bento .hero-callout-3 { bottom: 6%;  right: -6%; }  /* 85% bottom-right */
+  .hero-bento .hero-callout-4 { bottom: 22%; left: -14%; }  /* 68% mid-left  */
+  .hero-bento .hero-callout-5 { top: 8%;   left: -10%; }    /* 65% top-left  */
 
-  /* ═══ Tablet — tighten gutters; headline shrinks via clamp(). ═══ */
-  @media (max-width: 1100px) {
-    .hb-wrap { gap: 16px; max-width: 100%; padding: 0 16px; }
+  /* Right column — 3 stacked stat cards, icon left + number/label right.
+     UNUSED in current markup but retained inert for fast restore. */
+  .hero-bento .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
-  /* ═══ Mobile — stack to single column; stats row → 2x3 grid. ═══ */
+  .hero-bento .hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--pink-softer);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .hero-bento .hero-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(184,35,92,0.10);
+    border-color: var(--pink-3);
+  }
+  .hero-bento .hero-stat-icon {
+    flex: none;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--pink-soft);
+    color: var(--pink-deep);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-bento .hero-stat-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .hero-bento .hero-stat-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  /* Tablet — tighten the gap but keep both columns side-by-side. */
+  @media (max-width: 1100px) {
+    .hb-wrap { gap: 36px; }
+    .hero-bento .hero-callout { font-size: 12px; }
+    .hero-bento .hero-callout-num { font-size: 19px; }
+  }
+  /* Mobile — stack to single column, hide the 5 floating callouts
+     (they would collide with the avatar on small screens). */
   @media (max-width: 720px) {
-    .hero-bento { padding: 180px 18px 0; }
-    .hb-wrap {
-      grid-template-columns: 1fr;
-      gap: 18px;
-      max-width: 480px;
-    }
-    .hero-bento .h1-half {
-      grid-column: 1;
-      font-size: clamp(34px, 8.5vw, 50px);
-      text-align: center;
-    }
-    .hero-bento .hero-center { max-width: 320px; grid-column: 1; }
-    .hero-bento .hero-stats-row {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin: -28px auto 0;
-      max-width: 460px;
-    }
-    .hero-bento .hero-stat-card:nth-child(5) { grid-column: 1 / span 2; }
-    .hero-bento .hero-stat-num { font-size: 26px; }
-    .hero-bento .hero-stat-label { font-size: 11.5px; }
-    .hero-bento .hb-disclaimer { font-size: 11px; }
+    .hero-bento { padding: 190px 18px 56px; min-height: 0; }
+    .hb-wrap { grid-template-columns: 1fr; gap: 28px; }
+    .hero-bento .hero-center { max-width: 380px; }
+    .hero-bento .hero-cta { padding: 14px 24px; font-size: 14.5px; }
+    .hero-bento .hero-callout { display: none; }
+    .hero-bento .hb-checks li { font-size: 15px; }
+    .hero-bento .hb-check-icon { width: 22px; height: 22px; font-size: 13px; }
   }
   /* The main bento tile sits over a darkened lifestyle photo where the
      existing rule (.hero-bento .tile p { color: #fff }) forces white text.
