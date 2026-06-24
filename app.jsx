@@ -417,46 +417,13 @@ function App() {
           <p className="hb-disclaimer rv d2">
             Treatment is subject to clinician approval; outcomes vary by individual.
           </p>
-          <div className="bento">
-            <a className="tile main rv d1" href={INTAKE_URL}>
-              <div className="blob" aria-hidden="true"></div>
-              <div>
-                <h3>Start with the 2-minute assessment</h3>
-                <div className="pillrow">
-                  <span className="pill-chip">No insurance needed</span>
-                  <span className="pill-chip">Reviewed in 24–48h</span>
-                  <span className="pill-chip">All 50 states</span>
-                </div>
-              </div>
-              <p className="hero-guarantee">
-                If your clinician determines hormone therapy isn&rsquo;t right for you — <strong>you pay nothing.</strong>
-              </p>
-              <span className="btn btn-primary hb-cta">
-                Find my treatment
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </span>
-            </a>
-            <a className="tile sleep rv d2" href={INTAKE_URL}>
-              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8a1745" strokeWidth="1.8"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
-              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              <h3>Sleep through the night</h3><p>Night sweats &amp; 3am wakeups</p>
-            </a>
-            <a className="tile heat rv d3" href={INTAKE_URL}>
-              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b8235c" strokeWidth="1.8"><path d="M12 3c3 4 5 6.5 5 9.5a5 5 0 11-10 0C7 9.5 9 7 12 3z" /></svg>
-              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              <h3>Cool the hot flashes</h3><p>Daytime heat, on your terms</p>
-            </a>
-            <a className="tile fog rv d3" href={INTAKE_URL}>
-              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5a6b4a" strokeWidth="1.8"><path d="M4 15h12M6 19h14M3 11h18" /></svg>
-              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              <h3>Clear the fog</h3><p>Focus, memory, sharpness</p>
-            </a>
-            <a className="tile mood rv d4" href={INTAKE_URL}>
-              <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b89455" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
-              <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              <h3>Frozen shoulder</h3><p>Joint pain &amp; stiffness</p>
-            </a>
-          </div>
+          <p className="hero-guarantee rv d2">
+            If your clinician determines hormone therapy isn&rsquo;t right for you — <strong>you pay nothing.</strong>
+          </p>
+          <a className="btn btn-primary hero-cta rv d3" href={INTAKE_URL}>
+            Find my treatment
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
         </div>
       </section>
 
