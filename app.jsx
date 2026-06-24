@@ -19,7 +19,8 @@ const SYMPTOMS = [
 { id: 'sex', name: 'Low libido', note: 'Drive, arousal', glyph: 'L' },
 { id: 'skin', name: 'Dry skin & hair', note: 'Texture, elasticity', glyph: 'D' },
 { id: 'weight', name: 'Weight & energy', note: 'Midsection, fatigue', glyph: 'W' },
-{ id: 'cycle', name: 'Irregular cycles', note: 'Heavier, lighter, missed', glyph: 'C' }];
+{ id: 'cycle', name: 'Irregular cycles', note: 'Heavier, lighter, missed', glyph: 'C' },
+{ id: 'frozen', name: 'Frozen shoulder', note: 'Joint pain & stiffness', glyph: 'F' }];
 
 
 const TREATMENTS = [
@@ -72,6 +73,31 @@ const TREATMENTS = [
   ['Dose', '100 mg or 200 mg as prescribed']],
   image: 'assets/progesterone-pill.png'
 }];
+
+
+// Trust marquee items + their icon kinds. Single-stroke pink SVGs render
+// inline via the MarqueeIcon component below (kept monochrome to match the
+// existing minimal monospace aesthetic of the marquee).
+const MARQUEE_ITEMS = [
+  { icon: 'fda',     label: 'FDA-approved medications only' },
+  { icon: 'doctor',  label: 'Licensed clinicians, all 50 states' },
+  { icon: 'truck',   label: 'Free shipping' },
+  { icon: 'flag',    label: 'All 50 states' },
+  { icon: 'no-ins',  label: 'No insurance needed' },
+  { icon: 'cancel',  label: 'Cancel before any renewal' }
+];
+
+function MarqueeIcon(props) {
+  const k = props.kind;
+  const c = { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  if (k === 'fda')    return (<svg {...c}><path d="M12 2l8 4v6c0 4.5-3.5 9-8 10-4.5-1-8-5.5-8-10V6z" /><path d="M9 12l2 2 4-4" /></svg>);
+  if (k === 'doctor') return (<svg {...c}><path d="M6 3v8a5 5 0 0010 0V3" /><path d="M6 3h2M14 3h2" /><circle cx="11" cy="18" r="3" /></svg>);
+  if (k === 'truck')  return (<svg {...c}><rect x="2" y="7" width="12" height="10" rx="1" /><path d="M14 11h4l3 3v3h-7" /><circle cx="6" cy="19" r="2" /><circle cx="18" cy="19" r="2" /></svg>);
+  if (k === 'flag')   return (<svg {...c}><path d="M5 21V3" /><path d="M5 4h14l-3 4 3 4H5" /></svg>);
+  if (k === 'no-ins') return (<svg {...c}><path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V7z" /><path d="M14 2v5h5" /><line x1="4" y1="4" x2="20" y2="20" /></svg>);
+  if (k === 'cancel') return (<svg {...c}><circle cx="12" cy="12" r="9" /><path d="M8 12l3 3 5-6" /></svg>);
+  return null;
+}
 
 
 // REVIEWS / CASE STUDIES — REMOVED (audit findings C-06, H-13).
@@ -370,24 +396,22 @@ function App() {
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
           <h1 className="write-on">
-            <span className="word" style={{ animationDelay: '0ms'   }}>Your</span>{' '}
-            <span className="word" style={{ animationDelay: '80ms'  }}>doctor</span>{' '}
-            <span className="word" style={{ animationDelay: '160ms' }}>said</span>{' '}
-            <span className="word" style={{ animationDelay: '240ms' }}>it</span>{' '}
-            <span className="word" style={{ animationDelay: '320ms' }}>was</span>{' '}
-            <span className="word" style={{ animationDelay: '400ms' }}>stress.</span>
+            <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
+            <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
+            <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
+            <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>
             <br />
             <em>
-              <span className="word" style={{ animationDelay: '560ms' }}>It</span>{' '}
-              <span className="word" style={{ animationDelay: '640ms' }}>wasn&rsquo;t.</span>
+              <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
+              <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
+              <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
             </em>
           </h1>
-          <p className="hb-sub rv d1">
-            For women experiencing hormonal changes. Get FDA-approved hormone
-            therapy prescribed in less than 48 hours and delivered straight to
-            your door in under 7 days after approval. You&rsquo;ve already
-            spent time waiting for things to get better on their own.
-          </p>
+          <ul className="hb-checks rv d1">
+            <li><span className="hb-check-icon" aria-hidden="true">✓</span>FDA-approved hormone therapy</li>
+            <li><span className="hb-check-icon" aria-hidden="true">✓</span>Prescribed in under 48 hours</li>
+            <li><span className="hb-check-icon" aria-hidden="true">✓</span>Delivered in under 7 days</li>
+          </ul>
           {/* Compliance disclaimer moved from inside the hero subhead — kept
               on the page as fine-print directly below it (audit C-11). */}
           <p className="hb-disclaimer rv d2">
@@ -430,7 +454,7 @@ function App() {
             <a className="tile mood rv d4" href={INTAKE_URL}>
               <svg className="mini-art" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#b89455" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
               <span className="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              <h3>Steady the moods</h3><p>Feel like you, more often</p>
+              <h3>Frozen shoulder</h3><p>Joint pain &amp; stiffness</p>
             </a>
           </div>
         </div>
@@ -439,8 +463,16 @@ function App() {
       {/* TRUST MARQUEE — ported from reference (text ticker), brand-skinned */}
       <div className="trust-marquee" aria-hidden="true">
         <div className="tm-track">
-          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians, all 50 states</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
-          <span><i className="tm-dot"></i>FDA-approved medications only</span><span><i className="tm-dot"></i>Licensed clinicians, all 50 states</span><span><i className="tm-dot"></i>Free discreet shipping</span><span><i className="tm-dot"></i>All 50 states</span><span><i className="tm-dot"></i>No insurance needed</span><span><i className="tm-dot"></i>Cancel before any renewal</span>
+          {[0, 1].map(function (dup) {
+            return MARQUEE_ITEMS.map(function (item, i) {
+              return (
+                <span key={dup + '-' + i}>
+                  <span className="tm-icon"><MarqueeIcon kind={item.icon} /></span>
+                  {item.label}
+                </span>
+              );
+            });
+          })}
         </div>
       </div>
 
@@ -853,7 +885,7 @@ function App() {
               <div className="compare-feat">Medication at your door</div>
               <div className="compare-no">2–6 weeks (Rx + pharmacy runs)</div>
               <div className="compare-no">Standard packaging</div>
-              <div className="col-us compare-yes">Free discreet shipping</div>
+              <div className="col-us compare-yes">Free shipping</div>
             </div>
             <div className="compare-row">
               <div className="compare-feat">Clinician focus</div>

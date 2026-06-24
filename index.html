@@ -2707,6 +2707,33 @@
     font-size: 18px; line-height: 1.55; color: var(--ink-2);
     max-width: 620px; margin: 0 0 16px;
   }
+  /* Hero subhead replaced by a 3-item green-check list. Drop-in replacement
+     for .hb-sub — same vertical rhythm, cleaner scan. */
+  .hero-bento .hb-checks {
+    list-style: none; padding: 0; margin: 0 0 16px;
+    display: flex; flex-direction: column; gap: 10px;
+    max-width: 620px;
+  }
+  .hero-bento .hb-checks li {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 17px; font-weight: 500; color: var(--ink);
+    line-height: 1.35;
+  }
+  .hero-bento .hb-check-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    font-size: 14px; font-weight: 800;
+    line-height: 1; flex-shrink: 0;
+  }
+  @media (max-width: 560px) {
+    .hero-bento .hb-checks { gap: 8px; margin: 0 0 14px; }
+    .hero-bento .hb-checks li { font-size: 15px; }
+    .hero-bento .hb-check-icon { width: 20px; height: 20px; font-size: 12px; }
+  }
   /* Fine-print disclaimer — moved out of the hero subhead per spec but kept
      on the page for compliance. Sits directly under the subhead. */
   .hero-bento .hb-disclaimer {
@@ -2886,6 +2913,13 @@
     color: var(--muted); display: inline-flex; align-items: center; gap: 12px;
   }
   .trust-marquee .tm-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+  /* Marquee icons — brand-pink single-stroke SVGs replace the old pink dot. */
+  .trust-marquee .tm-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; flex-shrink: 0;
+    color: var(--pink);
+  }
+  .trust-marquee .tm-icon svg { display: block; width: 16px; height: 16px; }
 
   /* Reveal motion — hero is above the fold, so it animates on LOAD via pure
      CSS. Deliberately animates TRANSFORM ONLY (never opacity): content is
