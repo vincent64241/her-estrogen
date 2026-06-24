@@ -2822,34 +2822,52 @@
     display: block;
     box-shadow: 0 24px 56px -16px rgba(26, 18, 22, 0.18);
   }
-  /* Floating bracketed-corner symptom labels overlaid on the avatar. */
+  /* 5 floating stat callouts wrap the avatar — each is a small card with
+     a large italic-serif percentage stacked over a DM-Sans caption. */
   .hero-bento .hero-callout {
     position: absolute;
-    padding: 6px 10px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
     border: 1px solid rgba(184,35,92,0.18);
-    border-radius: 4px;
-    font-family: 'DM Mono', ui-monospace, monospace;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: var(--pink-deep);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    box-shadow: 0 8px 22px rgba(26,18,22,0.12);
+    min-width: 132px;
+    z-index: 2;
   }
+  /* Bracketed-corner accent (top-left + bottom-right). */
   .hero-bento .hero-callout::before,
   .hero-bento .hero-callout::after {
     content: ''; position: absolute;
-    width: 8px; height: 8px;
+    width: 10px; height: 10px;
     border: 1.5px solid var(--pink);
   }
   .hero-bento .hero-callout::before { top: -1.5px; left: -1.5px; border-right: 0; border-bottom: 0; }
   .hero-bento .hero-callout::after  { bottom: -1.5px; right: -1.5px; border-left: 0; border-top: 0; }
-  .hero-bento .hero-callout-1 { top: 10%; right: -8%; }
-  .hero-bento .hero-callout-2 { top: 44%; left: -12%; }
-  .hero-bento .hero-callout-3 { bottom: 14%; right: 0; }
+  .hero-bento .hero-callout-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic; font-weight: 500;
+    font-size: 22px; line-height: 1;
+    color: var(--pink-deep);
+    letter-spacing: -0.01em;
+  }
+  .hero-bento .hero-callout-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px; font-weight: 500;
+    color: var(--ink-2); line-height: 1.25;
+    white-space: nowrap;
+  }
+  /* Positioning — 5 cards wrapping the square avatar, 3 right + 2 left for
+     visual balance. Slight overlap with the image edge for the "floating
+     overlay" effect from the reference. */
+  .hero-bento .hero-callout-1 { top: -2%;  right: -10%; }   /* 76% top-right */
+  .hero-bento .hero-callout-2 { top: 32%;  right: -16%; }   /* 70% mid-right */
+  .hero-bento .hero-callout-3 { bottom: 6%;  right: -6%; }  /* 85% bottom-right */
+  .hero-bento .hero-callout-4 { bottom: 22%; left: -14%; }  /* 68% mid-left  */
+  .hero-bento .hero-callout-5 { top: 8%;   left: -10%; }    /* 65% top-left  */
 
   /* Right column — 3 stacked stat cards, icon left + number/label right */
   .hero-bento .hero-right {
@@ -2912,7 +2930,10 @@
     .hero-bento .hero-stat-icon { width: 38px; height: 38px; }
     .hero-bento .hero-stat-num { font-size: 22px; }
     .hero-bento .hero-cta { padding: 14px 24px; font-size: 14.5px; }
-    .hero-bento .hero-callout { font-size: 9.5px; padding: 4px 8px; }
+    /* 5 floating callouts would collide on small screens — the same stats
+       live in the right-column stat cards (FDA / 48hr / 7-day are different
+       from these percentages, so callouts add value, but only on desktop). */
+    .hero-bento .hero-callout { display: none; }
   }
   /* The main bento tile sits over a darkened lifestyle photo where the
      existing rule (.hero-bento .tile p { color: #fff }) forces white text.
@@ -3853,85 +3874,9 @@
   /* Curve note sits inside the white curve card → restore muted dark */
   .science-v2 .curve-note { color: var(--muted) !important; }
 
-  /* ═══ Outcomes stat cards (below the existing science content) ═══
-     Compact version — half the visual weight of the previous iteration so
-     the section reads as a quick supporting block rather than a hero. */
-  .science-v2 .outcomes-block {
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    text-align: center;
-  }
-  .science-v2 .outcomes-title {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 500;
-    font-size: clamp(18px, 2vw, 24px);
-    line-height: 1.18;
-    color: #ffffff !important;
-    margin: 0 0 6px;
-    letter-spacing: -0.012em;
-  }
-  .science-v2 .outcomes-title em {
-    font-style: italic;
-    color: var(--pink-3) !important;
-    font-weight: 500;
-  }
-  .science-v2 .outcomes-sub {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12.5px;
-    color: rgba(255,255,255,0.72) !important;
-    margin: 0 0 20px;
-  }
-  .science-v2 .outcomes-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    max-width: 880px;
-    margin: 0 auto;
-  }
-  .science-v2 .outcome-card {
-    background: linear-gradient(180deg, #b8235c 0%, #5a0e2b 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 18px 12px 14px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.35);
-  }
-  .science-v2 .outcome-num {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(26px, 2.4vw, 34px);
-    line-height: 1;
-    color: #ffffff;
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
-  }
-  .science-v2 .outcome-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.92);
-    line-height: 1.3;
-  }
-  .science-v2 .outcomes-foot {
-    margin: 18px auto 0;
-    max-width: 620px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12px;
-    color: rgba(255,255,255,0.68) !important;
-    line-height: 1.5;
-  }
-  @media (max-width: 1024px) {
-    .science-v2 .outcomes-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 720px) {
-    .science-v2 .outcomes-block { margin-top: 32px; padding-top: 24px; }
-    .science-v2 .outcomes-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .science-v2 .outcome-card { padding: 14px 10px 12px; }
-    .science-v2 .outcome-num { font-size: 26px; margin-bottom: 4px; }
-    .science-v2 .outcome-label { font-size: 11.5px; }
-    .science-v2 .outcomes-foot { font-size: 11.5px; margin-top: 14px; }
-  }
+  /* (Outcomes stat-card CSS removed — the 5 percentages now render as
+     floating callouts around the hero avatar instead of as a separate
+     section. See .hero-callout rules higher up in this stylesheet.) */
 
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:

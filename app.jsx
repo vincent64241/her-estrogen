@@ -422,12 +422,37 @@ function App() {
             </p>
           </div>
 
-          {/* CENTER — avatar image + floating symptom callouts (bracketed corners) */}
+          {/* CENTER — avatar image + 5 floating stat callouts wrapping the
+              picture. Percentages are sourced from peer-reviewed clinical
+              research on FDA-approved hormone therapy. SOURCES (not on
+              page, kept here for substantiation if challenged):
+                76% — MacLennan 2004 Cochrane review of vasomotor outcomes
+                70% — MsFLASH trial, JAMA Intern Med 2014 (sleep)
+                85% — ACOG Practice Bulletin 141 + NAMS 2020 GSM statement
+                68% — Schmidt 2015 JAMA Psychiatry + Soares 2001 (mood)
+                65% — NAMS 2022 HT Position Statement (energy / fatigue) */}
           <div className="hero-center rv d2">
             <img src="assets/lifestyle/lifestyle-1.jpg" alt="" className="hero-avatar" />
-            <span className="hero-callout hero-callout-1" aria-hidden="true">Hot Flashes</span>
-            <span className="hero-callout hero-callout-2" aria-hidden="true">Brain Fog</span>
-            <span className="hero-callout hero-callout-3" aria-hidden="true">Sleep Disruption</span>
+            <span className="hero-callout hero-callout-1" aria-hidden="true">
+              <span className="hero-callout-num">76%</span>
+              <span className="hero-callout-label">fewer hot flashes</span>
+            </span>
+            <span className="hero-callout hero-callout-2" aria-hidden="true">
+              <span className="hero-callout-num">70%</span>
+              <span className="hero-callout-label">better sleep quality</span>
+            </span>
+            <span className="hero-callout hero-callout-3" aria-hidden="true">
+              <span className="hero-callout-num">85%</span>
+              <span className="hero-callout-label">vaginal comfort restored</span>
+            </span>
+            <span className="hero-callout hero-callout-4" aria-hidden="true">
+              <span className="hero-callout-num">68%</span>
+              <span className="hero-callout-label">improved mood</span>
+            </span>
+            <span className="hero-callout hero-callout-5" aria-hidden="true">
+              <span className="hero-callout-num">65%</span>
+              <span className="hero-callout-label">energy &amp; focus return</span>
+            </span>
           </div>
 
           {/* RIGHT — 3 stat cards (repurposed from the prior green checks) */}
@@ -667,53 +692,10 @@ function App() {
             </div>
           </div>
 
-          {/* ─────────────────────────────────────────────────────────────────
-              OUTCOMES STAT CARDS
-              Numbers sourced from peer-reviewed clinical research on
-              FDA-approved hormone therapy. SOURCES (not displayed on page
-              per design — keep here for substantiation if challenged):
-                76% — Vasomotor symptom reduction: MacLennan et al. 2004
-                      Cochrane review of estrogen for hot flashes
-                70% — Sleep quality improvement: MsFLASH trial, JAMA Intern
-                      Med 2014 (transdermal estradiol vs placebo)
-                85% — Genitourinary syndrome relief: ACOG Practice Bulletin
-                      141 + NAMS 2020 GSM Position Statement (low-dose
-                      vaginal estradiol)
-                68% — Mood symptom improvement: Schmidt et al. 2015 (JAMA
-                      Psychiatry, perimenopausal depression RCT) + Soares
-                      2001 (transdermal estradiol)
-                65% — Energy / fatigue improvement: NAMS 2022 Hormone
-                      Therapy Position Statement, secondary QoL outcomes
-              Animations use the existing [data-count] hook in
-              index.html's science-v2 IntersectionObserver.
-              ───────────────────────────────────────────────────────────── */}
-          <div className="outcomes-block">
-            <h3 className="outcomes-title">Real relief — typically in <em>just a few weeks</em></h3>
-            <p className="outcomes-sub">In peer-reviewed clinical research on FDA-approved hormone therapy:</p>
-            <div className="outcomes-grid">
-              <div className="outcome-card rv">
-                <div className="outcome-num"><span className="num" data-count="76">76</span>%</div>
-                <div className="outcome-label">fewer hot flashes</div>
-              </div>
-              <div className="outcome-card rv d1">
-                <div className="outcome-num"><span className="num" data-count="70">70</span>%</div>
-                <div className="outcome-label">better sleep quality</div>
-              </div>
-              <div className="outcome-card rv d2">
-                <div className="outcome-num"><span className="num" data-count="85">85</span>%</div>
-                <div className="outcome-label">vaginal comfort restored</div>
-              </div>
-              <div className="outcome-card rv d3">
-                <div className="outcome-num"><span className="num" data-count="68">68</span>%</div>
-                <div className="outcome-label">improved mood</div>
-              </div>
-              <div className="outcome-card rv d4">
-                <div className="outcome-num"><span className="num" data-count="65">65</span>%</div>
-                <div className="outcome-label">energy and focus return</div>
-              </div>
-            </div>
-            <p className="outcomes-foot">These changes reflect restored hormone levels — not temporary symptom masking.</p>
-          </div>
+          {/* Outcomes stat cards moved out of this section — the same five
+              percentages are now displayed as floating callouts around the
+              hero avatar (see .hero-callout markup above). Sources stay
+              documented in the hero's code comment for substantiation. */}
         </div>
       </section>
 
