@@ -2703,11 +2703,7 @@
     align-items: center;
   }
   .hb-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: center;
-    max-width: 1180px;
+    max-width: 1240px;
     margin: 0 auto;
     width: 100%;
   }
@@ -3056,7 +3052,20 @@
   /* Lift content above the scrim + make text legible on photos */
   .hero-bento .tile > * { position: relative; z-index: 1; }
   .hero-bento .tile.main .blob { display: none; }
-  .hero-bento .tile h3, .hero-bento .tile p { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+  .hero-bento .tile h1, .hero-bento .tile h3, .hero-bento .tile p { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+  /* When h1 is inside .tile.main, scale it to the original tile-headline size
+     (was h3 in the old structure) so it fits the tile bounds. */
+  .hero-bento .tile.main h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    max-width: 330px;
+    margin: 0;
+    position: relative;
+  }
+  .hero-bento .tile.main h1 em { font-style: italic; color: var(--pink-3); font-weight: 500; }
   .hero-bento .tile .mini-art { stroke: #fff; opacity: .92; }
   .hero-bento .tile .go { background: rgba(26,18,22,.7); }
 

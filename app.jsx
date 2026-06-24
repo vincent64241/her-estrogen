@@ -395,66 +395,52 @@ function App() {
           bento tile copy ported verbatim per Vincent's "B" choice. */}
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
-          {/* LEFT — headline, 3 green-check subheading items, CTA, fine-print */}
-          <div className="hero-left">
-            <h1 className="write-on">
-              <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
-              <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
-              <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
-              <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>
-              <br />
-              <em>
-                <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
-                <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
-                <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
-              </em>
-            </h1>
-            <ul className="hb-checks rv d2">
-              <li><span className="hb-check-icon" aria-hidden="true">✓</span>FDA-approved hormone therapy</li>
-              <li><span className="hb-check-icon" aria-hidden="true">✓</span>48-hour clinician review</li>
-              <li><span className="hb-check-icon" aria-hidden="true">✓</span>7-day delivery to your door</li>
-            </ul>
-            <a className="btn btn-primary hero-cta rv d3" href={INTAKE_URL}>
-              Find my treatment
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          <div className="bento rv d1">
+            {/* MAIN tile — large lifestyle photo with the h1 + pill row + CTA */}
+            <a className="tile main" href={INTAKE_URL}>
+              <div className="blob" aria-hidden="true"></div>
+              <h1 className="write-on">
+                <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
+                <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
+                <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
+                <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>{' '}
+                <em>
+                  <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
+                  <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
+                  <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
+                </em>
+              </h1>
+              <div className="pillrow">
+                <span className="pill-chip">FDA-approved</span>
+                <span className="pill-chip">48-hour review</span>
+                <span className="pill-chip">7-day delivery</span>
+              </div>
+              <span className="btn btn-primary hb-cta">
+                Start your assessment
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
             </a>
-            {/* Compliance disclaimer — fine print directly below the CTA. */}
-            <p className="hb-disclaimer rv d4">
-              Treatment is subject to clinician approval; outcomes vary by individual.
-            </p>
-          </div>
-
-          {/* RIGHT — avatar image + 5 floating stat callouts wrapping the
-              picture. Percentages are sourced from peer-reviewed clinical
-              research on FDA-approved hormone therapy. SOURCES (not on
-              page, kept here for substantiation if challenged):
-                76% — MacLennan 2004 Cochrane review of vasomotor outcomes
-                70% — MsFLASH trial, JAMA Intern Med 2014 (sleep)
-                85% — ACOG Practice Bulletin 141 + NAMS 2020 GSM statement
-                68% — Schmidt 2015 JAMA Psychiatry + Soares 2001 (mood)
-                65% — NAMS 2022 HT Position Statement (energy / fatigue) */}
-          <div className="hero-center rv d2">
-            <img src="assets/lifestyle/lifestyle-1.jpg" alt="" className="hero-avatar" />
-            <span className="hero-callout hero-callout-1" aria-hidden="true">
-              <span className="hero-callout-num">76%</span>
-              <span className="hero-callout-label">fewer hot flashes</span>
-            </span>
-            <span className="hero-callout hero-callout-2" aria-hidden="true">
-              <span className="hero-callout-num">70%</span>
-              <span className="hero-callout-label">better sleep quality</span>
-            </span>
-            <span className="hero-callout hero-callout-3" aria-hidden="true">
-              <span className="hero-callout-num">85%</span>
-              <span className="hero-callout-label">vaginal comfort restored</span>
-            </span>
-            <span className="hero-callout hero-callout-4" aria-hidden="true">
-              <span className="hero-callout-num">68%</span>
-              <span className="hero-callout-label">improved mood</span>
-            </span>
-            <span className="hero-callout hero-callout-5" aria-hidden="true">
-              <span className="hero-callout-num">65%</span>
-              <span className="hero-callout-label">energy &amp; focus return</span>
-            </span>
+            {/* 4 symptom tiles, each a darkened lifestyle photo */}
+            <a className="tile sleep" href={INTAKE_URL}>
+              <span className="go" aria-hidden="true">↗</span>
+              <h3>Sleep through the night</h3>
+              <p>Restore restful sleep.</p>
+            </a>
+            <a className="tile heat" href={INTAKE_URL}>
+              <span className="go" aria-hidden="true">↗</span>
+              <h3>Cool the hot flashes</h3>
+              <p>Quell heat &amp; night sweats.</p>
+            </a>
+            <a className="tile fog" href={INTAKE_URL}>
+              <span className="go" aria-hidden="true">↗</span>
+              <h3>Clear the brain fog</h3>
+              <p>Sharpen focus and recall.</p>
+            </a>
+            <a className="tile mood" href={INTAKE_URL}>
+              <span className="go" aria-hidden="true">↗</span>
+              <h3>Frozen shoulder</h3>
+              <p>Joint pain &amp; stiffness.</p>
+            </a>
           </div>
         </div>
       </section>
