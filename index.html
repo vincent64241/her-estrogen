@@ -3120,17 +3120,41 @@
 
   /* Bento responsive */
   @media (max-width: 900px) {
-    .hero-bento { padding: 196px 0 56px; }
-    .hero-bento .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .hero-bento .tile.main { grid-row: auto; grid-column: 1 / -1; min-height: 280px; }
-    .hero-bento .tile { min-height: 150px; }
+    .hero-bento { padding: 160px 0 32px; }
+    .hero-bento .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 12px; }
+    .hero-bento .tile.main { grid-row: auto; grid-column: 1 / -1; min-height: 240px; }
+    .hero-bento .tile { min-height: 130px; }
   }
+  /* ═══ MOBILE — compress aggressively so the main tile + CTA sit above
+     the fold on iPhone SE (667px viewport), and the four symptom tiles
+     follow within one short scroll. ═══ */
   @media (max-width: 560px) {
-    /* Mobile: keep a 2-column grid so the 4 symptom tiles sit 2-up + 2-up
-       below the full-width primary tile. The sub-paragraph on the small
-       tiles is hidden so only the heading shows. */
-    .hero-bento .bento { grid-template-columns: 1fr 1fr; }
-    .hero-bento .tile.main { grid-column: 1 / -1; min-height: 260px; }
+    /* Reduce hero top padding so the bento clears the nav by ~10px
+       instead of the desktop 196px clearance. The nav is ~150px tall
+       at mobile widths, so 156px padding-top is sufficient. */
+    .hero-bento { padding: 156px 0 24px; }
+    .hero-bento .bento { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 12px; }
+    /* Main tile: short, compact, headline + pills + CTA only. */
+    .hero-bento .tile.main {
+      grid-column: 1 / -1;
+      min-height: 220px;
+      padding: 20px 18px;
+      border-radius: 18px;
+    }
+    .hero-bento .tile.main h1 {
+      font-size: clamp(20px, 5.6vw, 26px);
+      line-height: 1.06;
+      max-width: 100%;
+      margin: 0 0 12px;
+    }
+    .hero-bento .tile.main .pillrow { gap: 5px; margin-top: 0; }
+    .hero-bento .pill-chip { font-size: 10.5px; padding: 4px 9px; font-weight: 600; }
+    .hero-bento .tile.main .hb-cta {
+      padding: 11px 18px;
+      font-size: 13.5px;
+      margin-top: 14px;
+    }
+    /* Symptom tiles: short, photo-only feel with just the title overlay. */
     .hero-bento .tile.sleep p,
     .hero-bento .tile.heat p,
     .hero-bento .tile.fog p,
@@ -3139,50 +3163,37 @@
     .hero-bento .tile.heat,
     .hero-bento .tile.fog,
     .hero-bento .tile.mood {
-      min-height: 130px;
-      padding: 20px;
+      min-height: 104px;
+      padding: 14px;
+      border-radius: 16px;
     }
     .hero-bento .tile.sleep h3,
     .hero-bento .tile.heat h3,
     .hero-bento .tile.fog h3,
     .hero-bento .tile.mood h3 {
-      font-size: 18px;
-      line-height: 1.15;
+      font-size: 15px;
+      line-height: 1.1;
     }
+    /* Tile "go" arrow shrinks to give the tile face more room. */
+    .hero-bento .tile .go { width: 30px; height: 30px; top: 12px; right: 12px; }
     .trust-marquee .tm-track { gap: 38px; animation-duration: 24s; }
-
-    /* ── Mobile hero density (P1-FIX2) — pull the main tile + CTA up so it
-       reaches the fold faster. Mobile-only; desktop untouched. ── */
-    .hero-bento h1 { margin: 0 0 10px; }              /* a) tighter headline→subhead */
-    .hero-bento .hb-sub { margin: 0 0 10px; }
-    .hero-bento .hb-disclaimer {                       /* b) smaller, tighter fine print (still visible for compliance) */
-      font-size: 11px; line-height: 1.45; margin: 0 0 20px;
-    }
-    /* c) reduce main-tile internal padding so the CTA sits higher in the
-       tile (the tile uses justify-content: space-between). */
-    .hero-bento .tile.main { padding: 22px; min-height: 230px; }
-    /* d) tighten the main-tile headline + pills + CTA at mobile widths so
-       the whole tile fits on one screen height and doesn't dominate the
-       viewport above the 4 symptom tiles. */
-    .hero-bento .tile.main h1 {
-      font-size: clamp(22px, 6vw, 30px);
-      line-height: 1.08;
-      max-width: 100%;
-      margin: 0 0 14px;
-    }
-    .hero-bento .tile.main .pillrow {
-      gap: 6px;
-      margin-top: 0;
-    }
-    .hero-bento .pill-chip {
-      font-size: 11px;
-      padding: 5px 10px;
-    }
-    .hero-bento .tile.main .hb-cta {
-      padding: 12px 20px;
-      font-size: 14px;
-      margin-top: 16px;
-    }
+    /* Compliance fine print — kept tiny so it doesn't push content. */
+    .hero-bento .hb-disclaimer { font-size: 11px; line-height: 1.45; margin: 0 0 16px; }
+  }
+  /* Extra-small phones (iPhone SE width: 320–375): one more nudge. */
+  @media (max-width: 380px) {
+    .hero-bento { padding: 144px 0 20px; }
+    .hero-bento .tile.main { min-height: 200px; padding: 18px 16px; }
+    .hero-bento .tile.main h1 { font-size: 19px; line-height: 1.05; }
+    .hero-bento .tile.main .hb-cta { padding: 10px 16px; font-size: 13px; }
+    .hero-bento .tile.sleep,
+    .hero-bento .tile.heat,
+    .hero-bento .tile.fog,
+    .hero-bento .tile.mood { min-height: 92px; }
+    .hero-bento .tile.sleep h3,
+    .hero-bento .tile.heat h3,
+    .hero-bento .tile.fog h3,
+    .hero-bento .tile.mood h3 { font-size: 14px; }
   }
 
   /* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
@@ -3679,8 +3690,9 @@
      the tail-script). No !important so the inline style from JS wins. */
   .nav.nav-editorial { top: 46px; }
   .hero-bento { padding-top: 244px; }
-  @media (max-width: 900px) { .hero-bento { padding-top: 196px; } }
-  @media (max-width: 560px) { .nav.nav-editorial { top: 42px; } }
+  @media (max-width: 900px) { .hero-bento { padding-top: 184px; } }
+  @media (max-width: 560px) { .nav.nav-editorial { top: 42px; } .hero-bento { padding-top: 150px; } }
+  @media (max-width: 380px) { .hero-bento { padding-top: 138px; } }
 
   /* ═══ FIX PASS (per request) ═══ */
 
