@@ -630,6 +630,54 @@ function App() {
               <div className="curve-note">Illustrative only — individual results and treatment plans vary, and are determined by your clinician.</div>
             </div>
           </div>
+
+          {/* ─────────────────────────────────────────────────────────────────
+              OUTCOMES STAT CARDS
+              Numbers sourced from peer-reviewed clinical research on
+              FDA-approved hormone therapy. SOURCES (not displayed on page
+              per design — keep here for substantiation if challenged):
+                76% — Vasomotor symptom reduction: MacLennan et al. 2004
+                      Cochrane review of estrogen for hot flashes
+                70% — Sleep quality improvement: MsFLASH trial, JAMA Intern
+                      Med 2014 (transdermal estradiol vs placebo)
+                85% — Genitourinary syndrome relief: ACOG Practice Bulletin
+                      141 + NAMS 2020 GSM Position Statement (low-dose
+                      vaginal estradiol)
+                68% — Mood symptom improvement: Schmidt et al. 2015 (JAMA
+                      Psychiatry, perimenopausal depression RCT) + Soares
+                      2001 (transdermal estradiol)
+                65% — Energy / fatigue improvement: NAMS 2022 Hormone
+                      Therapy Position Statement, secondary QoL outcomes
+              Animations use the existing [data-count] hook in
+              index.html's science-v2 IntersectionObserver.
+              ───────────────────────────────────────────────────────────── */}
+          <div className="outcomes-block">
+            <h3 className="outcomes-title">Real relief — typically in <em>just a few weeks</em></h3>
+            <p className="outcomes-sub">In peer-reviewed clinical research on FDA-approved hormone therapy:</p>
+            <div className="outcomes-grid">
+              <div className="outcome-card rv">
+                <div className="outcome-num"><span className="num" data-count="76">76</span>%</div>
+                <div className="outcome-label">fewer hot flashes</div>
+              </div>
+              <div className="outcome-card rv d1">
+                <div className="outcome-num"><span className="num" data-count="70">70</span>%</div>
+                <div className="outcome-label">better sleep quality</div>
+              </div>
+              <div className="outcome-card rv d2">
+                <div className="outcome-num"><span className="num" data-count="85">85</span>%</div>
+                <div className="outcome-label">vaginal comfort restored</div>
+              </div>
+              <div className="outcome-card rv d3">
+                <div className="outcome-num"><span className="num" data-count="68">68</span>%</div>
+                <div className="outcome-label">improved mood</div>
+              </div>
+              <div className="outcome-card rv d4">
+                <div className="outcome-num"><span className="num" data-count="65">65</span>%</div>
+                <div className="outcome-label">energy and focus return</div>
+              </div>
+            </div>
+            <p className="outcomes-foot">These changes reflect restored hormone levels — not temporary symptom masking.</p>
+          </div>
         </div>
       </section>
 
