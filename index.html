@@ -3065,7 +3065,16 @@
     margin: 0;
     position: relative;
   }
-  .hero-bento .tile.main h1 em { font-style: italic; color: var(--pink-3); font-weight: 500; }
+  /* "HerEstrogen Fixes That." — uses the lighter pink-3 instead of the
+     brand pink so it stays readable over the dark photo overlay. A
+     dedicated stronger text-shadow gives it more presence than the
+     generic tile shadow. */
+  .hero-bento .tile.main h1 em {
+    font-style: italic;
+    color: var(--pink-3);
+    font-weight: 600;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.6);
+  }
   .hero-bento .tile .mini-art { stroke: #fff; opacity: .92; }
   .hero-bento .tile .go { background: rgba(26,18,22,.7); }
 
@@ -3152,6 +3161,28 @@
     /* c) reduce main-tile internal padding so the CTA sits higher in the
        tile (the tile uses justify-content: space-between). */
     .hero-bento .tile.main { padding: 22px; min-height: 230px; }
+    /* d) tighten the main-tile headline + pills + CTA at mobile widths so
+       the whole tile fits on one screen height and doesn't dominate the
+       viewport above the 4 symptom tiles. */
+    .hero-bento .tile.main h1 {
+      font-size: clamp(22px, 6vw, 30px);
+      line-height: 1.08;
+      max-width: 100%;
+      margin: 0 0 14px;
+    }
+    .hero-bento .tile.main .pillrow {
+      gap: 6px;
+      margin-top: 0;
+    }
+    .hero-bento .pill-chip {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+    .hero-bento .tile.main .hb-cta {
+      padding: 12px 20px;
+      font-size: 14px;
+      margin-top: 16px;
+    }
   }
 
   /* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
