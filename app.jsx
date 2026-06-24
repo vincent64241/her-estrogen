@@ -395,35 +395,71 @@ function App() {
           bento tile copy ported verbatim per Vincent's "B" choice. */}
       <section className="hero-bento" data-screen-label="01 Hero">
         <div className="hb-wrap">
-          <h1 className="write-on">
-            <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
-            <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
-            <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
-            <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>
-            <br />
-            <em>
-              <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
-              <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
-              <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
-            </em>
-          </h1>
-          <ul className="hb-checks rv d1">
-            <li><span className="hb-check-icon" aria-hidden="true">✓</span>FDA-approved hormone therapy</li>
-            <li><span className="hb-check-icon" aria-hidden="true">✓</span>Prescribed in under 48 hours</li>
-            <li><span className="hb-check-icon" aria-hidden="true">✓</span>Delivered in under 7 days</li>
-          </ul>
-          {/* Compliance disclaimer moved from inside the hero subhead — kept
-              on the page as fine-print directly below it (audit C-11). */}
-          <p className="hb-disclaimer rv d2">
-            Treatment is subject to clinician approval; outcomes vary by individual.
-          </p>
-          <p className="hero-guarantee rv d2">
-            If your clinician determines hormone therapy isn&rsquo;t right for you — <strong>you pay nothing.</strong>
-          </p>
-          <a className="btn btn-primary hero-cta rv d3" href={INTAKE_URL}>
-            Find my treatment
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </a>
+          {/* LEFT — headline, guarantee, CTA, fine-print */}
+          <div className="hero-left">
+            <h1 className="write-on">
+              <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
+              <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
+              <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
+              <span className="word" style={{ animationDelay: '240ms' }}>Symptoms.</span>
+              <br />
+              <em>
+                <span className="word" style={{ animationDelay: '380ms' }}>HerEstrogen</span>{' '}
+                <span className="word" style={{ animationDelay: '470ms' }}>Fixes</span>{' '}
+                <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
+              </em>
+            </h1>
+            <p className="hero-guarantee rv d2">
+              If your clinician determines hormone therapy isn&rsquo;t right for you — <strong>you pay nothing.</strong>
+            </p>
+            <a className="btn btn-primary hero-cta rv d3" href={INTAKE_URL}>
+              Find my treatment
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            {/* Compliance disclaimer — fine print directly below the CTA. */}
+            <p className="hb-disclaimer rv d4">
+              Treatment is subject to clinician approval; outcomes vary by individual.
+            </p>
+          </div>
+
+          {/* CENTER — avatar image + floating symptom callouts (bracketed corners) */}
+          <div className="hero-center rv d2">
+            <img src="assets/lifestyle/lifestyle-1.jpg" alt="" className="hero-avatar" />
+            <span className="hero-callout hero-callout-1" aria-hidden="true">Hot Flashes</span>
+            <span className="hero-callout hero-callout-2" aria-hidden="true">Brain Fog</span>
+            <span className="hero-callout hero-callout-3" aria-hidden="true">Sleep Disruption</span>
+          </div>
+
+          {/* RIGHT — 3 stat cards (repurposed from the prior green checks) */}
+          <div className="hero-right">
+            <div className="hero-stat rv d2">
+              <div className="hero-stat-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 4v6c0 4.5-3.5 9-8 10-4.5-1-8-5.5-8-10V6z" /><path d="M9 12l2 2 4-4" /></svg>
+              </div>
+              <div>
+                <div className="hero-stat-num">FDA</div>
+                <div className="hero-stat-label">approved<br />hormone therapy</div>
+              </div>
+            </div>
+            <div className="hero-stat rv d3">
+              <div className="hero-stat-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </div>
+              <div>
+                <div className="hero-stat-num">48hr</div>
+                <div className="hero-stat-label">clinician<br />review</div>
+              </div>
+            </div>
+            <div className="hero-stat rv d4">
+              <div className="hero-stat-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="13" height="10" rx="1" /><path d="M15 11h4l3 3v3h-7" /><circle cx="6" cy="19" r="2" /><circle cx="18" cy="19" r="2" /></svg>
+              </div>
+              <div>
+                <div className="hero-stat-num">7-day</div>
+                <div className="hero-stat-label">delivery<br />to your door</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
