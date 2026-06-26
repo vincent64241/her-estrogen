@@ -1995,7 +1995,7 @@
     margin: 0;
   }
 
-  .edu-section-cta-wrap { text-align: center; margin: 36px 0 8px; }
+  .edu-section-cta-wrap { text-align: center; margin: 36px 0 56px; }
   .edu-section-cta {
     display: inline-block;
     background: var(--pink);
@@ -3261,14 +3261,14 @@
   }
 
   /* ═══ HERO SPLIT (full-bleed photo card + text overlay) ════════════ */
-  .hero-split { padding-bottom: 48px; }
-  .hs-wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .hero-split { padding-bottom: 0; }
+  .hs-wrap { max-width: 100%; margin: 0; padding: 0; }
   .hs-card {
     position: relative;
     min-height: 600px;
-    border-radius: 20px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(184,35,92,0.32), 0 6px 20px rgba(184,35,92,0.18);
+    box-shadow: none;
   }
   /* Gradient overlay — lighter so photo breathes, still readable on left */
   .hs-card::before {
@@ -3363,7 +3363,7 @@
     .hs-trust { justify-content: center; }
   }
   @media (max-width: 480px) {
-    .hs-wrap { padding: 0 16px; }
+    .hs-wrap { padding: 0; }
     .hs-content { padding: 28px 20px 32px; min-height: 560px; }
     .hs-h1 { font-size: clamp(28px, 7.5vw, 40px); }
     .hs-btn-primary, .hs-btn-secondary { padding: 12px 22px; font-size: 14px; }
@@ -3848,7 +3848,7 @@
     position: absolute; top: 36px; left: 0; right: 0; z-index: 60;
     background: var(--pink);
     display: flex; align-items: center; justify-content: center;
-    padding: 8px 16px; min-height: 46px; box-sizing: border-box;
+    padding: 12px 16px; min-height: 54px; box-sizing: border-box;
   }
   .annc-pill {
     display: inline-flex; align-items: center; gap: 9px;
