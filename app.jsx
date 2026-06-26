@@ -410,8 +410,8 @@ function App() {
                   <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
                 </em>
               </h1>
-              <p className="hs-sub"><em>Clinician-reviewed HRT, delivered to your door.</em></p>
-              <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$159/mo</strong></p>
+              <p className="hs-sub"><em>FDA-Approved hormone replacement therapy with results in just weeks. Feel like your 30's again.</em></p>
+              <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$95/mo</strong></p>
               <ul className="hs-bullets">
                 <li>
                   <span className="hs-bullet-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
@@ -432,7 +432,7 @@ function App() {
               </ul>
               <div className="hs-ctas">
                 <a className="hs-btn-primary" href={INTAKE_URL}>
-                  Start your assessment
+                  Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </a>
                 <a className="hs-btn-secondary" href={INTAKE_URL}>See Pricing</a>
