@@ -3932,6 +3932,13 @@
   }
   /* Static statement variant — non-link, no hover/cursor affordance */
   .annc-pill-static { cursor: default; max-width: 92%; line-height: 1.35; text-align: center; }
+  .annc-text {
+    color: #fff; font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px; line-height: 1.35; text-align: center;
+  }
+  .annc-offer { font-weight: 900; letter-spacing: 0.01em; }
+  .annc-pct   { font-weight: 700; }
+  .annc-rest  { font-weight: 600; }
   @media (max-width: 560px) { .annc-pill { font-size: 12.5px; padding: 6px 14px; } .annc-bar { padding: 7px 12px; min-height: 42px; } }
 
   /* Nav starts beneath the announcement bar at scroll = 0, then slides up
@@ -4229,8 +4236,8 @@ fbq('track', 'PageView');
 <div class="promo-bar">Save up to $768 on your first order</div>
 
 <div class="annc-bar">
-  <span class="annc-pill annc-pill-static">
-    📦 <strong>JUNE OFFER:</strong> 40% OFF Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee
+  <span class="annc-text">
+    📦 <span class="annc-offer">JUNE OFFER:</span> <span class="annc-pct">40% OFF</span><span class="annc-rest"> Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee</span>
   </span>
   <div class="annc-timer">
     <span class="annc-timer-label">🔥 Ends in</span>
