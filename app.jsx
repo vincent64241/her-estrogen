@@ -389,17 +389,16 @@ function App() {
 
   return (
     <>
-      {/* HERO — bento layout (ported from design-reference v2, reskinned to brand).
-          Layout/motion from reference; palette + fonts are 100% ours.
-          Headline + sub kept from existing site per spec STEP-1 reuse rule;
-          bento tile copy ported verbatim per Vincent's "B" choice. */}
-      <section className="hero-bento" data-screen-label="01 Hero">
-        <div className="hb-wrap">
-          <div className="bento rv d1">
-            {/* MAIN tile — large lifestyle photo with the h1 + pill row + CTA */}
-            <a className="tile main" href={INTAKE_URL}>
-              <div className="blob" aria-hidden="true"></div>
-              <h1 className="write-on">
+      {/* HERO — split layout: text left, lifestyle photo right */}
+      <section className="hero-split" data-screen-label="01 Hero">
+        <div className="hs-wrap">
+          <div className="hs-card rv d1">
+            <div className="hs-content">
+              <div className="hs-stars">
+                <span className="hs-star-pips" aria-label="5 stars">{'★★★★★'}</span>
+                <span className="hs-stars-label">Excellent! Licensed clinicians in all 50 states</span>
+              </div>
+              <h1 className="hs-h1 write-on">
                 <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
                 <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
                 <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
@@ -411,37 +410,30 @@ function App() {
                   <span className="word" style={{ animationDelay: '560ms' }}>That.</span>
                 </em>
               </h1>
-              <div className="pillrow">
-                <span className="pill-chip">FDA-approved</span>
-                <span className="pill-chip">48-hour review</span>
-                <span className="pill-chip">7-day delivery</span>
+              <p className="hs-sub"><em>Clinician-reviewed HRT, delivered to your door.</em></p>
+              <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$159/mo</strong></p>
+              <ul className="hs-bullets">
+                <li>100% online intake — no office visit needed.</li>
+                <li>Prescription + telehealth included. No insurance required.</li>
+                <li>Same price, every month. No hidden fees.</li>
+                <li>Free shipping. Arrives in 7 days.</li>
+              </ul>
+              <div className="hs-ctas">
+                <a className="hs-btn-primary" href={INTAKE_URL}>
+                  Start your assessment
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+                <a className="hs-btn-secondary" href={INTAKE_URL}>See Pricing</a>
               </div>
-              <span className="btn btn-primary hb-cta">
-                Start your assessment
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </span>
-            </a>
-            {/* 4 symptom tiles, each a darkened lifestyle photo */}
-            <a className="tile sleep" href={INTAKE_URL}>
-              <span className="go" aria-hidden="true">↗</span>
-              <h3>Sleep through the night</h3>
-              <p>Restore restful sleep.</p>
-            </a>
-            <a className="tile heat" href={INTAKE_URL}>
-              <span className="go" aria-hidden="true">↗</span>
-              <h3>Cool the hot flashes</h3>
-              <p>Quell heat &amp; night sweats.</p>
-            </a>
-            <a className="tile fog" href={INTAKE_URL}>
-              <span className="go" aria-hidden="true">↗</span>
-              <h3>Clear the brain fog</h3>
-              <p>Sharpen focus and recall.</p>
-            </a>
-            <a className="tile mood" href={INTAKE_URL}>
-              <span className="go" aria-hidden="true">↗</span>
-              <h3>Frozen shoulder</h3>
-              <p>Joint pain &amp; stiffness.</p>
-            </a>
+              <div className="hs-trust">
+                <span className="hs-trust-item hs-trust-no">No Hidden Fees</span>
+                <span className="hs-trust-item hs-trust-no">No Insurance Required</span>
+                <span className="hs-trust-item hs-trust-yes">Cancel Anytime</span>
+              </div>
+            </div>
+            <div className="hs-photo" aria-hidden="true">
+              <img src="assets/lifestyle/lifestyle-3.jpg" alt="" />
+            </div>
           </div>
         </div>
       </section>
