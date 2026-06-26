@@ -3890,30 +3890,30 @@
     padding: 10px 20px; min-height: 54px; box-sizing: border-box; flex-wrap: wrap;
   }
   .annc-timer {
-    display: flex; align-items: center; gap: 8px;
-    background: #fff; border-radius: 100px; padding: 5px 16px 5px 12px;
-    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
   }
   .annc-timer-label {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 0.02em;
+    font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.02em;
+    margin-right: 4px;
   }
-  .annc-timer-digits { display: flex; align-items: center; gap: 3px; }
+  .annc-timer-digits { display: flex; align-items: center; gap: 4px; }
   .annc-td {
     display: flex; flex-direction: column; align-items: center; line-height: 1;
-    min-width: 22px;
+    background: rgba(0,0,0,0.22); border-radius: 5px; padding: 5px 9px 4px; min-width: 38px;
   }
   .annc-td span {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 17px; font-weight: 800; color: var(--pink-deep);
-    font-variant-numeric: tabular-nums; line-height: 1;
+    font-size: 18px; font-weight: 800; color: #fff;
+    font-variant-numeric: tabular-nums; line-height: 1; letter-spacing: 0.01em;
   }
   .annc-td em {
-    font-style: normal; font-size: 8px; font-weight: 700;
-    color: var(--pink); letter-spacing: 0.08em; text-transform: uppercase;
+    font-style: normal; font-size: 7.5px; font-weight: 700;
+    color: rgba(255,255,255,0.75); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 3px;
   }
   .annc-tsep {
-    font-size: 15px; font-weight: 800; color: var(--pink-deep); margin-bottom: 6px;
+    font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.6); margin-bottom: 8px;
   }
   .annc-pill {
     display: inline-flex; align-items: center; gap: 9px;
@@ -4230,16 +4230,18 @@ fbq('track', 'PageView');
 
 <div class="annc-bar">
   <span class="annc-pill annc-pill-static">
-    📦 Limited Time Offer! 40% OFF Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee
+    📦 <strong>JUNE OFFER:</strong> 40% OFF Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee
   </span>
   <div class="annc-timer">
     <span class="annc-timer-label">🔥 Ends in</span>
     <span class="annc-timer-digits">
-      <span class="annc-td"><span id="annc-h">01</span><em>h</em></span>
+      <span class="annc-td"><span id="annc-d">00</span><em>DAYS</em></span>
       <span class="annc-tsep">:</span>
-      <span class="annc-td"><span id="annc-m">00</span><em>m</em></span>
+      <span class="annc-td"><span id="annc-h">00</span><em>HRS</em></span>
       <span class="annc-tsep">:</span>
-      <span class="annc-td"><span id="annc-s">00</span><em>s</em></span>
+      <span class="annc-td"><span id="annc-m">00</span><em>MINS</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-s">00</span><em>SECS</em></span>
     </span>
   </div>
 </div>
@@ -4298,6 +4300,7 @@ fbq('track', 'PageView');
   // refresh doesn't reset it.
   (function() {
     var KEY = 'he_offer_end';
+    var elD = document.getElementById('annc-d');
     var elH = document.getElementById('annc-h');
     var elM = document.getElementById('annc-m');
     var elS = document.getElementById('annc-s');
@@ -4312,7 +4315,8 @@ fbq('track', 'PageView');
     function pad(n) { return n < 10 ? '0' + n : '' + n; }
     function tick() {
       var rem = Math.max(0, end - Date.now());
-      elH.textContent = pad(Math.floor(rem / 3600000));
+      if (elD) elD.textContent = pad(Math.floor(rem / 86400000));
+      elH.textContent = pad(Math.floor((rem % 86400000) / 3600000));
       elM.textContent = pad(Math.floor((rem % 3600000) / 60000));
       elS.textContent = pad(Math.floor((rem % 60000) / 1000));
       if (rem > 0) setTimeout(tick, 1000);
