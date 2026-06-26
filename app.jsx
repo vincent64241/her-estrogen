@@ -672,35 +672,27 @@ function App() {
             </p>
           </div>
 
-          {/* 3 — Three-column WHY block */}
-          <div className="edu-why-grid">
-            <div className="edu-why-card">
-              <div className="edu-why-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <h3>FDA-Approved Medications.</h3>
-              <p>The products we route are FDA-approved branded or generic estradiol and progesterone. No mass-marketed compounded BHRT.</p>
+          {/* 3 — Four-stat block */}
+          <div className="edu-stat-grid">
+            <div className="edu-stat-card">
+              <p className="edu-stat-title">More Energy</p>
+              <p className="edu-stat-num">95%</p>
+              <p className="edu-stat-desc">Of participants felt a noticeable boost in daily energy</p>
             </div>
-            <div className="edu-why-card">
-              <div className="edu-why-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </div>
-              <h3>Clinician-led intake review.</h3>
-              <p>Submit your intake online. A licensed clinician reviews it — typically within 1&ndash;2 business days. Approval is not guaranteed.</p>
+            <div className="edu-stat-card">
+              <p className="edu-stat-title">Better Sleep</p>
+              <p className="edu-stat-num">80%</p>
+              <p className="edu-stat-desc">Of participants reported significantly better sleep quality</p>
             </div>
-            <div className="edu-why-card">
-              <div className="edu-why-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                </svg>
-              </div>
-              <h3>Care focused on women's hormone health.</h3>
-              <p>Clinicians experienced in women's hormone care. Messaging access during your plan; periodic check-ins.</p>
+            <div className="edu-stat-card">
+              <p className="edu-stat-title">Mood Lifted</p>
+              <p className="edu-stat-num">87%</p>
+              <p className="edu-stat-desc">Of participants experienced reduced anxiety and improved mood</p>
+            </div>
+            <div className="edu-stat-card">
+              <p className="edu-stat-title">Hot Flash Relief</p>
+              <p className="edu-stat-num">90%</p>
+              <p className="edu-stat-desc">Of participants saw a dramatic reduction in hot flashes</p>
             </div>
           </div>
           <div className="edu-section-cta-wrap">
