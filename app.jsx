@@ -401,12 +401,13 @@ function App() {
               <h1 className="hs-h1 write-on">
                 <span className="word" style={{ animationDelay: '0ms'   }}>You</span>{' '}
                 <span className="word" style={{ animationDelay: '80ms'  }}>Have</span>{' '}
-                <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>
+                <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
+                <span className="word" style={{ animationDelay: '240ms' }}>Symptoms?</span>
                 <br />
                 <em>
-                  <span className="word" style={{ animationDelay: '280ms' }}>HerEstrogen</span>{' '}
-                  <span className="word" style={{ animationDelay: '370ms' }}>Fixes</span>{' '}
-                  <span className="word" style={{ animationDelay: '460ms' }}>That.</span>
+                  <span className="word" style={{ animationDelay: '360ms' }}>HerEstrogen</span>{' '}
+                  <span className="word" style={{ animationDelay: '450ms' }}>Fixes</span>{' '}
+                  <span className="word" style={{ animationDelay: '540ms' }}>That.</span>
                 </em>
               </h1>
               <p className="hs-sub"><em>FDA-Approved hormone replacement therapy with results in just weeks. Feel like your 30's again.</em></p>
