@@ -703,6 +703,9 @@ function App() {
               <p>Clinicians experienced in women's hormone care. Messaging access during your plan; periodic check-ins.</p>
             </div>
           </div>
+          <div className="edu-section-cta-wrap">
+            <a href={INTAKE_URL} className="edu-section-cta">GET STARTED</a>
+          </div>
 
           {/* 5 — Problem vs Solution table */}
           <div className="edu-table-wrap">
@@ -829,6 +832,9 @@ function App() {
               percentages are now displayed as floating callouts around the
               hero avatar (see .hero-callout markup above). Sources stay
               documented in the hero's code comment for substantiation. */}
+          <div className="edu-section-cta-wrap">
+            <a href={INTAKE_URL} className="edu-section-cta">GET STARTED</a>
+          </div>
         </div>
       </section>
 
