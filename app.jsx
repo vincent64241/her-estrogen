@@ -849,92 +849,34 @@ function App() {
       {/* HOW IT WORKS */}
       <Timeline />
 
-      {/* COMPARE */}
-      <section className="compare" data-screen-label="06 Compare">
+      {/* WEEK-BY-WEEK TIMELINE */}
+      <section className="week-timeline" data-screen-label="06 Week by week">
         <div className="container">
-          <div className="compare-head">
-            <div className="eyebrow">For comparison</div>
-            <h2 className="write-on">
-              <span className="word" style={{ animationDelay: '0ms'   }}>Honest</span>{' '}
-              <span className="word" style={{ animationDelay: '90ms'  }}>about</span>{' '}
-              <em>
-                <span className="word" style={{ animationDelay: '200ms' }}>what's</span>{' '}
-                <span className="word" style={{ animationDelay: '290ms' }}>different.</span>
-              </em>
-            </h2>
+          <div className="wt-head">
+            <h2 className="wt-h2">What to expect, week<br />by week with your<br />HRT Treatment</h2>
+            <p className="wt-sub">No guesswork. Here's how the first months typically look for patients in the program. Individual experiences vary.</p>
           </div>
-          <div className="compare-table">
-            <div className="compare-row header">
-              <div></div>
-              <div>Most clinics</div>
-              <div>Other telehealth brands</div>
-              <div className="col-us">HerEstrogen</div>
+          <div className="wt-cards">
+            <div className="wt-card">
+              <div className="wt-img"><img src="assets/lifestyle/lifestyle-1.jpg" alt="Woman beginning HRT treatment" /></div>
+              <div className="wt-body">
+                <p className="wt-label">Week 1 → 4 · <strong>Your body is adjusting</strong></p>
+                <p className="wt-text">You start at the lowest therapeutic dose — intentionally. Estradiol is introduced gradually to give your body time to adapt. Some patients notice early relief from hot flashes. Others take a few more weeks. Both are normal. Your clinician is available throughout.</p>
+              </div>
             </div>
-            <div className="compare-row">
-              <div className="compare-feat">Initial intake review</div>
-              <div className="compare-no">Often 2–4 month wait</div>
-              <div className="compare-no">Generic questionnaire</div>
-              <div className="col-us compare-yes">Hormone-specific intake, 1–2 business days</div>
+            <div className="wt-card">
+              <div className="wt-img"><img src="assets/lifestyle/lifestyle-2.jpg" alt="Woman feeling better mid-treatment" /></div>
+              <div className="wt-body">
+                <p className="wt-label">Week 4 → 12 · <strong>The treatment starts to settle</strong></p>
+                <p className="wt-text">This is when most patients begin to feel the HRT working more consistently. Hot flashes start to quiet. Sleep deepens. The mood swings that disrupted your days begin to ease. Your dose may be reviewed and adjusted based on how you're responding.</p>
+              </div>
             </div>
-            <div className="compare-row">
-              <div className="compare-feat">Medication at your door</div>
-              <div className="compare-no">2–6 weeks (Rx + pharmacy runs)</div>
-              <div className="compare-no">Standard packaging</div>
-              <div className="col-us compare-yes">Free shipping</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Clinician focus</div>
-              <div className="compare-no">General practice</div>
-              <div className="compare-no">Multi-condition telehealth</div>
-              <div className="col-us compare-yes">Women's hormone care</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Async messaging</div>
-              <div className="compare-no">Phone tag</div>
-              <div className="compare-no">Limited windows</div>
-              <div className="col-us compare-yes">Throughout your plan</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">FDA-approved estradiol &amp; progesterone</div>
-              <div className="compare-no">Sometimes</div>
-              <div className="compare-no">May include compounded BHRT</div>
-              <div className="col-us compare-yes">FDA-approved only</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Dose adjustments</div>
-              <div className="compare-no">Annual visit</div>
-              <div className="compare-no">Periodic only</div>
-              <div className="col-us compare-yes">Anytime, free</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Cancel or pause</div>
-              <div className="compare-no">Call required</div>
-              <div className="compare-no">Online, with friction</div>
-              <div className="col-us compare-yes">Anytime, one tap</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Your own private licensed clinician</div>
-              <div className="compare-no">Random rotation</div>
-              <div className="compare-no">Rotating roster</div>
-              <div className="col-us compare-yes">Yes — included</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">24/7 support</div>
-              <div className="compare-no">Office hours</div>
-              <div className="compare-no">Business hours</div>
-              <div className="col-us compare-yes">Anytime — included</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Educational resources &amp; guides</div>
-              <div className="compare-no">—</div>
-              <div className="compare-no">Limited</div>
-              <div className="col-us compare-yes">Full library — included</div>
-            </div>
-            <div className="compare-row">
-              <div className="compare-feat">Our guarantee</div>
-              <div className="compare-no">—</div>
-              <div className="compare-no">—</div>
-              <div className="col-us compare-yes">Included</div>
+            <div className="wt-card">
+              <div className="wt-img"><img src="assets/lifestyle/lifestyle-4.jpg" alt="Woman thriving on HRT long-term" /></div>
+              <div className="wt-body">
+                <p className="wt-label">Month 3+ · <strong>Calibrated to you</strong></p>
+                <p className="wt-text">This is where your treatment becomes truly personal. With how your body has responded — to the dose, to the formulation — your clinician can now fine-tune your plan with real precision. The focus shifts from adjustment to consistency as sustainable wellbeing becomes the rhythm.</p>
+              </div>
             </div>
           </div>
         </div>
