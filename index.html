@@ -1982,7 +1982,7 @@
     font-family: 'Newsreader', Georgia, serif;
     font-size: 62px;
     font-weight: 700;
-    color: #e8b84b;
+    color: #fff;
     line-height: 1;
     margin: 0 0 12px;
   }
@@ -2037,8 +2037,8 @@
   .edu-section-cta-wrap { text-align: center; margin: 36px 0 56px; }
   .edu-section-cta {
     display: inline-block;
-    background: var(--pink);
-    color: #fff;
+    background: #fff;
+    color: var(--pink);
     padding: 15px 40px;
     border-radius: 999px;
     font-family: 'DM Sans', sans-serif;
@@ -2047,7 +2047,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    box-shadow: 0 8px 24px rgba(184,35,92,0.35);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     transition: opacity .15s;
   }
   .edu-section-cta:hover { opacity: 0.9; }
@@ -3886,14 +3886,35 @@
        nav slides up from beneath both bars via the tail-script handler. */
     position: absolute; top: 36px; left: 0; right: 0; z-index: 60;
     background: var(--pink);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-    padding: 10px 16px; min-height: 54px; box-sizing: border-box;
+    display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px;
+    padding: 10px 20px; min-height: 54px; box-sizing: border-box; flex-wrap: wrap;
   }
   .annc-timer {
-    color: rgba(255,255,255,0.92); font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 12.5px; font-weight: 600; letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border-radius: 100px; padding: 5px 16px 5px 12px;
+    white-space: nowrap;
   }
-  .annc-timer #annc-countdown { font-variant-numeric: tabular-nums; }
+  .annc-timer-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 0.02em;
+  }
+  .annc-timer-digits { display: flex; align-items: center; gap: 3px; }
+  .annc-td {
+    display: flex; flex-direction: column; align-items: center; line-height: 1;
+    min-width: 22px;
+  }
+  .annc-td span {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 17px; font-weight: 800; color: var(--pink-deep);
+    font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .annc-td em {
+    font-style: normal; font-size: 8px; font-weight: 700;
+    color: var(--pink); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .annc-tsep {
+    font-size: 15px; font-weight: 800; color: var(--pink-deep); margin-bottom: 6px;
+  }
   .annc-pill {
     display: inline-flex; align-items: center; gap: 9px;
     background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.6);
@@ -4211,7 +4232,16 @@ fbq('track', 'PageView');
   <span class="annc-pill annc-pill-static">
     📦 Limited Time Offer! 40% OFF Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee
   </span>
-  <div class="annc-timer">⏱ Offer ends in <span id="annc-countdown">01h 00m 00s</span></div>
+  <div class="annc-timer">
+    <span class="annc-timer-label">🔥 Ends in</span>
+    <span class="annc-timer-digits">
+      <span class="annc-td"><span id="annc-h">01</span><em>h</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-m">00</span><em>m</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-s">00</span><em>s</em></span>
+    </span>
+  </div>
 </div>
 
 <nav class="nav nav-editorial">
@@ -4268,8 +4298,10 @@ fbq('track', 'PageView');
   // refresh doesn't reset it.
   (function() {
     var KEY = 'he_offer_end';
-    var el = document.getElementById('annc-countdown');
-    if (!el) return;
+    var elH = document.getElementById('annc-h');
+    var elM = document.getElementById('annc-m');
+    var elS = document.getElementById('annc-s');
+    if (!elH) return;
     var end = sessionStorage.getItem(KEY);
     if (!end) {
       end = Date.now() + 3600 * 1000;
@@ -4280,10 +4312,9 @@ fbq('track', 'PageView');
     function pad(n) { return n < 10 ? '0' + n : '' + n; }
     function tick() {
       var rem = Math.max(0, end - Date.now());
-      var h = Math.floor(rem / 3600000);
-      var m = Math.floor((rem % 3600000) / 60000);
-      var s = Math.floor((rem % 60000) / 1000);
-      el.textContent = pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+      elH.textContent = pad(Math.floor(rem / 3600000));
+      elM.textContent = pad(Math.floor((rem % 3600000) / 60000));
+      elS.textContent = pad(Math.floor((rem % 60000) / 1000));
       if (rem > 0) setTimeout(tick, 1000);
     }
     tick();
