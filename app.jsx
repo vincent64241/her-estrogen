@@ -25,6 +25,16 @@ const SYMPTOMS = [
 
 const TREATMENTS = [
 {
+  id: 'patch',
+  eyebrow: 'FDA-Approved · No Daily Routine',
+  name: 'The Twice-Weekly Patch',
+  subtitle: 'Estradiol — transdermal, twice weekly',
+  mostPopular: true,
+  features: [
+  ['Application', 'Twice weekly — adhesive patch']],
+  image: 'assets/estradiol-patch.png?v=3'
+},
+{
   id: 'gel',
   eyebrow: 'FDA-Approved · Most Prescribed',
   name: 'The Daily Hormone Gel',
@@ -32,15 +42,6 @@ const TREATMENTS = [
   features: [
   ['Application', 'Once daily — inner arm or thigh']],
   image: 'assets/estradiol-gel.png'
-},
-{
-  id: 'patch',
-  eyebrow: 'FDA-Approved · No Daily Routine',
-  name: 'The Twice-Weekly Patch',
-  subtitle: 'Estradiol — transdermal, twice weekly',
-  features: [
-  ['Application', 'Twice weekly — adhesive patch']],
-  image: 'assets/estradiol-patch.png?v=3'
 },
 {
   id: 'pill',
@@ -466,6 +467,182 @@ function App() {
         </div>
       </div>
 
+      {/* TREATMENTS — restored original horizontal product scroll (per request) */}
+      <section className="treatments" id="treatments" data-screen-label="02 Treatments">
+        <div className="container">
+          <div className="treatments-two-col">
+            <div className="treatments-col-left">
+              <div className="eyebrow">Treatments</div>
+              <h2>Every woman deserves to feel like <em>herself again.</em></h2>
+            </div>
+            <div className="treatments-col-right">
+              <p className="treatments-sub">
+                Most patients start with one or two of the following{' '}
+                <span className="treatments-highlight">FDA-approved</span>{' '}
+                protocols. Your clinician decides what's appropriate based on
+                your symptoms, history, and goals.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="products-scroll-wrapper">
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-left"
+            aria-label="Scroll products left"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: -452, behavior: 'smooth' });
+            }}
+          >
+            ‹
+          </button>
+          <div className="products-scroll-container">
+            {TREATMENTS.map((t) => (
+              <a href={INTAKE_URL} className={'product-card-new' + (t.mostPopular ? ' product-card-popular' : '')} key={t.id}>
+                {t.mostPopular && <div className="product-popular-badge">Most Popular</div>}
+                <div className="product-card-image-wrapper">
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className={t.id === 'patch' ? 'no-shadow' : ''}
+                  />
+                </div>
+                <div className="product-card-body">
+                  <p className="product-card-price">Starting at $95/mo</p>
+                  <h3 className="product-card-name">{t.name}</h3>
+                  <p className="product-card-subtitle">{t.subtitle}</p>
+                  {t.useCase ? <span className="product-use-case">{t.useCase}</span> : null}
+                  <span className="product-card-btn">GET STARTED</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="products-scroll-arrow products-scroll-arrow-right"
+            aria-label="Scroll products right"
+            onClick={() => {
+              const el = document.querySelector('.products-scroll-container');
+              if (el) el.scrollBy({ left: 452, behavior: 'smooth' });
+            }}
+          >
+            ›
+          </button>
+        </div>
+      </section>
+
+      {/* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
+          Sits directly below the treatments/products section per spec.
+          Bonus copy carries explicit dollar values per the spec — note this
+          differs from the results-page bonus stack (which has no $ values
+          per a prior compliance vote). The two pages render distinct UIs. */}
+      <section className="home-bonus-section" data-screen-label="02c Bonuses + Promises">
+        <div className="container">
+          <div className="eyebrow">Included with every plan</div>
+          <p className="home-bonus-offer">🔥 Limited Time Offer: Up to 40% OFF</p>
+          <h2 className="home-bonus-h2">Everything <em>included</em> with your protocol</h2>
+          <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month</p>
+
+          <div className="home-bonus-grid">
+            {/* Card 1 — Protocol Passport */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="8" y1="13" x2="16" y2="13"/>
+                  <line x1="8" y1="17" x2="14" y2="17"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Your Personalized Clinical Guide</h3>
+              <span className="home-bonus-value">$150 value — Included</span>
+              <p className="home-bonus-desc">A personalized clinical guide created for your specific protocol after clinician review. What you&rsquo;re taking, why, what to expect week by week, and how to reach your clinician — all in one place.</p>
+            </div>
+
+            {/* Card 2 — 30-Day Clinical Concierge */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">30-Day Clinical Concierge</h3>
+              <span className="home-bonus-value">$300 value — Included</span>
+              <p className="home-bonus-desc">Unlimited clinician messaging for your first 30 days with responses within 2 hours during waking hours. Questions, side effects, reassurance — your clinician is there.</p>
+            </div>
+
+            {/* Card 3 — Quarterly Protocol Reviews */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <polyline points="9 16 11 18 15 14"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Quarterly Protocol Reviews</h3>
+              <span className="home-bonus-value">$800/year value — Included</span>
+              <p className="home-bonus-desc">Every 90 days, your board-certified clinician reviews your protocol, checks your progress, and adjusts your treatment if needed. Included with every plan at no extra cost.</p>
+            </div>
+
+            {/* Card 4 — Lifetime Price Lock */}
+            <div className="home-bonus-card">
+              <div className="home-bonus-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 className="home-bonus-title">Lifetime Price Lock</h3>
+              <span className="home-bonus-value">Priceless — Included</span>
+              <p className="home-bonus-desc">Your rate today is your rate forever. We raise prices as we grow. Your loyalty means your price never changes as long as you remain an active subscriber.</p>
+            </div>
+          </div>
+
+          {/* ── Promises (continues the same section) ──────────────────── */}
+          <h2 className="home-promise-h2">Our <em>promises</em> to you</h2>
+          <div className="home-promise-grid">
+            {/* Promise 1 — Clinical Match Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">Clinical Match Guarantee</h3>
+              <p className="home-promise-body">If our board-certified clinician reviews your intake and determines that FDA-approved hormone therapy is not the right fit for you, you pay absolutely nothing. No consultation fee. No processing fee. Nothing. You only pay if we can help you.</p>
+            </div>
+            {/* Promise 2 — 7-Day Shipping Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 3h5v5"/>
+                  <path d="M21 3l-7 7"/>
+                  <rect x="3" y="8" width="13" height="13" rx="2" ry="2"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">7-Day Shipping Guarantee</h3>
+              <p className="home-promise-body">Once your clinician approves your protocol, your medication ships from a licensed U.S. pharmacy and arrives at your door within 7 days — guaranteed. If it takes longer, your next month is on us.</p>
+            </div>
+            {/* Promise 3 — Lifetime Price Lock Guarantee */}
+            <div className="home-promise-card">
+              <div className="home-promise-icon" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <h3 className="home-promise-headline">Lifetime Price Lock Guarantee</h3>
+              <p className="home-promise-body">The price you start at is the price you keep — forever. As long as you remain an active subscriber, your rate never increases regardless of what happens to our pricing. Lock in today and never pay more.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* LIFESTYLE STRIP removed — its imagery now lives as the darkened
           background photos inside the hero bento tiles. */}
 
@@ -480,14 +657,11 @@ function App() {
           <div className="edu-head">
             <div className="eyebrow">What is HRT?</div>
             <h2 className="write-on">
-              <span className="word" style={{ animationDelay: '0ms'   }}>Every</span>{' '}
-              <span className="word" style={{ animationDelay: '90ms'  }}>woman</span>{' '}
-              <span className="word" style={{ animationDelay: '180ms' }}>deserves</span>{' '}
-              <span className="word" style={{ animationDelay: '270ms' }}>to</span>{' '}
-              <span className="word" style={{ animationDelay: '360ms' }}>feel</span>{' '}
-              <span className="word" style={{ animationDelay: '450ms' }}>like</span>{' '}
-              <em><span className="word" style={{ animationDelay: '560ms' }}>herself</span></em>{' '}
-              <span className="word" style={{ animationDelay: '660ms' }}>again.</span>
+              <span className="word" style={{ animationDelay: '0ms'   }}>What</span>{' '}
+              <span className="word" style={{ animationDelay: '90ms'  }}>is</span>{' '}
+              <span className="word" style={{ animationDelay: '180ms' }}>hormone</span>{' '}
+              <em><span className="word" style={{ animationDelay: '280ms' }}>replacement</span></em>{' '}
+              <span className="word" style={{ animationDelay: '400ms' }}>therapy?</span>
             </h2>
             <p className="edu-sub">
               HRT — hormone replacement therapy — gently puts back the
@@ -527,17 +701,6 @@ function App() {
               </div>
               <h3>Care focused on women's hormone health.</h3>
               <p>Clinicians experienced in women's hormone care. Messaging access during your plan; periodic check-ins.</p>
-            </div>
-          </div>
-
-          {/* Education block — sourced stats only.
-              The unsourced "92% relief in 90 days" claim was removed per
-              audit finding C-11. Restore only with peer-reviewed citation
-              visible at the point of claim. */}
-          <div className="edu-education">
-            <div className="edu-text">
-              <h3>Why hormone therapy is worth a conversation.</h3>
-              <p>Estrogen plays a role in sleep, mood, cognition, bone, and metabolic health. When levels change in perimenopause and menopause, symptoms can follow. Hormone therapy is one option among several — a clinician can help you decide whether it is right for you.</p>
             </div>
           </div>
 
@@ -590,7 +753,15 @@ function App() {
                   ? 'Show less ↑'
                   : `See ${HRT_COMPARISON.length - collapsedCount} more symptoms ↓`}
               </button>
+              {!tableExpanded && (
+                <a href={INTAKE_URL} className="edu-table-cta-black">I FEEL THESE, LET'S GET STARTED</a>
+              )}
             </div>
+            {tableExpanded && (
+              <div className="edu-table-cta-wrap">
+                <a href={INTAKE_URL} className="edu-table-cta-pink">I'M READY, LET'S GO</a>
+              </div>
+            )}
           </div>
 
         </div>
@@ -661,179 +832,6 @@ function App() {
         </div>
       </section>
 
-      {/* TREATMENTS — restored original horizontal product scroll (per request) */}
-      <section className="treatments" id="treatments" data-screen-label="02 Treatments">
-        <div className="container">
-          <div className="treatments-two-col">
-            <div className="treatments-col-left">
-              <div className="eyebrow">Treatments</div>
-              <h2>Your solutions, <em>trusted by experts.</em></h2>
-            </div>
-            <div className="treatments-col-right">
-              <p className="treatments-sub">
-                Most patients start with one or two of the following{' '}
-                <span className="treatments-highlight">FDA-approved</span>{' '}
-                protocols. Your clinician decides what's appropriate based on
-                your symptoms, history, and goals.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="products-scroll-wrapper">
-          <button
-            type="button"
-            className="products-scroll-arrow products-scroll-arrow-left"
-            aria-label="Scroll products left"
-            onClick={() => {
-              const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: -452, behavior: 'smooth' });
-            }}
-          >
-            ‹
-          </button>
-          <div className="products-scroll-container">
-            {TREATMENTS.map((t) => (
-              <a href={INTAKE_URL} className="product-card-new" key={t.id}>
-                <div className="product-card-image-wrapper">
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className={t.id === 'patch' ? 'no-shadow' : ''}
-                  />
-                </div>
-                <div className="product-card-body">
-                  <h3 className="product-card-name">{t.name}</h3>
-                  <p className="product-card-subtitle">{t.subtitle}</p>
-                  {t.useCase ? <span className="product-use-case">{t.useCase}</span> : null}
-                  <span className="product-card-btn">GET STARTED</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <button
-            type="button"
-            className="products-scroll-arrow products-scroll-arrow-right"
-            aria-label="Scroll products right"
-            onClick={() => {
-              const el = document.querySelector('.products-scroll-container');
-              if (el) el.scrollBy({ left: 452, behavior: 'smooth' });
-            }}
-          >
-            ›
-          </button>
-        </div>
-      </section>
-
-      {/* ═══ HOMEPAGE BONUSES + PROMISES ═══════════════════════════════════
-          Sits directly below the treatments/products section per spec.
-          Bonus copy carries explicit dollar values per the spec — note this
-          differs from the results-page bonus stack (which has no $ values
-          per a prior compliance vote). The two pages render distinct UIs. */}
-      <section className="home-bonus-section" data-screen-label="02c Bonuses + Promises">
-        <div className="container">
-          <div className="eyebrow">Included with every plan</div>
-          <h2 className="home-bonus-h2">Everything <em>included</em> with your protocol</h2>
-          <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month</p>
-
-          <div className="home-bonus-grid">
-            {/* Card 1 — Protocol Passport */}
-            <div className="home-bonus-card">
-              <div className="home-bonus-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="8" y1="13" x2="16" y2="13"/>
-                  <line x1="8" y1="17" x2="14" y2="17"/>
-                </svg>
-              </div>
-              <h3 className="home-bonus-title">Your Protocol Passport</h3>
-              <span className="home-bonus-value">$150 value — included free</span>
-              <p className="home-bonus-desc">A personalized clinical guide created for your specific protocol after clinician review. What you&rsquo;re taking, why, what to expect week by week, and how to reach your clinician — all in one place.</p>
-            </div>
-
-            {/* Card 2 — 30-Day Clinical Concierge */}
-            <div className="home-bonus-card">
-              <div className="home-bonus-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
-              </div>
-              <h3 className="home-bonus-title">30-Day Clinical Concierge</h3>
-              <span className="home-bonus-value">$300 value — included free</span>
-              <p className="home-bonus-desc">Unlimited clinician messaging for your first 30 days with responses within 2 hours during waking hours. Questions, side effects, reassurance — your clinician is there.</p>
-            </div>
-
-            {/* Card 3 — Quarterly Protocol Reviews */}
-            <div className="home-bonus-card">
-              <div className="home-bonus-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                  <polyline points="9 16 11 18 15 14"/>
-                </svg>
-              </div>
-              <h3 className="home-bonus-title">Quarterly Protocol Reviews</h3>
-              <span className="home-bonus-value">$800/year value — included</span>
-              <p className="home-bonus-desc">Every 90 days, your board-certified clinician reviews your protocol, checks your progress, and adjusts your treatment if needed. Included with every plan at no extra cost.</p>
-            </div>
-
-            {/* Card 4 — Lifetime Price Lock */}
-            <div className="home-bonus-card">
-              <div className="home-bonus-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              </div>
-              <h3 className="home-bonus-title">Lifetime Price Lock</h3>
-              <span className="home-bonus-value">Priceless — included</span>
-              <p className="home-bonus-desc">Your rate today is your rate forever. We raise prices as we grow. Your loyalty means your price never changes as long as you remain an active subscriber.</p>
-            </div>
-          </div>
-
-          {/* ── Promises (continues the same section) ──────────────────── */}
-          <h2 className="home-promise-h2">Our <em>promises</em> to you</h2>
-          <div className="home-promise-grid">
-            {/* Promise 1 — Clinical Match Guarantee */}
-            <div className="home-promise-card">
-              <div className="home-promise-icon" aria-hidden="true">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <polyline points="9 12 11 14 15 10"/>
-                </svg>
-              </div>
-              <h3 className="home-promise-headline">Clinical Match Guarantee</h3>
-              <p className="home-promise-body">If our board-certified clinician reviews your intake and determines that FDA-approved hormone therapy is not the right fit for you, you pay absolutely nothing. No consultation fee. No processing fee. Nothing. You only pay if we can help you.</p>
-            </div>
-            {/* Promise 2 — 7-Day Shipping Guarantee */}
-            <div className="home-promise-card">
-              <div className="home-promise-icon" aria-hidden="true">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 3h5v5"/>
-                  <path d="M21 3l-7 7"/>
-                  <rect x="3" y="8" width="13" height="13" rx="2" ry="2"/>
-                </svg>
-              </div>
-              <h3 className="home-promise-headline">7-Day Shipping Guarantee</h3>
-              <p className="home-promise-body">Once your clinician approves your protocol, your medication ships from a licensed U.S. pharmacy and arrives at your door within 7 days — guaranteed. If it takes longer, your next month is on us.</p>
-            </div>
-            {/* Promise 3 — Lifetime Price Lock Guarantee */}
-            <div className="home-promise-card">
-              <div className="home-promise-icon" aria-hidden="true">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              </div>
-              <h3 className="home-promise-headline">Lifetime Price Lock Guarantee</h3>
-              <p className="home-promise-body">The price you start at is the price you keep — forever. As long as you remain an active subscriber, your rate never increases regardless of what happens to our pricing. Lock in today and never pay more.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* (Science section moved above the products section — see below.) */}
 
       {/* PATIENT STORIES section REMOVED pending real, consented patient
@@ -878,6 +876,9 @@ function App() {
                 <p className="wt-text">This is where your treatment becomes truly personal. With how your body has responded — to the dose, to the formulation — your clinician can now fine-tune your plan with real precision. The focus shifts from adjustment to consistency as sustainable wellbeing becomes the rhythm.</p>
               </div>
             </div>
+          </div>
+          <div className="wt-cta-wrap">
+            <a href={INTAKE_URL} className="wt-cta-btn">GET STARTED</a>
           </div>
         </div>
       </section>

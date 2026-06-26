@@ -627,6 +627,33 @@
     text-align: center;
     border-top: 0;
   }
+  .product-card-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pink);
+    margin: 0 0 6px;
+    letter-spacing: 0.01em;
+  }
+  .product-popular-badge {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--pink);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .product-card-popular {
+    position: relative;
+    border: 2px solid var(--pink);
+  }
   .product-card-name {
     font-family: 'Newsreader', Georgia, serif;
     font-weight: 700;
@@ -792,6 +819,23 @@
   .wt-label { font-size: 15px; font-weight: 400; color: var(--ink); margin: 0 0 12px; line-height: 1.4; }
   .wt-label strong { font-weight: 700; }
   .wt-text { font-size: 14px; color: var(--ink-2); line-height: 1.65; margin: 0; }
+  .wt-cta-wrap { text-align: center; margin-top: 40px; }
+  .wt-cta-btn {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(184,35,92,0.38);
+    transition: opacity .15s;
+  }
+  .wt-cta-btn:hover { opacity: 0.9; }
   @media (max-width: 820px) {
     .week-timeline { padding: 60px 0 64px; }
     .wt-cards { grid-template-columns: 1fr; gap: 20px; }
@@ -1984,9 +2028,9 @@
       border-radius: 12px;
     }
     .edu-education .edu-text h3 {
-      font-size: 18px;
-      line-height: 1.18;
-      margin: 0 0 8px;
+      font-size: clamp(26px, 6.5vw, 34px);
+      line-height: 1.15;
+      margin: 0 0 10px;
     }
     .edu-education .edu-text p {
       font-size: 13.5px;
@@ -2193,6 +2237,45 @@
     border-color: var(--pink-3);
     color: var(--pink);
   }
+  .edu-table-toggle-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .edu-table-cta-black {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity .15s;
+  }
+  .edu-table-cta-black:hover { opacity: 0.85; }
+  .edu-table-cta-wrap { text-align: center; margin-top: 20px; }
+  .edu-table-cta-pink {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(184,35,92,0.35);
+    transition: opacity .15s;
+  }
+  .edu-table-cta-pink:hover { opacity: 0.9; }
 
   /* Mobile — collapse table to stacked cards */
   @media (max-width: 760px) {
@@ -3252,11 +3335,15 @@
   .hs-trust-no::before  { content: '⊗'; font-size: 14px; }
   .hs-trust-yes::before { content: '✓'; font-size: 14px; color: #4ade80; }
 
-  /* Mobile: photo stays full background, slightly stronger overlay for full-width text */
+  /* Mobile: photo stays full background, content centered */
   @media (max-width: 820px) {
     .hs-card { min-height: 620px; }
     .hs-card::before { background: rgba(18,8,14,0.55); }
-    .hs-content { width: 100%; min-height: 620px; padding: 36px 32px 40px; }
+    .hs-content { width: 100%; min-height: 620px; padding: 36px 32px 40px; text-align: center; }
+    .hs-stars { justify-content: center; }
+    .hs-bullets li { justify-content: center; }
+    .hs-ctas { justify-content: center; }
+    .hs-trust { justify-content: center; }
   }
   @media (max-width: 480px) {
     .hs-wrap { padding: 0 16px; }
@@ -3272,7 +3359,7 @@
     background: var(--cream, var(--pink-softer));
     /* Tighter top padding so this sits closer to the products carousel
        above it; bottom padding unchanged. */
-    padding: 40px 0 88px;
+    padding: 20px 0 88px;
   }
   .home-bonus-section .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
   .home-bonus-section .eyebrow {
@@ -3289,6 +3376,13 @@
     color: var(--ink); margin: 0 0 8px;
   }
   .home-bonus-h2 em, .home-promise-h2 em { font-style: italic; color: var(--pink); }
+  .home-bonus-offer {
+    display: inline-block;
+    background: var(--pink); color: #fff;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 6px 16px; border-radius: 20px;
+    margin: 0 0 14px;
+  }
   .home-bonus-sub {
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 16px; line-height: 1.55;
