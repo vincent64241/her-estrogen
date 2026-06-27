@@ -1231,7 +1231,8 @@
     border-bottom: 1px solid transparent;
     box-shadow: none;
     z-index: 50;
-    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease, transform .0s;
+    will-change: transform;
   }
   .nav.nav-editorial.scrolled {
     background: rgba(255, 255, 255, 0.94);
@@ -4294,7 +4295,6 @@ fbq('track', 'PageView');
     var promo = document.querySelector('.promo-bar');
     var ann = document.querySelector('.annc-bar');
     if (!nav || !ann) return;
-    nav.style.willChange = 'top';
     var totalBarH = 0;
     function measureBars() {
       var promoH = promo ? promo.offsetHeight : 0;
@@ -4303,7 +4303,7 @@ fbq('track', 'PageView');
     }
     function update() {
       var offset = totalBarH - window.scrollY;
-      nav.style.top = (offset > 0 ? offset : 0) + 'px';
+      nav.style.transform = 'translateY(' + (offset > 0 ? offset : 0) + 'px)';
     }
     measureBars();
     window.addEventListener('scroll', update, { passive: true });
