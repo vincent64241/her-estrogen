@@ -124,7 +124,16 @@ const HRT_COMPARISON = [
   { icon: '💧', problem: 'Vaginal dryness and painful sex',               fix: 'Estradiol vaginal cream restores tissue health and moisture locally' },
   { icon: '💗', problem: 'Heart palpitations and anxiety spikes',         fix: 'Estrogen protects cardiovascular function — palpitations resolve' },
   { icon: '🩻', problem: 'Bone loss and fracture risk',                   fix: 'Estrogen is your primary bone protector — HRT stops bone density decline' },
-  { icon: '🪞', problem: 'Feeling like a stranger in your own body',      fix: 'Balanced hormones restore your sense of self — women describe it as "coming home"' }
+  { icon: '🪞', problem: 'Feeling like a stranger in your own body',      fix: 'Balanced hormones restore your sense of self — women describe it as "coming home"' },
+  { icon: '💧', problem: 'Urinary urgency, UTIs, pain, and bladder discomfort', fix: 'Estrogen keeps the bladder lining thick and healthy — restoring it reduces urgency, lowers UTI frequency, and relieves pelvic discomfort' },
+  { icon: '🌸', problem: 'Breast aching, stiffness, soreness, tightness, and tenderness', fix: 'Hormone fluctuations trigger breast tissue sensitivity — stabilizing estrogen and progesterone levels reduces cyclical breast discomfort' },
+  { icon: '🫃', problem: 'Stomach and gut issues — bloating, nausea, constipation, and cramps', fix: 'Your gut is deeply connected to your hormones. When estrogen drops, digestion slows and your stomach gets unsettled — HRT helps your gut get back to normal' },
+  { icon: '🌪️', problem: 'Behavior changes — withdrawal, emotional reactivity, and loss of motivation', fix: 'Estrogen and progesterone regulate the brain chemicals behind drive and emotional control — restoring balance reduces reactivity and brings back motivation' },
+  { icon: '🍽️', problem: 'Appetite changes, intense cravings, and digestive irregularities', fix: 'Hormonal shifts disrupt hunger signals and slow gut motility — HRT helps regulate appetite, reduce cravings, and smooth out digestion' },
+  { icon: '🌬️', problem: 'Shortness of breath, worsening allergies, and sinus sensitivity', fix: 'Estrogen influences the airways and immune response — restoring levels can ease breathing difficulties and reduce sinus flare-ups' },
+  { icon: '🦷', problem: 'Dry mouth, gum sensitivity, tooth pain, and oral discomfort', fix: 'Estrogen supports saliva production and bone density in the jaw — HRT reduces dry mouth and helps protect gum and tooth health' },
+  { icon: '⚡', problem: 'Tingling, numbness, electric shock sensations, and worsening headaches', fix: 'Estrogen supports nerve function and raises pain thresholds — restoring levels reduces nerve-related sensations and hormone-driven migraines' },
+  { icon: '🛡️', problem: 'New or worsening allergies, heightened sensitivities, and increased inflammation', fix: 'Estrogen modulates immune function — stabilizing levels can reduce autoimmune flares, allergic reactions, and systemic inflammation in perimenopause' }
 ];
 
 
