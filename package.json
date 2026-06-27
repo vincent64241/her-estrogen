@@ -7,9 +7,11 @@
     "@supabase/supabase-js": "^2.45.0"
   },
   "scripts": {
-    "build": "esbuild app.jsx --minify --target=es2018 --outfile=app.bundle.js"
+    "build": "esbuild app.jsx --bundle --minify --target=es2018 --outfile=app.bundle.js",
+    "build:lp:sleep": "esbuild lp/sleep.jsx --bundle --minify --target=es2018 --outfile=lp/sleep.bundle.js",
+    "build:all": "npm run build && npm run build:lp:sleep"
   },
-  "comment_build": "app.bundle.js is built LOCALLY and committed (Vercel serves it statically — no Vercel build step). After editing app.jsx you MUST run `npm run build` and re-sync the GitHub Desktop mirror, or the live site will not reflect your changes.",
+  "comment_build": "Bundles are built LOCALLY and committed (Vercel serves statically — no Vercel build step). After editing app.jsx or lp/sleep.jsx run `npm run build:all` and re-sync the GitHub Desktop mirror. esbuild --bundle follows ES module imports; shared.jsx is bundled into each output, not loaded at runtime.",
   "engines": {
     "node": ">=18"
   },

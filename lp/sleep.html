@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Can't Sleep? It Might Be Your Hormones — HerEstrogen</title>
+<meta name="description" content="The 3am wakeups, the night sweats, the lying-there-exhausted-but-wired — these are hormonal symptoms. FDA-approved HRT from licensed clinicians in all 50 states." />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=3" />
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png?v=3" />
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=3" />
+<link rel="shortcut icon" href="../assets/favicon-32.png?v=3" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Shared CSS — extracted from homepage, shared across all LPs -->
+<link rel="stylesheet" href="../assets/main.css" />
+
+<!-- LP-specific styles — sleep hero + 5-reasons listicle -->
+<style>
+/* ── Sleep Hero ─────────────────────────────────────────────── */
+.lp-sleep-hero {
+  background: #1a0d13;
+  padding: 0;
+}
+.lp-sh-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 580px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.lp-sh-left {
+  padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.lp-sh-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+.lp-sh-h1 {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 400;
+  line-height: 1.18;
+  color: #fff;
+  margin: 0;
+}
+.lp-sh-h1 em {
+  font-style: italic;
+  color: var(--pink);
+}
+.lp-sh-sub {
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+.lp-sh-price {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+.lp-sh-price strong { color: #fff; font-size: 17px; }
+.lp-sh-price .price-was { color: rgba(255,255,255,0.5); }
+.lp-sh-price .price-badge { background: #fff; color: var(--pink); }
+.lp-sh-price .price-per-day { color: rgba(255,255,255,0.65); }
+.lp-sh-ctas { margin-top: 4px; }
+.lp-sh-right {
+  position: relative;
+  overflow: hidden;
+}
+.lp-sh-right img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+@media (max-width: 680px) {
+  .lp-sh-wrap { grid-template-columns: 1fr; }
+  .lp-sh-right { height: 280px; position: relative; }
+  .lp-sh-right img { position: absolute; }
+}
+
+/* ── 5 Reasons ──────────────────────────────────────────────── */
+.lp-five-reasons {
+  padding: clamp(56px, 7vw, 100px) 0;
+  background: #fff;
+}
+.lp-fr-h2 {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 12px 0 16px;
+}
+.lp-fr-h2 em {
+  font-style: italic;
+  color: var(--pink);
+}
+.lp-fr-sub {
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 640px;
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+.lp-fr-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.lp-fr-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.lp-fr-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pink);
+  padding-top: 3px;
+  letter-spacing: 0.04em;
+}
+.lp-fr-title {
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.lp-fr-text {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin: 0;
+}
+.lp-fr-cta-wrap {
+  text-align: center;
+  padding-top: 8px;
+}
+@media (max-width: 480px) {
+  .lp-fr-item { grid-template-columns: 40px 1fr; gap: 12px; }
+}
+</style>
+
+<!-- Meta Pixel — PageView ONLY on this LP.
+     Health-context pages (quiz, results, confirmation) are pixel-free per
+     HHS OCR tracking-tech guidance (2022/2024). Lead / CompleteRegistration
+     / InitiateCheckout events must be implemented via server-side CAPI only.
+     Pixel ID: 1691324572051294 -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1691324572051294');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1691324572051294&ev=PageView&noscript=1"
+  alt="" /></noscript>
+<!-- End Meta Pixel — PageView ONLY. Do NOT add Lead / Complete / Checkout. -->
+</head>
+<body>
+
+<div class="promo-bar">Save up to $768 on your first order</div>
+
+<div class="annc-bar">
+  <span class="annc-text">
+    📦 <span class="annc-offer">JUNE OFFER:</span> <span class="annc-pct">40% OFF</span><span class="annc-rest"> Annual Plans + 🔒 Free Shipping + Clinical Match Guarantee</span>
+  </span>
+  <div class="annc-timer">
+    <span class="annc-timer-label">🔥 Ends in</span>
+    <span class="annc-timer-digits">
+      <span class="annc-td"><span id="annc-d">00</span><em>DAYS</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-h">00</span><em>HRS</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-m">00</span><em>MINS</em></span>
+      <span class="annc-tsep">:</span>
+      <span class="annc-td"><span id="annc-s">00</span><em>SECS</em></span>
+    </span>
+  </div>
+</div>
+
+<!-- QUIZ_URL_PLACEHOLDER — replace /quiz.html with live OpenLoop intake URL -->
+<nav class="nav nav-editorial">
+  <div class="nav-inner">
+    <a class="logo" href="/"><img src="../assets/logo.png" alt="HerEstrogen" class="nav-logo" /></a>
+    <div class="nav-cta">
+      <a href="/quiz.html" class="btn btn-primary nav-btn">Get Approved →</a>
+    </div>
+  </div>
+</nav>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
+
+<script src="sleep.bundle.js?v=v1" defer></script>
+
+<script>
+  (function() {
+    var nav = document.querySelector('.nav.nav-editorial');
+    if (!nav) return;
+    nav.classList.add('scrolled');
+  })();
+
+  (function() {
+    var KEY = 'he_offer_end';
+    var elD = document.getElementById('annc-d');
+    var elH = document.getElementById('annc-h');
+    var elM = document.getElementById('annc-m');
+    var elS = document.getElementById('annc-s');
+    if (!elH) return;
+    var end = sessionStorage.getItem(KEY);
+    if (!end) {
+      end = Date.now() + 3600 * 1000;
+      sessionStorage.setItem(KEY, String(end));
+    } else {
+      end = parseInt(end, 10);
+    }
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var rem = Math.max(0, end - Date.now());
+      if (elD) elD.textContent = pad(Math.floor(rem / 86400000));
+      elH.textContent = pad(Math.floor((rem % 86400000) / 3600000));
+      elM.textContent = pad(Math.floor((rem % 3600000) / 60000));
+      elS.textContent = pad(Math.floor((rem % 60000) / 1000));
+      if (rem > 0) setTimeout(tick, 1000);
+    }
+    tick();
+  })();
+
+  (function() {
+    function init() {
+      var el = document.querySelector('.products-scroll-container');
+      if (!el) { return setTimeout(init, 200); }
+      var isDown = false, startX = 0, scrollLeft = 0;
+      el.addEventListener('mousedown', function(e) {
+        isDown = true; el.classList.add('dragging');
+        startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; e.preventDefault();
+      });
+      ['mouseleave', 'mouseup'].forEach(function(evt) {
+        el.addEventListener(evt, function() { isDown = false; el.classList.remove('dragging'); });
+      });
+      el.addEventListener('mousemove', function(e) {
+        if (!isDown) return; e.preventDefault();
+        var x = e.pageX - el.offsetLeft; el.scrollLeft = scrollLeft - (x - startX) * 1.4;
+      });
+    }
+    init();
+  })();
+
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var tries = 0;
+    function go() {
+      var sec = document.querySelector('#root .science-v2');
+      if (!sec && tries < 240) { tries++; return requestAnimationFrame(go); }
+      if (!sec) return;
+      var nums = sec.querySelectorAll('[data-count]');
+      function run() {
+        sec.classList.add('sci-go');
+        if (reduce) return;
+        nums.forEach(function (el) {
+          var target = parseFloat(el.getAttribute('data-count')) || 0;
+          var dur = 1400, start = null;
+          function tick(ts) {
+            if (start === null) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(eased * target);
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+      if (reduce || !('IntersectionObserver' in window)) { run(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { run(); io.disconnect(); } });
+      }, { threshold: 0.3 });
+      io.observe(sec);
+      setTimeout(function () { if (!sec.classList.contains('sci-go')) run(); }, 4000);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  })();
+
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pendingIo = null;
+    var setupDone = false;
+    function inView(el) {
+      var r = el.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.6 && r.bottom > 0;
+    }
+    function revealVisible() {
+      document.querySelectorAll('#root .write-on:not(.write-go)').forEach(function (el) {
+        if (inView(el)) el.classList.add('write-go');
+      });
+    }
+    function revealAll() {
+      document.querySelectorAll('#root .write-on:not(.write-go)').forEach(function (el) {
+        el.classList.add('write-go');
+      });
+    }
+    function setup() {
+      if (setupDone) return;
+      var els = document.querySelectorAll('#root .write-on:not(.write-go)');
+      if (!els.length) return;
+      setupDone = true;
+      if (reduce) { revealAll(); return; }
+      revealVisible();
+      if ('IntersectionObserver' in window) {
+        pendingIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('write-go');
+              pendingIo.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -40% 0px', threshold: 0 });
+        document.querySelectorAll('#root .write-on:not(.write-go)').forEach(function (el) {
+          pendingIo.observe(el);
+        });
+      }
+      window.addEventListener('scroll', revealVisible, { passive: true });
+    }
+    setTimeout(revealAll, 5000);
+    function watch() {
+      var root = document.getElementById('root');
+      if (!root) { setTimeout(watch, 50); return; }
+      setup();
+      if (setupDone) return;
+      var mo = new MutationObserver(function () {
+        setup();
+        if (setupDone) mo.disconnect();
+      });
+      mo.observe(root, { childList: true, subtree: true });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch);
+    else watch();
+  })();
+</script>
+
+</body>
+</html>
