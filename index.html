@@ -4287,19 +4287,27 @@ fbq('track', 'PageView');
   // Announcement bar scrolls away normally (position: absolute). The nav
   // is fixed but its top is computed each scroll: starts beneath the bar
   // at scrollY=0, slides up to top:0 once the bar is past.
+  // Heights are cached and only re-read on resize to avoid layout thrash on
+  // every scroll tick (critical for smooth mobile performance).
   (function() {
     var nav = document.querySelector('.nav.nav-editorial');
     var promo = document.querySelector('.promo-bar');
     var ann = document.querySelector('.annc-bar');
     if (!nav || !ann) return;
-    function update() {
+    nav.style.willChange = 'top';
+    var totalBarH = 0;
+    function measureBars() {
       var promoH = promo ? promo.offsetHeight : 0;
       var annH = ann.offsetHeight || 46;
-      var offset = Math.max(0, promoH + annH - window.scrollY);
-      nav.style.top = offset + 'px';
+      totalBarH = promoH + annH;
     }
+    function update() {
+      var offset = totalBarH - window.scrollY;
+      nav.style.top = (offset > 0 ? offset : 0) + 'px';
+    }
+    measureBars();
     window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
+    window.addEventListener('resize', function() { measureBars(); update(); }, { passive: true });
     update();
   })();
 
