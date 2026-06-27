@@ -422,7 +422,7 @@ function App() {
                 </em>
               </h1>
               <p className="hs-sub"><em>FDA-Approved hormone replacement therapy with results in just weeks. Feel like your 30's again.</em></p>
-              <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$95/mo</strong></p>
+              <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;<s className="price-was">$160</s>&nbsp;<span className="price-badge">Up to 40% OFF</span><span className="price-per-day">= $3.17/day</span></p>
               <ul className="hs-bullets">
                 <li>
                   <span className="hs-bullet-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
@@ -519,7 +519,7 @@ function App() {
                   />
                 </div>
                 <div className="product-card-body">
-                  <p className="product-card-price">Starting at $95/mo</p>
+                  <p className="product-card-price">Starting at $95/mo&nbsp;<s className="price-was">$160</s>&nbsp;<span className="price-badge">Up to 40% OFF</span><span className="price-per-day">= $3.17/day</span></p>
                   <h3 className="product-card-name">{t.name}</h3>
                   <p className="product-card-subtitle">{t.subtitle}</p>
                   {t.useCase ? <span className="product-use-case">{t.useCase}</span> : null}
@@ -552,7 +552,7 @@ function App() {
           <div className="eyebrow">Included with every plan</div>
           <p className="home-bonus-offer">🔥 Limited Time Offer: Up to 40% OFF</p>
           <h2 className="home-bonus-h2">Everything <em>included</em> with your protocol</h2>
-          <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month</p>
+          <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month&nbsp;<s className="price-was">$160</s>&nbsp;<span className="price-badge">Up to 40% OFF</span><span className="price-per-day">= $3.17/day</span></p>
 
           <div className="home-bonus-grid">
             {/* Card 1 — Protocol Passport */}
