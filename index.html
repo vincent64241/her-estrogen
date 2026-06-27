@@ -29,7 +29,7 @@
     --gold: #b89455;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; overflow-x: hidden; max-width: 100%; }
+  html, body { margin: 0; padding: 0; overflow-x: clip; max-width: 100%; }
   /* Global responsive defaults — prevents images busting out of containers on resize */
   img { max-width: 100%; height: auto; }
   body {
@@ -1223,7 +1223,12 @@
 
   /* Transparent fixed nav (logo left, button right) — turns white on scroll */
   .nav.nav-editorial {
-    position: fixed;
+    /* Sticky, not fixed: the browser pins it natively on the compositor with
+       zero JS, so it never lags during iOS momentum scroll. The promo/annc
+       bars sit above it in normal flow and scroll away; the nav then sticks
+       to the top. (Requires no overflow:hidden on html/body — see the
+       overflow-x: clip rules, which clip without breaking sticky.) */
+    position: sticky;
     top: 0; left: 0; right: 0;
     background: transparent;
     backdrop-filter: none;
@@ -1231,8 +1236,7 @@
     border-bottom: 1px solid transparent;
     box-shadow: none;
     z-index: 50;
-    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease, transform .0s;
-    will-change: transform;
+    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
   }
   .nav.nav-editorial.scrolled {
     background: rgba(255, 255, 255, 0.94);
@@ -3328,7 +3332,7 @@
     width: 56%;
     min-height: 600px;
     background: transparent;
-    padding: 280px 48px 48px;
+    padding: 48px 48px 48px;
     display: flex; flex-direction: column; justify-content: center;
   }
 
@@ -3396,7 +3400,7 @@
   @media (max-width: 820px) {
     .hs-card { min-height: 620px; }
     .hs-card::before { background: rgba(18,8,14,0.55); }
-    .hs-content { width: 100%; min-height: 620px; padding: 204px 32px 40px; text-align: center; }
+    .hs-content { width: 100%; min-height: 620px; padding: 40px 32px 40px; text-align: center; }
     .hs-stars { justify-content: center; }
     .hs-bullets li { justify-content: center; }
     .hs-ctas { justify-content: center; }
@@ -3404,7 +3408,7 @@
   }
   @media (max-width: 480px) {
     .hs-wrap { padding: 0; }
-    .hs-content { padding: 188px 20px 32px; min-height: 560px; }
+    .hs-content { padding: 32px 20px 32px; min-height: 560px; }
     .hs-h1 { font-size: clamp(28px, 7.5vw, 40px); }
     .hs-btn-primary, .hs-btn-secondary { padding: 12px 22px; font-size: 14px; }
   }
@@ -3876,16 +3880,16 @@
 
   /* ═══ ANNOUNCEMENT BAR (primary pink, centered clickable pill → quiz) ═══ */
   .promo-bar {
-    position: absolute; top: 0; left: 0; right: 0; z-index: 62;
+    position: relative; z-index: 62;
     background: #fff;
     display: flex; align-items: center; justify-content: center;
     height: 36px; font-size: 13.5px; font-weight: 600; color: var(--ink);
     box-sizing: border-box; letter-spacing: 0.01em;
   }
   .annc-bar {
-    /* Sits beneath the promo bar and scrolls away normally — the
-       nav slides up from beneath both bars via the tail-script handler. */
-    position: absolute; top: 36px; left: 0; right: 0; z-index: 60;
+    /* Normal flow, directly below the promo bar; both scroll away while the
+       sticky nav pins to the top. */
+    position: relative; z-index: 60;
     background: var(--pink);
     display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px;
     padding: 10px 20px; min-height: 54px; box-sizing: border-box; flex-wrap: wrap;
@@ -3942,20 +3946,19 @@
   .annc-rest  { font-weight: 600; }
   @media (max-width: 560px) { .annc-pill { font-size: 12.5px; padding: 6px 14px; } .annc-bar { padding: 7px 12px; min-height: 42px; } .annc-timer { display: none; } }
 
-  /* Nav starts beneath the announcement bar at scroll = 0, then slides up
-     to top: 0 as the user scrolls past the announcement bar (handled by
-     the tail-script). No !important so the inline style from JS wins. */
-  .nav.nav-editorial { top: 46px; }
+  /* Nav is position: sticky; top: 0 — it sits below the in-flow promo/annc
+     bars and pins to the top once they scroll away. No JS, no manual offset. */
+  .nav.nav-editorial { top: 0; }
   .hero-bento { padding-top: 280px; }
   .hero-split { padding-top: 0; }
   @media (max-width: 900px) { .hero-bento { padding-top: 204px; } }
-  @media (max-width: 560px) { .nav.nav-editorial { top: 42px; } .hero-bento { padding-top: 188px; } }
+  @media (max-width: 560px) { .hero-bento { padding-top: 188px; } }
   @media (max-width: 380px) { .hero-bento { padding-top: 168px; } }
 
   /* ═══ FIX PASS (per request) ═══ */
 
   /* No stray scrollbars: products scrolls horizontally only, bar hidden */
-  html, body { overflow-x: hidden; }
+  html, body { overflow-x: clip; }
   .products-scroll-container { overflow-x: auto !important; overflow-y: hidden !important; scrollbar-width: none; -ms-overflow-style: none; }
   .products-scroll-container::-webkit-scrollbar { display: none; height: 0; }
 
@@ -4285,31 +4288,9 @@ fbq('track', 'PageView');
     nav.classList.add('scrolled');
   })();
 
-  // Announcement bar scrolls away normally (position: absolute). The nav
-  // is fixed but its top is computed each scroll: starts beneath the bar
-  // at scrollY=0, slides up to top:0 once the bar is past.
-  // Heights are cached and only re-read on resize to avoid layout thrash on
-  // every scroll tick (critical for smooth mobile performance).
-  (function() {
-    var nav = document.querySelector('.nav.nav-editorial');
-    var promo = document.querySelector('.promo-bar');
-    var ann = document.querySelector('.annc-bar');
-    if (!nav || !ann) return;
-    var totalBarH = 0;
-    function measureBars() {
-      var promoH = promo ? promo.offsetHeight : 0;
-      var annH = ann.offsetHeight || 46;
-      totalBarH = promoH + annH;
-    }
-    function update() {
-      var offset = totalBarH - window.scrollY;
-      nav.style.transform = 'translateY(' + (offset > 0 ? offset : 0) + 'px)';
-    }
-    measureBars();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', function() { measureBars(); update(); }, { passive: true });
-    update();
-  })();
+  // Nav positioning is now pure CSS (position: sticky) — the old scroll-driven
+  // transform handler was removed because iOS throttles scroll events during
+  // momentum scrolling, which made the nav lag. Sticky is compositor-native.
 
   // Announcement bar countdown — 1 hour, persisted in sessionStorage so
   // refresh doesn't reset it.
