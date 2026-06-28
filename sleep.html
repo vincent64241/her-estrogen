@@ -218,6 +218,15 @@ fbq('track', 'PageView');
 </head>
 <body>
 
+<!-- Sticky promo bar — slides in from top after nav scrolls away -->
+<div class="sp-bar" id="spBar">
+  <div class="sp-inner">
+    <a class="sp-logo" href="/"><img src="assets/logo.png" alt="HerEstrogen" /></a>
+    <p class="sp-offer">📦 <strong>JUNE OFFER: 40% OFF Annual Plans</strong> + 🔒 Free Shipping + Clinical Match Guarantee</p>
+    <a href="/quiz.html" class="sp-cta">Get Started →</a>
+  </div>
+</div>
+
 <div class="promo-bar">Save up to $768 on your first order</div>
 
 <div class="annc-bar">
@@ -368,6 +377,20 @@ fbq('track', 'PageView');
     }
     if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', watch);
     else watch();
+  })();
+</script>
+
+<script>
+  // Sticky promo bar — slides in once the nav scrolls fully off screen.
+  (function() {
+    var bar = document.getElementById('spBar');
+    var nav = document.querySelector('.nav');
+    if (!bar) return;
+    function onScroll() {
+      var past = nav ? nav.getBoundingClientRect().bottom <= 0 : window.scrollY > 200;
+      bar.classList.toggle('sp-visible', past);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
   })();
 </script>
 </body>

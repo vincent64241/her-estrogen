@@ -1210,27 +1210,13 @@
 
   /* Transparent fixed nav (logo left, button right) — turns white on scroll */
   .nav.nav-editorial {
-    /* Sticky, not fixed: the browser pins it natively on the compositor with
-       zero JS, so it never lags during iOS momentum scroll. The promo/annc
-       bars sit above it in normal flow and scroll away; the nav then sticks
-       to the top. (Requires no overflow:hidden on html/body — see the
-       overflow-x: clip rules, which clip without breaking sticky.) */
-    position: sticky;
-    top: 0; left: 0; right: 0;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom: 1px solid transparent;
-    box-shadow: none;
-    z-index: 50;
-    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
-  }
-  .nav.nav-editorial.scrolled {
+    position: relative;
     background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom-color: var(--line);
+    border-bottom: 1px solid var(--line);
     box-shadow: 0 2px 14px rgba(20, 18, 22, .04);
+    z-index: 50;
   }
   .nav.nav-editorial .nav-inner {
     /* Desktop: slightly tighter vertical padding so the nav bar is a touch
@@ -1258,17 +1244,9 @@
     transform-origin: left center;
   }
   .nav.nav-editorial .nav-cta {
-    position: fixed;
-    top: 95px;
-    right: 48px;
-    z-index: 60;
     display: flex;
     gap: 12px;
     align-items: center;
-    transition: top .25s ease;
-  }
-  .nav.nav-editorial.scrolled .nav-cta {
-    top: 58px;
   }
   .nav.nav-editorial .nav-btn {
     padding: 11px 22px;
@@ -4203,3 +4181,45 @@
   line-height: 1.5;
 }
 .edu-stat-citation-slot { font-style: italic; }
+
+/* ── Sticky Promo Bar ─────────────────────────────────────────── */
+.sp-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--pink);
+  z-index: 200;
+  transform: translateY(-100%);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+}
+.sp-bar.sp-visible { transform: translateY(0); }
+.sp-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 24px;
+}
+.sp-logo { flex-shrink: 0; display: flex; align-items: center; }
+.sp-logo img { height: 28px; width: auto; filter: brightness(0) invert(1); display: block; }
+.sp-offer {
+  color: #fff; font-size: 14px; font-weight: 700;
+  margin: 0; text-align: center; flex: 1; line-height: 1.4;
+}
+.sp-cta {
+  background: #fff; color: var(--pink);
+  font-weight: 800; font-size: 13px;
+  padding: 9px 22px; border-radius: 100px;
+  text-decoration: none; white-space: nowrap;
+  flex-shrink: 0; letter-spacing: 0.02em;
+  transition: opacity 0.15s ease;
+}
+.sp-cta:hover { opacity: 0.88; }
+@media (max-width: 680px) {
+  .sp-inner { padding: 10px 16px; gap: 10px; }
+  .sp-logo { display: none; }
+  .sp-offer { font-size: 12px; }
+  .sp-cta { font-size: 12px; padding: 8px 14px; }
+}
