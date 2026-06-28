@@ -16,7 +16,7 @@
 
 <style>
 /* ── Sleep Hero ─────────────────────────────────────────────── */
-.lp-sleep-hero { background: #1a0d13; padding: 0; }
+.lp-sleep-hero { background: #fff; padding: 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .lp-sh-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,6 +30,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 18px;
+  background: #fff;
 }
 .lp-sh-eyebrow {
   font-family: 'DM Mono', monospace;
@@ -44,21 +45,21 @@
   font-size: clamp(28px,3.8vw,52px);
   font-weight: 400;
   line-height: 1.18;
-  color: #fff;
+  color: var(--ink);
   margin: 0;
 }
 .lp-sh-h1 em { font-style: italic; color: var(--pink); }
 .lp-sh-sub {
   font-size: clamp(15px,1.4vw,17px);
-  color: rgba(255,255,255,0.75);
+  color: var(--ink-2);
   line-height: 1.6;
   margin: 0;
 }
-.lp-sh-price { font-size: 14px; color: rgba(255,255,255,0.72); margin: 0; }
-.lp-sh-price strong { color: #fff; font-size: 17px; }
-.lp-sh-price .price-was { color: rgba(255,255,255,0.5); }
-.lp-sh-price .price-badge { background: #fff; color: var(--pink); }
-.lp-sh-price .price-per-day { color: rgba(255,255,255,0.65); }
+.lp-sh-price { font-size: 14px; color: var(--ink-2); margin: 0; }
+.lp-sh-price strong { color: var(--ink); font-size: 17px; }
+.lp-sh-price .price-was { color: inherit; opacity: 0.45; }
+.lp-sh-price .price-badge { background: var(--pink); color: #fff; }
+.lp-sh-price .price-per-day { color: var(--ink-2); opacity: 0.75; }
 .lp-sh-ctas { margin-top: 4px; }
 .lp-sh-right {
   position: relative;
