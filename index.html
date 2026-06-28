@@ -4219,6 +4219,132 @@
 }
 .edu-stat-citation-slot { font-style: italic; }
 
+/* ── Full-page welcome offer popup (fades in 2s after load) ───────── */
+.he-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background:
+    radial-gradient(120% 120% at 25% 15%, #b8235c 0%, #8a1745 52%, #5e0e2f 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease;
+}
+.he-pop.he-pop-on { opacity: 1; visibility: visible; }
+.he-pop-inner {
+  width: 100%;
+  max-width: 1080px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 32px;
+}
+.he-pop-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.he-pop-close:hover { color: #fff; transform: scale(1.08); }
+.he-pop-logo {
+  height: 34px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+  margin: 0 0 22px;
+}
+.he-pop-h {
+  font-family: 'DM Sans', sans-serif;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(34px, 4.6vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+}
+.he-pop-h span { color: #f7b9d0; }
+.he-pop-sub {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+.he-pop-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+.he-pop-opt {
+  display: block;
+  background: #fff;
+  color: var(--ink);
+  padding: 15px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+.he-pop-opt:hover {
+  transform: translateY(-2px);
+  background: var(--pink-softer);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+.he-pop-decline {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+.he-pop-decline:hover { color: #fff; }
+.he-pop-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.he-pop-right img {
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.4));
+}
+@media (max-width: 768px) {
+  .he-pop { padding: 20px; overflow-y: auto; }
+  .he-pop-inner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: center;
+    max-width: 440px;
+  }
+  .he-pop-logo { margin-left: auto; margin-right: auto; }
+  .he-pop-opts { max-width: 100%; }
+  .he-pop-opt { text-align: center; }
+  .he-pop-right { order: -1; }
+  .he-pop-right img { max-height: 26vh; }
+}
+@media (max-width: 360px) {
+  .he-pop-right { display: none; }
+  .he-pop-h { font-size: clamp(28px, 9vw, 38px); }
+}
+
 </style>
 <!-- Compliance audit C-03 / C-08 / M-19 / HHS OCR tracking-tech guidance:
      Client-side trackers are temporarily disabled site-wide pending counsel
@@ -4251,6 +4377,29 @@ fbq('track', 'PageView');
 <!-- End Meta Pixel — PageView ONLY. Do NOT add Lead / Complete / Checkout. -->
 </head>
 <body>
+
+<!-- Full-page welcome offer popup — fades in 2s after load, once per session.
+     Buttons route to the same intake placeholder (#) as every other CTA. -->
+<div class="he-pop" id="hePop" role="dialog" aria-modal="true" aria-label="Welcome offer" aria-hidden="true">
+  <button class="he-pop-close" id="hePopClose" type="button" aria-label="Close">&times;</button>
+  <div class="he-pop-inner">
+    <div class="he-pop-left">
+      <img class="he-pop-logo" src="assets/logo.png" alt="HerEstrogen" />
+      <h2 class="he-pop-h">You've Got<br />Up To 40% Off<br /><span>+ Free Shipping</span></h2>
+      <p class="he-pop-sub">To claim, tell us what you're struggling with most:</p>
+      <div class="he-pop-opts">
+        <a href="#" class="he-pop-opt">Hot flashes &amp; night sweats</a>
+        <a href="#" class="he-pop-opt">I can't sleep through the night</a>
+        <a href="#" class="he-pop-opt">Low energy &amp; brain fog</a>
+        <a href="#" class="he-pop-opt">Mood swings &amp; irritability</a>
+      </div>
+      <button class="he-pop-decline" id="hePopDecline" type="button">No thanks, I don't like savings</button>
+    </div>
+    <div class="he-pop-right" aria-hidden="true">
+      <img src="assets/products-hero.png" alt="" />
+    </div>
+  </div>
+</div>
 
 <!-- Old top "Telehealth / Free shipping / Cancel anytime" banner REMOVED
      (duplicate top bar stacked above .annc-bar on mobile). Its compliance
@@ -4507,6 +4656,41 @@ fbq('track', 'PageView');
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch);
     else watch();
+  })();
+
+  // Full-page welcome offer popup — fades in 2s after load, once per session.
+  (function () {
+    var pop = document.getElementById('hePop');
+    if (!pop) return;
+    var KEY = 'he_pop_seen';
+    if (sessionStorage.getItem(KEY)) return;
+
+    function open() {
+      pop.classList.add('he-pop-on');
+      pop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      pop.classList.remove('he-pop-on');
+      pop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+
+    setTimeout(open, 2000);
+
+    document.getElementById('hePopClose').addEventListener('click', close);
+    document.getElementById('hePopDecline').addEventListener('click', close);
+    // Click the backdrop (outside the content) to dismiss.
+    pop.addEventListener('click', function (e) { if (e.target === pop) close(); });
+    // Esc to dismiss.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && pop.classList.contains('he-pop-on')) close();
+    });
+    // Picking a problem closes the overlay before following the CTA link.
+    pop.querySelectorAll('.he-pop-opt').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
   })();
 </script>
 
