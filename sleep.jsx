@@ -74,7 +74,7 @@ function SleepHero() {
           </div>
         </div>
         <div className="lp-sh-right" aria-hidden="true">
-          <img src="assets/lifestyle/lifestyle-3.jpg" alt="" />
+          <img src="assets/products-hero.png" alt="" className="lp-sh-product-img" />
         </div>
       </div>
     </section>
