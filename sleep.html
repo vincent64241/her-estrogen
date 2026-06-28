@@ -15,9 +15,10 @@
 <link rel="stylesheet" href="assets/main.css" />
 
 <style>
-/* ── Nav: override main.css position:relative back to sticky ──
-   High z-index so the promo bar slides in BELOW it (nav never moves). */
-.nav.nav-editorial { position: sticky !important; top: 0 !important; z-index: 210 !important; }
+/* ── Nav: relative so it scrolls away with the page (matches home).
+   Declared inline because the preview can serve a stale main.css. The
+   promo bar slides in to replace it once it scrolls off the top. ── */
+.nav.nav-editorial { position: relative; }
 
 /* ── Sleep Hero ─────────────────────────────────────────────── */
 .lp-sleep-hero { padding: 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
@@ -196,15 +197,12 @@
   .lp-fr-card-img { min-height: 260px; }
 }
 
-/* ── Sliding Promo Bar ────────────────────────────────────────────
-   Sits just below the fixed nav (its `top` is set by JS to the nav's
-   height). z-index is BELOW the nav so it slides out from behind it —
-   the nav itself never moves. */
+/* ── Sticky Promo Bar — slides in after nav scrolls away ──────────── */
 .sp-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
   background: var(--pink);
-  z-index: 100;
+  z-index: 200;
   transform: translateY(-100%);
   transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 2px 20px rgba(0,0,0,0.18);
@@ -431,16 +429,15 @@ fbq('track', 'PageView');
 </script>
 
 <script>
-  // Promo bar slides in BELOW the fixed nav. The nav never moves; only
-  // the promo bar animates in once you scroll past the hero.
+  // Sticky promo bar — slides in once the nav scrolls fully off screen.
   (function() {
     var bar = document.getElementById('spBar');
-    var nav = document.querySelector('.nav.nav-editorial');
-    if (!bar || !nav) return;
-    function place() { bar.style.top = nav.getBoundingClientRect().height + 'px'; }
-    function onScroll() { bar.classList.toggle('sp-visible', window.scrollY > 300); }
-    place();
-    window.addEventListener('resize', place, { passive: true });
+    var nav = document.querySelector('.nav');
+    if (!bar) return;
+    function onScroll() {
+      var past = nav ? nav.getBoundingClientRect().bottom <= 0 : window.scrollY > 200;
+      bar.classList.toggle('sp-visible', past);
+    }
     window.addEventListener('scroll', onScroll, { passive: true });
   })();
 </script>
