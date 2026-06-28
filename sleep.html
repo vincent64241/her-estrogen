@@ -116,7 +116,7 @@
 .lp-fr-cards {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 20px;
 }
 .lp-fr-card {
   display: grid;
@@ -124,10 +124,8 @@
   min-height: 400px;
   overflow: hidden;
 }
-.lp-fr-flip .lp-fr-card-img { order: 2; }
-.lp-fr-flip .lp-fr-card-body { order: 1; }
-
 .lp-fr-card-img {
+  order: 2;
   position: relative;
   overflow: hidden;
   min-height: 360px;
@@ -141,6 +139,7 @@
 .lp-fr-card:hover .lp-fr-card-img img { transform: scale(1.03); }
 
 .lp-fr-card-body {
+  order: 1;
   padding: clamp(32px,5vw,64px) clamp(28px,4vw,56px);
   display: flex;
   flex-direction: column;
@@ -161,9 +160,9 @@
 .lp-fr-title {
   font-family: 'DM Sans', sans-serif;
   font-size: clamp(22px,2.6vw,36px);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.15;
-  color: var(--ink);
+  color: var(--pink);
   margin: 0 0 16px;
   letter-spacing: -0.01em;
 }
@@ -193,6 +192,48 @@
   .lp-fr-card-img { min-height: 260px; }
 }
 
+/* ── Sticky Promo Bar ─────────────────────────────────────────── */
+.sp-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--pink);
+  z-index: 200;
+  transform: translateY(-100%);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+}
+.sp-bar.sp-visible { transform: translateY(0); }
+.sp-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 24px;
+}
+.sp-logo { flex-shrink: 0; display: flex; align-items: center; }
+.sp-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); display: block; }
+.sp-offer {
+  color: #fff; font-size: 14px; font-weight: 700;
+  margin: 0; text-align: center; flex: 1; line-height: 1.4;
+}
+.sp-cta {
+  background: #fff; color: var(--pink);
+  font-weight: 800; font-size: 13px;
+  padding: 9px 22px; border-radius: 100px;
+  text-decoration: none; white-space: nowrap;
+  flex-shrink: 0; letter-spacing: 0.02em;
+  transition: opacity 0.15s ease;
+}
+.sp-cta:hover { opacity: 0.88; }
+@media (max-width: 680px) {
+  .sp-inner { padding: 10px 16px; gap: 10px; }
+  .sp-logo { display: none; }
+  .sp-offer { font-size: 12px; }
+  .sp-cta { font-size: 12px; padding: 8px 14px; }
+}
+
 /* Stat citation footnote */
 .edu-stat-citation {
   font-size: 11.5px;
@@ -219,6 +260,15 @@ fbq('track', 'PageView');
   alt="" /></noscript>
 </head>
 <body>
+
+<!-- Sticky promo bar — slides in from top after nav scrolls away -->
+<div class="sp-bar" id="spBar">
+  <div class="sp-inner">
+    <a class="sp-logo" href="/"><img src="assets/logo.png" alt="HerEstrogen" /></a>
+    <p class="sp-offer">📦 <strong>JUNE OFFER: 40% OFF Annual Plans</strong> + 🔒 Free Shipping + Clinical Match Guarantee</p>
+    <a href="/quiz.html" class="sp-cta">Get Started →</a>
+  </div>
+</div>
 
 <div class="promo-bar">Save up to $768 on your first order</div>
 
@@ -373,5 +423,15 @@ fbq('track', 'PageView');
   })();
 </script>
 
+<script>
+  (function() {
+    var bar = document.getElementById('spBar');
+    if (!bar) return;
+    function onScroll() {
+      bar.classList.toggle('sp-visible', window.scrollY > 300);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
 </body>
 </html>
