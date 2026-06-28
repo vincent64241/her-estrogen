@@ -3314,23 +3314,23 @@
     border-radius: 0;
     overflow: hidden;
     box-shadow: none;
-    background: #fff;
+    background: linear-gradient(135deg, #fff5f8 0%, #fce8f2 60%, #f9d9ea 100%);
   }
   .hs-card::before { display: none; }
-  /* Product image — right column, white bg, contained */
+  /* Product image — right column, transparent so gradient shows through */
   .hs-photo {
     position: static;
-    background: #fff;
+    background: transparent;
     display: flex; align-items: center; justify-content: center;
     padding: 32px 24px;
   }
   .hs-photo img { width: 88%; height: auto; object-fit: contain; display: block; }
-  /* Content — left column, white bg, dark text */
+  /* Content — left column, transparent so gradient shows through */
   .hs-content {
     position: relative; z-index: 2;
     width: 100%;
     min-height: 600px;
-    background: #fff;
+    background: transparent;
     padding: 48px 48px 48px;
     display: flex; flex-direction: column; justify-content: center;
   }
@@ -4295,7 +4295,7 @@ fbq('track', 'PageView');
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 
-<script src="app.bundle.js?v=v16" defer></script>
+<script src="app.bundle.js?v=v17" defer></script>
 
 <script>
   // Nav stays in its compact "scrolled" state always (per request — the nav
