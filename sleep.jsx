@@ -50,8 +50,8 @@ function SleepHero() {
         <div className="lp-sh-left">
           <div className="lp-sh-eyebrow">SLEEP &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            You don't have an insomnia problem.{' '}
-            <em>You have a hormone problem.</em>
+            5 reasons your poor sleep{' '}
+            <em>is actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
             The 3am wakeups, the night sweats, the lying-there-exhausted-but-wired — this isn't just "getting older." It's what happens when estrogen and progesterone disappear.
@@ -85,17 +85,6 @@ function FiveReasonsSection() {
   return (
     <section className="lp-five-reasons" data-screen-label="02 5 Reasons">
       <div className="container">
-        <div className="lp-fr-intro">
-          <div className="eyebrow">Why you can't sleep</div>
-          <h2 className="lp-fr-h2">
-            5 reasons your poor sleep<br />
-            <em>is actually hormonal.</em>
-          </h2>
-          <p className="lp-fr-sub">
-            Most sleep problems in perimenopause and menopause have the same root cause. Here's exactly what's happening inside your body.
-          </p>
-        </div>
-
         <div className="lp-fr-cards">
           {FIVE_REASONS.map((r, i) => (
             <div key={r.n} className={'lp-fr-card' + (i % 2 === 1 ? ' lp-fr-card-flip' : '')}>
