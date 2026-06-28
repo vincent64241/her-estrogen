@@ -3406,17 +3406,17 @@
   /* Mobile: stack text top, product image below */
   @media (max-width: 820px) {
     .hs-card { grid-template-columns: 1fr; min-height: unset; }
-    .hs-photo { order: 2; min-height: 280px; padding: 24px 0; }
-    .hs-photo img { width: 72%; }
-    .hs-content { width: 100%; min-height: unset; padding: 40px 32px 32px; text-align: center; order: 1; }
+    .hs-photo { order: 2; min-height: 240px; padding: 0; }
+    .hs-photo img { width: 68%; }
+    .hs-content { width: 100%; min-height: unset; padding: 40px 32px 24px; text-align: center; order: 1; }
     .hs-stars { justify-content: center; }
-    .hs-bullets li { justify-content: center; }
+    .hs-bullets { display: none; }
     .hs-ctas { justify-content: center; }
     .hs-trust { justify-content: center; }
   }
   @media (max-width: 480px) {
     .hs-wrap { padding: 0; }
-    .hs-content { padding: 32px 20px 32px; min-height: 560px; }
+    .hs-content { padding: 28px 20px 20px; min-height: unset; }
     .hs-h1 { font-size: clamp(28px, 7.5vw, 40px); }
     .hs-btn-primary, .hs-btn-secondary { padding: 12px 22px; font-size: 14px; }
   }
