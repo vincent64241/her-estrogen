@@ -64,7 +64,7 @@ function SleepHero() {
           </p>
           <div className="lp-sh-ctas">
             <a className="hs-btn-primary" href={QUIZ_URL}>
-              Take the 2-minute assessment →
+              Get Started →
             </a>
           </div>
           <div className="hs-trust">
@@ -113,7 +113,7 @@ function FiveReasonsSection() {
 
         <div className="lp-fr-cta-wrap">
           <a href={QUIZ_URL} className="hs-btn-primary">
-            Take the 2-minute assessment →
+            Get Started →
           </a>
           <p className="lp-fr-cta-note">Licensed clinicians in all 50 states · No insurance required</p>
         </div>
