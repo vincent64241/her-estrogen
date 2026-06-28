@@ -1,6 +1,6 @@
 import {
   TrustMarquee, ProductsSection, BonusPromisesSection, EduSection,
-  WeekTimelineSection, FaqSection, StartQuizSection, FooterSection,
+  ScienceSection, WeekTimelineSection, FaqSection, StartQuizSection, FooterSection,
 } from './shared.jsx';
 
 const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live OpenLoop intake URL
@@ -86,15 +86,15 @@ function FiveReasonsSection() {
     <section className="lp-five-reasons" data-screen-label="02 5 Reasons">
       <div className="container">
         <div className="lp-fr-cards">
-          {FIVE_REASONS.map((r) => (
-            <div key={r.n} className="lp-fr-card">
+          {FIVE_REASONS.map((r, idx) => (
+            <div key={r.n} className={`lp-fr-card${idx % 2 !== 0 ? ' lp-fr-flip' : ''}`}>
+              <div className="lp-fr-card-img">
+                <img src={r.img} alt={r.alt} />
+              </div>
               <div className="lp-fr-card-body">
                 <span className="lp-fr-num">{r.n}</span>
                 <h3 className="lp-fr-title">{r.headline}</h3>
                 <p className="lp-fr-text">{r.body}</p>
-              </div>
-              <div className="lp-fr-card-img">
-                <img src={r.img} alt={r.alt} />
               </div>
             </div>
           ))}
@@ -120,6 +120,7 @@ function SleepApp() {
       <ProductsSection ctaUrl={QUIZ_URL} />
       <BonusPromisesSection />
       <EduSection ctaUrl={QUIZ_URL} />
+      <ScienceSection ctaUrl={QUIZ_URL} />
       <WeekTimelineSection ctaUrl={QUIZ_URL} />
       <FaqSection />
       <StartQuizSection ctaUrl={QUIZ_URL} />

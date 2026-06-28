@@ -16,7 +16,7 @@
 
 <style>
 /* ── Sleep Hero ─────────────────────────────────────────────── */
-.lp-sleep-hero { background: linear-gradient(135deg, #fff5f8 0%, #fce8f2 60%, #f9d9ea 100%); padding: 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.lp-sleep-hero { padding: 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .lp-sh-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,7 +30,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 18px;
-  background: transparent;
 }
 .lp-sh-eyebrow {
   font-family: 'DM Mono', monospace;
@@ -64,7 +63,6 @@
 .lp-sh-right {
   position: relative;
   overflow: hidden;
-  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,19 +107,19 @@
 }
 .lp-five-reasons .eyebrow { color: rgba(255,255,255,0.7); }
 
-/* Cards: text left, image right — always */
 .lp-fr-cards {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0;
 }
 .lp-fr-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 400px;
   overflow: hidden;
-  border-radius: 16px;
 }
+.lp-fr-flip .lp-fr-card-img { order: 2; }
+.lp-fr-flip .lp-fr-card-body { order: 1; }
 
 .lp-fr-card-img {
   position: relative;
@@ -157,9 +155,9 @@
 .lp-fr-title {
   font-family: 'DM Sans', sans-serif;
   font-size: clamp(22px,2.6vw,36px);
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.15;
-  color: var(--pink);
+  color: var(--ink);
   margin: 0 0 16px;
   letter-spacing: -0.01em;
 }
@@ -184,11 +182,9 @@
   margin: 0;
 }
 
-/* Mobile: stack text above image */
 @media (max-width: 760px) {
   .lp-fr-card { grid-template-columns: 1fr; }
-  .lp-fr-card-img { min-height: 260px; order: 2; }
-  .lp-fr-card-body { order: 1; background: #fff !important; }
+  .lp-fr-card-img { min-height: 260px; }
 }
 
 /* Stat citation footnote */
@@ -217,15 +213,6 @@ fbq('track', 'PageView');
   alt="" /></noscript>
 </head>
 <body>
-
-<!-- Sticky promo bar — slides in from top after nav scrolls away -->
-<div class="sp-bar" id="spBar">
-  <div class="sp-inner">
-    <a class="sp-logo" href="/"><img src="assets/logo.png" alt="HerEstrogen" /></a>
-    <p class="sp-offer">📦 <strong>JUNE OFFER: 40% OFF Annual Plans</strong> + 🔒 Free Shipping + Clinical Match Guarantee</p>
-    <a href="/quiz.html" class="sp-cta">Get Started →</a>
-  </div>
-</div>
 
 <div class="promo-bar">Save up to $768 on your first order</div>
 
@@ -380,18 +367,5 @@ fbq('track', 'PageView');
   })();
 </script>
 
-<script>
-  // Sticky promo bar — slides in once the nav scrolls fully off screen.
-  (function() {
-    var bar = document.getElementById('spBar');
-    var nav = document.querySelector('.nav');
-    if (!bar) return;
-    function onScroll() {
-      var past = nav ? nav.getBoundingClientRect().bottom <= 0 : window.scrollY > 200;
-      bar.classList.toggle('sp-visible', past);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-</script>
 </body>
 </html>
