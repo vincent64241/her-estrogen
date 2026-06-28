@@ -11,7 +11,8 @@
     "build:sleep": "esbuild sleep.jsx --bundle --minify --target=es2018 --outfile=sleep.bundle.js",
     "build:hotflashes": "esbuild hotflashes.jsx --bundle --minify --target=es2018 --outfile=hotflashes.bundle.js",
     "build:weightgain": "esbuild weightgain.jsx --bundle --minify --target=es2018 --outfile=weightgain.bundle.js",
-    "build:all": "npm run build && npm run build:sleep && npm run build:hotflashes && npm run build:weightgain"
+    "build:brainfog": "esbuild brainfog.jsx --bundle --minify --target=es2018 --outfile=brainfog.bundle.js",
+    "build:all": "npm run build && npm run build:sleep && npm run build:hotflashes && npm run build:weightgain && npm run build:brainfog"
   },
   "comment_build": "Bundles are built LOCALLY and committed (Vercel serves statically — no Vercel build step). After editing app.jsx or lp/sleep.jsx run `npm run build:all` and re-sync the GitHub Desktop mirror. esbuild --bundle follows ES module imports; shared.jsx is bundled into each output, not loaded at runtime.",
   "engines": {
