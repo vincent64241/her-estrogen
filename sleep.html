@@ -74,9 +74,15 @@
   display: block;
 }
 @media (max-width: 680px) {
+  .lp-sleep-hero { background: linear-gradient(135deg, #fff5f8 0%, #fce8f2 60%, #f9d9ea 100%); }
   .lp-sh-wrap { grid-template-columns: 1fr; }
-  .lp-sh-right { min-height: 280px; padding: 24px 0; }
-  .lp-sh-product-img { width: 72%; }
+  .lp-sh-left { background: transparent; text-align: center; padding: 40px 32px 24px; }
+  .lp-sh-ctas { justify-content: center; }
+  .lp-sh-right { background: transparent; min-height: 240px; padding: 0; }
+  .lp-sh-product-img { width: 68%; }
+}
+@media (max-width: 480px) {
+  .lp-sh-left { padding: 28px 20px 20px; }
 }
 
 /* ── 5 Reasons — Gruns-style image cards ────────────────────── */
