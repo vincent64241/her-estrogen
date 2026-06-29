@@ -8,60 +8,53 @@ const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live Op
 const FIVE_REASONS = [
   {
     n: '01',
-    headline: 'Estrogen decides where your fat goes',
-    body: 'Estrogen steers fat toward your hips and thighs. As it drops, that fat redistributes to your belly — the deep visceral fat that wraps around your organs. Same number on the scale, different shape, and far harder to budge.',
+    headline: 'Estrogen helps protect your gums',
+    body: 'Gum tissue is full of estrogen receptors. As estrogen drops, gums can become inflamed, tender, and start to recede — bringing bleeding when you brush and a higher risk of gum disease, even with the exact same routine you\'ve always had.',
     img: 'assets/case-joy.jpg',
-    alt: 'Woman looking vibrant and energized',
+    alt: 'Woman with a healthy smile',
   },
   {
     n: '02',
-    headline: 'Your metabolism quietly downshifted',
-    body: 'Estrogen helps regulate how efficiently your body burns energy. As it declines, your resting metabolic rate falls — so the same meals that kept your weight steady for years now slowly add to it, even though nothing about how you eat has changed.',
+    headline: 'Dry mouth came out of nowhere',
+    body: 'Estrogen supports saliva production, and saliva is your mouth\'s natural defense against decay. As estrogen declines, your mouth turns dry — which fuels bad breath, more cavities, and that constant parched, sticky feeling.',
     img: 'assets/lifestyle/lifestyle-1.jpg',
-    alt: 'Woman resting comfortably',
+    alt: 'Woman reaching for water',
   },
   {
     n: '03',
-    headline: 'You\'re losing the muscle that burns calories',
-    body: 'Falling estrogen accelerates muscle loss. Muscle is your most metabolically active tissue — it burns calories around the clock, even at rest. Less of it means a slower burn all day long, no matter how hard you work out.',
+    headline: 'Burning mouth & altered taste',
+    body: 'Falling estrogen can irritate the nerves in your mouth, causing burning mouth syndrome — a scalded, tingling sensation on the tongue and lips — often alongside a metallic or "off" taste that just won\'t go away.',
     img: 'assets/lifestyle/lifestyle-2.jpg',
-    alt: 'Woman staying active',
+    alt: 'Woman experiencing mouth discomfort',
   },
   {
     n: '04',
-    headline: 'Your hunger signals got louder',
-    body: 'Estrogen influences leptin and insulin — the hormones that tell you when you\'re full. When estrogen swings, those signals misfire, so you stay hungry even after a full meal and reach for more without realizing it.',
+    headline: 'Your jawbone is losing density too',
+    body: 'The same estrogen loss that thins the bones in your hips and spine thins your jawbone. That can loosen teeth, shift your bite, and quietly undermine the foundation your teeth depend on — long before a dentist flags it.',
     img: 'assets/case-reading.jpg',
-    alt: 'Woman managing hunger',
+    alt: 'Woman at a dental check-up',
   },
   {
     n: '05',
-    headline: 'Your appetite and cravings shifted',
-    body: 'It isn\'t only how much you eat — it\'s what you crave and when. Falling estrogen drives a pull toward sugar and refined carbs, while rising cortisol fuels stress and late-night eating. Your appetite starts steering you toward the very foods that make weight gain worse.',
-    img: 'assets/lifestyle/lifestyle-3.jpg',
-    alt: 'Woman facing changing cravings',
-  },
-  {
-    n: '06',
-    headline: 'Diet and exercise alone stopped working',
-    body: 'If you\'re eating less and moving more but the scale won\'t move, it isn\'t willpower — it\'s biology. The only way to work with your body again is to address the hormone shift underneath, not just cut more calories or add another workout.',
+    headline: 'It\'s not "getting older" or poor hygiene',
+    body: 'Brushing harder or more often won\'t fix a hormone-driven change. When dry mouth, sore gums, and dental problems track with menopause, addressing the estrogen decline underneath is what protects your mouth at the source.',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman thriving after treatment',
   },
 ];
 
-function WeightGainHero() {
+function OralHealthHero() {
   return (
-    <section className="lp-sleep-hero" data-screen-label="01 Weight Gain Hero">
+    <section className="lp-sleep-hero" data-screen-label="01 Oral Health Hero">
       <div className="lp-sh-wrap">
         <div className="lp-sh-left">
-          <div className="lp-sh-eyebrow">WEIGHT GAIN &amp; HORMONAL CHANGE</div>
+          <div className="lp-sh-eyebrow">ORAL, DENTAL &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            6 reasons your weight gain{' '}
-            <em>is actually hormonal.</em>
+            5 reasons your oral &amp; dental changes{' '}
+            <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The stubborn belly fat, the scale creeping up while you eat the same, the cravings you can't shake, the diets that suddenly stop working — this isn't just "getting older." It's what happens when estrogen declines and your metabolism shifts.
+            The bleeding gums, the dry mouth, the burning or metallic taste, the teeth that suddenly feel loose — this isn't just "getting older" or poor brushing. It's what happens when estrogen declines in your gums, saliva, and jawbone.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;
@@ -118,10 +111,10 @@ function FiveReasonsSection() {
   );
 }
 
-function WeightGainApp() {
+function OralHealthApp() {
   return (
     <>
-      <WeightGainHero />
+      <OralHealthHero />
       <TrustMarquee />
       <FiveReasonsSection />
       <ProductsSection ctaUrl={QUIZ_URL} />
@@ -136,4 +129,4 @@ function WeightGainApp() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<WeightGainApp />);
+ReactDOM.createRoot(document.getElementById('root')).render(<OralHealthApp />);

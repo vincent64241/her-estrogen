@@ -16,7 +16,11 @@
     "build:frozenshoulder": "esbuild frozenshoulder.jsx --bundle --minify --target=es2018 --outfile=frozenshoulder.bundle.js",
     "build:skinandhair": "esbuild skinandhair.jsx --bundle --minify --target=es2018 --outfile=skinandhair.bundle.js",
     "build:libido": "esbuild libido.jsx --bundle --minify --target=es2018 --outfile=libido.bundle.js",
-    "build:all": "npm run build && npm run build:sleep && npm run build:hotflashes && npm run build:weightgain && npm run build:brainfog && npm run build:moodswings && npm run build:frozenshoulder && npm run build:skinandhair && npm run build:libido"
+    "build:vaginaldryness": "esbuild vaginaldryness.jsx --bundle --minify --target=es2018 --outfile=vaginaldryness.bundle.js",
+    "build:digestion": "esbuild digestion.jsx --bundle --minify --target=es2018 --outfile=digestion.bundle.js",
+    "build:urinaryrespiratory": "esbuild urinaryrespiratory.jsx --bundle --minify --target=es2018 --outfile=urinaryrespiratory.bundle.js",
+    "build:oralhealth": "esbuild oralhealth.jsx --bundle --minify --target=es2018 --outfile=oralhealth.bundle.js",
+    "build:all": "npm run build && npm run build:sleep && npm run build:hotflashes && npm run build:weightgain && npm run build:brainfog && npm run build:moodswings && npm run build:frozenshoulder && npm run build:skinandhair && npm run build:libido && npm run build:vaginaldryness && npm run build:digestion && npm run build:urinaryrespiratory && npm run build:oralhealth"
   },
   "comment_build": "Bundles are built LOCALLY and committed (Vercel serves statically — no Vercel build step). After editing app.jsx or lp/sleep.jsx run `npm run build:all` and re-sync the GitHub Desktop mirror. esbuild --bundle follows ES module imports; shared.jsx is bundled into each output, not loaded at runtime.",
   "engines": {

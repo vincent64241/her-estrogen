@@ -8,60 +8,60 @@ const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live Op
 const FIVE_REASONS = [
   {
     n: '01',
-    headline: 'Estrogen decides where your fat goes',
-    body: 'Estrogen steers fat toward your hips and thighs. As it drops, that fat redistributes to your belly — the deep visceral fat that wraps around your organs. Same number on the scale, different shape, and far harder to budge.',
+    headline: 'Estrogen keeps your bladder & urethra strong',
+    body: 'The bladder and urethra are lined with estrogen receptors. As estrogen falls, that tissue thins and weakens — so you leak when you laugh, cough, or sneeze, and feel like you have to go far more often than you used to.',
     img: 'assets/case-joy.jpg',
-    alt: 'Woman looking vibrant and energized',
+    alt: 'Woman feeling confident and comfortable',
   },
   {
     n: '02',
-    headline: 'Your metabolism quietly downshifted',
-    body: 'Estrogen helps regulate how efficiently your body burns energy. As it declines, your resting metabolic rate falls — so the same meals that kept your weight steady for years now slowly add to it, even though nothing about how you eat has changed.',
+    headline: 'Sudden urgency that won\'t wait',
+    body: 'Estrogen helps regulate the bladder muscle. Without it, the bladder turns overactive and twitchy — triggering that gotta-go-right-now urgency and waking you several times a night just to pee.',
     img: 'assets/lifestyle/lifestyle-1.jpg',
-    alt: 'Woman resting comfortably',
+    alt: 'Woman resting at night',
   },
   {
     n: '03',
-    headline: 'You\'re losing the muscle that burns calories',
-    body: 'Falling estrogen accelerates muscle loss. Muscle is your most metabolically active tissue — it burns calories around the clock, even at rest. Less of it means a slower burn all day long, no matter how hard you work out.',
+    headline: 'UTIs that keep coming back',
+    body: 'Estrogen maintains the protective lining and healthy bacteria of your urinary tract. As it declines, that natural defense breaks down — which is why recurrent UTIs and burning become so common in menopause.',
     img: 'assets/lifestyle/lifestyle-2.jpg',
-    alt: 'Woman staying active',
+    alt: 'Woman managing urinary discomfort',
   },
   {
     n: '04',
-    headline: 'Your hunger signals got louder',
-    body: 'Estrogen influences leptin and insulin — the hormones that tell you when you\'re full. When estrogen swings, those signals misfire, so you stay hungry even after a full meal and reach for more without realizing it.',
+    headline: 'Estrogen helps keep your airways open',
+    body: 'Estrogen and progesterone influence the muscles and lining of your airways. As they decline, airways can tighten and inflame more easily — bringing breathlessness, chest tightness, and a lingering cough. Many women find asthma worsens, or shows up for the first time, in perimenopause.',
     img: 'assets/case-reading.jpg',
-    alt: 'Woman managing hunger',
+    alt: 'Woman catching her breath',
   },
   {
     n: '05',
-    headline: 'Your appetite and cravings shifted',
-    body: 'It isn\'t only how much you eat — it\'s what you crave and when. Falling estrogen drives a pull toward sugar and refined carbs, while rising cortisol fuels stress and late-night eating. Your appetite starts steering you toward the very foods that make weight gain worse.',
+    headline: 'Congestion, allergies & air hunger',
+    body: 'Estrogen interacts with histamine — the chemical behind allergic reactions — so as it fluctuates, congestion and a runny nose can flare. Paired with the palpitations and anxiety from the same hormone swings, you can feel winded or air-hungry even at rest.',
     img: 'assets/lifestyle/lifestyle-3.jpg',
-    alt: 'Woman facing changing cravings',
+    alt: 'Woman dealing with congestion',
   },
   {
     n: '06',
-    headline: 'Diet and exercise alone stopped working',
-    body: 'If you\'re eating less and moving more but the scale won\'t move, it isn\'t willpower — it\'s biology. The only way to work with your body again is to address the hormone shift underneath, not just cut more calories or add another workout.',
+    headline: 'It\'s hormonal — not just "getting older"',
+    body: 'Pads, inhalers, and antihistamines help you cope, but they don\'t restore what estrogen used to maintain. When urinary and breathing changes track with menopause, addressing the estrogen shift underneath is part of getting back to normal. (Sudden or severe shortness of breath always warrants urgent medical care.)',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman thriving after treatment',
   },
 ];
 
-function WeightGainHero() {
+function UrinaryRespiratoryHero() {
   return (
-    <section className="lp-sleep-hero" data-screen-label="01 Weight Gain Hero">
+    <section className="lp-sleep-hero" data-screen-label="01 Urinary & Respiratory Hero">
       <div className="lp-sh-wrap">
         <div className="lp-sh-left">
-          <div className="lp-sh-eyebrow">WEIGHT GAIN &amp; HORMONAL CHANGE</div>
+          <div className="lp-sh-eyebrow">URINARY, RESPIRATORY &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            6 reasons your weight gain{' '}
-            <em>is actually hormonal.</em>
+            6 reasons your urinary &amp; breathing changes{' '}
+            <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The stubborn belly fat, the scale creeping up while you eat the same, the cravings you can't shake, the diets that suddenly stop working — this isn't just "getting older." It's what happens when estrogen declines and your metabolism shifts.
+            The bladder leaks and constant urgency, the recurring UTIs, the breathlessness and asthma flares — this isn't just "getting older." Both your bladder and your airways are rich in estrogen receptors, and they feel it when estrogen drops.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;
@@ -90,7 +90,7 @@ function WeightGainHero() {
 
 function FiveReasonsSection() {
   return (
-    <section className="lp-five-reasons" data-screen-label="02 5 Reasons">
+    <section className="lp-five-reasons" data-screen-label="02 6 Reasons">
       <div className="container">
         <div className="lp-fr-cards">
           {FIVE_REASONS.map((r, idx) => (
@@ -118,10 +118,10 @@ function FiveReasonsSection() {
   );
 }
 
-function WeightGainApp() {
+function UrinaryRespiratoryApp() {
   return (
     <>
-      <WeightGainHero />
+      <UrinaryRespiratoryHero />
       <TrustMarquee />
       <FiveReasonsSection />
       <ProductsSection ctaUrl={QUIZ_URL} />
@@ -136,4 +136,4 @@ function WeightGainApp() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<WeightGainApp />);
+ReactDOM.createRoot(document.getElementById('root')).render(<UrinaryRespiratoryApp />);

@@ -8,60 +8,53 @@ const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live Op
 const FIVE_REASONS = [
   {
     n: '01',
-    headline: 'Estrogen decides where your fat goes',
-    body: 'Estrogen steers fat toward your hips and thighs. As it drops, that fat redistributes to your belly — the deep visceral fat that wraps around your organs. Same number on the scale, different shape, and far harder to budge.',
+    headline: 'Estrogen keeps vaginal tissue thick & resilient',
+    body: 'Estrogen maintains the thickness, elasticity, and blood flow of vaginal tissue. As it declines in menopause, that tissue thins and grows fragile — what doctors call vaginal atrophy — which is exactly why dryness, irritation, and tearing start to show up.',
     img: 'assets/case-joy.jpg',
-    alt: 'Woman looking vibrant and energized',
+    alt: 'Woman feeling comfortable and at ease',
   },
   {
     n: '02',
-    headline: 'Your metabolism quietly downshifted',
-    body: 'Estrogen helps regulate how efficiently your body burns energy. As it declines, your resting metabolic rate falls — so the same meals that kept your weight steady for years now slowly add to it, even though nothing about how you eat has changed.',
+    headline: 'Your natural lubrication dried up',
+    body: 'Estrogen drives the natural moisture and lubrication that makes intimacy comfortable. Without it, the tissue stays dry — so friction that once felt good now burns, stings, or pinches instead.',
     img: 'assets/lifestyle/lifestyle-1.jpg',
-    alt: 'Woman resting comfortably',
+    alt: 'Woman relaxing comfortably',
   },
   {
     n: '03',
-    headline: 'You\'re losing the muscle that burns calories',
-    body: 'Falling estrogen accelerates muscle loss. Muscle is your most metabolically active tissue — it burns calories around the clock, even at rest. Less of it means a slower burn all day long, no matter how hard you work out.',
+    headline: 'Sex started to hurt — so you started avoiding it',
+    body: 'When tissue is thin and dry, penetration can cause real pain (dyspareunia). Your body learns to brace and pull away, which tightens the muscles and can make the next time hurt even more — a cycle that has nothing to do with desire.',
     img: 'assets/lifestyle/lifestyle-2.jpg',
-    alt: 'Woman staying active',
+    alt: 'Woman looking thoughtful',
   },
   {
     n: '04',
-    headline: 'Your hunger signals got louder',
-    body: 'Estrogen influences leptin and insulin — the hormones that tell you when you\'re full. When estrogen swings, those signals misfire, so you stay hungry even after a full meal and reach for more without realizing it.',
+    headline: 'It\'s not just sex — it\'s burning, itching & UTIs',
+    body: 'The same estrogen loss affects your entire urinary and vaginal tract — known as GSM. That brings burning, itching, urgency, and recurring UTIs, symptoms most women endure silently because they assume nothing can be done.',
     img: 'assets/case-reading.jpg',
-    alt: 'Woman managing hunger',
+    alt: 'Woman dealing with discomfort',
   },
   {
     n: '05',
-    headline: 'Your appetite and cravings shifted',
-    body: 'It isn\'t only how much you eat — it\'s what you crave and when. Falling estrogen drives a pull toward sugar and refined carbs, while rising cortisol fuels stress and late-night eating. Your appetite starts steering you toward the very foods that make weight gain worse.',
-    img: 'assets/lifestyle/lifestyle-3.jpg',
-    alt: 'Woman facing changing cravings',
-  },
-  {
-    n: '06',
-    headline: 'Diet and exercise alone stopped working',
-    body: 'If you\'re eating less and moving more but the scale won\'t move, it isn\'t willpower — it\'s biology. The only way to work with your body again is to address the hormone shift underneath, not just cut more calories or add another workout.',
+    headline: 'Lubricants only mask it — they don\'t restore the tissue',
+    body: 'Over-the-counter lubes can help in the moment, but they don\'t rebuild the tissue estrogen used to maintain. When dryness and pain track with menopause, addressing the estrogen decline underneath is what actually restores lasting comfort.',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman thriving after treatment',
   },
 ];
 
-function WeightGainHero() {
+function VaginalDrynessHero() {
   return (
-    <section className="lp-sleep-hero" data-screen-label="01 Weight Gain Hero">
+    <section className="lp-sleep-hero" data-screen-label="01 Vaginal Dryness Hero">
       <div className="lp-sh-wrap">
         <div className="lp-sh-left">
-          <div className="lp-sh-eyebrow">WEIGHT GAIN &amp; HORMONAL CHANGE</div>
+          <div className="lp-sh-eyebrow">VAGINAL HEALTH &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            6 reasons your weight gain{' '}
-            <em>is actually hormonal.</em>
+            5 reasons your dryness &amp; painful sex{' '}
+            <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The stubborn belly fat, the scale creeping up while you eat the same, the cravings you can't shake, the diets that suddenly stop working — this isn't just "getting older." It's what happens when estrogen declines and your metabolism shifts.
+            The dryness, the burning, the intimacy that suddenly hurts — this isn't just "getting older," and it isn't in your head. It's what happens when estrogen leaves vaginal tissue thin and dry.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;
@@ -118,10 +111,10 @@ function FiveReasonsSection() {
   );
 }
 
-function WeightGainApp() {
+function VaginalDrynessApp() {
   return (
     <>
-      <WeightGainHero />
+      <VaginalDrynessHero />
       <TrustMarquee />
       <FiveReasonsSection />
       <ProductsSection ctaUrl={QUIZ_URL} />
@@ -136,4 +129,4 @@ function WeightGainApp() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<WeightGainApp />);
+ReactDOM.createRoot(document.getElementById('root')).render(<VaginalDrynessApp />);

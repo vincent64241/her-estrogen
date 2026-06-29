@@ -36,8 +36,15 @@ const FIVE_REASONS = [
   },
   {
     n: '05',
+    headline: 'You\'re acting in ways that don\'t feel like you',
+    body: 'Hormone swings don\'t stop at how you feel — they change how you act. Snapping at the people you love, pulling away from friends, flying off the handle over nothing, or going quiet and flat: these out-of-character reactions are your brain chemistry shifting, not who you really are.',
+    img: 'assets/lifestyle/lifestyle-3.jpg',
+    alt: 'Woman reflecting on changes',
+  },
+  {
+    n: '06',
     headline: 'It\'s not "just stress" — and it\'s treatable',
-    body: 'Being told to relax or wait it out doesn\'t fix a hormone problem. When the mood shifts and anxiety are driven by estrogen and progesterone, the way back to feeling like yourself is treating the root cause — not white-knuckling through it.',
+    body: 'Being told to relax or wait it out doesn\'t fix a hormone problem. When the mood shifts, anxiety, and behavior changes are driven by estrogen and progesterone, the way back to feeling like yourself is treating the root cause — not white-knuckling through it.',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman feeling like herself again',
   },
@@ -50,11 +57,11 @@ function MoodSwingsHero() {
         <div className="lp-sh-left">
           <div className="lp-sh-eyebrow">MOOD SWINGS &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            5 reasons your mood swings &amp; anxiety{' '}
+            6 reasons your mood swings &amp; anxiety{' '}
             <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The irritability out of nowhere, the 3am anxiety, the crying you can't explain, the short fuse — this isn't just "who you are now." It's what happens when estrogen and progesterone swing.
+            The irritability out of nowhere, the 3am anxiety, the crying you can't explain, snapping at the people you love — this isn't just "who you are now." It's what happens when estrogen and progesterone swing.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;

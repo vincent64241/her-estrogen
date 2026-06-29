@@ -8,60 +8,53 @@ const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live Op
 const FIVE_REASONS = [
   {
     n: '01',
-    headline: 'Estrogen decides where your fat goes',
-    body: 'Estrogen steers fat toward your hips and thighs. As it drops, that fat redistributes to your belly — the deep visceral fat that wraps around your organs. Same number on the scale, different shape, and far harder to budge.',
+    headline: 'Estrogen keeps your digestion moving',
+    body: 'Estrogen and progesterone help regulate the muscle contractions that move food through your gut. As they swing in menopause, that rhythm slows and stutters — bringing bloating, constipation, and a stomach that just feels off for no clear reason.',
     img: 'assets/case-joy.jpg',
-    alt: 'Woman looking vibrant and energized',
+    alt: 'Woman feeling comfortable and light',
   },
   {
     n: '02',
-    headline: 'Your metabolism quietly downshifted',
-    body: 'Estrogen helps regulate how efficiently your body burns energy. As it declines, your resting metabolic rate falls — so the same meals that kept your weight steady for years now slowly add to it, even though nothing about how you eat has changed.',
+    headline: 'Bloating became your new normal',
+    body: 'Hormone shifts change how your body holds water and how gas moves through the gut. The result is that puffy, distended, "nothing fits by evening" bloating that can leave you looking and feeling months along — even when nothing about your diet has changed.',
     img: 'assets/lifestyle/lifestyle-1.jpg',
-    alt: 'Woman resting comfortably',
+    alt: 'Woman dealing with bloating',
   },
   {
     n: '03',
-    headline: 'You\'re losing the muscle that burns calories',
-    body: 'Falling estrogen accelerates muscle loss. Muscle is your most metabolically active tissue — it burns calories around the clock, even at rest. Less of it means a slower burn all day long, no matter how hard you work out.',
+    headline: 'Your gut bacteria changed with your hormones',
+    body: 'Estrogen and your gut microbiome are deeply linked — scientists call it the "estrobolome." As estrogen falls, the balance of gut bacteria shifts with it, which can worsen gas, irregularity, and food sensitivities you never used to have.',
     img: 'assets/lifestyle/lifestyle-2.jpg',
-    alt: 'Woman staying active',
+    alt: 'Woman supporting her gut health',
   },
   {
     n: '04',
-    headline: 'Your hunger signals got louder',
-    body: 'Estrogen influences leptin and insulin — the hormones that tell you when you\'re full. When estrogen swings, those signals misfire, so you stay hungry even after a full meal and reach for more without realizing it.',
+    headline: 'Your gut and stress are wired together',
+    body: 'Estrogen helps buffer the gut-brain stress axis. Without it, cortisol and anxiety hit your digestion harder — triggering cramping, urgency, or that nervous-stomach feeling, especially when everything else is flaring at once.',
     img: 'assets/case-reading.jpg',
-    alt: 'Woman managing hunger',
+    alt: 'Woman with an upset stomach',
   },
   {
     n: '05',
-    headline: 'Your appetite and cravings shifted',
-    body: 'It isn\'t only how much you eat — it\'s what you crave and when. Falling estrogen drives a pull toward sugar and refined carbs, while rising cortisol fuels stress and late-night eating. Your appetite starts steering you toward the very foods that make weight gain worse.',
-    img: 'assets/lifestyle/lifestyle-3.jpg',
-    alt: 'Woman facing changing cravings',
-  },
-  {
-    n: '06',
-    headline: 'Diet and exercise alone stopped working',
-    body: 'If you\'re eating less and moving more but the scale won\'t move, it isn\'t willpower — it\'s biology. The only way to work with your body again is to address the hormone shift underneath, not just cut more calories or add another workout.',
+    headline: 'It\'s not "just IBS" or something you ate',
+    body: 'Being told it\'s stress or to cut out more foods rarely fixes hormonal digestive changes. When the bloating and irregularity track with menopause, addressing the estrogen shift underneath is what calms your gut at the source.',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman thriving after treatment',
   },
 ];
 
-function WeightGainHero() {
+function DigestionHero() {
   return (
-    <section className="lp-sleep-hero" data-screen-label="01 Weight Gain Hero">
+    <section className="lp-sleep-hero" data-screen-label="01 Digestion Hero">
       <div className="lp-sh-wrap">
         <div className="lp-sh-left">
-          <div className="lp-sh-eyebrow">WEIGHT GAIN &amp; HORMONAL CHANGE</div>
+          <div className="lp-sh-eyebrow">DIGESTION &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            6 reasons your weight gain{' '}
-            <em>is actually hormonal.</em>
+            5 reasons your bloating &amp; digestive changes{' '}
+            <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The stubborn belly fat, the scale creeping up while you eat the same, the cravings you can't shake, the diets that suddenly stop working — this isn't just "getting older." It's what happens when estrogen declines and your metabolism shifts.
+            The bloating that won't quit, the constipation, the stomach that's suddenly sensitive to everything — this isn't just "something you ate." It's what happens when estrogen declines and your gut loses its rhythm.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;
@@ -118,10 +111,10 @@ function FiveReasonsSection() {
   );
 }
 
-function WeightGainApp() {
+function DigestionApp() {
   return (
     <>
-      <WeightGainHero />
+      <DigestionHero />
       <TrustMarquee />
       <FiveReasonsSection />
       <ProductsSection ctaUrl={QUIZ_URL} />
@@ -136,4 +129,4 @@ function WeightGainApp() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<WeightGainApp />);
+ReactDOM.createRoot(document.getElementById('root')).render(<DigestionApp />);
