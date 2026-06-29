@@ -3,7 +3,7 @@ import {
   ScienceSection, WeekTimelineSection, FaqSection, StartQuizSection, FooterSection,
 } from './shared.jsx';
 
-const QUIZ_URL = '/quiz.html';  // QUIZ_URL_PLACEHOLDER — replace with live OpenLoop intake URL
+const QUIZ_URL = 'https://quiz.herestrogen.com/herestrogen_hrt';  // QUIZ_URL_PLACEHOLDER — replace with live OpenLoop intake URL
 
 const FIVE_REASONS = [
   {

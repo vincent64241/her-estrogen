@@ -6,7 +6,7 @@ import {
 // TODO(vincent): replace '#' with the live OpenLoop intake URL once available.
 // Update the matching value in index.html's nav button (INTAKE_URL_PLACEHOLDER) in lockstep.
 // After editing, run `npm run build` and re-sync the mirror.
-const INTAKE_URL = '#';  // INTAKE_URL_PLACEHOLDER
+const INTAKE_URL = 'https://quiz.herestrogen.com/herestrogen_hrt';  // INTAKE_URL_PLACEHOLDER
 
 function App() {
   return (
