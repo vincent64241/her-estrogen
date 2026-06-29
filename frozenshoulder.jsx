@@ -36,8 +36,15 @@ const FIVE_REASONS = [
   },
   {
     n: '05',
+    headline: 'Your bones are thinning at the same time',
+    body: 'Estrogen doesn\'t just protect your joints — it protects your bones. Women can lose up to 20% of their bone density in the five to seven years after menopause, once estrogen\'s brake on bone breakdown lifts. It\'s silent at first, then shows up as aches, fractures, or lost height long before most women connect it to hormones.',
+    img: 'assets/lifestyle/lifestyle-3.jpg',
+    alt: 'Woman staying strong and active',
+  },
+  {
+    n: '06',
     headline: 'Stretching alone won\'t fix the cause',
-    body: 'Physical therapy helps you cope, but it doesn\'t replace the hormone driving the stiffness. When joint pain and frozen shoulder track with menopause, addressing the estrogen shift underneath is how you get your range of motion back.',
+    body: 'Physical therapy and calcium help you cope, but they don\'t replace the hormone driving the stiffness and bone loss. When joint pain, frozen shoulder, and thinning bones track with menopause, addressing the estrogen shift underneath is how you protect them at the source.',
     img: 'assets/lifestyle/lifestyle-4.jpg',
     alt: 'Woman thriving after treatment',
   },
@@ -48,13 +55,13 @@ function FrozenShoulderHero() {
     <section className="lp-sleep-hero" data-screen-label="01 Frozen Shoulder Hero">
       <div className="lp-sh-wrap">
         <div className="lp-sh-left">
-          <div className="lp-sh-eyebrow">FROZEN SHOULDER &amp; HORMONAL CHANGE</div>
+          <div className="lp-sh-eyebrow">JOINTS, BONES &amp; HORMONAL CHANGE</div>
           <h1 className="lp-sh-h1">
-            5 reasons your frozen shoulder{' '}
-            <em>is actually hormonal.</em>
+            6 reasons your frozen shoulder &amp; joint pain{' '}
+            <em>are actually hormonal.</em>
           </h1>
           <p className="lp-sh-sub">
-            The shoulder that locked up out of nowhere, the joints that ache and stiffen, the mornings that start sore — this isn't just "wear and tear." Frozen shoulder peaks exactly when estrogen drops.
+            The shoulder that locked up out of nowhere, the joints that ache and stiffen, the bone density quietly slipping away — this isn't just "wear and tear." It's what happens when estrogen drops.
           </p>
           <p className="lp-sh-price">
             HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;
