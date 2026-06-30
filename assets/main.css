@@ -4279,3 +4279,10 @@
   .sp-offer { font-size: 12px; }
   .sp-cta { font-size: 12px; padding: 8px 14px; }
 }
+
+/* ── LegitScript compliance: hide ALL branded product photos. The HerEstrogen
+   wordmark is baked into these images (products-hero.png + product mockups),
+   so they're hidden site-wide and their columns collapse to one column.
+   Reversible — delete this block once unbranded images are dropped in. ── */
+.lp-sh-right, .hs-photo, .he-pop-right, .product-card-image-wrapper { display: none !important; }
+.lp-sh-wrap, .hs-card, .he-pop-inner { grid-template-columns: 1fr !important; }
