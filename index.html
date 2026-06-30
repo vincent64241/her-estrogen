@@ -3280,7 +3280,7 @@
     border-radius: 0;
     overflow: hidden;
     box-shadow: none;
-    background: linear-gradient(135deg, #fff5f8 0%, #fce8f2 60%, #f9d9ea 100%);
+    background: #fff;
   }
   .hs-card::before { display: none; }
   /* Product image — right column, transparent so gradient shows through */
@@ -4085,6 +4085,18 @@
   .edu-stat-desc { color: var(--ink-2) !important; }
   .edu-table thead { background: #fff !important; }
   .edu-table td:last-child { background: #fff !important; }
+  /* Headings/subheads were white for the old pink bg — restore dark text on
+     white, keeping pink only for eyebrows + <em> keywords. */
+  .hrt-flow-band .how-head .eyebrow,
+  .edu-head .eyebrow { color: var(--pink) !important; opacity: 1 !important; }
+  .hrt-flow-band .how-head h2,
+  .edu-head h2 { color: var(--ink) !important; }
+  .hrt-flow-band .how-head h2 em,
+  .edu-head h2 em { color: var(--pink) !important; }
+  .hrt-flow-band .how-head .how-intro,
+  .edu-head .edu-sub,
+  .edu-sub { color: var(--ink-2) !important; }
+  .hrt-flow-band .how-head .how-intro strong { color: var(--pink) !important; }
 
   /* "For comparison" — its own pink gradient WITH a diagonal white streak
      cutting across (per request). The streak is a softly-feathered white
@@ -4108,14 +4120,14 @@
 
   /* White-on-saturated text at the top of each band */
   .edu-section .edu-head .eyebrow,
-  .hrt-flow-band .how-head .eyebrow { color: #fff !important; opacity: .92; }
+  .hrt-flow-band .how-head .eyebrow { color: var(--pink) !important; opacity: 1; }
   .edu-section .edu-head h2,
-  .hrt-flow-band .how-head h2 { color: #fff !important; }
+  .hrt-flow-band .how-head h2 { color: var(--ink) !important; }
   .edu-section .edu-head h2 em,
-  .hrt-flow-band .how-head h2 em { color: #fff !important; }
+  .hrt-flow-band .how-head h2 em { color: var(--pink) !important; }
   .edu-section .edu-head .edu-sub,
-  .hrt-flow-band .how-head .how-intro { color: rgba(255,255,255,.92) !important; }
-  .hrt-flow-band .how-head .how-intro strong { color: #fff !important; }
+  .hrt-flow-band .how-head .how-intro { color: var(--ink-2) !important; }
+  .hrt-flow-band .how-head .how-intro strong { color: var(--pink) !important; }
 
   /* ═══ Timeline step colors — Step 1 white (sits on saturated top of the
      flow band), Step 2 dark grey (sits on the lighter mid-band). Step 3
