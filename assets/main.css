@@ -3392,7 +3392,7 @@
      Lives directly below the treatments product carousel. Section is a
      soft cream/sand alternation against the white .treatments block above. */
   .home-bonus-section {
-    background: var(--cream, var(--pink-softer));
+    background: #fff;
     /* Tighter top padding so this sits closer to the products carousel
        above it; bottom padding unchanged. */
     padding: 20px 0 88px;
@@ -3764,7 +3764,16 @@
     right: -130px; top: -130px; animation: breathe 8s ease-in-out infinite; will-change: transform;
   }
   .start-quiz .mini-quiz h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.08; position: relative; margin: 0; }
-  .start-quiz .mini-quiz h3 em { font-style: italic; color: var(--pink-3); }
+  .start-quiz .mini-quiz h3 em { font-style: italic; }
+  /* "Unsure where to begin? Start here." in the brand pink gradient. Applied
+     per-word so it composes with the .word write-on animation. */
+  .start-quiz .mini-quiz h3 .typed-text {
+    background: linear-gradient(90deg, var(--pink-deep) 0%, var(--pink) 50%, var(--pink-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
   .start-quiz .mini-quiz p { font-family: 'DM Sans', system-ui, sans-serif; color: rgba(255,255,255,.78); margin-top: 12px; font-size: 15.5px; line-height: 1.6; position: relative; }
   .start-quiz .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; }
   .start-quiz .q-opt {
@@ -4099,14 +4108,14 @@
   .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card h3,
   .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card p,
   .hrt-flow-band .step-rows > .step-row:nth-child(1) .step-card .step-meta {
-    color: #fff !important;
+    color: var(--ink) !important;
   }
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card .step-num,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card h3,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card p,
   .hrt-flow-band .step-rows > .step-row:nth-child(2) .step-card .step-meta {
-    color: #5a5a5a !important;
+    color: var(--ink) !important;
   }
 
   /* ═══ "The science, plainly" — mid-pink → near-black gradient. The TOP
@@ -4177,6 +4186,33 @@
       from { opacity: 0; transform: translateY(0.45em); }
       to   { opacity: 1; transform: translateY(0); }
     }
+  }
+  /* Icon flip-in (JS adds .flip-init then .flip-go when scrolled into view;
+     if JS never runs the icon simply shows normally). */
+  .flip-init { opacity: 0; backface-visibility: hidden; }
+  .flip-go { opacity: 1; animation: iconFlipIn .6s cubic-bezier(.22,.8,.3,1); }
+  @keyframes iconFlipIn {
+    from { opacity: 0; transform: perspective(600px) rotateY(90deg); }
+    to   { opacity: 1; transform: perspective(600px) rotateY(0deg); }
+  }
+  /* Pure-CSS typewriter. Animates max-width (capped at the parent width) so it
+     never forces horizontal page scroll, and ends at the text's own width. */
+  .typed-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    vertical-align: bottom;
+    animation: typing 1.8s steps(20, end) forwards;
+  }
+  @keyframes typing { from { max-width: 0; } to { max-width: 100%; } }
+  @media (prefers-reduced-motion: reduce) {
+    .typed-text { animation: none; max-width: 100%; }
+  }
+  /* Below desktop the long headings can't fit on one line, so let typed text
+     wrap normally (no typewriter, no clipping). Typewriter shows ≥1280px. */
+  @media (max-width: 1279px) {
+    .typed-text { display: inline; white-space: normal; max-width: none; animation: none; }
   }
   /* Subhead sits in the transition / saturated zone of the gradient → white
      (per request). Slight transparency keeps a hierarchy with the stat
