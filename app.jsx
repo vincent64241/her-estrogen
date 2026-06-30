@@ -26,7 +26,11 @@ function App() {
                 <span className="word" style={{ animationDelay: '160ms' }}>Menopause</span>{' '}
                 <span className="word" style={{ animationDelay: '240ms' }}>Symptoms?</span>
                 <br />
-                <em className="typed-text">HerEstrogen Fixes That.</em>
+                <em>
+                  <span className="word" style={{ animationDelay: '360ms' }}>HerEstrogen</span>{' '}
+                  <span className="word" style={{ animationDelay: '450ms' }}>Fixes</span>{' '}
+                  <span className="word" style={{ animationDelay: '540ms' }}>That.</span>
+                </em>
               </h1>
               <p className="hs-sub"><em>FDA-Approved hormone replacement therapy with results in just weeks. Feel like your 30's again.</em></p>
               <p className="hs-price">HRT Plans Starting at&nbsp;<strong>$95/mo</strong>&nbsp;<s className="price-was">$160</s>&nbsp;<span className="price-badge">Up to 40% OFF</span><span className="price-per-day">= $3.17/day</span></p>

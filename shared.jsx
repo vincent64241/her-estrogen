@@ -227,7 +227,10 @@ function Timeline() {
           <div className="eyebrow">How it works</div>
           <h2 className="write-on">
             <span className="word" style={{ animationDelay: '0ms'   }}>From</span>{' '}
-            <em className="typed-text">getting approved</em>{' '}
+            <em>
+              <span className="word" style={{ animationDelay: '110ms' }}>getting</span>{' '}
+              <span className="word" style={{ animationDelay: '200ms' }}>approved</span>
+            </em>{' '}
             <span className="word" style={{ animationDelay: '310ms' }}>to</span>{' '}
             <span className="word" style={{ animationDelay: '400ms' }}>medication</span>{' '}
             <span className="word" style={{ animationDelay: '490ms' }}>at</span>{' '}
@@ -363,7 +366,7 @@ function ProductsSection({ ctaUrl }) {
         <div className="treatments-two-col">
           <div className="treatments-col-left">
             <div className="eyebrow">Treatments</div>
-            <h2>Every woman deserves to feel like <em className="typed-text">herself again.</em></h2>
+            <h2>Every woman deserves to feel like <em>herself again.</em></h2>
           </div>
           <div className="treatments-col-right">
             <p className="treatments-sub">
@@ -421,7 +424,7 @@ function BonusPromisesSection() {
       <div className="container">
         <div className="eyebrow">Included with every plan</div>
         <p className="home-bonus-offer">🔥 Limited Time Offer: Up to 40% OFF</p>
-        <h2 className="home-bonus-h2">Everything <em className="typed-text">included</em> with your protocol</h2>
+        <h2 className="home-bonus-h2">Everything <em>included</em> with your protocol</h2>
         <p className="home-bonus-sub">Total value: $1,250+ · Your investment: from $95/month&nbsp;<s className="price-was">$160</s>&nbsp;<span className="price-badge">Up to 40% OFF</span><span className="price-per-day">= $3.17/day</span></p>
 
         <div className="home-bonus-grid">
@@ -432,7 +435,7 @@ function BonusPromisesSection() {
               </svg>
             </div>
             <h3 className="home-bonus-title">Your Personalized Clinical Guide</h3>
-            <span className="home-bonus-value">$<span data-count="150">150</span> value — Included</span>
+            <span className="home-bonus-value">$150 value — Included</span>
             <p className="home-bonus-desc">A personalized clinical guide created for your specific protocol after clinician review. What you're taking, why, what to expect week by week, and how to reach your clinician — all in one place.</p>
           </div>
           <div className="home-bonus-card">
@@ -442,7 +445,7 @@ function BonusPromisesSection() {
               </svg>
             </div>
             <h3 className="home-bonus-title">30-Day Clinical Concierge</h3>
-            <span className="home-bonus-value">$<span data-count="300">300</span> value — Included</span>
+            <span className="home-bonus-value">$300 value — Included</span>
             <p className="home-bonus-desc">Unlimited clinician messaging for your first 30 days with responses within 2 hours during waking hours. Questions, side effects, reassurance — your clinician is there.</p>
           </div>
           <div className="home-bonus-card">
@@ -452,7 +455,7 @@ function BonusPromisesSection() {
               </svg>
             </div>
             <h3 className="home-bonus-title">Quarterly Protocol Reviews</h3>
-            <span className="home-bonus-value">$<span data-count="800">800</span>/year value — Included</span>
+            <span className="home-bonus-value">$800/year value — Included</span>
             <p className="home-bonus-desc">Every 90 days, your board-certified clinician reviews your protocol, checks your progress, and adjusts your treatment if needed. Included with every plan at no extra cost.</p>
           </div>
           <div className="home-bonus-card">
@@ -467,7 +470,7 @@ function BonusPromisesSection() {
           </div>
         </div>
 
-        <h2 className="home-promise-h2">Our <em className="typed-text">promises</em> to you</h2>
+        <h2 className="home-promise-h2">Our <em>promises</em> to you</h2>
         <div className="home-promise-grid">
           <div className="home-promise-card">
             <div className="home-promise-icon" aria-hidden="true">
@@ -527,7 +530,7 @@ function EduSection({ ctaUrl }) {
             <span className="word" style={{ animationDelay: '0ms'   }}>What</span>{' '}
             <span className="word" style={{ animationDelay: '90ms'  }}>is</span>{' '}
             <span className="word" style={{ animationDelay: '180ms' }}>hormone</span>{' '}
-            <em className="typed-text">replacement</em>{' '}
+            <em><span className="word" style={{ animationDelay: '280ms' }}>replacement</span></em>{' '}
             <span className="word" style={{ animationDelay: '400ms' }}>therapy?</span>
           </h2>
           <p className="edu-sub">
@@ -538,22 +541,22 @@ function EduSection({ ctaUrl }) {
         <div className="edu-stat-grid">
           <div className="edu-stat-card">
             <p className="edu-stat-title">More Energy</p>
-            <p className="edu-stat-num"><span data-count="95">95</span>%</p>
+            <p className="edu-stat-num">95%</p>
             <p className="edu-stat-desc">Of participants felt a noticeable boost in daily energy</p>
           </div>
           <div className="edu-stat-card">
             <p className="edu-stat-title">Better Sleep</p>
-            <p className="edu-stat-num"><span data-count="80">80</span>%</p>
+            <p className="edu-stat-num">80%</p>
             <p className="edu-stat-desc">Of participants reported significantly better sleep quality</p>
           </div>
           <div className="edu-stat-card">
             <p className="edu-stat-title">Mood Lifted</p>
-            <p className="edu-stat-num"><span data-count="87">87</span>%</p>
+            <p className="edu-stat-num">87%</p>
             <p className="edu-stat-desc">Of participants experienced reduced anxiety and improved mood</p>
           </div>
           <div className="edu-stat-card">
             <p className="edu-stat-title">Hot Flash Relief</p>
-            <p className="edu-stat-num"><span data-count="90">90</span>%</p>
+            <p className="edu-stat-num">90%</p>
             <p className="edu-stat-desc">Of participants saw a dramatic reduction in hot flashes</p>
           </div>
         </div>
@@ -569,7 +572,10 @@ function EduSection({ ctaUrl }) {
             <h2 className="write-on">
               <span className="word" style={{ animationDelay: '0ms'   }}>What</span>{' '}
               <span className="word" style={{ animationDelay: '90ms'  }}>HRT</span>{' '}
-              <em className="typed-text">Actually Fixes</em>
+              <em>
+                <span className="word" style={{ animationDelay: '200ms' }}>Actually</span>{' '}
+                <span className="word" style={{ animationDelay: '290ms' }}>Fixes</span>
+              </em>
             </h2>
             <p className="edu-table-sub">Sound Familiar?</p>
           </div>
@@ -629,8 +635,16 @@ function ScienceSection({ ctaUrl }) {
         <div className="curve-grid">
           <div>
             <span className="eyebrow-chip rv">The science, plainly</span>
-            <h2 className="v2-title" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>
-              <span className="typed-text">This is the curve <em>nobody showed you.</em></span>
+            <h2 className="v2-title write-on" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>
+              <span className="word" style={{ animationDelay: '0ms'   }}>This</span>{' '}
+              <span className="word" style={{ animationDelay: '90ms'  }}>is</span>{' '}
+              <span className="word" style={{ animationDelay: '180ms' }}>the</span>{' '}
+              <span className="word" style={{ animationDelay: '280ms' }}>curve</span>{' '}
+              <em>
+                <span className="word" style={{ animationDelay: '400ms' }}>nobody</span>{' '}
+                <span className="word" style={{ animationDelay: '510ms' }}>showed</span>{' '}
+                <span className="word" style={{ animationDelay: '620ms' }}>you.</span>
+              </em>
             </h2>
             <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
             <div className="stat-band">
@@ -705,8 +719,15 @@ function ClinicalSection() {
     <section className="clinical-v2" id="clinical" data-screen-label="07b Clinical excellence">
       <div className="container">
         <span className="eyebrow-chip rv">Clinical excellence</span>
-        <h2 className="v2-title">
-          <span className="typed-text">The best care, <em>by the book.</em></span>
+        <h2 className="v2-title write-on">
+          <span className="word" style={{ animationDelay: '0ms'   }}>The</span>{' '}
+          <span className="word" style={{ animationDelay: '90ms'  }}>best</span>{' '}
+          <span className="word" style={{ animationDelay: '180ms' }}>care,</span>{' '}
+          <em>
+            <span className="word" style={{ animationDelay: '290ms' }}>by</span>{' '}
+            <span className="word" style={{ animationDelay: '380ms' }}>the</span>{' '}
+            <span className="word" style={{ animationDelay: '470ms' }}>book.</span>
+          </em>
         </h2>
         <div className="cred-list">
           <div className="cred rv">
@@ -777,8 +798,15 @@ function StartQuizSection({ ctaUrl }) {
       <div className="container">
         <div className="mini-quiz rv">
           <div>
-            <h3>
-              <span className="typed-text">Unsure where to begin? <em>Start here.</em></span>
+            <h3 className="write-on">
+              <span className="word" style={{ animationDelay: '0ms'   }}>Unsure</span>{' '}
+              <span className="word" style={{ animationDelay: '90ms'  }}>where</span>{' '}
+              <span className="word" style={{ animationDelay: '180ms' }}>to</span>{' '}
+              <span className="word" style={{ animationDelay: '270ms' }}>begin?</span>{' '}
+              <em>
+                <span className="word" style={{ animationDelay: '380ms' }}>Start</span>{' '}
+                <span className="word" style={{ animationDelay: '470ms' }}>here.</span>
+              </em>
             </h3>
             <p>Tell us what's bothering you most — your assessment adapts to you, and a licensed clinician reviews every answer.</p>
           </div>
@@ -790,49 +818,6 @@ function StartQuizSection({ ctaUrl }) {
 }
 
 function FooterSection() {
-  // Scroll-triggered flourishes that run on every page (FooterSection mounts
-  // on all of them): count-up for any [data-count] number (outside the science
-  // section, which has its own counter in the page tail) + a flip-in for icons.
-  // Fully guarded — if IntersectionObserver is missing or the user prefers
-  // reduced motion, everything just shows in its final state.
-  useEffect(function () {
-    if (!('IntersectionObserver' in window)) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    document.querySelectorAll('#root [data-count]').forEach(function (el) {
-      if (el.closest && el.closest('.science-v2')) return;
-      var target = parseFloat(el.getAttribute('data-count')) || 0;
-      if (reduce) { el.textContent = String(target); return; }
-      var io = new IntersectionObserver(function (ents) {
-        if (!ents[0].isIntersecting) return;
-        io.disconnect();
-        var dur = 1400, start = null;
-        function tick(ts) {
-          if (start === null) start = ts;
-          var p = Math.min((ts - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = String(Math.round(eased * target));
-          if (p < 1) requestAnimationFrame(tick); else el.textContent = String(target);
-        }
-        requestAnimationFrame(tick);
-      }, { threshold: 0.6 });
-      io.observe(el);
-    });
-
-    if (!reduce) {
-      document.querySelectorAll('#root .home-bonus-icon, #root .clinical-v2 .ic').forEach(function (ic) {
-        ic.classList.add('flip-init');
-        var done = false;
-        function reveal() { if (done) return; done = true; ic.classList.add('flip-go'); }
-        var io = new IntersectionObserver(function (ents) {
-          if (ents[0].isIntersecting) { reveal(); io.disconnect(); }
-        }, { threshold: 0.3 });
-        io.observe(ic);
-        setTimeout(reveal, 4000); // safety: never leave an icon hidden if IO is throttled
-      });
-    }
-  }, []);
-
   return (
     <footer data-screen-label="10 Footer">
       <div className="container foot-simple">

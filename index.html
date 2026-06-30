@@ -3316,7 +3316,7 @@
     font-family: 'Newsreader', Georgia, serif;
     font-weight: 500;
     font-style: italic;
-    font-size: 1em;
+    font-size: 1.16em;
   }
 
   .hs-sub { font-size: 17px; font-weight: 600; color: var(--ink-2); line-height: 1.45; margin: 0 0 12px; }
@@ -3754,39 +3754,40 @@
   /* ═══ CLOSING "Start here" mini-quiz (replaces final CTA), our colors ═══ */
   .start-quiz { padding: 72px 0 110px; background: #fff; }
   .start-quiz .mini-quiz {
-    background: var(--ink); border-radius: 30px; padding: 54px; color: #fff;
+    background: #fff; border-radius: 30px; padding: 54px; color: var(--ink);
     display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
     overflow: hidden; position: relative; max-width: 1080px; margin: 0 auto;
-    box-shadow: 0 30px 70px -28px rgba(26,18,22,.5);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 70px -34px rgba(26,18,22,.18);
   }
   .start-quiz .mini-quiz::before {
     content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(184,35,92,.45), transparent 70%);
+    background: radial-gradient(circle, rgba(184,35,92,.10), transparent 70%);
     right: -130px; top: -130px; animation: breathe 8s ease-in-out infinite; will-change: transform;
   }
   .start-quiz .mini-quiz h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.08; position: relative; margin: 0; }
   .start-quiz .mini-quiz h3 em { font-style: italic; }
   /* "Unsure where to begin? Start here." in the brand pink gradient. Applied
      per-word so it composes with the .word write-on animation. */
-  .start-quiz .mini-quiz h3 .typed-text {
+  .start-quiz .mini-quiz h3 .word {
     background: linear-gradient(90deg, var(--pink-deep) 0%, var(--pink) 50%, var(--pink-2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .start-quiz .mini-quiz p { font-family: 'DM Sans', system-ui, sans-serif; color: rgba(255,255,255,.78); margin-top: 12px; font-size: 15.5px; line-height: 1.6; position: relative; }
+  .start-quiz .mini-quiz p { font-family: 'DM Sans', system-ui, sans-serif; color: var(--ink-2); margin-top: 12px; font-size: 15.5px; line-height: 1.6; position: relative; }
   .start-quiz .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; }
   .start-quiz .q-opt {
     font-family: 'DM Sans', system-ui, sans-serif;
-    background-color: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.16); border-radius: 16px; padding: 18px 20px;
-    color: #fff; text-decoration: none; font-weight: 600; font-size: 15px;
+    background-color: var(--pink-softer);
+    border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px;
+    color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     transition: transform .25s ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .start-quiz .q-opt:hover { background-color: #b8235c; border-color: #b8235c; transform: translateY(-3px); }
+    .start-quiz .q-opt:hover { background-color: #b8235c; border-color: #b8235c; color: #fff; transform: translateY(-3px); }
   }
   /* Multi-select toggle button styling (button element, not anchor).
      Uses background-color/border-color explicitly so the selected state
@@ -3802,6 +3803,7 @@
   .start-quiz .q-opt-toggle.is-selected {
     background-color: #b8235c !important;
     border-color: #b8235c !important;
+    color: #fff !important;
   }
   .start-quiz .q-opt-mark {
     display: inline-flex;
@@ -3809,7 +3811,8 @@
     justify-content: center;
     width: 22px; height: 22px;
     border-radius: 50%;
-    background-color: rgba(255,255,255,.18);
+    background-color: var(--pink-soft);
+    color: var(--pink);
     font-weight: 700; font-size: 13px;
     line-height: 1;
   }
@@ -4226,33 +4229,6 @@
       from { opacity: 0; transform: translateY(0.45em); }
       to   { opacity: 1; transform: translateY(0); }
     }
-  }
-  /* Icon flip-in (JS adds .flip-init then .flip-go when scrolled into view;
-     if JS never runs the icon simply shows normally). */
-  .flip-init { opacity: 0; backface-visibility: hidden; }
-  .flip-go { opacity: 1; animation: iconFlipIn .6s cubic-bezier(.22,.8,.3,1); }
-  @keyframes iconFlipIn {
-    from { opacity: 0; transform: perspective(600px) rotateY(90deg); }
-    to   { opacity: 1; transform: perspective(600px) rotateY(0deg); }
-  }
-  /* Pure-CSS typewriter. Animates max-width (capped at the parent width) so it
-     never forces horizontal page scroll, and ends at the text's own width. */
-  .typed-text {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-    vertical-align: bottom;
-    animation: typing 1.8s steps(20, end) forwards;
-  }
-  @keyframes typing { from { max-width: 0; } to { max-width: 100%; } }
-  @media (prefers-reduced-motion: reduce) {
-    .typed-text { animation: none; max-width: 100%; }
-  }
-  /* Below desktop the long headings can't fit on one line, so let typed text
-     wrap normally (no typewriter, no clipping). Typewriter shows ≥1280px. */
-  @media (max-width: 1279px) {
-    .typed-text { display: inline; white-space: normal; max-width: none; animation: none; }
   }
   /* Subhead sits in the transition / saturated zone of the gradient → white
      (per request). Slight transparency keeps a hierarchy with the stat
