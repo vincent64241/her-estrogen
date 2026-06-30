@@ -69,6 +69,7 @@ const TREATMENTS = [
 const MARQUEE_ITEMS = [
   { icon: 'fda',    label: 'FDA-approved medications only' },
   { icon: 'doctor', label: 'Licensed clinicians, all 50 states' },
+  { icon: 'consult', label: 'Free consultations' },
   { icon: 'truck',  label: 'Free shipping' },
   { icon: 'flag',   label: 'All 50 states' },
   { icon: 'no-ins', label: 'No insurance needed' },
@@ -149,6 +150,7 @@ function MarqueeIcon(props) {
   if (k === 'flag')   return (<svg {...c}><path d="M5 21V3" /><path d="M5 4h14l-3 4 3 4H5" /></svg>);
   if (k === 'no-ins') return (<svg {...c}><path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V7z" /><path d="M14 2v5h5" /><line x1="4" y1="4" x2="20" y2="20" /></svg>);
   if (k === 'cancel') return (<svg {...c}><circle cx="12" cy="12" r="9" /><path d="M8 12l3 3 5-6" /></svg>);
+  if (k === 'consult') return (<svg {...c}><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z" /></svg>);
   return null;
 }
 
