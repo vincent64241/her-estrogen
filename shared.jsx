@@ -633,7 +633,7 @@ function ScienceSection({ ctaUrl }) {
     <section className="science-v2" id="science" data-screen-label="02b Science">
       <div className="container">
         <div className="curve-grid">
-          <div className="curve-copy">
+          <div>
             <span className="eyebrow-chip rv">The science, plainly</span>
             <h2 className="v2-title write-on" style={{ fontSize: 'clamp(32px,3.6vw,50px)' }}>
               <span className="word" style={{ animationDelay: '0ms'   }}>This</span>{' '}
@@ -647,12 +647,11 @@ function ScienceSection({ ctaUrl }) {
               </em>
             </h2>
             <p className="v2-sub rv d2">From your mid-30s on, estradiol — your body's primary estrogen — declines. The symptoms you feel track that curve almost exactly. FDA-approved therapy is designed to restore what your body is losing, guided by a licensed clinician.</p>
-            <ul className="sci-checks rv d2">
-              <li><span className="sci-check-ic" aria-hidden="true">✓</span><span><strong>75M</strong> U.S. women are in hormonal transition</span></li>
-              <li><span className="sci-check-ic" aria-hidden="true">✓</span><span><strong>93%</strong> never receive treatment</span></li>
-              <li><span className="sci-check-ic" aria-hidden="true">✓</span><span><strong>7+ years</strong> average wait before help</span></li>
-            </ul>
-            <a href={ctaUrl} className="sci-cta rv d2">Get Started →</a>
+            <div className="stat-band">
+              <div className="stat rv"><b><span className="num" data-count="75">75</span>M</b><small>U.S. women in hormonal transition</small></div>
+              <div className="stat rv d1"><b><span className="num" data-count="93">93</span>%</b><small>never receive treatment</small></div>
+              <div className="stat rv d2"><b><span className="num" data-count="7">7</span>+yrs</b><small>average wait before help</small></div>
+            </div>
           </div>
           <div className="curve-card rv d2">
             <svg viewBox="0 0 560 330" fill="none">
@@ -667,6 +666,9 @@ function ScienceSection({ ctaUrl }) {
             </svg>
             <div className="curve-note">Illustrative only — individual results and treatment plans vary, and are determined by your clinician.</div>
           </div>
+        </div>
+        <div className="edu-section-cta-wrap">
+          <a href={ctaUrl} className="edu-section-cta">GET STARTED</a>
         </div>
       </div>
     </section>
