@@ -57,7 +57,7 @@ function App() {
                   Get Started
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                 </a>
-                <a className="hs-btn-secondary" href={INTAKE_URL}>See Pricing</a>
+                <a className="hs-btn-secondary" href="#why" onClick={(e) => { e.preventDefault(); const el = document.getElementById('why'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>What is HRT?</a>
               </div>
               <div className="hs-trust">
                 <span className="hs-trust-item hs-trust-no">No Hidden Fees</span>

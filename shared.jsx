@@ -560,8 +560,8 @@ function EduSection({ ctaUrl }) {
             <p className="edu-stat-desc">Of participants saw a dramatic reduction in hot flashes</p>
           </div>
         </div>
-        {/* COMPLIANCE: Stat tiles must carry citation. Vincent fills in {{STUDY_CITATION}}. */}
-        <p className="edu-stat-citation">Source: <span className="edu-stat-citation-slot">{'{{STUDY_CITATION}}'}</span></p>
+        {/* COMPLIANCE: Stat tiles must carry citation before launch. Source line
+            temporarily removed at Vincent's request — re-add real {{STUDY_CITATION}}. */}
 
         <div className="edu-section-cta-wrap">
           <a href={ctaUrl} className="edu-section-cta">GET STARTED</a>
