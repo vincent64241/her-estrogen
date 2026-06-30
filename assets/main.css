@@ -4031,6 +4031,23 @@
   .hrt-flow-band > .how,
   .hrt-flow-band > .clinical-v2 { background: transparent !important; }
 
+  /* ── White-background restyle: How it works + What is HRT + What HRT Actually
+     Fixes. Black body text; pink kept only for eyebrows, <em> keywords, and the
+     big stat numbers. ── */
+  .hrt-flow-band > .how { background: #fff !important; }
+  .edu-section { background: #fff !important; }
+  .edu-stat-card {
+    background: #fff !important;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    color: var(--ink) !important;
+  }
+  .edu-stat-title { color: var(--ink) !important; }
+  .edu-stat-card .edu-stat-num { color: var(--pink) !important; }
+  .edu-stat-desc { color: var(--ink-2) !important; }
+  .edu-table thead { background: #fff !important; }
+  .edu-table td:last-child { background: #fff !important; }
+
   /* "For comparison" — its own pink gradient WITH a diagonal white streak
      cutting across (per request). The streak is a softly-feathered white
      band layered on top of a vertical pink base; the bottom of the pink
