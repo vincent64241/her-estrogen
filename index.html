@@ -554,6 +554,233 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 @media (max-width: 860px) { .online-grid { grid-template-columns: 1fr; } .o-card { min-height: 340px; } }
 
+/* ═══ Hers-replica sections (after "100% online") ═══ */
+
+/* ── A. Hair hero — sage full-bleed, centered headline, CTAs, overlap cards ── */
+.hair-hero {
+  margin-top: 72px; position: relative; overflow: hidden;
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(180deg, #a9c4b6 0%, #8fb3a3 55%, #7ba394 100%);
+  padding: clamp(56px, 7vw, 88px) 24px 0;
+  text-align: center; color: #fff;
+}
+.hair-hero h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; text-shadow: 0 1px 14px rgba(20,50,40,.25); }
+.hair-ctas { display: flex; gap: 12px; justify-content: center; margin: 26px 0 0; flex-wrap: wrap; }
+.btn-ghost-dark {
+  background: rgba(20,50,40,.28); color: #fff; backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.25);
+}
+/* abstract stand-in for their lifestyle photo */
+.hair-photo { position: relative; height: clamp(180px, 26vw, 320px); margin-top: 8px; }
+.hair-orb { position: absolute; border-radius: 50%; }
+.ho-1 { width: 340px; height: 340px; left: 50%; translate: -50%; top: 10%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), rgba(255,255,255,.05) 70%); }
+.ho-2 { width: 150px; height: 150px; left: 22%; top: 30%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.4), rgba(255,255,255,.04) 70%); }
+.ho-3 { width: 110px; height: 110px; right: 20%; top: 16%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.4), rgba(255,255,255,.04) 70%); }
+@media (prefers-reduced-motion: no-preference) {
+  .hair-orb { animation: bob 9s ease-in-out infinite alternate; will-change: transform; }
+  .ho-2 { animation-duration: 12s; animation-delay: -5s; }
+  .ho-3 { animation-duration: 10s; animation-delay: -3s; }
+}
+.hair-cards {
+  position: relative; z-index: 2; max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding-bottom: clamp(32px, 4vw, 56px); text-align: left;
+}
+.hcard {
+  background: rgba(20,50,40,.30); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.16); border-radius: 20px;
+  padding: 24px; color: #fff; position: relative; overflow: hidden;
+}
+.hcard h3 { font-size: clamp(19px, 1.8vw, 24px); font-weight: 600; line-height: 1.2; max-width: 300px; }
+.hcard-left { display: flex; flex-direction: column; gap: 16px; }
+.hc-grow { min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; }
+.hc-grow .btn { align-self: flex-end; }
+.hc-goals { min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; }
+.hgoal-chips { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.hgoal-chips .chip { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.28); }
+/* pebble product stand-in */
+.pebble {
+  width: 92px; height: 118px; margin: 0 auto 18px; display: block;
+  border-radius: 48% 52% 55% 45% / 60% 58% 42% 40%;
+  background: linear-gradient(155deg, #b9cabc, #8ba695);
+  box-shadow: inset 0 -8px 18px rgba(20,50,40,.25), 0 18px 30px rgba(20,50,40,.3);
+  position: relative;
+}
+.pebble::after {
+  content: "h"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 30px; color: rgba(20,50,40,.4);
+}
+@media (prefers-reduced-motion: no-preference) { .pebble { animation: pbob 7s ease-in-out infinite alternate; } }
+/* testimonial carousel */
+.tcar { display: flex; flex-direction: column; }
+.tcar-viewport { overflow: hidden; flex: 1; }
+.tcar-track { display: flex; transition: transform .5s var(--ease-out); }
+@media (prefers-reduced-motion: reduce) { .tcar-track { transition: none; } }
+.tcar-slide { flex: 0 0 100%; padding: 0 4px; }
+.tquote { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45; font-weight: 600; color: rgba(255,255,255,.62); }
+.tquote .q-em { color: #fff; }
+.tthumbs { display: flex; gap: 10px; margin: 18px 0 12px; }
+.tthumb {
+  width: 86px; height: 108px; border-radius: 10px; position: relative;
+  background: linear-gradient(160deg, #9db8a9, #6f8f80); border: 1px solid rgba(255,255,255,.2);
+}
+.tthumb::after {
+  content: attr(data-label); position: absolute; bottom: 6px; left: 0; right: 0; text-align: center;
+  font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,.75);
+}
+.tmeta { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); line-height: 1.5; }
+.tcar-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+.tcar-dots { display: flex; gap: 8px; }
+.tcar-dot { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.35); cursor: pointer; }
+.tcar-dot.on { background: #fff; }
+.tcar-navs { display: flex; gap: 8px; position: absolute; top: 50%; left: 12px; right: 12px; justify-content: space-between; transform: translateY(-50%); pointer-events: none; }
+.tcar-navs button {
+  pointer-events: auto; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.3); background: rgba(20,50,40,.35); color: #fff;
+  cursor: pointer; font-size: 15px; backdrop-filter: blur(4px);
+  transition: background .2s ease;
+}
+.tcar-navs button:hover { background: rgba(20,50,40,.6); }
+@media (max-width: 860px) { .hair-cards { grid-template-columns: 1fr; } }
+
+/* ── B. Labs — dark teal cinematic hero + feature cards ── */
+.labs {
+  margin-top: 0; position: relative; overflow: hidden; color: #fff;
+  background:
+    radial-gradient(80% 50% at 50% 0%, rgba(122,190,160,.25), transparent 65%),
+    linear-gradient(180deg, #1d4a41 0%, #0e2b25 60%, #0a201c 100%);
+  padding: clamp(64px, 8vw, 110px) 24px clamp(40px, 5vw, 64px);
+}
+.labs-head { text-align: center; position: relative; z-index: 2; }
+.labs-eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .02em; opacity: .9; }
+.labs-eyebrow .lb { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 600; }
+.labs h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; margin-top: 8px; }
+.labs-ctas { display: flex; gap: 12px; justify-content: center; margin-top: 26px; flex-wrap: wrap; position: relative; z-index: 2; }
+/* floating dashboard panels (CSS-drawn) */
+.labs-stage { position: relative; height: clamp(120px, 16vw, 210px); margin-top: 10px; }
+.lpanel {
+  position: absolute; border-radius: 14px; padding: 12px 14px;
+  background: rgba(10,32,28,.55); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: 10.5px; color: rgba(255,255,255,.8);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.lpanel b { display: block; font-size: 12px; color: #fff; margin-bottom: 6px; }
+.lp-rows span { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,.18); margin: 6px 0; }
+.lp-rows span:nth-child(2) { width: 74%; } .lp-rows span:nth-child(3) { width: 58%; }
+.lp-donut {
+  width: 44px; height: 44px; border-radius: 50%; float: right; margin-left: 10px;
+  background: conic-gradient(#7abea0 0 62%, rgba(255,255,255,.15) 62% 100%);
+  -webkit-mask: radial-gradient(circle 14px, transparent 96%, #000); mask: radial-gradient(circle 14px, transparent 96%, #000);
+}
+.lp-1 { left: 6%; top: 8%; width: 190px; }
+.lp-2 { right: 7%; top: 0; width: 170px; text-align: left; }
+.lp-2 .big { font-size: 30px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+.lp-3 { left: 26%; bottom: 0; width: 150px; }
+.lp-chip { display: inline-block; background: rgba(214,86,140,.85); color: #fff; border-radius: 999px; padding: 2px 8px; font-size: 9px; font-weight: 700; margin-bottom: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .lpanel { will-change: transform; }
+  .lp-1 { animation: sfloat 12s ease-in-out infinite alternate; }
+  .lp-2 { animation: sfloat 10s ease-in-out infinite alternate -4s; }
+  .lp-3 { animation: sfloat 14s ease-in-out infinite alternate-reverse -6s; }
+}
+@media (max-width: 720px) { .lp-3 { display: none; } .lp-1 { left: 2%; } .lp-2 { right: 2%; } }
+/* labs cards */
+.labs-cards { max-width: 1180px; margin: clamp(28px, 4vw, 48px) auto 0; display: grid; gap: 16px; position: relative; z-index: 2; }
+.lcard {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px; padding: clamp(22px, 3vw, 34px); overflow: hidden; position: relative;
+}
+.lcard h3 { font-size: clamp(21px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
+.lcard p { font-size: 14.5px; color: rgba(255,255,255,.75); margin-top: 8px; max-width: 260px; }
+.lcard .btn { margin-top: 18px; }
+.lc-plan { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; text-align: left; }
+.lc-plan .col-r { text-align: right; }
+.lc-plan .col-r p { margin-left: auto; }
+.lc-plan .col-r .btn { margin-left: auto; }
+/* CSS phone mockup */
+.phone {
+  width: 200px; border-radius: 30px; padding: 12px 12px 16px;
+  background: #0b211c; border: 1px solid rgba(255,255,255,.2);
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+  margin: 0 auto;
+}
+.phone-notch { width: 74px; height: 16px; border-radius: 999px; background: #000; margin: 2px auto 10px; }
+.phone-ui { background: linear-gradient(180deg, #12362e, #0d2a24); border-radius: 18px; padding: 14px 12px; font-size: 10.5px; color: rgba(255,255,255,.8); }
+.phone-ui b { display: block; font-size: 13px; color: #fff; margin-bottom: 8px; }
+.phone-note { background: rgba(255,255,255,.94); color: var(--ink); border-radius: 10px; padding: 9px 10px; font-size: 10px; line-height: 1.45; margin-top: 8px; }
+.phone-note .flag { display: inline-block; background: #d6568c; color: #fff; border-radius: 999px; padding: 1px 7px; font-size: 8.5px; font-weight: 700; margin-bottom: 4px; }
+.phone-bars { display: flex; gap: 5px; margin-top: 10px; }
+.phone-bars span { height: 5px; border-radius: 3px; background: var(--lime); flex: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js .lc-plan .phone { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .7s var(--ease-out); transition-delay: .25s; }
+  html.js .lc-plan.in .phone { opacity: 1; transform: none; }
+}
+.labs-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+/* biological age mini-card */
+.bio-age-chip {
+  width: min(220px, 80%); margin: 20px auto 0; border-radius: 14px; padding: 16px;
+  background: rgba(10,32,28,.6); border: 1px solid rgba(255,255,255,.14); text-align: center;
+}
+.bio-age-chip small { display: block; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+.bio-age-chip .n { font-size: 52px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.bio-age-chip em { display: block; font-style: normal; font-size: 11px; color: rgba(255,255,255,.7); }
+/* biomarker cloud (marquee rows) */
+.bio-cloud { position: relative; margin-top: 20px; overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.bio-row { display: flex; gap: 22px; white-space: nowrap; width: max-content; padding: 7px 0; font-size: 14.5px; color: rgba(255,255,255,.55); font-weight: 500; }
+.bio-row .bk {
+  border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 2px 12px; color: #fff; font-weight: 600;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bio-row { animation: bio-loop 36s linear infinite; will-change: transform; }
+  .bio-row.rev { animation-direction: reverse; animation-duration: 44s; }
+  @keyframes bio-loop { to { transform: translateX(-50%); } }
+  .bio-cloud.paused .bio-row, .bio-cloud:hover .bio-row { animation-play-state: paused; }
+}
+.mq-pause {
+  position: absolute; right: 8px; bottom: 8px; z-index: 2;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.35); background: rgba(10,32,28,.7); color: #fff;
+  font-size: 9px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) { .mq-pause { display: none; } }
+.labs-fine { max-width: 760px; margin: 22px auto 0; text-align: center; font-size: 11.5px; color: rgba(255,255,255,.72); line-height: 1.6; position: relative; z-index: 2; }
+@media (max-width: 860px) {
+  .lc-plan { grid-template-columns: 1fr; text-align: left; }
+  .lc-plan .col-r { text-align: left; }
+  .lc-plan .col-r p, .lc-plan .col-r .btn { margin-left: 0; }
+  .labs-duo { grid-template-columns: 1fr; }
+}
+
+/* ── C. Clinicians — "The best care / by the best in medicine" ── */
+.docs { padding: 88px 0 8px; text-align: center; }
+.docs h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; }
+.docs h2 .accent { color: #5f9384; }
+.docs-sub { max-width: 460px; margin: 14px auto 0; font-size: 16px; color: var(--ink-2); }
+.docs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; text-align: left; }
+.doc-card { display: flex; flex-direction: column; }
+.doc-panel {
+  border-radius: 16px; padding: 16px; min-height: 190px; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #dce9e2, #f0f6f2);
+  display: flex; justify-content: flex-end;
+}
+/* abstract clinician avatar (photo placeholder) */
+.doc-ava { position: absolute; left: 14px; bottom: 0; width: 110px; height: 130px; }
+.doc-ava::before { content: ""; position: absolute; left: 50%; top: 0; translate: -50%; width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(150deg, #b3c9be, #8fb3a3); }
+.doc-ava::after { content: ""; position: absolute; left: 50%; bottom: -22px; translate: -50%; width: 108px; height: 74px; border-radius: 40px 40px 0 0; background: linear-gradient(150deg, #c4d6cc, #a3c0b3); }
+.doc-role { position: relative; z-index: 1; max-width: 55%; }
+.doc-role b { display: block; font-size: 12.5px; line-height: 1.3; }
+.doc-role span { display: block; font-size: 10.5px; color: var(--ink-2); border-left: 2px solid #5f9384; padding-left: 6px; margin-top: 5px; }
+.doc-name { font-size: 15.5px; font-weight: 700; margin-top: 12px; }
+.doc-bio { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin-top: 5px; }
+@media (max-width: 1020px) { .docs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .docs-grid { grid-template-columns: 1fr; } }
+
 /* ── Start here ── */
 .start {
   margin: 72px 0 0; background: var(--ink); border-radius: var(--r-lg); color: #fff;
@@ -973,6 +1200,176 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
+<!-- A. Hair — Hers hair-vertical replica -->
+<section class="hair-hero" id="hairsec">
+  <h2 data-reveal>Thicker, fuller hair<br />is here</h2>
+  <div class="hair-ctas" data-reveal style="--i:1">
+    <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+    <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">See if I'm eligible</a>
+  </div>
+  <div class="hair-photo" aria-hidden="true">
+    <span class="hair-orb ho-1"></span>
+    <span class="hair-orb ho-2"></span>
+    <span class="hair-orb ho-3"></span>
+    <span class="ph-chip" style="right:50%; translate:50%; bottom:10px;">Lifestyle photo placeholder</span>
+  </div>
+  <div class="hair-cards">
+    <div class="hcard-left" data-reveal-group>
+      <div class="hcard hc-grow">
+        <h3>Regrow hair in 3–6 months with minoxidil</h3>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+      </div>
+      <div class="hcard hc-goals">
+        <h3>What are your hair goals?</h3>
+        <div class="hgoal-chips">
+          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Stop thinning or shedding</a>
+          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Regrow thicker, fuller hair</a>
+          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">All the above</a>
+        </div>
+      </div>
+    </div>
+    <div class="hcard tcar" data-reveal>
+      <span class="pebble" aria-hidden="true"></span>
+      <div class="tcar-viewport">
+        <div class="tcar-track">
+          <div class="tcar-slide">
+            <p class="tquote">"<span class="q-em">Patient story placeholder.</span> Real, verified patient quotes are staged here — <span class="q-em">swapped in after compliance review</span> of each claim and photo."</p>
+            <div class="tthumbs" aria-hidden="true">
+              <span class="tthumb" data-label="Before"></span>
+              <span class="tthumb" data-label="After"></span>
+            </div>
+            <p class="tmeta">Verified patient · Placeholder<br />Duration · Product</p>
+          </div>
+          <div class="tcar-slide">
+            <p class="tquote">"<span class="q-em">Second story placeholder.</span> The carousel supports any number of slides — quotes, before/after imagery, and <span class="q-em">attribution</span> per patient."</p>
+            <div class="tthumbs" aria-hidden="true">
+              <span class="tthumb" data-label="Before"></span>
+              <span class="tthumb" data-label="After"></span>
+            </div>
+            <p class="tmeta">Verified patient · Placeholder<br />Duration · Product</p>
+          </div>
+        </div>
+      </div>
+      <div class="tcar-navs" aria-hidden="false">
+        <button class="tcar-prev" aria-label="Previous story">‹</button>
+        <button class="tcar-next" aria-label="Next story">›</button>
+      </div>
+      <div class="tcar-foot">
+        <div class="tcar-dots" role="tablist" aria-label="Stories">
+          <button class="tcar-dot on" aria-label="Story 1"></button>
+          <button class="tcar-dot" aria-label="Story 2"></button>
+        </div>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get results</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B. Labs — dark teal cinematic replica -->
+<section class="labs" id="labs">
+  <div class="labs-head">
+    <p class="labs-eyebrow" data-reveal>labs by <span class="lb">herestrogen</span></p>
+    <h2 data-reveal style="--i:1">Test what your body's<br />been telling you</h2>
+  </div>
+  <div class="labs-stage" aria-hidden="true">
+    <div class="lpanel lp-1"><span class="lp-donut"></span><b>All 34 biomarkers</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
+    <div class="lpanel lp-2"><span class="lp-chip">Hormone health</span><span class="big">41</span>Your biological age estimate, from your markers</div>
+    <div class="lpanel lp-3"><b>Making you younger</b><div class="lp-rows"><span></span><span></span></div></div>
+  </div>
+  <div class="labs-ctas">
+    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Start my labs</a>
+    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Learn more</a>
+  </div>
+
+  <div class="labs-cards">
+    <div class="lcard lc-plan" data-reveal>
+      <div>
+        <h3>Discover your baseline</h3>
+        <p>Get a clear picture of your health with a simple at-home lab test.</p>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="phone-notch"></div>
+        <div class="phone-ui">
+          <b>Action Plan</b>
+          Two areas of your health need attention — let's get things on track.
+          <div class="phone-note"><span class="flag">Needs attention</span>First up: hormone balance. Your profile and biomarkers show your estradiol trending low.</div>
+          <div class="phone-bars"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="col-r">
+        <h3>Plan your breakthrough</h3>
+        <p>Optimize your health with a clinician-developed action plan.</p>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the plan</a>
+      </div>
+    </div>
+    <div class="labs-duo" data-reveal-group>
+      <div class="lcard">
+        <h3>Unlock your Biological Age</h3>
+        <p>Reveal how fast your body is aging compared to your actual age.</p>
+        <div class="bio-age-chip" aria-hidden="true">
+          <small>As of today</small>
+          <span class="n">38</span>
+          <em>2 years younger than your chronological age</em>
+        </div>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get the science</a>
+      </div>
+      <div class="lcard">
+        <h3>Test 130+ biomarkers</h3>
+        <p>From hormones to heart health — one draw, the full picture.</p>
+        <div class="bio-cloud" aria-hidden="true">
+          <div class="bio-row"><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span></div>
+          <div class="bio-row rev"><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span></div>
+          <button class="mq-pause" id="bioPause" aria-pressed="false" aria-label="Pause biomarker list">❚❚</button>
+        </div>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Meet the markers</a>
+      </div>
+    </div>
+  </div>
+  <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
+</section>
+
+<!-- C. Clinicians -->
+<section class="docs">
+  <div class="container">
+    <h2 data-reveal><span class="accent">The best care</span><br />by the best in medicine</h2>
+    <p class="docs-sub" data-reveal style="--i:1">Meet the team of leading specialists with decades of combined experience across key specialties.</p>
+    <div class="docs-grid" data-reveal-group>
+      <div class="doc-card">
+        <div class="doc-panel">
+          <span class="doc-ava" aria-hidden="true"></span>
+          <div class="doc-role"><b>Chief Medical Officer</b><span>Women's Health</span><span>Hormone Health</span></div>
+        </div>
+        <p class="doc-name">Clinician name, MD</p>
+        <p class="doc-bio">Board-certified OB/GYN — deep experience in menopausal, hormonal, and women's health. Bio placeholder.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-panel">
+          <span class="doc-ava" aria-hidden="true"></span>
+          <div class="doc-role"><b>Head of Weight Loss</b><span>Metabolic Health</span></div>
+        </div>
+        <p class="doc-name">Clinician name, MD</p>
+        <p class="doc-bio">Board-certified obesity-medicine specialist focused on evidence-based metabolic care. Bio placeholder.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-panel">
+          <span class="doc-ava" aria-hidden="true"></span>
+          <div class="doc-role"><b>Head of Medical Affairs</b><span>Inflammation &amp; Stress</span><span>Nutrients &amp; Blood</span></div>
+        </div>
+        <p class="doc-name">Clinician name, MD</p>
+        <p class="doc-bio">Board-certified family-medicine physician guiding the clinical patient experience. Bio placeholder.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-panel">
+          <span class="doc-ava" aria-hidden="true"></span>
+          <div class="doc-role"><b>Endocrinology Advisor</b><span>Thyroid Health</span></div>
+        </div>
+        <p class="doc-name">Clinician name, MD</p>
+        <p class="doc-bio">Board-certified endocrinologist advising on thyroid, metabolic, and endocrine care. Bio placeholder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Start here -->
 <section class="container">
   <div class="start" id="start">
@@ -1103,6 +1500,36 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       pauseBtn.setAttribute('aria-label', paused ? 'Resume scrolling banner' : 'Pause scrolling banner');
     });
   }
+
+  /* Biomarker cloud pause (same WCAG rule, labs card) */
+  var bioCloud = document.querySelector('.bio-cloud');
+  var bioPause = document.getElementById('bioPause');
+  if (bioCloud && bioPause) {
+    bioPause.addEventListener('click', function () {
+      var paused = bioCloud.classList.toggle('paused');
+      bioPause.setAttribute('aria-pressed', String(paused));
+      bioPause.textContent = paused ? '▶' : '❚❚';
+      bioPause.setAttribute('aria-label', paused ? 'Resume biomarker list' : 'Pause biomarker list');
+    });
+  }
+
+  /* Testimonial carousel (Hers): track slides, dots, prev/next. */
+  document.querySelectorAll('.tcar').forEach(function (car) {
+    var track = car.querySelector('.tcar-track');
+    var dots = car.querySelectorAll('.tcar-dot');
+    if (!track || !dots.length) return;
+    var n = track.children.length, i = 0;
+    function go(k) {
+      i = (k + n) % n;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      dots.forEach(function (d, j) { d.classList.toggle('on', j === i); });
+    }
+    var prev = car.querySelector('.tcar-prev');
+    var next = car.querySelector('.tcar-next');
+    if (prev) prev.addEventListener('click', function () { go(i - 1); });
+    if (next) next.addEventListener('click', function () { go(i + 1); });
+    dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); }); });
+  });
 
   /* Scroll-linked parallax (Hers): --bp maps the band's trip through the
      viewport onto the product's rise/rotate/scale; --py drifts the bento
