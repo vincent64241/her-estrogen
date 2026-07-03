@@ -954,8 +954,28 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 /* Secondary framing divider */
 .sec-divider { text-align: center; padding: clamp(48px, 6vw, 80px) 24px 0; }
 .sec-divider .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
-.sec-divider h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-top: 10px; }
+.sec-divider h2, .sec-divider h1 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-top: 10px; line-height: 1.08; }
 .sec-divider p { max-width: 500px; margin: 12px auto 0; font-size: 16px; color: var(--ink-2); }
+/* Hero instance of the platform bento — a touch more scale + breathing room */
+.hero-divider { padding-top: clamp(40px, 6vw, 76px); }
+.hero-divider h1 { font-size: clamp(34px, 4.8vw, 56px); }
+.hero-divider p { max-width: 560px; font-size: 17px; }
+/* Hero entrance — CSS load animation (fires for everyone, no observer/LCP risk) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hero-divider h1,
+  html.js .hero-divider p,
+  html.js .bento .feature-card,
+  html.js .bento .mini-card { animation: heroUp .72s var(--ease-out) both; }
+  html.js .hero-divider h1 { animation-delay: .02s; }
+  html.js .hero-divider p  { animation-delay: .10s; }
+  html.js .bento-big .feature-card:nth-child(1) { animation-delay: .16s; }
+  html.js .bento-big .feature-card:nth-child(2) { animation-delay: .24s; }
+  html.js .bento-small .mini-card:nth-child(1) { animation-delay: .30s; }
+  html.js .bento-small .mini-card:nth-child(2) { animation-delay: .37s; }
+  html.js .bento-small .mini-card:nth-child(3) { animation-delay: .44s; }
+  html.js .bento-small .mini-card:nth-child(4) { animation-delay: .51s; }
+  @keyframes heroUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+}
 
 /* Mobile: full-width primary CTA + tighter hero */
 @media (max-width: 600px) {
@@ -1046,39 +1066,50 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </nav>
 
-<!-- Hero — all-in-one for women (repositioned from "More than menopause / Care for all of you") -->
-<header class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="hero-eyebrow">All-in-one care for women · 100% online</div>
-      <h1>
-        <span class="hm"><span class="hw" style="--w:0">More than menopause.</span></span><br />
-        <span class="hm"><em class="hw" style="--w:1">Care for all of you.</em></span>
-      </h1>
-      <p class="hero-sub">One clinician-guided platform for hormones, weight, skin, hair, energy, and recovery — prescribed online by licensed clinicians who specialize in women's health.</p>
-      <div class="hero-cta-row">
-        <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-        <span class="hero-cta-note">2-minute quiz · No insurance needed</span>
-      </div>
-      <div class="hero-rating"><span class="stars">★★★★★</span> Trusted by women across all 50 states</div>
-      <ul class="hero-reassure">
-        <li>✓ Licensed U.S. clinicians</li>
-        <li>✓ Free, discreet shipping</li>
-        <li>✓ Cancel anytime</li>
-      </ul>
+<!-- Hero — the platform bento (everything we treat) -->
+<div class="sec-divider hero-divider">
+  <div class="eyebrow">All-in-one care for women · 100% online</div>
+  <h1>Explore everything we treat</h1>
+  <p>Weight, skin, hair, energy, and recovery — expert, clinician-guided care for every part of your health, 100% online.</p>
+</div>
+
+<!-- Bento feature cards (hero) -->
+<section class="bento">
+  <div class="container">
+    <div class="bento-big">
+      <a class="feature-card fc-green" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
+        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
+        <span class="ph-chip">Product image placeholder</span>
+        <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
+      </a>
+      <a class="feature-card fc-rose" id="menopause" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <h3>Hormone therapy <span class="lt">for menopause — patches, gel, pills &amp; cream</span></h3>
+        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
+        <span class="ph-chip">Product image placeholder</span>
+        <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
+      </a>
     </div>
-    <aside class="hero-proofcard" data-reveal style="--i:2">
-      <div class="hpc-top">
-        <span class="hpc-score">4.9</span>
-        <span><span class="stars">★★★★★</span><br /><span class="hpc-count">based on verified patient reviews</span></span>
-      </div>
-      <blockquote class="hpc-quote">
-        "Everything in one place — my hormones, my energy, even my skin. I finally have a plan that fits my whole life."
-        <cite>— Verified patient · placeholder</cite>
-      </blockquote>
-    </aside>
+    <div class="bento-small">
+      <a class="mini-card" id="skin" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-rose">✦</span><span class="t">Face &amp; skin <em>with GHK-Cu</em></span></span>
+        <span class="mc-arrow"><i>→</i></span>
+      </a>
+      <a class="mini-card" id="energy" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-blue">⚡</span><span class="t">NAD+ <em>for energy &amp; longevity</em></span></span>
+        <span class="mc-arrow"><i>→</i></span>
+      </a>
+      <a class="mini-card" id="hair" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-tan">❋</span><span class="t">Grow fuller <em>hair</em></span></span>
+        <span class="mc-arrow"><i>→</i></span>
+      </a>
+      <a class="mini-card" href="#start">
+        <span class="goal-left"><span class="mini-ic mi-lime">＋</span><span class="t">Unsure where to begin? <em>Start here</em></span></span>
+        <span class="mc-arrow"><i>→</i></span>
+      </a>
+    </div>
   </div>
-</header>
+</section>
 
 <!-- Social proof (proof before persuasion) -->
 <section class="proof" id="proof">
@@ -1196,51 +1227,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Secondary content: the broader platform (demoted below the funnel) ── -->
-<div class="sec-divider">
-  <div class="eyebrow">The full platform</div>
-  <h2 data-reveal>Explore everything we treat</h2>
-  <p data-reveal style="--i:1">Weight, skin, hair, energy, and recovery — add any vertical to your clinician-guided plan whenever you're ready.</p>
-</div>
-
-<!-- Bento feature cards -->
-<section class="bento">
-  <div class="container">
-    <div class="bento-big" data-reveal-group>
-      <a class="feature-card fc-green" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
-        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
-        <span class="ph-chip">Product image placeholder</span>
-        <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
-      </a>
-      <a class="feature-card fc-rose" id="menopause" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <h3>Hormone therapy <span class="lt">for menopause — patches, gel, pills &amp; cream</span></h3>
-        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
-        <span class="ph-chip">Product image placeholder</span>
-        <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
-      </a>
-    </div>
-    <div class="bento-small" data-reveal-group>
-      <a class="mini-card" id="skin" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <span class="goal-left"><span class="mini-ic mi-rose">✦</span><span class="t">Face &amp; skin <em>with GHK-Cu</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
-      <a class="mini-card" id="energy" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <span class="goal-left"><span class="mini-ic mi-blue">⚡</span><span class="t">NAD+ <em>for energy &amp; longevity</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
-      <a class="mini-card" id="hair" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <span class="goal-left"><span class="mini-ic mi-tan">❋</span><span class="t">Grow fuller <em>hair</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
-      <a class="mini-card" href="#start">
-        <span class="goal-left"><span class="mini-ic mi-lime">＋</span><span class="t">Unsure where to begin? <em>Start here</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
     </div>
   </div>
 </section>
