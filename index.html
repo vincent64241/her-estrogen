@@ -219,6 +219,24 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .fc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -1; }
 .feature-card.has-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(165deg, rgba(0,0,0,.14), rgba(0,0,0,.5)); }
 .feature-card.has-photo .ph-shape, .feature-card.has-photo .ph-chip { display: none; }
+/* Hover: soft light bloom that glows *within* the photo. Sits above the scrim
+   but below the text; screen-blend is confined to the card by isolation:isolate. */
+.fc-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(44% 40% at 72% 32%, rgba(255,255,255,.6), rgba(255,255,255,0) 62%);
+  mix-blend-mode: screen; transition: opacity .5s ease; will-change: opacity, transform; }
+.feature-card h3, .feature-card .fc-cta { position: relative; z-index: 1; }
+.feature-card.has-photo .fc-photo { transition: filter .5s ease; }
+.feature-card.has-photo:hover .fc-photo { filter: brightness(1.05) saturate(1.04); }
+@media (prefers-reduced-motion: no-preference) {
+  .feature-card.has-photo:hover .fc-glow { opacity: 1; animation: fcGlow 2.6s ease-in-out infinite; }
+  @keyframes fcGlow {
+    0%, 100% { opacity: .32; transform: scale(1); }
+    50%      { opacity: .9;  transform: scale(1.14); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feature-card.has-photo:hover .fc-glow { opacity: .55; }
+}
 .feature-card h3 { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; font-weight: 600; max-width: 320px; }
 .feature-card h3 .lt { opacity: .8; font-weight: 500; }
 .fc-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
@@ -1090,14 +1108,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   <div class="container">
     <div class="bento-big">
       <a class="feature-card fc-green has-photo" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <img class="fc-photo" src="assets/card-weightloss.webp" alt="GLP-1 weight loss treatment for women" width="1031" height="560" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
+        <img class="fc-photo" src="assets/card-weightloss.webp" alt="GLP-1 weight loss treatment for women" width="1178" height="640" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
+        <span class="fc-glow" aria-hidden="true"></span>
         <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
         <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
         <span class="ph-chip">Product image placeholder</span>
         <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
       </a>
       <a class="feature-card fc-rose has-photo" id="menopause" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <img class="fc-photo" src="assets/card-hormones.webp" alt="Hormone therapy for menopause" width="1031" height="560" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
+        <img class="fc-photo" src="assets/card-hormones.webp" alt="Hormone therapy for menopause" width="1178" height="640" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
+        <span class="fc-glow" aria-hidden="true"></span>
         <h3>Hormone therapy <span class="lt">for menopause — patches, gel, pills &amp; cream</span></h3>
         <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
         <span class="ph-chip">Product image placeholder</span>
