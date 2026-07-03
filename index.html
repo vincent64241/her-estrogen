@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HerEstrogen — All-in-one care for women</title>
+<meta name="description" content="HRT, weight loss, skin, hair, and energy — clinician-guided care for women, 100% online. Licensed clinicians in all 50 states." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..800&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<style>
+/* ═══ HerEstrogen rebuild — Eden / Hers / Ro design system, HRT-adapted.
+   All imagery = clean CSS placeholders (no branded product photos — LegitScript). ═══ */
+:root {
+  --ink: #1c1a17;
+  --ink-2: #55504a;
+  --muted: #8a847c;
+  --paper: #f6f4f1;          /* warm off-white page bg (Ro/Eden) */
+  --card: #ffffff;
+  --line: #e7e3dd;
+  --yellow: #f4f0a3;         /* offer bar */
+  --pink: #b8235c;           /* brand accent, used sparingly */
+  --pink-soft: #fde8ef;
+  --green-1: #3d5a3c;        /* deep sage gradient card */
+  --green-2: #6f8f66;
+  --tan-1: #c98f62;
+  --tan-2: #e7c3a1;
+  --blue-1: #7fa5c9;
+  --blue-2: #b8d0e8;
+  --rose-1: #c96f8e;
+  --rose-2: #ecc2d0;
+  --dark-1: #2c3a26;         /* full-bleed band */
+  --dark-2: #0d130a;
+  --lime: #cde96f;           /* band accent (Hers) */
+  --r-lg: 24px;
+  --r-md: 16px;
+  --r-pill: 999px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Offer bar ── */
+.offer-bar {
+  background: var(--yellow);
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 9px 16px;
+}
+.offer-bar a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Nav ── */
+.nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+.nav-inner {
+  max-width: 1280px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; gap: 28px;
+}
+.logo {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 24px; letter-spacing: -0.02em; white-space: nowrap;
+}
+.logo .thin { font-style: italic; font-weight: 400; }
+.logo .bold { font-weight: 700; }
+.nav-links { display: flex; gap: 26px; font-size: 14.5px; font-weight: 500; margin: 0 auto; }
+.nav-links a { color: var(--ink-2); }
+.nav-links a:hover { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: var(--r-pill); font-weight: 600; font-size: 14.5px;
+  padding: 11px 22px; white-space: nowrap; cursor: pointer; border: 0;
+  transition: transform .12s ease, opacity .15s ease;
+}
+.btn:hover { transform: translateY(-1px); opacity: .92; }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-outline { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
+.btn-light { background: #fff; color: var(--ink); }
+@media (max-width: 980px) { .nav-links { display: none; } .nav-inner { justify-content: space-between; } }
+
+/* ── Hero ── */
+.hero { padding: 56px 0 28px; }
+.hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: start; }
+.hero h1 {
+  font-size: clamp(40px, 5.4vw, 68px);
+  line-height: 1.04; letter-spacing: -0.025em; font-weight: 700;
+}
+.hero h1 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--pink); }
+.hero-sub { margin-top: 16px; font-size: 17px; color: var(--ink-2); max-width: 480px; }
+.trust-bullets { display: flex; flex-direction: column; gap: 14px; padding-top: 10px; }
+.trust-bullets li { list-style: none; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; }
+.tb-ic {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+}
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+
+/* ── Bento feature cards ── */
+.bento { padding: 28px 0 8px; }
+.bento-big { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.feature-card {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  min-height: 320px; padding: 28px; color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.feature-card h3 { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; font-weight: 600; max-width: 320px; }
+.feature-card h3 .lt { opacity: .8; font-weight: 500; }
+.fc-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
+.fc-arrow {
+  width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.fc-green { background: linear-gradient(135deg, var(--green-1), var(--green-2)); }
+.fc-rose  { background: linear-gradient(135deg, var(--rose-1), var(--rose-2)); }
+/* placeholder "product" shapes */
+.ph-shape { position: absolute; border-radius: 50%; filter: blur(0.5px); }
+.ph-a { width: 220px; height: 220px; right: -40px; top: 30px;  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.08) 70%); }
+.ph-b { width: 120px; height: 120px; right: 130px; bottom: -20px; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), rgba(255,255,255,.06) 70%); }
+.ph-chip {
+  position: absolute; right: 22px; bottom: 22px;
+  background: rgba(255,255,255,.22); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.35); border-radius: 12px;
+  color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: 7px 12px;
+}
+.bento-small { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+.mini-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.mini-card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(28,26,23,.08); }
+.mini-card .t { font-size: 17px; font-weight: 600; }
+.mini-card .t em { font-style: normal; color: var(--pink); }
+.mini-ic {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 19px;
+}
+.mi-blue { background: linear-gradient(135deg, var(--blue-2), #e8f0f8); }
+.mi-tan  { background: linear-gradient(135deg, var(--tan-2), #f6e9dc); }
+.mi-rose { background: linear-gradient(135deg, var(--rose-2), #f8e7ee); }
+.mi-lime { background: linear-gradient(135deg, #e6f2c2, #f4f9e3); }
+.mc-arrow { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--line); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+@media (max-width: 860px) { .bento-big { grid-template-columns: 1fr; } .bento-small { grid-template-columns: 1fr; } }
+
+/* ── Trust strip ── */
+.trust-strip { background: #ecefe2; margin-top: 40px; }
+.ts-inner {
+  max-width: 1280px; margin: 0 auto; padding: 16px 24px;
+  display: flex; gap: 36px; justify-content: space-between; overflow-x: auto; scrollbar-width: none;
+}
+.ts-inner::-webkit-scrollbar { display: none; }
+.ts-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; white-space: nowrap; color: #3c4a33; }
+
+/* ── Full-bleed gradient band (Hers-style) ── */
+.band {
+  margin: 56px 0 0;
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(205,233,111,.28), transparent 60%),
+    linear-gradient(180deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  color: #fff; text-align: center;
+  padding: clamp(64px, 9vw, 120px) 24px;
+  position: relative; overflow: hidden;
+}
+.band h2 { font-size: clamp(34px, 4.6vw, 58px); line-height: 1.08; letter-spacing: -0.02em; font-weight: 700; }
+.band h2 .accent { color: var(--lime); }
+.band-sub { margin: 18px auto 0; max-width: 460px; font-size: 17px; color: rgba(255,255,255,.85); }
+.band-sub .accent { color: var(--lime); font-weight: 700; }
+.band .btn { margin-top: 28px; }
+.band-ph {
+  margin: 44px auto 0; width: min(520px, 80vw); height: 300px; border-radius: var(--r-lg);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.16), transparent 55%),
+    linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.16);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.55); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+}
+.band-fine { margin-top: 26px; font-size: 11.5px; color: rgba(255,255,255,.55); max-width: 640px; margin-left: auto; margin-right: auto; }
+
+/* ── Product lineup (Ro/Hers horizontal scroll) ── */
+.lineup { padding: 64px 0 8px; }
+.lineup h2 { font-size: clamp(26px, 3vw, 38px); letter-spacing: -0.02em; font-weight: 700; margin-bottom: 24px; }
+.lineup-scroll {
+  display: flex; gap: 16px; overflow-x: auto; padding: 4px 4px 18px; scrollbar-width: none;
+}
+.lineup-scroll::-webkit-scrollbar { display: none; }
+.p-card {
+  flex: 0 0 262px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.p-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(28,26,23,.10); }
+.p-img { position: relative; height: 190px; display: flex; align-items: center; justify-content: center; }
+.p-img .ph-label { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: rgba(0,0,0,.35); }
+.pi-sage  { background: linear-gradient(150deg, #dbe6cf, #eef3e4); }
+.pi-tan   { background: linear-gradient(150deg, #ecd9c4, #f7efe4); }
+.pi-blue  { background: linear-gradient(150deg, #cfdfee, #e9f1f8); }
+.pi-rose  { background: linear-gradient(150deg, #f0d5df, #faeef3); }
+.pi-lav   { background: linear-gradient(150deg, #dcd6ec, #f0edf8); }
+.pi-lemon { background: linear-gradient(150deg, #efeccb, #f9f8e8); }
+.p-badges { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
+.badge {
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: var(--r-pill);
+  background: rgba(255,255,255,.85); backdrop-filter: blur(4px);
+}
+.badge-new { background: var(--lime); }
+.p-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.p-status { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.p-dot { width: 7px; height: 7px; border-radius: 50%; background: #3f9e58; }
+.p-name { font-size: 18.5px; font-weight: 700; letter-spacing: -0.01em; }
+.p-desc { font-size: 13.5px; color: var(--ink-2); flex: 1; }
+.p-ctas { display: flex; gap: 8px; margin-top: 12px; }
+.p-ctas .btn { padding: 9px 16px; font-size: 13px; }
+.lineup-fine { font-size: 11.5px; color: var(--muted); margin: 6px 4px 0; max-width: 880px; }
+
+/* ── Goals band (Ro "health goals" rows over gradient) ── */
+.goals {
+  margin-top: 64px; border-radius: var(--r-lg);
+  background:
+    radial-gradient(80% 90% at 80% 10%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(135deg, var(--tan-2), var(--rose-2));
+  padding: clamp(32px, 4.5vw, 56px);
+}
+.goals h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--ink); max-width: 560px; }
+.goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.goal-row {
+  background: rgba(255,255,255,.92); border-radius: var(--r-md);
+  padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-weight: 600; font-size: 15px;
+  transition: transform .15s ease;
+}
+.goal-row:hover { transform: translateY(-2px); }
+.goal-left { display: flex; align-items: center; gap: 12px; }
+.goal-ic { width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; background: var(--paper); }
+@media (max-width: 860px) { .goal-grid { grid-template-columns: 1fr; } }
+
+/* ── 100% online (app-UI mockup cards, Ro-style) ── */
+.online { padding: 72px 0 8px; }
+.online h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 28px; }
+.online-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.o-card {
+  border-radius: var(--r-lg); overflow: hidden; min-height: 420px; position: relative;
+  padding: 26px; display: flex; flex-direction: column;
+}
+.o-card h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+.oc-1 { background: linear-gradient(165deg, #cfdfee, #e9eef4); }
+.oc-2 { background: linear-gradient(165deg, #e7dbc9, #f3ece1); }
+.oc-3 { background: linear-gradient(165deg, #d9e4d0, #edf2e7); }
+/* CSS-drawn app UI */
+.ui-chat {
+  margin-top: auto; background: rgba(255,255,255,.9); backdrop-filter: blur(6px);
+  border-radius: 14px; padding: 14px 16px; font-size: 13.5px; box-shadow: 0 12px 30px rgba(28,26,23,.10);
+}
+.ui-chat .who { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; }
+.ui-avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--rose-1), var(--tan-1)); }
+.ui-app {
+  margin-top: auto; background: rgba(255,255,255,.75); backdrop-filter: blur(6px);
+  border-radius: 18px; padding: 18px; box-shadow: 0 12px 30px rgba(28,26,23,.10);
+}
+.ui-app .hello { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.ui-stat { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+.ui-stat .num { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+.ui-stat .num .down { color: #3f9e58; }
+.ui-spark { height: 34px; margin-top: 6px; border-radius: 6px;
+  background: repeating-linear-gradient(90deg, #dfe9d4 0 6px, transparent 6px 12px);
+  position: relative; overflow: hidden;
+}
+.ui-spark::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 2.5px;
+  background: linear-gradient(90deg, #a9c88a, #3f9e58); border-radius: 2px; transform: rotate(-4deg);
+}
+.ui-row { background: #fff; border-radius: 10px; padding: 10px 12px; font-size: 12.5px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.ui-bars { display: flex; gap: 6px; margin-top: 8px; }
+.ui-bars span { height: 6px; border-radius: 4px; background: var(--lime); flex: 1; }
+.ui-bars span:last-child { background: #e6e2da; }
+@media (max-width: 860px) { .online-grid { grid-template-columns: 1fr; } .o-card { min-height: 340px; } }
+
+/* ── Unsure / start here ── */
+.start {
+  margin: 72px 0 0; background: var(--ink); border-radius: var(--r-lg); color: #fff;
+  padding: clamp(32px, 4.5vw, 56px);
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center;
+}
+.start h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.start h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--rose-2); }
+.start p { margin-top: 12px; color: rgba(255,255,255,.75); font-size: 15.5px; max-width: 420px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.22);
+  border-radius: var(--r-pill); padding: 12px 20px; font-size: 14px; font-weight: 600; color: #fff;
+  transition: background .15s ease;
+}
+.chip:hover { background: rgba(255,255,255,.2); }
+@media (max-width: 860px) { .start { grid-template-columns: 1fr; } }
+
+/* ── Footer ── */
+footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
+.foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; }
+.foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 22px; }
+.foot-tag { margin-top: 8px; font-size: 14px; color: var(--ink-2); max-width: 300px; }
+.foot-col h4 { font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.foot-col a { display: block; font-size: 14.5px; color: var(--ink-2); padding: 4px 0; }
+.isi {
+  margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line);
+  font-size: 12px; color: var(--muted); line-height: 1.6;
+}
+.isi strong { color: var(--ink-2); }
+@media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- Offer bar -->
+<div class="offer-bar">Clinician-guided care for women, 100% online. <a href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/"><span class="thin">her</span><span class="bold">estrogen</span></a>
+    <div class="nav-links">
+      <a href="#weightloss">Weight Loss</a>
+      <a href="#menopause">Menopause</a>
+      <a href="#skin">Skin</a>
+      <a href="#hair">Hair</a>
+      <a href="#energy">Energy</a>
+      <a href="#lineup">Top Products</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>All-in-one care,<br /><em>made for women.</em></h1>
+      <p class="hero-sub">Hormones, weight, skin, hair, and energy — one place, one clinician-guided plan. Look, feel, and perform your best every day.</p>
+    </div>
+    <ul class="trust-bullets">
+      <li><span class="tb-ic">✓</span> Licensed clinicians, all 50 states</li>
+      <li><span class="tb-ic">✓</span> Free consultations &amp; free shipping</li>
+      <li><span class="tb-ic">✓</span> No insurance needed</li>
+      <li><span class="tb-ic">✓</span> Get started 100% online</li>
+    </ul>
+  </div>
+</header>
+
+<!-- Bento feature cards -->
+<section class="bento">
+  <div class="container">
+    <div class="bento-big">
+      <a class="feature-card fc-green" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
+        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
+        <span class="ph-chip">Product image placeholder</span>
+        <span class="fc-cta">Start now <span class="fc-arrow">→</span></span>
+      </a>
+      <a class="feature-card fc-rose" id="menopause" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <h3>Hormone therapy <span class="lt">for menopause — patches, gel, pills &amp; cream</span></h3>
+        <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
+        <span class="ph-chip">Product image placeholder</span>
+        <span class="fc-cta">Start now <span class="fc-arrow">→</span></span>
+      </a>
+    </div>
+    <div class="bento-small">
+      <a class="mini-card" id="skin" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-rose">✦</span><span class="t">Face &amp; skin <em>with GHK-Cu</em></span></span>
+        <span class="mc-arrow">→</span>
+      </a>
+      <a class="mini-card" id="energy" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-blue">⚡</span><span class="t">NAD+ <em>for energy &amp; longevity</em></span></span>
+        <span class="mc-arrow">→</span>
+      </a>
+      <a class="mini-card" id="hair" href="https://quiz.herestrogen.com/herestrogen_hrt">
+        <span class="goal-left"><span class="mini-ic mi-tan">❋</span><span class="t">Grow fuller <em>hair</em></span></span>
+        <span class="mc-arrow">→</span>
+      </a>
+      <a class="mini-card" href="#start">
+        <span class="goal-left"><span class="mini-ic mi-lime">＋</span><span class="t">Unsure where to begin? <em>Start here</em></span></span>
+        <span class="mc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trust-strip">
+  <div class="ts-inner">
+    <span class="ts-item">✓ Personalized support</span>
+    <span class="ts-item">✓ 100% entirely online</span>
+    <span class="ts-item">✓ Licensed clinicians, all 50 states</span>
+    <span class="ts-item">✓ Free &amp; discreet shipping</span>
+    <span class="ts-item">✓ Cancel before any renewal</span>
+  </div>
+</div>
+
+<!-- Full-bleed gradient band -->
+<section class="band">
+  <h2>Your menopause<br /><span class="accent">breakthrough is here</span></h2>
+  <div class="band-ph">Product visual placeholder</div>
+  <p class="band-sub">FDA-approved <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
+  <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+  <p class="band-fine">Prescription products require an evaluation with a licensed clinician who will determine if a prescription is appropriate. Individual results vary.</p>
+</section>
+
+<!-- HRT lineup -->
+<section class="lineup" id="lineup">
+  <div class="container">
+    <h2>Hormone therapy, your way</h2>
+    <div class="lineup-scroll">
+      <div class="p-card">
+        <div class="p-img pi-rose"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Patch</h3>
+          <p class="p-desc">Twice-weekly patch. Steady, low-maintenance estrogen delivery.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-lav"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Gel</h3>
+          <p class="p-desc">Daily transdermal gel. Absorbs in minutes, easy dose adjustments.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-tan"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Oral Pills</h3>
+          <p class="p-desc">A familiar daily pill for whole-body symptom relief.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-blue"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Vaginal Cream</h3>
+          <p class="p-desc">Local relief for dryness and discomfort, applied where it's needed.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLP-1 lineup -->
+<section class="lineup">
+  <div class="container">
+    <h2>Access our wide GLP-1 lineup</h2>
+    <div class="lineup-scroll">
+      <div class="p-card">
+        <div class="p-img pi-sage"><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Semaglutide</h3>
+          <p class="p-desc">Compounded semaglutide — injection or topical options.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-lemon"><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Tirzepatide</h3>
+          <p class="p-desc">Compounded tirzepatide — injection or topical options.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-tan"><span class="p-badges"><span class="badge badge-new">New</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Foundayo®</h3>
+          <p class="p-desc">Oral GLP-1 option (orforglipron).</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-blue"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Ozempic®</h3>
+          <p class="p-desc">Semaglutide injection.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-lav"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Wegovy®</h3>
+          <p class="p-desc">Semaglutide injection, FDA-approved for weight loss.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-rose"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Zepbound®</h3>
+          <p class="p-desc">Tirzepatide injection, FDA-approved for weight loss.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+    </div>
+    <p class="lineup-fine">Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. Actual product packaging may appear differently than shown. Prescription products require clinician evaluation; a prescription is not guaranteed. Ozempic®, Wegovy®, Zepbound®, and Foundayo® are trademarks of their respective owners; HerEstrogen is not affiliated with or endorsed by them.</p>
+  </div>
+</section>
+
+<!-- Wellness lineup -->
+<section class="lineup">
+  <div class="container">
+    <h2>Skin, hair, energy &amp; recovery</h2>
+    <div class="lineup-scroll">
+      <div class="p-card">
+        <div class="p-img pi-rose"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">GHK-Cu Face Cream</h3>
+          <p class="p-desc">Copper peptide cream for firmer, healthier-looking skin.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-blue"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">NAD+</h3>
+          <p class="p-desc">For cellular energy and healthy aging support.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-sage"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Hair Growth — Minoxidil</h3>
+          <p class="p-desc">Clinically-proven regrowth, with GHK-Cu cream options.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-tan"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Sermorelin</h3>
+          <p class="p-desc">For muscle support and recovery.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-lemon"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Glutathione</h3>
+          <p class="p-desc">Antioxidant support.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+    </div>
+    <p class="lineup-fine">Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. Prescription products require clinician evaluation.</p>
+  </div>
+</section>
+
+<!-- Goals band -->
+<section class="container">
+  <div class="goals">
+    <h2>Prescription treatments for your health goals</h2>
+    <div class="goal-grid">
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚖️</span> Lose weight</span><span>→</span></a>
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">🌡️</span> Treat menopause</span><span>→</span></a>
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">✨</span> Improve skin</span><span>→</span></a>
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">💇‍♀️</span> Regrow hair</span><span>→</span></a>
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚡</span> Boost energy</span><span>→</span></a>
+      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">💪</span> Recover stronger</span><span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 100% online -->
+<section class="online">
+  <div class="container">
+    <h2>100% online,<br />100% convenient</h2>
+    <div class="online-grid">
+      <div class="o-card oc-1">
+        <h3>Message your provider 24/7</h3>
+        <div class="ui-chat">
+          <div class="who"><span class="ui-avatar"></span> Your clinician</div>
+          Hi Jenna, got your message. How are you doing on the new dose?
+        </div>
+      </div>
+      <div class="o-card oc-2">
+        <h3>Manage goals in one place</h3>
+        <div class="ui-app">
+          <div class="hello">Hello, Jenna</div>
+          <div class="ui-stat"><div class="num"><span class="down">↓</span> Symptoms easing</div><div class="ui-spark"></div></div>
+          <div class="ui-row">Your Rx is ready <span>→</span></div>
+          <div class="ui-bars"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="o-card oc-3">
+        <h3>Clinically-guided treatments</h3>
+        <div class="ui-chat">
+          <div class="who"><span class="ui-avatar"></span> Care team</div>
+          Your plan was reviewed by a licensed clinician and shipped — tracking is in your portal.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Start here -->
+<section class="container">
+  <div class="start" id="start">
+    <div>
+      <h2>Unsure where to begin? <em>Start here.</em></h2>
+      <p>Tell us what's bothering you most — a licensed clinician reviews every answer and builds your plan.</p>
+    </div>
+    <div class="chips">
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Hot flashes &amp; night sweats</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Weight that won't move</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Can't sleep</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Low energy</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Hair thinning</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Skin aging</a>
+      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">All of the above</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span style="font-style:italic">her</span><strong>estrogen</strong></div>
+        <p class="foot-tag">Modern, clinician-guided care — for every part of being a woman.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Care</h4>
+        <a href="#weightloss">Weight Loss</a>
+        <a href="#menopause">Menopause &amp; HRT</a>
+        <a href="#skin">Skin</a>
+        <a href="#hair">Hair</a>
+        <a href="#energy">Energy</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="mailto:support@herestrogen.com">support@herestrogen.com</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Telehealth Consent</a>
+      </div>
+    </div>
+    <div class="isi">
+      <strong>Important Safety Information.</strong> Prescription medications — including hormone therapy and GLP-1 medications — carry real risks that vary by individual, product, dose, and duration. Hormone therapy risks include cardiovascular events and breast cancer (in combination with progestins), among others. Use the lowest effective dose for the shortest duration consistent with treatment goals and patient risk. All treatment is subject to evaluation by a licensed clinician, who may determine a prescription is not appropriate; a prescription is not guaranteed. Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. This page is for informational purposes only and does not constitute medical advice. Individual results vary. Subscriptions renew automatically at the end of each plan period unless cancelled before the renewal date. Report side effects to FDA MedWatch at fda.gov/safety/medwatch. Ozempic®, Wegovy®, Zepbound®, and Foundayo® are registered trademarks of their respective owners.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
