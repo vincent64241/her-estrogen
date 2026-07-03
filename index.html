@@ -918,6 +918,29 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .proof-badges span { font-size: 13px; font-weight: 600; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
 .proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
 @media (max-width: 860px) { .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } .proof-cards { grid-template-columns: 1fr; } }
+/* ── Wall of praise (testimonial grid) ── */
+.wall-head { text-align: center; margin-top: 48px; }
+.wall-pill { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: var(--r-pill); padding: 7px 16px 7px 8px; font-size: 13px; font-weight: 600; }
+.wall-pill .stars { color: #f0a02a; font-size: 12px; letter-spacing: 0; }
+.wall-avastack { display: inline-flex; align-items: center; }
+.wall-avastack i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink); margin-right: -9px; display: block; }
+.wall-avastack i:nth-child(1) { background: linear-gradient(135deg, #e58bad, #b8235c); }
+.wall-avastack i:nth-child(2) { background: linear-gradient(135deg, #d7a0c4, #8f2f6a); }
+.wall-avastack i:nth-child(3) { background: linear-gradient(135deg, #eab6a0, #c26a4a); margin-right: 0; }
+.wall-head h2 { margin-top: 18px; font-size: clamp(26px, 3.3vw, 42px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; }
+.wall-head h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--brand); }
+.wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+.wall-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; transition: transform .3s var(--ease-out), border-color .2s ease; }
+.wall-card:hover { transform: translateY(-3px); border-color: #d9d3cb; }
+.q-mark { font-family: 'Newsreader', Georgia, serif; font-size: 46px; line-height: .5; color: var(--brand); opacity: .34; height: 20px; }
+.wall-card blockquote { margin: 8px 0 20px; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.wall-card figcaption { display: flex; align-items: center; gap: 11px; margin-top: auto; }
+.wc-ava { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; background: var(--a, var(--brand)); flex-shrink: 0; }
+.wc-meta { display: flex; flex-direction: column; line-height: 1.3; }
+.wc-meta b { font-size: 14px; color: var(--ink); }
+.wc-meta span { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+@media (max-width: 900px) { .wall { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .wall { grid-template-columns: 1fr; } }
 
 /* ── Minimal social proof (clean editorial rows, reveal on scroll) ── */
 .sproof { padding: clamp(48px, 6vw, 88px) 0; text-align: center; }
@@ -930,6 +953,36 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .sq p { margin: 12px 0 14px; font-size: 15.5px; line-height: 1.5; color: var(--ink); font-weight: 500; }
 .sq cite { font-style: normal; font-size: 12.5px; color: var(--muted); font-weight: 600; }
 @media (max-width: 860px) { .sproof-quotes { grid-template-columns: 1fr; gap: 30px; } }
+/* ── Testimonial marquee — auto-scroll left, loop, pause on hover ── */
+.treviews { padding: clamp(44px, 5.5vw, 76px) 0; text-align: center; position: relative; }
+.treviews .sproof-eyebrow { display: block; margin-bottom: 30px; }
+.tr-inner { display: flex; overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.tr-track { display: flex; gap: 18px; flex-shrink: 0; padding-right: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .tr-track { animation: tr-loop 60s linear infinite; will-change: transform; }
+  @keyframes tr-loop { to { transform: translateX(-100%); } }
+  .treviews:hover .tr-track, .treviews.paused .tr-track { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tr-track[aria-hidden] { display: none; }
+  .tr-inner { overflow-x: auto; -webkit-mask: none; mask: none; padding: 0 24px 8px; }
+}
+.tr-card { width: 336px; flex-shrink: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 22px; text-align: left; display: flex; flex-direction: column; gap: 13px; }
+.tr-head { display: flex; align-items: center; gap: 12px; }
+.tr-ava { width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0; background: var(--paper); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; overflow: hidden; color: #c79bb0; }
+.tr-ava svg { width: 27px; height: 27px; }
+.tr-ava img { width: 100%; height: 100%; object-fit: cover; }
+.tr-id { display: flex; flex-direction: column; line-height: 1.3; }
+.tr-id b { font-size: 14.5px; color: var(--ink); }
+.tr-id span { font-size: 12px; color: var(--muted); font-weight: 600; }
+.tr-card .stars { font-size: 13px; }
+.tr-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.tr-pause { position: absolute; right: 16px; top: 12px; z-index: 2;
+  width: 28px; height: 28px; border-radius: 50%; border: 1px solid #f0c8d8; background: #fdf1f6; color: var(--brand);
+  font-size: 10px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+@media (prefers-reduced-motion: reduce) { .tr-pause { display: none; } }
 
 /* Single centered pull-quote variant */
 .pullquote { padding: clamp(52px, 7vw, 96px) 0; text-align: center; }
@@ -1154,22 +1207,41 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <div class="stat-big"><b>All 50 states</b><span>licensed clinicians</span></div>
       <div class="stat-big"><b>Under 2 days</b><span>to clinician review</span></div>
     </div>
-    <div class="proof-cards" data-reveal-group>
-      <div class="tcard2">
-        <span class="stars">★★★★★</span>
-        <p>"Within three weeks the night sweats were gone. My clinician actually listened."</p>
-        <cite>Verified patient, 51 · placeholder</cite>
-      </div>
-      <div class="tcard2">
-        <span class="stars">★★★★★</span>
-        <p>"I'd been told to 'just wait it out' for years. This finally treated the cause."</p>
-        <cite>Verified patient, 47 · placeholder</cite>
-      </div>
-      <div class="tcard2">
-        <span class="stars">★★★★★</span>
-        <p>"Simple, private, and it worked. Sleeping through the night for the first time in ages."</p>
-        <cite>Verified patient, 55 · placeholder</cite>
-      </div>
+    <div class="wall-head" data-reveal>
+      <span class="wall-pill"><span class="wall-avastack"><i></i><i></i><i></i></span> <span class="stars">★★★★★</span> Rated 4.9/5 by thousands of women</span>
+      <h2>Words of praise from women<br /><em>who found relief</em></h2>
+    </div>
+    <div class="wall" data-reveal-group>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>Within three weeks the night sweats were gone. My clinician actually listened instead of brushing me off.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#b8235c">SM</span><span class="wc-meta"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>I'd been told to &lsquo;just wait it out&rsquo; for years. This finally treated the cause, not the symptoms.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#8f2f6a">RT</span><span class="wc-meta"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>Simple, private, and it worked. I'm sleeping through the night for the first time in ages.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#c26a4a">DK</span><span class="wc-meta"><b>Denise K.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>The brain fog lifted within a month. I feel sharp at work again — like myself.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#3d5a7a">ML</span><span class="wc-meta"><b>Maria L.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>No more 2am wake-ups drenched in sweat. My mood is steadier than it's been in years.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#6f8f66">AP</span><span class="wc-meta"><b>Angela P.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
+      <figure class="wall-card">
+        <span class="q-mark">&ldquo;</span>
+        <blockquote>Everything's online and the check-ins are easy. My only regret is not starting sooner.</blockquote>
+        <figcaption><span class="wc-ava" style="--a:#9a5f8f">KW</span><span class="wc-meta"><b>Karen W.</b><span>Verified patient · placeholder</span></span></figcaption>
+      </figure>
     </div>
     <div class="proof-badges">
       <span><span class="bdot">✓</span> FDA-approved medications</span>
@@ -1425,14 +1497,73 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </section>
 
 <!-- Social proof — wellness verticals (clean, minimal, reveal on scroll) -->
-<section class="sproof">
-  <div class="container">
-    <p class="sproof-eyebrow" data-reveal>Real results</p>
-    <div class="sproof-rate" data-reveal style="--i:1"><span class="stars">★★★★★</span> Loved by women treating more than menopause</div>
-    <div class="sproof-quotes" data-reveal-group>
-      <div class="sq"><span class="stars">★★★★★</span><p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p><cite>Verified patient, 49 · placeholder</cite></div>
-      <div class="sq"><span class="stars">★★★★★</span><p>"The energy support was the missing piece — I get through the afternoon without crashing."</p><cite>Verified patient, 52 · placeholder</cite></div>
-      <div class="sq"><span class="stars">★★★★★</span><p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p><cite>Verified patient, 46 · placeholder</cite></div>
+<section class="treviews" id="treviews" aria-label="Patient testimonials">
+  <p class="sproof-eyebrow" data-reveal>Real results</p>
+  <button class="tr-pause" id="trPause" aria-pressed="false" aria-label="Pause testimonials">❚❚</button>
+  <div class="tr-inner">
+    <div class="tr-track">
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Priya N.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"The energy support was the missing piece — I get through the afternoon without crashing."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Denise K.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"My skin feels firmer and my hair looks fuller. Small changes that really add up."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Angela P.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"Recovery is faster and I sleep deeper. Honestly I feel a decade younger."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Karen W.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"Everything in one place, one clinician who actually knows my whole history."</p>
+      </article>
+    </div>
+    <div class="tr-track" aria-hidden="true">
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Priya N.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"The energy support was the missing piece — I get through the afternoon without crashing."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Denise K.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"My skin feels firmer and my hair looks fuller. Small changes that really add up."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Angela P.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"Recovery is faster and I sleep deeper. Honestly I feel a decade younger."</p>
+      </article>
+      <article class="tr-card">
+        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Karen W.</b><span>Verified patient · placeholder</span></span></div>
+        <span class="stars">★★★★★</span>
+        <p>"Everything in one place, one clinician who actually knows my whole history."</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1828,6 +1959,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       pauseBtn.setAttribute('aria-pressed', String(paused));
       pauseBtn.textContent = paused ? '▶' : '❚❚';
       pauseBtn.setAttribute('aria-label', paused ? 'Resume scrolling banner' : 'Pause scrolling banner');
+    });
+  }
+
+  /* Testimonial marquee pause/play (WCAG 2.2.2) */
+  var trev = document.getElementById('treviews');
+  var trPause = document.getElementById('trPause');
+  if (trev && trPause) {
+    trPause.addEventListener('click', function () {
+      var paused = trev.classList.toggle('paused');
+      trPause.setAttribute('aria-pressed', String(paused));
+      trPause.textContent = paused ? '▶' : '❚❚';
+      trPause.setAttribute('aria-label', paused ? 'Resume testimonials' : 'Pause testimonials');
     });
   }
 
