@@ -30,17 +30,17 @@
   --brand-ink: #a4184f;  /* darker brand for hover / gradient depth */
   --pink: #c21e63;
   --pink-soft: #fde8ef;
-  --green-1: #3d5a3c;
-  --green-2: #6f8f66;
+  --green-1: #a4184f;   /* was green — brand magenta (feature-card gradient dark stop) */
+  --green-2: #d24d80;   /* brand magenta gradient light stop */
   --tan-1: #c98f62;
   --tan-2: #e7c3a1;
   --blue-1: #7fa5c9;
   --blue-2: #b8d0e8;
   --rose-1: #c96f8e;
   --rose-2: #ecc2d0;
-  --dark-1: #2c3a26;
-  --dark-2: #0d130a;
-  --lime: #cde96f;
+  --dark-1: #7a1440;   /* was dark green — deep wine (band gradient top) */
+  --dark-2: #200710;   /* near-black plum (band gradient bottom) */
+  --lime: #ff9cc4;   /* was lime green — bright brand pink accent */
   --r-lg: 24px;
   --r-md: 16px;
   --r-pill: 999px;
@@ -279,11 +279,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .mi-blue { background: linear-gradient(135deg, var(--blue-2), #e8f0f8); }
 .mi-tan  { background: linear-gradient(135deg, var(--tan-2), #f6e9dc); }
 .mi-rose { background: linear-gradient(135deg, var(--rose-2), #f8e7ee); }
-.mi-lime { background: linear-gradient(135deg, #e6f2c2, #f4f9e3); }
+.mi-lime { background: linear-gradient(135deg, #f9c9dd, #fdeaf3); }
 @media (max-width: 860px) { .bento-big { grid-template-columns: 1fr; } .bento-small { grid-template-columns: 1fr; } }
 
 /* ── Trust strip — infinite marquee, pause on hover (Eden) ── */
-.trust-strip { background: #ecefe2; margin-top: 40px; }
+.trust-strip { background: #f7ecf3; margin-top: 40px; }
 .ts-inner {
   max-width: 1280px; margin: 0 auto; padding: 16px 0;
   display: flex; overflow: hidden;
@@ -303,13 +303,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .ts-track[aria-hidden] { display: none; }
   .ts-inner { overflow-x: auto; -webkit-mask: none; mask: none; padding: 16px 24px; }
 }
-.ts-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; white-space: nowrap; color: #3c4a33; }
+.ts-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; white-space: nowrap; color: var(--brand); }
 
 /* ── Full-bleed gradient band (Hers cinematic) ── */
 .band {
   margin: 56px 0 0;
   background:
-    radial-gradient(90% 60% at 50% 0%, rgba(205,233,111,.28), transparent 60%),
+    radial-gradient(90% 60% at 50% 0%, rgba(255,156,196,.28), transparent 60%),
     linear-gradient(180deg, var(--dark-1) 0%, var(--dark-2) 100%);
   color: #fff; text-align: center;
   padding: clamp(64px, 9vw, 120px) 24px;
@@ -319,7 +319,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 @media (prefers-reduced-motion: no-preference) {
   .band::before {
     content: ""; position: absolute; inset: -20%; pointer-events: none; z-index: 0;
-    background: linear-gradient(115deg, transparent 42%, rgba(205,233,111,.10) 50%, rgba(255,255,255,.07) 54%, transparent 62%);
+    background: linear-gradient(115deg, transparent 42%, rgba(255,156,196,.10) 50%, rgba(255,255,255,.07) 54%, transparent 62%);
     transform: translateX(-60%);
     animation: beam 14s cubic-bezier(.45,0,.25,1) infinite;
     will-change: transform;
@@ -339,7 +339,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .band-stage { position: relative; margin: 44px auto 0; width: min(560px, 86vw); height: 340px; }
 .stage-glow {
   position: absolute; inset: -14% -22%; pointer-events: none; z-index: 0;
-  background: radial-gradient(46% 44% at 50% 48%, rgba(205,233,111,.30), transparent 70%);
+  background: radial-gradient(46% 44% at 50% 48%, rgba(255,156,196,.30), transparent 70%);
 }
 .band-float {
   position: absolute; inset: 0; z-index: 2;
@@ -431,7 +431,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .p-card:hover .p-img::before { transform: scale(1.06); }
 .p-img > * { position: relative; }
 .p-img .ph-label { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: rgba(0,0,0,.35); }
-.pi-sage  { background: linear-gradient(150deg, #dbe6cf, #eef3e4); }
+.pi-sage  { background: linear-gradient(150deg, #e4d2e0, #f4ecf2); }
 .pi-tan   { background: linear-gradient(150deg, #ecd9c4, #f7efe4); }
 .pi-blue  { background: linear-gradient(150deg, #cfdfee, #e9f1f8); }
 .pi-rose  { background: linear-gradient(150deg, #f0d5df, #faeef3); }
@@ -446,10 +446,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .p-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; background: var(--card); }
 .p-status { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
 /* Live status-dot pulse (Ro) */
-.p-dot { width: 7px; height: 7px; border-radius: 50%; background: #3f9e58; position: relative; }
+.p-dot { width: 7px; height: 7px; border-radius: 50%; background: #c21e63; position: relative; }
 @media (prefers-reduced-motion: no-preference) {
   .p-dot::after {
-    content: ""; position: absolute; inset: 0; border-radius: 50%; background: #3f9e58;
+    content: ""; position: absolute; inset: 0; border-radius: 50%; background: #c21e63;
     animation: pulse 2.4s ease-out infinite;
   }
   @keyframes pulse { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(2.4); opacity: 0; } }
@@ -499,7 +499,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .o-card h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
 .oc-1 { background: linear-gradient(165deg, #cfdfee, #e9eef4); }
 .oc-2 { background: linear-gradient(165deg, #e7dbc9, #f3ece1); }
-.oc-3 { background: linear-gradient(165deg, #d9e4d0, #edf2e7); }
+.oc-3 { background: linear-gradient(165deg, #ecd7e2, #f7ecf3); }
 .ui-dock { margin-top: auto; position: relative; }
 .ui-chat {
   background: rgba(255,255,255,.9); backdrop-filter: blur(6px);
@@ -534,7 +534,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .ui-app .hello { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
 .ui-stat { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
 .ui-stat .num { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
-.ui-stat .num .down { color: #3f9e58; }
+.ui-stat .num .down { color: #c21e63; }
 /* Self-drawing sparkline (inline SVG, stroke-dashoffset) */
 .ui-spark-svg { width: 100%; height: 34px; margin-top: 6px; display: block; }
 @media (prefers-reduced-motion: no-preference) {
@@ -567,14 +567,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   margin-top: 72px; position: relative; overflow: hidden;
   background:
     radial-gradient(70% 55% at 50% 0%, rgba(255,255,255,.35), transparent 60%),
-    linear-gradient(180deg, #a9c4b6 0%, #8fb3a3 55%, #7ba394 100%);
+    linear-gradient(180deg, #c79cb3 0%, #b17f9b 55%, #9d6c88 100%);
   padding: clamp(56px, 7vw, 88px) 24px 0;
   text-align: center; color: #fff;
 }
-.hair-hero h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; text-shadow: 0 1px 14px rgba(20,50,40,.25); }
+.hair-hero h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; text-shadow: 0 1px 14px rgba(45,12,30,.25); }
 .hair-ctas { display: flex; gap: 12px; justify-content: center; margin: 26px 0 0; flex-wrap: wrap; }
 .btn-ghost-dark {
-  background: rgba(20,50,40,.28); color: #fff; backdrop-filter: blur(6px);
+  background: rgba(45,12,30,.28); color: #fff; backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,.25);
 }
 /* abstract stand-in for their lifestyle photo */
@@ -594,7 +594,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   padding-bottom: clamp(32px, 4vw, 56px); text-align: left;
 }
 .hcard {
-  background: rgba(20,50,40,.30); backdrop-filter: blur(10px);
+  background: rgba(45,12,30,.30); backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.16); border-radius: 20px;
   padding: 24px; color: #fff; position: relative; overflow: hidden;
 }
@@ -609,13 +609,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .pebble {
   width: 92px; height: 118px; margin: 0 auto 18px; display: block;
   border-radius: 48% 52% 55% 45% / 60% 58% 42% 40%;
-  background: linear-gradient(155deg, #b9cabc, #8ba695);
-  box-shadow: inset 0 -8px 18px rgba(20,50,40,.25), 0 18px 30px rgba(20,50,40,.3);
+  background: linear-gradient(155deg, #d1a9c0, #b384a1);
+  box-shadow: inset 0 -8px 18px rgba(45,12,30,.25), 0 18px 30px rgba(45,12,30,.3);
   position: relative;
 }
 .pebble::after {
   content: "h"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 30px; color: rgba(20,50,40,.4);
+  font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 30px; color: rgba(45,12,30,.4);
 }
 @media (prefers-reduced-motion: no-preference) { .pebble { animation: pbob 7s ease-in-out infinite alternate; } }
 /* testimonial carousel */
@@ -629,7 +629,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .tthumbs { display: flex; gap: 10px; margin: 18px 0 12px; }
 .tthumb {
   width: 86px; height: 108px; border-radius: 10px; position: relative;
-  background: linear-gradient(160deg, #9db8a9, #6f8f80); border: 1px solid rgba(255,255,255,.2);
+  background: linear-gradient(160deg, #d7a3bb, #a86f88); border: 1px solid rgba(255,255,255,.2);
 }
 .tthumb::after {
   content: attr(data-label); position: absolute; bottom: 6px; left: 0; right: 0; text-align: center;
@@ -643,19 +643,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .tcar-navs { display: flex; gap: 8px; position: absolute; top: 50%; left: 12px; right: 12px; justify-content: space-between; transform: translateY(-50%); pointer-events: none; }
 .tcar-navs button {
   pointer-events: auto; width: 40px; height: 40px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.3); background: rgba(20,50,40,.35); color: #fff;
+  border: 1px solid rgba(255,255,255,.3); background: rgba(45,12,30,.35); color: #fff;
   cursor: pointer; font-size: 15px; backdrop-filter: blur(4px);
   transition: background .2s ease;
 }
-.tcar-navs button:hover { background: rgba(20,50,40,.6); }
+.tcar-navs button:hover { background: rgba(45,12,30,.6); }
 @media (max-width: 860px) { .hair-cards { grid-template-columns: 1fr; } }
 
 /* ── B. Labs — dark teal cinematic hero + feature cards ── */
 .labs {
   margin-top: 0; position: relative; overflow: hidden; color: #fff;
   background:
-    radial-gradient(80% 50% at 50% 0%, rgba(122,190,160,.25), transparent 65%),
-    linear-gradient(180deg, #1d4a41 0%, #0e2b25 60%, #0a201c 100%);
+    radial-gradient(80% 50% at 50% 0%, rgba(255,156,196,.25), transparent 65%),
+    linear-gradient(180deg, #3a1226 0%, #220a13 60%, #180610 100%);
   padding: clamp(64px, 8vw, 110px) 24px clamp(40px, 5vw, 64px);
 }
 .labs-head { text-align: center; position: relative; z-index: 2; }
@@ -677,7 +677,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .lp-rows span:nth-child(2) { width: 74%; } .lp-rows span:nth-child(3) { width: 58%; }
 .lp-donut {
   width: 44px; height: 44px; border-radius: 50%; float: right; margin-left: 10px;
-  background: conic-gradient(#7abea0 0 62%, rgba(255,255,255,.15) 62% 100%);
+  background: conic-gradient(#c21e63 0 62%, rgba(255,255,255,.15) 62% 100%);
   -webkit-mask: radial-gradient(circle 14px, transparent 96%, #000); mask: radial-gradient(circle 14px, transparent 96%, #000);
 }
 .lp-1 { left: 6%; top: 8%; width: 190px; }
@@ -708,12 +708,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* CSS phone mockup */
 .phone {
   width: 200px; border-radius: 30px; padding: 12px 12px 16px;
-  background: #0b211c; border: 1px solid rgba(255,255,255,.2);
+  background: #170610; border: 1px solid rgba(255,255,255,.2);
   box-shadow: 0 30px 60px rgba(0,0,0,.45);
   margin: 0 auto;
 }
 .phone-notch { width: 74px; height: 16px; border-radius: 999px; background: #000; margin: 2px auto 10px; }
-.phone-ui { background: linear-gradient(180deg, #12362e, #0d2a24); border-radius: 18px; padding: 14px 12px; font-size: 10.5px; color: rgba(255,255,255,.8); }
+.phone-ui { background: linear-gradient(180deg, #2c0d1a, #1c0810); border-radius: 18px; padding: 14px 12px; font-size: 10.5px; color: rgba(255,255,255,.8); }
 .phone-ui b { display: block; font-size: 13px; color: #fff; margin-bottom: 8px; }
 .phone-note { background: rgba(255,255,255,.94); color: var(--ink); border-radius: 10px; padding: 9px 10px; font-size: 10px; line-height: 1.45; margin-top: 8px; }
 .phone-note .flag { display: inline-block; background: #d6568c; color: #fff; border-radius: 999px; padding: 1px 7px; font-size: 8.5px; font-weight: 700; margin-bottom: 4px; }
@@ -766,22 +766,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* ── C. Clinicians — "The best care / by the best in medicine" ── */
 .docs { padding: 88px 0 8px; text-align: center; }
 .docs h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; }
-.docs h2 .accent { color: #5f9384; }
+.docs h2 .accent { color: #c21e63; }
 .docs-sub { max-width: 460px; margin: 14px auto 0; font-size: 16px; color: var(--ink-2); }
 .docs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; text-align: left; }
 .doc-card { display: flex; flex-direction: column; }
 .doc-panel {
   border-radius: 16px; padding: 16px; min-height: 190px; position: relative; overflow: hidden;
-  background: linear-gradient(160deg, #dce9e2, #f0f6f2);
+  background: linear-gradient(160deg, #ecd7e2, #f7ecf3);
   display: flex; justify-content: flex-end;
 }
 /* abstract clinician avatar (photo placeholder) */
 .doc-ava { position: absolute; left: 14px; bottom: 0; width: 110px; height: 130px; }
-.doc-ava::before { content: ""; position: absolute; left: 50%; top: 0; translate: -50%; width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(150deg, #b3c9be, #8fb3a3); }
-.doc-ava::after { content: ""; position: absolute; left: 50%; bottom: -22px; translate: -50%; width: 108px; height: 74px; border-radius: 40px 40px 0 0; background: linear-gradient(150deg, #c4d6cc, #a3c0b3); }
+.doc-ava::before { content: ""; position: absolute; left: 50%; top: 0; translate: -50%; width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(150deg, #d0a9c0, #b17f9b); }
+.doc-ava::after { content: ""; position: absolute; left: 50%; bottom: -22px; translate: -50%; width: 108px; height: 74px; border-radius: 40px 40px 0 0; background: linear-gradient(150deg, #ddbdd0, #c69ab2); }
 .doc-role { position: relative; z-index: 1; max-width: 55%; }
 .doc-role b { display: block; font-size: 12.5px; line-height: 1.3; }
-.doc-role span { display: block; font-size: 10.5px; color: var(--ink-2); border-left: 2px solid #5f9384; padding-left: 6px; margin-top: 5px; }
+.doc-role span { display: block; font-size: 10.5px; color: var(--ink-2); border-left: 2px solid #c21e63; padding-left: 6px; margin-top: 5px; }
 .doc-name { font-size: 15.5px; font-weight: 700; margin-top: 12px; }
 .doc-bio { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin-top: 5px; }
 @media (max-width: 1020px) { .docs-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -824,7 +824,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .ts-pause {
   position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 2;
   width: 28px; height: 28px; border-radius: 50%;
-  border: 1px solid #b9c2a4; background: #f6f8ee; color: #3c4a33;
+  border: 1px solid #f0c8d8; background: #fdf1f6; color: var(--brand);
   font-size: 10px; line-height: 1; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
@@ -1044,20 +1044,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span><span class="bdot">✓</span> Licensed U.S. pharmacies</span>
       <span><span class="bdot">✓</span> HSA / FSA eligible</span>
     </div>
-  </div>
-</section>
-
-<!-- How it works -->
-<section class="how" id="how">
-  <div class="container">
-    <h2 data-reveal>How it works</h2>
-    <p class="how-sub" data-reveal style="--i:1">No office visits. No insurance hassle. Care that fits your life.</p>
-    <div class="how-steps" data-reveal-group>
-      <div class="how-step"><div class="num">1</div><h3>Take the 2-minute quiz</h3><p>Share your symptoms and history. Private, and there's no cost to start.</p></div>
-      <div class="how-step"><div class="num">2</div><h3>A clinician reviews</h3><p>A licensed clinician who specializes in women's hormones reviews your answers — typically within 2 business days.</p></div>
-      <div class="how-step"><div class="num">3</div><h3>Treatment to your door</h3><p>If appropriate, your prescription ships free and discreet, with ongoing clinician support.</p></div>
-    </div>
-    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
   </div>
 </section>
 
@@ -1357,7 +1343,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="hello">Hello, Jenna</div>
           <div class="ui-stat">
             <div class="num"><span class="down">↓</span> Symptoms easing</div>
-            <svg class="ui-spark-svg" viewBox="0 0 200 34" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 C40 6 60 14 100 18 S170 26 198 28" fill="none" stroke="#3f9e58" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <svg class="ui-spark-svg" viewBox="0 0 200 34" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 C40 6 60 14 100 18 S170 26 198 28" fill="none" stroke="#c21e63" stroke-width="2.5" stroke-linecap="round"/></svg>
           </div>
           <div class="ui-row">Your Rx is ready <span>→</span></div>
           <div class="ui-bars"><span></span><span></span><span></span></div>
@@ -1503,6 +1489,20 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
   </div>
   <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
+</section>
+
+<!-- How it works -->
+<section class="how" id="how">
+  <div class="container">
+    <h2 data-reveal>How it works</h2>
+    <p class="how-sub" data-reveal style="--i:1">No office visits. No insurance hassle. Care that fits your life.</p>
+    <div class="how-steps" data-reveal-group>
+      <div class="how-step"><div class="num">1</div><h3>Take the 2-minute quiz</h3><p>Share your symptoms and history. Private, and there's no cost to start.</p></div>
+      <div class="how-step"><div class="num">2</div><h3>A clinician reviews</h3><p>A licensed clinician who specializes in women's hormones reviews your answers — typically within 2 business days.</p></div>
+      <div class="how-step"><div class="num">3</div><h3>Treatment to your door</h3><p>If appropriate, your prescription ships free and discreet, with ongoing clinician support.</p></div>
+    </div>
+    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+  </div>
 </section>
 
 <!-- C. Clinicians -->
