@@ -889,6 +889,41 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
 @media (max-width: 860px) { .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } .proof-cards { grid-template-columns: 1fr; } }
 
+/* ── Minimal social proof (clean editorial rows, reveal on scroll) ── */
+.sproof { padding: clamp(48px, 6vw, 88px) 0; text-align: center; }
+.sproof-eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+.sproof-rate { margin-top: 12px; font-size: 15px; font-weight: 600; color: var(--ink-2); display: inline-flex; align-items: center; gap: 9px; }
+.sproof-rate .stars { font-size: 17px; }
+.sproof-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 44px; margin-top: 44px; text-align: left; }
+.sq { padding-top: 18px; border-top: 2px solid var(--brand); }
+.sq .stars { font-size: 13px; }
+.sq p { margin: 12px 0 14px; font-size: 15.5px; line-height: 1.5; color: var(--ink); font-weight: 500; }
+.sq cite { font-style: normal; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+@media (max-width: 860px) { .sproof-quotes { grid-template-columns: 1fr; gap: 30px; } }
+
+/* Single centered pull-quote variant */
+.pullquote { padding: clamp(52px, 7vw, 96px) 0; text-align: center; }
+.pullquote .stars { font-size: 17px; }
+.pullquote blockquote { max-width: 780px; margin: 16px auto 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(23px, 3vw, 34px); line-height: 1.32; letter-spacing: -0.01em; color: var(--ink); }
+.pullquote blockquote .em { color: var(--brand); }
+.pullquote cite { display: block; font-style: normal; margin-top: 22px; font-size: 13.5px; font-weight: 600; color: var(--muted); }
+
+/* ── FAQ (native disclosure — accessible, no-JS, reveal on scroll) ── */
+.faq { padding: clamp(48px, 6vw, 92px) 0; }
+.faq h2 { text-align: center; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.faq h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--brand); }
+.faq-list { max-width: 760px; margin: 40px auto 0; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary { list-style: none; cursor: pointer; padding: 22px 44px 22px 0; position: relative; font-size: 17px; font-weight: 600; color: var(--ink); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 26px; font-weight: 300; color: var(--brand); line-height: 1; transition: transform .3s var(--ease-out); }
+.faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq-a { padding: 0 44px 24px 0; margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item[open] .faq-a { animation: faqIn .34s var(--ease-out); }
+  @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+}
+
 /* Value prop — one problem, one solution */
 .vprop { padding: clamp(56px, 7vw, 96px) 0; text-align: center; }
 .vprop h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; }
@@ -996,22 +1031,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </header>
 
-<!-- Core value prop — the one problem → one solution -->
-<section class="vprop" id="why">
-  <div class="container">
-    <h2 data-reveal>Your symptoms aren't random.<br /><em>They're hormonal.</em></h2>
-    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. FDA-approved hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
-    <div class="vprop-grid" data-reveal-group>
-      <div class="vp-item"><span class="vp-ic">🌡️</span><b>Hot flashes</b><span>Estrogen steadies your body's thermostat.</span></div>
-      <div class="vp-item"><span class="vp-ic">🌙</span><b>Poor sleep</b><span>Fewer 3am wakeups; deeper, restorative rest.</span></div>
-      <div class="vp-item"><span class="vp-ic">💭</span><b>Mood swings</b><span>Steadier serotonin, steadier days.</span></div>
-      <div class="vp-item"><span class="vp-ic">🧠</span><b>Brain fog</b><span>Sharper focus and recall as levels stabilize.</span></div>
-      <div class="vp-item"><span class="vp-ic">⚖️</span><b>Weight changes</b><span>Support a metabolism that shifted with menopause.</span></div>
-    </div>
-    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a>
-  </div>
-</section>
-
 <!-- Social proof (proof before persuasion) -->
 <section class="proof" id="proof">
   <div class="container">
@@ -1044,6 +1063,22 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span><span class="bdot">✓</span> Licensed U.S. pharmacies</span>
       <span><span class="bdot">✓</span> HSA / FSA eligible</span>
     </div>
+  </div>
+</section>
+
+<!-- Core value prop — the one problem → one solution (after the proof) -->
+<section class="vprop" id="why">
+  <div class="container">
+    <h2 data-reveal>Your symptoms aren't random.<br /><em>They're hormonal.</em></h2>
+    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. FDA-approved hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
+    <div class="vprop-grid" data-reveal-group>
+      <div class="vp-item"><span class="vp-ic">🌡️</span><b>Hot flashes</b><span>Estrogen steadies your body's thermostat.</span></div>
+      <div class="vp-item"><span class="vp-ic">🌙</span><b>Poor sleep</b><span>Fewer 3am wakeups; deeper, restorative rest.</span></div>
+      <div class="vp-item"><span class="vp-ic">💭</span><b>Mood swings</b><span>Steadier serotonin, steadier days.</span></div>
+      <div class="vp-item"><span class="vp-ic">🧠</span><b>Brain fog</b><span>Sharper focus and recall as levels stabilize.</span></div>
+      <div class="vp-item"><span class="vp-ic">⚖️</span><b>Weight changes</b><span>Support a metabolism that shifted with menopause.</span></div>
+    </div>
+    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a>
   </div>
 </section>
 
@@ -1307,6 +1342,19 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
+<!-- Social proof — wellness verticals (clean, minimal, reveal on scroll) -->
+<section class="sproof">
+  <div class="container">
+    <p class="sproof-eyebrow" data-reveal>Real results</p>
+    <div class="sproof-rate" data-reveal style="--i:1"><span class="stars">★★★★★</span> Loved by women treating more than menopause</div>
+    <div class="sproof-quotes" data-reveal-group>
+      <div class="sq"><span class="stars">★★★★★</span><p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p><cite>Verified patient, 49 · placeholder</cite></div>
+      <div class="sq"><span class="stars">★★★★★</span><p>"The energy support was the missing piece — I get through the afternoon without crashing."</p><cite>Verified patient, 52 · placeholder</cite></div>
+      <div class="sq"><span class="stars">★★★★★</span><p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p><cite>Verified patient, 46 · placeholder</cite></div>
+    </div>
+  </div>
+</section>
+
 <!-- Goals band -->
 <section class="container">
   <div class="goals">
@@ -1543,6 +1591,29 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <p class="doc-name">Clinician name, MD</p>
         <p class="doc-bio">Board-certified endocrinologist advising on thyroid, metabolic, and endocrine care. Bio placeholder.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social proof — clinician care (single centered pull-quote) -->
+<section class="pullquote">
+  <div class="container">
+    <span class="stars" data-reveal>★★★★★</span>
+    <blockquote data-reveal style="--i:1">"For the first time, a clinician actually <span class="em">listened</span> — then built a plan around my labs and my life. I only wish I'd found them years ago."</blockquote>
+    <cite data-reveal style="--i:2">Verified patient, 53 · placeholder</cite>
+  </div>
+</section>
+
+<!-- FAQ (right above the Start-here prompt) -->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 data-reveal>Questions? <em>Answered.</em></h2>
+    <div class="faq-list" data-reveal style="--i:1">
+      <details class="faq-item"><summary>Is hormone therapy safe?</summary><p class="faq-a">For most healthy women under 60 or within 10 years of menopause, FDA-approved hormone therapy is well-studied and considered safe. A licensed clinician reviews your health history to determine whether it's appropriate for you.</p></details>
+      <details class="faq-item"><summary>Do I need insurance?</summary><p class="faq-a">No. HerEstrogen is a cash-pay service with transparent pricing, and many treatments are HSA/FSA eligible — no insurance hurdles or surprise bills.</p></details>
+      <details class="faq-item"><summary>How soon will I hear back?</summary><p class="faq-a">A clinician who specializes in women's hormones typically reviews your intake within 2 business days. If treatment is appropriate, your prescription ships free and discreet.</p></details>
+      <details class="faq-item"><summary>What if it's not right for me?</summary><p class="faq-a">If a clinician determines treatment isn't appropriate, you won't be charged for medication. You can adjust or cancel your plan anytime — there's no long-term commitment.</p></details>
+      <details class="faq-item"><summary>Which states do you serve?</summary><p class="faq-a">We work with licensed clinicians and pharmacies across all 50 states. Some products and lab tests carry state-level restrictions, which are noted before checkout.</p></details>
     </div>
   </div>
 </section>
