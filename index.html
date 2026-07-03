@@ -598,6 +598,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   background: linear-gradient(180deg, rgba(45,12,30,.30) 0%, rgba(45,12,30,.12) 40%, rgba(45,12,30,.55) 100%); }
 .hair-hero > *:not(.hair-bg) { position: relative; z-index: 2; }
 .hair-hero.has-bg .hair-orb { display: none; }
+/* Mobile: pin the photo to a top band so it doesn't zoom into a narrow centre strip */
+@media (max-width: 700px) {
+  .hair-bg { height: 56vh; bottom: auto; object-position: center 18%; }
+  .hair-photo { height: 96px; }
+}
 .ho-1 { width: 340px; height: 340px; left: 50%; translate: -50%; top: 10%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), rgba(255,255,255,.05) 70%); }
 .ho-2 { width: 150px; height: 150px; left: 22%; top: 30%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.4), rgba(255,255,255,.04) 70%); }
 .ho-3 { width: 110px; height: 110px; right: 20%; top: 16%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.4), rgba(255,255,255,.04) 70%); }
@@ -825,7 +830,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Footer (static — ISI must never animate) ── */
 footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
-.foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; }
+.foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 32px; }
+.foot-states { margin-top: 28px; font-size: 12.5px; color: var(--muted); max-width: 720px; }
 .foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 22px; }
 .foot-tag { margin-top: 8px; font-size: 14px; color: var(--ink-2); max-width: 300px; }
 .foot-col h4 { font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
@@ -1063,10 +1069,10 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is hormone therapy safe?",
+      "name": "Is hormone therapy right for everyone?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For most healthy women under 60 or within 10 years of menopause, FDA-approved hormone therapy is well-studied and considered safe. A licensed clinician reviews your health history to determine whether it's appropriate for you."
+        "text": "No — hormone therapy isn't right for everyone. A licensed clinician reviews your health history and discusses the risks and benefits with you before prescribing. Depending on what's appropriate for you, treatment may involve FDA-approved or compounded medications."
       }
     },
     {
@@ -1230,7 +1236,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </figure>
     </div>
     <div class="proof-badges">
-      <span><span class="bdot">✓</span> FDA-approved medications</span>
+      <span><span class="bdot">✓</span> FDA-approved &amp; compounded options</span>
       <span><span class="bdot">✓</span> Licensed U.S. clinicians</span>
       <span><span class="bdot">✓</span> Licensed U.S. pharmacies</span>
       <span><span class="bdot">✓</span> HSA / FSA eligible</span>
@@ -1242,7 +1248,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <section class="vprop" id="why">
   <div class="container">
     <h2 data-reveal>Your symptoms aren't random.<br /><em>They're hormonal.</em></h2>
-    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. FDA-approved hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
+    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. Prescription hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
     <div class="vprop-grid" data-reveal-group>
       <div class="vp-item"><span class="vp-ic">🌡️</span><b>Hot flashes</b><span>Estrogen steadies your body's thermostat.</span></div>
       <div class="vp-item"><span class="vp-ic">🌙</span><b>Poor sleep</b><span>Fewer 3am wakeups; deeper, restorative rest.</span></div>
@@ -1270,7 +1276,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </span>
     <span class="band-ph-label" aria-hidden="true">Product visual placeholder</span>
   </div>
-  <p class="band-sub" data-reveal style="--i:2">FDA-approved <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
+  <p class="band-sub" data-reveal style="--i:2">Prescription <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
   <a class="btn btn-light" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
   <p class="band-fine">Prescription products require an evaluation with a licensed clinician who will determine if a prescription is appropriate. Individual results vary.</p>
 </section>
@@ -1393,7 +1399,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Wegovy®</h3>
-          <p class="p-desc">Semaglutide injection, FDA-approved for weight loss.</p>
+          <p class="p-desc">Semaglutide injection, prescribed for weight loss.</p>
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
@@ -1402,7 +1408,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Zepbound®</h3>
-          <p class="p-desc">Tirzepatide injection, FDA-approved for weight loss.</p>
+          <p class="p-desc">Tirzepatide injection, prescribed for weight loss.</p>
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
@@ -1433,7 +1439,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Hair Growth — Minoxidil</h3>
-          <p class="p-desc">Clinically-proven regrowth, with GHK-Cu cream options.</p>
+          <p class="p-desc">Prescription regrowth treatment, with GHK-Cu cream options.</p>
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
@@ -1473,7 +1479,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Sermorelin</h3>
-          <p class="p-desc">For muscle support and recovery.</p>
+          <p class="p-desc">For recovery, sleep, and healthy aging support.</p>
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
@@ -1776,7 +1782,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="doc-role"><b>Head of Medical Affairs</b><span>Inflammation &amp; Stress</span><span>Nutrients &amp; Blood</span></div>
         </div>
         <p class="doc-name">Clinician name, MD</p>
-        <p class="doc-bio">Board-certified family-medicine physician guiding the clinical patient experience. Bio placeholder.</p>
+        <p class="doc-bio">Board-certified family-medicine clinician guiding the clinical patient experience. Bio placeholder.</p>
       </div>
       <div class="doc-card">
         <div class="doc-panel">
@@ -1804,7 +1810,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   <div class="container">
     <h2 data-reveal>Questions? <em>Answered.</em></h2>
     <div class="faq-list" data-reveal style="--i:1">
-      <details class="faq-item"><summary>Is hormone therapy safe?</summary><p class="faq-a">For most healthy women under 60 or within 10 years of menopause, FDA-approved hormone therapy is well-studied and considered safe. A licensed clinician reviews your health history to determine whether it's appropriate for you.</p></details>
+      <details class="faq-item"><summary>Is hormone therapy right for everyone?</summary><p class="faq-a">No — hormone therapy isn't right for everyone. A licensed clinician reviews your health history and discusses the risks and benefits with you before prescribing. Depending on what's appropriate for you, treatment may involve FDA-approved or compounded medications.</p></details>
       <details class="faq-item"><summary>Do I need insurance?</summary><p class="faq-a">No. HerEstrogen is a cash-pay service with transparent pricing, and many treatments are HSA/FSA eligible — no insurance hurdles or surprise bills.</p></details>
       <details class="faq-item"><summary>How soon will I hear back?</summary><p class="faq-a">A clinician who specializes in women's hormones typically reviews your intake within 2 business days. If treatment is appropriate, your prescription ships free and discreet.</p></details>
       <details class="faq-item"><summary>What if it's not right for me?</summary><p class="faq-a">If a clinician determines treatment isn't appropriate, you won't be charged for medication. You can adjust or cancel your plan anytime — there's no long-term commitment.</p></details>
@@ -1851,17 +1857,24 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <div class="foot-col">
         <h4>Company</h4>
         <a href="mailto:support@herestrogen.com">support@herestrogen.com</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Telehealth Consent</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/terms">Terms of Use</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/refund-policy">Cancellation &amp; Refund</a>
+        <a data-legal-link="npp" href="https://openloophealth.com/notice-of-privacy-practices" target="_blank" rel="noopener noreferrer">Notice of Privacy Practices</a>
+        <a data-legal-link="telehealth" href="https://openloophealth.com/telehealth-consent" target="_blank" rel="noopener noreferrer">Telehealth Consent</a>
       </div>
     </div>
+    <p class="foot-states">Currently offering services in all 50 states plus Washington, D.C. Some services may not be available in all states or D.C. Subject to change.</p>
     <div class="isi">
       <strong>Important Safety Information.</strong> Prescription medications — including hormone therapy and GLP-1 medications — carry real risks that vary by individual, product, dose, and duration. Hormone therapy risks include cardiovascular events and breast cancer (in combination with progestins), among others. Use the lowest effective dose for the shortest duration consistent with treatment goals and patient risk. All treatment is subject to evaluation by a licensed clinician, who may determine a prescription is not appropriate; a prescription is not guaranteed. Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. This page is for informational purposes only and does not constitute medical advice. Individual results vary. Subscriptions renew automatically at the end of each plan period unless cancelled before the renewal date. Report side effects to FDA MedWatch at fda.gov/safety/medwatch. Ozempic®, Wegovy®, Zepbound®, and Foundayo® are registered trademarks of their respective owners.
     </div>
   </div>
 </footer>
 
+<script src="assets/legal.js"></script>
 <script>
 /* Motion runtime — reveal choreography, nav condense, hamburger, carousels.
    Everything degrades: no JS → html.js absent → page fully visible/static. */
