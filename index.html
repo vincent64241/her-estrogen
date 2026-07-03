@@ -26,7 +26,9 @@
   --card: #ffffff;
   --line: #e7e3dd;
   --yellow: #f4f0a3;
-  --pink: #b8235c;
+  --brand: #c21e63;      /* herestrogen logo magenta */
+  --brand-ink: #a4184f;  /* darker brand for hover / gradient depth */
+  --pink: #c21e63;
   --pink-soft: #fde8ef;
   --green-1: #3d5a3c;
   --green-2: #6f8f66;
@@ -80,13 +82,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Offer bar ── */
 .offer-bar {
-  background: var(--yellow);
+  background: var(--brand);
+  color: #fff;
   text-align: center;
   font-size: 13.5px;
   font-weight: 600;
   padding: 9px 16px;
 }
-.offer-bar a { text-decoration: underline; text-underline-offset: 3px; }
+.offer-bar a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.offer-bar :focus-visible { outline-color: #fff; }
 
 /* ── Nav (sticky, elevates + condenses after scroll — Ro) ── */
 .nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
@@ -104,6 +108,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .nav.is-scrolled .nav-inner { padding: 9px 24px; }
 .logo {
   font-family: 'Newsreader', Georgia, serif;
+  color: var(--brand);
   font-size: 24px; letter-spacing: -0.02em; white-space: nowrap;
   transform-origin: left center; transition: transform .3s ease;
 }
@@ -121,7 +126,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   transition: transform .2s var(--ease-out), opacity .15s ease;
 }
 .btn:hover { transform: translateY(-1px); opacity: .92; }
-.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark { background: var(--brand); color: #fff; }
+.btn-dark:hover { background: var(--brand-ink); }
 .btn-outline { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
 .btn-light { background: #fff; color: var(--ink); }
 /* Hamburger (mobile) — two bars morph to an X */
@@ -835,6 +841,93 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   .goal-row, .goal-ic, .g-arrow, .chip, .nav-links a { transition: none; }
   .band-float, .stage-shadow { transform: none; }
 }
+
+/* ═══ Conversion funnel — 5-second test, one problem→solution, proof-first,
+   mobile-first. Hero → social proof → value prop → how it works → secondary. ═══ */
+.btn-lg { padding: 16px 30px; font-size: 16px; }
+.stars { color: #f0a02a; letter-spacing: 1px; }
+
+/* Hero (menopause-led) */
+.hero { padding: clamp(36px, 5vw, 60px) 0 20px; }
+.hero-eyebrow {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--pink); margin-bottom: 14px;
+}
+.hero h1 { font-size: clamp(38px, 5.6vw, 66px); }
+.hero-cta-row { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hero-cta-note { font-size: 13.5px; color: var(--ink-2); font-weight: 500; }
+.hero-rating { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--ink-2); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hero-reassure { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; margin-top: 18px; }
+.hero-reassure li { font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
+/* Compact trust card (answers "do I trust this" in 5s) */
+.hero-proofcard {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 24px; box-shadow: 0 20px 50px rgba(28,26,23,.07); align-self: center;
+}
+.hpc-top { display: flex; align-items: center; gap: 12px; }
+.hpc-score { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+.hpc-top .stars { font-size: 15px; }
+.hpc-count { font-size: 13px; color: var(--ink-2); }
+.hpc-quote { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.5; color: var(--ink); }
+.hpc-quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+/* Mobile: headline-first. Proof card is redundant with the social-proof
+   section directly below, and stacking it on top buries the hero message. */
+@media (max-width: 860px) { .hero-proofcard { display: none; } }
+
+/* Social proof band */
+.proof { padding: clamp(40px, 5vw, 64px) 0; background: #fff; border-block: 1px solid var(--line); }
+.proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center; }
+.stat-big b { display: block; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--ink); }
+.stat-big span { display: block; margin-top: 6px; font-size: 13px; color: var(--ink-2); font-weight: 500; }
+.proof-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+.tcard2 { border: 1px solid var(--line); border-radius: var(--r-md); padding: 22px; background: var(--paper); }
+.tcard2 .stars { font-size: 14px; }
+.tcard2 p { margin: 12px 0 14px; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.tcard2 cite { font-style: normal; font-size: 13px; color: var(--muted); font-weight: 600; }
+.proof-badges { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: center; margin-top: 36px; }
+.proof-badges span { font-size: 13px; font-weight: 600; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
+.proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+@media (max-width: 860px) { .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } .proof-cards { grid-template-columns: 1fr; } }
+
+/* Value prop — one problem, one solution */
+.vprop { padding: clamp(56px, 7vw, 96px) 0; text-align: center; }
+.vprop h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; }
+.vprop h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--pink); }
+.vprop-lead { max-width: 620px; margin: 16px auto 0; font-size: 17px; color: var(--ink-2); }
+.vprop-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 40px 0 36px; text-align: left; }
+.vp-item { border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px 18px; background: var(--card); }
+.vp-ic { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--pink-soft); margin-bottom: 12px; }
+.vp-item b { display: block; font-size: 15px; margin-bottom: 5px; }
+.vp-item span { font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 860px) { .vprop-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .vprop-grid { grid-template-columns: 1fr; } }
+
+/* How it works — 3 steps */
+.how { padding: clamp(48px, 6vw, 80px) 0; background: #fff; border-block: 1px solid var(--line); text-align: center; }
+.how h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; letter-spacing: -0.02em; }
+.how-sub { max-width: 480px; margin: 12px auto 0; font-size: 16px; color: var(--ink-2); }
+.how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0 36px; text-align: left; counter-reset: step; }
+.how-step { position: relative; padding: 26px 22px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); }
+.how-step .num {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-bottom: 14px;
+}
+.how-step h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.how-step p { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+@media (max-width: 720px) { .how-steps { grid-template-columns: 1fr; } }
+
+/* Secondary framing divider */
+.sec-divider { text-align: center; padding: clamp(48px, 6vw, 80px) 24px 0; }
+.sec-divider .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+.sec-divider h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-top: 10px; }
+.sec-divider p { max-width: 500px; margin: 12px auto 0; font-size: 16px; color: var(--ink-2); }
+
+/* Mobile: full-width primary CTA + tighter hero */
+@media (max-width: 600px) {
+  .hero-cta-row .btn-lg { width: 100%; }
+  .hero-cta-row { gap: 10px; }
+  .btn-lg { padding: 15px 24px; }
+}
 </style>
 </head>
 <body>
@@ -869,25 +962,180 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- Hero — one problem (menopause), one solution, 5-second test -->
 <header class="hero">
   <div class="container hero-grid">
-    <div>
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Menopause &amp; hormone care · Women 40+</div>
       <h1>
-        <span class="hm"><span class="hw" style="--w:0">All-in-one</span></span>
-        <span class="hm"><span class="hw" style="--w:1">care,</span></span><br />
-        <span class="hm"><em class="hw" style="--w:2">made for women.</em></span>
+        <span class="hm"><span class="hw" style="--w:0">Feel like</span></span><br />
+        <span class="hm"><em class="hw" style="--w:1">yourself again.</em></span>
       </h1>
-      <p class="hero-sub" data-reveal style="--i:2">Hormones, weight, skin, hair, and energy — one place, one clinician-guided plan. Look, feel, and perform your best every day.</p>
+      <p class="hero-sub">FDA-approved hormone therapy for menopause — prescribed online by clinicians who specialize in women 40+. Fewer hot flashes, deeper sleep, steadier mood.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a>
+        <span class="hero-cta-note">2-minute quiz · No insurance needed</span>
+      </div>
+      <div class="hero-rating"><span class="stars">★★★★★</span> Trusted by women across all 50 states</div>
+      <ul class="hero-reassure">
+        <li>✓ Licensed U.S. clinicians</li>
+        <li>✓ Free, discreet shipping</li>
+        <li>✓ Cancel anytime</li>
+      </ul>
     </div>
-    <ul class="trust-bullets" data-reveal>
-      <li style="--b:0"><span class="tb-ic">✓</span> Licensed clinicians, all 50 states</li>
-      <li style="--b:1"><span class="tb-ic">✓</span> Free consultations &amp; free shipping</li>
-      <li style="--b:2"><span class="tb-ic">✓</span> No insurance needed</li>
-      <li style="--b:3"><span class="tb-ic">✓</span> Get started 100% online</li>
-    </ul>
+    <aside class="hero-proofcard" data-reveal style="--i:2">
+      <div class="hpc-top">
+        <span class="hpc-score">4.9</span>
+        <span><span class="stars">★★★★★</span><br /><span class="hpc-count">based on verified patient reviews</span></span>
+      </div>
+      <blockquote class="hpc-quote">
+        "The hot flashes stopped, I'm sleeping through the night, and I feel like me again. I only wish I'd started sooner."
+        <cite>— Verified patient · placeholder</cite>
+      </blockquote>
+    </aside>
   </div>
 </header>
+
+<!-- Core value prop — the one problem → one solution -->
+<section class="vprop" id="why">
+  <div class="container">
+    <h2 data-reveal>Your symptoms aren't random.<br /><em>They're hormonal.</em></h2>
+    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. FDA-approved hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
+    <div class="vprop-grid" data-reveal-group>
+      <div class="vp-item"><span class="vp-ic">🌡️</span><b>Hot flashes</b><span>Estrogen steadies your body's thermostat.</span></div>
+      <div class="vp-item"><span class="vp-ic">🌙</span><b>Poor sleep</b><span>Fewer 3am wakeups; deeper, restorative rest.</span></div>
+      <div class="vp-item"><span class="vp-ic">💭</span><b>Mood swings</b><span>Steadier serotonin, steadier days.</span></div>
+      <div class="vp-item"><span class="vp-ic">🧠</span><b>Brain fog</b><span>Sharper focus and recall as levels stabilize.</span></div>
+      <div class="vp-item"><span class="vp-ic">⚖️</span><b>Weight changes</b><span>Support a metabolism that shifted with menopause.</span></div>
+    </div>
+    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a>
+  </div>
+</section>
+
+<!-- Social proof (proof before persuasion) -->
+<section class="proof" id="proof">
+  <div class="container">
+    <div class="proof-stats" data-reveal-group>
+      <div class="stat-big"><b>4.9★</b><span>average patient rating</span></div>
+      <div class="stat-big"><b>Tens of thousands</b><span>of women helped</span></div>
+      <div class="stat-big"><b>All 50 states</b><span>licensed clinicians</span></div>
+      <div class="stat-big"><b>Under 2 days</b><span>to clinician review</span></div>
+    </div>
+    <div class="proof-cards" data-reveal-group>
+      <div class="tcard2">
+        <span class="stars">★★★★★</span>
+        <p>"Within three weeks the night sweats were gone. My clinician actually listened."</p>
+        <cite>Verified patient, 51 · placeholder</cite>
+      </div>
+      <div class="tcard2">
+        <span class="stars">★★★★★</span>
+        <p>"I'd been told to 'just wait it out' for years. This finally treated the cause."</p>
+        <cite>Verified patient, 47 · placeholder</cite>
+      </div>
+      <div class="tcard2">
+        <span class="stars">★★★★★</span>
+        <p>"Simple, private, and it worked. Sleeping through the night for the first time in ages."</p>
+        <cite>Verified patient, 55 · placeholder</cite>
+      </div>
+    </div>
+    <div class="proof-badges">
+      <span><span class="bdot">✓</span> FDA-approved medications</span>
+      <span><span class="bdot">✓</span> Licensed U.S. clinicians</span>
+      <span><span class="bdot">✓</span> Licensed U.S. pharmacies</span>
+      <span><span class="bdot">✓</span> HSA / FSA eligible</span>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how" id="how">
+  <div class="container">
+    <h2 data-reveal>How it works</h2>
+    <p class="how-sub" data-reveal style="--i:1">No office visits. No insurance hassle. Care that fits your life.</p>
+    <div class="how-steps" data-reveal-group>
+      <div class="how-step"><div class="num">1</div><h3>Take the 2-minute quiz</h3><p>Share your symptoms and history. Private, and there's no cost to start.</p></div>
+      <div class="how-step"><div class="num">2</div><h3>A clinician reviews</h3><p>A licensed clinician who specializes in women's hormones reviews your answers — typically within 2 business days.</p></div>
+      <div class="how-step"><div class="num">3</div><h3>Treatment to your door</h3><p>If appropriate, your prescription ships free and discreet, with ongoing clinician support.</p></div>
+    </div>
+    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+  </div>
+</section>
+
+<!-- Primary offer — menopause / HRT (clear offer, obvious next step) -->
+<section class="band">
+  <h2 data-reveal>Your menopause<br /><span class="accent">breakthrough is here</span></h2>
+  <div class="band-stage" data-reveal style="--i:1">
+    <span class="stage-glow" aria-hidden="true"></span>
+    <span class="sil sil-bottle" aria-hidden="true"></span>
+    <span class="sil sil-jar" aria-hidden="true"></span>
+    <span class="sil sil-patch" aria-hidden="true"></span>
+    <span class="stage-shadow" aria-hidden="true"></span>
+    <span class="band-float">
+      <img class="band-product" src="assets/estradiol-bottle.png"
+           alt="Estradiol 1&nbsp;mg tablets bottle"
+           onerror="this.closest('.band-stage').classList.add('no-img')" />
+    </span>
+    <span class="band-ph-label" aria-hidden="true">Product visual placeholder</span>
+  </div>
+  <p class="band-sub" data-reveal style="--i:2">FDA-approved <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
+  <a class="btn btn-light" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+  <p class="band-fine">Prescription products require an evaluation with a licensed clinician who will determine if a prescription is appropriate. Individual results vary.</p>
+</section>
+
+<!-- HRT lineup -->
+<section class="lineup" id="lineup">
+  <div class="container">
+    <div class="lu-head" data-reveal>
+      <h2>Hormone therapy, your way</h2>
+      <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
+    </div>
+    <div class="lineup-scroll" data-reveal-group>
+      <div class="p-card">
+        <div class="p-img pi-rose"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Patch</h3>
+          <p class="p-desc">Twice-weekly patch. Steady, low-maintenance estrogen delivery.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-lav"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Gel</h3>
+          <p class="p-desc">Daily transdermal gel. Absorbs in minutes, easy dose adjustments.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-tan"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Oral Pills</h3>
+          <p class="p-desc">A familiar daily pill for whole-body symptom relief.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-img pi-blue"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Estradiol Vaginal Cream</h3>
+          <p class="p-desc">Local relief for dryness and discomfort, applied where it's needed.</p>
+          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Secondary content: the broader platform (demoted below the funnel) ── -->
+<div class="sec-divider">
+  <div class="eyebrow">More than menopause</div>
+  <h2 data-reveal>Care for all of you</h2>
+  <p data-reveal style="--i:1">Once you're in, explore weight, skin, hair, and energy — all from the same clinician-guided platform.</p>
+</div>
 
 <!-- Bento feature cards -->
 <section class="bento">
@@ -947,77 +1195,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
   </div>
 </div>
-
-<!-- Full-bleed gradient band -->
-<section class="band">
-  <h2 data-reveal>Your menopause<br /><span class="accent">breakthrough is here</span></h2>
-  <div class="band-stage" data-reveal style="--i:1">
-    <span class="stage-glow" aria-hidden="true"></span>
-    <span class="sil sil-bottle" aria-hidden="true"></span>
-    <span class="sil sil-jar" aria-hidden="true"></span>
-    <span class="sil sil-patch" aria-hidden="true"></span>
-    <span class="stage-shadow" aria-hidden="true"></span>
-    <span class="band-float">
-      <!-- Drop the product photo at assets/estradiol-bottle.png (bg-removed).
-           Until it exists, onerror flips the stage to the silhouette fallback. -->
-      <img class="band-product" src="assets/estradiol-bottle.png"
-           alt="Estradiol 1&nbsp;mg tablets bottle"
-           onerror="this.closest('.band-stage').classList.add('no-img')" />
-    </span>
-    <span class="band-ph-label" aria-hidden="true">Product visual placeholder</span>
-  </div>
-  <p class="band-sub" data-reveal style="--i:2">FDA-approved <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
-  <a class="btn btn-light" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-  <p class="band-fine">Prescription products require an evaluation with a licensed clinician who will determine if a prescription is appropriate. Individual results vary.</p>
-</section>
-
-<!-- HRT lineup -->
-<section class="lineup" id="lineup">
-  <div class="container">
-    <div class="lu-head" data-reveal>
-      <h2>Hormone therapy, your way</h2>
-      <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
-    </div>
-    <div class="lineup-scroll" data-reveal-group>
-      <div class="p-card">
-        <div class="p-img pi-rose"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Estradiol Patch</h3>
-          <p class="p-desc">Twice-weekly patch. Steady, low-maintenance estrogen delivery.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-img pi-lav"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Estradiol Gel</h3>
-          <p class="p-desc">Daily transdermal gel. Absorbs in minutes, easy dose adjustments.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-img pi-tan"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Estradiol Oral Pills</h3>
-          <p class="p-desc">A familiar daily pill for whole-body symptom relief.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-img pi-blue"><span class="p-badges"><span class="badge">Rx</span></span><span class="ph-label">Image placeholder</span></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Estradiol Vaginal Cream</h3>
-          <p class="p-desc">Local relief for dryness and discomfort, applied where it's needed.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- GLP-1 lineup -->
 <section class="lineup">
