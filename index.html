@@ -336,7 +336,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     radial-gradient(90% 60% at 50% 0%, rgba(255,156,196,.28), transparent 60%),
     linear-gradient(180deg, var(--dark-1) 0%, var(--dark-2) 100%);
   color: #fff; text-align: center;
-  padding: clamp(64px, 9vw, 120px) 24px;
+  padding: clamp(36px, 5vw, 64px) 24px;
   position: relative; overflow: hidden;
 }
 /* Slow-panning light beam — the signature Hers move */
@@ -360,7 +360,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
    lit by a breathing lime glow, riding a scroll-mapped transform.
    --bp (0→1, set by rAF as the band crosses the viewport; default .5 = neutral)
    drives rise/rotate/scale, while a slow bob loops on the inner image. */
-.band-stage { position: relative; margin: 44px auto 0; width: min(560px, 86vw); height: 340px; }
+.band-stage { position: relative; margin: 32px auto 0; width: min(640px, 92vw); height: 440px; }
 .stage-glow {
   position: absolute; inset: -14% -22%; pointer-events: none; z-index: 0;
   background: radial-gradient(46% 44% at 50% 48%, rgba(255,156,196,.30), transparent 70%);
@@ -374,7 +374,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     scale(calc(.94 + var(--bp, .5) * .10));
   will-change: transform;
 }
-.band-product { height: 300px; max-height: 88%; width: auto; filter: drop-shadow(0 34px 44px rgba(0,0,0,.5)); }
+.band-product { height: 420px; max-height: 96%; width: auto; filter: drop-shadow(0 40px 50px rgba(0,0,0,.55)); }
 .stage-shadow {
   position: absolute; left: 50%; bottom: 2%; width: 46%; height: 26px; z-index: 1;
   translate: -50%; border-radius: 50%;
@@ -390,7 +390,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .sil-bottle { width: 58px; height: 138px; border-radius: 16px 16px 22px 22px; left: 12%; top: 26%; }
 .sil-jar    { width: 84px; height: 84px;  border-radius: 22px; left: 44%; bottom: 12%; }
 .sil-patch  { width: 96px; height: 96px; border-radius: 30px; right: 10%; top: 24%; transform: rotate(8deg); }
-.band-stage:not(.no-img) .sil-jar { display: none; } /* center sil clashes behind the real product */
+.band-stage:not(.no-img) .sil { display: none; } /* hide the side silhouettes behind the real product */
 .band-stage.no-img .band-float { display: none; }
 .band-stage.no-img .stage-shadow { display: none; }
 .band-ph-label {
@@ -465,7 +465,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .p-img.has-photo { background: #fff; }
 .p-img.has-photo::before { display: none; }
 .p-img.has-photo .ph-label { display: none; }
-.p-photo { max-width: 84%; max-height: 152px; object-fit: contain; filter: drop-shadow(0 6px 11px rgba(0,0,0,.07)); }
+.p-photo { max-width: 84%; max-height: 152px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.12)); transition: transform .45s var(--ease-out), filter .45s ease; }
+.p-card:hover .p-photo { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 24px 30px rgba(0,0,0,.22)); }
 .p-img.has-photo .p-badges .badge { background: #fff; border: 1px solid var(--line); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
 .p-badges { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
 .badge {
@@ -992,7 +993,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 @media (max-width: 860px) { .sproof-quotes { grid-template-columns: 1fr; gap: 30px; } }
 /* ── Testimonial marquee — auto-scroll left, loop, pause on hover ── */
 .treviews { padding: clamp(44px, 5.5vw, 76px) 0; text-align: center; position: relative; }
-.treviews .sproof-eyebrow { display: block; margin-bottom: 30px; font-size: clamp(26px, 3.2vw, 40px); letter-spacing: 0.03em; line-height: 1.1; }
+.treviews .sproof-eyebrow { display: block; margin-bottom: 30px; font-size: clamp(26px, 3.2vw, 40px); letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); text-transform: none; }
 .tr-inner { display: flex; overflow: hidden;
   -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
@@ -1399,8 +1400,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <span class="sil sil-patch" aria-hidden="true"></span>
     <span class="stage-shadow" aria-hidden="true"></span>
     <span class="band-float">
-      <img class="band-product" src="assets/estradiol-bottle.png"
-           alt="Estradiol 1&nbsp;mg tablets bottle"
+      <img class="band-product" src="assets/rx-pills.webp"
+           alt="Prescription estradiol tablets"
            onerror="this.closest('.band-stage').classList.add('no-img')" />
     </span>
     <span class="band-ph-label" aria-hidden="true">Product visual placeholder</span>
