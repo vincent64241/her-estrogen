@@ -492,13 +492,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Goals band (Ro rows) ── */
 .goals {
-  margin-top: 64px; border-radius: var(--r-lg);
+  margin-top: 64px; border-radius: var(--r-lg); position: relative; overflow: hidden;
   background:
     radial-gradient(80% 90% at 80% 10%, rgba(255,255,255,.35), transparent 60%),
     linear-gradient(135deg, var(--tan-2), var(--rose-2));
   padding: clamp(32px, 4.5vw, 56px);
 }
 .goals h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--ink); max-width: 560px; }
+/* Video background for the goals band */
+.goals-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.goals.has-video::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(45,12,30,.66) 0%, rgba(45,12,30,.42) 50%, rgba(45,12,30,.30) 100%); }
+.goals.has-video > *:not(.goals-video) { position: relative; z-index: 2; }
+.goals.has-video h2 { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
 .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .goal-row {
   background: rgba(255,255,255,.92); border-radius: var(--r-md);
@@ -530,6 +535,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .oc-1 { background: linear-gradient(165deg, #cfdfee, #e9eef4); }
 .oc-2 { background: linear-gradient(165deg, #e7dbc9, #f3ece1); }
 .oc-3 { background: linear-gradient(165deg, #ecd7e2, #f7ecf3); }
+/* Lifestyle photo background for the app cards */
+.oc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+.o-card.has-photo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(20,8,14,.08) 0%, rgba(20,8,14,.20) 45%, rgba(20,8,14,.72) 100%); }
+.o-card.has-photo h3 { position: relative; z-index: 2; color: #fff; margin-top: auto; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.o-card.has-photo .ui-dock, .o-card.has-photo .ui-app { display: none; }
 .ui-dock { margin-top: auto; position: relative; }
 .ui-chat {
   background: rgba(255,255,255,.9); backdrop-filter: blur(6px);
@@ -830,27 +840,31 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Start here ── */
 .start {
-  margin: 72px 0 0; background: var(--ink); border-radius: var(--r-lg); color: #fff;
+  margin: 72px 0 0; border-radius: var(--r-lg); color: var(--ink);
+  background:
+    radial-gradient(80% 90% at 15% 10%, rgba(255,255,255,.5), transparent 60%),
+    linear-gradient(135deg, #fde8ef, #f6d3e2);
   padding: clamp(32px, 4.5vw, 56px);
   display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center;
 }
 .start h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
-.start h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--rose-2); }
-.start p { margin-top: 12px; color: rgba(255,255,255,.75); font-size: 15.5px; max-width: 420px; }
+.start h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--brand); }
+.start p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; max-width: 420px; }
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
-  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.22);
-  border-radius: var(--r-pill); padding: 12px 20px; font-size: 14px; font-weight: 600; color: #fff;
-  transition: background .15s ease, transform .25s var(--ease-out), border-color .15s ease;
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-pill); padding: 12px 20px; font-size: 14px; font-weight: 600; color: var(--ink);
+  transition: background .15s ease, transform .25s var(--ease-out), border-color .15s ease, color .15s ease;
 }
-.chip:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); border-color: rgba(255,255,255,.5); }
+.chip:hover { background: var(--brand); color: #fff; transform: translateY(-2px); border-color: var(--brand); }
 @media (max-width: 860px) { .start { grid-template-columns: 1fr; } }
 
 /* ── Footer (static — ISI must never animate) ── */
 footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 32px; }
 .foot-states { margin-top: 28px; font-size: 12.5px; color: var(--muted); max-width: 720px; }
-.foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 22px; }
+.foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 24px; color: var(--brand); letter-spacing: -0.02em; }
+.foot-brand strong { font-weight: 700; }
 .foot-tag { margin-top: 8px; font-size: 14px; color: var(--ink-2); max-width: 300px; }
 .foot-col h4 { font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 .foot-col a { display: block; font-size: 14.5px; color: var(--ink-2); padding: 4px 0; }
@@ -978,7 +992,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 @media (max-width: 860px) { .sproof-quotes { grid-template-columns: 1fr; gap: 30px; } }
 /* ── Testimonial marquee — auto-scroll left, loop, pause on hover ── */
 .treviews { padding: clamp(44px, 5.5vw, 76px) 0; text-align: center; position: relative; }
-.treviews .sproof-eyebrow { display: block; margin-bottom: 30px; }
+.treviews .sproof-eyebrow { display: block; margin-bottom: 30px; font-size: clamp(26px, 3.2vw, 40px); letter-spacing: 0.03em; line-height: 1.1; }
 .tr-inner { display: flex; overflow: hidden;
   -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
@@ -1606,7 +1620,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <!-- Social proof — wellness verticals (clean, minimal, reveal on scroll) -->
 <section class="treviews" id="treviews" aria-label="Patient testimonials">
   <p class="sproof-eyebrow" data-reveal>Real results</p>
-  <button class="tr-pause" id="trPause" aria-pressed="false" aria-label="Pause testimonials">❚❚</button>
   <div class="tr-inner">
     <div class="tr-track">
       <article class="tr-card">
@@ -1677,7 +1690,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Goals band -->
 <section class="container">
-  <div class="goals">
+  <div class="goals has-video">
+    <video class="goals-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/prescription-section.mp4" type="video/mp4" /></video>
     <h2 data-reveal>Prescription treatments for your health goals</h2>
     <div class="goal-grid" data-reveal-group>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚖️</span> Lose weight</span><span class="g-arrow">→</span></a>
@@ -1695,7 +1709,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   <div class="container">
     <h2 data-reveal>100% online,<br />100% convenient</h2>
     <div class="online-grid" data-reveal-group>
-      <div class="o-card oc-1">
+      <div class="o-card oc-1 has-photo">
+        <img class="oc-photo" src="assets/o-msg.webp" alt="Woman messaging her provider from home" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
         <h3>Message your provider 24/7</h3>
         <div class="ui-dock">
           <div class="ui-typing" aria-hidden="true"><b></b><b></b><b></b></div>
@@ -1705,7 +1720,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           </div>
         </div>
       </div>
-      <div class="o-card oc-2">
+      <div class="o-card oc-2 has-photo">
+        <img class="oc-photo" src="assets/o-goals.webp" alt="Woman managing her care plan on a laptop" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
         <h3>Manage goals in one place</h3>
         <div class="ui-app">
           <div class="hello">Hello, Jenna</div>
@@ -1717,7 +1733,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="ui-bars"><span></span><span></span><span></span></div>
         </div>
       </div>
-      <div class="o-card oc-3">
+      <div class="o-card oc-3 has-photo">
+        <img class="oc-photo" src="assets/o-treat.webp" alt="Telehealth video visit with a licensed clinician" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
         <h3>Clinically-guided treatments</h3>
         <div class="ui-dock">
           <div class="ui-typing" aria-hidden="true"><b></b><b></b><b></b></div>
@@ -1866,48 +1883,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <div class="how-step"><div class="num">3</div><h3>Treatment to your door</h3><p>If appropriate, your prescription ships free and discreet, with ongoing clinician support.</p></div>
     </div>
     <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-  </div>
-</section>
-
-<!-- C. Clinicians -->
-<section class="docs">
-  <div class="container">
-    <h2 data-reveal><span class="accent">The best care</span><br />by the best in medicine</h2>
-    <p class="docs-sub" data-reveal style="--i:1">Meet the team of leading specialists with decades of combined experience across key specialties.</p>
-    <div class="docs-grid" data-reveal-group>
-      <div class="doc-card">
-        <div class="doc-panel">
-          <span class="doc-ava" aria-hidden="true"></span>
-          <div class="doc-role"><b>Chief Medical Officer</b><span>Women's Health</span><span>Hormone Health</span></div>
-        </div>
-        <p class="doc-name">Clinician name, MD</p>
-        <p class="doc-bio">Board-certified OB/GYN — deep experience in menopausal, hormonal, and women's health. Bio placeholder.</p>
-      </div>
-      <div class="doc-card">
-        <div class="doc-panel">
-          <span class="doc-ava" aria-hidden="true"></span>
-          <div class="doc-role"><b>Head of Weight Loss</b><span>Metabolic Health</span></div>
-        </div>
-        <p class="doc-name">Clinician name, MD</p>
-        <p class="doc-bio">Board-certified obesity-medicine specialist focused on evidence-based metabolic care. Bio placeholder.</p>
-      </div>
-      <div class="doc-card">
-        <div class="doc-panel">
-          <span class="doc-ava" aria-hidden="true"></span>
-          <div class="doc-role"><b>Head of Medical Affairs</b><span>Inflammation &amp; Stress</span><span>Nutrients &amp; Blood</span></div>
-        </div>
-        <p class="doc-name">Clinician name, MD</p>
-        <p class="doc-bio">Board-certified family-medicine clinician guiding the clinical patient experience. Bio placeholder.</p>
-      </div>
-      <div class="doc-card">
-        <div class="doc-panel">
-          <span class="doc-ava" aria-hidden="true"></span>
-          <div class="doc-role"><b>Endocrinology Advisor</b><span>Thyroid Health</span></div>
-        </div>
-        <p class="doc-name">Clinician name, MD</p>
-        <p class="doc-bio">Board-certified endocrinologist advising on thyroid, metabolic, and endocrine care. Bio placeholder.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -2095,18 +2070,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       pauseBtn.setAttribute('aria-pressed', String(paused));
       pauseBtn.textContent = paused ? '▶' : '❚❚';
       pauseBtn.setAttribute('aria-label', paused ? 'Resume scrolling banner' : 'Pause scrolling banner');
-    });
-  }
-
-  /* Testimonial marquee pause/play (WCAG 2.2.2) */
-  var trev = document.getElementById('treviews');
-  var trPause = document.getElementById('trPause');
-  if (trev && trPause) {
-    trPause.addEventListener('click', function () {
-      var paused = trev.classList.toggle('paused');
-      trPause.setAttribute('aria-pressed', String(paused));
-      trPause.textContent = paused ? '▶' : '❚❚';
-      trPause.setAttribute('aria-label', paused ? 'Resume testimonials' : 'Pause testimonials');
     });
   }
 
