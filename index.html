@@ -656,7 +656,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .hc-grow .btn { align-self: flex-end; }
 .hc-goals { min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; }
 .hgoal-chips { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
-.hgoal-chips .chip { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.28); }
+.hgoal-chips .chip { background: #fff; border-color: #fff; color: var(--ink); }
+.hgoal-chips .chip:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
 /* pebble product stand-in */
 .pebble {
   width: 92px; height: 118px; margin: 0 auto 18px; display: block;
@@ -670,6 +671,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 30px; color: rgba(45,12,30,.4);
 }
 @media (prefers-reduced-motion: no-preference) { .pebble { animation: pbob 7s ease-in-out infinite alternate; } }
+.tcar-product { width: auto; height: 126px; display: block; margin: 0 auto 16px; object-fit: contain; filter: drop-shadow(0 16px 24px rgba(45,12,30,.45)); }
+@media (prefers-reduced-motion: no-preference) { .tcar-product { animation: pbob 7s ease-in-out infinite alternate; will-change: transform; } }
 /* testimonial carousel */
 .tcar { display: flex; flex-direction: column; }
 .tcar-viewport { overflow: hidden; flex: 1; }
@@ -1774,24 +1777,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </div>
     </div>
     <div class="hcard tcar" data-reveal>
-      <span class="pebble" aria-hidden="true"></span>
+      <img class="tcar-product" src="assets/rx-dropper.webp" alt="Minoxidil hair treatment" loading="lazy" decoding="async" />
       <div class="tcar-viewport">
         <div class="tcar-track">
           <div class="tcar-slide">
-            <p class="tquote">"<span class="q-em">Patient story placeholder.</span> Real, verified patient quotes are staged here — <span class="q-em">swapped in after compliance review</span> of each claim and photo."</p>
-            <div class="tthumbs" aria-hidden="true">
-              <span class="tthumb" data-label="Before"></span>
-              <span class="tthumb" data-label="After"></span>
-            </div>
-            <p class="tmeta">Verified patient · Placeholder<br />Duration · Product</p>
+            <p class="tquote">"My hairline filled in and the shedding slowed by month three. I finally feel like <span class="q-em">myself</span> in photos again."</p>
+            <p class="tmeta">Verified patient · placeholder<br />Minoxidil</p>
           </div>
           <div class="tcar-slide">
-            <p class="tquote">"<span class="q-em">Second story placeholder.</span> The carousel supports any number of slides — quotes, before/after imagery, and <span class="q-em">attribution</span> per patient."</p>
-            <div class="tthumbs" aria-hidden="true">
-              <span class="tthumb" data-label="Before"></span>
-              <span class="tthumb" data-label="After"></span>
-            </div>
-            <p class="tmeta">Verified patient · Placeholder<br />Duration · Product</p>
+            <p class="tquote">"Thicker, fuller hair without the fuss — a few drops a day and <span class="q-em">steady, visible results</span>."</p>
+            <p class="tmeta">Verified patient · placeholder<br />Minoxidil</p>
           </div>
         </div>
       </div>
@@ -1810,68 +1805,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
-<!-- B. Labs — dark teal cinematic replica -->
-<section class="labs" id="labs">
-  <div class="labs-head">
-    <p class="labs-eyebrow" data-reveal>labs by <span class="lb">herestrogen</span></p>
-    <h2 data-reveal style="--i:1">Test what your body's<br />been telling you</h2>
-  </div>
-  <div class="labs-stage" aria-hidden="true">
-    <div class="lpanel lp-1"><span class="lp-donut"></span><b>All 34 biomarkers</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
-    <div class="lpanel lp-2"><span class="lp-chip">Hormone health</span><span class="big">41</span>Your biological age estimate, from your markers</div>
-    <div class="lpanel lp-3"><b>Making you younger</b><div class="lp-rows"><span></span><span></span></div></div>
-  </div>
-  <div class="labs-ctas">
-    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Start my labs</a>
-    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Learn more</a>
-  </div>
-
-  <div class="labs-cards">
-    <div class="lcard lc-plan" data-reveal>
-      <div>
-        <h3>Discover your baseline</h3>
-        <p>Get a clear picture of your health with a simple at-home lab test.</p>
-      </div>
-      <div class="phone" aria-hidden="true">
-        <div class="phone-notch"></div>
-        <div class="phone-ui">
-          <b>Action Plan</b>
-          Two areas of your health need attention — let's get things on track.
-          <div class="phone-note"><span class="flag">Needs attention</span>First up: hormone balance. Your profile and biomarkers show your estradiol trending low.</div>
-          <div class="phone-bars"><span></span><span></span><span></span></div>
-        </div>
-      </div>
-      <div class="col-r">
-        <h3>Plan your breakthrough</h3>
-        <p>Optimize your health with a clinician-developed action plan.</p>
-        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the plan</a>
-      </div>
-    </div>
-    <div class="labs-duo" data-reveal-group>
-      <div class="lcard">
-        <h3>Unlock your Biological Age</h3>
-        <p>Reveal how fast your body is aging compared to your actual age.</p>
-        <div class="bio-age-chip" aria-hidden="true">
-          <small>As of today</small>
-          <span class="n">38</span>
-          <em>2 years younger than your chronological age</em>
-        </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get the science</a>
-      </div>
-      <div class="lcard">
-        <h3>Test 130+ biomarkers</h3>
-        <p>From hormones to heart health — one draw, the full picture.</p>
-        <div class="bio-cloud" aria-hidden="true">
-          <div class="bio-row"><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span></div>
-          <div class="bio-row rev"><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span></div>
-          <button class="mq-pause" id="bioPause" aria-pressed="false" aria-label="Pause biomarker list">❚❚</button>
-        </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Meet the markers</a>
-      </div>
-    </div>
-  </div>
-  <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
-</section>
 
 <!-- How it works -->
 <section class="how" id="how">
@@ -2071,18 +2004,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       pauseBtn.setAttribute('aria-pressed', String(paused));
       pauseBtn.textContent = paused ? '▶' : '❚❚';
       pauseBtn.setAttribute('aria-label', paused ? 'Resume scrolling banner' : 'Pause scrolling banner');
-    });
-  }
-
-  /* Biomarker cloud pause (same WCAG rule, labs card) */
-  var bioCloud = document.querySelector('.bio-cloud');
-  var bioPause = document.getElementById('bioPause');
-  if (bioCloud && bioPause) {
-    bioPause.addEventListener('click', function () {
-      var paused = bioCloud.classList.toggle('paused');
-      bioPause.setAttribute('aria-pressed', String(paused));
-      bioPause.textContent = paused ? '▶' : '❚❚';
-      bioPause.setAttribute('aria-label', paused ? 'Resume biomarker list' : 'Pause biomarker list');
     });
   }
 
