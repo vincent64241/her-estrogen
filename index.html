@@ -233,7 +233,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* Drop-in hero photo: export 1600×640 WebP, subject centred. object-fit:cover
    makes any image at that size fill the card at every breakpoint (incl. mobile).
    If the file is missing, onerror drops back to the gradient placeholder. */
-.fc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -1; }
+.fc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -1; transition: transform .6s var(--ease-out); }
+.feature-card.has-photo:hover .fc-photo { transform: scale(1.07); }
 .feature-card.has-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(165deg, rgba(0,0,0,.14), rgba(0,0,0,.5)); }
 .feature-card.has-photo .ph-shape, .feature-card.has-photo .ph-chip { display: none; }
 .feature-card h3 { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; font-weight: 600; max-width: 320px; }
@@ -1199,16 +1200,70 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
             <a href="/products/estradiol-cream">Estradiol Vaginal Cream <span class="rx">Rx</span></a>
           </div>
           <div class="mega-col"><h5>Learn about hormone care</h5>
-            <a href="#why">Why hormone therapy</a>
+            <a href="#faq">Why hormone therapy</a>
             <a href="#faq">Is it right for me?</a>
             <a href="#proof">Real results</a>
           </div>
         </div></div>
       </div>
-      <a href="#skin">Skin</a>
-      <a href="#hair">Hair</a>
-      <a href="#energy">Energy</a>
-      <a href="#lineup">Top Products</a>
+      <div class="nav-item has-mega">
+        <a href="#skin">Skin</a>
+        <div class="mega"><div class="mega-inner">
+          <div class="mega-col"><a class="mega-all" href="#skinhair">See all Skin →</a></div>
+          <div class="mega-col"><h5>Skin &amp; peptide care</h5>
+            <a href="/products/ghk-cu-face-cream">GHK-Cu Face Cream <span class="rx">Rx</span></a>
+            <a href="/products/glutathione">Glutathione <span class="rx">Rx</span></a>
+          </div>
+          <div class="mega-col"><h5>Learn</h5>
+            <a href="#proof">Real results</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div></div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#hair">Hair</a>
+        <div class="mega"><div class="mega-inner">
+          <div class="mega-col"><a class="mega-all" href="#hairsec">See all Hair →</a></div>
+          <div class="mega-col"><h5>Hair regrowth</h5>
+            <a href="/products/minoxidil">Hair Growth — Minoxidil <span class="rx">Rx</span></a>
+          </div>
+          <div class="mega-col"><h5>Learn</h5>
+            <a href="#hairsec">Thicker, fuller hair</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div></div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#energy">Energy</a>
+        <div class="mega"><div class="mega-inner">
+          <div class="mega-col"><a class="mega-all" href="#recovery">See all Energy →</a></div>
+          <div class="mega-col"><h5>Energy &amp; recovery</h5>
+            <a href="/products/nad">NAD+ <span class="rx">Rx</span></a>
+            <a href="/products/sermorelin">Sermorelin <span class="rx">Rx</span></a>
+          </div>
+          <div class="mega-col"><h5>Learn</h5>
+            <a href="#proof">Real results</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div></div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#lineup">Top Products</a>
+        <div class="mega"><div class="mega-inner">
+          <div class="mega-col"><a class="mega-all" href="#lineup">See all products →</a></div>
+          <div class="mega-col"><h5>Most popular</h5>
+            <a href="/products/semaglutide">GLP-1 (Semaglutide) <span class="rx">Rx</span></a>
+            <a href="/products/estradiol-patch">Estradiol Patch <span class="rx">Rx</span></a>
+            <a href="/products/ghk-cu-face-cream">GHK-Cu Face Cream <span class="rx">Rx</span></a>
+            <a href="/products/minoxidil">Minoxidil <span class="rx">Rx</span></a>
+            <a href="/products/nad">NAD+ <span class="rx">Rx</span></a>
+          </div>
+          <div class="mega-col"><h5>Learn</h5>
+            <a href="#proof">Real results</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div></div>
+      </div>
     </div>
     <div class="nav-right">
       <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
@@ -1317,22 +1372,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span><span class="bdot">✓</span> Licensed U.S. pharmacies</span>
       <span><span class="bdot">✓</span> HSA / FSA eligible</span>
     </div>
-  </div>
-</section>
-
-<!-- Core value prop — the one problem → one solution (after the proof) -->
-<section class="vprop" id="why">
-  <div class="container">
-    <h2 data-reveal>Your symptoms aren't random.<br /><em>They're hormonal.</em></h2>
-    <p class="vprop-lead" data-reveal style="--i:1">As estrogen declines in your 40s and 50s, one shift shows up in many ways. Prescription hormone therapy restores what your body is missing — treating the root cause, not just the symptoms.</p>
-    <div class="vprop-grid" data-reveal-group>
-      <div class="vp-item"><span class="vp-ic">🌡️</span><b>Hot flashes</b><span>Estrogen steadies your body's thermostat.</span></div>
-      <div class="vp-item"><span class="vp-ic">🌙</span><b>Poor sleep</b><span>Fewer 3am wakeups; deeper, restorative rest.</span></div>
-      <div class="vp-item"><span class="vp-ic">💭</span><b>Mood swings</b><span>Steadier serotonin, steadier days.</span></div>
-      <div class="vp-item"><span class="vp-ic">🧠</span><b>Brain fog</b><span>Sharper focus and recall as levels stabilize.</span></div>
-      <div class="vp-item"><span class="vp-ic">⚖️</span><b>Weight changes</b><span>Support a metabolism that shifted with menopause.</span></div>
-    </div>
-    <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a>
   </div>
 </section>
 
