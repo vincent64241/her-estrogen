@@ -666,6 +666,35 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 body.modal-open { overflow: hidden; }
 @media (max-width: 760px) { .cm-panel { grid-template-columns: 1fr; gap: 26px; } .cm-right { order: -1; } }
 
+/* BMI results modal */
+.bmi-panel { grid-template-columns: 0.92fr 1.08fr; gap: 40px; max-width: 1120px; align-items: start; }
+.bmi-gaugecard { border: 1px solid var(--line); border-radius: 22px; padding: 30px 26px; text-align: center; box-shadow: 0 10px 30px rgba(28,26,23,.05); }
+.bmi-gaugecard h3 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; letter-spacing: -0.01em; }
+.bmi-gauge { position: relative; width: min(250px, 62vw); margin: 14px auto 6px; }
+.bmi-gauge svg { width: 100%; height: auto; display: block; }
+.bg-track, .bg-prog { fill: none; stroke-width: 15; stroke-linecap: round; transform: rotate(135deg); transform-origin: 100px 100px; }
+.bg-track { stroke: #ece8e3; stroke-dasharray: 377 503; }
+.bg-prog { stroke: #ef8f7e; stroke-dasharray: 0 503; transition: stroke-dasharray .9s var(--ease-out), stroke .35s ease; }
+.bmi-gauge-c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.bmi-gauge-c b { font-size: clamp(38px, 5vw, 52px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+.bmi-gauge-c span { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.bmi-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin-top: 16px; }
+.bmi-cats { display: flex; flex-direction: column; }
+.bmi-cat { padding: 15px 4px; border-bottom: 1px solid var(--line); }
+.bmi-cat:last-child { border-bottom: 0; }
+.bmi-cat-head { display: flex; align-items: center; gap: 11px; font-size: 15.5px; font-weight: 600; }
+.bmi-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); flex-shrink: 0; }
+.bmi-cat-range { margin-left: auto; color: var(--ink-2); font-weight: 700; }
+.bmi-cat-more { display: none; }
+.bmi-cat-more p { font-size: 14.5px; line-height: 1.5; color: var(--ink); margin: 12px 0 0; }
+.bmi-cat-more .btn { display: flex; width: 100%; margin-top: 16px; }
+.bmi-cat.is-you { background: var(--cbg); border-radius: 16px; border-bottom: 0; padding: 16px 18px 18px; margin: 6px 0; }
+.bmi-cat.is-you .bmi-cat-more { display: block; }
+.bmi-cat.is-you .bmi-dot { display: none; }
+.bmi-cat.is-you .bmi-cat-head::before { content: "→"; font-weight: 800; margin-right: 3px; }
+.bmi-disc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 16px; }
+@media (max-width: 760px) { .bmi-panel { grid-template-columns: 1fr; gap: 24px; } }
+
 /* ═══ Hers-replica sections (after "100% online") ═══ */
 
 /* ── A. Hair hero — sage full-bleed, centered headline, CTAs, overlap cards ── */
@@ -1680,6 +1709,47 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </div>
 
+<!-- BMI results modal -->
+<div class="calc-modal" id="bmiModal" hidden role="dialog" aria-modal="true" aria-label="Your BMI results">
+  <div class="cm-backdrop" data-close="1"></div>
+  <div class="cm-panel bmi-panel">
+    <button type="button" class="cm-close" id="bmiClose" aria-label="Close">&times;</button>
+    <div class="bmi-gaugecard">
+      <h3>Body Mass Index</h3>
+      <div class="bmi-gauge">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="bg-track" cx="100" cy="100" r="80" />
+          <circle class="bg-prog" id="bmiArc" cx="100" cy="100" r="80" />
+        </svg>
+        <div class="bmi-gauge-c"><b id="bmiBig">0</b><span>Your BMI</span></div>
+      </div>
+      <p class="bmi-desc">Body Mass Index (BMI) is a measurement tool that uses your height and weight to estimate if your weight is in a healthy range for your height.*</p>
+    </div>
+    <div class="bmi-right">
+      <div class="bmi-cats" id="bmiCats">
+        <div class="bmi-cat" data-cat="under" style="--c:#6ea8e6;--cbg:#e6f0fb">
+          <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Underweight</span><b class="bmi-cat-range">&le; 18.4</b></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is below the typical healthy range.</b> A licensed clinician can help you understand what may be going on and what to do next.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Talk to a clinician</a></div>
+        </div>
+        <div class="bmi-cat" data-cat="healthy" style="--c:#8cc152;--cbg:#edf6e2">
+          <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Healthy Weight</span><b class="bmi-cat-range">18.5 - 24.9</b></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is in the healthy range.</b> A licensed clinician can still help with hormones, energy, hair, and more.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore care</a></div>
+        </div>
+        <div class="bmi-cat" data-cat="over" style="--c:#e6b34e;--cbg:#fbf0d8">
+          <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Overweight</span><b class="bmi-cat-range">25 - 29.9</b></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is above the healthy range.</b> A personalized weight-loss medication plan could help you reach your goals.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
+        </div>
+        <div class="bmi-cat" data-cat="obese" style="--c:#ef8f7e;--cbg:#fce0da">
+          <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Obesity</span><b class="bmi-cat-range">&ge; 30</b></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is in a range where extra support may be helpful.</b> A personalized weight-loss medication plan could help you feel better, move more easily, and regain confidence.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
+        </div>
+      </div>
+      <p class="bmi-disc">*BMI doesn't directly measure body fat and may not accurately reflect health for people with high muscle mass, pregnant women, children, older adults, certain ethnic groups, or those with medical conditions. It shouldn't be used as the only way to assess health.</p>
+      <p class="bmi-disc">The BMI calculator does not determine eligibility for weight-loss treatments. A licensed clinician must evaluate your overall health and history to decide if treatment is right for you.</p>
+    </div>
+  </div>
+</div>
+
 <!-- B. Labs — cinematic, over the lifestyle photo background -->
 <section class="labs has-bg" id="labs">
   <img class="labs-bg" src="assets/hair-lifestyle.webp" alt="" loading="lazy" decoding="async" onerror="this.closest('.labs').classList.remove('has-bg'); this.remove();" />
@@ -2049,17 +2119,31 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   fillBars(document.getElementById('loseBars'));
   fillBars(document.getElementById('mBars'));
 
+  function openM(m) { if (!m) return; m.hidden = false; document.body.classList.add('modal-open'); }
+  function closeM(m) { if (m) m.hidden = true; if (!document.querySelector('.calc-modal:not([hidden])')) document.body.classList.remove('modal-open'); }
+
   var bC = document.getElementById('bmiCalc'), bV = document.getElementById('bmiValue'), bCat = document.getElementById('bmiCat');
+  var bmiModal = document.getElementById('bmiModal'), bmiBig = document.getElementById('bmiBig'), bmiArc = document.getElementById('bmiArc');
+  var CIRC = 502.655, ARC = 376.99, CATC = { under: '#6ea8e6', healthy: '#8cc152', over: '#e6b34e', obese: '#ef8f7e' };
+  function catKey(v) { return v < 18.5 ? 'under' : v < 25 ? 'healthy' : v < 30 ? 'over' : 'obese'; }
   function bmi() {
     var ft = parseFloat((document.getElementById('bmiFt') || {}).value) || 0;
     var inch = parseFloat((document.getElementById('bmiIn') || {}).value) || 0;
     var lbs = parseFloat((document.getElementById('bmiLbs') || {}).value) || 0;
     var tot = ft * 12 + inch;
-    if (tot > 0 && lbs > 0) {
-      var v = 703 * lbs / (tot * tot);
-      bV.textContent = (Math.round(v * 10) / 10).toFixed(1);
-      bCat.textContent = v < 18.5 ? 'Underweight' : v < 25 ? 'Healthy range' : v < 30 ? 'Overweight' : 'Obese range';
-    } else { bV.textContent = '0'; bCat.textContent = ''; }
+    if (!(tot > 0 && lbs > 0)) { bV.textContent = '0'; if (bCat) bCat.textContent = 'Enter height and weight'; return; }
+    var v = 703 * lbs / (tot * tot);
+    var shown = (Math.round(v * 10) / 10).toFixed(1);
+    bV.textContent = shown;
+    if (bCat) bCat.textContent = v < 18.5 ? 'Underweight' : v < 25 ? 'Healthy range' : v < 30 ? 'Overweight' : 'Obese range';
+    if (bmiModal) {
+      var key = catKey(v);
+      if (bmiBig) bmiBig.textContent = shown;
+      var frac = Math.max(0, Math.min(1, (v - 15) / 25));
+      if (bmiArc) { bmiArc.style.stroke = CATC[key]; bmiArc.style.strokeDasharray = (frac * ARC).toFixed(1) + ' ' + CIRC; }
+      [].forEach.call(bmiModal.querySelectorAll('.bmi-cat'), function (el) { el.classList.toggle('is-you', el.getAttribute('data-cat') === key); });
+      openM(bmiModal);
+    }
   }
   if (bC) {
     bC.addEventListener('click', bmi);
@@ -2067,15 +2151,17 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   }
 
   var sl = document.getElementById('weightSlider'), sV = document.getElementById('startVal'), lV = document.getElementById('loseVal');
-  var modal = document.getElementById('loseModal'), mS = document.getElementById('mStart'), mL = document.getElementById('mLose'), mClose = document.getElementById('loseClose');
+  var loseM = document.getElementById('loseModal'), mS = document.getElementById('mStart'), mL = document.getElementById('mLose');
   function loss(w) { return Math.round(w * 0.15); }
   function sliderUpdate() { var w = parseInt(sl.value, 10); sV.textContent = w; lV.textContent = loss(w); }
-  function openModal() { var w = parseInt(sl.value, 10); if (mS) mS.textContent = w; if (mL) mL.textContent = loss(w); modal.hidden = false; document.body.classList.add('modal-open'); }
-  function closeModal() { if (!modal) return; modal.hidden = true; document.body.classList.remove('modal-open'); }
-  if (sl) { sl.addEventListener('input', sliderUpdate); sl.addEventListener('change', openModal); sliderUpdate(); }
-  if (mClose) mClose.addEventListener('click', closeModal);
-  if (modal) modal.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeModal(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal && !modal.hidden) closeModal(); });
+  function openLose() { var w = parseInt(sl.value, 10); if (mS) mS.textContent = w; if (mL) mL.textContent = loss(w); openM(loseM); }
+  if (sl) { sl.addEventListener('input', sliderUpdate); sl.addEventListener('change', openLose); sliderUpdate(); }
+
+  var loseClose = document.getElementById('loseClose'), bmiClose = document.getElementById('bmiClose');
+  if (loseClose) loseClose.addEventListener('click', function () { closeM(loseM); });
+  if (bmiClose) bmiClose.addEventListener('click', function () { closeM(bmiModal); });
+  Array.prototype.forEach.call(document.querySelectorAll('.calc-modal'), function (m) { m.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeM(m); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') Array.prototype.forEach.call(document.querySelectorAll('.calc-modal:not([hidden])'), closeM); });
 })();
 </script>
 
