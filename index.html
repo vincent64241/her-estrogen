@@ -345,7 +345,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     content: ""; position: absolute; inset: -20%; pointer-events: none; z-index: 0;
     background: linear-gradient(115deg, transparent 42%, rgba(255,156,196,.10) 50%, rgba(255,255,255,.07) 54%, transparent 62%);
     transform: translateX(-60%);
-    animation: beam 14s cubic-bezier(.45,0,.25,1) infinite;
+    animation: beam 3s cubic-bezier(.45,0,.25,1) infinite;
     will-change: transform;
   }
   @keyframes beam { 0%, 12% { transform: translateX(-60%); } 60%, 100% { transform: translateX(60%); } }
@@ -601,6 +601,72 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 @media (max-width: 860px) { .online-grid { grid-template-columns: 1fr; } .o-card { min-height: 340px; } }
 
+/* ── Weight-loss calculators (BMI + potential loss) ── */
+.calc { padding: clamp(48px, 6vw, 80px) 0; }
+.calc > .container > h2 { text-align: center; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 32px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: stretch; }
+.calc-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px; box-shadow: 0 14px 40px rgba(28,26,23,.06); }
+.bmi-card h3, .lose-card .lose-lead { margin: 0; }
+.bmi-card h3 { font-size: 20px; font-weight: 700; }
+.calc-sub { font-size: 14px; color: var(--muted); margin: 4px 0 0; }
+.bmi-result { font-size: clamp(52px, 6vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -0.02em; margin: 18px 0 22px; }
+.calc-label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-2); margin: 0 0 8px; }
+.calc-hrow { display: flex; gap: 10px; margin-bottom: 16px; }
+.calc-field { display: flex; align-items: center; flex: 1; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: #fff; transition: border-color .15s ease; }
+.calc-field:focus-within { border-color: var(--brand); }
+.calc-field input { flex: 1; width: 100%; border: 0; outline: 0; background: transparent; padding: 14px 0; font-size: 15px; font-family: inherit; color: var(--ink); -moz-appearance: textfield; }
+.calc-field input::-webkit-outer-spin-button, .calc-field input::-webkit-inner-spin-button { opacity: .35; }
+.calc-field i { font-style: normal; color: var(--muted); font-size: 13px; margin-left: 8px; }
+.calc-btn { display: block; margin: 22px auto 0; padding: 13px 30px; border-radius: var(--r-pill); font-family: inherit; font-weight: 600; font-size: 15px; color: var(--ink); cursor: pointer;
+  border: 2px solid transparent; background-image: linear-gradient(#fff,#fff), linear-gradient(90deg,#f4a04e,#e06bd0,#9a6ff0,#5ab0e6); background-origin: border-box; background-clip: padding-box, border-box; transition: transform .2s var(--ease-out); }
+.calc-btn:hover { transform: translateY(-1px); }
+.bmi-cat { text-align: center; font-size: 13.5px; font-weight: 600; color: var(--brand); margin: 12px 0 0; min-height: 18px; }
+/* middle image card */
+.calc-photo { position: relative; min-height: 360px; padding: 0; overflow: hidden; display: block;
+  background: linear-gradient(160deg, #bfe0f5 0%, #dceffa 55%, #eaf6fc 100%); }
+.calc-photo .ph-chip { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: rgba(28,26,23,.38); backdrop-filter: blur(6px); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 7px 12px; border-radius: 12px; }
+/* lose card */
+.lose-card { text-align: center; display: flex; flex-direction: column; }
+.lose-lead, .lose-lead2 { font-size: 14px; color: var(--ink-2); margin: 0; }
+.lose-lead2 { margin-top: 20px; }
+.lose-num { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-top: 6px; }
+.lose-num b { font-size: clamp(48px, 6vw, 72px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+.lose-num span { font-size: 20px; font-weight: 700; color: var(--ink-2); }
+.lose-viz { position: relative; padding-top: 22px; margin-top: 14px; }
+.lose-arrow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); color: var(--brand); font-size: 15px; }
+.lose-bars { display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 88px; }
+.lose-bars span { width: 6px; border-radius: 3px; background: linear-gradient(180deg, #ef8fbb, #c21e63); }
+.lose-chip { display: inline-flex; align-items: baseline; gap: 3px; align-self: center; margin-top: 8px; background: var(--brand); color: #fff; border-radius: 10px; padding: 8px 16px; font-weight: 800; font-size: 20px; }
+.lose-chip small { font-size: 12px; font-weight: 700; opacity: .9; }
+.lose-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 999px; margin-top: 16px; outline: none; cursor: pointer;
+  background: linear-gradient(90deg, #f4a04e, #e06bd0, #9a6ff0, #5ab0e6); }
+.lose-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid #d7d2cb; box-shadow: 0 2px 6px rgba(0,0,0,.22); cursor: pointer; }
+.lose-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid #d7d2cb; box-shadow: 0 2px 6px rgba(0,0,0,.22); cursor: pointer; }
+.calc-fine { max-width: 780px; margin: 22px auto 0; text-align: center; font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+@media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; } .calc-photo { min-height: 260px; } }
+
+/* results modal */
+.calc-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.calc-modal[hidden] { display: none; }
+.cm-backdrop { position: absolute; inset: 0; background: rgba(24,8,14,.55); backdrop-filter: blur(3px); }
+.cm-panel { position: relative; z-index: 1; width: 100%; max-width: 1000px; max-height: 92vh; overflow: auto; background: #fff; border-radius: 28px; padding: clamp(28px, 4vw, 52px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; box-shadow: 0 30px 90px rgba(0,0,0,.4); animation: cmIn .3s var(--ease-pop); }
+@keyframes cmIn { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+.cm-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; background: #3a3a3a; color: #fff; border: 0; font-size: 22px; line-height: 1; cursor: pointer; }
+.cm-lead { font-size: 15px; color: var(--ink-2); margin: 0; }
+.cm-pct { font-size: clamp(56px, 8vw, 96px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; margin: 6px 0; }
+.cm-of { font-size: 17px; color: var(--ink); margin: 0 0 26px; }
+.cm-fine { font-size: 11.5px; color: var(--muted); line-height: 1.6; margin: 22px 0 0; max-width: 440px; }
+.cm-right { text-align: center; border: 1px solid var(--line); border-radius: 24px; padding: 30px 26px; box-shadow: 0 0 0 5px rgba(194,30,99,.06); }
+.cm-start { display: inline-block; border: 1.5px solid var(--brand); color: var(--brand); border-radius: 10px; padding: 8px 16px; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+.cm-start b { font-weight: 800; }
+.cm-lose { display: flex; align-items: baseline; justify-content: center; gap: 5px; margin-top: 4px; }
+.cm-lose b { font-size: clamp(56px, 8vw, 92px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+.cm-lose span { font-size: 24px; font-weight: 700; color: var(--ink-2); }
+.cm-viz { position: relative; padding-top: 22px; margin-top: 16px; }
+body.modal-open { overflow: hidden; }
+@media (max-width: 760px) { .cm-panel { grid-template-columns: 1fr; gap: 26px; } .cm-right { order: -1; } }
+
 /* ═══ Hers-replica sections (after "100% online") ═══ */
 
 /* ── A. Hair hero — sage full-bleed, centered headline, CTAs, overlap cards ── */
@@ -713,6 +779,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     linear-gradient(180deg, #3a1226 0%, #220a13 60%, #180610 100%);
   padding: clamp(64px, 8vw, 110px) 24px clamp(40px, 5vw, 64px);
 }
+/* Lifestyle photo background (same image as the old hair section) + dark scrim for legibility */
+.labs-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+.labs.has-bg::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(35,8,20,.52) 0%, rgba(24,6,16,.74) 55%, rgba(18,5,12,.92) 100%); }
+.labs.has-bg > *:not(.labs-bg) { position: relative; z-index: 2; }
 .labs-head { text-align: center; position: relative; z-index: 2; }
 .labs-eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .02em; opacity: .9; }
 .labs-eyebrow .lb { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 600; }
@@ -858,10 +929,24 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .chip {
   background: #fff; border: 1px solid var(--line);
   border-radius: var(--r-pill); padding: 12px 20px; font-size: 14px; font-weight: 600; color: var(--ink);
+  cursor: pointer; font-family: inherit; line-height: 1; -webkit-tap-highlight-color: transparent;
   transition: background .15s ease, transform .25s var(--ease-out), border-color .15s ease, color .15s ease;
 }
 .chip:hover { background: var(--brand); color: #fff; transform: translateY(-2px); border-color: var(--brand); }
-@media (max-width: 860px) { .start { grid-template-columns: 1fr; } }
+/* Selected multiple-choice state */
+.chip[aria-pressed="true"] { background: var(--brand); color: #fff; border-color: var(--brand); padding-left: 40px; position: relative; }
+.chip[aria-pressed="true"]::before { content: "✓"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 13px; }
+/* Video background for the Start-here tile */
+.start { position: relative; overflow: hidden; }
+.start-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 0; }
+.start.has-video::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg, rgba(253,232,239,.80) 0%, rgba(253,232,239,.55) 42%, rgba(253,232,239,.34) 100%); }
+.start.has-video > *:not(.start-bg) { position: relative; z-index: 2; }
+.start.has-video h2, .start.has-video > div > p { text-shadow: 0 1px 10px rgba(255,255,255,.55); }
+.start-picker { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+.start-continue { align-self: flex-start; }
+.start-continue.is-disabled { opacity: .45; pointer-events: none; }
+@media (max-width: 860px) { .start { grid-template-columns: 1fr; } .start-continue { align-self: stretch; text-align: center; } }
 
 /* ── Footer (static — ISI must never animate) ── */
 footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
@@ -955,7 +1040,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 /* Social proof band */
 .proof { padding: clamp(40px, 5vw, 64px) 0; background: #fff; border-block: 1px solid var(--line); }
-.proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center; }
+.proof-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; text-align: center; }
 .stat-big b { display: block; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--ink); }
 .stat-big span { display: block; margin-top: 6px; font-size: 13px; color: var(--ink-2); font-weight: 500; }
 .proof-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
@@ -965,7 +1050,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .tcard2 cite { font-style: normal; font-size: 13px; color: var(--muted); font-weight: 600; }
 .proof-badges { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: center; margin-top: 36px; }
 .proof-badges span { font-size: 13px; font-weight: 600; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
-.proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+.proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
 @media (max-width: 860px) { .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } .proof-cards { grid-template-columns: 1fr; } }
 /* ── Wall of praise (testimonial grid) ── */
 .wall-head { text-align: center; margin-top: 48px; }
@@ -1246,12 +1331,12 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <div class="nav-item has-mega">
         <a href="#hair">Hair</a>
         <div class="mega"><div class="mega-inner">
-          <div class="mega-col"><a class="mega-all" href="#hairsec">See all Hair →</a></div>
+          <div class="mega-col"><a class="mega-all" href="#skinhair">See all Hair →</a></div>
           <div class="mega-col"><h5>Hair regrowth</h5>
             <a href="/products/minoxidil">Hair Growth — Minoxidil <span class="rx">Rx</span></a>
           </div>
           <div class="mega-col"><h5>Learn</h5>
-            <a href="#hairsec">Thicker, fuller hair</a>
+            <a href="#skinhair">Thicker, fuller hair</a>
             <a href="#faq">FAQs</a>
           </div>
         </div></div>
@@ -1328,10 +1413,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <section class="proof" id="proof">
   <div class="container">
     <div class="proof-stats" data-reveal-group>
-      <div class="stat-big"><b>2 minutes</b><span>private online quiz</span></div>
+      <div class="stat-big"><b>5-minute quiz</b><span>private &amp; online</span></div>
       <div class="stat-big"><b>100% online</b><span>no office visits needed</span></div>
       <div class="stat-big"><b>All 50 states</b><span>licensed clinicians</span></div>
       <div class="stat-big"><b>Under 2 days</b><span>to clinician review</span></div>
+      <div class="stat-big"><b>Free delivery</b><span>2-day shipping</span></div>
     </div>
     <div class="proof-badges">
       <span><span class="bdot">✓</span> FDA-approved &amp; compounded options</span>
@@ -1537,75 +1623,127 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
-<!-- 100% online -->
-<section class="online">
+<!-- Weight-loss calculators (BMI + potential loss) -->
+<section class="calc" id="calc">
   <div class="container">
-    <h2 data-reveal>100% online,<br />100% convenient</h2>
-    <div class="online-grid" data-reveal-group>
-      <div class="o-card oc-1 has-photo">
-        <img class="oc-photo" src="assets/o-msg.webp" alt="Woman messaging her provider from home" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
-        <h3>Message your provider 24/7</h3>
-        <div class="ui-dock">
-          <div class="ui-typing" aria-hidden="true"><b></b><b></b><b></b></div>
-          <div class="ui-chat">
-            <div class="who"><span class="ui-avatar"></span> Your clinician</div>
-            Hi Jenna, got your message. How are you doing on the new dose?
-          </div>
+    <h2 data-reveal>See what's possible</h2>
+    <div class="calc-grid" data-reveal-group>
+
+      <div class="calc-card bmi-card">
+        <h3>Check your BMI</h3>
+        <p class="calc-sub">Enter your height and weight below</p>
+        <div class="bmi-result"><span id="bmiValue">0</span></div>
+        <label class="calc-label" for="bmiFt">Height</label>
+        <div class="calc-hrow">
+          <span class="calc-field"><input type="number" id="bmiFt" min="0" max="8" inputmode="numeric" placeholder="Feet" /><i>ft</i></span>
+          <span class="calc-field"><input type="number" id="bmiIn" min="0" max="11" inputmode="numeric" placeholder="Inches" /><i>in</i></span>
         </div>
+        <label class="calc-label" for="bmiLbs">Weight</label>
+        <span class="calc-field"><input type="number" id="bmiLbs" min="0" inputmode="numeric" placeholder="Weight (pounds)" /><i>lbs</i></span>
+        <button type="button" class="calc-btn" id="bmiCalc">Calculate BMI</button>
+        <p class="bmi-cat" id="bmiCat" aria-live="polite"></p>
       </div>
-      <div class="o-card oc-2 has-photo">
-        <img class="oc-photo" src="assets/o-goals.webp" alt="Woman managing her care plan on a laptop" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
-        <h3>Manage goals in one place</h3>
-        <div class="ui-app">
-          <div class="hello">Hello, Jenna</div>
-          <div class="ui-stat">
-            <div class="num"><span class="down">↓</span> Symptoms easing</div>
-            <svg class="ui-spark-svg" viewBox="0 0 200 34" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 C40 6 60 14 100 18 S170 26 198 28" fill="none" stroke="#c21e63" stroke-width="2.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="ui-row">Your Rx is ready <span>→</span></div>
-          <div class="ui-bars"><span></span><span></span><span></span></div>
-        </div>
+
+      <a class="calc-card calc-photo" href="https://quiz.herestrogen.com/herestrogen_hrt" aria-label="Explore weight loss">
+        <span class="ph-chip">Lifestyle image placeholder</span>
+      </a>
+
+      <div class="calc-card lose-card">
+        <p class="lose-lead">You could lose:</p>
+        <div class="lose-num"><b id="loseVal">30</b><span>lbs</span></div>
+        <div class="lose-viz" aria-hidden="true"><span class="lose-arrow">▼</span><div class="lose-bars" id="loseBars"></div></div>
+        <p class="lose-lead2">Starting weight:</p>
+        <div class="lose-chip"><b id="startVal">200</b><small>lbs</small></div>
+        <input type="range" class="lose-slider" id="weightSlider" min="120" max="400" step="1" value="200" aria-label="Select your starting weight in pounds" />
       </div>
-      <div class="o-card oc-3 has-photo">
-        <img class="oc-photo" src="assets/o-treat.webp" alt="Telehealth video visit with a licensed clinician" loading="lazy" decoding="async" onerror="this.closest('.o-card').classList.remove('has-photo'); this.remove();" />
-        <h3>Clinically-guided treatments</h3>
-        <div class="ui-dock">
-          <div class="ui-typing" aria-hidden="true"><b></b><b></b><b></b></div>
-          <div class="ui-chat">
-            <div class="who"><span class="ui-avatar"></span> Care team</div>
-            Your plan was reviewed by a licensed clinician and shipped — tracking is in your portal.
-          </div>
-        </div>
-      </div>
+
     </div>
+    <p class="calc-fine">Estimates are illustrative only, based on the average 15% body-weight reduction reported in Wegovy® clinical trials; individual results vary. This is not medical advice. Only a licensed clinician can determine whether treatment is appropriate.</p>
   </div>
 </section>
 
-<!-- A. Hair — Hers hair-vertical replica -->
-<section class="hair-hero has-bg" id="hairsec">
-  <img class="hair-bg" src="assets/hair-lifestyle.webp" alt="" loading="lazy" decoding="async" onerror="this.closest('.hair-hero').classList.remove('has-bg'); this.remove();" />
-  <h2 data-reveal>Thicker, fuller hair<br />is here</h2>
-  <div class="hair-ctas" data-reveal style="--i:1">
-    <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-    <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">See if I'm eligible</a>
+<!-- Weight-loss results modal -->
+<div class="calc-modal" id="loseModal" hidden role="dialog" aria-modal="true" aria-label="Your weight-loss estimate">
+  <div class="cm-backdrop" data-close="1"></div>
+  <div class="cm-panel">
+    <button type="button" class="cm-close" id="loseClose" aria-label="Close">&times;</button>
+    <div class="cm-left">
+      <p class="cm-lead">Lose on average:</p>
+      <div class="cm-pct">15%</div>
+      <p class="cm-of">of your body weight with Wegovy®*</p>
+      <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+      <p class="cm-fine">*In a clinical trial, adults taking FDA-approved Wegovy® lost an average of 15% of body weight over 68 weeks alongside diet and exercise; some lost up to 20%. Individual results vary. Side effects may include nausea or diarrhea. Only a licensed clinician can determine whether treatment is appropriate. Compounded GLP-1 medications are not FDA-approved.</p>
+    </div>
+    <div class="cm-right">
+      <div class="cm-start">Starting weight: <b id="mStart">240</b> lbs</div>
+      <p class="cm-lead">You could lose:</p>
+      <div class="cm-lose"><b id="mLose">36</b><span>lbs</span></div>
+      <div class="cm-viz" aria-hidden="true"><span class="lose-arrow">▼</span><div class="lose-bars" id="mBars"></div></div>
+    </div>
   </div>
-  <div class="hair-photo" aria-hidden="true"></div>
-  <div class="hair-cards">
-    <div class="hcard-left" data-reveal-group>
-      <div class="hcard hc-grow">
-        <h3>Regrow hair in 3–6 months with minoxidil</h3>
-        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+</div>
+
+<!-- B. Labs — cinematic, over the lifestyle photo background -->
+<section class="labs has-bg" id="labs">
+  <img class="labs-bg" src="assets/hair-lifestyle.webp" alt="" loading="lazy" decoding="async" onerror="this.closest('.labs').classList.remove('has-bg'); this.remove();" />
+  <div class="labs-head">
+    <p class="labs-eyebrow" data-reveal>labs by <span class="lb">herestrogen</span></p>
+    <h2 data-reveal style="--i:1">Test what your body's<br />been telling you</h2>
+  </div>
+  <div class="labs-stage" aria-hidden="true">
+    <div class="lpanel lp-1"><span class="lp-donut"></span><b>All 34 biomarkers</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
+    <div class="lpanel lp-2"><span class="lp-chip">Hormone health</span><span class="big">41</span>Your biological age estimate, from your markers</div>
+    <div class="lpanel lp-3"><b>Making you younger</b><div class="lp-rows"><span></span><span></span></div></div>
+  </div>
+  <div class="labs-ctas">
+    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Start my labs</a>
+    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Learn more</a>
+  </div>
+
+  <div class="labs-cards">
+    <div class="lcard lc-plan" data-reveal>
+      <div>
+        <h3>Discover your baseline</h3>
+        <p>Get a clear picture of your health with a simple at-home lab test.</p>
       </div>
-      <div class="hcard hc-goals">
-        <h3>What are your hair goals?</h3>
-        <div class="hgoal-chips">
-          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Stop thinning or shedding</a>
-          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Regrow thicker, fuller hair</a>
-          <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">All the above</a>
+      <div class="phone" aria-hidden="true">
+        <div class="phone-notch"></div>
+        <div class="phone-ui">
+          <b>Action Plan</b>
+          Two areas of your health need attention — let's get things on track.
+          <div class="phone-note"><span class="flag">Needs attention</span>First up: hormone balance. Your profile and biomarkers show your estradiol trending low.</div>
+          <div class="phone-bars"><span></span><span></span><span></span></div>
         </div>
+      </div>
+      <div class="col-r">
+        <h3>Plan your breakthrough</h3>
+        <p>Optimize your health with a clinician-developed action plan.</p>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the plan</a>
+      </div>
+    </div>
+    <div class="labs-duo" data-reveal-group>
+      <div class="lcard">
+        <h3>Unlock your Biological Age</h3>
+        <p>Reveal how fast your body is aging compared to your actual age.</p>
+        <div class="bio-age-chip" aria-hidden="true">
+          <small>As of today</small>
+          <span class="n">38</span>
+          <em>2 years younger than your chronological age</em>
+        </div>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get the science</a>
+      </div>
+      <div class="lcard">
+        <h3>Test 130+ biomarkers</h3>
+        <p>From hormones to heart health — one draw, the full picture.</p>
+        <div class="bio-cloud" aria-hidden="true">
+          <div class="bio-row"><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span></div>
+          <div class="bio-row rev"><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span></div>
+        </div>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Meet the markers</a>
       </div>
     </div>
   </div>
+  <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
 </section>
 
 
@@ -1640,18 +1778,24 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Start here -->
 <section class="container">
-  <div class="start" id="start">
+  <div class="start has-video" id="start">
+    <video class="start-bg" autoplay muted loop playsinline preload="metadata" poster="assets/start-bg-poster.webp" aria-hidden="true" onerror="this.closest('.start').classList.remove('has-video'); this.remove();">
+      <source src="assets/start-bg.mp4" type="video/mp4" />
+    </video>
     <div>
       <h2 data-reveal>Unsure where to begin? <em>Start here.</em></h2>
       <p data-reveal style="--i:1">Tell us what's bothering you most — a licensed clinician reviews every answer and builds your plan.</p>
     </div>
-    <div class="chips" data-reveal-group>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Hot flashes &amp; night sweats</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Weight that won't move</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Can't sleep</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Low energy</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Hair thinning</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">All of the above</a>
+    <div class="start-picker" data-reveal style="--i:2">
+      <div class="chips" id="startChips" role="group" aria-label="What's bothering you most? Select all that apply.">
+        <button type="button" class="chip" aria-pressed="false" data-v="hot-flashes">Hot flashes &amp; night sweats</button>
+        <button type="button" class="chip" aria-pressed="false" data-v="weight">Weight that won't move</button>
+        <button type="button" class="chip" aria-pressed="false" data-v="sleep">Can't sleep</button>
+        <button type="button" class="chip" aria-pressed="false" data-v="energy">Low energy</button>
+        <button type="button" class="chip" aria-pressed="false" data-v="hair">Hair thinning</button>
+        <button type="button" class="chip" aria-pressed="false" data-v="all">All of the above</button>
+      </div>
+      <a class="btn btn-dark btn-lg start-continue is-disabled" id="startContinue" role="button" aria-disabled="true" href="https://quiz.herestrogen.com/herestrogen_hrt">Continue <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -1874,6 +2018,79 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     window.addEventListener('resize', update, { passive: true });
     update();
   });
+})();
+</script>
+
+<script>
+/* "Start here" multiple-choice → Continue */
+(function () {
+  var wrap = document.getElementById('startChips');
+  var cont = document.getElementById('startContinue');
+  if (!wrap || !cont) return;
+  var base = cont.getAttribute('href').split('?')[0];
+  var chips = Array.prototype.slice.call(wrap.querySelectorAll('.chip'));
+  function selected() { return chips.filter(function (c) { return c.getAttribute('aria-pressed') === 'true'; }); }
+  function sync() {
+    var sel = selected(), on = sel.length > 0;
+    cont.classList.toggle('is-disabled', !on);
+    cont.setAttribute('aria-disabled', String(!on));
+    var vals = sel.map(function (c) { return c.getAttribute('data-v'); });
+    cont.setAttribute('href', on ? base + '?concerns=' + encodeURIComponent(vals.join(',')) : base);
+  }
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var isAll = c.getAttribute('data-v') === 'all';
+      var now = c.getAttribute('aria-pressed') !== 'true';
+      if (isAll) {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c && now)); });
+      } else {
+        c.setAttribute('aria-pressed', String(now));
+        var all = wrap.querySelector('.chip[data-v="all"]');
+        if (all) all.setAttribute('aria-pressed', 'false');
+      }
+      sync();
+    });
+  });
+  cont.addEventListener('click', function (e) { if (cont.classList.contains('is-disabled')) e.preventDefault(); });
+  sync();
+})();
+</script>
+
+<script>
+/* BMI + "you could lose" calculators + results modal */
+(function () {
+  var BARS = [.45,.6,.4,.75,.5,.85,.55,.7,.95,.5,.72,.42,.66,1,.62,.48,.82,.52,.7,.4,.86,.56,.42,.62];
+  function fillBars(el) { if (!el) return; el.innerHTML = ''; BARS.forEach(function (h) { var s = document.createElement('span'); s.style.height = Math.round(h * 100) + '%'; el.appendChild(s); }); }
+  fillBars(document.getElementById('loseBars'));
+  fillBars(document.getElementById('mBars'));
+
+  var bC = document.getElementById('bmiCalc'), bV = document.getElementById('bmiValue'), bCat = document.getElementById('bmiCat');
+  function bmi() {
+    var ft = parseFloat((document.getElementById('bmiFt') || {}).value) || 0;
+    var inch = parseFloat((document.getElementById('bmiIn') || {}).value) || 0;
+    var lbs = parseFloat((document.getElementById('bmiLbs') || {}).value) || 0;
+    var tot = ft * 12 + inch;
+    if (tot > 0 && lbs > 0) {
+      var v = 703 * lbs / (tot * tot);
+      bV.textContent = (Math.round(v * 10) / 10).toFixed(1);
+      bCat.textContent = v < 18.5 ? 'Underweight' : v < 25 ? 'Healthy range' : v < 30 ? 'Overweight' : 'Obese range';
+    } else { bV.textContent = '0'; bCat.textContent = ''; }
+  }
+  if (bC) {
+    bC.addEventListener('click', bmi);
+    ['bmiFt', 'bmiIn', 'bmiLbs'].forEach(function (id) { var e = document.getElementById(id); if (e) e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') bmi(); }); });
+  }
+
+  var sl = document.getElementById('weightSlider'), sV = document.getElementById('startVal'), lV = document.getElementById('loseVal');
+  var modal = document.getElementById('loseModal'), mS = document.getElementById('mStart'), mL = document.getElementById('mLose'), mClose = document.getElementById('loseClose');
+  function loss(w) { return Math.round(w * 0.15); }
+  function sliderUpdate() { var w = parseInt(sl.value, 10); sV.textContent = w; lV.textContent = loss(w); }
+  function openModal() { var w = parseInt(sl.value, 10); if (mS) mS.textContent = w; if (mL) mL.textContent = loss(w); modal.hidden = false; document.body.classList.add('modal-open'); }
+  function closeModal() { if (!modal) return; modal.hidden = true; document.body.classList.remove('modal-open'); }
+  if (sl) { sl.addEventListener('input', sliderUpdate); sl.addEventListener('change', openModal); sliderUpdate(); }
+  if (mClose) mClose.addEventListener('click', closeModal);
+  if (modal) modal.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal && !modal.hidden) closeModal(); });
 })();
 </script>
 
