@@ -939,7 +939,9 @@ body.modal-open { overflow: hidden; }
 .start { position: relative; overflow: hidden; }
 .start-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 0; }
 .start.has-video > *:not(.start-bg) { position: relative; z-index: 2; }
-.start.has-video h2, .start.has-video > div > p { text-shadow: 0 1px 12px rgba(255,255,255,.6); }
+.start.has-video h2 { color: #fff; }
+.start.has-video > div > p { color: rgba(255,255,255,.9); }
+.start.has-video h2, .start.has-video > div > p, .start.has-video h2 em { text-shadow: 0 1px 16px rgba(0,0,0,.5); }
 .start-picker { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
 .start-continue { align-self: flex-start; }
 .start-continue.is-disabled { opacity: .45; pointer-events: none; }
