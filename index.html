@@ -321,7 +321,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 @media (prefers-reduced-motion: no-preference) {
   .ts-track { animation: ts-loop 32s linear infinite; will-change: transform; }
   @keyframes ts-loop { to { transform: translateX(-100%); } }
-  .trust-strip:hover .ts-track { animation-play-state: paused; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ts-track[aria-hidden] { display: none; }
@@ -939,10 +938,8 @@ body.modal-open { overflow: hidden; }
 /* Video background for the Start-here tile */
 .start { position: relative; overflow: hidden; }
 .start-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 0; }
-.start.has-video::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(100deg, rgba(253,232,239,.80) 0%, rgba(253,232,239,.55) 42%, rgba(253,232,239,.34) 100%); }
 .start.has-video > *:not(.start-bg) { position: relative; z-index: 2; }
-.start.has-video h2, .start.has-video > div > p { text-shadow: 0 1px 10px rgba(255,255,255,.55); }
+.start.has-video h2, .start.has-video > div > p { text-shadow: 0 1px 12px rgba(255,255,255,.6); }
 .start-picker { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
 .start-continue { align-self: flex-start; }
 .start-continue.is-disabled { opacity: .45; pointer-events: none; }
@@ -992,7 +989,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   font-size: 10px; line-height: 1; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
-.trust-strip.paused .ts-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .ts-pause { display: none; } }
 
 /* ── Reduced motion: kill every interaction transition/animation too.
@@ -1499,7 +1495,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Trust strip: marquee -->
 <div class="trust-strip" id="tstrip">
-  <button class="ts-pause" id="tsPause" aria-pressed="false" aria-label="Pause scrolling banner">❚❚</button>
   <div class="ts-inner">
     <div class="ts-track">
       <span class="ts-item">✓ Personalized support</span>
@@ -1911,18 +1906,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     }
   } catch (err) {
     revealAll();
-  }
-
-  /* Marquee pause/play (WCAG 2.2.2 — hover can't be the only pause). */
-  var strip = document.getElementById('tstrip');
-  var pauseBtn = document.getElementById('tsPause');
-  if (strip && pauseBtn) {
-    pauseBtn.addEventListener('click', function () {
-      var paused = strip.classList.toggle('paused');
-      pauseBtn.setAttribute('aria-pressed', String(paused));
-      pauseBtn.textContent = paused ? '▶' : '❚❚';
-      pauseBtn.setAttribute('aria-label', paused ? 'Resume scrolling banner' : 'Pause scrolling banner');
-    });
   }
 
   /* Testimonial carousel (Hers): track slides, dots, prev/next. */
