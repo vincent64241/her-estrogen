@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>HerEstrogen — All-in-one care for women</title>
-<meta name="description" content="HRT, weight loss, skin, hair, and energy — clinician-guided care for women, 100% online. Licensed clinicians in all 50 states." />
+<meta name="description" content="HRT, weight loss, and hair regrowth — clinician-guided care for women, 100% online. Licensed clinicians in all 50 states." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..800&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
@@ -641,8 +641,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .ho-3 { animation-duration: 10s; animation-delay: -3s; }
 }
 .hair-cards {
-  position: relative; z-index: 2; max-width: 1180px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  position: relative; z-index: 2; max-width: 620px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr; gap: 16px;
   padding-bottom: clamp(32px, 4vw, 56px); text-align: left;
 }
 .hcard {
@@ -867,6 +867,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 32px; }
 .foot-states { margin-top: 28px; font-size: 12.5px; color: var(--muted); max-width: 720px; }
+/* ── Sticky quiz bar (appears on scroll; big conversion lever) ── */
+.qbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  background: rgba(255,255,255,.94); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgba(28,26,23,.10);
+  transform: translateY(120%); transition: transform .4s var(--ease-out);
+}
+.qbar.show { transform: translateY(0); }
+.qbar-in { max-width: 1100px; margin: 0 auto; padding: 12px 20px;
+  display: flex; align-items: center; gap: 16px; }
+.qbar-txt { font-size: 15px; font-weight: 600; color: var(--ink); }
+.qbar-txt span { display: block; font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.qbar .btn { margin-left: auto; }
+@media (max-width: 560px) {
+  .qbar-in { padding: 10px 14px; gap: 12px; }
+  .qbar-txt span { display: none; }
+  .qbar .btn { padding: 12px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .qbar { transition: none; } }
 .foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 24px; color: var(--brand); letter-spacing: -0.02em; }
 .foot-brand strong { font-weight: 700; }
 .foot-tag { margin-top: 8px; font-size: 14px; color: var(--ink-2); max-width: 300px; }
@@ -1225,20 +1244,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div></div>
       </div>
       <div class="nav-item has-mega">
-        <a href="#skin">Skin</a>
-        <div class="mega"><div class="mega-inner">
-          <div class="mega-col"><a class="mega-all" href="#skinhair">See all Skin →</a></div>
-          <div class="mega-col"><h5>Skin &amp; peptide care</h5>
-            <a href="/products/ghk-cu-face-cream">GHK-Cu Face Cream <span class="rx">Rx</span></a>
-            <a href="/products/glutathione">Glutathione <span class="rx">Rx</span></a>
-          </div>
-          <div class="mega-col"><h5>Learn</h5>
-            <a href="#proof">Real results</a>
-            <a href="#faq">FAQs</a>
-          </div>
-        </div></div>
-      </div>
-      <div class="nav-item has-mega">
         <a href="#hair">Hair</a>
         <div class="mega"><div class="mega-inner">
           <div class="mega-col"><a class="mega-all" href="#hairsec">See all Hair →</a></div>
@@ -1252,29 +1257,13 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div></div>
       </div>
       <div class="nav-item has-mega">
-        <a href="#energy">Energy</a>
-        <div class="mega"><div class="mega-inner">
-          <div class="mega-col"><a class="mega-all" href="#recovery">See all Energy →</a></div>
-          <div class="mega-col"><h5>Energy &amp; recovery</h5>
-            <a href="/products/nad">NAD+ <span class="rx">Rx</span></a>
-            <a href="/products/sermorelin">Sermorelin <span class="rx">Rx</span></a>
-          </div>
-          <div class="mega-col"><h5>Learn</h5>
-            <a href="#proof">Real results</a>
-            <a href="#faq">FAQs</a>
-          </div>
-        </div></div>
-      </div>
-      <div class="nav-item has-mega">
         <a href="#lineup">Top Products</a>
         <div class="mega"><div class="mega-inner">
           <div class="mega-col"><a class="mega-all" href="#lineup">See all products →</a></div>
           <div class="mega-col"><h5>Most popular</h5>
             <a href="/products/semaglutide">GLP-1 (Semaglutide) <span class="rx">Rx</span></a>
             <a href="/products/estradiol-patch">Estradiol Patch <span class="rx">Rx</span></a>
-            <a href="/products/ghk-cu-face-cream">GHK-Cu Face Cream <span class="rx">Rx</span></a>
             <a href="/products/minoxidil">Minoxidil <span class="rx">Rx</span></a>
-            <a href="/products/nad">NAD+ <span class="rx">Rx</span></a>
           </div>
           <div class="mega-col"><h5>Learn</h5>
             <a href="#proof">Real results</a>
@@ -1291,9 +1280,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   <div class="m-panel" id="mpanel">
     <a href="#weightloss" style="--n:0">Weight Loss</a>
     <a href="#menopause" style="--n:1">Menopause</a>
-    <a href="#skin" style="--n:2">Skin</a>
     <a href="#hair" style="--n:3">Hair</a>
-    <a href="#energy" style="--n:4">Energy</a>
     <a href="#lineup" style="--n:5">Top Products</a>
   </div>
 </nav>
@@ -1302,7 +1289,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <div class="sec-divider hero-divider">
   <div class="eyebrow">All-in-one care for women · 100% online</div>
   <h1>Explore everything we treat</h1>
-  <p>Weight, skin, hair, energy, and recovery — expert, clinician-guided care for every part of your health, 100% online.</p>
+  <p>Weight loss, menopause &amp; hormone care, and hair regrowth — expert, clinician-guided care for women, 100% online.</p>
 </div>
 
 <!-- Bento feature cards (hero) -->
@@ -1325,14 +1312,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </a>
     </div>
     <div class="bento-small">
-      <a class="mini-card" id="skin" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <span class="goal-left"><span class="mini-ic mi-rose">✦</span><span class="t">Face &amp; skin <em>with GHK-Cu</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
-      <a class="mini-card" id="energy" href="https://quiz.herestrogen.com/herestrogen_hrt">
-        <span class="goal-left"><span class="mini-ic mi-blue">⚡</span><span class="t">NAD+ <em>for energy &amp; longevity</em></span></span>
-        <span class="mc-arrow"><i>→</i></span>
-      </a>
       <a class="mini-card" id="hair" href="https://quiz.herestrogen.com/herestrogen_hrt">
         <span class="goal-left"><span class="mini-ic mi-tan">❋</span><span class="t">Grow fuller <em>hair</em></span></span>
         <span class="mc-arrow"><i>→</i></span>
@@ -1353,36 +1332,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <div class="stat-big"><b>100% online</b><span>no office visits needed</span></div>
       <div class="stat-big"><b>All 50 states</b><span>licensed clinicians</span></div>
       <div class="stat-big"><b>Under 2 days</b><span>to clinician review</span></div>
-    </div>
-    <div class="wall-head" data-reveal>
-      <span class="wall-pill"><span class="wall-avastack"><i></i><i></i><i></i></span> Caring for women in all 50 states</span>
-      <h2>Words of praise from women<br /><em>who found relief</em></h2>
-    </div>
-    <div class="wall-rows" data-reveal style="--i:1">
-      <div class="wall-row"><div class="wall-track wall-track-a">
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>Within three weeks the night sweats were gone. My clinician actually listened instead of brushing me off.</blockquote><figcaption><span class="wc-ava" style="--a:#b8235c">SM</span><span class="wc-meta"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>Simple, private, and it worked. I'm sleeping through the night for the first time in ages.</blockquote><figcaption><span class="wc-ava" style="--a:#c26a4a">DK</span><span class="wc-meta"><b>Denise K.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>The brain fog lifted within a month. I feel sharp at work again — like myself.</blockquote><figcaption><span class="wc-ava" style="--a:#3d5a7a">ML</span><span class="wc-meta"><b>Maria L.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>My energy came back and the weight finally started moving. I feel in control again.</blockquote><figcaption><span class="wc-ava" style="--a:#a4184f">NR</span><span class="wc-meta"><b>Nina R.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>The whole thing took ten minutes and my meds arrived in days. Wish I'd done it sooner.</blockquote><figcaption><span class="wc-ava" style="--a:#7a1f66">BC</span><span class="wc-meta"><b>Beth C.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>Within three weeks the night sweats were gone. My clinician actually listened instead of brushing me off.</blockquote><figcaption><span class="wc-ava" style="--a:#b8235c">SM</span><span class="wc-meta"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>Simple, private, and it worked. I'm sleeping through the night for the first time in ages.</blockquote><figcaption><span class="wc-ava" style="--a:#c26a4a">DK</span><span class="wc-meta"><b>Denise K.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>The brain fog lifted within a month. I feel sharp at work again — like myself.</blockquote><figcaption><span class="wc-ava" style="--a:#3d5a7a">ML</span><span class="wc-meta"><b>Maria L.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>My energy came back and the weight finally started moving. I feel in control again.</blockquote><figcaption><span class="wc-ava" style="--a:#a4184f">NR</span><span class="wc-meta"><b>Nina R.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>The whole thing took ten minutes and my meds arrived in days. Wish I'd done it sooner.</blockquote><figcaption><span class="wc-ava" style="--a:#7a1f66">BC</span><span class="wc-meta"><b>Beth C.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-      </div></div>
-      <div class="wall-row"><div class="wall-track wall-track-b">
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>I'd been told to &lsquo;just wait it out&rsquo; for years. This finally treated the cause, not the symptoms.</blockquote><figcaption><span class="wc-ava" style="--a:#8f2f6a">RT</span><span class="wc-meta"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>No more 2am wake-ups drenched in sweat. My mood is steadier than it's been in years.</blockquote><figcaption><span class="wc-ava" style="--a:#6f8f66">AP</span><span class="wc-meta"><b>Angela P.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>Everything's online and the check-ins are easy. My only regret is not starting sooner.</blockquote><figcaption><span class="wc-ava" style="--a:#9a5f8f">KW</span><span class="wc-meta"><b>Karen W.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>My skin looks calmer and my hair feels thicker. Little wins that added up fast.</blockquote><figcaption><span class="wc-ava" style="--a:#c26a4a">TG</span><span class="wc-meta"><b>Toni G.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card"><span class="q-mark">&ldquo;</span><blockquote>Someone finally connected my symptoms instead of dismissing them one by one.</blockquote><figcaption><span class="wc-ava" style="--a:#3d5a7a">PV</span><span class="wc-meta"><b>Paula V.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>I'd been told to &lsquo;just wait it out&rsquo; for years. This finally treated the cause, not the symptoms.</blockquote><figcaption><span class="wc-ava" style="--a:#8f2f6a">RT</span><span class="wc-meta"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>No more 2am wake-ups drenched in sweat. My mood is steadier than it's been in years.</blockquote><figcaption><span class="wc-ava" style="--a:#6f8f66">AP</span><span class="wc-meta"><b>Angela P.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>Everything's online and the check-ins are easy. My only regret is not starting sooner.</blockquote><figcaption><span class="wc-ava" style="--a:#9a5f8f">KW</span><span class="wc-meta"><b>Karen W.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>My skin looks calmer and my hair feels thicker. Little wins that added up fast.</blockquote><figcaption><span class="wc-ava" style="--a:#c26a4a">TG</span><span class="wc-meta"><b>Toni G.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-        <figure class="wall-card" aria-hidden="true"><span class="q-mark">&ldquo;</span><blockquote>Someone finally connected my symptoms instead of dismissing them one by one.</blockquote><figcaption><span class="wc-ava" style="--a:#3d5a7a">PV</span><span class="wc-meta"><b>Paula V.</b><span>Verified patient · placeholder</span></span></figcaption></figure>
-      </div></div>
     </div>
     <div class="proof-badges">
       <span><span class="bdot">✓</span> FDA-approved &amp; compounded options</span>
@@ -1554,34 +1503,17 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <section class="lineup" id="skinhair">
   <div class="container">
     <div class="lu-head" data-reveal>
-      <h2>Skin &amp; hair</h2>
+      <h2>Hair</h2>
       <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
     </div>
     <div class="lineup-scroll" data-reveal-group>
-      <div class="p-card">
-        <div class="p-img pi-rose has-photo"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-pump.webp" alt="GHK-Cu Face Cream product" loading="lazy" decoding="async" width="440" height="440" /></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">GHK-Cu Face Cream</h3>
-          <p class="p-desc">Copper peptide cream for firmer, healthier-looking skin.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
       <div class="p-card">
         <div class="p-img pi-sage has-photo"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-dropper.webp" alt="Hair Growth — Minoxidil product" loading="lazy" decoding="async" width="440" height="440" /></div>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Hair Growth — Minoxidil</h3>
-          <p class="p-desc">Prescription regrowth treatment, with GHK-Cu cream options.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-img pi-lemon has-photo"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-pills.webp" alt="Glutathione product" loading="lazy" decoding="async" width="440" height="440" /></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Glutathione</h3>
-          <p class="p-desc">Antioxidant support for skin brightness and clarity.</p>
+          <p class="p-desc">Prescription regrowth treatment for thinning hair.</p>
+          
           <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
@@ -1590,107 +1522,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
-<!-- Energy & recovery lineup -->
-<section class="lineup" id="recovery">
-  <div class="container">
-    <div class="lu-head" data-reveal>
-      <h2>Energy &amp; recovery</h2>
-      <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
-    </div>
-    <div class="lineup-scroll" data-reveal-group>
-      <div class="p-card">
-        <div class="p-img pi-blue has-photo"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-vial.webp" alt="NAD+ product" loading="lazy" decoding="async" width="440" height="440" /></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">NAD+</h3>
-          <p class="p-desc">For cellular energy and healthy aging support.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-img pi-tan has-photo"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-vialsyringe.webp" alt="Sermorelin product" loading="lazy" decoding="async" width="440" height="440" /></div>
-        <div class="p-body">
-          <span class="p-status"><span class="p-dot"></span> In stock</span>
-          <h3 class="p-name">Sermorelin</h3>
-          <p class="p-desc">For recovery, sleep, and healthy aging support.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
-        </div>
-      </div>
-    </div>
-    <p class="lineup-fine">Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. Prescription products require clinician evaluation.</p>
-  </div>
-</section>
 
-<!-- Social proof — wellness verticals (clean, minimal, reveal on scroll) -->
-<section class="treviews" id="treviews" aria-label="Patient testimonials">
-  <p class="sproof-eyebrow" data-reveal>Real results</p>
-  <div class="tr-inner">
-    <div class="tr-track">
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Priya N.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"The energy support was the missing piece — I get through the afternoon without crashing."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Denise K.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"My skin feels firmer and my hair looks fuller. Small changes that really add up."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Angela P.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"Recovery is faster and I sleep deeper. Honestly I feel a decade younger."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Karen W.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"Everything in one place, one clinician who actually knows my whole history."</p>
-      </article>
-    </div>
-    <div class="tr-track" aria-hidden="true">
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Sandra M.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"My hair stopped shedding and my skin looks calmer. I feel like myself in the mirror again."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Priya N.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"The energy support was the missing piece — I get through the afternoon without crashing."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Denise K.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"One platform for hormones, hair, and recovery. So much simpler than juggling clinics."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Rachel T.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"My skin feels firmer and my hair looks fuller. Small changes that really add up."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Angela P.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"Recovery is faster and I sleep deeper. Honestly I feel a decade younger."</p>
-      </article>
-      <article class="tr-card">
-        <div class="tr-head"><span class="tr-ava"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></span><span class="tr-id"><b>Karen W.</b><span>Verified patient · placeholder</span></span></div>
-        <span class="stars">★★★★★</span>
-        <p>"Everything in one place, one clinician who actually knows my whole history."</p>
-      </article>
-    </div>
-  </div>
-</section>
 
 <!-- Goals band -->
 <section class="container">
@@ -1700,10 +1532,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <div class="goal-grid" data-reveal-group>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚖️</span> Lose weight</span><span class="g-arrow">→</span></a>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">🌡️</span> Treat menopause</span><span class="g-arrow">→</span></a>
-      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">✨</span> Improve skin</span><span class="g-arrow">→</span></a>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">💇‍♀️</span> Regrow hair</span><span class="g-arrow">→</span></a>
-      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚡</span> Boost energy</span><span class="g-arrow">→</span></a>
-      <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">💪</span> Recover stronger</span><span class="g-arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -1776,32 +1605,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div>
       </div>
     </div>
-    <div class="hcard tcar" data-reveal>
-      <img class="tcar-product" src="assets/rx-dropper.webp" alt="Minoxidil hair treatment" loading="lazy" decoding="async" />
-      <div class="tcar-viewport">
-        <div class="tcar-track">
-          <div class="tcar-slide">
-            <p class="tquote">"My hairline filled in and the shedding slowed by month three. I finally feel like <span class="q-em">myself</span> in photos again."</p>
-            <p class="tmeta">Verified patient · placeholder<br />Minoxidil</p>
-          </div>
-          <div class="tcar-slide">
-            <p class="tquote">"Thicker, fuller hair without the fuss — a few drops a day and <span class="q-em">steady, visible results</span>."</p>
-            <p class="tmeta">Verified patient · placeholder<br />Minoxidil</p>
-          </div>
-        </div>
-      </div>
-      <div class="tcar-navs" aria-hidden="false">
-        <button class="tcar-prev" aria-label="Previous story">‹</button>
-        <button class="tcar-next" aria-label="Next story">›</button>
-      </div>
-      <div class="tcar-foot">
-        <div class="tcar-dots" role="tablist" aria-label="Stories">
-          <button class="tcar-dot on" aria-label="Story 1"></button>
-          <button class="tcar-dot" aria-label="Story 2"></button>
-        </div>
-        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get results</a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1820,40 +1623,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
-<!-- Social proof — clinician care (arched 5-testimonial wall, scroll-animated) -->
-<section class="archsec">
-  <div class="container">
-    <p class="arch-eyebrow" data-reveal>Why women stay</p>
-    <h2 class="arch-title" data-reveal style="--i:1">Care that actually <em>listens</em></h2>
-    <div class="arch" data-reveal-group>
-      <figure class="arch-card" style="--arch:translateY(40px) rotate(-9deg)">
-        <span class="stars">★★★★★</span>
-        <blockquote>"For the first time, a clinician actually listened — then built a plan around my labs and my life."</blockquote>
-        <cite>Verified patient, 53 · placeholder</cite>
-      </figure>
-      <figure class="arch-card" style="--arch:translateY(13px) rotate(-4.5deg)">
-        <span class="stars">★★★★★</span>
-        <blockquote>"No rushed seven-minute visit. They explained every option and let me choose what fit my life."</blockquote>
-        <cite>Verified patient, 48 · placeholder</cite>
-      </figure>
-      <figure class="arch-card" style="--arch:translateY(0) rotate(0)">
-        <span class="stars">★★★★★</span>
-        <blockquote>"My questions got real answers, not a brochure. I finally understood my own body again."</blockquote>
-        <cite>Verified patient, 51 · placeholder</cite>
-      </figure>
-      <figure class="arch-card" style="--arch:translateY(13px) rotate(4.5deg)">
-        <span class="stars">★★★★★</span>
-        <blockquote>"Follow-ups are easy and my dose got fine-tuned to me. For once I actually feel heard."</blockquote>
-        <cite>Verified patient, 45 · placeholder</cite>
-      </figure>
-      <figure class="arch-card" style="--arch:translateY(40px) rotate(9deg)">
-        <span class="stars">★★★★★</span>
-        <blockquote>"I only wish I'd found them years ago. The care feels personal, start to finish."</blockquote>
-        <cite>Verified patient, 56 · placeholder</cite>
-      </figure>
-    </div>
-  </div>
-</section>
 
 <!-- FAQ (right above the Start-here prompt) -->
 <section class="faq" id="faq">
@@ -1882,7 +1651,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Can't sleep</a>
       <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Low energy</a>
       <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Hair thinning</a>
-      <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">Skin aging</a>
       <a class="chip" href="https://quiz.herestrogen.com/herestrogen_hrt">All of the above</a>
     </div>
   </div>
@@ -1900,9 +1668,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <h4>Care</h4>
         <a href="#weightloss">Weight Loss</a>
         <a href="#menopause">Menopause &amp; HRT</a>
-        <a href="#skin">Skin</a>
         <a href="#hair">Hair</a>
-        <a href="#energy">Energy</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
@@ -1923,6 +1689,14 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
   </div>
 </footer>
+
+<!-- Sticky quiz bar -->
+<div class="qbar" id="qbar" aria-hidden="true">
+  <div class="qbar-in">
+    <div class="qbar-txt">See if you qualify<span>2-minute quiz &middot; no insurance needed &middot; 100% online</span></div>
+    <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Start the quiz</a>
+  </div>
+</div>
 
 <script src="assets/legal.js"></script>
 <script>
@@ -2049,6 +1823,23 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     window.addEventListener('resize', onScroll, { passive: true });
     frame();
   } catch (err2) { /* parallax is decorative */ }
+
+  /* Sticky quiz bar — reveal after scroll, hide over the footer CTA */
+  var qbar = document.getElementById('qbar');
+  var footEl = document.querySelector('footer');
+  if (qbar) {
+    var qOnScroll = function () {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      var vh = window.innerHeight;
+      var past = y > vh * 0.6;
+      var nearFoot = footEl && footEl.getBoundingClientRect().top < vh - 40;
+      if (past && !nearFoot) { qbar.classList.add('show'); qbar.setAttribute('aria-hidden', 'false'); }
+      else { qbar.classList.remove('show'); qbar.setAttribute('aria-hidden', 'true'); }
+    };
+    window.addEventListener('scroll', qOnScroll, { passive: true });
+    window.addEventListener('resize', qOnScroll, { passive: true });
+    qOnScroll();
+  }
 
   /* Hamburger menu */
   var burger = document.getElementById('burger');
