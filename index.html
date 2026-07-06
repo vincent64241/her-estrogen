@@ -621,9 +621,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .calc-btn:hover { transform: translateY(-1px); }
 .bmi-cat { text-align: center; font-size: 13.5px; font-weight: 600; color: var(--brand); margin: 12px 0 0; min-height: 18px; }
 /* middle image card */
-.calc-photo { position: relative; min-height: 360px; padding: 0; overflow: hidden; display: block;
-  background: linear-gradient(160deg, #bfe0f5 0%, #dceffa 55%, #eaf6fc 100%); }
-.calc-photo .ph-chip { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: rgba(28,26,23,.38); backdrop-filter: blur(6px); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 7px 12px; border-radius: 12px; }
+.calc-photo { position: relative; min-height: 360px; padding: 18px; overflow: hidden; background: #fff;
+  display: flex; align-items: center; justify-content: center; }
+.calc-photo svg { width: 100%; height: 100%; max-height: 100%; display: block; }
+@media (prefers-reduced-motion: reduce) { .calc-photo svg * { animation: none !important; } }
 /* lose card */
 .lose-card { text-align: center; display: flex; flex-direction: column; }
 .lose-lead, .lose-lead2 { font-size: 14px; color: var(--ink-2); margin: 0; }
@@ -1671,7 +1672,82 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </div>
 
       <a class="calc-card calc-photo" href="https://quiz.herestrogen.com/herestrogen_hrt" aria-label="Explore weight loss">
-        <span class="ph-chip">Lifestyle image placeholder</span>
+        <svg viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>GLP-1 injection pen</title>
+          <desc>Animated GLP-1 auto-injector pen in HerEstrogen pink</desc>
+          <defs>
+            <style>
+              .q-body{fill:#fdf0f5;stroke:#f0b8d0;stroke-width:1.5}
+              .q-cap{fill:#e8457a;stroke:#c42d60;stroke-width:1.5}
+              .q-tip{fill:#c42d60}
+              .q-win{fill:#fce0ec;stroke:#f0a0c0;stroke-width:1}
+              .q-grip{fill:#fce8f2;stroke:#f0b8d0;stroke-width:0.5}
+              .q-lab{fill:#fdf0f5;stroke:#f0a0c0;stroke-width:0.5}
+              .q-btn{fill:#c42d60;stroke:#a01f4a;stroke-width:1}
+              .q-g{animation:qf 3.2s ease-in-out infinite;transform-origin:340px 340px}
+              @keyframes qf{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+              .q-pl{animation:qp 3.2s ease-in-out infinite;transform-origin:340px 175px}
+              @keyframes qp{0%,42%{transform:translateY(0)}60%,80%{transform:translateY(18px)}100%{transform:translateY(0)}}
+              .q-liq{animation:qd 3.2s ease-in-out infinite;transform-origin:340px 360px}
+              @keyframes qd{0%,42%{transform:scaleY(1);opacity:1}80%{transform:scaleY(0.08);opacity:0.3}100%{transform:scaleY(1);opacity:1}}
+              .q-sp{animation:qs 3.2s ease-in-out infinite;opacity:0;transform-origin:340px 490px}
+              @keyframes qs{0%,52%{opacity:0;transform:translateY(0) scale(0.5)}66%,76%{opacity:1;transform:translateY(8px) scale(1)}90%,100%{opacity:0;transform:translateY(18px) scale(1.4)}}
+              .qm1{animation:qmo 3.2s 0.2s ease-in-out infinite;opacity:0;transform-origin:272px 310px}
+              .qm2{animation:qmo 3.2s 0.7s ease-in-out infinite;opacity:0;transform-origin:258px 355px}
+              .qm3{animation:qmo 3.2s 1.2s ease-in-out infinite;opacity:0;transform-origin:262px 400px}
+              .qm4{animation:qmo 3.2s 0.9s ease-in-out infinite;opacity:0;transform-origin:408px 318px}
+              .qm5{animation:qmo 3.2s 0.4s ease-in-out infinite;opacity:0;transform-origin:424px 362px}
+              .qm6{animation:qmo 3.2s 1.5s ease-in-out infinite;opacity:0;transform-origin:418px 405px}
+              @keyframes qmo{0%{opacity:0;transform:translate(0,0) scale(0.3)}20%{opacity:0}45%,60%{opacity:1;transform:translate(0,-30px) scale(1)}100%{opacity:0;transform:translate(0,-65px) scale(0.3)}}
+            </style>
+            <clipPath id="qClip"><rect x="319" y="271" width="42" height="88" rx="5"/></clipPath>
+          </defs>
+          <circle cx="340" cy="340" r="280" fill="#fff5f9" stroke="#f7d0e3" stroke-width="1"/>
+          <circle cx="340" cy="340" r="255" fill="none" stroke="#fce8f2" stroke-width="0.5"/>
+          <g class="q-g">
+            <rect x="308" y="175" width="64" height="280" rx="10" class="q-body"/>
+            <rect x="308" y="390" width="64" height="60" rx="4" class="q-grip"/>
+            <line x1="315" y1="400" x2="365" y2="400" stroke="#f0b8d0" stroke-width="0.8"/>
+            <line x1="315" y1="409" x2="365" y2="409" stroke="#f0b8d0" stroke-width="0.8"/>
+            <line x1="315" y1="418" x2="365" y2="418" stroke="#f0b8d0" stroke-width="0.8"/>
+            <line x1="315" y1="427" x2="365" y2="427" stroke="#f0b8d0" stroke-width="0.8"/>
+            <line x1="315" y1="436" x2="365" y2="436" stroke="#f0b8d0" stroke-width="0.8"/>
+            <line x1="315" y1="445" x2="365" y2="445" stroke="#f0b8d0" stroke-width="0.8"/>
+            <rect x="318" y="270" width="44" height="90" rx="6" class="q-win"/>
+            <g clip-path="url(#qClip)"><rect x="319" y="271" width="42" height="88" fill="#e8457a" class="q-liq"/></g>
+            <line x1="318" y1="295" x2="327" y2="295" stroke="#c42d60" stroke-width="0.8"/>
+            <line x1="318" y1="315" x2="327" y2="315" stroke="#c42d60" stroke-width="0.8"/>
+            <line x1="318" y1="335" x2="327" y2="335" stroke="#c42d60" stroke-width="0.8"/>
+            <line x1="318" y1="355" x2="327" y2="355" stroke="#c42d60" stroke-width="0.8"/>
+            <rect x="310" y="195" width="60" height="65" rx="4" class="q-lab"/>
+            <rect x="318" y="207" width="30" height="4" rx="2" fill="#e8457a" opacity="0.6"/>
+            <rect x="318" y="215" width="44" height="3" rx="1.5" fill="#e8457a" opacity="0.35"/>
+            <rect x="318" y="221" width="38" height="3" rx="1.5" fill="#e8457a" opacity="0.35"/>
+            <rect x="318" y="230" width="20" height="8" rx="2" fill="#c42d60" opacity="0.5"/>
+            <rect x="342" y="230" width="18" height="8" rx="2" fill="#e8457a" opacity="0.3"/>
+            <rect x="318" y="242" width="44" height="2.5" rx="1.2" fill="#e8457a" opacity="0.2"/>
+            <rect x="318" y="248" width="36" height="2.5" rx="1.2" fill="#e8457a" opacity="0.2"/>
+            <g class="q-pl">
+              <rect x="324" y="155" width="32" height="24" rx="6" class="q-cap"/>
+              <rect x="329" y="148" width="22" height="12" rx="4" class="q-btn"/>
+            </g>
+            <rect x="330" y="453" width="20" height="16" rx="3" fill="#c42d60" stroke="#a01f4a" stroke-width="1"/>
+            <polygon points="335,469 345,469 342,492 338,492" class="q-tip"/>
+            <g class="q-sp">
+              <circle cx="340" cy="500" r="2.5" fill="#e8457a" opacity="0.9"/>
+              <circle cx="333" cy="506" r="1.8" fill="#e8457a" opacity="0.7"/>
+              <circle cx="347" cy="506" r="1.8" fill="#e8457a" opacity="0.7"/>
+              <circle cx="336" cy="513" r="1.2" fill="#c42d60" opacity="0.5"/>
+              <circle cx="344" cy="513" r="1.2" fill="#c42d60" opacity="0.5"/>
+            </g>
+          </g>
+          <g class="qm1"><circle cx="272" cy="310" r="5" fill="#e8457a" opacity="0.7"/><circle cx="281" cy="304" r="3" fill="#f07aa0" opacity="0.5"/><line x1="272" y1="310" x2="281" y2="304" stroke="#e8457a" stroke-width="1" opacity="0.4"/></g>
+          <g class="qm2"><circle cx="258" cy="355" r="4" fill="#c42d60" opacity="0.6"/><circle cx="267" cy="348" r="2.5" fill="#e8457a" opacity="0.45"/><line x1="258" y1="355" x2="267" y2="348" stroke="#c42d60" stroke-width="1" opacity="0.35"/></g>
+          <g class="qm3"><circle cx="262" cy="400" r="3.5" fill="#f07aa0" opacity="0.55"/></g>
+          <g class="qm4"><circle cx="408" cy="318" r="5" fill="#e8457a" opacity="0.7"/><circle cx="399" cy="311" r="3" fill="#f07aa0" opacity="0.5"/><line x1="408" y1="318" x2="399" y2="311" stroke="#e8457a" stroke-width="1" opacity="0.4"/></g>
+          <g class="qm5"><circle cx="424" cy="362" r="4" fill="#c42d60" opacity="0.6"/><circle cx="414" cy="354" r="2.5" fill="#e8457a" opacity="0.45"/><line x1="424" y1="362" x2="414" y2="354" stroke="#c42d60" stroke-width="1" opacity="0.35"/></g>
+          <g class="qm6"><circle cx="418" cy="405" r="3.5" fill="#f07aa0" opacity="0.55"/></g>
+        </svg>
       </a>
 
       <div class="calc-card lose-card">
