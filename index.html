@@ -281,6 +281,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .fc-price { display: inline-flex; align-items: baseline; gap: 4px; margin-top: 12px; align-self: flex-start;
   background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.32); backdrop-filter: blur(4px);
   border-radius: 999px; padding: 6px 14px; font-size: 13.5px; font-weight: 700; color: #fff; }
+.fc-price[hidden] { display: none; }   /* gated GLP-1 tile: stay fully hidden until launch */
 .fc-price b { font-weight: 800; }
 .fc-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
 /* Circle arrows with slide-through glyph swap (Ro) */
@@ -1621,7 +1622,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Patch</h3>
           <p class="p-desc">Twice-weekly patch. Steady, low-maintenance estrogen delivery.</p>
-          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">Starting at $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1630,7 +1631,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Gel</h3>
           <p class="p-desc">Daily transdermal gel. Absorbs in minutes, easy dose adjustments.</p>
-          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">Starting at $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1639,7 +1640,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Oral Pills</h3>
           <p class="p-desc">A familiar daily pill for whole-body symptom relief.</p>
-          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">Starting at $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1648,7 +1649,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Vaginal Cream</h3>
           <p class="p-desc">Local relief for dryness and discomfort, applied where it's needed.</p>
-          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">Starting at $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
     </div>
