@@ -48,7 +48,7 @@
   --ease-pop: cubic-bezier(.34,1.56,.64,1);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-padding-top: 84px; }
+html { scroll-padding-top: calc(84px + var(--bar-h, 42px)); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html, body { overflow-x: clip; }
 body {
@@ -82,18 +82,23 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Offer bar ── */
 .offer-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: var(--brand);
   color: #fff;
-  text-align: center;
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 9px 16px;
+  display: flex; align-items: center; justify-content: center; gap: clamp(16px, 4vw, 48px);
+  padding: 9px 20px; flex-wrap: wrap;
 }
-.offer-bar a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
-.offer-bar :focus-visible { outline-color: #fff; }
+.ob-copy { text-align: center; line-height: 1.35; }
+.ob-copy b { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.ob-copy span { font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,.9); }
+.ob-timer { display: flex; align-items: center; gap: 4px; }
+.ob-unit { display: flex; flex-direction: column; align-items: center; min-width: 32px; }
+.ob-unit strong { font-size: 18px; font-weight: 800; line-height: 1; }
+.ob-unit small { font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-top: 1px; }
+.ob-sep { font-size: 16px; font-weight: 700; margin: 0 2px; padding-bottom: 8px; opacity: .7; }
 
 /* ── Nav (sticky, elevates + condenses after scroll — Ro) ── */
-.nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+.nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: var(--bar-h, 42px); z-index: 50; }
 .nav::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   box-shadow: 0 10px 30px rgba(28,26,23,.09);
@@ -981,25 +986,6 @@ body.modal-open { overflow: hidden; }
 footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); padding: 48px 0 40px; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 32px; }
 .foot-states { margin-top: 28px; font-size: 12.5px; color: var(--muted); max-width: 720px; }
-/* ── Sticky quiz bar (appears on scroll; big conversion lever) ── */
-.qbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  background: rgba(255,255,255,.94); backdrop-filter: blur(10px);
-  border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgba(28,26,23,.10);
-  transform: translateY(120%); transition: transform .4s var(--ease-out);
-}
-.qbar.show { transform: translateY(0); }
-.qbar-in { max-width: 1100px; margin: 0 auto; padding: 12px 20px;
-  display: flex; align-items: center; gap: 16px; }
-.qbar-txt { font-size: 15px; font-weight: 600; color: var(--ink); }
-.qbar-txt span { display: block; font-size: 12.5px; font-weight: 500; color: var(--muted); }
-.qbar .btn { margin-left: auto; }
-@media (max-width: 560px) {
-  .qbar-in { padding: 10px 14px; gap: 12px; }
-  .qbar-txt span { display: none; }
-  .qbar .btn { padding: 12px 18px; }
-}
-@media (prefers-reduced-motion: reduce) { .qbar { transition: none; } }
 .foot-brand { font-family: 'Newsreader', Georgia, serif; font-size: 24px; color: var(--brand); letter-spacing: -0.02em; }
 .foot-brand strong { font-weight: 700; }
 .foot-tag { margin-top: 8px; font-size: 14px; color: var(--ink-2); max-width: 300px; }
@@ -1258,6 +1244,67 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   .hero-cta-row { gap: 10px; }
   .btn-lg { padding: 15px 24px; }
 }
+
+/* ── Offer popup ── */
+.opop { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: 18px; opacity: 0; transition: opacity .5s ease; pointer-events: none; }
+.opop.visible { opacity: 1; pointer-events: auto; }
+.opop[hidden] { display: none !important; }
+.opop-bd { position: absolute; inset: 0; background: rgba(20,4,12,.55); backdrop-filter: blur(4px); }
+.opop-card {
+  position: relative; z-index: 1; width: 100%; max-width: 560px;
+  background: linear-gradient(160deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  border-radius: 22px; padding: clamp(32px, 6vw, 52px) clamp(24px, 5vw, 48px) clamp(28px, 5vw, 44px);
+  text-align: center; color: #fff;
+  box-shadow: 0 48px 96px -20px rgba(10,2,8,.7);
+  overflow: hidden;
+}
+/* Subtle pink glow at top — mirrors .band */
+.opop-card::before {
+  content: ""; position: absolute; inset: -20%; pointer-events: none;
+  background: radial-gradient(90% 55% at 50% 0%, rgba(255,156,196,.22), transparent 60%);
+}
+.opop-card > * { position: relative; z-index: 1; }
+.opop-x {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.12); color: #fff; font-size: 18px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease;
+}
+.opop-x:hover { background: rgba(255,255,255,.22); }
+.opop-logo { font-size: 17px; font-weight: 700; letter-spacing: .05em; color: var(--lime); margin-bottom: 18px; }
+.opop-logo .thin { font-style: italic; font-weight: 400; }
+.opop-h { font-size: clamp(26px, 5.5vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+.opop-sub { margin: 10px auto 0; font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.5; }
+.opop-concerns { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+.opop-btn {
+  width: 100%; border: 0; border-radius: 999px;
+  padding: 14px 20px; font-family: inherit; font-size: 15px; font-weight: 700; text-align: center;
+  cursor: pointer; transition: filter .15s ease, transform .15s ease;
+}
+.opop-btn.choice { background: var(--brand); color: #fff; }
+.opop-btn.choice:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.opop-btn.choice:active { transform: scale(.98); }
+.opop-btn.primary { background: var(--lime); color: var(--dark-2); margin-top: 4px; }
+.opop-btn.primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.opop-dismiss { background: 0; border: 0; font-family: inherit; font-size: 12px; color: rgba(255,255,255,.45); cursor: pointer; margin-top: 16px; text-decoration: underline; text-underline-offset: 2px; }
+.opop-dismiss:hover { color: rgba(255,255,255,.7); }
+.opop-input {
+  width: 100%; border: 1.5px solid rgba(255,255,255,.25); border-radius: 14px;
+  background: rgba(255,255,255,.1); color: #fff; padding: 14px 16px;
+  font-size: 16px; font-family: inherit; outline: 0; transition: border-color .15s ease;
+  box-sizing: border-box; margin-top: 20px;
+}
+.opop-input::placeholder { color: rgba(255,255,255,.45); }
+.opop-input:focus { border-color: var(--lime); }
+.opop-err { font-size: 12px; color: #ff9cc4; margin: 6px 0 0; min-height: 16px; }
+.opop-step { animation: opFade .35s ease; }
+.opop-step[hidden] { display: none; }
+@keyframes opFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.opop-check { font-size: 48px; margin-bottom: 10px; }
+.opop-success-h { font-size: clamp(22px, 4vw, 28px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.opop-success-sub { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .opop { transition: none; } .opop-step { animation: none; } }
 </style>
 <!-- FAQPage structured data (Google rich result) — answers mirror the visible FAQ verbatim -->
 <script type="application/ld+json">
@@ -1311,8 +1358,22 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </head>
 <body>
 
-<!-- Offer bar -->
-<div class="offer-bar">Clinician-guided care for women, 100% online. <a href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a></div>
+<!-- Offer bar (fixed) -->
+<div class="offer-bar" id="offerBar">
+  <div class="ob-copy">
+    <b>July Offer</b>
+    <span>Up to 50% off &nbsp;·&nbsp; Free 2-Day Shipping &nbsp;·&nbsp; Clinician Guarantee</span>
+  </div>
+  <div class="ob-timer" aria-label="Offer countdown">
+    <div class="ob-unit"><strong id="obDays">00</strong><small>Days</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obHrs">00</strong><small>Hrs</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obMins">00</strong><small>Mins</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obSecs">00</strong><small>Secs</small></div>
+  </div>
+</div>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
@@ -1967,14 +2028,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </footer>
 
-<!-- Sticky quiz bar -->
-<div class="qbar" id="qbar" aria-hidden="true">
-  <div class="qbar-in">
-    <div class="qbar-txt">See if you qualify<span>2-minute quiz &middot; no insurance needed &middot; 100% online</span></div>
-    <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Start the quiz</a>
-  </div>
-</div>
-
 <script src="assets/legal.js"></script>
 <script>
 /* Motion runtime — reveal choreography, nav condense, hamburger, carousels.
@@ -2034,14 +2087,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       if (!document.hidden) watchdog(600);
     });
 
-    /* Nav elevates + condenses once the offer bar scrolls away (no scroll listener). */
+    /* Nav elevates once user scrolls down */
     var nav = document.getElementById('nav');
-    var offer = document.querySelector('.offer-bar');
-    if (nav && offer) {
-      new IntersectionObserver(function (entries) {
-        nav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
-      }).observe(offer);
-    }
+    window.addEventListener('scroll', function () {
+      if (nav) nav.classList.toggle('is-scrolled', (window.pageYOffset || 0) > 8);
+    }, { passive: true });
   } catch (err) {
     revealAll();
   }
@@ -2088,23 +2138,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     window.addEventListener('resize', onScroll, { passive: true });
     frame();
   } catch (err2) { /* parallax is decorative */ }
-
-  /* Sticky quiz bar — reveal after scroll, hide over the footer CTA */
-  var qbar = document.getElementById('qbar');
-  var footEl = document.querySelector('footer');
-  if (qbar) {
-    var qOnScroll = function () {
-      var y = window.pageYOffset || document.documentElement.scrollTop;
-      var vh = window.innerHeight;
-      var past = y > vh * 0.6;
-      var nearFoot = footEl && footEl.getBoundingClientRect().top < vh - 40;
-      if (past && !nearFoot) { qbar.classList.add('show'); qbar.setAttribute('aria-hidden', 'false'); }
-      else { qbar.classList.remove('show'); qbar.setAttribute('aria-hidden', 'true'); }
-    };
-    window.addEventListener('scroll', qOnScroll, { passive: true });
-    window.addEventListener('resize', qOnScroll, { passive: true });
-    qOnScroll();
-  }
 
   /* Hamburger menu */
   var burger = document.getElementById('burger');
@@ -2228,6 +2261,154 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   if (bmiClose) bmiClose.addEventListener('click', function () { closeM(bmiModal); });
   Array.prototype.forEach.call(document.querySelectorAll('.calc-modal'), function (m) { m.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeM(m); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') Array.prototype.forEach.call(document.querySelectorAll('.calc-modal:not([hidden])'), closeM); });
+})();
+</script>
+
+<!-- Bar height offset + countdown -->
+<script>
+(function () {
+  var bar = document.getElementById('offerBar');
+  function setOffset() {
+    if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  }
+  setOffset();
+  window.addEventListener('resize', setOffset, { passive: true });
+
+  /* Countdown to July 31 2026 midnight ET */
+  var END = new Date('2026-08-01T04:00:00Z').getTime();
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var diff = Math.max(0, END - Date.now());
+    var d = Math.floor(diff / 864e5);
+    var h = Math.floor(diff % 864e5 / 36e5);
+    var m = Math.floor(diff % 36e5 / 6e4);
+    var s = Math.floor(diff % 6e4 / 1000);
+    var D = document.getElementById('obDays'), H = document.getElementById('obHrs'),
+        M = document.getElementById('obMins'), S = document.getElementById('obSecs');
+    if (D) D.textContent = pad(d);
+    if (H) H.textContent = pad(h);
+    if (M) M.textContent = pad(m);
+    if (S) S.textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+
+<!-- Offer popup -->
+<div class="opop" id="offerPop" role="dialog" aria-modal="true" aria-labelledby="opopHead" hidden>
+  <div class="opop-bd" id="opopBd"></div>
+  <div class="opop-card">
+    <button class="opop-x" id="opopX" aria-label="Close">&times;</button>
+
+    <!-- Step 1 — concern -->
+    <div class="opop-step" id="opopStep1">
+      <div class="opop-logo">her<span class="thin">estrogen</span></div>
+      <h2 class="opop-h" id="opopHead">Get up to 50% OFF Now</h2>
+      <p class="opop-sub">Free 2-Day Shipping &middot; Clinical Match Guarantee</p>
+      <p class="opop-sub" style="margin-top:6px;font-size:13px;">Tell us about the challenge you're looking to address:</p>
+      <div class="opop-concerns" role="group" aria-label="What are you looking to address?">
+        <button class="opop-btn choice" data-concern="hormone-balance">Hormone Balance</button>
+        <button class="opop-btn choice" data-concern="weight">Weight Management</button>
+        <button class="opop-btn choice" data-concern="hair-skin">Hair &amp; Skin</button>
+        <button class="opop-btn choice" data-concern="not-sure">Not Sure Yet</button>
+      </div>
+      <button class="opop-dismiss" id="opopDismiss">No thanks, I don't like savings</button>
+    </div>
+
+    <!-- Step 2 — email -->
+    <div class="opop-step" id="opopStep2" hidden>
+      <div class="opop-logo">her<span class="thin">estrogen</span></div>
+      <h2 class="opop-h">Enter your email to receive it</h2>
+      <p class="opop-sub">We'll clip your up to 50% off discount so it's ready at checkout.</p>
+      <input class="opop-input" type="email" id="opopEmail" autocomplete="email" inputmode="email" placeholder="you@email.com" />
+      <p class="opop-err" id="opopErr"></p>
+      <button class="opop-btn primary" id="opopContinue" style="margin-top:14px;">Continue &rarr;</button>
+    </div>
+
+    <!-- Step 3 — clipped -->
+    <div class="opop-step" id="opopStep3" hidden>
+      <div class="opop-check">✓</div>
+      <div class="opop-success-h">Clipped to checkout!</div>
+      <p class="opop-success-sub">Your discount is saved and will apply automatically when you order.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var QUIZ = 'https://quiz.herestrogen.com/herestrogen_hrt';
+  var SEEN_KEY = 'he_popup_seen';
+  var CAP_KEY  = 'he_offer_captured';
+
+  function setCookie(n, v, days) {
+    var d = new Date(); d.setTime(d.getTime() + days * 864e5);
+    document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+  function getCookie(n) {
+    return document.cookie.split('; ').reduce(function (a, c) {
+      var i = c.indexOf('='); return c.slice(0, i) === n ? decodeURIComponent(c.slice(i + 1)) : a;
+    }, '');
+  }
+  function suppressed() { return getCookie(SEEN_KEY) === '1' || getCookie(CAP_KEY) === '1'; }
+
+  var pop = document.getElementById('offerPop');
+  var s1 = document.getElementById('opopStep1');
+  var s2 = document.getElementById('opopStep2');
+  var s3 = document.getElementById('opopStep3');
+  var errEl = document.getElementById('opopErr');
+  var shown = false;
+  var concern = 'not-sure';
+
+  function show() {
+    if (shown) return;
+    shown = true;
+    pop.hidden = false;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () { pop.classList.add('visible'); });
+  }
+  function hide(redirect) {
+    pop.classList.remove('visible');
+    document.body.style.overflow = '';
+    setCookie(SEEN_KEY, '1', 30);
+    setTimeout(function () {
+      pop.hidden = true;
+      if (redirect) window.location.href = QUIZ + '?concern=' + encodeURIComponent(concern);
+    }, 500);
+  }
+  function goTo(step) {
+    [s1, s2, s3].forEach(function (s) { s.hidden = true; });
+    step.hidden = false;
+  }
+
+  /* Step 1 — concern → step 2 */
+  Array.prototype.forEach.call(pop.querySelectorAll('[data-concern]'), function (b) {
+    b.addEventListener('click', function () {
+      concern = b.getAttribute('data-concern');
+      goTo(s2);
+      var em = document.getElementById('opopEmail'); if (em) em.focus();
+    });
+  });
+
+  /* Step 2 — email → step 3 → close */
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  document.getElementById('opopContinue').addEventListener('click', function () {
+    var email = (document.getElementById('opopEmail').value || '').trim();
+    if (!validEmail(email)) { errEl.textContent = 'Please enter a valid email.'; return; }
+    errEl.textContent = '';
+    setCookie(CAP_KEY, '1', 30);
+    /* TODO: send email + concern to Klaviyo */
+    goTo(s3);
+    setTimeout(function () { hide(true); }, 2200);
+  });
+
+  /* Close */
+  document.getElementById('opopX').addEventListener('click', function () { hide(false); });
+  document.getElementById('opopDismiss').addEventListener('click', function () { hide(false); });
+  document.getElementById('opopBd').addEventListener('click', function () { hide(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) hide(false); });
+
+  /* Auto-show 2s after load */
+  if (!suppressed()) setTimeout(show, 2000);
 })();
 </script>
 
