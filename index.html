@@ -1277,9 +1277,13 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 }
 .opop-logo .thin { font-style: italic; font-weight: 400; }
 .opop-logo .bold { font-weight: 700; }
-.opop-h { font-size: clamp(38px, 8vw, 68px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; }
-.opop-h .accent { color: var(--lime); }
-.opop-sub { margin: 18px auto 0; max-width: 460px; font-size: clamp(15px, 2.4vw, 18px); color: rgba(255,255,255,.85); line-height: 1.5; font-weight: 500; }
+.opop-h { font-size: clamp(38px, 8vw, 68px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.02; color: #fff; }
+.opop-h .accent { color: #fff; }
+.opop-guar {
+  display: inline-flex; align-items: center; gap: 8px; margin: 18px auto 0;
+  font-size: clamp(13px, 2vw, 15px); font-weight: 700; color: var(--lime);
+}
+.opop-sub { margin: 14px auto 0; max-width: 460px; font-size: clamp(15px, 2.4vw, 18px); color: rgba(255,255,255,.85); line-height: 1.5; font-weight: 500; }
 .opop-concerns { margin-top: clamp(26px, 4vh, 40px); display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 440px; }
 .opop-btn {
   width: 100%; border: 0; border-radius: 999px;
@@ -2312,13 +2316,14 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <!-- Step 1 — concern -->
     <div class="opop-step" id="opopStep1">
       <div class="opop-logo"><span class="thin">her</span><span class="bold">estrogen</span></div>
-      <h2 class="opop-h" id="opopHead">Here's <span class="accent">50% off</span><br>to feel like you again</h2>
-      <p class="opop-sub">Up to 50% off &nbsp;·&nbsp; Free 2-Day Shipping &nbsp;·&nbsp; Clinician Guarantee</p>
-      <div class="opop-concerns" role="group" aria-label="What are you looking to address?">
-        <button class="opop-btn choice" data-concern="hormone-balance">Hormone Balance</button>
-        <button class="opop-btn choice" data-concern="weight">Weight Management</button>
-        <button class="opop-btn choice" data-concern="hair-skin">Hair &amp; Skin</button>
-        <button class="opop-btn choice" data-concern="not-sure">Not Sure Yet</button>
+      <h2 class="opop-h" id="opopHead">Unlock Up To 50% OFF<br>+ Free 2-Day Shipping</h2>
+      <p class="opop-guar"><span aria-hidden="true">✓</span> Backed by our Clinician Match Guarantee</p>
+      <p class="opop-sub">To claim, share the problem you're having trouble with:</p>
+      <div class="opop-concerns" role="group" aria-label="What are you having trouble with?">
+        <button class="opop-btn choice" data-concern="hormone-balance">I want to feel like myself again.</button>
+        <button class="opop-btn choice" data-concern="weight">I want to start getting slimmer.</button>
+        <button class="opop-btn choice" data-concern="hair-skin">I want fuller hair &amp; glowing skin.</button>
+        <button class="opop-btn choice" data-concern="not-sure">I'm not sure yet — help me find out.</button>
       </div>
       <button class="opop-dismiss" id="opopDismiss">No thanks, I don't like savings</button>
     </div>
@@ -2326,18 +2331,19 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <!-- Step 2 — email -->
     <div class="opop-step" id="opopStep2" hidden>
       <div class="opop-logo"><span class="thin">her</span><span class="bold">estrogen</span></div>
-      <h2 class="opop-h">Almost yours!<br>Enter your email</h2>
-      <p class="opop-sub">We'll clip your up to 50% off discount so it's ready at checkout.</p>
-      <input class="opop-input" type="email" id="opopEmail" autocomplete="email" inputmode="email" placeholder="you@email.com" />
+      <h2 class="opop-h">Unlock Up To 50% OFF<br>+ Free 2-Day Shipping</h2>
+      <p class="opop-guar"><span aria-hidden="true">✓</span> Backed by our Clinician Match Guarantee</p>
+      <p class="opop-sub">Sign up with your email to receive your discount:</p>
+      <input class="opop-input" type="email" id="opopEmail" autocomplete="email" inputmode="email" placeholder="Your email address" />
       <p class="opop-err" id="opopErr"></p>
-      <button class="opop-btn primary opop-form-btn" id="opopContinue">Continue &rarr;</button>
+      <button class="opop-btn primary opop-form-btn" id="opopContinue">Continue</button>
     </div>
 
     <!-- Step 3 — clipped -->
     <div class="opop-step" id="opopStep3" hidden>
       <div class="opop-check" aria-hidden="true">✓</div>
-      <div class="opop-success-h">Coupon clipped!</div>
-      <p class="opop-success-sub">Your discount is saved and will apply automatically when you order.</p>
+      <div class="opop-success-h">You're all set!</div>
+      <p class="opop-success-sub">Your discount is automatically clipped into checkout — it'll apply when you order. That's it!</p>
     </div>
   </div>
 </div>
