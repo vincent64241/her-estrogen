@@ -183,6 +183,17 @@
       var key = mount.getAttribute('data-glp1-price');
       if (GLP1[key]) { mount.innerHTML = stripHTML(key); mount.hidden = false; }
     });
+    /* Compact card price (homepage lineup): <div class="p-price" data-glp1-price-card="semaglutide"></div>.
+       Disclosure is carried by the lineup's existing .lineup-fine. */
+    [].forEach.call(document.querySelectorAll('[data-glp1-price-card]'), function (mount) {
+      var key = mount.getAttribute('data-glp1-price-card');
+      if (GLP1[key]) {
+        var p = GLP1[key], h = heroPlan(p);
+        mount.innerHTML = '<span class="p-was">' + money(p.anchor) + '/mo</span>'
+          + '<span class="p-now">' + money(h.pricePerMo) + '/mo</span>';
+        mount.hidden = false;
+      }
+    });
     /* Hero tile "starting at": <span data-glp1-tile></span> */
     [].forEach.call(document.querySelectorAll('[data-glp1-tile]'), function (el) {
       el.innerHTML = 'Starting at <b>' + money(lowestPerMo()) + '/month</b>';

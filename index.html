@@ -529,6 +529,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 .p-name { font-size: 18.5px; font-weight: 700; letter-spacing: -0.01em; }
 .p-desc { font-size: 13.5px; color: var(--ink-2); flex: 1; }
+.p-price { display: flex; align-items: baseline; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.p-price[hidden] { display: none; }
+.p-was { font-size: 13px; font-weight: 600; color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.p-now { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; line-height: 1; }
+.p-day { font-size: 12px; font-weight: 700; color: var(--brand); }
+.lineup-disc { font-size: 11.5px; font-weight: 600; color: var(--ink-2); margin: 4px 4px 0; }
+.lineup-disc[hidden] { display: none; }
 .p-ctas { display: flex; gap: 8px; margin-top: 12px; }
 .p-ctas .btn { padding: 9px 16px; font-size: 13px; }
 .lineup-fine { font-size: 11.5px; color: var(--ink-2); margin: 6px 4px 0; max-width: 880px; }
@@ -1614,7 +1621,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Patch</h3>
           <p class="p-desc">Twice-weekly patch. Steady, low-maintenance estrogen delivery.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1623,7 +1630,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Gel</h3>
           <p class="p-desc">Daily transdermal gel. Absorbs in minutes, easy dose adjustments.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1632,7 +1639,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Oral Pills</h3>
           <p class="p-desc">A familiar daily pill for whole-body symptom relief.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1641,7 +1648,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Estradiol Vaginal Cream</h3>
           <p class="p-desc">Local relief for dryness and discomfort, applied where it's needed.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">= $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
     </div>
@@ -1682,7 +1689,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Semaglutide</h3>
           <p class="p-desc">Compounded semaglutide — injection or topical options.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price" data-glp1-price-card="semaglutide" hidden></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
@@ -1691,7 +1698,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Tirzepatide</h3>
           <p class="p-desc">Compounded tirzepatide — injection or topical options.</p>
-          <div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+          <div class="p-price" data-glp1-price-card="tirzepatide" hidden></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
       <div class="p-card">
