@@ -120,6 +120,27 @@
   font-size: 11.5px; line-height: 1.6; color: var(--muted, #736a62);
 }
 
+/* ── Cancel-anytime trust signal (SHORT badge, mini line, MEDIUM copy) ── */
+.cancel-badge, .hero-cancel-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12.5px; font-weight: 700; color: var(--peach-ink, #e85f2e);
+  background: var(--peach-soft, #ffe6da); border: 1px solid #f7cdbb;
+  border-radius: 999px; padding: 6px 14px; white-space: nowrap;
+}
+.hero-cancel-chip { margin: 18px auto 0; }
+.cancel-mini, .pl-cancel-mini {
+  margin: 5px 2px 0; font-size: 11.5px; font-weight: 600; color: var(--ink-2, #5c5049);
+  display: flex; align-items: center; gap: 6px;
+}
+.pl-cancel-mini { justify-content: flex-start; }
+.cancel-mini .g, .pl-cancel-mini .g { color: var(--brand, #c21e63); font-weight: 800; }
+.cancel-med, .pl-cancel-med, .ei-cancel {
+  font-size: 13px; line-height: 1.55; color: var(--ink-2, #5c5049); font-weight: 500;
+}
+.pl-cancel-med { max-width: 740px; margin: 22px auto 0; text-align: center; }
+.ei-cancel { margin-top: 16px; padding-top: 14px; border-top: 1px solid #f7cdbb; font-size: 12.5px; }
+.phero-cancel { margin-top: 14px; font-size: 12.5px; line-height: 1.5; color: var(--ink-2, #5c5049); max-width: 480px; border-left: 3px solid var(--peach, #ff8a5c); padding-left: 12px; }
+
 /* ── Clinical Match Guarantee microcopy beside primary CTAs ── */
 .cta-guar { font-size: 12.5px; font-weight: 600; color: var(--ink-2, #5c5049); display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; }
 .cta-guar .g { color: var(--brand, #c21e63); font-weight: 800; }
