@@ -109,25 +109,26 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 .claim-bar.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 .claim-in {
-  max-width: 1280px; margin: 0 auto; padding: 12px 24px;
-  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  position: relative; max-width: 1280px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
 }
-.claim-copy { font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.claim-copy { font-size: 15px; font-weight: 600; letter-spacing: .01em; text-align: center; }
 .claim-copy b { font-weight: 800; }
 .claim-copy .sep { opacity: .82; font-weight: 500; }
 .claim-cta {
-  flex-shrink: 0; background: #fff; color: var(--brand);
+  position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+  background: #fff; color: var(--brand);
   font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
   border-radius: 999px; padding: 11px 26px; white-space: nowrap;
-  transition: transform .15s var(--ease-out), box-shadow .15s ease;
+  transition: box-shadow .15s ease;
 }
-.claim-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -6px rgba(0,0,0,.35); }
+.claim-cta:hover { box-shadow: 0 8px 18px -6px rgba(0,0,0,.4); }
 @media (prefers-reduced-motion: reduce) { .claim-bar { transition: opacity .2s ease; } }
-@media (max-width: 560px) {
-  .claim-in { padding: 9px 16px; gap: 12px; }
+@media (max-width: 700px) {
+  .claim-in { flex-wrap: wrap; padding: 9px 16px; gap: 8px; }
   .claim-copy { font-size: 12.5px; }
   .claim-copy .sep { display: none; }
-  .claim-cta { padding: 9px 18px; font-size: 11.5px; letter-spacing: .04em; }
+  .claim-cta { position: static; transform: none; padding: 8px 18px; font-size: 11.5px; letter-spacing: .04em; }
 }
 
 /* ── Nav (sticky, elevates + condenses after scroll — Ro) ── */
@@ -277,6 +278,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .feature-card.has-photo .ph-shape, .feature-card.has-photo .ph-chip { display: none; }
 .feature-card h3 { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; font-weight: 600; max-width: 320px; }
 .feature-card h3 .lt { opacity: .8; font-weight: 500; }
+.fc-price { display: inline-flex; align-items: baseline; gap: 4px; margin-top: 12px; align-self: flex-start;
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.32); backdrop-filter: blur(4px);
+  border-radius: 999px; padding: 6px 14px; font-size: 13.5px; font-weight: 700; color: #fff; }
+.fc-price b { font-weight: 800; }
 .fc-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
 /* Circle arrows with slide-through glyph swap (Ro) */
 .fc-arrow, .mc-arrow {
@@ -1327,7 +1332,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .opop-btn.choice { background: #fff; color: var(--brand); }
 .opop-btn.choice:hover { filter: brightness(.95); transform: translateY(-2px); }
 .opop-btn.choice:active { transform: scale(.98); }
-.opop-btn.primary { background: var(--lime); color: var(--dark-2); }
+.opop-btn.primary { background: var(--brand); color: #fff; }
 .opop-btn.primary:hover { filter: brightness(1.06); transform: translateY(-2px); }
 .opop-dismiss { background: 0; border: 0; font-family: inherit; font-size: 13px; color: rgba(255,255,255,.5); cursor: pointer; margin-top: clamp(20px, 4vh, 32px); text-decoration: underline; text-underline-offset: 3px; }
 .opop-dismiss:hover { color: rgba(255,255,255,.8); }
@@ -1346,7 +1351,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 @keyframes opFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .opop-check {
   width: clamp(80px, 14vw, 104px); height: clamp(80px, 14vw, 104px); border-radius: 50%;
-  background: var(--lime); color: var(--dark-2); display: flex; align-items: center; justify-content: center;
+  background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center;
   font-size: clamp(40px, 7vw, 56px); margin-bottom: 24px; animation: opCheck .45s var(--ease-pop);
 }
 @keyframes opCheck { from { transform: scale(0); } to { transform: scale(1); } }
@@ -1509,7 +1514,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <!-- Scroll-triggered claim/offer bar (appears after the hero, hides at the trust stats) -->
 <div class="claim-bar" id="claimBar" aria-hidden="true">
   <div class="claim-in">
-    <p class="claim-copy"><b>Save up to 50% + Free 2-Day Shipping</b> <span class="sep">· Clinician Guarantee</span></p>
+    <p class="claim-copy"><b>JULY OFFER:</b> Save up to 50% + Free 2-Day Shipping<span class="sep"> · Clinician Guarantee</span></p>
     <a class="claim-cta" href="https://quiz.herestrogen.com/herestrogen_hrt">Get Started &rarr;</a>
   </div>
 </div>
@@ -1528,6 +1533,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a class="feature-card fc-green has-photo" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
         <img class="fc-photo" src="assets/card-weightloss.webp" alt="GLP-1 weight loss treatment for women" width="1178" height="640" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
         <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
+        <span class="fc-price" data-glp1-tile hidden></span>
         <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
         <span class="ph-chip">Product image placeholder</span>
         <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
@@ -1535,6 +1541,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a class="feature-card fc-rose has-photo" id="menopause" href="https://quiz.herestrogen.com/herestrogen_hrt">
         <img class="fc-photo" src="assets/card-hormones.webp" alt="Hormone therapy for menopause" width="1178" height="640" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
         <h3>Hormone therapy <span class="lt">for menopause — patches, gel, pills &amp; cream</span></h3>
+        <span class="fc-price">Starting at <b>$3 per day</b></span>
         <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
         <span class="ph-chip">Product image placeholder</span>
         <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
@@ -2085,6 +2092,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </footer>
 
 <script src="assets/legal.js"></script>
+<script src="assets/glp1-pricing.js"></script>
 <script>
 /* Motion runtime — reveal choreography, nav condense, hamburger, carousels.
    Everything degrades: no JS → html.js absent → page fully visible/static. */
