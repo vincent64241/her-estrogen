@@ -110,24 +110,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 .claim-bar.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 .claim-in {
-  max-width: 1280px; margin: 0 auto; padding: 11px 24px;
-  display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 36px); flex-wrap: wrap;
+  max-width: 1280px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
-.claim-copy { font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+.claim-copy { font-size: 15px; font-weight: 600; letter-spacing: .01em; }
 .claim-copy b { font-weight: 800; }
 .claim-copy .sep { opacity: .82; font-weight: 500; }
 .claim-cta {
   flex-shrink: 0; background: #fff; color: var(--brand);
   font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
-  border-radius: 999px; padding: 10px 22px; white-space: nowrap;
+  border-radius: 999px; padding: 11px 26px; white-space: nowrap;
   transition: transform .15s var(--ease-out), box-shadow .15s ease;
 }
 .claim-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -6px rgba(0,0,0,.35); }
 @media (prefers-reduced-motion: reduce) { .claim-bar { transition: opacity .2s ease; } }
 @media (max-width: 560px) {
-  .claim-in { padding: 8px 14px; gap: 10px; }
-  .claim-copy { font-size: 12.5px; text-align: center; }
-  .claim-cta { padding: 8px 16px; font-size: 12px; }
+  .claim-in { padding: 9px 16px; gap: 12px; }
+  .claim-copy { font-size: 12.5px; }
+  .claim-copy .sep { display: none; }
+  .claim-cta { padding: 9px 18px; font-size: 11.5px; letter-spacing: .04em; }
 }
 
 /* ── Nav (sticky, elevates + condenses after scroll — Ro) ── */
@@ -2333,17 +2334,15 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   setOffset();
   window.addEventListener('resize', setOffset, { passive: true });
 
-  /* Claim bar: slides in once the hero header scrolls above the fixed bars,
-     hides again once the trust-stats (.proof) section reaches the top. */
+  /* Claim bar: appears once the "menopause breakthrough" (.band) section
+     reaches the fixed header, and stays shown all the way to the bottom.
+     Hidden only while we are above that section. */
   var claim = document.getElementById('claimBar');
-  var hero = document.querySelector('.hero-divider');
-  var proof = document.querySelector('.proof');
-  if (claim && hero && proof) {
+  var band = document.querySelector('.band');
+  if (claim && band) {
     var updateClaim = function () {
       var top = (bar ? bar.offsetHeight : 0) + (navEl ? navEl.offsetHeight : 0);
-      var pastHero = hero.getBoundingClientRect().bottom <= top;
-      var reachedProof = proof.getBoundingClientRect().top <= top + claim.offsetHeight;
-      var show = pastHero && !reachedProof;
+      var show = band.getBoundingClientRect().top <= top;
       claim.classList.toggle('show', show);
       claim.setAttribute('aria-hidden', String(!show));
     };
