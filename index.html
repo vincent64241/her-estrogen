@@ -19,17 +19,24 @@
    prefers-reduced-motion and an html.js gate so no-JS/reduced users get the
    full static page. ═══ */
 :root {
-  --ink: #1c1a17;
-  --ink-2: #55504a;
-  --muted: #6d6760; /* ≥4.5:1 on white + paper (a11y) */
-  --paper: #f6f4f1;
+  --ink: #2a201c;        /* warm dark-brown ink (was near-black) — friendlier on cream */
+  --ink-2: #5c5049;
+  --muted: #736a62; /* ≥4.5:1 on white + paper (a11y) */
+  --paper: #fef5ec;      /* warm cream base (Gruns/Bloom) */
   --card: #ffffff;
-  --line: #e7e3dd;
+  --line: #efe4d8;       /* warm hairline */
   --yellow: #f4f0a3;
-  --brand: #c21e63;      /* herestrogen logo magenta */
+  --brand: #c21e63;      /* herestrogen logo magenta — anchor, unchanged */
   --brand-ink: #a4184f;  /* darker brand for hover / gradient depth */
   --pink: #c21e63;
   --pink-soft: #fde8ef;
+  /* Friendly warm accents (peach/coral) + soft blush surfaces for the rebrand */
+  --peach: #ff8a5c;
+  --peach-ink: #e85f2e;   /* AA text on light peach */
+  --peach-soft: #ffe6da;
+  --blush-1: #ffe7f0;     /* light rose — band/labs top stop */
+  --blush-2: #ffd9c9;     /* warm peach — band/labs bottom stop */
+  --cream-2: #fff9f3;
   --green-1: #a4184f;   /* was green — brand magenta (feature-card gradient dark stop) */
   --green-2: #d24d80;   /* brand magenta gradient light stop */
   --tan-1: #c98f62;
@@ -41,14 +48,14 @@
   --dark-1: #7a1440;   /* was dark green — deep wine (band gradient top) */
   --dark-2: #200710;   /* near-black plum (band gradient bottom) */
   --lime: #ff9cc4;   /* was lime green — bright brand pink accent */
-  --r-lg: 24px;
-  --r-md: 16px;
+  --r-lg: 30px;   /* rounder, friendlier corners */
+  --r-md: 20px;
   --r-pill: 999px;
   --ease-out: cubic-bezier(.22,1,.36,1);
   --ease-pop: cubic-bezier(.34,1.56,.64,1);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-padding-top: 84px; }
+html { scroll-padding-top: 128px; }  /* clears sticky deal bar + nav */
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html, body { overflow-x: clip; }
 body {
@@ -332,10 +339,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .band {
   margin: 56px 0 0;
   background:
-    radial-gradient(90% 60% at 50% 0%, rgba(255,156,196,.28), transparent 60%),
-    linear-gradient(180deg, var(--dark-1) 0%, var(--dark-2) 100%);
-  color: #fff; text-align: center;
-  padding: clamp(36px, 5vw, 64px) 24px;
+    radial-gradient(90% 70% at 50% 0%, rgba(255,255,255,.6), transparent 62%),
+    linear-gradient(170deg, var(--blush-1) 0%, var(--blush-2) 100%);
+  color: var(--ink); text-align: center;
+  padding: clamp(40px, 5vw, 68px) 24px;
   position: relative; overflow: hidden;
 }
 /* Slow-panning light beam — the signature Hers move */
@@ -501,7 +508,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .goals h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--ink); max-width: 560px; }
 /* Video background for the goals band */
 .goals-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.goals.has-video::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(45,12,30,.66) 0%, rgba(45,12,30,.42) 50%, rgba(45,12,30,.30) 100%); }
+.goals.has-video::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(140,30,72,.52) 0%, rgba(194,30,99,.30) 50%, rgba(255,138,92,.22) 100%); }
 .goals.has-video > *:not(.goals-video) { position: relative; z-index: 2; }
 .goals.has-video h2 { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
 .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -802,10 +809,10 @@ body.modal-open { overflow: hidden; }
 
 /* ── B. Labs — dark teal cinematic hero + feature cards ── */
 .labs {
-  margin-top: 0; position: relative; overflow: hidden; color: #fff;
+  margin-top: 0; position: relative; overflow: hidden; color: var(--ink);
   background:
-    radial-gradient(80% 50% at 50% 0%, rgba(255,156,196,.25), transparent 65%),
-    linear-gradient(180deg, #3a1226 0%, #220a13 60%, #180610 100%);
+    radial-gradient(80% 55% at 50% 0%, rgba(255,255,255,.55), transparent 62%),
+    linear-gradient(180deg, var(--blush-1) 0%, #ffe4de 55%, var(--cream-2) 100%);
   padding: clamp(64px, 8vw, 110px) 24px clamp(40px, 5vw, 64px);
 }
 /* Lifestyle photo background (same image as the old hair section) + dark scrim for legibility */
@@ -1258,6 +1265,159 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   .hero-cta-row { gap: 10px; }
   .btn-lg { padding: 15px 24px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   FRIENDLY REBRAND — warm overrides + conversion mechanics
+   (Gruns/Bloom energy: warm cream, blush sections, peach accents,
+    rounder + bouncier. Compliance text untouched — colour only.)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Band: was near-black plum, now light blush. Flip inherited white text. ── */
+.band::before { display: none !important; }              /* kill the dark cinematic light-beam */
+.band h2 .accent { color: var(--brand); }
+.band-sub { color: var(--ink-2); }
+.band-sub .accent { color: var(--brand); font-weight: 700; }
+.band-fine { color: var(--muted); }
+.band-ph-label { color: rgba(42,32,28,.5); }
+.band .btn-light { background: var(--brand); color: #fff; box-shadow: 0 12px 26px -10px rgba(194,30,99,.55); }
+.band .btn-light:hover { background: var(--brand-ink); }
+
+/* ── Labs: was near-black wine, now light blush. Flip text + dark glass to white. ── */
+.labs-eyebrow { color: var(--ink-2); opacity: 1; }
+.labs-fine { color: var(--muted); }
+.lpanel { background: rgba(255,255,255,.9); border-color: var(--line); color: var(--ink-2);
+  box-shadow: 0 16px 36px -14px rgba(140,30,72,.2); }
+.lpanel b { color: var(--ink); }
+.lp-rows span { background: rgba(42,32,28,.12); }
+.lp-2 .big { color: var(--brand); }
+.lp-chip { background: var(--peach); color: #fff; }
+.lp-donut { background: conic-gradient(var(--brand) 0 62%, rgba(42,32,28,.1) 62% 100%); }
+.lcard { background: #fff; border-color: var(--line); box-shadow: 0 20px 46px -20px rgba(140,30,72,.18); }
+.lcard p { color: var(--ink-2); }
+.bio-age-chip { background: var(--peach-soft); border-color: #f7cdbb; }
+.bio-age-chip small { color: var(--peach-ink); }
+.bio-age-chip .n { color: var(--ink); }
+.bio-age-chip em { color: var(--ink-2); }
+.bio-row { color: var(--muted); }
+.bio-row .bk { border-color: var(--brand); color: var(--brand); }
+.mq-pause { background: #fff; border-color: var(--line); color: var(--brand); }
+.labs .btn-light { background: var(--brand); color: #fff; }
+.labs .btn-light:hover { background: var(--brand-ink); }
+.labs .btn-ghost-dark { background: #fff; color: var(--brand); border: 1.5px solid #f2c7d8; backdrop-filter: none; }
+.labs .btn-ghost-dark:hover { background: var(--pink-soft); }
+
+/* ── Friendly peach accents on small moments ── */
+.badge-new { background: var(--peach); color: #fff; }
+.offer-bar { display: none; }   /* replaced by .deal-bar */
+
+/* ══ PART 3 — Sticky deal bar (top) with live countdown ══ */
+.deal-bar {
+  position: sticky; top: 0; z-index: 60;
+  background: linear-gradient(90deg, var(--brand) 0%, #d53f77 52%, var(--peach) 130%);
+  color: #fff;
+}
+.deal-in {
+  max-width: 1240px; margin: 0 auto; padding: 8px 18px;
+  display: flex; align-items: center; justify-content: center; gap: 8px 16px; flex-wrap: nowrap;
+}
+.deal-msg { font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.deal-msg b { font-weight: 800; }
+.deal-msg .spark { font-size: 13px; }
+.deal-count {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; font-weight: 800; font-size: 13.5px;
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.4);
+  border-radius: 999px; padding: 3px 12px;
+}
+.deal-count .lbl { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .92; }
+.deal-count b { min-width: 64px; text-align: center; }
+.deal-cta {
+  border: 0; cursor: pointer; font-family: inherit; white-space: nowrap;
+  background: #fff; color: var(--brand); font-weight: 800; font-size: 13px;
+  border-radius: 999px; padding: 7px 16px;
+  transition: transform .2s var(--ease-out), box-shadow .2s ease;
+}
+.deal-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -6px rgba(0,0,0,.28); }
+/* Nav stacks below the sticky deal bar (height fed in by JS; 44px fallback) */
+.nav { top: var(--dealbar-h, 44px); }
+@media (max-width: 560px) {
+  .deal-in { gap: 7px 9px; padding: 7px 11px; }
+  .deal-msg { font-size: 11.5px; }
+  .deal-msg .hide-sm { display: none; }
+  .deal-count { font-size: 11.5px; padding: 2px 9px; gap: 5px; }
+  .deal-count .lbl { display: none; }
+  .deal-count b { min-width: 58px; }
+  .deal-cta { padding: 6px 12px; font-size: 11.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .deal-cta { transition: none; } }
+
+/* ══ PART 2 — Up-to-50%-off popup (two-step) ══ */
+.pop { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 18px; }
+.pop[hidden] { display: none; }
+.pop-backdrop { position: absolute; inset: 0; background: rgba(42,20,14,.5); backdrop-filter: blur(3px); }
+.pop-card {
+  position: relative; z-index: 1; width: 100%; max-width: 440px; max-height: 92vh; overflow: auto;
+  background: linear-gradient(180deg, var(--cream-2), #fff 32%);
+  border-radius: 28px; padding: 32px 24px 26px; text-align: center;
+  box-shadow: 0 44px 96px -24px rgba(42,20,14,.55);
+  animation: popIn .32s var(--ease-pop);
+}
+@keyframes popIn { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pop-card { animation: none; } }
+.pop-close {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%;
+  border: 0; background: rgba(42,32,28,.07); color: var(--ink-2); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.pop-close:hover { background: rgba(42,32,28,.13); }
+.pop-badge {
+  display: inline-flex; align-items: center; gap: 7px; margin: 2px 0 14px;
+  background: var(--peach-soft); color: var(--peach-ink);
+  border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800; letter-spacing: .02em;
+}
+.pop-h { font-size: clamp(25px, 6.4vw, 31px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
+.pop-h .em { color: var(--brand); }
+.pop-sub { margin: 10px auto 20px; font-size: 14.5px; color: var(--ink-2); max-width: 330px; line-height: 1.45; }
+.pop-concerns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pop-concern {
+  border: 1.5px solid var(--line); background: #fff; border-radius: 16px;
+  padding: 16px 12px; font-family: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink);
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 7px;
+  transition: transform .2s var(--ease-pop), border-color .15s ease, background .15s ease;
+}
+.pop-concern .ci { font-size: 22px; }
+.pop-concern:hover { border-color: var(--brand); transform: translateY(-2px); }
+.pop-concern:active { transform: scale(.97); }
+.pop-field { text-align: left; }
+.pop-field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink-2); margin: 0 0 6px 2px; }
+.pop-input {
+  width: 100%; border: 1.5px solid var(--line); border-radius: 14px; background: #fff;
+  padding: 14px 16px; font-size: 16px; font-family: inherit; color: var(--ink); outline: 0;
+  transition: border-color .15s ease;
+}
+.pop-input:focus { border-color: var(--brand); }
+.pop-phone-wrap[hidden] { display: none; }
+.pop-consent { margin: 12px 2px 0; font-size: 10.5px; line-height: 1.5; color: var(--muted); text-align: left; }
+.pop-err { color: #c0392b; font-size: 12.5px; font-weight: 600; margin: 8px 2px 0; text-align: left; }
+.pop-err:empty { margin: 0; }
+.pop-btn {
+  width: 100%; margin-top: 14px; border: 0; cursor: pointer; font-family: inherit;
+  background: var(--brand); color: #fff; font-weight: 800; font-size: 16px;
+  border-radius: 14px; padding: 15px; transition: transform .2s var(--ease-out), background .15s ease;
+}
+.pop-btn:hover { transform: translateY(-1px); background: var(--brand-ink); }
+.pop-progress { display: flex; gap: 6px; justify-content: center; margin-top: 18px; }
+.pop-progress i { width: 22px; height: 4px; border-radius: 2px; background: var(--line); }
+.pop-progress i.on { background: var(--brand); }
+.pop-success { padding: 10px 0 4px; }
+.pop-check {
+  width: 66px; height: 66px; border-radius: 50%; margin: 0 auto 16px;
+  background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 32px;
+  animation: popCheck .4s var(--ease-pop);
+}
+@keyframes popCheck { from { transform: scale(0); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .pop-check { animation: none; } }
+.pop-step[hidden] { display: none; }
+@media (max-width: 380px) { .pop-concerns { grid-template-columns: 1fr; } }
 </style>
 <!-- FAQPage structured data (Google rich result) — answers mirror the visible FAQ verbatim -->
 <script type="application/ld+json">
@@ -1308,11 +1468,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   ]
 }
 </script>
+<link rel="stylesheet" href="/assets/offer.css" />
 </head>
 <body>
 
-<!-- Offer bar -->
-<div class="offer-bar">Clinician-guided care for women, 100% online. <a href="https://quiz.herestrogen.com/herestrogen_hrt">See if you qualify</a></div>
+<!-- Sticky deal bar (top) with live countdown — coexists with #qbar (bottom) -->
+<div class="deal-bar" id="dealbar">
+  <div class="deal-in">
+    <span class="deal-msg"><span class="spark" aria-hidden="true">✦</span> Up to <b>50% off</b> your first plan<span class="hide-sm"> — limited-time offer</span></span>
+    <span class="deal-count"><span class="lbl">Ends in</span><b id="dealTimer">24:00:00</b></span>
+    <button type="button" class="deal-cta" id="dealCta">Claim offer</button>
+  </div>
+</div>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
@@ -1401,7 +1568,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <div class="sec-divider hero-divider">
   <div class="eyebrow">All-in-one care for women · 100% online</div>
   <h1>Feel like yourself again.</h1>
-  <p>Weight loss, menopause &amp; hormone care, and hair regrowth — expert, clinician-guided care for women, 100% online.</p>
+  <p>Weight loss, menopause &amp; hormone care, and hair regrowth — real support from licensed clinicians, all from the comfort of home. No waiting rooms, no runaround.</p>
+  <p class="hero-cancel-chip"><span aria-hidden="true">↻</span> Cancel anytime · No contracts · No hidden fees</p>
 </div>
 
 <!-- Bento feature cards (hero) -->
@@ -1436,6 +1604,88 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
+<!-- ═══ OFFER: Everything Included + HRT pricing ladder (reusable; styled by /assets/offer.css) ═══ -->
+<section class="offer-wrap" id="pricing" aria-label="What's included and pricing">
+  <div class="offer-inner">
+    <div class="offer-head">
+      <h2>The Feel-Like-Yourself Protocol — <em>everything included</em></h2>
+      <p>One flat price. No office visits. Delivered to your door.</p>
+    </div>
+    <div class="ei-grid">
+      <div class="ei-stack">
+        <ul class="ei-list">
+          <li class="ei-item"><span class="ei-check" aria-hidden="true">✓</span><div class="ei-txt"><b>Personalized hormone protocol</b><span>Matched to your symptoms and history by a licensed clinician, adjusted as your body responds.</span></div><span class="ei-tag">$200+ value</span></li>
+          <li class="ei-item"><span class="ei-check" aria-hidden="true">✓</span><div class="ei-txt"><b>Free 2-day delivery</b><span>Shipped discreetly to your door.</span></div><span class="ei-tag">$40/yr value</span></li>
+          <li class="ei-item"><span class="ei-check" aria-hidden="true">✓</span><div class="ei-txt"><b>Your private care portal</b><span>Track your treatment and message your care team in one place.</span></div><span class="ei-tag">included</span></li>
+          <li class="ei-item"><span class="ei-check" aria-hidden="true">✓</span><div class="ei-txt"><b>Clinician-adjusted protocol</b><span>Not feeling right? Your clinician reviews and adjusts your plan.</span></div><span class="ei-tag">$150+ value</span></li>
+          <li class="ei-item"><span class="ei-check" aria-hidden="true">✓</span><div class="ei-txt"><b>Lifetime Price Lock</b><span>Your rate is locked for life, never rises.</span></div><span class="ei-tag">priceless</span></li>
+        </ul>
+        <p class="ei-total">Over <b>$390</b> in included care — yours from <b>$95/mo</b>.</p>
+      </div>
+      <aside class="ei-guar">
+        <h3 class="ei-guar-h">Your peace of mind</h3>
+        <ul>
+          <li><span class="ei-gi" aria-hidden="true">🛡️</span><div><b>Clinical Match Guarantee</b><span>If a licensed clinician determines treatment isn't right for you, you pay nothing.</span></div></li>
+          <li><span class="ei-gi" aria-hidden="true">🚚</span><div><b>2-Day Shipping</b><span>Free and discreet, on every order.</span></div></li>
+          <li><span class="ei-gi" aria-hidden="true">🔒</span><div><b>Lifetime Price Lock</b><span>Your rate never rises.</span></div></li>
+        </ul>
+        <p class="ei-cancel">Cancel anytime — no contracts, no cancellation fees. Your prepaid term runs through its paid period, and you can cancel future renewals whenever you like.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="pl-wrap" aria-label="HRT pricing plans">
+  <div class="offer-inner">
+    <div class="offer-head">
+      <h2>Simple, <em>honest</em> pricing</h2>
+      <p>One flat rate — the longer your plan, the more you save. Locked in for life.</p>
+    </div>
+    <div class="pl-grid">
+      <div class="pl-card">
+        <div class="pl-name">Monthly</div>
+        <div class="pl-tagline">Most flexible</div>
+        <div class="pl-price"><span class="pl-now">$189</span><span class="pl-per">/mo</span></div>
+        <div class="pl-total">$189 billed monthly</div>
+        <a class="pl-cta" href="https://quiz.herestrogen.com/herestrogen_hrt?plan=monthly">Get started</a>
+        <p class="pl-guar"><span class="g" aria-hidden="true">✓</span> If it's not right for you, you pay nothing.</p>
+        <p class="pl-cancel-mini"><span class="g" aria-hidden="true">↻</span> Cancel anytime · No contracts · No hidden fees</p>
+      </div>
+      <div class="pl-card">
+        <div class="pl-name">3-month</div>
+        <div class="pl-tagline save">Save 16%</div>
+        <div class="pl-price"><span class="pl-was">$189</span><span class="pl-now">$159</span><span class="pl-per">/mo</span></div>
+        <div class="pl-total">$477 billed once</div>
+        <a class="pl-cta" href="https://quiz.herestrogen.com/herestrogen_hrt?plan=3mo">Get started</a>
+        <p class="pl-guar"><span class="g" aria-hidden="true">✓</span> If it's not right for you, you pay nothing.</p>
+        <p class="pl-cancel-mini"><span class="g" aria-hidden="true">↻</span> Cancel anytime · No contracts · No hidden fees</p>
+      </div>
+      <div class="pl-card">
+        <div class="pl-name">6-month</div>
+        <div class="pl-tagline save">Save 33%</div>
+        <div class="pl-price"><span class="pl-was">$189</span><span class="pl-now">$127</span><span class="pl-per">/mo</span></div>
+        <div class="pl-total">$762 billed once</div>
+        <a class="pl-cta" href="https://quiz.herestrogen.com/herestrogen_hrt?plan=6mo">Get started</a>
+        <p class="pl-guar"><span class="g" aria-hidden="true">✓</span> If it's not right for you, you pay nothing.</p>
+        <p class="pl-cancel-mini"><span class="g" aria-hidden="true">↻</span> Cancel anytime · No contracts · No hidden fees</p>
+      </div>
+      <div class="pl-card pl-hero">
+        <span class="pl-badge">Best value</span>
+        <div class="pl-name">12-month</div>
+        <div class="pl-tagline save">Save 50% · price-locked for life</div>
+        <div class="pl-price"><span class="pl-was">$189</span><span class="pl-now">$95</span><span class="pl-per">/mo</span></div>
+        <div class="pl-total">$1,140 billed once</div>
+        <a class="pl-cta" href="https://quiz.herestrogen.com/herestrogen_hrt?plan=12mo">Get started</a>
+        <p class="pl-guar"><span class="g" aria-hidden="true">✓</span> If it's not right for you, you pay nothing.</p>
+        <p class="pl-cancel-mini"><span class="g" aria-hidden="true">↻</span> Cancel anytime · No contracts · No hidden fees</p>
+      </div>
+    </div>
+    <p class="pl-cancel-med">Cancel anytime — no contracts, no cancellation fees. Your prepaid term runs through its paid period, and you can cancel future renewals whenever you like.</p>
+    <p class="pl-fine">Plans renew automatically at the end of each term. Cancel anytime. There are no contracts and no cancellation fees. Your plan is prepaid for the term you choose and runs through that paid period. To stop your next renewal, cancel at least 72 hours before your renewal date — easily, from your account or by emailing support@herestrogen.com. Treatment subject to clinician approval.</p>
+  </div>
+</section>
+<!-- ═══ /OFFER ═══ -->
+
 <!-- Social proof (proof before persuasion) -->
 <section class="proof" id="proof">
   <div class="container">
@@ -1457,7 +1707,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Primary offer — menopause / HRT (clear offer, obvious next step) -->
 <section class="band">
-  <h2 data-reveal>Your menopause<br /><span class="accent">breakthrough is here</span></h2>
+  <h2 data-reveal>Menopause care,<br /><span class="accent">made just for you</span></h2>
   <div class="band-stage" data-reveal style="--i:1">
     <span class="stage-glow" aria-hidden="true"></span>
     <span class="sil sil-bottle" aria-hidden="true"></span>
@@ -1473,6 +1723,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
   <p class="band-sub" data-reveal style="--i:2">Prescription <span class="accent">estradiol</span> — patches, gel, oral pills, and vaginal cream — prescribed by licensed clinicians, delivered to your door.</p>
   <a class="btn btn-light" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+  <p class="cta-guar" style="justify-content:center"><span class="g">✓</span> If it's not right for you, you pay nothing.</p>
+  <p class="cta-guar" style="justify-content:center;margin-top:4px"><span class="g">↻</span> Cancel anytime · No contracts · No hidden fees</p>
   <p class="band-fine">Prescription products require an evaluation with a licensed clinician who will determine if a prescription is appropriate. Individual results vary.</p>
 </section>
 
@@ -1532,14 +1784,14 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span class="ts-item">✓ 100% entirely online</span>
       <span class="ts-item">✓ Licensed clinicians, all 50 states</span>
       <span class="ts-item">✓ Free &amp; discreet shipping</span>
-      <span class="ts-item">✓ Cancel before any renewal</span>
+      <span class="ts-item">✓ Cancel anytime · No contracts · No hidden fees</span>
     </div>
     <div class="ts-track" aria-hidden="true">
       <span class="ts-item">✓ Personalized support</span>
       <span class="ts-item">✓ 100% entirely online</span>
       <span class="ts-item">✓ Licensed clinicians, all 50 states</span>
       <span class="ts-item">✓ Free &amp; discreet shipping</span>
-      <span class="ts-item">✓ Cancel before any renewal</span>
+      <span class="ts-item">✓ Cancel anytime · No contracts · No hidden fees</span>
     </div>
   </div>
 </div>
@@ -1817,66 +2069,65 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </div>
 
 <!-- B. Labs — cinematic, over the lifestyle photo background -->
-<section class="labs has-bg" id="labs">
-  <img class="labs-bg" src="assets/hair-lifestyle.webp" alt="" loading="lazy" decoding="async" onerror="this.closest('.labs').classList.remove('has-bg'); this.remove();" />
+<section class="labs" id="labs">
   <div class="labs-head">
-    <p class="labs-eyebrow" data-reveal>labs by <span class="lb">herestrogen</span></p>
-    <h2 data-reveal style="--i:1">Test what your body's<br />been telling you</h2>
+    <p class="labs-eyebrow" data-reveal>your <span class="lb">herestrogen</span> portal</p>
+    <h2 data-reveal style="--i:1">Your whole care team,<br />a tap away</h2>
   </div>
   <div class="labs-stage" aria-hidden="true">
-    <div class="lpanel lp-1"><span class="lp-donut"></span><b>All 34 biomarkers</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
-    <div class="lpanel lp-2"><span class="lp-chip">Hormone health</span><span class="big">41</span>Your biological age estimate, from your markers</div>
-    <div class="lpanel lp-3"><b>Making you younger</b><div class="lp-rows"><span></span><span></span></div></div>
+    <div class="lpanel lp-1"><span class="lp-donut"></span><b>Book a call anytime</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
+    <div class="lpanel lp-2"><span class="lp-chip">Your plan</span><span class="big">2</span>prescriptions, working together for you</div>
+    <div class="lpanel lp-3"><b>Order on the way</b><div class="lp-rows"><span></span><span></span></div></div>
   </div>
   <div class="labs-ctas">
-    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Start my labs</a>
-    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Learn more</a>
+    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">See how it works</a>
   </div>
 
   <div class="labs-cards">
     <div class="lcard lc-plan" data-reveal>
       <div>
-        <h3>Discover your baseline</h3>
-        <p>Get a clear picture of your health with a simple at-home lab test.</p>
+        <h3>Everything in one login</h3>
+        <p>Pay, book visits, message your care team, and track every order — all from your private portal.</p>
       </div>
       <div class="phone" aria-hidden="true">
         <div class="phone-notch"></div>
         <div class="phone-ui">
-          <b>Action Plan</b>
-          Two areas of your health need attention — let's get things on track.
-          <div class="phone-note"><span class="flag">Needs attention</span>First up: hormone balance. Your profile and biomarkers show your estradiol trending low.</div>
+          <b>Your care hub</b>
+          Message your care team, book a visit, or check your shipment — anytime.
+          <div class="phone-note"><span class="flag">On track</span>Your next check-in is set. Message a licensed clinician whenever you need — we're here.</div>
           <div class="phone-bars"><span></span><span></span><span></span></div>
         </div>
       </div>
       <div class="col-r">
-        <h3>Plan your breakthrough</h3>
-        <p>Optimize your health with a clinician-developed action plan.</p>
-        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the plan</a>
+        <h3>A clinician whenever you need one</h3>
+        <p>Book a call with a licensed clinician on your schedule, with unlimited messaging support.</p>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
       </div>
     </div>
     <div class="labs-duo" data-reveal-group>
       <div class="lcard">
-        <h3>Unlock your Biological Age</h3>
-        <p>Reveal how fast your body is aging compared to your actual age.</p>
+        <h3>Track your progress</h3>
+        <p>Follow your treatment week by week and see how you're feeling over time.</p>
         <div class="bio-age-chip" aria-hidden="true">
-          <small>As of today</small>
-          <span class="n">38</span>
-          <em>2 years younger than your chronological age</em>
+          <small>Your progress</small>
+          <span class="n">Wk 6</span>
+          <em>on your personalized plan</em>
         </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get the science</a>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
       </div>
       <div class="lcard">
-        <h3>Test 130+ biomarkers</h3>
-        <p>From hormones to heart health — one draw, the full picture.</p>
+        <h3>Manage &amp; stack your care</h3>
+        <p>Adjust, add, or stack prescriptions for your whole-body goals — all in one place.</p>
         <div class="bio-cloud" aria-hidden="true">
-          <div class="bio-row"><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span></div>
-          <div class="bio-row rev"><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span></div>
+          <div class="bio-row"><span>Appointments</span><span class="bk">Book</span><span>Video visits</span><span>Messaging</span><span>Refills</span><span class="bk">Manage</span><span>Billing</span><span>Care plan</span><span>Appointments</span><span class="bk">Book</span><span>Video visits</span><span>Messaging</span><span>Refills</span><span class="bk">Manage</span><span>Billing</span><span>Care plan</span></div>
+          <div class="bio-row rev"><span>Shipment tracking</span><span>Progress</span><span class="bk">Track</span><span>Dosage adjustments</span><span>Add-ons</span><span>Prescriptions</span><span class="bk">Stack</span><span>Support</span><span>Shipment tracking</span><span>Progress</span><span class="bk">Track</span><span>Dosage adjustments</span><span>Add-ons</span><span>Prescriptions</span><span class="bk">Stack</span><span>Support</span></div>
         </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Meet the markers</a>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">See what's included</a>
       </div>
     </div>
   </div>
-  <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
+  <p class="labs-fine">Your patient portal is included with every plan. Care is provided by licensed clinicians; treatment is subject to clinician evaluation and a prescription is not guaranteed. Some services may not be available in all states.</p>
 </section>
 
 
@@ -1966,6 +2217,60 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
   </div>
 </footer>
+
+<!-- Up-to-50%-off popup (two-step; in-memory + cookie only, no localStorage) -->
+<div class="pop" id="offerPop" hidden role="dialog" aria-modal="true" aria-labelledby="popHead">
+  <div class="pop-backdrop" data-pop-close></div>
+  <div class="pop-card">
+    <button type="button" class="pop-close" id="popClose" aria-label="Close">&times;</button>
+
+    <!-- Step A — concern -->
+    <div class="pop-step" id="popStepA">
+      <span class="pop-badge"><span aria-hidden="true">✦</span> Your reward is waiting</span>
+      <h2 class="pop-h" id="popHead">You've got <span class="em">up to 50% off</span></h2>
+      <p class="pop-sub">To claim it, tell us what you're working on:</p>
+      <div class="pop-concerns" role="group" aria-label="What are you working on?">
+        <button type="button" class="pop-concern" data-concern="hormone-balance"><span class="ci" aria-hidden="true">🌸</span> Hormone balance</button>
+        <button type="button" class="pop-concern" data-concern="weight"><span class="ci" aria-hidden="true">⚖️</span> Weight</button>
+        <button type="button" class="pop-concern" data-concern="hair-skin"><span class="ci" aria-hidden="true">✨</span> Hair &amp; skin</button>
+        <button type="button" class="pop-concern" data-concern="not-sure"><span class="ci" aria-hidden="true">💬</span> Not sure yet</button>
+      </div>
+      <div class="pop-progress" aria-hidden="true"><i class="on"></i><i></i></div>
+    </div>
+
+    <!-- Step B — email → phone -->
+    <div class="pop-step" id="popStepB" hidden>
+      <span class="pop-badge"><span aria-hidden="true">✦</span> Almost yours</span>
+      <h2 class="pop-h">Almost yours — <span class="em">enter your email</span></h2>
+      <p class="pop-sub">We'll clip your discount to this email so it's ready at checkout.</p>
+      <form id="popForm" novalidate>
+        <div class="pop-field">
+          <label for="popEmail">Email address</label>
+          <input class="pop-input" type="email" id="popEmail" name="email" autocomplete="email" inputmode="email" placeholder="you@email.com" required />
+        </div>
+        <div class="pop-phone-wrap" id="popPhoneWrap" hidden>
+          <div class="pop-field" style="margin-top:14px">
+            <label for="popPhone">Mobile number</label>
+            <input class="pop-input" type="tel" id="popPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="(555) 123-4567" />
+          </div>
+          <p class="pop-consent">By entering your number you agree to receive recurring marketing texts from HerEstrogen. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+        </div>
+        <p class="pop-err" id="popErr" role="alert"></p>
+        <button type="submit" class="pop-btn" id="popSubmit">Continue</button>
+      </form>
+      <div class="pop-progress" aria-hidden="true"><i class="on"></i><i class="on"></i></div>
+    </div>
+
+    <!-- Success -->
+    <div class="pop-step" id="popSuccess" hidden>
+      <div class="pop-success">
+        <div class="pop-check" aria-hidden="true">✓</div>
+        <h2 class="pop-h">You're all set!</h2>
+        <p class="pop-sub">Your discount is activated and clipped. It'll apply automatically at checkout.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Sticky quiz bar -->
 <div class="qbar" id="qbar" aria-hidden="true">
@@ -2228,6 +2533,172 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   if (bmiClose) bmiClose.addEventListener('click', function () { closeM(bmiModal); });
   Array.prototype.forEach.call(document.querySelectorAll('.calc-modal'), function (m) { m.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeM(m); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') Array.prototype.forEach.call(document.querySelectorAll('.calc-modal:not([hidden])'), closeM); });
+})();
+</script>
+
+<script>
+/* ── Deal bar countdown + up-to-50%-off popup ──
+   Cookies + in-memory only (no localStorage/sessionStorage).
+   Capture posts a marketing lead to Klaviyo (coarse concern only, no health
+   condition, never to any ad pixel). See sendLeadToKlaviyo() TODO. */
+(function () {
+  var QUIZ = 'https://quiz.herestrogen.com/herestrogen_hrt';
+  var OFFER_CODE = 'HE50';
+  var SEEN_KEY = 'he_popup_seen';      // suppresses auto-trigger (30d)
+  var CAP_KEY  = 'he_offer_captured';  // routes deal CTA (30d)
+  var DEAL_KEY = 'he_deal_deadline';   // rolling 24h countdown per visitor
+
+  /* cookie helpers */
+  function setCookie(n, v, days) {
+    var d = new Date(); d.setTime(d.getTime() + days * 864e5);
+    document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+  function getCookie(n) {
+    return document.cookie.split('; ').reduce(function (a, c) {
+      var i = c.indexOf('='); var k = c.slice(0, i);
+      return k === n ? decodeURIComponent(c.slice(i + 1)) : a;
+    }, '');
+  }
+  function captured()  { return getCookie(CAP_KEY) === '1'; }
+  function suppressed(){ return getCookie(SEEN_KEY) === '1' || captured(); }
+
+  /* ── Countdown: rolling 24h, honest "limited-time" (resets, never "only today") ── */
+  var timerEl = document.getElementById('dealTimer');
+  function deadline() {
+    var raw = parseInt(getCookie(DEAL_KEY), 10), now = Date.now();
+    if (!raw || isNaN(raw) || raw <= now) { raw = now + 24 * 3600 * 1000; setCookie(DEAL_KEY, String(raw), 2); }
+    return raw;
+  }
+  var end = deadline();
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var diff = end - Date.now();
+    if (diff <= 0) { end = Date.now() + 24 * 3600 * 1000; setCookie(DEAL_KEY, String(end), 2); diff = end - Date.now(); }
+    var h = Math.floor(diff / 3.6e6), m = Math.floor(diff % 3.6e6 / 6e4), s = Math.floor(diff % 6e4 / 1000);
+    if (timerEl) timerEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── Nav offset so it stacks below the sticky deal bar; scroll-condense ── */
+  var dealbar = document.getElementById('dealbar');
+  var navEl = document.getElementById('nav');
+  function setNavOffset() {
+    if (dealbar) document.documentElement.style.setProperty('--dealbar-h', dealbar.offsetHeight + 'px');
+  }
+  setNavOffset();
+  window.addEventListener('resize', setNavOffset, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (navEl) navEl.classList.toggle('is-scrolled', (window.pageYOffset || 0) > 8);
+  }, { passive: true });
+
+  /* ── Popup ── */
+  var pop = document.getElementById('offerPop');
+  if (!pop) return;
+  var stepA = document.getElementById('popStepA');
+  var stepB = document.getElementById('popStepB');
+  var success = document.getElementById('popSuccess');
+  var phoneWrap = document.getElementById('popPhoneWrap');
+  var submitBtn = document.getElementById('popSubmit');
+  var errEl = document.getElementById('popErr');
+  var shownThisSession = false;
+  var chosenConcern = 'not-sure';
+  var emailOk = false;
+
+  function lockScroll() { document.body.classList.add('modal-open'); }
+  function releaseScroll() {
+    if (pop.hidden && !document.querySelector('.calc-modal:not([hidden])')) document.body.classList.remove('modal-open');
+  }
+  function show() {
+    pop.hidden = false; shownThisSession = true; lockScroll();
+    var f = pop.querySelector('.pop-concern'); if (f) f.focus();
+  }
+  function openAuto()   { if (!shownThisSession && !suppressed()) show(); }   // triggers respect the 30-day cookie
+  function openManual() { if (pop.hidden) show(); }                           // deal CTA — always opens
+  function dismiss()    { pop.hidden = true; setCookie(SEEN_KEY, '1', 30); releaseScroll(); }
+
+  /* Klaviyo marketing-lead capture — company RUvm7K, list Rsp58u.
+     PRE-CONVERSION MARKETING ONLY. Coarse concern label only (never a
+     diagnosis). NEVER sent to any ad pixel. */
+  function sendLeadToKlaviyo(email, phone, concern) {
+    try {
+      var payload = {
+        email: email, phone_number: phone,
+        concern: concern,               // coarse label e.g. "hormone-balance", NOT "menopause patient"
+        list_id: 'Rsp58u', company_id: 'RUvm7K',
+        source: 'homepage-offer-popup'
+      };
+      /* TODO(Klaviyo): wire the real endpoint/public key. No key is configured
+         in this environment, so this is stubbed. When wiring, POST `payload`
+         to the Klaviyo client subscriptions API (or a server proxy). Marketing
+         lead only — do NOT add or fire any ad pixel here. */
+      if (window.console) console.log('[HE] Klaviyo marketing lead (stubbed — TODO wire endpoint):', payload);
+    } catch (e) { /* never block the UX on capture */ }
+  }
+
+  /* Step A — concern → Step B */
+  Array.prototype.forEach.call(pop.querySelectorAll('.pop-concern'), function (b) {
+    b.addEventListener('click', function () {
+      chosenConcern = b.getAttribute('data-concern') || 'not-sure';
+      stepA.hidden = true; stepB.hidden = false;
+      var em = document.getElementById('popEmail'); if (em) em.focus();
+    });
+  });
+
+  /* Step B — email → reveal phone → activate */
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  document.getElementById('popForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = (document.getElementById('popEmail').value || '').trim();
+    if (!validEmail(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
+    errEl.textContent = '';
+    if (!emailOk) {                       // first submit reveals the phone step
+      emailOk = true;
+      phoneWrap.hidden = false;
+      submitBtn.textContent = 'Activate my discount';
+      var ph = document.getElementById('popPhone'); if (ph) ph.focus();
+      return;
+    }
+    var phone = (document.getElementById('popPhone').value || '').trim();
+    if (phone.replace(/\D/g, '').length < 10) { errEl.textContent = 'Please enter a valid mobile number.'; return; }
+    errEl.textContent = '';
+    sendLeadToKlaviyo(email, phone, chosenConcern);
+    setCookie(CAP_KEY, '1', 30); setCookie(SEEN_KEY, '1', 30);   // captured — persist 30 days
+    stepB.hidden = true; success.hidden = false;
+    setTimeout(function () {
+      pop.hidden = true; releaseScroll();
+      window.location.href = QUIZ + '?concern=' + encodeURIComponent(chosenConcern) + '&offer=' + encodeURIComponent(OFFER_CODE);
+    }, 2500);
+  });
+
+  /* Close controls — ESC, backdrop, × */
+  document.getElementById('popClose').addEventListener('click', dismiss);
+  var bd = pop.querySelector('[data-pop-close]'); if (bd) bd.addEventListener('click', dismiss);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) dismiss(); });
+
+  /* Deal-bar CTA — quiz if already captured, else open the popup */
+  var dealCta = document.getElementById('dealCta');
+  if (dealCta) dealCta.addEventListener('click', function () {
+    if (captured()) window.location.href = QUIZ;
+    else openManual();
+  });
+
+  /* Auto-triggers: exit-intent (desktop) OR 15s OR 50% scroll (mobile) — first wins.
+     Respects the 30-day cookie; never blocks the page. */
+  if (!suppressed()) {
+    setTimeout(openAuto, 15000);
+    var onScroll = function () {
+      var sc = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && sc / h >= 0.5) { openAuto(); window.removeEventListener('scroll', onScroll); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    var isTouch = (window.matchMedia && matchMedia('(hover: none)').matches) || 'ontouchstart' in window;
+    if (!isTouch) {
+      document.addEventListener('mouseout', function (e) {
+        if (!e.relatedTarget && e.clientY <= 0) openAuto();
+      });
+    }
+  }
 })();
 </script>
 
