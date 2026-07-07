@@ -57,6 +57,7 @@ body {
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  padding-top: var(--stack-h, 118px);   /* clear the fixed promo bar + fixed nav */
 }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--pink-soft); }
@@ -97,8 +98,40 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .ob-unit small { font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-top: 1px; }
 .ob-sep { font-size: 16px; font-weight: 700; margin: 0 2px; padding-bottom: 8px; opacity: .7; }
 
+/* ── Scroll-triggered claim/offer bar (slides down from behind the fixed nav) ── */
+.claim-bar {
+  position: fixed; left: 0; right: 0; z-index: 40;
+  top: var(--stack-h, 118px);
+  background: linear-gradient(90deg, var(--brand-ink) 0%, var(--brand) 100%);
+  color: #fff;
+  transform: translateY(-100%); opacity: 0; pointer-events: none;
+  transition: transform .5s var(--ease-out), opacity .35s ease;
+  box-shadow: 0 14px 30px -14px rgba(0,0,0,.45);
+}
+.claim-bar.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.claim-in {
+  max-width: 1280px; margin: 0 auto; padding: 11px 24px;
+  display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 36px); flex-wrap: wrap;
+}
+.claim-copy { font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+.claim-copy b { font-weight: 800; }
+.claim-copy .sep { opacity: .82; font-weight: 500; }
+.claim-cta {
+  flex-shrink: 0; background: #fff; color: var(--brand);
+  font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  border-radius: 999px; padding: 10px 22px; white-space: nowrap;
+  transition: transform .15s var(--ease-out), box-shadow .15s ease;
+}
+.claim-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 18px -6px rgba(0,0,0,.35); }
+@media (prefers-reduced-motion: reduce) { .claim-bar { transition: opacity .2s ease; } }
+@media (max-width: 560px) {
+  .claim-in { padding: 8px 14px; gap: 10px; }
+  .claim-copy { font-size: 12.5px; text-align: center; }
+  .claim-cta { padding: 8px 16px; font-size: 12px; }
+}
+
 /* ── Nav (sticky, elevates + condenses after scroll — Ro) ── */
-.nav { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: var(--bar-h, 42px); z-index: 50; }
+.nav { background: #fff; border-bottom: 1px solid var(--line); position: fixed; top: var(--bar-h, 55px); left: 0; right: 0; z-index: 50; }
 .nav::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   box-shadow: 0 10px 30px rgba(28,26,23,.09);
@@ -110,14 +143,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   display: flex; align-items: center; gap: 28px;
   transition: padding .3s ease;
 }
-.nav.is-scrolled .nav-inner { padding: 9px 24px; }
+/* nav stays a constant size on scroll — it does not move/resize */
 .logo {
   font-family: 'Newsreader', Georgia, serif;
   color: var(--brand);
   font-size: 24px; letter-spacing: -0.02em; white-space: nowrap;
   transform-origin: left center; transition: transform .3s ease;
 }
-.nav.is-scrolled .logo { transform: scale(.92); }
+/* logo stays constant on scroll (nav does not move) */
 .logo .thin { font-style: italic; font-weight: 400; }
 .logo .bold { font-weight: 700; }
 .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14.5px; font-weight: 500; margin: 0 auto; }
@@ -1473,6 +1506,14 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </nav>
 
+<!-- Scroll-triggered claim/offer bar (appears after the hero, hides at the trust stats) -->
+<div class="claim-bar" id="claimBar" aria-hidden="true">
+  <div class="claim-in">
+    <p class="claim-copy"><b>Save up to 50% + Free 2-Day Shipping</b> <span class="sep">· Clinician Guarantee</span></p>
+    <a class="claim-cta" href="https://quiz.herestrogen.com/herestrogen_hrt">Get Started &rarr;</a>
+  </div>
+</div>
+
 <!-- Hero — the platform bento (everything we treat) -->
 <div class="sec-divider hero-divider">
   <div class="eyebrow">All-in-one care for women · 100% online</div>
@@ -1896,63 +1937,63 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <section class="labs has-bg" id="labs">
   <img class="labs-bg" src="assets/hair-lifestyle.webp" alt="" loading="lazy" decoding="async" onerror="this.closest('.labs').classList.remove('has-bg'); this.remove();" />
   <div class="labs-head">
-    <p class="labs-eyebrow" data-reveal>labs by <span class="lb">herestrogen</span></p>
-    <h2 data-reveal style="--i:1">Test what your body's<br />been telling you</h2>
+    <p class="labs-eyebrow" data-reveal>your <span class="lb">herestrogen</span> portal</p>
+    <h2 data-reveal style="--i:1">Your whole care team,<br />in one secure login</h2>
   </div>
   <div class="labs-stage" aria-hidden="true">
-    <div class="lpanel lp-1"><span class="lp-donut"></span><b>All 34 biomarkers</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
-    <div class="lpanel lp-2"><span class="lp-chip">Hormone health</span><span class="big">41</span>Your biological age estimate, from your markers</div>
-    <div class="lpanel lp-3"><b>Making you younger</b><div class="lp-rows"><span></span><span></span></div></div>
+    <div class="lpanel lp-1"><span class="lp-donut"></span><b>3 new messages</b><div class="lp-rows"><span></span><span></span><span></span></div></div>
+    <div class="lpanel lp-2"><span class="lp-chip">Your plan</span><span class="big">2</span>Active prescriptions, managed in one place</div>
+    <div class="lpanel lp-3"><b>Order shipped</b><div class="lp-rows"><span></span><span></span></div></div>
   </div>
   <div class="labs-ctas">
-    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Start my labs</a>
-    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">Learn more</a>
+    <a class="btn btn-light" data-reveal style="--i:2" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
+    <a class="btn btn-ghost-dark" data-reveal style="--i:3" href="https://quiz.herestrogen.com/herestrogen_hrt">See how it works</a>
   </div>
 
   <div class="labs-cards">
     <div class="lcard lc-plan" data-reveal>
       <div>
-        <h3>Discover your baseline</h3>
-        <p>Get a clear picture of your health with a simple at-home lab test.</p>
+        <h3>Care that answers back</h3>
+        <p>Message a licensed clinician between visits — no phone tag, no waiting rooms.</p>
       </div>
       <div class="phone" aria-hidden="true">
         <div class="phone-notch"></div>
         <div class="phone-ui">
-          <b>Action Plan</b>
-          Two areas of your health need attention — let's get things on track.
-          <div class="phone-note"><span class="flag">Needs attention</span>First up: hormone balance. Your profile and biomarkers show your estradiol trending low.</div>
+          <b>Your care team</b>
+          Secure messaging and video visits, right from your phone.
+          <div class="phone-note"><span class="flag">New reply</span>"Your estradiol dose looks good — let's check in again in 4 weeks. Message us anytime."</div>
           <div class="phone-bars"><span></span><span></span><span></span></div>
         </div>
       </div>
       <div class="col-r">
-        <h3>Plan your breakthrough</h3>
-        <p>Optimize your health with a clinician-developed action plan.</p>
-        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the plan</a>
+        <h3>Everything in one place</h3>
+        <p>Visits, messages, prescriptions, results and orders — all behind one HIPAA-secure login.</p>
+        <a class="btn btn-light" href="https://quiz.herestrogen.com/herestrogen_hrt">Message your clinician</a>
       </div>
     </div>
     <div class="labs-duo" data-reveal-group>
       <div class="lcard">
-        <h3>Unlock your Biological Age</h3>
-        <p>Reveal how fast your body is aging compared to your actual age.</p>
+        <h3>Track every order to your door</h3>
+        <p>Watch your treatment ship in real time, with a status alert at every step.</p>
         <div class="bio-age-chip" aria-hidden="true">
-          <small>As of today</small>
-          <span class="n">38</span>
-          <em>2 years younger than your chronological age</em>
+          <small>Arrives in</small>
+          <span class="n">2</span>
+          <em>days — free, discreet shipping, tracked door to door</em>
         </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get the science</a>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">See your dashboard</a>
       </div>
       <div class="lcard">
-        <h3>Test 130+ biomarkers</h3>
-        <p>From hormones to heart health — one draw, the full picture.</p>
+        <h3>Manage prescriptions, refills &amp; billing</h3>
+        <p>Request refills, review your results, and handle payments — all in one place.</p>
         <div class="bio-cloud" aria-hidden="true">
-          <div class="bio-row"><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span><span>Estradiol</span><span class="bk">Hormones</span><span>FSH</span><span>LH</span><span>Progesterone</span><span>SHBG</span><span class="bk">Thyroid</span><span>TSH</span><span>Free T3</span><span>Free T4</span></div>
-          <div class="bio-row rev"><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span><span>Hemoglobin A1c</span><span>Fasting Insulin</span><span class="bk">Metabolism</span><span>LDL Cholesterol</span><span>HDL</span><span>ApoB</span><span class="bk">Heart</span><span>Vitamin D</span><span>Ferritin</span><span>hs-CRP</span><span>Cortisol</span></div>
+          <div class="bio-row"><span>Messaging</span><span class="bk">Care team</span><span>Video visits</span><span>Refill requests</span><span>Treatment plan</span><span>Results</span><span class="bk">Records</span><span>Order tracking</span><span>Scheduling</span><span>Notifications</span><span>Messaging</span><span class="bk">Care team</span><span>Video visits</span><span>Refill requests</span><span>Treatment plan</span><span>Results</span><span class="bk">Records</span><span>Order tracking</span><span>Scheduling</span><span>Notifications</span></div>
+          <div class="bio-row rev"><span>HSA / FSA</span><span>Auto-refills</span><span class="bk">Billing</span><span>Card &amp; ACH</span><span>Subscriptions</span><span>Secure login</span><span class="bk">HIPAA</span><span>Multi-factor</span><span>Mobile access</span><span>Health history</span><span>HSA / FSA</span><span>Auto-refills</span><span class="bk">Billing</span><span>Card &amp; ACH</span><span>Subscriptions</span><span>Secure login</span><span class="bk">HIPAA</span><span>Multi-factor</span><span>Mobile access</span><span>Health history</span></div>
         </div>
-        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Meet the markers</a>
+        <a class="btn btn-ghost-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Explore the portal</a>
       </div>
     </div>
   </div>
-  <p class="labs-fine">Not available in all 50 states. Eligibility determination and prescription required for all lab tests. Lab results alone are not intended to diagnose, treat, or cure any condition. Any biological-age figure is an illustrative estimate only and does not reflect a medical diagnosis.</p>
+  <p class="labs-fine">Your patient portal is included with every plan. Messaging and video visits connect you with licensed clinicians; treatment is provided only where clinically appropriate and a prescription is not guaranteed. Portal features and availability vary by state.</p>
 </section>
 
 
@@ -2279,15 +2320,37 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 })();
 </script>
 
-<!-- Bar height offset + countdown -->
+<!-- Bar height offset + countdown + scroll-triggered claim bar -->
 <script>
 (function () {
   var bar = document.getElementById('offerBar');
+  var navEl = document.getElementById('nav');
   function setOffset() {
     if (bar) document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+    var stack = (bar ? bar.offsetHeight : 0) + (navEl ? navEl.offsetHeight : 0);
+    document.documentElement.style.setProperty('--stack-h', stack + 'px');
   }
   setOffset();
   window.addEventListener('resize', setOffset, { passive: true });
+
+  /* Claim bar: slides in once the hero header scrolls above the fixed bars,
+     hides again once the trust-stats (.proof) section reaches the top. */
+  var claim = document.getElementById('claimBar');
+  var hero = document.querySelector('.hero-divider');
+  var proof = document.querySelector('.proof');
+  if (claim && hero && proof) {
+    var updateClaim = function () {
+      var top = (bar ? bar.offsetHeight : 0) + (navEl ? navEl.offsetHeight : 0);
+      var pastHero = hero.getBoundingClientRect().bottom <= top;
+      var reachedProof = proof.getBoundingClientRect().top <= top + claim.offsetHeight;
+      var show = pastHero && !reachedProof;
+      claim.classList.toggle('show', show);
+      claim.setAttribute('aria-hidden', String(!show));
+    };
+    updateClaim();
+    window.addEventListener('scroll', updateClaim, { passive: true });
+    window.addEventListener('resize', updateClaim, { passive: true });
+  }
 
   /* Countdown to July 31 2026 midnight ET */
   var END = new Date('2026-08-01T04:00:00Z').getTime();
