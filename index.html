@@ -1245,66 +1245,76 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   .btn-lg { padding: 15px 24px; }
 }
 
-/* ── Offer popup ── */
-.opop { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: 18px; opacity: 0; transition: opacity .5s ease; pointer-events: none; }
+/* ── Offer popup (FULL SCREEN) ── */
+.opop {
+  position: fixed; inset: 0; z-index: 400;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(255,156,196,.28), transparent 62%),
+    linear-gradient(165deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  color: #fff; text-align: center; overflow-y: auto;
+  opacity: 0; transition: opacity .5s ease; pointer-events: none;
+}
 .opop.visible { opacity: 1; pointer-events: auto; }
 .opop[hidden] { display: none !important; }
-.opop-bd { position: absolute; inset: 0; background: rgba(20,4,12,.55); backdrop-filter: blur(4px); }
 .opop-card {
-  position: relative; z-index: 1; width: 100%; max-width: 560px;
-  background: linear-gradient(160deg, var(--dark-1) 0%, var(--dark-2) 100%);
-  border-radius: 22px; padding: clamp(32px, 6vw, 52px) clamp(24px, 5vw, 48px) clamp(28px, 5vw, 44px);
-  text-align: center; color: #fff;
-  box-shadow: 0 48px 96px -20px rgba(10,2,8,.7);
-  overflow: hidden;
+  position: relative; z-index: 1; width: 100%; max-width: 620px;
+  padding: clamp(40px, 8vh, 80px) clamp(24px, 6vw, 56px);
+  display: flex; flex-direction: column; align-items: center;
 }
-/* Subtle pink glow at top — mirrors .band */
-.opop-card::before {
-  content: ""; position: absolute; inset: -20%; pointer-events: none;
-  background: radial-gradient(90% 55% at 50% 0%, rgba(255,156,196,.22), transparent 60%);
-}
-.opop-card > * { position: relative; z-index: 1; }
 .opop-x {
-  position: absolute; top: 14px; right: 14px; z-index: 2;
-  width: 32px; height: 32px; border-radius: 50%; border: 0;
-  background: rgba(255,255,255,.12); color: #fff; font-size: 18px; line-height: 1;
+  position: fixed; top: 20px; right: 22px; z-index: 2;
+  width: 44px; height: 44px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.14); color: #fff; font-size: 24px; line-height: 1;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background .15s ease;
 }
-.opop-x:hover { background: rgba(255,255,255,.22); }
-.opop-logo { font-size: 17px; font-weight: 700; letter-spacing: .05em; color: var(--lime); margin-bottom: 18px; }
+.opop-x:hover { background: rgba(255,255,255,.26); }
+.opop-logo {
+  font-family: 'Newsreader', Georgia, serif; color: #fff;
+  font-size: clamp(30px, 5vw, 40px); letter-spacing: -0.02em; white-space: nowrap;
+  margin-bottom: clamp(24px, 5vh, 40px);
+}
 .opop-logo .thin { font-style: italic; font-weight: 400; }
-.opop-h { font-size: clamp(26px, 5.5vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; }
-.opop-sub { margin: 10px auto 0; font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.5; }
-.opop-concerns { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+.opop-logo .bold { font-weight: 700; }
+.opop-h { font-size: clamp(38px, 8vw, 68px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; }
+.opop-h .accent { color: var(--lime); }
+.opop-sub { margin: 18px auto 0; max-width: 460px; font-size: clamp(15px, 2.4vw, 18px); color: rgba(255,255,255,.85); line-height: 1.5; font-weight: 500; }
+.opop-concerns { margin-top: clamp(26px, 4vh, 40px); display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 440px; }
 .opop-btn {
   width: 100%; border: 0; border-radius: 999px;
-  padding: 14px 20px; font-family: inherit; font-size: 15px; font-weight: 700; text-align: center;
+  padding: 17px 24px; font-family: inherit; font-size: 16px; font-weight: 700; text-align: center;
   cursor: pointer; transition: filter .15s ease, transform .15s ease;
 }
-.opop-btn.choice { background: var(--brand); color: #fff; }
-.opop-btn.choice:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.opop-btn.choice { background: #fff; color: var(--brand); }
+.opop-btn.choice:hover { filter: brightness(.95); transform: translateY(-2px); }
 .opop-btn.choice:active { transform: scale(.98); }
-.opop-btn.primary { background: var(--lime); color: var(--dark-2); margin-top: 4px; }
-.opop-btn.primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.opop-dismiss { background: 0; border: 0; font-family: inherit; font-size: 12px; color: rgba(255,255,255,.45); cursor: pointer; margin-top: 16px; text-decoration: underline; text-underline-offset: 2px; }
-.opop-dismiss:hover { color: rgba(255,255,255,.7); }
+.opop-btn.primary { background: var(--lime); color: var(--dark-2); }
+.opop-btn.primary:hover { filter: brightness(1.06); transform: translateY(-2px); }
+.opop-dismiss { background: 0; border: 0; font-family: inherit; font-size: 13px; color: rgba(255,255,255,.5); cursor: pointer; margin-top: clamp(20px, 4vh, 32px); text-decoration: underline; text-underline-offset: 3px; }
+.opop-dismiss:hover { color: rgba(255,255,255,.8); }
 .opop-input {
-  width: 100%; border: 1.5px solid rgba(255,255,255,.25); border-radius: 14px;
-  background: rgba(255,255,255,.1); color: #fff; padding: 14px 16px;
+  width: 100%; max-width: 440px; border: 1.5px solid rgba(255,255,255,.3); border-radius: 16px;
+  background: rgba(255,255,255,.12); color: #fff; padding: 17px 20px;
   font-size: 16px; font-family: inherit; outline: 0; transition: border-color .15s ease;
-  box-sizing: border-box; margin-top: 20px;
+  box-sizing: border-box; margin-top: clamp(24px, 4vh, 36px); text-align: center;
 }
-.opop-input::placeholder { color: rgba(255,255,255,.45); }
+.opop-input::placeholder { color: rgba(255,255,255,.5); }
 .opop-input:focus { border-color: var(--lime); }
-.opop-err { font-size: 12px; color: #ff9cc4; margin: 6px 0 0; min-height: 16px; }
-.opop-step { animation: opFade .35s ease; }
+.opop-err { font-size: 13px; color: var(--lime); margin: 10px 0 0; min-height: 18px; }
+.opop-form-btn { max-width: 440px; margin-top: 16px; }
+.opop-step { animation: opFade .35s ease; display: flex; flex-direction: column; align-items: center; width: 100%; }
 .opop-step[hidden] { display: none; }
-@keyframes opFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.opop-check { font-size: 48px; margin-bottom: 10px; }
-.opop-success-h { font-size: clamp(22px, 4vw, 28px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
-.opop-success-sub { font-size: 14px; color: rgba(255,255,255,.78); line-height: 1.5; }
-@media (prefers-reduced-motion: reduce) { .opop { transition: none; } .opop-step { animation: none; } }
+@keyframes opFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.opop-check {
+  width: clamp(80px, 14vw, 104px); height: clamp(80px, 14vw, 104px); border-radius: 50%;
+  background: var(--lime); color: var(--dark-2); display: flex; align-items: center; justify-content: center;
+  font-size: clamp(40px, 7vw, 56px); margin-bottom: 24px; animation: opCheck .45s var(--ease-pop);
+}
+@keyframes opCheck { from { transform: scale(0); } to { transform: scale(1); } }
+.opop-success-h { font-size: clamp(30px, 6vw, 46px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+.opop-success-sub { font-size: clamp(15px, 2.4vw, 18px); color: rgba(255,255,255,.85); line-height: 1.5; max-width: 420px; }
+@media (prefers-reduced-motion: reduce) { .opop { transition: none; } .opop-step, .opop-check { animation: none; } }
 </style>
 <!-- FAQPage structured data (Google rich result) — answers mirror the visible FAQ verbatim -->
 <script type="application/ld+json">
@@ -2294,18 +2304,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 })();
 </script>
 
-<!-- Offer popup -->
+<!-- Offer popup (full screen) -->
 <div class="opop" id="offerPop" role="dialog" aria-modal="true" aria-labelledby="opopHead" hidden>
-  <div class="opop-bd" id="opopBd"></div>
+  <button class="opop-x" id="opopX" aria-label="Close">&times;</button>
   <div class="opop-card">
-    <button class="opop-x" id="opopX" aria-label="Close">&times;</button>
 
     <!-- Step 1 — concern -->
     <div class="opop-step" id="opopStep1">
-      <div class="opop-logo">her<span class="thin">estrogen</span></div>
-      <h2 class="opop-h" id="opopHead">Get up to 50% OFF Now</h2>
-      <p class="opop-sub">Free 2-Day Shipping &middot; Clinical Match Guarantee</p>
-      <p class="opop-sub" style="margin-top:6px;font-size:13px;">Tell us about the challenge you're looking to address:</p>
+      <div class="opop-logo"><span class="thin">her</span><span class="bold">estrogen</span></div>
+      <h2 class="opop-h" id="opopHead">Here's <span class="accent">50% off</span><br>to feel like you again</h2>
+      <p class="opop-sub">Up to 50% off &nbsp;·&nbsp; Free 2-Day Shipping &nbsp;·&nbsp; Clinician Guarantee</p>
       <div class="opop-concerns" role="group" aria-label="What are you looking to address?">
         <button class="opop-btn choice" data-concern="hormone-balance">Hormone Balance</button>
         <button class="opop-btn choice" data-concern="weight">Weight Management</button>
@@ -2317,18 +2325,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
     <!-- Step 2 — email -->
     <div class="opop-step" id="opopStep2" hidden>
-      <div class="opop-logo">her<span class="thin">estrogen</span></div>
-      <h2 class="opop-h">Enter your email to receive it</h2>
+      <div class="opop-logo"><span class="thin">her</span><span class="bold">estrogen</span></div>
+      <h2 class="opop-h">Almost yours!<br>Enter your email</h2>
       <p class="opop-sub">We'll clip your up to 50% off discount so it's ready at checkout.</p>
       <input class="opop-input" type="email" id="opopEmail" autocomplete="email" inputmode="email" placeholder="you@email.com" />
       <p class="opop-err" id="opopErr"></p>
-      <button class="opop-btn primary" id="opopContinue" style="margin-top:14px;">Continue &rarr;</button>
+      <button class="opop-btn primary opop-form-btn" id="opopContinue">Continue &rarr;</button>
     </div>
 
     <!-- Step 3 — clipped -->
     <div class="opop-step" id="opopStep3" hidden>
-      <div class="opop-check">✓</div>
-      <div class="opop-success-h">Clipped to checkout!</div>
+      <div class="opop-check" aria-hidden="true">✓</div>
+      <div class="opop-success-h">Coupon clipped!</div>
       <p class="opop-success-sub">Your discount is saved and will apply automatically when you order.</p>
     </div>
   </div>
@@ -2336,27 +2344,13 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <script>
 (function () {
-  var QUIZ = 'https://quiz.herestrogen.com/herestrogen_hrt';
-  var SEEN_KEY = 'he_popup_seen';
-  var CAP_KEY  = 'he_offer_captured';
-
-  function setCookie(n, v, days) {
-    var d = new Date(); d.setTime(d.getTime() + days * 864e5);
-    document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
-  }
-  function getCookie(n) {
-    return document.cookie.split('; ').reduce(function (a, c) {
-      var i = c.indexOf('='); return c.slice(0, i) === n ? decodeURIComponent(c.slice(i + 1)) : a;
-    }, '');
-  }
-  function suppressed() { return getCookie(SEEN_KEY) === '1' || getCookie(CAP_KEY) === '1'; }
-
   var pop = document.getElementById('offerPop');
+  if (!pop) return;
   var s1 = document.getElementById('opopStep1');
   var s2 = document.getElementById('opopStep2');
   var s3 = document.getElementById('opopStep3');
   var errEl = document.getElementById('opopErr');
-  var shown = false;
+  var shown = false;              // in-memory only — reappears on a fresh page load / new tab
   var concern = 'not-sure';
 
   function show() {
@@ -2366,14 +2360,10 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(function () { pop.classList.add('visible'); });
   }
-  function hide(redirect) {
+  function hide() {
     pop.classList.remove('visible');
     document.body.style.overflow = '';
-    setCookie(SEEN_KEY, '1', 30);
-    setTimeout(function () {
-      pop.hidden = true;
-      if (redirect) window.location.href = QUIZ + '?concern=' + encodeURIComponent(concern);
-    }, 500);
+    setTimeout(function () { pop.hidden = true; }, 500);   // no redirect — just closes
   }
   function goTo(step) {
     [s1, s2, s3].forEach(function (s) { s.hidden = true; });
@@ -2389,26 +2379,24 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     });
   });
 
-  /* Step 2 — email → step 3 → close */
+  /* Step 2 — email → step 3 → auto-close (no navigation) */
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
   document.getElementById('opopContinue').addEventListener('click', function () {
     var email = (document.getElementById('opopEmail').value || '').trim();
     if (!validEmail(email)) { errEl.textContent = 'Please enter a valid email.'; return; }
     errEl.textContent = '';
-    setCookie(CAP_KEY, '1', 30);
     /* TODO: send email + concern to Klaviyo */
     goTo(s3);
-    setTimeout(function () { hide(true); }, 2200);
+    setTimeout(hide, 2200);
   });
 
   /* Close */
-  document.getElementById('opopX').addEventListener('click', function () { hide(false); });
-  document.getElementById('opopDismiss').addEventListener('click', function () { hide(false); });
-  document.getElementById('opopBd').addEventListener('click', function () { hide(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) hide(false); });
+  document.getElementById('opopX').addEventListener('click', hide);
+  document.getElementById('opopDismiss').addEventListener('click', hide);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) hide(); });
 
-  /* Auto-show 2s after load */
-  if (!suppressed()) setTimeout(show, 2000);
+  /* Auto-show 2s after load — no persistence, so it shows again in any new tab */
+  setTimeout(show, 2000);
 })();
 </script>
 
