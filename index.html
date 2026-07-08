@@ -166,7 +166,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   opacity: 0; visibility: hidden; transform: translateY(-10px); pointer-events: none;
   transition: opacity .24s ease, transform .28s var(--ease-out), visibility 0s .28s; }
 .mega::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; }
-.nav-item:hover .mega, .nav-item:focus-within .mega { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
+.nav-item:hover .mega, .nav-item:focus-within .mega, .nav-item.mega-open .mega { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
+.nav-item:hover > a::after, .nav-item.mega-open > a::after { transform: rotate(225deg) translateY(-1px); }
 .mega-inner { max-width: 1200px; margin: 0 auto; padding: 34px 24px 38px; display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 36px; }
 .mega-col h5 { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; font-weight: 700; }
 .mega-col a { display: block; font-size: 15px; font-weight: 500; color: var(--ink); padding: 8px 0; text-decoration: none; transition: color .15s ease; }
@@ -1245,18 +1246,72 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 @media (max-width: 480px) { .vprop-grid { grid-template-columns: 1fr; } }
 
 /* How it works — 3 steps */
-.how { padding: clamp(48px, 6vw, 80px) 0; background: #fff; border-block: 1px solid var(--line); text-align: center; }
+.how { padding: clamp(48px, 6vw, 84px) 0; background: linear-gradient(180deg, var(--cream-2, #fff9f3), var(--paper)); border-block: 1px solid var(--line); text-align: center; }
 .how h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; letter-spacing: -0.02em; }
 .how-sub { max-width: 480px; margin: 12px auto 0; font-size: 16px; color: var(--ink-2); }
-.how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0 36px; text-align: left; counter-reset: step; }
-.how-step { position: relative; padding: 26px 22px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); }
-.how-step .num {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff;
-  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-bottom: 14px;
+.how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 52px 0 40px; text-align: center; }
+.how-step {
+  position: relative; padding: 42px 24px 30px; border-radius: 26px;
+  background: rgba(160,120,95,.09); display: flex; flex-direction: column; align-items: center;
 }
-.how-step h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-.how-step p { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
-@media (max-width: 720px) { .how-steps { grid-template-columns: 1fr; } }
+.hs-num {
+  position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  width: 42px; height: 42px; border-radius: 50%; background: #fff;
+  box-shadow: 0 8px 18px -6px rgba(60,30,20,.22);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Newsreader', Georgia, serif; font-weight: 600; color: var(--brand); font-size: 18px;
+}
+.hs-visual { width: 100%; height: 228px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+.how-step h3 { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 8px; }
+.how-step p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; max-width: 262px; }
+
+/* Visual 1 — intake form mockup */
+.hs-form { perspective: 800px; }
+.fm-card {
+  position: relative; width: 232px; background: #fff; border-radius: 14px;
+  box-shadow: 0 22px 44px -20px rgba(60,30,20,.3); padding: 18px 16px 22px; text-align: left;
+  transform: rotateX(4deg);
+}
+.fm-row { display: flex; gap: 10px; }
+.fm-field { flex: 1; margin-bottom: 12px; }
+.fm-field label { display: block; font-size: 8.5px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.fm-input { display: block; height: 22px; border-radius: 5px; border: 1px solid var(--line); background: #fbf9f7; }
+.fm-hint { font-size: 7.5px; color: var(--muted); margin: -6px 0 12px; }
+.fm-cursor {
+  position: absolute; right: 14px; bottom: 30px; background: var(--brand); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px 999px 999px 2px;
+  box-shadow: 0 6px 14px -4px rgba(194,30,99,.5);
+}
+.fm-cursor::before { content: ""; position: absolute; left: -14px; top: -8px; width: 0; height: 0; border: 6px solid transparent; border-right-color: var(--brand); transform: rotate(-30deg); }
+
+/* Visual 2 — licensed clinician on a phone (illustration, not a real person) */
+.hs-phone { position: relative; }
+.ph-frame {
+  position: relative; width: 128px; height: 210px; border-radius: 26px; background: #1c0810;
+  padding: 7px; box-shadow: 0 24px 46px -18px rgba(60,30,20,.4);
+}
+.ph-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 40px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.25); z-index: 2; }
+.ph-screen { width: 100%; height: 100%; border-radius: 20px; overflow: hidden; background: linear-gradient(170deg, var(--blush-1, #ffe7f0), var(--peach-soft, #ffe6da)); display: flex; align-items: flex-end; justify-content: center; }
+.ph-screen svg { width: 100%; height: 100%; display: block; }
+.ph-badge {
+  position: absolute; right: -10px; top: 22px; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 18px -6px rgba(194,30,99,.55); border: 3px solid var(--paper);
+}
+.ph-badge svg { width: 19px; height: 19px; }
+
+/* Visual 3 — treatment delivered (unbranded package; no HerEstrogen branding per LegitScript) */
+.hs-package { position: relative; }
+.pkg-badge {
+  position: absolute; left: 50%; top: 6px; transform: translateX(38px); width: 44px; height: 44px; border-radius: 50%;
+  background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 18px -6px rgba(194,30,99,.55); border: 3px solid var(--paper); z-index: 2;
+}
+.pkg-badge svg { width: 22px; height: 22px; }
+.hs-package > svg { width: 168px; height: auto; filter: drop-shadow(0 20px 34px rgba(60,30,20,.28)); }
+
+@media (max-width: 720px) { .how-steps { grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; } }
+@media (prefers-reduced-motion: reduce) { .fm-card { transform: none; } }
 
 /* Secondary framing divider */
 .sec-divider { text-align: center; padding: clamp(48px, 6vw, 80px) 24px 0; }
@@ -2018,9 +2073,80 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <h2 data-reveal>How it works</h2>
     <p class="how-sub" data-reveal style="--i:1">No office visits. No insurance hassle. Care that fits your life.</p>
     <div class="how-steps" data-reveal-group>
-      <div class="how-step"><div class="num">1</div><h3>Take the 2-minute quiz</h3><p>Share your symptoms and history. Private, and there's no cost to start.</p></div>
-      <div class="how-step"><div class="num">2</div><h3>A clinician reviews</h3><p>A licensed clinician who specializes in women's hormones reviews your answers — typically within 2 business days.</p></div>
-      <div class="how-step"><div class="num">3</div><h3>Treatment to your door</h3><p>If appropriate, your prescription ships free and discreet, with ongoing clinician support.</p></div>
+      <div class="how-step">
+        <div class="hs-num">1</div>
+        <div class="hs-visual hs-form" aria-hidden="true">
+          <div class="fm-card">
+            <div class="fm-row">
+              <div class="fm-field"><label>Legal First Name</label><span class="fm-input"></span></div>
+              <div class="fm-field"><label>Legal Last Name</label><span class="fm-input"></span></div>
+            </div>
+            <div class="fm-field"><label>Email Address</label><span class="fm-input"></span></div>
+            <div class="fm-hint">Please use a unique email address</div>
+            <div class="fm-field"><label>Date of Birth</label><span class="fm-input"></span></div>
+            <span class="fm-cursor">You</span>
+          </div>
+        </div>
+        <h3>Share your details</h3>
+        <p>A private intake about your health &mdash; takes about 2 minutes, no cost to start.</p>
+      </div>
+
+      <div class="how-step">
+        <div class="hs-num">2</div>
+        <div class="hs-visual hs-phone" aria-hidden="true">
+          <div class="ph-frame">
+            <span class="ph-notch"></span>
+            <div class="ph-screen">
+              <svg viewBox="0 0 128 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Licensed clinician illustration">
+                <!-- hair back -->
+                <path d="M40 92c0-20 10-34 24-34s24 14 24 34v40H40z" fill="#4a2c1c"/>
+                <!-- neck -->
+                <rect x="56" y="96" width="16" height="20" rx="7" fill="#e8b48f"/>
+                <!-- white coat / shoulders -->
+                <path d="M28 210c0-30 16-52 36-52s36 22 36 52z" fill="#fff"/>
+                <path d="M64 158c-8 0-15 3-20 8l20 44 20-44c-5-5-12-8-20-8z" fill="#f3eef0"/>
+                <!-- collar -->
+                <path d="M52 160l12 12 12-12-6-6-6 6-6-6z" fill="#e7e0e4"/>
+                <!-- stethoscope -->
+                <path d="M54 164c-2 14-14 16-14 28" fill="none" stroke="#c21e63" stroke-width="3" stroke-linecap="round"/>
+                <path d="M74 164c2 12 12 15 12 26" fill="none" stroke="#c21e63" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="86" cy="192" r="6" fill="#c21e63"/>
+                <!-- face -->
+                <circle cx="64" cy="88" r="24" fill="#f0c09a"/>
+                <!-- hair front -->
+                <path d="M40 88c0-20 10-32 24-32s24 12 24 32c-6-8-14-12-24-12s-18 4-24 12z" fill="#4a2c1c"/>
+                <!-- eyes + smile -->
+                <circle cx="56" cy="86" r="2.4" fill="#3a2418"/>
+                <circle cx="72" cy="86" r="2.4" fill="#3a2418"/>
+                <path d="M57 96c3 4 11 4 14 0" fill="none" stroke="#b06a4a" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="ph-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" fill="#fff"/><path d="M16 10l5-3v10l-5-3v-4Z" fill="#fff"/></svg>
+            </span>
+          </div>
+        </div>
+        <h3>A licensed clinician reviews</h3>
+        <p>A licensed clinician reviews your history to determine whether treatment is right for you.</p>
+      </div>
+
+      <div class="how-step">
+        <div class="hs-num">3</div>
+        <div class="hs-visual hs-package" aria-hidden="true">
+          <span class="pkg-badge">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <svg viewBox="0 0 180 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Discreet delivery package">
+            <path d="M36 60l12-16h84l12 16-6 92a8 8 0 0 1-8 7H50a8 8 0 0 1-8-7z" fill="#c9a07a"/>
+            <path d="M36 60l12-16h42v115H50a8 8 0 0 1-8-7z" fill="#d8b088"/>
+            <path d="M36 60h108l-4 10H40z" fill="#b98a63"/>
+            <path d="M78 44h24v10a12 12 0 0 1-24 0z" fill="#a87850"/>
+            <rect x="80" y="40" width="20" height="6" rx="3" fill="#8f6743"/>
+          </svg>
+        </div>
+        <h3>Receive your treatment</h3>
+        <p>If prescribed, your medication ships free and discreet, straight to your door.</p>
+      </div>
     </div>
     <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
   </div>
@@ -2210,6 +2336,37 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     window.addEventListener('resize', onScroll, { passive: true });
     frame();
   } catch (err2) { /* parallax is decorative */ }
+
+  /* Mega-menu hover intent: keep the dropdown open while the pointer travels
+     from the trigger down into the panel (the CSS :hover alone drops it in the
+     gap). A short close delay means it only collapses once the mouse has truly
+     left both the nav item and its panel. */
+  (function () {
+    var items = document.querySelectorAll('.nav-item.has-mega');
+    if (!items.length) return;
+    var closeTimer = null;
+    function closeAll() { items.forEach(function (i) { i.classList.remove('mega-open'); }); }
+    function openOnly(item) {
+      clearTimeout(closeTimer);
+      items.forEach(function (i) { i.classList.toggle('mega-open', i === item); });
+    }
+    items.forEach(function (item) {
+      // mega is a child of the nav item, so these fire for the trigger AND the panel
+      item.addEventListener('mouseenter', function () { openOnly(item); });
+      item.addEventListener('mouseleave', function () {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(closeAll, 220);   // grace period to cross the gap
+      });
+      // clicking a link inside the panel: let it navigate, then drop the menu
+      item.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { clearTimeout(closeTimer); closeAll(); });
+      });
+    });
+    // Esc or leaving the nav entirely closes immediately
+    var navEl2 = document.getElementById('nav');
+    if (navEl2) navEl2.addEventListener('mouseleave', function () { clearTimeout(closeTimer); closeTimer = setTimeout(closeAll, 220); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  })();
 
   /* Hamburger menu */
   var burger = document.getElementById('burger');
@@ -2468,7 +2625,9 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     var email = (document.getElementById('opopEmail').value || '').trim();
     if (!validEmail(email)) { errEl.textContent = 'Please enter a valid email.'; return; }
     errEl.textContent = '';
-    /* TODO: send email + concern to Klaviyo */
+    /* Lead capture stub — collects {email, concern} in memory only. No third-party
+       marketing provider is wired (Klaviyo removed). Wire the chosen endpoint here
+       later; never send health data to any ad pixel. */
     goTo(s3);
     setTimeout(hide, 2200);
   });
