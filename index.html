@@ -1146,23 +1146,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   .proof-badges span { text-align: left; }
   .proof-badges .bdot { flex-shrink: 0; }
 }
-/* ── Standards band (icon tiles above FAQ) ── */
-.stdband { padding: clamp(44px, 6vw, 72px) 0; background: var(--paper); border-top: 1px solid var(--line); text-align: center; }
-.stdband h2 { font-size: clamp(28px, 3.6vw, 42px); font-weight: 800; letter-spacing: -0.02em; }
-.stdband h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--brand); }
-.std-ctas { display: flex; gap: 12px; justify-content: center; margin: 22px 0 36px; flex-wrap: wrap; }
-.std-ctas .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
-.std-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
-.std-tile {
-  background: #fff; border: 1px solid var(--line); border-radius: var(--r-md);
-  padding: 26px 12px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px;
-  box-shadow: 0 10px 24px -18px rgba(28,26,23,.18);
-}
-.std-tile svg { width: 44px; height: 44px; stroke: var(--ink); }
-.std-tile b { font-size: 13.5px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-@media (max-width: 960px) { .std-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .std-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .std-tile { padding: 20px 8px 16px; } .std-tile svg { width: 36px; height: 36px; } }
-
 /* ── Wall of praise (testimonial grid) ── */
 .wall-head { text-align: center; margin-top: 48px; }
 .wall-pill { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: var(--r-pill); padding: 7px 16px 7px 8px; font-size: 13px; font-weight: 600; }
@@ -2224,24 +2207,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 
 <!-- FAQ (right above the Start-here prompt) -->
-<section class="stdband">
-  <div class="container">
-    <h2 data-reveal>Care held to a <em>higher standard</em></h2>
-    <div class="std-ctas" data-reveal>
-      <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-      <a class="btn btn-outline" href="https://quiz.herestrogen.com/herestrogen_hrt">See if you're eligible</a>
-    </div>
-    <div class="std-grid" data-reveal-group>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M24 16v16M16 24h16"/></svg><b>Licensed U.S.<br>Clinicians</b></div>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="18" width="28" height="14" rx="7" transform="rotate(-30 24 25)"/><path d="M19 18.5l9.5 12.5"/></svg><b>Licensed U.S.<br>Pharmacies</b></div>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 8l13 5v10c0 8-5.5 14.5-13 17-7.5-2.5-13-9-13-17V13z"/><path d="M18 24l4.5 4.5L31 20"/></svg><b>Clinical Match<br>Guarantee</b></div>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16l14-7 14 7v16l-14 7-14-7z"/><path d="M10 16l14 7 14-7M24 23v16"/></svg><b>Discreet<br>Packaging</b></div>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14h22v18H6zM28 20h8l6 6v6h-14z"/><circle cx="14" cy="36" r="3.5"/><circle cx="34" cy="36" r="3.5"/></svg><b>Free 2-Day<br>Shipping</b></div>
-      <div class="std-tile"><svg viewBox="0 0 48 48" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M38 24a14 14 0 1 1-4.1-9.9"/><path d="M38 10v8h-8"/></svg><b>Cancel<br>Anytime</b></div>
-    </div>
-  </div>
-</section>
-
 <section class="faq" id="faq">
   <div class="container">
     <h2 data-reveal>Questions? <em>Answered.</em></h2>
