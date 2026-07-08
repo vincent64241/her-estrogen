@@ -30,7 +30,7 @@
      necessary but do NOT by themselves constitute LegitScript certification
      or legal sign-off — those remain separate prerequisites, along with the
      compounded-medication consent gate in checkout. ── */
-  var GLP1_LAUNCH_ENABLED = true;
+  var GLP1_LAUNCH_ENABLED = false;  /* HOLD until: LegitScript cert + legal sign-off + consent gate (per spec + compliance officer) */
 
   /* ── Quiz route. TODO: confirm whether GLP-1 uses a separate quiz
        route; if so, swap QUIZ_BASE. Params carry product + plan intent. ── */
@@ -151,7 +151,12 @@
   var lowestPerMo = function () {
     return Math.min.apply(null, Object.keys(GLP1).map(function (k) { return heroPlan(GLP1[k]).pricePerMo; }));
   };
-  var perDay = function (mo) { return Math.round(mo / 30); };   /* "starting at $X/day" like HRT */
+  /* Per-day = effective monthly / 30, exact to the cent — price claims
+     must be mathematically true (FTC/LegitScript). Callers prepend "$". */
+  var perDay = function (mo) {
+    var d = mo / 30;
+    return d % 1 === 0 ? String(d) : d.toFixed(2);
+  };
   var ctaHref = function (key, planId) {
     var p = getProd(key);
     return QUIZ_BASE + '?product=' + (p ? p.qparam : key) + (planId ? '&plan=' + encodeURIComponent(planId) : '');
