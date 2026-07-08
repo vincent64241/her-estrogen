@@ -493,10 +493,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .lineup-scroll::-webkit-scrollbar { display: none; }
 .lineup-scroll { overscroll-behavior-x: contain; }
 @media (hover: none) {
-  /* Rail is LEFT-RIGHT only on touch: vertical/diagonal gestures on it are ignored,
-     so a thumb on the products can never yank the page or the section. */
-  .lineup-scroll, .lineup-scroll .p-card, .lineup-scroll .p-card * { touch-action: pan-x; }
-  .lineup-scroll { scroll-snap-type: none; scroll-behavior: auto; overscroll-behavior: contain; }
+  /* Touch: the browser owns VERTICAL (page scroll works from anywhere, incl. over products).
+     Horizontal rail movement is driven by the axis-locked drag handler below — the rail
+     itself can only ever move left/right, never up/down/diagonally. */
+  .lineup-scroll, .lineup-scroll .p-card, .lineup-scroll .p-card * { touch-action: pan-y; }
+  .lineup-scroll { scroll-snap-type: none; scroll-behavior: auto; overscroll-behavior-x: contain; }
   .p-card:hover { transform: none; }
   .p-card:hover .p-photo { transform: none; }
 }
@@ -1133,7 +1134,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .proof-badges { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: center; margin-top: 36px; }
 .proof-badges span { font-size: 13px; font-weight: 600; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
 .proof-badges .bdot { width: 20px; height: 20px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
-@media (max-width: 860px) { .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } .proof-cards { grid-template-columns: 1fr; } }
+@media (max-width: 860px) {
+  .proof-cards { grid-template-columns: 1fr; }
+  /* Stats: tidy 2×2 + full-width fifth; smaller numerals so nothing wraps mid-phrase */
+  .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 26px 12px; align-items: start; }
+  .stat-big:last-child { grid-column: 1 / -1; padding-top: 4px; }
+  .stat-big b { font-size: clamp(21px, 5.8vw, 30px); }
+  .stat-big span { font-size: 12.5px; margin-top: 4px; }
+  /* Badges: single clean left-aligned column, centered as a block */
+  .proof-badges { display: grid; grid-template-columns: auto; gap: 12px; width: fit-content; margin: 30px auto 0; justify-items: start; }
+  .proof-badges span { text-align: left; }
+  .proof-badges .bdot { flex-shrink: 0; }
+}
 /* ── Wall of praise (testimonial grid) ── */
 .wall-head { text-align: center; margin-top: 48px; }
 .wall-pill { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: var(--r-pill); padding: 7px 16px 7px 8px; font-size: 13px; font-weight: 600; }
@@ -2683,5 +2695,46 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 })();
 </script>
 
+<script>
+/* Touch-only: axis-locked horizontal drag for the product rails.
+   Vertical/diagonal swipes fall through to native page scroll (touch-action: pan-y);
+   a clearly horizontal drag moves the rail, with light momentum on release. */
+(function () {
+  if (!(window.matchMedia && matchMedia('(hover: none)').matches)) return;
+  document.querySelectorAll('.lineup-scroll').forEach(function (rail) {
+    var sx = 0, sy = 0, sl = 0, mode = null, lastX = 0, lastT = 0, vx = 0, raf = null;
+    rail.addEventListener('touchstart', function (e) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      var t = e.touches[0];
+      sx = lastX = t.clientX; sy = t.clientY; sl = rail.scrollLeft;
+      mode = null; vx = 0; lastT = e.timeStamp;
+    }, { passive: true });
+    rail.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      var dx = t.clientX - sx, dy = t.clientY - sy;
+      if (mode === null) {
+        if (Math.abs(dx) < 7 && Math.abs(dy) < 7) return;      // undecided
+        mode = Math.abs(dx) > Math.abs(dy) * 1.3 ? 'x' : 'y';  // must be CLEARLY horizontal
+      }
+      if (mode === 'x' && e.cancelable) {
+        e.preventDefault();
+        rail.scrollLeft = sl - dx;
+        var now = e.timeStamp || Date.now();
+        if (now > lastT) vx = (t.clientX - lastX) / (now - lastT);
+        lastX = t.clientX; lastT = now;
+      }
+      /* mode 'y': do nothing — browser scrolls the page natively */
+    }, { passive: false });
+    rail.addEventListener('touchend', function () {
+      if (mode !== 'x' || Math.abs(vx) < 0.15) return;
+      var v = -vx * 16;                                        // px per frame
+      (function glide() {
+        rail.scrollLeft += v; v *= 0.94;
+        if (Math.abs(v) > 0.5) raf = requestAnimationFrame(glide);
+      })();
+    }, { passive: true });
+  });
+})();
+</script>
 </body>
 </html>
