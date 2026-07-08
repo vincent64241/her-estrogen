@@ -12,10 +12,27 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--paper);color:va
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
 .container{max-width:1060px;margin:0 auto;padding:0 24px;}
-.nav{background:#fff;border-bottom:1px solid var(--line);}
-.nav-inner{max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:center;}
-.logo{font-family:'Newsreader',Georgia,serif;color:var(--brand);font-size:25px;letter-spacing:-.02em;}
-.logo .thin{font-style:italic;font-weight:400;}.logo .bold{font-weight:700;}
+/* ── top offer bar w/ countdown (scrolls away) ── */
+.offer-bar{background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;gap:clamp(16px,4vw,48px);padding:9px 20px;flex-wrap:wrap;}
+.ob-copy{text-align:center;line-height:1.35;}
+.ob-copy b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;}
+.ob-copy span{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.9);}
+.ob-timer{display:flex;align-items:center;gap:4px;}
+.ob-unit{display:flex;flex-direction:column;align-items:center;min-width:32px;}
+.ob-unit strong{font-size:18px;font-weight:800;line-height:1;}
+.ob-unit small{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:1px;}
+.ob-sep{font-size:16px;font-weight:700;margin:0 2px;padding-bottom:8px;opacity:.7;}
+/* ── fixed claim bar (appears on scroll) ── */
+.claim-bar{position:fixed;left:0;right:0;top:0;z-index:40;background:linear-gradient(90deg,var(--brand-ink),var(--brand));color:#fff;transform:translateY(-100%);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .3s ease;box-shadow:0 14px 30px -14px rgba(0,0,0,.45);}
+.claim-bar.show{transform:translateY(0);opacity:1;pointer-events:auto;}
+.claim-in{position:relative;max-width:1280px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;}
+.claim-copy{font-size:15px;font-weight:600;text-align:center;}
+.claim-copy b{font-weight:800;}
+.claim-cta{position:absolute;right:24px;top:50%;transform:translateY(-50%);background:#fff;color:var(--brand);font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:var(--r-pill);padding:11px 26px;white-space:nowrap;}
+@media(max-width:700px){.claim-in{flex-wrap:wrap;padding:9px 16px;gap:8px;}.claim-copy{font-size:12.5px;}.claim-cta{position:static;transform:none;padding:8px 18px;font-size:11.5px;}}
+@media(prefers-reduced-motion:reduce){.claim-bar{transition:opacity .2s ease;}}
+.hero-wm{font-family:'Newsreader',Georgia,serif;color:var(--brand);font-size:24px;letter-spacing:-.02em;margin-bottom:20px;}
+.hero-wm .thin{font-style:italic;font-weight:400;}.hero-wm .bold{font-weight:700;}
 .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r-pill);font-weight:700;cursor:pointer;border:0;}
 .btn-dark{background:var(--brand);color:#fff;padding:16px 34px;font-size:16px;}
 .btn-dark:hover{background:var(--brand-ink);}
@@ -40,15 +57,11 @@ h1{font-size:clamp(32px,4.6vw,54px);line-height:1.06;letter-spacing:-.02em;font-
 .val p{font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0 auto;text-align:center;}
 .val p b{color:var(--ink);}
 /* ── reasons ── */
-.list-head{text-align:center;padding:clamp(44px,6vw,72px) 0 10px;}
-.list-head h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;}
-.list-head h2 em{font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;color:var(--brand);}
-.list-head p{font-size:15px;color:var(--muted);margin-top:8px;}
+.reasons-pad{padding-top:clamp(30px,4vw,54px);}
 .reason{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(30px,4.5vw,52px) 0;}
-.reason.flip .r-txt{order:2;}.reason.flip .r-img{order:1;}
-.r-num{font-size:13px;font-weight:800;letter-spacing:.14em;color:var(--muted);margin-bottom:10px;}
-.r-txt h3{font-size:clamp(21px,2.6vw,28px);font-weight:800;letter-spacing:-.015em;color:var(--brand);margin-bottom:12px;}
-.r-txt p{font-size:16px;color:var(--ink-2);line-height:1.65;max-width:56ch;}
+.r-num{font-family:'Newsreader',Georgia,serif;font-size:30px;font-weight:600;color:var(--brand);line-height:1;margin-bottom:12px;}
+.r-txt h3{font-size:clamp(25px,3.2vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--brand);margin-bottom:14px;}
+.r-txt p{font-size:16.5px;color:var(--ink-2);line-height:1.65;max-width:56ch;}
 .r-img{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;background:linear-gradient(150deg,var(--blush),var(--pink-soft));position:relative;box-shadow:0 24px 48px -24px rgba(194,30,99,.25);}
 .r-img img{width:100%;height:100%;object-fit:cover;}
 .r-img .tag{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--brand-ink);}
@@ -88,11 +101,23 @@ h1{font-size:clamp(32px,4.6vw,54px);line-height:1.06;letter-spacing:-.02em;font-
 .buy-acc details[open] summary::after{content:"–";}
 .buy-acc p,.buy-acc li{font-size:14px;color:var(--ink-2);margin-top:10px;line-height:1.6;}
 .buy-acc ul{margin:10px 0 0 18px;}
-/* ── promises ── */
-.promises{padding:clamp(40px,5vw,64px) 0;}
-.promises h2{text-align:center;font-size:clamp(24px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:26px;}
+/* ── value stack + promises (inside buy section) ── */
+.value-wrap{max-width:760px;margin:clamp(36px,5vw,56px) auto 0;}
+.value-wrap h3.vh{text-align:center;font-size:clamp(22px,3vw,29px);font-weight:800;letter-spacing:-.02em;margin-bottom:6px;}
+.value-wrap .vsub{text-align:center;font-size:14.5px;color:var(--ink-2);margin-bottom:20px;}
+.vstack{list-style:none;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:8px 22px;}
+.vstack li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+.vstack li:last-child{border-bottom:0;}
+.vstack .c{color:var(--brand);font-weight:800;flex-shrink:0;margin-top:2px;}
+.vstack .vt{flex:1 1 220px;min-width:0;}
+.vstack .vt b{display:block;font-size:15.5px;}
+.vstack .vt span{display:block;font-size:13px;color:var(--ink-2);margin-top:2px;line-height:1.5;}
+.vtag{flex-shrink:0;align-self:center;margin-left:auto;font-size:12px;font-weight:700;color:var(--brand-ink);background:var(--pink-soft);border-radius:var(--r-pill);padding:4px 12px;white-space:nowrap;}
+.vtotal{margin-top:14px;text-align:center;font-size:15.5px;font-weight:600;color:var(--ink-2);}
+.vtotal b{color:var(--brand);font-weight:800;}
+.promises-h{text-align:center;font-size:clamp(22px,3vw,29px);font-weight:800;letter-spacing:-.02em;margin:clamp(32px,4vw,44px) 0 20px;}
 .prom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.prom{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;text-align:center;}
+.prom{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;text-align:center;}
 .prom .pi{font-size:26px;margin-bottom:10px;}
 .prom b{display:block;font-size:15.5px;margin-bottom:6px;}
 .prom p{font-size:13.5px;color:var(--ink-2);line-height:1.5;}
@@ -141,12 +166,32 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 40px;}
 }
 </style></head><body>
 
-<nav class="nav"><div class="nav-inner">
-  <a class="logo" href="/"><span class="thin">her</span><span class="bold">estrogen</span></a>
-</div></nav>
+<div class="offer-bar" id="offerBar">
+  <div class="ob-copy">
+    <b>July Offer</b>
+    <span>Up to 50% off &nbsp;&middot;&nbsp; Free 2-Day Shipping &nbsp;&middot;&nbsp; Clinician Guarantee</span>
+  </div>
+  <div class="ob-timer" aria-label="Offer countdown">
+    <div class="ob-unit"><strong id="obDays">00</strong><small>Days</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obHrs">00</strong><small>Hrs</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obMins">00</strong><small>Mins</small></div>
+    <span class="ob-sep" aria-hidden="true">:</span>
+    <div class="ob-unit"><strong id="obSecs">00</strong><small>Secs</small></div>
+  </div>
+</div>
+
+<div class="claim-bar" id="claimBar" aria-hidden="true">
+  <div class="claim-in">
+    <p class="claim-copy"><b>JULY OFFER:</b> Save up to 50% + Free 2-Day Shipping &middot; Clinician Guarantee</p>
+    <a class="claim-cta" href="https://quiz.herestrogen.com/herestrogen_hrt">Get Started &rarr;</a>
+  </div>
+</div>
 
 <header class="hero">
   <div class="hero-l">
+    <div class="hero-wm"><span class="thin">her</span><span class="bold">estrogen</span></div>
     <div class="trust-chip"><span><span class="d">&#10003;</span> Licensed U.S. clinicians</span><span><span class="d">&#10003;</span> All 50 states</span><span><span class="d">&#10003;</span> Free 2-day shipping</span></div>
     <h1>The Rage You Can&rsquo;t Explain Isn&rsquo;t You. It&rsquo;s Your Hormones.</h1>
     <p class="hero-quote">Snapping at people you love, then replaying it at midnight. Anxiety that showed up at 45 uninvited. In perimenopause and menopause it&rsquo;s usually chemistry &mdash; and it&rsquo;s something a licensed clinician can actually address.</p>
@@ -165,17 +210,16 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 40px;}
 
 <section class="val"><div class="container"><p>You&rsquo;ve tried breathing apps, journaling, being &ldquo;more grateful,&rdquo; blaming your schedule. <b>None of it touched the real cause</b> &mdash; because estrogen helps regulate serotonin and the brain&rsquo;s stress response. When it swings day to day, mood swings with it. <b>You&rsquo;re not doing it wrong. You were never told the truth about what&rsquo;s happening.</b></p></div></section>
 
-<section><div class="container">
-  <div class="list-head"><h2>9 reasons you don&rsquo;t feel like yourself <em>(and why it&rsquo;s chemistry, not character)</em></h2><p>The version of you that laughs easily is not gone.</p></div>
-  <div class="reason"><div class="r-txt"><div class="r-num">REASON 01 / 09</div><h3>Your fuse got shorter because serotonin&rsquo;s supply line changed.</h3><p>Estrogen supports serotonin &mdash; the neurotransmitter that steadies mood. When estrogen fluctuates wildly (the signature of perimenopause), the floor under your patience moves. The rage isn&rsquo;t a character flaw; it&rsquo;s a supply issue.</p></div><div class="r-img"><div class="tag"><b>The short fuse</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason flip"><div class="r-txt"><div class="r-num">REASON 02 / 09</div><h3>The tears arrive without a reason because the threshold dropped.</h3><p>Crying at nothing isn&rsquo;t &ldquo;being dramatic.&rdquo; Hormonal shifts lower the brain&rsquo;s emotional threshold, so feelings crest faster than they used to. Same you, thinner insulation.</p></div><div class="r-img"><div class="tag"><b>The threshold</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason"><div class="r-txt"><div class="r-num">REASON 03 / 09</div><h3>New anxiety in midlife is a known hormonal pattern.</h3><p>Waking with dread, a racing heart in the grocery line &mdash; for many women anxiety appears for the first time in perimenopause. If it arrived alongside cycle changes and bad sleep, hormones belong on the suspect list.</p></div><div class="r-img"><div class="tag"><b>New anxiety</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason flip"><div class="r-txt"><div class="r-num">REASON 04 / 09</div><h3>The flatness counts, too.</h3><p>Not sad exactly &mdash; just muted. Estrogen touches dopamine pathways as well; when it dips, so can motivation and pleasure. Flatness is a symptom worth taking seriously, not a mood to push through.</p></div><div class="r-img"><div class="tag"><b>The flatness</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason"><div class="r-txt"><div class="r-num">REASON 05 / 09</div><h3>It lands hardest on the people closest.</h3><p>You hold it together in the meeting, then snap at home. That&rsquo;s not hypocrisy &mdash; it&rsquo;s a depleted regulation system spending its last reserves where the stakes feel safest. It still deserves fixing.</p></div><div class="r-img"><div class="tag"><b>Closest targets</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason flip"><div class="r-txt"><div class="r-num">REASON 06 / 09</div><h3>PMS got louder in your 40s for a reason.</h3><p>The week before your period turned from annoying to unrecognizable. In perimenopause, hormone swings amplify that luteal sensitivity &mdash; a pattern worth naming to a clinician.</p></div><div class="r-img"><div class="tag"><b>The amplifier</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason"><div class="r-txt"><div class="r-num">REASON 07 / 09</div><h3>Sleep and mood are a two-way street.</h3><p>Every 3am wake-up shaves tomorrow&rsquo;s patience; every anxious evening steals tonight&rsquo;s sleep. Hormones sit at both ends of that loop.</p></div><div class="r-img"><div class="tag"><b>The loop</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason flip"><div class="r-txt"><div class="r-num">REASON 08 / 09</div><h3>&ldquo;Snap out of it&rdquo; fails because chemistry doesn&rsquo;t take advice.</h3><p>Willpower can&rsquo;t out-argue a shifting neurotransmitter supply. Self-blame just adds a second problem on top of the first.</p></div><div class="r-img"><div class="tag"><b>Not willpower</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
-  <div class="reason"><div class="r-txt"><div class="r-num">REASON 09 / 09</div><h3>Your doctor may not have been trained for this.</h3><p>Too many visits end with &ldquo;try to reduce stress&rdquo; &mdash; or an antidepressant, with hormones never once mentioned. Our licensed clinicians are focused on hormonal health: they review your history and assess whether treatment is right for you. If it isn&rsquo;t, you pay nothing.</p></div><div class="r-img"><div class="tag"><b>Real answers</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+<section><div class="container reasons-pad">
+  <div class="reason"><div class="r-txt"><div class="r-num">1</div><h3>Your fuse got shorter because serotonin&rsquo;s supply line changed.</h3><p>Estrogen supports serotonin &mdash; the neurotransmitter that steadies mood. When estrogen fluctuates wildly (the signature of perimenopause), the floor under your patience moves. The rage isn&rsquo;t a character flaw; it&rsquo;s a supply issue.</p></div><div class="r-img"><div class="tag"><b>The short fuse</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">2</div><h3>The tears arrive without a reason because the threshold dropped.</h3><p>Crying at nothing isn&rsquo;t &ldquo;being dramatic.&rdquo; Hormonal shifts lower the brain&rsquo;s emotional threshold, so feelings crest faster than they used to. Same you, thinner insulation.</p></div><div class="r-img"><div class="tag"><b>The threshold</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">3</div><h3>New anxiety in midlife is a known hormonal pattern.</h3><p>Waking with dread, a racing heart in the grocery line &mdash; for many women anxiety appears for the first time in perimenopause. If it arrived alongside cycle changes and bad sleep, hormones belong on the suspect list.</p></div><div class="r-img"><div class="tag"><b>New anxiety</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">4</div><h3>The flatness counts, too.</h3><p>Not sad exactly &mdash; just muted. Estrogen touches dopamine pathways as well; when it dips, so can motivation and pleasure. Flatness is a symptom worth taking seriously, not a mood to push through.</p></div><div class="r-img"><div class="tag"><b>The flatness</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">5</div><h3>It lands hardest on the people closest.</h3><p>You hold it together in the meeting, then snap at home. That&rsquo;s not hypocrisy &mdash; it&rsquo;s a depleted regulation system spending its last reserves where the stakes feel safest. It still deserves fixing.</p></div><div class="r-img"><div class="tag"><b>Closest targets</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">6</div><h3>PMS got louder in your 40s for a reason.</h3><p>The week before your period turned from annoying to unrecognizable. In perimenopause, hormone swings amplify that luteal sensitivity &mdash; a pattern worth naming to a clinician.</p></div><div class="r-img"><div class="tag"><b>The amplifier</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">7</div><h3>Sleep and mood are a two-way street.</h3><p>Every 3am wake-up shaves tomorrow&rsquo;s patience; every anxious evening steals tonight&rsquo;s sleep. Hormones sit at both ends of that loop.</p></div><div class="r-img"><div class="tag"><b>The loop</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">8</div><h3>&ldquo;Snap out of it&rdquo; fails because chemistry doesn&rsquo;t take advice.</h3><p>Willpower can&rsquo;t out-argue a shifting neurotransmitter supply. Self-blame just adds a second problem on top of the first.</p></div><div class="r-img"><div class="tag"><b>Not willpower</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
+  <div class="reason"><div class="r-txt"><div class="r-num">9</div><h3>Your doctor may not have been trained for this.</h3><p>Too many visits end with &ldquo;try to reduce stress&rdquo; &mdash; or an antidepressant, with hormones never once mentioned. Our licensed clinicians are focused on hormonal health: they review your history and assess whether treatment is right for you. If it isn&rsquo;t, you pay nothing.</p></div><div class="r-img"><div class="tag"><b>Real answers</b><span>real photo &mdash; batch-shoot slot</span></div></div></div>
 </div></section>
 
 <section class="buy" id="offer"><div class="container"><div class="buy-grid">
@@ -198,8 +242,8 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 40px;}
       <span><span class="d">&#10003;</span> Cancel anytime &mdash; no contracts, no hidden fees</span>
       <span><span class="d">&#10003;</span> Clinical Match Guarantee &mdash; not right for you? You pay nothing</span>
     </div>
-    <div class="buy-price"><span class="bp-was">$189/mo</span><span class="bp-now">$90/mo</span><span class="bp-day">= $3 per day</span></div>
-    <p class="bp-note">On the 12-month plan. Monthly, 3-month, and 6-month plans also available at checkout.</p>
+    <div class="buy-price"><span class="bp-was">$189/mo</span><span class="bp-now">$90/mo</span><span class="bp-day">starting at $3 per day</span></div>
+    <p class="bp-note">Starting price on the 12-month plan. Monthly, 3-month, and 6-month plans also available at checkout.</p>
     <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get Started</a>
     <div class="applied">July discount applied automatically at checkout &#9989;</div>
     <div class="badges">
@@ -209,21 +253,33 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 40px;}
     </div>
     <div class="buy-acc">
       <details><summary>Why HerEstrogen?</summary><p>Care built around your hormones, not a one-size template: a licensed clinician reviews your history, matches a protocol to you, and adjusts it as your body responds &mdash; 100% online, no insurance needed.</p></details>
-      <details><summary>What&rsquo;s included</summary><ul><li>Online evaluation by a licensed clinician</li><li>Your prescription, if appropriate, from a licensed pharmacy</li><li>Free, discreet 2-day shipping on every order</li><li>Ongoing clinician check-ins &amp; adjustments</li><li>Unlimited messaging with your care team</li><li>Cancel anytime &mdash; no long-term commitment</li></ul></details>
       <details><summary>How prescriptions work</summary><p>A licensed clinician reviews your health history and, if appropriate, issues a prescription &mdash; typically within 2 business days. Hormone therapy isn&rsquo;t right for everyone; if a clinician determines it isn&rsquo;t appropriate for you, you won&rsquo;t be charged for medication.</p></details>
       <details><summary>Billing &amp; HSA/FSA</summary><p>Cash-pay with transparent pricing &mdash; no insurance hurdles or surprise bills. Many members use HSA/FSA where eligible. Plans renew automatically unless cancelled at least 72 hours before the renewal date; cancel anytime.</p></details>
     </div>
   </div>
-</div></div></section>
+</div></div>
 
-<section class="promises"><div class="container">
-  <h2>Our promises</h2>
+<div class="container value-wrap">
+  <h3 class="vh">Everything your membership includes</h3>
+  <p class="vsub">One flat price &mdash; starting at $3 per day.</p>
+  <ul class="vstack">
+    <li><span class="c">&#10003;</span><div class="vt"><b>Personalized hormone protocol</b><span>Matched to your symptoms and history by a licensed clinician, and adjusted as your body responds.</span></div><span class="vtag">$200+ value</span></li>
+    <li><span class="c">&#10003;</span><div class="vt"><b>Online clinician evaluation</b><span>Reviewed by a licensed clinician &mdash; no office visits, no insurance needed.</span></div><span class="vtag">$150+ value</span></li>
+    <li><span class="c">&#10003;</span><div class="vt"><b>Free 2-day delivery</b><span>Shipped discreetly to your door, on every order.</span></div><span class="vtag">$40/yr value</span></li>
+    <li><span class="c">&#10003;</span><div class="vt"><b>Unlimited care-team messaging</b><span>Questions between visits answered &mdash; no phone tag, no waiting rooms.</span></div><span class="vtag">included</span></li>
+    <li><span class="c">&#10003;</span><div class="vt"><b>Ongoing check-ins &amp; dose adjustments</b><span>Your clinician reviews and tunes your plan as you go.</span></div><span class="vtag">$150+ value</span></li>
+    <li><span class="c">&#10003;</span><div class="vt"><b>Lifetime Price Lock</b><span>Your rate is locked for life &mdash; it never rises.</span></div><span class="vtag">priceless</span></li>
+  </ul>
+  <p class="vtotal">Over <b>$540 in care</b> &mdash; yours starting at <b>$3 per day</b>.</p>
+
+  <h3 class="promises-h">HerEstrogen&rsquo;s promises to you</h3>
   <div class="prom-grid">
     <div class="prom"><div class="pi">&#128737;&#65039;</div><b>Clinical Match Guarantee</b><p>If a licensed clinician determines treatment isn&rsquo;t right for you, you pay nothing.</p></div>
     <div class="prom"><div class="pi">&#128666;</div><b>Free 2-Day Shipping</b><p>Free and discreet, on every order.</p></div>
     <div class="prom"><div class="pi">&#128274;</div><b>Lifetime Price Lock</b><p>Your rate never rises.</p></div>
   </div>
-</div></section>
+</div>
+</section>
 
 <section class="how"><div class="container">
   <h2>How it works</h2>
@@ -255,4 +311,32 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 40px;}
   <div class="flinks" id="legalLinks"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/refund-policy">Refund Policy</a></div>
 </div></footer>
 <script src="/assets/legal.js"></script>
+<script>
+(function () {
+  /* Countdown to July 31 2026 midnight ET (same as homepage) */
+  var END = new Date('2026-08-01T04:00:00Z').getTime();
+  function pad(n){return (n<10?'0':'')+n;}
+  function tick(){
+    var diff = Math.max(0, END - Date.now());
+    var d=Math.floor(diff/864e5), h=Math.floor(diff%864e5/36e5), m=Math.floor(diff%36e5/6e4), s=Math.floor(diff%6e4/1000);
+    var D=document.getElementById('obDays'),H=document.getElementById('obHrs'),M=document.getElementById('obMins'),S=document.getElementById('obSecs');
+    if(D)D.textContent=pad(d); if(H)H.textContent=pad(h); if(M)M.textContent=pad(m); if(S)S.textContent=pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* Claim bar: appears once the hero scrolls past, stays to the bottom */
+  var claim = document.getElementById('claimBar');
+  var hero = document.querySelector('.hero');
+  if (claim && hero) {
+    var update = function () {
+      var show = hero.getBoundingClientRect().bottom <= claim.offsetHeight;
+      claim.classList.toggle('show', show);
+      claim.setAttribute('aria-hidden', String(!show));
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+  }
+})();
+</script>
 </body></html>
