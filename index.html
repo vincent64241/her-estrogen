@@ -491,9 +491,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 @media (prefers-reduced-motion: no-preference) { .lineup-scroll { scroll-behavior: smooth; } }
 .lineup-scroll::-webkit-scrollbar { display: none; }
-.lineup-scroll { overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+.lineup-scroll { overscroll-behavior-x: contain; }
 @media (hover: none) {
-  .lineup-scroll { scroll-snap-type: none; scroll-behavior: auto; }
+  /* Rail is LEFT-RIGHT only on touch: vertical/diagonal gestures on it are ignored,
+     so a thumb on the products can never yank the page or the section. */
+  .lineup-scroll, .lineup-scroll .p-card, .lineup-scroll .p-card * { touch-action: pan-x; }
+  .lineup-scroll { scroll-snap-type: none; scroll-behavior: auto; overscroll-behavior: contain; }
   .p-card:hover { transform: none; }
   .p-card:hover .p-photo { transform: none; }
 }
@@ -1603,7 +1606,12 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a href="/products/minoxidil">Daily Hair Drops <span class="rx">Rx</span></a>
       <a class="msub-all" href="#skinhair">See all Hair &rarr;</a>
     </div></details>
-    <a href="#lineup" style="--n:3">Top Products</a>
+    <details class="mnav"><summary>Top Products</summary><div class="msub">
+      <a href="/products/semaglutide">Weekly GLP-1 Shot <span class="rx">Rx</span></a>
+      <a href="/products/estradiol-patch">Twice-Weekly Patches <span class="rx">Rx</span></a>
+      <a href="/products/minoxidil">Daily Hair Drops <span class="rx">Rx</span></a>
+      <a class="msub-all" href="#lineup">See all products &rarr;</a>
+    </div></details>
   </div>
 </nav>
 
