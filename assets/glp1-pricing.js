@@ -25,8 +25,12 @@
 (function () {
   'use strict';
 
-  /* ── LAUNCH GATE — leave false until cleared (see header) ── */
-  var GLP1_LAUNCH_ENABLED = false;
+  /* ── LAUNCH GATE ──
+     Turned ON per operator direction. NOTE: on-page disclosures below are
+     necessary but do NOT by themselves constitute LegitScript certification
+     or legal sign-off — those remain separate prerequisites, along with the
+     compounded-medication consent gate in checkout. ── */
+  var GLP1_LAUNCH_ENABLED = true;
 
   /* ── Quiz route. TODO: confirm whether GLP-1 uses a separate quiz
        route; if so, swap QUIZ_BASE. Params carry product + plan intent. ── */
@@ -147,6 +151,7 @@
   var lowestPerMo = function () {
     return Math.min.apply(null, Object.keys(GLP1).map(function (k) { return heroPlan(GLP1[k]).pricePerMo; }));
   };
+  var perDay = function (mo) { return Math.round(mo / 30); };   /* "starting at $X/day" like HRT */
   var ctaHref = function (key, planId) {
     var p = getProd(key);
     return QUIZ_BASE + '?product=' + (p ? p.qparam : key) + (planId ? '&plan=' + encodeURIComponent(planId) : '');
@@ -229,7 +234,7 @@
     return '<div class="g1-price-strip">'
       + '<span class="g1-strip-was">' + money(p.anchor) + '/mo</span>'
       + '<span class="g1-strip-now">' + money(h.pricePerMo) + '/mo</span>'
-      + '<span class="g1-strip-per">on the ' + h.months + '-month plan</span>'
+      + '<span class="g1-strip-per">Starting at $' + perDay(h.pricePerMo) + '/day</span>'
       + '</div><p class="g1-strip-disc">' + disc + '</p>';
   }
 
@@ -250,12 +255,13 @@
       if (p) {
         var h = heroPlan(p);
         mount.innerHTML = '<span class="p-was">' + money(p.anchor) + '/mo</span>'
-          + '<span class="p-now">' + money(h.pricePerMo) + '/mo</span>';
+          + '<span class="p-now">' + money(h.pricePerMo) + '/mo</span>'
+          + '<span class="p-day">Starting at $' + perDay(h.pricePerMo) + '/day</span>';
         mount.hidden = false;
       }
     });
     [].forEach.call(document.querySelectorAll('[data-glp1-tile]'), function (el) {
-      el.innerHTML = 'Starting at <b>' + money(lowestPerMo()) + '/month</b>';
+      el.innerHTML = 'Starting at <b>$' + perDay(lowestPerMo()) + ' per day</b>';
       el.hidden = false;
     });
     [].forEach.call(document.querySelectorAll('[data-glp1-gated]'), function (el) { el.hidden = false; });
