@@ -492,7 +492,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 @media (prefers-reduced-motion: no-preference) { .lineup-scroll { scroll-behavior: smooth; } }
 .lineup-scroll::-webkit-scrollbar { display: none; }
-.lineup-scroll { overscroll-behavior-x: contain; }
+.lineup-scroll { overscroll-behavior-x: contain; overflow-y: hidden; }
 @media (hover: none) {
   /* Touch: the browser owns VERTICAL (page scroll works from anywhere, incl. over products).
      Horizontal rail movement is driven by the axis-locked drag handler below — the rail
@@ -529,11 +529,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .p-img.has-photo { background: #fff; }
 .p-img.has-photo::before { display: none; }
 .p-img.has-photo .ph-label { display: none; }
-.p-photo { max-width: 84%; max-height: 152px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.12)); transition: transform .45s var(--ease-out), filter .45s ease; }
+.p-photo { max-width: 84%; max-height: 152px; margin: auto; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0,0,0,.12)); transition: transform .45s var(--ease-out), filter .45s ease; }
 .p-card:hover .p-photo { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 24px 30px rgba(0,0,0,.22)); }
 .p-img.has-photo .p-badges .badge { background: #fff; border: 1px solid var(--line); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
 .p-badges { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
-a.p-img { display: block; z-index: 2; cursor: pointer; }
+a.p-img { display: flex; z-index: 2; cursor: pointer; }
 .p-pop { position: absolute; top: 12px; right: 12px; z-index: 2; background: var(--brand); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 4px 10px -3px rgba(194,30,99,.5); }
 .p-desc b { color: var(--ink); font-weight: 700; }
 .badge {
