@@ -1982,39 +1982,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </a>
 
       <div class="calc-card lose-card">
-        <p class="lose-lead">You could lose:</p>
-        <div class="lose-num"><b id="loseVal">30</b><span>lbs</span></div>
+        <p class="lose-lead">In Wegovy&reg; trials, adults lost on average:</p>
+        <div class="lose-num"><b>15%</b><span>body weight</span></div>
         <div class="lose-viz" aria-hidden="true"><span class="lose-arrow">▼</span><div class="lose-bars" id="loseBars"></div></div>
-        <p class="lose-lead2">Starting weight:</p>
-        <div class="lose-chip"><b id="startVal">200</b><small>lbs</small></div>
-        <input type="range" class="lose-slider" id="weightSlider" min="120" max="400" step="1" value="200" aria-label="Select your starting weight in pounds" />
+        <p class="lose-lead2">over 68 weeks, with diet &amp; exercise*</p>
       </div>
 
     </div>
-    <p class="calc-fine">Estimates are illustrative only, based on the average 15% body-weight reduction reported in Wegovy® clinical trials; individual results vary. This is not medical advice. Only a licensed clinician can determine whether treatment is appropriate.</p>
+    <p class="calc-fine">Figures reflect the average 15% body-weight reduction reported in Wegovy&reg; (semaglutide) clinical trials over 68 weeks with diet and exercise; individual results vary and are not guaranteed. Compounded GLP-1 medications are not FDA-approved and have not been studied for these outcomes. This is not medical advice; only a licensed clinician can determine whether treatment is appropriate.</p>
   </div>
 </section>
-
-<!-- Weight-loss results modal -->
-<div class="calc-modal" id="loseModal" hidden role="dialog" aria-modal="true" aria-label="Your weight-loss estimate">
-  <div class="cm-backdrop" data-close="1"></div>
-  <div class="cm-panel">
-    <button type="button" class="cm-close" id="loseClose" aria-label="Close">&times;</button>
-    <div class="cm-left">
-      <p class="cm-lead">Lose on average:</p>
-      <div class="cm-pct">15%</div>
-      <p class="cm-of">of your body weight with Wegovy®*</p>
-      <a class="btn btn-dark btn-lg" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-      <p class="cm-fine">*In a clinical trial, adults taking FDA-approved Wegovy® lost an average of 15% of body weight over 68 weeks alongside diet and exercise; some lost up to 20%. Individual results vary. Side effects may include nausea or diarrhea. Only a licensed clinician can determine whether treatment is appropriate. Compounded GLP-1 medications are not FDA-approved.</p>
-    </div>
-    <div class="cm-right">
-      <div class="cm-start">Starting weight: <b id="mStart">240</b> lbs</div>
-      <p class="cm-lead">You could lose:</p>
-      <div class="cm-lose"><b id="mLose">36</b><span>lbs</span></div>
-      <div class="cm-viz" aria-hidden="true"><span class="lose-arrow">▼</span><div class="lose-bars" id="mBars"></div></div>
-    </div>
-  </div>
-</div>
 
 <!-- BMI results modal -->
 <div class="calc-modal" id="bmiModal" hidden role="dialog" aria-modal="true" aria-label="Your BMI results">
@@ -2274,7 +2251,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
     <p class="foot-states">Currently offering services in all 50 states plus Washington, D.C. Some services may not be available in all states or D.C. Subject to change.</p>
     <div class="isi">
-      <strong>Important Safety Information.</strong> Prescription medications — including hormone therapy and GLP-1 medications — carry real risks that vary by individual, product, dose, and duration. Hormone therapy risks include cardiovascular events and breast cancer (in combination with progestins), among others. Use the lowest effective dose for the shortest duration consistent with treatment goals and patient risk. All treatment is subject to evaluation by a licensed clinician, who may determine a prescription is not appropriate; a prescription is not guaranteed. Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. This page is for informational purposes only and does not constitute medical advice. Individual results vary. Subscriptions renew automatically at the end of each plan period unless cancelled at least 72 hours before the renewal date. Report side effects to FDA MedWatch at fda.gov/safety/medwatch. Ozempic®, Wegovy®, and Zepbound® are registered trademarks of their respective owners.
+      <strong>Important Safety Information.</strong> Prescription medications — including hormone therapy and GLP-1 medications — carry real risks that vary by individual, product, dose, and duration. Hormone therapy risks include cardiovascular events and breast cancer (in combination with progestins), among others. Use the lowest effective dose for the shortest duration consistent with treatment goals and patient risk. All treatment is subject to evaluation by a licensed clinician, who may determine a prescription is not appropriate; a prescription is not guaranteed. Compounded medications are not approved by the FDA and have not been reviewed for safety, effectiveness, or quality. This page is for informational purposes only and does not constitute medical advice. Individual results vary. Subscriptions renew automatically at the end of each plan period unless cancelled at least 72 hours before the renewal date. Report side effects to FDA MedWatch at fda.gov/safety/medwatch. Ozempic® and Wegovy® are registered trademarks of Novo Nordisk A/S; Zepbound® is a registered trademark of Eli Lilly and Company. HerEstrogen is not affiliated with, endorsed by, or sponsored by Novo Nordisk or Eli Lilly. Brand-name medications are subject to manufacturer availability, clinician approval, and supply.
     </div>
   </div>
 </footer>
@@ -2494,12 +2471,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </script>
 
 <script>
-/* BMI + "you could lose" calculators + results modal */
+/* BMI calculator + results modal */
 (function () {
   var BARS = [.45,.6,.4,.75,.5,.85,.55,.7,.95,.5,.72,.42,.66,1,.62,.48,.82,.52,.7,.4,.86,.56,.42,.62];
   function fillBars(el) { if (!el) return; el.innerHTML = ''; BARS.forEach(function (h) { var s = document.createElement('span'); s.style.height = Math.round(h * 100) + '%'; el.appendChild(s); }); }
   fillBars(document.getElementById('loseBars'));
-  fillBars(document.getElementById('mBars'));
 
   function openM(m) { if (!m) return; m.hidden = false; document.body.classList.add('modal-open'); }
   function closeM(m) { if (m) m.hidden = true; if (!document.querySelector('.calc-modal:not([hidden])')) document.body.classList.remove('modal-open'); }
@@ -2532,15 +2508,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     ['bmiFt', 'bmiIn', 'bmiLbs'].forEach(function (id) { var e = document.getElementById(id); if (e) e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') bmi(); }); });
   }
 
-  var sl = document.getElementById('weightSlider'), sV = document.getElementById('startVal'), lV = document.getElementById('loseVal');
-  var loseM = document.getElementById('loseModal'), mS = document.getElementById('mStart'), mL = document.getElementById('mLose');
-  function loss(w) { return Math.round(w * 0.15); }
-  function sliderUpdate() { var w = parseInt(sl.value, 10); sV.textContent = w; lV.textContent = loss(w); }
-  function openLose() { var w = parseInt(sl.value, 10); if (mS) mS.textContent = w; if (mL) mL.textContent = loss(w); openM(loseM); }
-  if (sl) { sl.addEventListener('input', sliderUpdate); sl.addEventListener('change', openLose); sliderUpdate(); }
-
-  var loseClose = document.getElementById('loseClose'), bmiClose = document.getElementById('bmiClose');
-  if (loseClose) loseClose.addEventListener('click', function () { closeM(loseM); });
+  var bmiClose = document.getElementById('bmiClose');
   if (bmiClose) bmiClose.addEventListener('click', function () { closeM(bmiModal); });
   Array.prototype.forEach.call(document.querySelectorAll('.calc-modal'), function (m) { m.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeM(m); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') Array.prototype.forEach.call(document.querySelectorAll('.calc-modal:not([hidden])'), closeM); });
