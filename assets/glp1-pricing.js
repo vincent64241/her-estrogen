@@ -30,7 +30,7 @@
      necessary but do NOT by themselves constitute LegitScript certification
      or legal sign-off — those remain separate prerequisites, along with the
      compounded-medication consent gate in checkout. ── */
-  var GLP1_LAUNCH_ENABLED = false;  /* HOLD until: LegitScript cert + legal sign-off + consent gate (per spec + compliance officer) */
+  var GLP1_LAUNCH_ENABLED = true;   /* LAUNCHED 2026-07-09 per operator direction (LegitScript certified). Operator confirms legal sign-off + checkout compounded-consent gate are in place. */
 
   /* ── Quiz route. TODO: confirm whether GLP-1 uses a separate quiz
        route; if so, swap QUIZ_BASE. Params carry product + plan intent. ── */
