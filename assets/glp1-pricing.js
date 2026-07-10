@@ -98,7 +98,7 @@
          type 2 diabetes, NOT weight loss; do not imply a weight-loss indication). ── */
     mounjaro: {
       name: 'Mounjaro®', qparam: 'mounjaro', fdaApproved: true, mfr: 'Eli Lilly', anchor: 1599,
-      launchEnabled: false,
+      launchEnabled: true,   /* UNHIDDEN 2026-07-09 per operator direction. NOTE: Mounjaro® is FDA-approved for type 2 diabetes, NOT weight loss — off-label placement in the weight-loss lineup still needs legal sign-off (see compliance fixlist). */
       plans: [
         { id: 'mounjaro_monthly', months: 1,  pricePerMo: 1599, total: 1599,  savePct: 0,  hero: false, label: 'Most flexible' },
         { id: 'mounjaro_3mo',     months: 3,  pricePerMo: 1519, total: 4557,  savePct: 5,  hero: false, label: 'Save 5%' },
@@ -123,6 +123,7 @@
       ['Free 2-day delivery', 'Shipped discreetly to your door.', '$40/yr value'],
       ['Your private care portal', 'Track your progress and message your care team in one place.', 'included'],
       ['Clinician-adjusted dosing', 'Your titration is reviewed and adjusted as needed.', '$150+ value'],
+      ['US 503A licensed pharmacy', 'Your compounded medication is prepared by a licensed U.S. 503A compounding pharmacy.', 'included'],
       ['Lifetime Price Lock', 'Your rate is locked for life — it never rises.', 'priceless']
     ],
     brand: [
@@ -130,6 +131,7 @@
       ['Personalized dosing & titration', 'Managed by a licensed clinician.', '$200+ value'],
       ['Free 2-day delivery', 'Discreet, cold-chain handled.', '$40/yr value'],
       ['Your private care portal', 'Track your progress and message your care team.', 'included'],
+      ['US-licensed pharmacy', 'Your FDA-approved medication is dispensed by a licensed U.S. pharmacy.', 'included'],
       ['Lifetime Price Lock', 'Your rate is locked for life — it never rises.', 'priceless']
     ]
   };
