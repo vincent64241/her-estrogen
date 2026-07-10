@@ -510,6 +510,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   transition: transform .25s var(--ease-out);
 }
 .p-card[hidden] { display: none !important; } /* launch-gated cards (e.g. Mounjaro) must stay hidden despite .p-card display:flex */
+[data-peptide-gated][hidden] { display: none !important; } /* peptide launch gate — hides any element type */
 .p-card:hover { transform: translateY(-4px); }
 .p-card::after { z-index: 1; }
 .p-img { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -1578,14 +1579,20 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div></div>
       </div>
       <div class="nav-item has-mega">
-        <a href="#skin">Skin &amp; wellness</a>
+        <a href="#skin">Skin</a>
         <div class="mega"><div class="mega-inner">
-          <div class="mega-col"><a class="mega-all" href="#skin">See all Skin &amp; wellness →</a></div>
+          <div class="mega-col"><a class="mega-all" href="#skin">See all Skin →</a></div>
           <div class="mega-col"><h5>Skin</h5>
             <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
             <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
           </div>
-          <div class="mega-col" data-peptide-gated hidden><h5>Longevity &amp; wellness</h5>
+        </div></div>
+      </div>
+      <div class="nav-item has-mega" data-peptide-gated hidden>
+        <a href="#wellness">Wellness</a>
+        <div class="mega"><div class="mega-inner">
+          <div class="mega-col"><a class="mega-all" href="#wellness">See all Wellness →</a></div>
+          <div class="mega-col"><h5>Longevity &amp; wellness</h5>
             <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
             <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
             <a href="/products/pt141">PT-141 (Desire) <span class="rx">Rx</span></a>
@@ -1629,13 +1636,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a href="/products/estradiol-cream">Targeted Cream <span class="rx">Rx</span></a>
       <a class="msub-all" href="#menopause">See all Menopause &rarr;</a>
     </div></details>
-    <details class="mnav"><summary>Skin &amp; wellness</summary><div class="msub">
+    <details class="mnav"><summary>Skin</summary><div class="msub">
       <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
       <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
-      <a href="/products/sermorelin" data-peptide-gated hidden>Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
-      <a href="/products/nad" data-peptide-gated hidden>NAD+ (Longevity) <span class="rx">Rx</span></a>
-      <a href="/products/pt141" data-peptide-gated hidden>PT-141 (Desire) <span class="rx">Rx</span></a>
-      <a class="msub-all" href="#skin">See all Skin &amp; wellness &rarr;</a>
+      <a class="msub-all" href="#skin">See all Skin &rarr;</a>
+    </div></details>
+    <details class="mnav" data-peptide-gated hidden><summary>Wellness</summary><div class="msub">
+      <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
+      <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
+      <a href="/products/pt141">PT-141 (Desire) <span class="rx">Rx</span></a>
+      <a class="msub-all" href="#wellness">See all Wellness &rarr;</a>
     </div></details>
     <details class="mnav"><summary>Top Products</summary><div class="msub">
       <a href="/products/semaglutide">Weekly GLP-1 Shot <span class="rx">Rx</span></a>
@@ -1883,7 +1893,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 <section class="lineup" id="skin">
   <div class="container">
     <div class="lu-head" data-reveal>
-      <h2>Skin &amp; wellness</h2>
+      <h2>Skin</h2>
       <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
     </div>
     <div class="lineup-scroll" data-reveal-group>
@@ -1905,7 +1915,19 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="p-price"><span class="p-was">$75/mo</span><span class="p-now">$38/mo</span><span class="p-day">Starting at $1.27/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt?product=tretinoin&amp;plan=clear_12mo">Get started</a></div>
         </div>
       </div>
-      <div class="p-card" hidden data-peptide-gated>
+    </div>
+    <p class="lineup-fine">Compounded medications are prepared by a licensed U.S. compounding pharmacy and are not approved by the FDA; they have not been reviewed for safety, effectiveness, or quality. Prescription products require clinician evaluation; a prescription is not guaranteed. Product images are representative.</p>
+  </div>
+</section>
+
+<section class="lineup" id="wellness" data-peptide-gated hidden>
+  <div class="container">
+    <div class="lu-head" data-reveal>
+      <h2>Wellness</h2>
+      <div class="lu-nav"><button class="lu-prev" aria-label="Scroll back" disabled>←</button><button class="lu-next" aria-label="Scroll forward">→</button></div>
+    </div>
+    <div class="lineup-scroll" data-reveal-group>
+      <div class="p-card">
         <a class="p-img pi-blue has-photo" href="/products/sermorelin" aria-label="View Sermorelin (Anti-Aging) details"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/sermorelin.webp" alt="Sermorelin (Anti-Aging) compounded medication, representative image" loading="lazy" decoding="async" width="440" height="440" onerror="var c=this.closest('.p-img');if(c)c.classList.remove('has-photo');this.remove()" /></a>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
@@ -1914,7 +1936,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="p-price"><span class="p-was">$179/mo</span><span class="p-now">$99/mo</span><span class="p-day">Starting at $3.30/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt?product=sermorelin&amp;plan=antiaging_12mo">Get started</a></div>
         </div>
       </div>
-      <div class="p-card" hidden data-peptide-gated>
+      <div class="p-card">
         <a class="p-img pi-sage has-photo" href="/products/nad" aria-label="View NAD+ (Longevity) details"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/nad.webp" alt="NAD+ (Longevity) compounded medication, representative image" loading="lazy" decoding="async" width="440" height="440" onerror="var c=this.closest('.p-img');if(c)c.classList.remove('has-photo');this.remove()" /></a>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
@@ -1923,7 +1945,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="p-price"><span class="p-was">$149/mo</span><span class="p-now">$75/mo</span><span class="p-day">Starting at $2.50/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt?product=nad&amp;plan=longevity_12mo">Get started</a></div>
         </div>
       </div>
-      <div class="p-card" hidden data-peptide-gated>
+      <div class="p-card">
         <a class="p-img pi-lemon has-photo" href="/products/pt141" aria-label="View PT-141 (Desire) details"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/pt141.webp" alt="PT-141 (Desire) compounded medication, representative image" loading="lazy" decoding="async" width="440" height="440" onerror="var c=this.closest('.p-img');if(c)c.classList.remove('has-photo');this.remove()" /></a>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
@@ -2024,19 +2046,46 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </div>
 
-<div class="calc-modal" id="goalModal" hidden role="dialog" aria-modal="true" aria-label="Your weight goal">
+<style>
+.goalproj-panel{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px);max-width:1000px;width:min(1000px,94vw);padding:clamp(26px,4vw,48px);align-items:center;}
+.gp-lead{font-size:16px;color:var(--ink-2);margin:0 0 2px;}
+.gp-pct{margin:0;line-height:.85;}
+.gp-pct b{font-family:'Poppins',system-ui,sans-serif;font-size:clamp(64px,9vw,116px);font-weight:800;letter-spacing:-.04em;color:var(--ink);}
+.gp-pct b span{font-size:.55em;}
+.gp-sub{font-size:16px;color:var(--ink-2);margin:6px 0 22px;}
+.gp-cta{display:inline-flex;width:100%;max-width:360px;padding:16px;font-size:16px;}
+.gp-disc{font-size:11px;color:var(--muted);line-height:1.55;margin:20px 0 0;max-width:44ch;}
+.gp-card{border:2px solid transparent;border-radius:22px;padding:clamp(20px,3vw,30px);text-align:center;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(125deg,#a9c7f0,#f0b6d6,#f6d3a8) border-box;box-shadow:0 20px 50px -30px rgba(60,30,20,.4);}
+.gp-start{display:inline-block;border:1.5px solid #2e9e6b;color:#2e9e6b;border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:600;}
+.gp-start b{color:#2e9e6b;font-weight:800;}
+.gp-couldlose{font-size:17px;color:var(--ink-2);margin:18px 0 2px;}
+.gp-loss{line-height:.85;margin:0;}
+.gp-loss b{font-family:'Poppins',system-ui,sans-serif;font-size:clamp(72px,12vw,132px);font-weight:800;letter-spacing:-.04em;color:var(--ink);}
+.gp-loss span{font-size:.26em;font-weight:800;}
+.gp-marker{color:#8bc34a;font-size:15px;margin:8px 0 4px;}
+.gp-bars{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:88px;}
+.gp-bars i{width:8px;background:#8bc34a;border-radius:3px;display:block;}
+@media(max-width:760px){.goalproj-panel{grid-template-columns:1fr;}.gp-disc{max-width:none;}}
+</style>
+<div class="calc-modal" id="goalModal" hidden role="dialog" aria-modal="true" aria-label="What you could lose with Wegovy">
   <div class="cm-backdrop" data-close="1"></div>
-  <div class="cm-panel bmi-panel">
+  <div class="cm-panel goalproj-panel">
     <button type="button" class="cm-close" id="goalClose" aria-label="Close">&times;</button>
-    <div class="bmi-gaugecard">
-      <h3>Your goal</h3>
-      <div class="bmi-result" style="justify-content:center;margin:10px 0"><span id="goalGap2">0</span><i class="cal-unit">lbs to go</i></div>
-      <p class="bmi-desc">From <b id="goalCur2">0</b> lbs to a goal of <b id="goalTgt2">0</b> lbs.</p>
+    <div class="gp-left">
+      <p class="gp-lead">Lose on average:</p>
+      <p class="gp-pct"><b>15<span>%</span></b></p>
+      <p class="gp-sub">of your body weight with Wegovy&reg;*</p>
+      <a class="btn btn-dark gp-cta" href="https://quiz.herestrogen.com/herestrogen_hrt?product=wegovy">Get started</a>
+      <p class="gp-disc">*In a clinical trial, adults taking FDA-approved Wegovy&reg; lost an average of 15% of body weight. Some lost up to 20%. Results vary. Side effects may include nausea or diarrhea. Only a licensed provider can decide if it&rsquo;s appropriate. Compounded GLP-1s are not FDA-approved.</p>
     </div>
-    <div class="bmi-right">
-      <p class="cal-line">A healthy, sustainable rate of weight loss is generally about <b>1&ndash;2 lbs per week</b>. A licensed clinician will review your health and build a safe plan that fits you &mdash; there&rsquo;s no one-size-fits-all pace, and results vary.</p>
-      <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Talk to a clinician</a>
-      <p class="bmi-disc">This tool is for general goal-setting only and does not predict results or determine treatment eligibility. Weight-loss outcomes vary by individual and are determined with your clinician. Compounded medications are not FDA-approved.</p>
+    <div class="gp-right">
+      <div class="gp-card">
+        <span class="gp-start">Starting weight: <b id="gpStart">233</b> lbs</span>
+        <p class="gp-couldlose">You could lose:</p>
+        <p class="gp-loss"><b id="gpLoss">35</b><span>lbs</span></p>
+        <div class="gp-marker">&#9660;</div>
+        <div class="gp-bars" id="gpBars" aria-hidden="true"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -2261,7 +2310,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <h4>Care</h4>
         <a href="#weightloss">Weight Loss</a>
         <a href="#menopause">Menopause &amp; HRT</a>
-        <a href="#skin">Skin &amp; wellness</a>
+        <a href="#skin">Skin</a>
+        <a href="#wellness" data-peptide-gated hidden>Wellness</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
@@ -2584,10 +2634,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     if (e = document.getElementById('goalGap')) e.textContent = gap;
   }
   function goalOpen() {
-    var c = parseInt(gCur.value, 10), t = parseInt(gTgt.value, 10), gap = Math.max(0, c - t), e;
-    if (e = document.getElementById('goalGap2')) e.textContent = gap;
-    if (e = document.getElementById('goalCur2')) e.textContent = c;
-    if (e = document.getElementById('goalTgt2')) e.textContent = t;
+    // Projection uses the Wegovy(R) STEP-trial average (15% of body weight). "You could lose" + "results vary".
+    var c = parseInt(gCur.value, 10), loss = Math.round(c * 0.15), e;
+    if (e = document.getElementById('gpStart')) e.textContent = c;
+    if (e = document.getElementById('gpLoss')) e.textContent = loss;
+    var bars = document.getElementById('gpBars');
+    if (bars) {
+      var n = 27, html = '';
+      for (var i = 0; i < n; i++) { var x = (i - (n - 1) / 2) / 6; html += '<i style="height:' + Math.round(28 + 64 * Math.exp(-x * x / 2)) + '%"></i>'; }
+      bars.innerHTML = html;
+    }
     openM(goalModal);
   }
   if (gCur && gTgt) {
