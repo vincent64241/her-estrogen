@@ -2019,13 +2019,31 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <button type="button" class="calc-btn" id="calBtn">Calculate calories</button>
       </div>
 
-      <div class="calc-card goal-card">
-        <p class="lose-lead">What&rsquo;s your goal?</p>
-        <div class="lose-num"><b id="goalGap">20</b><span>lbs to go</span></div>
-        <div class="goal-row"><span>Current</span><b><span id="goalCur">200</span> lbs</b></div>
-        <input type="range" class="lose-slider" id="goalCurSlider" min="120" max="400" step="1" value="200" aria-label="Current weight in pounds" />
-        <div class="goal-row"><span>Goal</span><b><span id="goalTgt">180</span> lbs</b></div>
-        <input type="range" class="lose-slider" id="goalTgtSlider" min="100" max="380" step="1" value="180" aria-label="Goal weight in pounds" />
+      <style>
+      .gp2-card{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:8px;}
+      .gp2-couldlose{font-size:15px;color:var(--ink-2);margin:0 0 2px;}
+      .gp2-loss{line-height:.82;margin:0 0 8px;}
+      .gp2-loss b{font-family:'Poppins',system-ui,sans-serif;font-size:clamp(52px,7vw,76px);font-weight:800;letter-spacing:-.03em;color:var(--ink);}
+      .gp2-loss span{font-size:.34em;font-weight:800;color:var(--ink);}
+      .gp2-marker{color:var(--brand);font-size:14px;line-height:1;margin:0 0 6px;}
+      .gp2-bars{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:78px;width:100%;margin:0 0 18px;}
+      .gp2-bars i{flex:1 1 0;max-width:9px;min-width:4px;background:linear-gradient(180deg,var(--brand),#eaa0c0);border-radius:4px;}
+      .gp2-startlabel{font-size:14px;color:var(--ink-2);margin:0 0 8px;}
+      .gp2-startpill{display:inline-flex;align-items:baseline;gap:3px;background:var(--brand);color:#fff;border-radius:12px;padding:9px 18px;margin:0 0 18px;box-shadow:0 8px 18px -8px rgba(194,30,99,.5);}
+      .gp2-startpill b{font-size:18px;font-weight:800;}
+      .gp2-startpill span{font-size:11px;font-weight:700;opacity:.9;}
+      .gp2-slider{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;outline:none;background:linear-gradient(90deg,#f6c9dd,var(--brand),#f6c9dd);cursor:pointer;}
+      .gp2-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 2px 7px rgba(0,0,0,.22);cursor:pointer;}
+      .gp2-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 2px 7px rgba(0,0,0,.22);cursor:pointer;}
+      </style>
+      <div class="calc-card goal-card gp2-card">
+        <p class="gp2-couldlose">You could lose:</p>
+        <p class="gp2-loss"><b id="goalCardLoss">30</b><span>lbs</span></p>
+        <div class="gp2-marker">&#9660;</div>
+        <div class="gp2-bars" id="goalCardBars" aria-hidden="true"></div>
+        <p class="gp2-startlabel">Starting weight:</p>
+        <div class="gp2-startpill"><b id="goalCardStart">200</b><span>lbs</span></div>
+        <input type="range" class="gp2-slider" id="goalCurSlider" min="120" max="400" step="1" value="200" aria-label="Starting weight in pounds" />
       </div>
 
 
@@ -2061,16 +2079,16 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .gp-sub{font-size:16px;color:var(--ink-2);margin:6px 0 22px;}
 .gp-cta{display:inline-flex;width:100%;max-width:360px;padding:16px;font-size:16px;}
 .gp-disc{font-size:11px;color:var(--muted);line-height:1.55;margin:20px 0 0;max-width:44ch;}
-.gp-card{border:2px solid transparent;border-radius:22px;padding:clamp(20px,3vw,30px);text-align:center;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(125deg,#a9c7f0,#f0b6d6,#f6d3a8) border-box;box-shadow:0 20px 50px -30px rgba(60,30,20,.4);}
-.gp-start{display:inline-block;border:1.5px solid #2e9e6b;color:#2e9e6b;border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:600;}
-.gp-start b{color:#2e9e6b;font-weight:800;}
+.gp-card{border:2px solid transparent;border-radius:22px;padding:clamp(20px,3vw,30px);text-align:center;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(125deg,#f6c9dd,#e58bb0,var(--brand)) border-box;box-shadow:0 20px 50px -30px rgba(60,30,20,.4);}
+.gp-start{display:inline-block;border:1.5px solid var(--brand);color:var(--brand);border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:600;}
+.gp-start b{color:var(--brand);font-weight:800;}
 .gp-couldlose{font-size:17px;color:var(--ink-2);margin:18px 0 2px;}
 .gp-loss{line-height:.85;margin:0;}
 .gp-loss b{font-family:'Poppins',system-ui,sans-serif;font-size:clamp(72px,12vw,132px);font-weight:800;letter-spacing:-.04em;color:var(--ink);}
 .gp-loss span{font-size:.26em;font-weight:800;}
-.gp-marker{color:#8bc34a;font-size:15px;margin:8px 0 4px;}
+.gp-marker{color:var(--brand);font-size:15px;margin:8px 0 4px;}
 .gp-bars{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:88px;}
-.gp-bars i{width:8px;background:#8bc34a;border-radius:3px;display:block;}
+.gp-bars i{width:8px;background:linear-gradient(180deg,var(--brand),#eaa0c0);border-radius:3px;display:block;}
 @media(max-width:760px){.goalproj-panel{grid-template-columns:1fr;}.gp-disc{max-width:none;}}
 </style>
 <div class="calc-modal" id="goalModal" hidden role="dialog" aria-modal="true" aria-label="What you could lose with Wegovy">
@@ -2631,13 +2649,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   if (calClose) calClose.addEventListener('click', function () { closeM(calModal); });
 
   // Goal weight (general goal-setting; no drug-outcome projection)
-  var gCur = document.getElementById('goalCurSlider'), gTgt = document.getElementById('goalTgtSlider');
+  var gCur = document.getElementById('goalCurSlider');
   var goalModal = document.getElementById('goalModal');
-  function goalUpdate() {
-    var c = parseInt(gCur.value, 10), t = parseInt(gTgt.value, 10), gap = Math.max(0, c - t), e;
-    if (e = document.getElementById('goalCur')) e.textContent = c;
-    if (e = document.getElementById('goalTgt')) e.textContent = t;
-    if (e = document.getElementById('goalGap')) e.textContent = gap;
+  function goalCardUpdate() {
+    var c = parseInt(gCur.value, 10), loss = Math.round(c * 0.15), e;
+    if (e = document.getElementById('goalCardLoss')) e.textContent = loss;
+    if (e = document.getElementById('goalCardStart')) e.textContent = c;
+    var bars = document.getElementById('goalCardBars');
+    if (bars && !bars.childElementCount) {
+      var n = 25, html = '';
+      for (var i = 0; i < n; i++) { var x = (i - (n - 1) / 2) / 5.5; html += '<i style="height:' + Math.round(34 + 60 * Math.exp(-x * x / 2)) + '%"></i>'; }
+      bars.innerHTML = html;
+    }
   }
   function goalOpen() {
     // Projection uses the Wegovy(R) STEP-trial average (15% of body weight). "You could lose" + "results vary".
@@ -2652,10 +2675,10 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     }
     openM(goalModal);
   }
-  if (gCur && gTgt) {
-    gCur.addEventListener('input', goalUpdate); gTgt.addEventListener('input', goalUpdate);
-    gCur.addEventListener('change', goalOpen); gTgt.addEventListener('change', goalOpen);
-    goalUpdate();
+  if (gCur) {
+    gCur.addEventListener('input', goalCardUpdate);
+    gCur.addEventListener('change', goalOpen);
+    goalCardUpdate();
   }
   var goalClose = document.getElementById('goalClose');
   if (goalClose) goalClose.addEventListener('click', function () { closeM(goalModal); });
@@ -2864,8 +2887,12 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   if (reduce) return;                       // posters/gradients only — no multi-MB downloads
   function hydrate(v) {
     v.querySelectorAll('source[data-src]').forEach(function (so) { so.src = so.getAttribute('data-src'); so.removeAttribute('data-src'); });
+    v.loop = true; v.muted = true;                 // guarantee seamless infinite loop
+    v.addEventListener('ended', function () { try { v.currentTime = 0; } catch (e) {} var r = v.play(); if (r && r.catch) r.catch(function () {}); }); // belt-and-suspenders if loop ever misfires
     v.load();
-    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    play();
+    v.addEventListener('canplay', play, { once: true });   // retry once data is ready if autoplay was deferred
   }
   if (!('IntersectionObserver' in window)) { vids.forEach(hydrate); return; }
   var io = new IntersectionObserver(function (entries) {
