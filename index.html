@@ -1761,6 +1761,15 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <div class="p-price"><span class="p-was">$189/mo</span><span class="p-now">$90/mo</span><span class="p-day">Starting at $3/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
         </div>
       </div>
+      <div class="p-card">
+        <a class="p-img pi-rose has-photo" href="https://quiz.herestrogen.com/herestrogen_hrt" aria-label="Add Progesterone"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/product-progesterone.webp" alt="HerEstrogen compounded progesterone capsules, representative packaging" loading="lazy" decoding="async" width="440" height="440" /></a>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Progesterone</h3>
+          <p class="p-desc"><b>Micronized progesterone.</b> Typically added to estrogen therapy for women with a uterus &mdash; your clinician decides.</p>
+          <div class="p-price"><span class="p-now">$38/mo</span><span class="p-day">Starting at $1.27/day</span></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2196,27 +2205,57 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Start here -->
 <section class="container">
-  <div class="start has-video" id="start">
-    <video class="start-bg" muted loop playsinline preload="none" poster="assets/start-bg-poster.webp" aria-hidden="true" data-lazy-video onerror="this.closest('.start').classList.remove('has-video'); this.remove();">
-      <source data-src="assets/start-bg.mp4" type="video/mp4" />
-    </video>
-    <div>
-      <h2 data-reveal>Unsure where to begin? <em>Start here.</em></h2>
-      <p data-reveal style="--i:1">Tell us what's bothering you most — a licensed clinician reviews every answer and builds your plan.</p>
-    </div>
-    <div class="start-picker" data-reveal style="--i:2">
-      <div class="chips" id="startChips" role="group" aria-label="What's bothering you most? Select all that apply.">
-        <button type="button" class="chip" aria-pressed="false" data-v="hot-flashes">Hot flashes &amp; night sweats</button>
-        <button type="button" class="chip" aria-pressed="false" data-v="weight">Weight that won't move</button>
-        <button type="button" class="chip" aria-pressed="false" data-v="sleep">Can't sleep</button>
-        <button type="button" class="chip" aria-pressed="false" data-v="energy">Low energy</button>
-        <button type="button" class="chip" aria-pressed="false" data-v="hair">Hair thinning</button>
-        <button type="button" class="chip" aria-pressed="false" data-v="all">All of the above</button>
-      </div>
-      <a class="btn btn-dark btn-lg start-continue is-disabled" id="startContinue" role="button" aria-disabled="true" href="https://quiz.herestrogen.com/herestrogen_hrt">Continue <span aria-hidden="true">→</span></a>
+  <div class="guide" id="start">
+    <style>
+      .guide{position:relative;border-radius:26px;overflow:hidden;min-height:460px;display:flex;align-items:center;background-color:#4a112a;background-image:url('assets/lead-guide.webp');background-repeat:no-repeat;background-size:cover;background-position:right top;}
+      .guide::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(74,17,42,.97) 0%,rgba(74,17,42,.93) 30%,rgba(74,17,42,.55) 50%,rgba(74,17,42,0) 68%);}
+      .guide-inner{position:relative;z-index:2;max-width:540px;padding:clamp(28px,4vw,56px);color:#fff;}
+      .guide-eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:12px;color:#f3a9c8;margin:0 0 12px;}
+      .guide h2{font-family:'Poppins',system-ui,sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,46px);line-height:1.05;margin:0 0 12px;color:#fff;}
+      .guide-sub{font-size:16px;line-height:1.5;color:#f4e3ec;margin:0 0 22px;max-width:400px;}
+      .guide-form{display:flex;gap:10px;flex-wrap:wrap;max-width:440px;}
+      .guide-form input[type=email]{flex:1;min-width:210px;padding:15px 18px;border-radius:12px;border:0;font-size:15px;background:#fff;color:#222;}
+      .guide-form button{padding:15px 22px;border-radius:12px;border:0;background:var(--brand,#c21e63);color:#fff;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;}
+      .guide-form button:hover{background:var(--brand-ink,#a4184f);}
+      .guide-fine{font-size:11.5px;line-height:1.5;color:#e6c6d5;margin:12px 0 0;max-width:440px;}
+      .guide-fine a{color:#fff;text-decoration:underline;}
+      .guide-done{display:none;font-size:16px;font-weight:600;color:#fff;margin:4px 0 0;}
+      @media(max-width:720px){
+        .guide{min-height:0;aspect-ratio:3/4;align-items:flex-end;background-position:76% top;}
+        .guide::before{background:linear-gradient(180deg,rgba(74,17,42,0) 34%,rgba(74,17,42,.55) 56%,rgba(74,17,42,.97) 80%);}
+        .guide-inner{max-width:none;width:100%;}
+        .guide-sub{max-width:none;}
+      }
+    </style>
+    <div class="guide-inner">
+      <p class="guide-eyebrow" data-reveal>Free guide</p>
+      <h2 data-reveal style="--i:1">Feel Like<br>Yourself Again</h2>
+      <p class="guide-sub" data-reveal style="--i:2">Your free guide to menopause, hormones, and the options that can help &mdash; sent straight to your inbox.</p>
+      <form class="guide-form" id="guideForm" data-reveal style="--i:3" novalidate>
+        <input type="email" name="email" placeholder="Your email address" aria-label="Your email address" required />
+        <button type="submit">Send me the guide</button>
+      </form>
+      <p class="guide-done" id="guideDone">Thank you &mdash; your free guide is on its way to your inbox.</p>
+      <p class="guide-fine">By entering your email you agree to receive emails from HerEstrogen. Unsubscribe anytime. See our <a href="/privacy">Privacy Policy</a>.</p>
     </div>
   </div>
 </section>
+<script>
+  (function(){
+    var f=document.getElementById('guideForm');
+    if(!f)return;
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var email=(f.email.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){f.email.focus();return;}
+      /* TODO: wire to email backend for guide delivery. Placeholder capture below. */
+      try{window.dispatchEvent(new CustomEvent('guide_lead',{detail:{email:email}}));}catch(_){}
+      f.style.display='none';
+      var done=document.getElementById('guideDone');
+      if(done)done.style.display='block';
+    });
+  })();
+</script>
 
 <!-- Footer (static — no reveal on compliance content) -->
 <footer>
