@@ -679,7 +679,7 @@ a.p-img { display: flex; z-index: 2; cursor: pointer; }
 /* ── Weight-loss calculators (BMI + potential loss) ── */
 .calc { padding: clamp(48px, 6vw, 80px) 0; }
 .calc > .container > h2 { text-align: center; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 32px; }
-.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: stretch; }
 .calc-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px; box-shadow: 0 14px 40px rgba(28,26,23,.06); }
 .bmi-card h3, .lose-card .lose-lead { margin: 0; }
 .bmi-card h3 { font-size: 20px; font-weight: 700; }
@@ -700,7 +700,7 @@ a.p-img { display: flex; z-index: 2; cursor: pointer; }
 .calc-photo { position: relative; min-height: 360px; padding: 18px; overflow: hidden; background: #fff;
   display: flex; align-items: center; justify-content: center; }
 .calc-photo svg { width: 100%; height: 100%; max-height: 100%; display: block; }
-@media (prefers-reduced-motion: reduce) { .calc-photo svg * { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .calc-photo svg * { animation: none !important; } .cm-panel { animation: none !important; } }
 /* lose card */
 .lose-card { text-align: center; display: flex; flex-direction: column; }
 .lose-lead, .lose-lead2 { font-size: 14px; color: var(--ink-2); margin: 0; }
@@ -719,6 +719,14 @@ a.p-img { display: flex; z-index: 2; cursor: pointer; }
 .lose-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid #d7d2cb; box-shadow: 0 2px 6px rgba(0,0,0,.22); cursor: pointer; }
 .lose-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid #d7d2cb; box-shadow: 0 2px 6px rgba(0,0,0,.22); cursor: pointer; }
 .calc-fine { max-width: 780px; margin: 22px auto 0; text-align: center; font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+.calc-sel select { width: 100%; border: 0; background: transparent; font-size: 15px; color: var(--ink); outline: none; -webkit-appearance: none; appearance: none; padding: 2px 0; cursor: pointer; }
+.cal-unit { font-size: 15px; font-style: normal; color: var(--ink-2); font-weight: 600; margin-left: 6px; }
+.goal-card { text-align: center; display: flex; flex-direction: column; }
+.goal-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--ink-2); margin: 16px 0 2px; }
+.goal-row b { color: var(--ink); font-weight: 700; }
+.lose-slider { width: 100%; margin-top: 6px; accent-color: var(--brand); cursor: pointer; }
+.cal-line { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin: 0 0 16px; }
+.cal-line b { color: var(--ink); }
 @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; } .calc-photo { min-height: 260px; } }
 
 /* results modal */
@@ -1287,7 +1295,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 52px 0 40px; text-align: center; }
 .how-step {
   position: relative; padding: 42px 24px 30px; border-radius: 26px;
-  background: rgba(160,120,95,.09); display: flex; flex-direction: column; align-items: center;
+  background: #fff; border: 1px solid rgba(0,0,0,.06); display: flex; flex-direction: column; align-items: center;
 }
 .hs-num {
   position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
@@ -1881,7 +1889,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Goals band -->
 <section class="container">
-  <div class="goals">
+  <div class="goals has-video">
+    <video class="goals-video" muted loop playsinline preload="none" aria-hidden="true" data-lazy-video><source data-src="assets/prescription-section.mp4" type="video/mp4" /></video>
     <h2 data-reveal>Prescription treatments for your health goals</h2>
     <div class="goal-grid" data-reveal-group>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚖️</span> Lose weight</span><span class="g-arrow">→</span></a>
@@ -1912,90 +1921,73 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <p class="bmi-cat" id="bmiCat" aria-live="polite"></p>
       </div>
 
-      <a class="calc-card calc-photo" href="https://quiz.herestrogen.com/herestrogen_hrt" aria-label="Explore weight loss">
-        <svg viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
-          <title>GLP-1 injection pen</title>
-          <desc>Animated GLP-1 auto-injector pen in HerEstrogen pink</desc>
-          <defs>
-            <style>
-              .q-body{fill:#fdf0f5;stroke:#f0b8d0;stroke-width:1.5}
-              .q-cap{fill:#e8457a;stroke:#c42d60;stroke-width:1.5}
-              .q-tip{fill:#c42d60}
-              .q-win{fill:#fce0ec;stroke:#f0a0c0;stroke-width:1}
-              .q-grip{fill:#fce8f2;stroke:#f0b8d0;stroke-width:0.5}
-              .q-lab{fill:#fdf0f5;stroke:#f0a0c0;stroke-width:0.5}
-              .q-btn{fill:#c42d60;stroke:#a01f4a;stroke-width:1}
-              .q-g{animation:qf 3.2s ease-in-out infinite;transform-origin:340px 340px}
-              @keyframes qf{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-              .q-pl{animation:qp 3.2s ease-in-out infinite;transform-origin:340px 175px}
-              @keyframes qp{0%,42%{transform:translateY(0)}60%,80%{transform:translateY(18px)}100%{transform:translateY(0)}}
-              .q-liq{animation:qd 3.2s ease-in-out infinite;transform-origin:340px 360px}
-              @keyframes qd{0%,42%{transform:scaleY(1);opacity:1}80%{transform:scaleY(0.08);opacity:0.3}100%{transform:scaleY(1);opacity:1}}
-              .q-sp{animation:qs 3.2s ease-in-out infinite;opacity:0;transform-origin:340px 490px}
-              @keyframes qs{0%,52%{opacity:0;transform:translateY(0) scale(0.5)}66%,76%{opacity:1;transform:translateY(8px) scale(1)}90%,100%{opacity:0;transform:translateY(18px) scale(1.4)}}
-              .qm1{animation:qmo 3.2s 0.2s ease-in-out infinite;opacity:0;transform-origin:272px 310px}
-              .qm2{animation:qmo 3.2s 0.7s ease-in-out infinite;opacity:0;transform-origin:258px 355px}
-              .qm3{animation:qmo 3.2s 1.2s ease-in-out infinite;opacity:0;transform-origin:262px 400px}
-              .qm4{animation:qmo 3.2s 0.9s ease-in-out infinite;opacity:0;transform-origin:408px 318px}
-              .qm5{animation:qmo 3.2s 0.4s ease-in-out infinite;opacity:0;transform-origin:424px 362px}
-              .qm6{animation:qmo 3.2s 1.5s ease-in-out infinite;opacity:0;transform-origin:418px 405px}
-              @keyframes qmo{0%{opacity:0;transform:translate(0,0) scale(0.3)}20%{opacity:0}45%,60%{opacity:1;transform:translate(0,-30px) scale(1)}100%{opacity:0;transform:translate(0,-65px) scale(0.3)}}
-            </style>
-            <clipPath id="qClip"><rect x="319" y="271" width="42" height="88" rx="5"/></clipPath>
-          </defs>
-          <circle cx="340" cy="340" r="280" fill="#fff5f9" stroke="#f7d0e3" stroke-width="1"/>
-          <circle cx="340" cy="340" r="255" fill="none" stroke="#fce8f2" stroke-width="0.5"/>
-          <g class="q-g">
-            <rect x="308" y="175" width="64" height="280" rx="10" class="q-body"/>
-            <rect x="308" y="390" width="64" height="60" rx="4" class="q-grip"/>
-            <line x1="315" y1="400" x2="365" y2="400" stroke="#f0b8d0" stroke-width="0.8"/>
-            <line x1="315" y1="409" x2="365" y2="409" stroke="#f0b8d0" stroke-width="0.8"/>
-            <line x1="315" y1="418" x2="365" y2="418" stroke="#f0b8d0" stroke-width="0.8"/>
-            <line x1="315" y1="427" x2="365" y2="427" stroke="#f0b8d0" stroke-width="0.8"/>
-            <line x1="315" y1="436" x2="365" y2="436" stroke="#f0b8d0" stroke-width="0.8"/>
-            <line x1="315" y1="445" x2="365" y2="445" stroke="#f0b8d0" stroke-width="0.8"/>
-            <rect x="318" y="270" width="44" height="90" rx="6" class="q-win"/>
-            <g clip-path="url(#qClip)"><rect x="319" y="271" width="42" height="88" fill="#e8457a" class="q-liq"/></g>
-            <line x1="318" y1="295" x2="327" y2="295" stroke="#c42d60" stroke-width="0.8"/>
-            <line x1="318" y1="315" x2="327" y2="315" stroke="#c42d60" stroke-width="0.8"/>
-            <line x1="318" y1="335" x2="327" y2="335" stroke="#c42d60" stroke-width="0.8"/>
-            <line x1="318" y1="355" x2="327" y2="355" stroke="#c42d60" stroke-width="0.8"/>
-            <rect x="310" y="195" width="60" height="65" rx="4" class="q-lab"/>
-            <rect x="318" y="207" width="30" height="4" rx="2" fill="#e8457a" opacity="0.6"/>
-            <rect x="318" y="215" width="44" height="3" rx="1.5" fill="#e8457a" opacity="0.35"/>
-            <rect x="318" y="221" width="38" height="3" rx="1.5" fill="#e8457a" opacity="0.35"/>
-            <rect x="318" y="230" width="20" height="8" rx="2" fill="#c42d60" opacity="0.5"/>
-            <rect x="342" y="230" width="18" height="8" rx="2" fill="#e8457a" opacity="0.3"/>
-            <rect x="318" y="242" width="44" height="2.5" rx="1.2" fill="#e8457a" opacity="0.2"/>
-            <rect x="318" y="248" width="36" height="2.5" rx="1.2" fill="#e8457a" opacity="0.2"/>
-            <g class="q-pl">
-              <rect x="324" y="155" width="32" height="24" rx="6" class="q-cap"/>
-              <rect x="329" y="148" width="22" height="12" rx="4" class="q-btn"/>
-            </g>
-            <rect x="330" y="453" width="20" height="16" rx="3" fill="#c42d60" stroke="#a01f4a" stroke-width="1"/>
-            <polygon points="335,469 345,469 342,492 338,492" class="q-tip"/>
-            <g class="q-sp">
-              <circle cx="340" cy="500" r="2.5" fill="#e8457a" opacity="0.9"/>
-              <circle cx="333" cy="506" r="1.8" fill="#e8457a" opacity="0.7"/>
-              <circle cx="347" cy="506" r="1.8" fill="#e8457a" opacity="0.7"/>
-              <circle cx="336" cy="513" r="1.2" fill="#c42d60" opacity="0.5"/>
-              <circle cx="344" cy="513" r="1.2" fill="#c42d60" opacity="0.5"/>
-            </g>
-          </g>
-          <g class="qm1"><circle cx="272" cy="310" r="5" fill="#e8457a" opacity="0.7"/><circle cx="281" cy="304" r="3" fill="#f07aa0" opacity="0.5"/><line x1="272" y1="310" x2="281" y2="304" stroke="#e8457a" stroke-width="1" opacity="0.4"/></g>
-          <g class="qm2"><circle cx="258" cy="355" r="4" fill="#c42d60" opacity="0.6"/><circle cx="267" cy="348" r="2.5" fill="#e8457a" opacity="0.45"/><line x1="258" y1="355" x2="267" y2="348" stroke="#c42d60" stroke-width="1" opacity="0.35"/></g>
-          <g class="qm3"><circle cx="262" cy="400" r="3.5" fill="#f07aa0" opacity="0.55"/></g>
-          <g class="qm4"><circle cx="408" cy="318" r="5" fill="#e8457a" opacity="0.7"/><circle cx="399" cy="311" r="3" fill="#f07aa0" opacity="0.5"/><line x1="408" y1="318" x2="399" y2="311" stroke="#e8457a" stroke-width="1" opacity="0.4"/></g>
-          <g class="qm5"><circle cx="424" cy="362" r="4" fill="#c42d60" opacity="0.6"/><circle cx="414" cy="354" r="2.5" fill="#e8457a" opacity="0.45"/><line x1="424" y1="362" x2="414" y2="354" stroke="#c42d60" stroke-width="1" opacity="0.35"/></g>
-          <g class="qm6"><circle cx="418" cy="405" r="3.5" fill="#f07aa0" opacity="0.55"/></g>
-        </svg>
-      </a>
+      <div class="calc-card cal-card">
+        <h3>Daily calories</h3>
+        <p class="calc-sub">Estimate the calories you need each day</p>
+        <div class="bmi-result"><span id="calValue">0</span><i class="cal-unit">cal/day</i></div>
+        <label class="calc-label" for="calAge">Age</label>
+        <span class="calc-field"><input type="number" id="calAge" min="18" max="99" inputmode="numeric" placeholder="Years" /><i>yrs</i></span>
+        <label class="calc-label" for="calFt">Height</label>
+        <div class="calc-hrow">
+          <span class="calc-field"><input type="number" id="calFt" min="0" max="8" inputmode="numeric" placeholder="Feet" /><i>ft</i></span>
+          <span class="calc-field"><input type="number" id="calIn" min="0" max="11" inputmode="numeric" placeholder="Inches" /><i>in</i></span>
+        </div>
+        <label class="calc-label" for="calLbs">Weight</label>
+        <span class="calc-field"><input type="number" id="calLbs" min="0" inputmode="numeric" placeholder="Weight (pounds)" /><i>lbs</i></span>
+        <label class="calc-label" for="calAct">Activity level</label>
+        <span class="calc-field calc-sel"><select id="calAct"><option value="1.2">Not very active</option><option value="1.375" selected>Lightly active</option><option value="1.55">Moderately active</option><option value="1.725">Very active</option></select></span>
+        <button type="button" class="calc-btn" id="calBtn">Calculate calories</button>
+      </div>
+
+      <div class="calc-card goal-card">
+        <p class="lose-lead">What&rsquo;s your goal?</p>
+        <div class="lose-num"><b id="goalGap">20</b><span>lbs to go</span></div>
+        <div class="goal-row"><span>Current</span><b><span id="goalCur">200</span> lbs</b></div>
+        <input type="range" class="lose-slider" id="goalCurSlider" min="120" max="400" step="1" value="200" aria-label="Current weight in pounds" />
+        <div class="goal-row"><span>Goal</span><b><span id="goalTgt">180</span> lbs</b></div>
+        <input type="range" class="lose-slider" id="goalTgtSlider" min="100" max="380" step="1" value="180" aria-label="Goal weight in pounds" />
+      </div>
 
 
     </div>
     <p class="calc-fine">Weight management outcomes vary by individual and are determined with your clinician. Compounded GLP-1 medications are not FDA-approved and have not been studied for specific weight-loss outcomes. This is not medical advice; only a licensed clinician can determine whether treatment is appropriate.</p>
   </div>
 </section>
+
+<!-- Calorie + goal modals -->
+<div class="calc-modal" id="calModal" hidden role="dialog" aria-modal="true" aria-label="Your daily calorie estimate">
+  <div class="cm-backdrop" data-close="1"></div>
+  <div class="cm-panel bmi-panel">
+    <button type="button" class="cm-close" id="calClose" aria-label="Close">&times;</button>
+    <div class="bmi-gaugecard">
+      <h3>Your daily calories</h3>
+      <div class="bmi-result" style="justify-content:center;margin:10px 0"><span id="calMaint">0</span><i class="cal-unit">cal/day</i></div>
+      <p class="bmi-desc">Roughly the energy your body uses each day at your activity level &mdash; the calories to maintain your current weight.*</p>
+    </div>
+    <div class="bmi-right">
+      <p class="cal-line"><b>A common general guideline</b> for gentle weight loss is a modest daily reduction &mdash; around <b id="calLoseLo">0</b>&ndash;<b id="calLoseHi">0</b> cal/day. The right target for you is something to decide with a licensed clinician.</p>
+      <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Talk to a clinician</a>
+      <p class="bmi-disc">*Estimate only (Mifflin-St Jeor equation), based on the details you entered; individual needs vary. This is general information, not medical or nutritional advice. A licensed clinician can help build a plan that&rsquo;s right for you.</p>
+    </div>
+  </div>
+</div>
+
+<div class="calc-modal" id="goalModal" hidden role="dialog" aria-modal="true" aria-label="Your weight goal">
+  <div class="cm-backdrop" data-close="1"></div>
+  <div class="cm-panel bmi-panel">
+    <button type="button" class="cm-close" id="goalClose" aria-label="Close">&times;</button>
+    <div class="bmi-gaugecard">
+      <h3>Your goal</h3>
+      <div class="bmi-result" style="justify-content:center;margin:10px 0"><span id="goalGap2">0</span><i class="cal-unit">lbs to go</i></div>
+      <p class="bmi-desc">From <b id="goalCur2">0</b> lbs to a goal of <b id="goalTgt2">0</b> lbs.</p>
+    </div>
+    <div class="bmi-right">
+      <p class="cal-line">A healthy, sustainable rate of weight loss is generally about <b>1&ndash;2 lbs per week</b>. A licensed clinician will review your health and build a safe plan that fits you &mdash; there&rsquo;s no one-size-fits-all pace, and results vary.</p>
+      <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Talk to a clinician</a>
+      <p class="bmi-disc">This tool is for general goal-setting only and does not predict results or determine treatment eligibility. Weight-loss outcomes vary by individual and are determined with your clinician. Compounded medications are not FDA-approved.</p>
+    </div>
+  </div>
+</div>
 
 <!-- BMI results modal -->
 <div class="calc-modal" id="bmiModal" hidden role="dialog" aria-modal="true" aria-label="Your BMI results">
@@ -2025,11 +2017,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div>
         <div class="bmi-cat" data-cat="over" style="--c:#e6b34e;--cbg:#fbf0d8">
           <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Overweight</span><b class="bmi-cat-range">25 - 29.9</b></div>
-          <div class="bmi-cat-more"><p><b>Your BMI is above the healthy range.</b> A personalized weight-loss medication plan could help you reach your goals.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is above the healthy range.</b> A licensed clinician can review your health and discuss whether a weight-management treatment plan may be appropriate for you.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
         </div>
         <div class="bmi-cat" data-cat="obese" style="--c:#ef8f7e;--cbg:#fce0da">
           <div class="bmi-cat-head"><span class="bmi-dot"></span><span class="bmi-cat-name">Obesity</span><b class="bmi-cat-range">&ge; 30</b></div>
-          <div class="bmi-cat-more"><p><b>Your BMI is in a range where extra support may be helpful.</b> A personalized weight-loss medication plan could help you feel better, move more easily, and regain confidence.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
+          <div class="bmi-cat-more"><p><b>Your BMI is in a range where extra support may be helpful.</b> A licensed clinician can review your health and discuss whether a weight-management treatment plan may be appropriate for you.</p><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Check your options</a></div>
         </div>
       </div>
       <p class="bmi-disc">*BMI doesn't directly measure body fat and may not accurately reflect health for people with high muscle mass, pregnant women, children, older adults, certain ethnic groups, or those with medical conditions. It shouldn't be used as the only way to assess health.</p>
@@ -2451,8 +2443,18 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   function fillBars(el) { if (!el) return; el.innerHTML = ''; BARS.forEach(function (h) { var s = document.createElement('span'); s.style.height = Math.round(h * 100) + '%'; el.appendChild(s); }); }
   fillBars(document.getElementById('loseBars'));
 
-  function openM(m) { if (!m) return; m.hidden = false; document.body.classList.add('modal-open'); }
-  function closeM(m) { if (m) m.hidden = true; if (!document.querySelector('.calc-modal:not([hidden])')) document.body.classList.remove('modal-open'); }
+  var lastFocus = null;
+  function trapTab(e) {
+    if (e.key !== 'Tab') return;
+    var m = e.currentTarget;
+    var f = [].filter.call(m.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (el) { return !el.disabled && el.offsetParent !== null; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+  function openM(m) { if (!m) return; lastFocus = document.activeElement; m.hidden = false; document.body.classList.add('modal-open'); var c = m.querySelector('.cm-close'); if (c) c.focus(); m.addEventListener('keydown', trapTab); }
+  function closeM(m) { if (m) { m.hidden = true; m.removeEventListener('keydown', trapTab); } if (!document.querySelector('.calc-modal:not([hidden])')) document.body.classList.remove('modal-open'); if (lastFocus && lastFocus.focus) { lastFocus.focus(); lastFocus = null; } }
 
   var bC = document.getElementById('bmiCalc'), bV = document.getElementById('bmiValue'), bCat = document.getElementById('bmiCat');
   var bmiModal = document.getElementById('bmiModal'), bmiBig = document.getElementById('bmiBig'), bmiArc = document.getElementById('bmiArc');
@@ -2484,6 +2486,55 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
   var bmiClose = document.getElementById('bmiClose');
   if (bmiClose) bmiClose.addEventListener('click', function () { closeM(bmiModal); });
+
+  // Daily calories (Mifflin-St Jeor, female baseline)
+  var calBtn = document.getElementById('calBtn'), calModal = document.getElementById('calModal');
+  function calcCal() {
+    var age = parseFloat((document.getElementById('calAge')||{}).value) || 0;
+    var ft = parseFloat((document.getElementById('calFt')||{}).value) || 0;
+    var inch = parseFloat((document.getElementById('calIn')||{}).value) || 0;
+    var lbs = parseFloat((document.getElementById('calLbs')||{}).value) || 0;
+    var act = parseFloat((document.getElementById('calAct')||{}).value) || 1.375;
+    var tot = ft * 12 + inch;
+    if (!(age > 0 && lbs > 0 && tot > 0)) return;
+    var cm = tot * 2.54, kg = lbs * 0.453592;
+    var bmr = 10 * kg + 6.25 * cm - 5 * age - 161;
+    var tdee = Math.max(1000, Math.round(bmr * act / 10) * 10);
+    var e; if (e = document.getElementById('calValue')) e.textContent = tdee;
+    if (e = document.getElementById('calMaint')) e.textContent = tdee;
+    var lo = Math.max(1200, Math.round((tdee - 600) / 10) * 10);
+    var hi = Math.max(1200, Math.round((tdee - 300) / 10) * 10);
+    if (e = document.getElementById('calLoseLo')) e.textContent = lo;
+    if (e = document.getElementById('calLoseHi')) e.textContent = hi;
+    openM(calModal);
+  }
+  if (calBtn) calBtn.addEventListener('click', calcCal);
+  var calClose = document.getElementById('calClose');
+  if (calClose) calClose.addEventListener('click', function () { closeM(calModal); });
+
+  // Goal weight (general goal-setting; no drug-outcome projection)
+  var gCur = document.getElementById('goalCurSlider'), gTgt = document.getElementById('goalTgtSlider');
+  var goalModal = document.getElementById('goalModal');
+  function goalUpdate() {
+    var c = parseInt(gCur.value, 10), t = parseInt(gTgt.value, 10), gap = Math.max(0, c - t), e;
+    if (e = document.getElementById('goalCur')) e.textContent = c;
+    if (e = document.getElementById('goalTgt')) e.textContent = t;
+    if (e = document.getElementById('goalGap')) e.textContent = gap;
+  }
+  function goalOpen() {
+    var c = parseInt(gCur.value, 10), t = parseInt(gTgt.value, 10), gap = Math.max(0, c - t), e;
+    if (e = document.getElementById('goalGap2')) e.textContent = gap;
+    if (e = document.getElementById('goalCur2')) e.textContent = c;
+    if (e = document.getElementById('goalTgt2')) e.textContent = t;
+    openM(goalModal);
+  }
+  if (gCur && gTgt) {
+    gCur.addEventListener('input', goalUpdate); gTgt.addEventListener('input', goalUpdate);
+    gCur.addEventListener('change', goalOpen); gTgt.addEventListener('change', goalOpen);
+    goalUpdate();
+  }
+  var goalClose = document.getElementById('goalClose');
+  if (goalClose) goalClose.addEventListener('click', function () { closeM(goalModal); });
   Array.prototype.forEach.call(document.querySelectorAll('.calc-modal'), function (m) { m.addEventListener('click', function (e) { if (e.target.getAttribute('data-close')) closeM(m); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') Array.prototype.forEach.call(document.querySelectorAll('.calc-modal:not([hidden])'), closeM); });
 })();
