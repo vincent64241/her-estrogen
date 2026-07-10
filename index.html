@@ -509,6 +509,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   scroll-snap-align: start;
   transition: transform .25s var(--ease-out);
 }
+.p-card[hidden] { display: none !important; } /* launch-gated cards (e.g. Mounjaro) must stay hidden despite .p-card display:flex */
 .p-card:hover { transform: translateY(-4px); }
 .p-card::after { z-index: 1; }
 .p-img { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -1856,6 +1857,15 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           <h3 class="p-name">Zepbound®</h3>
           <p class="p-desc">Tirzepatide injection, prescribed for weight loss.</p><p class="p-tm">Zepbound&reg; is a registered trademark of Eli Lilly and Company. HerEstrogen is not affiliated with or endorsed by Eli Lilly.</p>
           <div class="p-price" data-glp1-price-card="zepbound" hidden></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a></div>
+        </div>
+      </div>
+      <div class="p-card" hidden data-glp1-card="mounjaro">
+        <a class="p-img pi-lav has-photo" href="/products/mounjaro" aria-label="View Mounjaro® details"><span class="p-badges"><span class="badge">Rx</span></span><img class="p-photo" src="assets/product-mounjaro.webp" alt="Mounjaro® (tirzepatide) injection pen, representative image" loading="lazy" decoding="async" width="440" height="440" /></a>
+        <div class="p-body">
+          <span class="p-status"><span class="p-dot"></span> In stock</span>
+          <h3 class="p-name">Mounjaro®</h3>
+          <p class="p-desc">Tirzepatide injection.</p><p class="p-tm">Mounjaro&reg; is a registered trademark of Eli Lilly and Company. HerEstrogen is not affiliated with or endorsed by Eli Lilly. Subject to availability.</p>
+          <div class="p-price" data-glp1-price-card="mounjaro" hidden></div><div class="p-ctas"><a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt?product=mounjaro">Get started</a></div>
         </div>
       </div>
     </div>

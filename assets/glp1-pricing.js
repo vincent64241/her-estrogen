@@ -90,6 +90,21 @@
         { id: 'zepbound_6mo',     months: 6,  pricePerMo: 1471, total: 8826,  savePct: 8,  hero: false, label: 'Save 8%' },
         { id: 'zepbound_12mo',    months: 12, pricePerMo: 1407, total: 16884, savePct: 12, hero: true,  label: 'Save 12% · price-locked' }
       ]
+    },
+    /* ── Mounjaro® (Eli Lilly, FDA-approved). PER-PRODUCT LAUNCH GATE ──
+         launchEnabled:false keeps Mounjaro fully hidden even though the master
+         GLP1_LAUNCH_ENABLED flag is already true. Flip to true ONLY after legal
+         clears Mounjaro — including its indication (Mounjaro® is FDA-approved for
+         type 2 diabetes, NOT weight loss; do not imply a weight-loss indication). ── */
+    mounjaro: {
+      name: 'Mounjaro®', qparam: 'mounjaro', fdaApproved: true, mfr: 'Eli Lilly', anchor: 1599,
+      launchEnabled: false,
+      plans: [
+        { id: 'mounjaro_monthly', months: 1,  pricePerMo: 1599, total: 1599,  savePct: 0,  hero: false, label: 'Most flexible' },
+        { id: 'mounjaro_3mo',     months: 3,  pricePerMo: 1519, total: 4557,  savePct: 5,  hero: false, label: 'Save 5%' },
+        { id: 'mounjaro_6mo',     months: 6,  pricePerMo: 1471, total: 8826,  savePct: 8,  hero: false, label: 'Save 8%' },
+        { id: 'mounjaro_12mo',    months: 12, pricePerMo: 1407, total: 16884, savePct: 12, hero: true,  label: 'Save 12% · price-locked' }
+      ]
     }
   };
 
@@ -127,6 +142,9 @@
 
   /* Always expose data + flag for reference (no rendering unless gated open). */
   window.GLP1_LAUNCH_ENABLED = GLP1_LAUNCH_ENABLED;
+  /* Per-product Mounjaro gate — true ONLY when master flag AND launchEnabled are both on.
+     Product page reads this to decide whether /products/mounjaro is reachable. */
+  window.HE_MOUNJARO_LIVE = !!(GLP1_LAUNCH_ENABLED && GLP1_BRAND.mounjaro && GLP1_BRAND.mounjaro.launchEnabled === true);
   window.HE_PRODUCTS = window.HE_PRODUCTS || {};
   window.HE_PRODUCTS.glp1 = GLP1;
   window.HE_PRODUCTS.glp1_brand = GLP1_BRAND;
@@ -144,7 +162,8 @@
      ──────────────────────────────────────────────────────────────── */
   var money = function (n) { return '$' + n.toLocaleString('en-US'); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
-  var getProd = function (key) { return GLP1[key] || GLP1_BRAND[key] || null; };
+  /* Gated products (launchEnabled:false) resolve to null → their mounts never render. */
+  var getProd = function (key) { var p = GLP1[key] || GLP1_BRAND[key] || null; return (p && p.launchEnabled === false) ? null : p; };
   var isBrand = function (p) { return !!p.fdaApproved; };
   var heroPlan = function (p) { return p.plans.filter(function (x) { return x.hero; })[0] || p.plans[p.plans.length - 1]; };
   /* "Starting at" for the GLP-1 hero tile = cheapest COMPOUNDED hero (the value entry). */
@@ -268,6 +287,10 @@
     [].forEach.call(document.querySelectorAll('[data-glp1-tile]'), function (el) {
       el.innerHTML = 'Starting at <b>$' + perDay(lowestPerMo()) + ' per day</b>';
       el.hidden = false;
+    });
+    /* Whole lineup cards that are launch-gated (e.g. Mounjaro) reveal only when live. */
+    [].forEach.call(document.querySelectorAll('[data-glp1-card]'), function (el) {
+      if (getProd(el.getAttribute('data-glp1-card'))) el.hidden = false;
     });
     [].forEach.call(document.querySelectorAll('[data-glp1-gated]'), function (el) { el.hidden = false; });
   }
