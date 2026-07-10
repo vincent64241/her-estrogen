@@ -428,7 +428,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     scale(calc(.94 + var(--bp, .5) * .10));
   will-change: transform;
 }
-.band-product { height: 470px; max-height: 98%; width: auto; filter: drop-shadow(0 40px 50px rgba(0,0,0,.55)); }
+.band-product { height: 720px; max-height: none; width: auto; filter: drop-shadow(0 40px 50px rgba(0,0,0,.55)); }
 .stage-shadow {
   position: absolute; left: 50%; bottom: 2%; width: 46%; height: 26px; z-index: 1;
   translate: -50%; border-radius: 50%;
@@ -678,7 +678,7 @@ a.p-img { display: flex; z-index: 2; cursor: pointer; }
 /* ── Weight-loss calculators (BMI + potential loss) ── */
 .calc { padding: clamp(48px, 6vw, 80px) 0; }
 .calc > .container > h2 { text-align: center; font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 32px; }
-.calc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: stretch; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
 .calc-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px; box-shadow: 0 14px 40px rgba(28,26,23,.06); }
 .bmi-card h3, .lose-card .lose-lead { margin: 0; }
 .bmi-card h3 { font-size: 20px; font-weight: 700; }
@@ -1296,6 +1296,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   font-family: 'Newsreader', Georgia, serif; font-weight: 600; color: var(--brand); font-size: 18px;
 }
 .hs-visual { width: 100%; height: 228px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+.hs-photo { width: 100%; height: 228px; object-fit: cover; border-radius: 18px; box-shadow: 0 18px 40px rgba(28,26,23,.12); }
 .how-step h3 { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 8px; }
 .how-step p { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; max-width: 262px; }
 
@@ -1781,7 +1782,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span class="ts-item">✓ Unlimited &amp; real-person support</span>
       <span class="ts-item">✓ 100% entirely online</span>
       <span class="ts-item">✓ Licensed clinicians, all 50 states</span>
-      <span class="ts-item">✓ LegitScript Certified</span>
       <span class="ts-item">✓ Free shipping</span>
       <span class="ts-item">✓ Cancel before any renewal</span>
     </div>
@@ -1789,7 +1789,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <span class="ts-item">✓ Unlimited &amp; real-person support</span>
       <span class="ts-item">✓ 100% entirely online</span>
       <span class="ts-item">✓ Licensed clinicians, all 50 states</span>
-      <span class="ts-item">✓ LegitScript Certified</span>
       <span class="ts-item">✓ Free shipping</span>
       <span class="ts-item">✓ Cancel before any renewal</span>
     </div>
@@ -1805,7 +1804,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     </div>
     <div class="lineup-scroll" data-reveal-group>
       <div class="p-card">
-        <a class="p-img pi-sage has-photo" href="/products/semaglutide" aria-label="View Semaglutide details"><span class="p-pop">&#9733; Most Popular</span><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-pen.webp" alt="Semaglutide product" loading="lazy" decoding="async" width="440" height="440" /></a>
+        <a class="p-img pi-sage has-photo" href="/products/semaglutide" aria-label="View Semaglutide details"><span class="p-pop">&#9733; Most Popular</span><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><img class="p-photo" src="assets/product-semaglutide.webp" alt="HerEstrogen compounded semaglutide injection pen, representative packaging" loading="lazy" decoding="async" width="440" height="440" /></a>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Weekly GLP-1 Shot</h3>
@@ -1814,7 +1813,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </div>
       </div>
       <div class="p-card">
-        <a class="p-img pi-lemon has-photo" href="/products/tirzepatide" aria-label="View Tirzepatide details"><span class="p-pop">&#9733; Most Popular</span><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><img class="p-photo" src="assets/rx-vialsyringe.webp" alt="Tirzepatide product" loading="lazy" decoding="async" width="440" height="440" /></a>
+        <a class="p-img pi-lemon has-photo" href="/products/tirzepatide" aria-label="View Tirzepatide details"><span class="p-pop">&#9733; Most Popular</span><span class="p-badges"><span class="badge badge-new">New</span><span class="badge">Rx</span></span><img class="p-photo" src="assets/product-tirzepatide.webp" alt="HerEstrogen compounded tirzepatide injection pen, representative packaging" loading="lazy" decoding="async" width="440" height="440" /></a>
         <div class="p-body">
           <span class="p-status"><span class="p-dot"></span> In stock</span>
           <h3 class="p-name">Weekly Dual-Action Shot</h3>
@@ -1881,8 +1880,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Goals band -->
 <section class="container">
-  <div class="goals has-video">
-    <video class="goals-video" muted loop playsinline preload="none" aria-hidden="true" data-lazy-video><source data-src="assets/prescription-section.mp4" type="video/mp4" /></video>
+  <div class="goals">
     <h2 data-reveal>Prescription treatments for your health goals</h2>
     <div class="goal-grid" data-reveal-group>
       <a class="goal-row" href="https://quiz.herestrogen.com/herestrogen_hrt"><span class="goal-left"><span class="goal-ic">⚖️</span> Lose weight</span><span class="g-arrow">→</span></a>
@@ -1992,11 +1990,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         </svg>
       </a>
 
-      <div class="calc-card lose-card">
-        <p class="lose-lead">Weight management,<br />guided by a clinician</p>
-        <div class="lose-viz" aria-hidden="true"><span class="lose-arrow">▼</span><div class="lose-bars" id="loseBars"></div></div>
-        <p class="lose-lead2">A personalized plan, reviewed and adjusted with your licensed clinician.</p>
-      </div>
 
     </div>
     <p class="calc-fine">Weight management outcomes vary by individual and are determined with your clinician. Compounded GLP-1 medications are not FDA-approved and have not been studied for specific weight-loss outcomes. This is not medical advice; only a licensed clinician can determine whether treatment is appropriate.</p>
@@ -2095,7 +2088,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <span class="mbr-free">$0</span>
         <span class="mbr-free-sub">Included free with every plan</span>
         <a class="btn btn-light mbr-cta" href="https://quiz.herestrogen.com/herestrogen_hrt">Get started</a>
-        <span class="mbr-note">Cancel anytime &mdash; no contracts, no fees.</span>
       </aside>
     </div>
     <p class="mbr-fine">Membership is included with every treatment plan. Value figures are estimated typical costs of comparable services, shown for comparison only. A licensed clinician reviews your history; treatment is provided only where clinically appropriate and a prescription is not guaranteed. If a clinician determines treatment isn&rsquo;t right for you, you pay nothing. Features and availability vary by state.</p>
@@ -2111,75 +2103,21 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <div class="how-steps" data-reveal-group>
       <div class="how-step">
         <div class="hs-num">1</div>
-        <div class="hs-visual hs-form" aria-hidden="true">
-          <div class="fm-card">
-            <div class="fm-row">
-              <div class="fm-field"><label>Legal First Name</label><span class="fm-input"></span></div>
-              <div class="fm-field"><label>Legal Last Name</label><span class="fm-input"></span></div>
-            </div>
-            <div class="fm-field"><label>Email Address</label><span class="fm-input"></span></div>
-            <div class="fm-hint">Please use a unique email address</div>
-            <div class="fm-field"><label>Date of Birth</label><span class="fm-input"></span></div>
-            <span class="fm-cursor">You</span>
-          </div>
-        </div>
+        <div class="hs-visual"><img class="hs-photo" src="assets/how-1.webp" alt="Woman starting her HerEstrogen intake from home" loading="lazy" decoding="async" width="380" height="228" /></div>
         <h3>Share your details</h3>
         <p>A private intake about your health &mdash; takes about 2 minutes, no cost to start.</p>
       </div>
 
       <div class="how-step">
         <div class="hs-num">2</div>
-        <div class="hs-visual hs-phone" aria-hidden="true">
-          <div class="ph-frame">
-            <span class="ph-notch"></span>
-            <div class="ph-screen">
-              <svg viewBox="0 0 128 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Licensed clinician illustration">
-                <!-- hair back -->
-                <path d="M40 92c0-20 10-34 24-34s24 14 24 34v40H40z" fill="#4a2c1c"/>
-                <!-- neck -->
-                <rect x="56" y="96" width="16" height="20" rx="7" fill="#e8b48f"/>
-                <!-- white coat / shoulders -->
-                <path d="M28 210c0-30 16-52 36-52s36 22 36 52z" fill="#fff"/>
-                <path d="M64 158c-8 0-15 3-20 8l20 44 20-44c-5-5-12-8-20-8z" fill="#f3eef0"/>
-                <!-- collar -->
-                <path d="M52 160l12 12 12-12-6-6-6 6-6-6z" fill="#e7e0e4"/>
-                <!-- stethoscope -->
-                <path d="M54 164c-2 14-14 16-14 28" fill="none" stroke="#c21e63" stroke-width="3" stroke-linecap="round"/>
-                <path d="M74 164c2 12 12 15 12 26" fill="none" stroke="#c21e63" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="86" cy="192" r="6" fill="#c21e63"/>
-                <!-- face -->
-                <circle cx="64" cy="88" r="24" fill="#f0c09a"/>
-                <!-- hair front -->
-                <path d="M40 88c0-20 10-32 24-32s24 12 24 32c-6-8-14-12-24-12s-18 4-24 12z" fill="#4a2c1c"/>
-                <!-- eyes + smile -->
-                <circle cx="56" cy="86" r="2.4" fill="#3a2418"/>
-                <circle cx="72" cy="86" r="2.4" fill="#3a2418"/>
-                <path d="M57 96c3 4 11 4 14 0" fill="none" stroke="#b06a4a" stroke-width="2.4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span class="ph-badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z" fill="#fff"/><path d="M16 10l5-3v10l-5-3v-4Z" fill="#fff"/></svg>
-            </span>
-          </div>
-        </div>
+        <div class="hs-visual"><img class="hs-photo" src="assets/how-2.webp" alt="A video visit with a licensed clinician" loading="lazy" decoding="async" width="380" height="228" /></div>
         <h3>A licensed clinician reviews</h3>
         <p>A licensed clinician reviews your history to determine whether treatment is right for you.</p>
       </div>
 
       <div class="how-step">
         <div class="hs-num">3</div>
-        <div class="hs-visual hs-package" aria-hidden="true">
-          <span class="pkg-badge">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <svg viewBox="0 0 180 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fast delivery package">
-            <path d="M36 60l12-16h84l12 16-6 92a8 8 0 0 1-8 7H50a8 8 0 0 1-8-7z" fill="#c9a07a"/>
-            <path d="M36 60l12-16h42v115H50a8 8 0 0 1-8-7z" fill="#d8b088"/>
-            <path d="M36 60h108l-4 10H40z" fill="#b98a63"/>
-            <path d="M78 44h24v10a12 12 0 0 1-24 0z" fill="#a87850"/>
-            <rect x="80" y="40" width="20" height="6" rx="3" fill="#8f6743"/>
-          </svg>
-        </div>
+        <div class="hs-visual"><img class="hs-photo" src="assets/how-3.webp" alt="Treatment delivered to her door" loading="lazy" decoding="async" width="380" height="228" /></div>
         <h3>Receive your treatment</h3>
         <p>If prescribed, your medication ships free, straight to your door.</p>
       </div>
