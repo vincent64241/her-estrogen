@@ -1410,11 +1410,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   display: flex; flex-direction: column; align-items: center;
 }
 .opop-x {
-  position: fixed; top: 20px; right: 22px; z-index: 2;
+  position: absolute; top: 16px; right: 16px; z-index: 2;
   width: 44px; height: 44px; border-radius: 50%; border: 0;
-  background: rgba(194,30,99,.10); color: var(--brand); font-size: 24px; line-height: 1;
+  background: rgba(194,30,99,.10); color: var(--brand); font-size: 26px; line-height: 1;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: background .15s ease;
+  padding: 0 0 3px; transition: background .15s ease;
 }
 .opop-x:hover { background: rgba(194,30,99,.18); }
 .opop-logo {
@@ -1606,9 +1606,9 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
             <a href="/products/semaglutide">Weekly GLP-1 Shot <span class="rx">Rx</span></a>
             <a href="/products/estradiol-patch">Twice-Weekly Patches <span class="rx">Rx</span></a>
             <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
+            <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
             <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
             <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
-          </div>            <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
           </div>
           <div class="mega-col"><h5>Learn</h5>
             <a href="#proof">Real results</a>
@@ -2740,8 +2740,8 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 
 <!-- Offer popup (full screen) -->
 <div class="opop" id="offerPop" role="dialog" aria-modal="true" aria-labelledby="opopHead" hidden>
-  <button class="opop-x" id="opopX" aria-label="Close">&times;</button>
   <div class="opop-card">
+    <button class="opop-x" id="opopX" aria-label="Close">&times;</button>
 
     <!-- Step 1 — concern -->
     <div class="opop-step" id="opopStep1">
