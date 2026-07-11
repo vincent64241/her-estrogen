@@ -510,7 +510,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   transition: transform .25s var(--ease-out);
 }
 .p-card[hidden] { display: none !important; } /* launch-gated cards (e.g. Mounjaro) must stay hidden despite .p-card display:flex */
-[data-peptide-gated][hidden] { display: none !important; } /* peptide launch gate — hides any element type */
 .p-card:hover { transform: translateY(-4px); }
 .p-card::after { z-index: 1; }
 .p-img { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -1588,7 +1587,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
           </div>
         </div></div>
       </div>
-      <div class="nav-item has-mega" data-peptide-gated hidden>
+      <div class="nav-item has-mega">
         <a href="#wellness">Wellness</a>
         <div class="mega"><div class="mega-inner">
           <div class="mega-col"><a class="mega-all" href="#wellness">See all Wellness →</a></div>
@@ -1607,9 +1606,9 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
             <a href="/products/semaglutide">Weekly GLP-1 Shot <span class="rx">Rx</span></a>
             <a href="/products/estradiol-patch">Twice-Weekly Patches <span class="rx">Rx</span></a>
             <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
-            <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
-            <a href="/products/sermorelin" data-peptide-gated hidden>Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
-            <a href="/products/nad" data-peptide-gated hidden>NAD+ (Longevity) <span class="rx">Rx</span></a>
+            <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
+            <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
+          </div>            <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
           </div>
           <div class="mega-col"><h5>Learn</h5>
             <a href="#proof">Real results</a>
@@ -1644,10 +1643,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
       <a class="msub-all" href="#skin">See all Skin &rarr;</a>
     </div></details>
-    <details class="mnav" data-peptide-gated hidden><summary>Wellness</summary><div class="msub">
+    <details class="mnav"><summary>Wellness</summary><div class="msub">
       <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
       <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
       <a href="/products/pt141">PT-141 (Desire) <span class="rx">Rx</span></a>
+      <a class="msub-all" href="#wellness">See all Wellness &rarr;</a>
       <a class="msub-all" href="#wellness">See all Wellness &rarr;</a>
     </div></details>
     <details class="mnav"><summary>Top Products</summary><div class="msub">
@@ -1655,8 +1655,9 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a href="/products/estradiol-patch">Twice-Weekly Patches <span class="rx">Rx</span></a>
       <a href="/products/tretinoin">Tretinoin (Acne-Free) <span class="rx">Rx</span></a>
       <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
-      <a href="/products/sermorelin" data-peptide-gated hidden>Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
-      <a href="/products/nad" data-peptide-gated hidden>NAD+ (Longevity) <span class="rx">Rx</span></a>
+      <a href="/products/sermorelin">Sermorelin (Anti-Aging) <span class="rx">Rx</span></a>
+      <a href="/products/nad">NAD+ (Longevity) <span class="rx">Rx</span></a>
+      <a class="msub-all" href="#lineup">See all products &rarr;</a>      <a href="/products/estriol">Estriol (Glow) <span class="rx">Rx</span></a>
       <a class="msub-all" href="#lineup">See all products &rarr;</a>
     </div></details>
   </div>
@@ -1926,7 +1927,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   </div>
 </section>
 
-<section class="lineup" id="wellness" data-peptide-gated hidden>
+<section class="lineup" id="wellness">
   <div class="container">
     <div class="lu-head" data-reveal>
       <h2>Wellness</h2>
@@ -1964,6 +1965,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <p class="lineup-fine">Compounded medications are prepared by a licensed U.S. compounding pharmacy and are not approved by the FDA; they have not been reviewed for safety, effectiveness, or quality. Prescription products require clinician evaluation; a prescription is not guaranteed. Product images are representative.</p>
   </div>
 </section>
+
 
 
 
@@ -2336,7 +2338,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
         <a href="#weightloss">Weight Loss</a>
         <a href="#menopause">Menopause &amp; HRT</a>
         <a href="#skin">Skin</a>
-        <a href="#wellness" data-peptide-gated hidden>Wellness</a>
+        <a href="#wellness">Wellness</a>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
@@ -2359,7 +2361,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 </footer>
 
 <script src="assets/legal.js"></script>
-<script src="assets/catalog-flags.js"></script>
 <script src="assets/glp1-pricing.js"></script>
 <script>
 /* Motion runtime — reveal choreography, nav condense, hamburger, carousels.
