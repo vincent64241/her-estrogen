@@ -1454,6 +1454,17 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 .opop-input:focus { border-color: var(--brand); }
 .opop-err { font-size: 13px; color: #b3261e; margin: 10px 0 0; min-height: 18px; }
 .opop-form-btn { max-width: 440px; margin-top: 16px; }
+.opop-phone-lead { font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--brand-ink); margin: 14px 0 14px; line-height: 1.45; }
+.opop-phone-lead span { display: block; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+.opop-sms-fine { font-size: 10.5px; line-height: 1.55; color: var(--muted); max-width: 460px; margin: 0 auto 16px; text-align: center; }
+.opop-sms-fine a { color: var(--brand); text-decoration: underline; }
+.opop-phone-row { display: flex; align-items: stretch; width: 100%; max-width: 440px; margin: 0 auto; border: 1.5px solid rgba(194,30,99,.3); border-radius: 16px; overflow: hidden; background: #fff; }
+.opop-phone-row:focus-within { border-color: var(--brand); }
+.opop-cc { display: flex; align-items: center; gap: 6px; padding: 0 13px; background: #faf3f7; border-right: 1.5px solid rgba(194,30,99,.18); font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+.opop-cc b { font-weight: 800; }
+.opop-phone { flex: 1; min-width: 0; border: 0; background: transparent; padding: 16px 16px; font-size: 16px; font-family: inherit; outline: 0; color: var(--ink); }
+.opop-phone::placeholder { color: var(--muted); }
+@media (max-width: 400px) { .opop-cc { font-size: 12.5px; padding: 0 9px; } }
 .opop-step { animation: opFade .35s ease; display: flex; flex-direction: column; align-items: center; width: 100%; }
 .opop-step[hidden] { display: none; }
 @keyframes opFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
@@ -2769,6 +2780,21 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <button class="opop-btn primary opop-form-btn" id="opopContinue">Continue</button>
     </div>
 
+    <!-- Step 2b — SMS opt-in -->
+    <div class="opop-step" id="opopStepPhone" hidden>
+      <div class="opop-logo"><span class="thin">her</span><span class="bold">estrogen</span></div>
+      <h2 class="opop-h">Finish Signing Up</h2>
+      <p class="opop-phone-lead">For up to 50% off + free 2-day shipping<span>by activating your coupon.</span></p>
+      <p class="opop-sms-fine">By submitting this form and signing up for texts, you consent to receive recurring automated promotional and personalized marketing text messages (e.g. cart reminders) from HerEstrogen at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg &amp; data rates may apply. View <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a> &amp; <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>.</p>
+      <div class="opop-phone-row">
+        <span class="opop-cc"><span aria-hidden="true">🇺🇸</span> United States <b>+1</b></span>
+        <input class="opop-phone" type="tel" id="opopPhone" autocomplete="tel-national" inputmode="tel" placeholder="(555) 555-5555" aria-label="Mobile phone number" />
+      </div>
+      <p class="opop-err" id="opopPhoneErr"></p>
+      <button class="opop-btn primary opop-form-btn" id="opopUnlock">UNLOCK THIS DEAL</button>
+      <button class="opop-dismiss" id="opopSkipSms">No thanks, just email me the deal</button>
+    </div>
+
     <!-- Step 3 — clipped -->
     <div class="opop-step" id="opopStep3" hidden>
       <div class="opop-check" aria-hidden="true">✓</div>
@@ -2784,6 +2810,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   if (!pop) return;
   var s1 = document.getElementById('opopStep1');
   var s2 = document.getElementById('opopStep2');
+  var sPhone = document.getElementById('opopStepPhone');
   var s3 = document.getElementById('opopStep3');
   var errEl = document.getElementById('opopErr');
   var shown = false;              // in-memory only — reappears on a fresh page load / new tab
@@ -2802,7 +2829,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     setTimeout(function () { pop.hidden = true; }, 500);   // no redirect — just closes
   }
   function goTo(step) {
-    [s1, s2, s3].forEach(function (s) { s.hidden = true; });
+    [s1, s2, sPhone, s3].forEach(function (s) { s.hidden = true; });
     step.hidden = false;
   }
 
@@ -2824,9 +2851,24 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     /* Lead capture stub — collects {email, concern} in memory only. No third-party
        marketing provider is wired (Klaviyo removed). Wire the chosen endpoint here
        later; never send health data to any ad pixel. */
-    goTo(s3);
-    setTimeout(hide, 2200);
+    goTo(sPhone);
+    var ph = document.getElementById('opopPhone'); if (ph) ph.focus();
   });
+
+  /* Step 2b — SMS opt-in → step 3 → auto-close */
+  var phoneErr = document.getElementById('opopPhoneErr');
+  function finish() { goTo(s3); setTimeout(hide, 2200); }
+  document.getElementById('opopUnlock').addEventListener('click', function () {
+    var digits = (document.getElementById('opopPhone').value || '').replace(/\D/g, '');
+    if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+    if (digits.length !== 10) { phoneErr.textContent = 'Please enter a valid 10-digit U.S. mobile number.'; return; }
+    phoneErr.textContent = '';
+    /* SMS opt-in stub — {email, concern, phone:+1<digits>, smsConsent:true, consentTextShown:true}
+       in memory only. No SMS/marketing provider is wired. Wire the compliant endpoint (double
+       opt-in recommended) here later; store proof-of-consent (timestamp + shown language). */
+    finish();
+  });
+  document.getElementById('opopSkipSms').addEventListener('click', finish);
 
   /* Close */
   document.getElementById('opopX').addEventListener('click', hide);
