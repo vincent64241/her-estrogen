@@ -2205,7 +2205,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
     <p class="mbr-sub" data-reveal style="--i:2">Everything below comes with all treatment plans. No platform fee, no recurring membership fee, no consultation fee. Just us making this the best possible experience for you as we can.</p>
     <div class="mbr-ledger" data-reveal style="--i:3">
       <ul class="mbr-list">
-        <li><span class="mbr-ic">&#10003;</span><div class="mbr-txt"><b>Online clinician evaluation &amp; consultation</b><span>Reviewed by a licensed U.S. clinician &mdash; no office visit, no insurance, no separate consult fee.</span></div><span class="mbr-tag free"><s>$150+</s>FREE</span></li>
+        <li><span class="mbr-ic">&#10003;</span><div class="mbr-txt"><b>First online clinician evaluation &amp; consultation</b><span>Your first visit with a licensed U.S. clinician is free &mdash; no office visit, no insurance, no separate consult fee.</span></div><span class="mbr-tag free"><s>$150+</s>FREE</span></li>
         <li><span class="mbr-ic">&#10003;</span><div class="mbr-txt"><b>Personalized hormone protocol</b><span>Matched to your symptoms and history, and adjusted as your body responds.</span></div><span class="mbr-tag val">$200+ value</span></li>
         <li><span class="mbr-ic">&#10003;</span><div class="mbr-txt"><b>Ongoing check-ins &amp; dose adjustments</b><span>Your clinician reviews and fine-tunes your plan as you go.</span></div><span class="mbr-tag val">$150+ value</span></li>
         <li><span class="mbr-ic">&#10003;</span><div class="mbr-txt"><b>Unlimited &amp; real-person support</b><span>Message real U.S. clinicians between visits &mdash; no bots, no phone tag, no waiting rooms.</span></div><span class="mbr-tag free">included</span></li>
@@ -2792,7 +2792,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       </div>
       <p class="opop-err" id="opopPhoneErr"></p>
       <button class="opop-btn primary opop-form-btn" id="opopUnlock">UNLOCK THIS DEAL</button>
-      <button class="opop-dismiss" id="opopSkipSms">No thanks, just email me the deal</button>
     </div>
 
     <!-- Step 3 — clipped -->
@@ -2868,7 +2867,6 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
        opt-in recommended) here later; store proof-of-consent (timestamp + shown language). */
     finish();
   });
-  document.getElementById('opopSkipSms').addEventListener('click', finish);
 
   /* Close */
   document.getElementById('opopX').addEventListener('click', hide);
