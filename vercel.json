@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/lp/general", "destination": "/lp/doctor", "permanent": true }
+  ],
   "cleanUrls": true,
   "trailingSlash": false,
   "buildCommand": "",
