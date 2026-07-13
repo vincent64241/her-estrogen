@@ -386,7 +386,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 
 /* ── Full-bleed gradient band (Hers cinematic) ── */
 .band {
-  margin: 56px 0 0;
+  margin: 0;
   background:
     radial-gradient(90% 60% at 50% 0%, rgba(255,156,196,.28), transparent 60%),
     linear-gradient(180deg, var(--dark-1) 0%, var(--dark-2) 100%);
@@ -1134,7 +1134,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
 @media (max-width: 860px) { .hero-proofcard { display: none; } }
 
 /* Social proof band */
-.proof { padding: clamp(40px, 5vw, 64px) 0; background: #fff; border-block: 1px solid var(--line); }
+.proof { padding: clamp(40px, 5vw, 64px) 0 clamp(28px, 3.5vw, 40px); background: #fff; border-block: 1px solid var(--line); }
 .proof-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; text-align: center; }
 .stat-big b { display: block; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--ink); }
 .stat-big span { display: block; margin-top: 6px; font-size: 13px; color: var(--ink-2); font-weight: 500; }
