@@ -20,8 +20,8 @@
 (function () {
   'use strict';
 
-  var GLP1_LAUNCH_ENABLED = true;      /* LIVE per operator (nav must work + GLP-1 marketed) */
-  var PEPTIDE_LAUNCH_ENABLED = true;   /* LIVE per operator */
+  var GLP1_LAUNCH_ENABLED = false;     /* FALSE in committed code per pricing spec — gated for launch prep */
+  var PEPTIDE_LAUNCH_ENABLED = false;  /* FALSE in committed code per pricing spec */
 
   var QUIZ = 'https://quiz.herestrogen.com/herestrogen_hrt';
 
@@ -29,11 +29,11 @@
   function P(name, qparam, opts) { return Object.assign({ name: name, qparam: qparam }, opts); }
   var CATALOG = {
     /* ── HRT (compounded) — 25/40 ── */
-    'estradiol-patch': P('Estradiol Patch', 'estradiol-patch', { compounded: true, m: 179, q: 134, qt: 402, a: 107, at: 1284, qp: 25, ap: 40 }),
-    'estradiol-gel':   P('Estradiol Gel', 'estradiol-gel', { compounded: true, m: 191, q: 143, qt: 429, a: 115, at: 1380, qp: 25, ap: 40 }),
-    'estradiol-pills': P('Estradiol Pills', 'estradiol-pills', { compounded: true, m: 107, q: 80, qt: 240, a: 64, at: 768, qp: 25, ap: 40 }),
-    'estradiol-cream': P('Estradiol Vaginal Cream', 'estradiol-cream', { compounded: true, m: 143, q: 107, qt: 321, a: 86, at: 1032, qp: 25, ap: 40 }),
-    'progesterone':    P('Progesterone', 'progesterone', { compounded: true, m: 95, q: 71, qt: 213, a: 57, at: 684, qp: 25, ap: 40 }),
+    'estradiol-patch': P('Estradiol Patch', 'estradiol-patch', { compounded: true, m: 215, q: 161, qt: 483, a: 129, at: 1548, qp: 25, ap: 40 }),
+    'estradiol-gel':   P('Estradiol Gel', 'estradiol-gel', { compounded: true, m: 229, q: 172, qt: 516, a: 137, at: 1644, qp: 25, ap: 40 }),
+    'estradiol-pills': P('Estradiol Pills', 'estradiol-pills', { compounded: true, m: 128, q: 96, qt: 288, a: 77, at: 924, qp: 25, ap: 40 }),
+    'estradiol-cream': P('Estradiol Vaginal Cream', 'estradiol-cream', { compounded: true, m: 172, q: 129, qt: 387, a: 103, at: 1236, qp: 25, ap: 40 }),
+    'progesterone':    P('Progesterone', 'progesterone', { compounded: true, m: 114, q: 86, qt: 258, a: 68, at: 816, qp: 25, ap: 40 }),
     /* ── Compounded GLP-1 (gated) — 25/40 ── */
     'semaglutide': P('Semaglutide', 'sema', { compounded: true, gate: 'glp1', m: 539, q: 404, qt: 1212, a: 323, at: 3876, qp: 25, ap: 40 }),
     'tirzepatide': P('Tirzepatide', 'tirz', { compounded: true, gate: 'glp1', m: 755, q: 566, qt: 1698, a: 453, at: 5436, qp: 25, ap: 40 }),
@@ -77,7 +77,8 @@
     var badge = kind === 'q' ? 'Most popular' : (kind === 'a' ? 'Best value · price-locked for life' : '');
     var name = monthly ? 'Monthly' : (kind === 'q' ? 'Quarterly' : 'Annual');
     var was = monthly ? '' : '<div class="pl-was">' + money(p.m) + '/mo</div>';
-    var day = '<div class="pl-save">Starting at $' + perDay(per) + '/day</div>';
+    var pct = kind === 'q' ? p.qp : p.ap;
+    var day = '<div class="pl-save">' + (monthly ? 'Starting at $' + perDay(per) + '/day' : 'Save ' + pct + '% &middot; $' + perDay(per) + '/day') + '</div>';
     var billed = monthly ? (money(total) + ' billed monthly') : (money(total) + ' billed once');
     return '<div class="pl-tier' + (hero ? ' hero' : '') + '">'
       + (badge ? '<span class="pl-badge">' + badge + '</span>' : '')
@@ -95,13 +96,13 @@
     var fda = p.brand ? '<p class="pl-fda">FDA-approved medication, prescribed by a licensed clinician if appropriate.</p>' : '';
     var start = '<div class="pl-start">'
       + '<p class="pl-start-lead">Starting at <b>$' + perDay(p.a) + '</b> per day</p>'
-      + '<p class="pl-start-sub">One flat price. No consultation fee. Choose monthly, quarterly, or annual in the 2-minute quiz.</p>'
-      + '<a class="btn btn-dark pl-start-cta" href="' + cta(p, 'annual') + '">Get started</a></div>';
+      + '<p class="pl-start-sub">One flat price. No consultation fee. Choose monthly, quarterly, or annual below.</p></div>';
+    var grid = '<div class="pl-grid">' + tier('m', p) + tier('q', p) + tier('a', p) + '</div>';
     var size = p.sizeUpsell ? '<p class="pl-size">Standard size shown. A larger value size is available on your plan for +' + money(p.sizeUpsell) + '/mo, selectable at checkout.</p>' : '';
     var guar = '<p class="pl-guar"><span class="pl-ck">✓</span> Clinical Match Guarantee. If a licensed clinician determines treatment is not right for you, you pay nothing.</p>';
     var foot = '<p class="pl-fine">' + esc(RENEWAL) + '</p>'
       + (p.brand ? '<p class="pl-fine pl-tm">' + tmLine(p) + '</p>' : '<p class="pl-fine pl-disc">' + esc(DISCLOSURE) + '</p>');
-    return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + fda + start + size + guar + foot + '</section>';
+    return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + fda + start + grid + size + guar + foot + '</section>';
   }
 
   /* Compact homepage card: annual /mo + monthly strikethrough + save% */
