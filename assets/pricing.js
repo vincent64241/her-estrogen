@@ -7,7 +7,7 @@
      • gate:'glp1'    → hidden unless GLP1_LAUNCH_ENABLED
      • gate:'peptide' → hidden unless PEPTIDE_LAUNCH_ENABLED
      • no gate        → always visible (HRT, skin)
-   Both launch flags DEFAULT FALSE. Gated products do not render.
+   Both launch flags TRUE (permanent per operator 2026-07-13). Do NOT set false.
 
    COMPLIANCE:
      • Compounded (estradiol, compounded GLP-1, peptides, estriol,
@@ -20,8 +20,8 @@
 (function () {
   'use strict';
 
-  var GLP1_LAUNCH_ENABLED = false;     /* FALSE in committed code per pricing spec — gated for launch prep */
-  var PEPTIDE_LAUNCH_ENABLED = false;  /* FALSE in committed code per pricing spec */
+  var GLP1_LAUNCH_ENABLED = true;      /* PERMANENT per operator 2026-07-13: GLP-1 stays visible. Do NOT set false. */
+  var PEPTIDE_LAUNCH_ENABLED = true;   /* PERMANENT per operator 2026-07-13: peptides stay visible. Do NOT set false. */
 
   var QUIZ = 'https://quiz.herestrogen.com/herestrogen_hrt';
 
