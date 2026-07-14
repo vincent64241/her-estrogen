@@ -1694,7 +1694,7 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <a class="feature-card fc-green has-photo" id="weightloss" href="https://quiz.herestrogen.com/herestrogen_hrt">
         <img class="fc-photo" src="assets/card-weightloss.webp" srcset="assets/card-weightloss-640.webp 640w, assets/card-weightloss-980.webp 980w, assets/card-weightloss.webp 1178w" sizes="(max-width: 720px) 94vw, 585px" alt="GLP-1 weight loss treatment for women" width="1178" height="640" loading="eager" fetchpriority="high" decoding="async" onerror="this.closest('.feature-card').classList.remove('has-photo'); this.remove();" />
         <h3>Personalized GLP-1 treatments <span class="lt">for weight loss</span></h3>
-        <span class="fc-price" data-glp1-tile hidden></span>
+        <span class="fc-price">Starting at <b>$10.77 per day</b></span>
         <span class="ph-shape ph-a"></span><span class="ph-shape ph-b"></span>
         <span class="ph-chip">Product image placeholder</span>
         <span class="fc-cta">Start now <span class="fc-arrow"><i>→</i></span></span>
@@ -2809,6 +2809,9 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
   function show() {
     if (shown) return;
     shown = true;
+    /* Only show once per 24h (first visit in the window). Cookie, not localStorage. */
+    if (/(?:^|;\s*)he_pop=1(?:;|$)/.test(document.cookie)) return;
+    document.cookie = 'he_pop=1; max-age=86400; path=/; SameSite=Lax';
     pop.hidden = false;
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(function () { pop.classList.add('visible'); });
