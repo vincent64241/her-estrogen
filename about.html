@@ -26,16 +26,16 @@ a{color:inherit;text-decoration:none;}img{max-width:100%;display:block;}
 /* hero */
 .a-hero{background:linear-gradient(180deg,#fff,var(--pink-soft));text-align:center;padding:clamp(48px,7vw,88px) 0 clamp(34px,5vw,52px);}
 .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:12.5px;color:var(--brand-ink);margin-bottom:16px;}
-.a-hero h1{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.01em;color:var(--brand);margin-bottom:16px;}
+.a-hero h1{font-family:'DM Sans',system-ui,sans-serif;font-weight:800;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.01em;color:var(--brand);margin-bottom:16px;}
 .a-hero .sub{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:40ch;margin:0 auto;}
 /* story */
 .story{padding:clamp(40px,6vw,72px) 0;}
 .story p{font-size:clamp(17px,2vw,19px);line-height:1.75;color:var(--ink);margin-bottom:26px;}
 .story p:last-child{margin-bottom:0;font-weight:700;color:var(--brand-ink);font-size:clamp(19px,2.4vw,23px);}
-.story .lead::first-letter{font-family:'Newsreader',Georgia,serif;font-size:3.1em;line-height:.82;float:left;color:var(--brand);font-weight:600;margin:6px 12px 0 0;}
-/* refuse */
+.story .lead::first-letter{font-family:'DM Sans',system-ui,sans-serif;font-size:3.1em;line-height:.82;float:left;color:var(--brand);font-weight:600;margin:6px 12px 0 0;}
+.story-img{float:left;width:128px;height:128px;border-radius:50%;object-fit:cover;margin:4px 24px 10px 0;border:3px solid #fff;box-shadow:0 14px 30px -14px rgba(60,30,20,.4);}@media(max-width:560px){.story-img{width:96px;height:96px;margin:2px 16px 6px 0;}}/* refuse */
 .refuse{background:var(--ink);color:#fff;padding:clamp(48px,6vw,80px) 0;}
-.refuse h2{font-family:'Newsreader',Georgia,serif;font-weight:600;text-align:center;font-size:clamp(30px,4.4vw,46px);letter-spacing:-.01em;margin-bottom:8px;}
+.refuse h2{font-family:'DM Sans',system-ui,sans-serif;font-weight:800;text-align:center;font-size:clamp(30px,4.4vw,46px);letter-spacing:-.01em;margin-bottom:8px;}
 .refuse .rsub{text-align:center;color:#c9bfb8;font-size:15px;margin-bottom:38px;}
 .refuse ul{list-style:none;max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:2px;}
 .refuse li{display:flex;gap:16px;align-items:flex-start;padding:18px 4px;border-bottom:1px solid rgba(255,255,255,.1);}
@@ -45,7 +45,7 @@ a{color:inherit;text-decoration:none;}img{max-width:100%;display:block;}
 .refuse span{display:block;font-size:14.5px;color:#c2b8b0;margin-top:4px;line-height:1.55;}
 /* included */
 .incl{padding:clamp(48px,6vw,80px) 0;}
-.incl h2{font-family:'Newsreader',Georgia,serif;font-weight:600;text-align:center;font-size:clamp(28px,4vw,42px);letter-spacing:-.01em;margin-bottom:8px;}
+.incl h2{font-family:'DM Sans',system-ui,sans-serif;font-weight:800;text-align:center;font-size:clamp(28px,4vw,42px);letter-spacing:-.01em;margin-bottom:8px;}
 .incl .isub{text-align:center;color:var(--ink-2);font-size:16px;max-width:60ch;margin:0 auto 30px;}
 .incl ul{list-style:none;max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:6px 24px;box-shadow:0 24px 54px -34px rgba(164,24,79,.4);}
 .incl li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);}
@@ -64,7 +64,7 @@ a{color:inherit;text-decoration:none;}img{max-width:100%;display:block;}
 .founder .line{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:clamp(17px,2.2vw,21px);color:var(--ink-2);max-width:34ch;margin:0 auto;line-height:1.5;}
 /* closing cta */
 .closing{background:var(--pink-soft);text-align:center;padding:clamp(48px,6vw,80px) 0;}
-.closing h2{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,42px);color:var(--brand);margin-bottom:20px;letter-spacing:-.01em;}
+.closing h2{font-family:'DM Sans',system-ui,sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);color:var(--brand);margin-bottom:20px;letter-spacing:-.01em;}
 .closing .rf{display:flex;align-items:flex-start;gap:9px;justify-content:center;font-size:14px;font-weight:600;color:var(--ink-2);margin-top:16px;max-width:52ch;margin-inline:auto;text-align:left;}
 .closing .rf .ck{flex-shrink:0;width:19px;height:19px;border-radius:50%;background:var(--brand);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;margin-top:2px;}
 .closing .cancel{font-size:13px;color:var(--muted);margin-top:8px;}
@@ -100,6 +100,7 @@ footer{background:#fff;border-top:1px solid var(--line);padding:40px 0;}
 </div></header>
 
 <section class="story"><div class="container">
+  <img class="story-img" src="/assets/founder.webp" alt="Founder, HerEstrogen" width="128" height="128" loading="lazy" decoding="async" onerror="this.remove()" />
   <p class="lead">My mom was exhausted. She wasn&rsquo;t sleeping. Her moods swung without warning. She&rsquo;d lose words mid-sentence. Her shoulder froze up and nobody could tell her why. Even her mouth felt different.</p>
   <p>So she went to the doctor. Every Tuesday &mdash; because Tuesday was her only day off. She came home with prescription after prescription, and none of them touched what was actually happening to her. Dozens of medications for a dozen separate symptoms, and not one person stopped to ask whether they might all be connected.</p>
   <p>I&rsquo;m not a doctor. But I could read. And the deeper I went, the more I found the same thing over and over: women describing exactly what my mom was going through &mdash; and women who had found hormone therapy, worked with a clinician, and finally felt like themselves again. Not one miracle story. Thousands of ordinary ones.</p>
@@ -141,16 +142,6 @@ footer{background:#fff;border-top:1px solid var(--line);padding:40px 0;}
   </div>
 </div></section>
 
-<section class="whofor"><div class="container">
-  <p>&ldquo;If you&rsquo;re in perimenopause or menopause &mdash; or you have symptoms you suspect might be hormonal and nobody has taken them seriously &mdash; this was built for you.&rdquo;</p>
-</div></section>
-
-<section class="founder"><div class="container">
-  <img src="/assets/founder.webp" alt="Founder, HerEstrogen" width="88" height="88" style="width:88px;height:88px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 12px 28px -12px rgba(60,30,20,.4);margin:0 auto 14px;display:block" loading="lazy" decoding="async" onerror="this.remove()" />
-  <div class="cap">Founder, HerEstrogen</div>
-  <p class="line">&ldquo;I&rsquo;m not the expert in the room. That&rsquo;s why I built a company that hires them.&rdquo;</p>
-</div></section>
-
 <section class="closing"><div class="container">
   <h2>Care built around your hormones.</h2>
   <a class="btn btn-dark" href="https://quiz.herestrogen.com/herestrogen_hrt">Get Started</a>
@@ -163,7 +154,7 @@ footer{background:#fff;border-top:1px solid var(--line);padding:40px 0;}
     <div>
       <div class="foot-brand"><span style="font-style:italic">her</span><strong>estrogen</strong></div>
       <p class="foot-tag">Modern, clinician-guided care — for every part of being a woman.</p>
-      <div class="foot-social"><a href="https://www.instagram.com/herestrogen" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/herestrogen" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.52l.38-2.93H13.5V9.05c0-.85.24-1.43 1.46-1.43h1.56V5a20.9 20.9 0 0 0-2.28-.12c-2.25 0-3.8 1.38-3.8 3.9v2.18H7.9v2.93h2.54V21h3.06z"/></svg></a><a href="https://www.tiktok.com/@herestrogen" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3h-2.6v12.2a2.2 2.2 0 1 1-2.02-2.19v-2.66a4.85 4.85 0 1 0 4.62 4.84V8.9a6.28 6.28 0 0 0 3.4 1v-2.6a3.68 3.68 0 0 1-3.4-3.3z"/></svg></a></div>
+      <div class="foot-social"><a href="https://www.instagram.com/herestrogenhealth" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.facebook.com/profile.php?id=61589620532595" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.52l.38-2.93H13.5V9.05c0-.85.24-1.43 1.46-1.43h1.56V5a20.9 20.9 0 0 0-2.28-.12c-2.25 0-3.8 1.38-3.8 3.9v2.18H7.9v2.93h2.54V21h3.06z"/></svg></a><a href="https://www.tiktok.com/@herestrogen" target="_blank" rel="noopener noreferrer" aria-label="HerEstrogen on TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3h-2.6v12.2a2.2 2.2 0 1 1-2.02-2.19v-2.66a4.85 4.85 0 1 0 4.62 4.84V8.9a6.28 6.28 0 0 0 3.4 1v-2.6a3.68 3.68 0 0 1-3.4-3.3z"/></svg></a></div>
     </div>
     <div class="foot-col"><h4>Care</h4><a href="/#weightloss">Weight Loss</a><a href="/#menopause">Menopause &amp; HRT</a><a href="/#skin">Skin</a><a href="/#wellness">Wellness</a></div>
     <div class="foot-col"><h4>Company</h4><a href="/about">About</a><a href="/affiliates">Affiliates</a><a href="mailto:support@herestrogen.com">support@herestrogen.com</a></div>
