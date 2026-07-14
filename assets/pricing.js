@@ -60,6 +60,7 @@
     return true;
   }
   var money = function (n) { return '$' + Number(n).toLocaleString('en-US'); };
+  var perDay = function (mo) { return (mo / 30).toFixed(2); };  /* effective daily rate */
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
   var cta = function (p, plan) { return QUIZ + '?product=' + p.qparam + '&plan=' + plan; };
 
@@ -72,19 +73,18 @@
     var plan = monthly ? 'monthly' : (kind === 'q' ? 'quarterly' : 'annual');
     var per = monthly ? p.m : (kind === 'q' ? p.q : p.a);
     var total = monthly ? p.m : (kind === 'q' ? p.qt : p.at);
-    var pct = kind === 'q' ? p.qp : p.ap;
     var hero = !monthly;
     var badge = kind === 'q' ? 'Most popular' : (kind === 'a' ? 'Best value · price-locked for life' : '');
     var name = monthly ? 'Monthly' : (kind === 'q' ? 'Quarterly' : 'Annual');
     var was = monthly ? '' : '<div class="pl-was">' + money(p.m) + '/mo</div>';
-    var save = monthly ? '' : '<div class="pl-save">Save ' + pct + '%</div>';
+    var day = '<div class="pl-save">Starting at $' + perDay(per) + '/day</div>';
     var billed = monthly ? (money(total) + ' billed monthly') : (money(total) + ' billed once');
     return '<div class="pl-tier' + (hero ? ' hero' : '') + '">'
       + (badge ? '<span class="pl-badge">' + badge + '</span>' : '')
       + '<div class="pl-plan">' + name + '</div>'
       + was
       + '<div class="pl-price"><b>' + money(per) + '</b><span>/mo</span></div>'
-      + save
+      + day
       + '<div class="pl-total">' + billed + '</div>'
       + '<a class="pl-cta" href="' + cta(p, plan) + '">Get started</a>'
       + '</div>';
@@ -106,7 +106,7 @@
     var p = CATALOG[key]; if (!p || !live(p)) return '';
     return '<span class="p-was">' + money(p.m) + '/mo</span>'
       + '<span class="p-now">' + money(p.a) + '/mo</span>'
-      + '<span class="p-day">Annual plan · save ' + p.ap + '%</span>';
+      + '<span class="p-day">Starting at $' + perDay(p.a) + '/day</span>';
   }
 
   function injectStyle() {
