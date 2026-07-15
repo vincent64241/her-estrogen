@@ -2300,9 +2300,11 @@ footer { margin-top: 80px; background: #fff; border-top: 1px solid var(--line); 
       <p class="guide-sub" data-reveal style="--i:2">Your free guide to menopause, hormones, and the options that can help &mdash; sent straight to your inbox.</p>
       <form class="guide-form" id="guideForm" data-reveal style="--i:3" novalidate>
         <input type="email" name="email" placeholder="Your email address" aria-label="Your email address" required />
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD2A33TLQ5boo3Qf" data-theme="light" style="flex-basis:100%"></div>
         <button type="submit">Send me the guide</button>
       </form>
       <p class="guide-done" id="guideDone">Thank you &mdash; your free guide is on its way to your inbox.</p>
+      <p class="guide-err" id="guideErr" style="display:none;color:#fff;font-size:13px;margin-top:8px;">Something went wrong. Please try again.</p>
       <p class="guide-fine">By entering your email you agree to receive emails from HerEstrogen. Unsubscribe anytime. See our <a href="/privacy">Privacy Policy</a>.</p>
     </div>
   </div>
