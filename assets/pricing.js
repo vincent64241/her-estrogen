@@ -93,16 +93,10 @@
 
   function ladderHTML(key) {
     var p = CATALOG[key]; if (!p || !live(p)) return '';
-    var fda = p.brand ? '<p class="pl-fda">FDA-approved medication, prescribed by a licensed clinician if appropriate.</p>' : '';
     var start = '<div class="pl-start">'
       + '<p class="pl-start-lead">Starting at <b>$' + perDay(p.a) + '</b> per day</p>'
-      + '<p class="pl-start-sub">One flat price. No consultation fee. Choose monthly, quarterly, or annual below.</p></div>';
-    var grid = '<div class="pl-grid">' + tier('m', p) + tier('q', p) + tier('a', p) + '</div>';
-    var size = p.sizeUpsell ? '<p class="pl-size">Standard size shown. A larger value size is available on your plan for +' + money(p.sizeUpsell) + '/mo, selectable at checkout.</p>' : '';
-    var guar = '<p class="pl-guar"><span class="pl-ck">✓</span> Clinical Match Guarantee. If a licensed clinician determines treatment is not right for you, you pay nothing.</p>';
-    var foot = '<p class="pl-fine">' + esc(RENEWAL) + '</p>'
-      + (p.brand ? '<p class="pl-fine pl-tm">' + tmLine(p) + '</p>' : '<p class="pl-fine pl-disc">' + esc(DISCLOSURE) + '</p>');
-    return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + fda + start + grid + size + guar + foot + '</section>';
+      + '<a class="pl-start-cta" href="' + cta(p, 'annual') + '">Get started</a></div>';
+    return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + start + '</section>';
   }
 
   /* Compact homepage card: annual /mo + monthly strikethrough + save% */
@@ -134,7 +128,8 @@
       + '.pl-start-lead{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink,#1c1a17);line-height:1.05;}'
       + '.pl-start-lead b{color:var(--brand,#c21e63);}'
       + '.pl-start-sub{font-size:14px;color:var(--ink-2,#55504a);margin:10px auto 18px;max-width:46ch;}'
-      + '.pl-start-cta{display:inline-flex !important;width:100%;max-width:420px;padding:16px;font-size:17px;}'
+      + '.pl-start-cta{display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:420px;margin:6px auto 0;padding:16px 24px;font-size:17px;font-weight:700;border-radius:999px;background:var(--brand,#c21e63);color:#fff;text-decoration:none;box-shadow:0 16px 34px -18px rgba(194,30,99,.5);}'
+      + '.pl-start-cta:hover{background:var(--brand-ink,#a4184f);}'
       + '.pl-size{font-size:12.5px;color:var(--ink-2,#55504a);text-align:center;margin:14px auto 0;max-width:60ch;}'
       + '.pl-guar{display:flex;gap:8px;align-items:flex-start;justify-content:center;font-size:13px;font-weight:600;color:var(--ink-2,#55504a);margin:16px auto 0;max-width:60ch;text-align:left;}'
       + '.pl-ck{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--brand,#c21e63);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;margin-top:1px;}'
