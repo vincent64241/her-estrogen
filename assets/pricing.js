@@ -94,7 +94,7 @@
   function ladderHTML(key) {
     var p = CATALOG[key]; if (!p || !live(p)) return '';
     var start = '<div class="pl-start">'
-      + '<p class="pl-start-lead">Starting at <b>$' + perDay(p.a) + '</b> per day</p>'
+      + '<p class="pl-start-lead"><span class="pd-was">$' + perDay(p.m) + '/day</span> starting at <b>$' + perDay(p.a) + '/day</b></p>'
       + '<a class="pl-start-cta" href="' + cta(p, 'annual') + '">Get started</a></div>';
     return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + start + '</section>';
   }
@@ -104,7 +104,51 @@
     var p = CATALOG[key]; if (!p || !live(p)) return '';
     return '<span class="p-was">' + money(p.m) + '/mo</span>'
       + '<span class="p-now">' + money(p.a) + '/mo</span>'
-      + '<span class="p-day">Starting at $' + perDay(p.a) + '/day</span>';
+      + '<span class="p-day"><span class="pd-was">$' + perDay(p.m) + '/day</span> starting at <b>$' + perDay(p.a) + '/day</b></span>';
+  }
+
+  /* ── Reusable MEMBERSHIP block: the six things every plan includes (no $ values) ── */
+  function membershipHTML() {
+    var items = [
+      'Personalized treatment protocol',
+      'Ongoing check-ins &amp; dose adjustments',
+      'Unlimited &amp; real-person support',
+      'Secure patient portal',
+      'Access to the HerEstrogen Community',
+      'Exclusive discounts &amp; deals'
+    ];
+    var lis = items.map(function (t) {
+      return '<li><span class="mm-ck" aria-hidden="true">&#10003;</span><span>' + t + '</span></li>';
+    }).join('');
+    return '<div class="mm-in">'
+      + '<p class="mm-eyebrow">Included with every plan</p>'
+      + '<h2 class="mm-title">Your HerEstrogen Membership</h2>'
+      + '<p class="mm-sub">Every plan includes the full HerEstrogen experience &mdash; no platform fee, no membership fee, no consultation fee.</p>'
+      + '<ul class="mm-list">' + lis + '</ul></div>';
+  }
+
+  /* ── Reusable FREE GIFTS block: intro value-stack, slashed values (same on every plan) ── */
+  function giftsHTML() {
+    var gifts = [
+      { ic: '&#129658;', was: '$200', lbl: 'Free First Online Clinician Consultation' },
+      { ic: '&#128203;', was: '$99', lbl: 'Your Personalized Hormone Assessment' },
+      { ic: '&#128666;', was: '$19.99', lbl: 'Free 2-Day Delivery' }
+    ];
+    var cards = gifts.map(function (g) {
+      return '<div class="gg-card"><div class="gg-ic" aria-hidden="true">' + g.ic + '</div>'
+        + '<p class="gg-val"><s>' + g.was + '</s> <b>FREE</b></p>'
+        + '<p class="gg-lbl">' + g.lbl + '</p></div>';
+    }).join('');
+    var bonus = '<div class="gg-card gg-bonus"><div class="gg-ic" aria-hidden="true">&#128274;</div>'
+      + '<p class="gg-val"><b>Locked for life</b></p>'
+      + '<p class="gg-lbl">Lifetime Price Lock Guarantee</p></div>';
+    return '<div class="gg-in">'
+      + '<p class="gg-eyebrow">Your free gifts &mdash; included with your first order</p>'
+      + '<h2 class="gg-title">Start today and get&hellip;</h2>'
+      + '<div class="gg-grid">' + cards + bonus + '</div>'
+      + '<p class="gg-total"><b>$318.99 in gifts</b> &mdash; included free when you start today.</p>'
+      + '<p class="gg-assess">Your Personalized Hormone Assessment is a personalized summary based on your quiz responses &mdash; not a diagnosis or medical advice. A licensed clinician reviews your intake before any treatment.</p>'
+      + '<p class="gg-fine"><b>Clinical Match Guarantee:</b> you are not charged until a licensed clinician confirms you are a fit. Cancel anytime &mdash; no contracts, no hidden fees. Plans renew automatically at the end of each term; cancel future renewals at least 72 hours before your renewal date.</p></div>';
   }
 
   function injectStyle() {
@@ -136,6 +180,37 @@
       + '.pl-fine{max-width:760px;margin:12px auto 0;text-align:center;font-size:11.5px;line-height:1.55;color:var(--muted,#6d6760);}'
       + '.pl-disc,.pl-tm{font-weight:700;color:var(--ink-2,#55504a);}'
       + '[data-flag-gated][hidden],[data-price-gated][hidden]{display:none !important;}'
+      /* slashed per-day price */
+      + '.pd-was{color:var(--muted,#6d6760);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--brand,#c21e63);font-weight:600;margin-right:6px;}'
+      + '.pl-start-lead .pd-was{font-size:.72em;}'
+      + '.pl-start-lead b{color:var(--brand,#c21e63);}'
+      /* MEMBERSHIP block */
+      + '[data-membership]{display:block;background:linear-gradient(180deg,#fff,#fdeef4);}'
+      + '.mm-in{max-width:720px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px;}'
+      + '.mm-eyebrow{text-align:center;text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:12.5px;color:var(--brand-ink,#a4184f);margin:0 0 10px;}'
+      + '.mm-title{text-align:center;font-family:\'Newsreader\',Georgia,serif;font-weight:700;font-size:clamp(26px,4vw,40px);line-height:1.1;color:var(--ink,#1c1a17);margin:0 0 10px;}'
+      + '.mm-sub{text-align:center;max-width:560px;margin:0 auto 26px;color:var(--ink-2,#55504a);font-size:15.5px;line-height:1.55;}'
+      + '.mm-list{list-style:none;margin:0 auto;padding:0;max-width:560px;background:#fff;border:1px solid #f2d3e0;border-radius:20px;overflow:hidden;box-shadow:0 18px 50px -30px rgba(164,24,79,.4);}'
+      + '.mm-list li{display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f6e5ee;font-size:16px;font-weight:600;color:var(--ink,#1c1a17);}'
+      + '.mm-list li:last-child{border-bottom:0;}'
+      + '.mm-ck{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--brand,#c21e63);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;}'
+      /* FREE GIFTS block */
+      + '.gg-in{background:linear-gradient(180deg,#fff9f3,#ffe7ed);border:1px solid #f2d3e0;border-radius:20px;padding:clamp(20px,3vw,30px);margin:0 0 20px;}'
+      + '.gg-eyebrow{text-transform:uppercase;letter-spacing:.1em;font-weight:800;font-size:11.5px;color:var(--brand-ink,#a4184f);margin:0 0 6px;text-align:center;}'
+      + '.gg-title{font-family:\'Newsreader\',Georgia,serif;font-weight:700;font-size:clamp(22px,3vw,30px);color:var(--ink,#1c1a17);text-align:center;margin:0 0 18px;}'
+      + '.gg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;}'
+      + '.gg-card{background:#fff;border:1px solid #f2d3e0;border-radius:14px;padding:16px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;}'
+      + '.gg-card.gg-bonus{background:#fff4f8;border-style:dashed;}'
+      + '.gg-ic{font-size:26px;line-height:1;}'
+      + '.gg-val{font-size:14px;font-weight:700;color:var(--ink,#1c1a17);}'
+      + '.gg-val s{color:var(--muted,#6d6760);font-weight:600;margin-right:5px;text-decoration-thickness:2px;}'
+      + '.gg-val b{color:var(--brand,#c21e63);font-weight:800;}'
+      + '.gg-lbl{font-size:12.5px;font-weight:600;color:var(--ink-2,#55504a);line-height:1.35;}'
+      + '.gg-total{text-align:center;font-size:15px;color:var(--ink,#1c1a17);margin:18px 0 0;}'
+      + '.gg-total b{color:var(--brand,#c21e63);font-weight:800;}'
+      + '.gg-assess{text-align:center;font-size:12px;color:var(--ink-2,#55504a);line-height:1.5;margin:12px auto 0;max-width:60ch;}'
+      + '.gg-fine{text-align:center;font-size:11.5px;color:var(--muted,#6d6760);line-height:1.55;margin:10px auto 0;max-width:72ch;}'
+      + '.gg-fine b{color:var(--ink-2,#55504a);}'
       + '@media(max-width:560px){.pl-grid{grid-template-columns:1fr;}}';
     var el = document.createElement('style'); el.id = 'pl-style'; el.textContent = css;
     document.head.appendChild(el);
@@ -151,6 +226,9 @@
       var h = cardHTML(m.getAttribute('data-price-card'));
       if (h) { m.innerHTML = h; m.hidden = false; } else { m.hidden = true; }
     });
+    /* Reusable MEMBERSHIP + FREE GIFTS blocks (static content, identical everywhere). */
+    [].forEach.call(document.querySelectorAll('[data-membership]'), function (m) { m.innerHTML = membershipHTML(); });
+    [].forEach.call(document.querySelectorAll('[data-gifts]'), function (m) { m.innerHTML = giftsHTML(); });
     /* Whole cards gated by product key → reveal only when that product is live. */
     [].forEach.call(document.querySelectorAll('[data-price-gated]'), function (el) {
       var p = CATALOG[el.getAttribute('data-price-gated')];
