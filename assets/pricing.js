@@ -94,8 +94,8 @@
   function ladderHTML(key) {
     var p = CATALOG[key]; if (!p || !live(p)) return '';
     var start = '<div class="pl-start">'
-      + '<p class="pl-start-lead"><span class="pd-was">$' + perDay(p.m) + '/day</span> starting at <b>$' + perDay(p.a) + '/day</b></p>'
       + '<p class="pl-start-mo"><span class="pdm-was">' + money(p.m) + '/mo</span> <b>' + money(p.a) + '/mo</b></p>'
+      + '<p class="pl-start-lead"><span class="pd-was">$' + perDay(p.m) + '/day</span> starting at <b>$' + perDay(p.a) + '/day</b></p>'
       + '<a class="pl-start-cta" href="' + cta(p, 'annual') + '">Get started</a></div>';
     return '<section class="pl-wrap" aria-label="' + esc(p.name) + ' pricing">' + start + '</section>';
   }
@@ -185,7 +185,7 @@
       + '.pd-was{color:var(--muted,#6d6760);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--brand,#c21e63);font-weight:600;margin-right:6px;}'
       + '.pl-start-lead .pd-was{font-size:.72em;}'
       + '.pl-start-lead b{color:var(--brand,#c21e63);}'
-      + '.pl-start-mo{font-size:15px;font-weight:600;color:var(--ink-2,#55504a);margin:2px 0 0;}'
+      + '.pl-start-mo{font-size:15px;font-weight:600;color:var(--ink-2,#55504a);margin:0 0 3px;}'
       + '.pl-start-mo .pdm-was{color:var(--muted,#6d6760);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--brand,#c21e63);font-weight:600;margin-right:6px;}'
       + '.pl-start-mo b{color:var(--brand,#c21e63);font-weight:800;}'
       /* MEMBERSHIP block */
