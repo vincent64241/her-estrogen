@@ -170,7 +170,7 @@
       + '.pl-cta{margin-top:14px;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--brand,#c21e63);border:1.5px solid var(--brand,#c21e63);border-radius:999px;font-weight:700;font-size:14px;padding:11px;text-decoration:none;}'
       + '.pl-tier.hero .pl-cta{background:var(--brand,#c21e63);color:#fff;}'
       + '.pl-start{text-align:center;padding:6px 0 2px;}'
-      + '.pl-start-lead{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink,#1c1a17);line-height:1.05;}'
+      + '.pl-start-lead{font-size:15px;font-weight:700;letter-spacing:0;color:var(--ink-2,#55504a);line-height:1.3;}'
       + '.pl-start-lead b{color:var(--brand,#c21e63);}'
       + '.pl-start-sub{font-size:14px;color:var(--ink-2,#55504a);margin:10px auto 18px;max-width:46ch;}'
       + '.pl-start-cta{display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:420px;margin:6px auto 0;padding:16px 24px;font-size:17px;font-weight:700;border-radius:999px;background:var(--brand,#c21e63);color:#fff;text-decoration:none;box-shadow:0 16px 34px -18px rgba(194,30,99,.5);}'
@@ -185,7 +185,7 @@
       + '.pd-was{color:var(--muted,#6d6760);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--brand,#c21e63);font-weight:600;margin-right:6px;}'
       + '.pl-start-lead .pd-was{font-size:.72em;}'
       + '.pl-start-lead b{color:var(--brand,#c21e63);}'
-      + '.pl-start-mo{font-size:15px;font-weight:600;color:var(--ink-2,#55504a);margin:0 0 3px;}'
+      + '.pl-start-mo{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.02em;color:var(--ink,#1c1a17);line-height:1.05;margin:0 0 4px;}'
       + '.pl-start-mo .pdm-was{color:var(--muted,#6d6760);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--brand,#c21e63);font-weight:600;margin-right:6px;}'
       + '.pl-start-mo b{color:var(--brand,#c21e63);font-weight:800;}'
       /* MEMBERSHIP block */
